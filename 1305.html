@@ -1,0 +1,1651 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"projectName": "goagent", "loggedInUserEmail": null, "projectHomeUrl": "/p/goagent", "profileUrl": null, "relativeBaseUrl": "", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "token": null, "domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 1305 - 
+ goagent -
+ 
+ 能否加入二级代理功能？（cmwap连接使用） - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D1305&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D1305" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="closed_colors">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=1305">1305</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >能否加入二级代理功能？（cmwap连接使用）</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 2 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A1305">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="The requested non-coding task was completed">Done</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ <tr><th align="left" valign="top">Closed:&nbsp;</th>
+ <td align="left" valign="top" width="100%">
+ Dec 2012
+ </td>
+ </tr>
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D1305&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D1305">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/104268965277377658117/">liuyu...@gmail.com</a
+>,
+ <span class="date" title="Sun Oct 30 07:49:07 2011">Oct 30, 2011</span>
+ 
+ </div>
+<pre>
+能否增加一个二级代理功能，可以用cmwap+10.0.0.172:80代理达到cmnet的效果呢？
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 30 07:56:08 2011">
+ Oct 30, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=1305#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+请尝试编辑proxy.ini
+[proxy]
+ip = 10.0.0.172
+port = 80
+username =
+password =
+
+ps:如果需要用户名和密码的话，请加上
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 30 08:08:05 2011">
+ Oct 30, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=1305#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/104268965277377658117/">liuyu...@gmail.com</a
+></span>
+ 
+<pre>
+[proxy]
+enable = 1
+host = 10.0.0.172
+port = 80
+username = 
+password =
+
+经测试无效。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 30 08:12:48 2011">
+ Oct 30, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=1305#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+1. 你使用的是最新版吗，老版的goagent的二级代理有<a title="图标显示不正常" class=closed_ref href="/p/goagent/issues/detail?id=2"> bug
+2 </a>. &quot;测试无效&quot;时候的错误是什么？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 30 08:19:11 2011">
+ Oct 30, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=1305#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/104268965277377658117/">liuyu...@gmail.com</a
+></span>
+ 
+<pre>
+1.63版，“代理窗口” 中不显示连接信息，用cmnet可以正常显示“日志”。
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=13050004000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2011-10-30+%E4%B8%8B%E5%8D%8811.17.47.png&amp;token=ABZ6GAfJTtyAeO1YBEmwznzI9IEW_oy7mw%3A1434452709730&amp;id=1305&amp;mod_ts_token=ABZ6GAeF7NXMa7NEB1gDttxYF5l70iGUvA%3A1434452709730">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >屏幕快照 2011-10-30 下午11.17.47.png</b>
+ <br>
+ 35.0 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=13050004000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2011-10-30+%E4%B8%8B%E5%8D%8811.17.47.png&amp;token=ABZ6GAfJTtyAeO1YBEmwznzI9IEW_oy7mw%3A1434452709730&amp;id=1305&amp;mod_ts_token=ABZ6GAeF7NXMa7NEB1gDttxYF5l70iGUvA%3A1434452709730&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=13050004000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2011-10-30+%E4%B8%8B%E5%8D%8811.17.47.png&amp;token=ABZ6GAfJTtyAeO1YBEmwznzI9IEW_oy7mw%3A1434452709730&amp;id=1305&amp;mod_ts_token=ABZ6GAeF7NXMa7NEB1gDttxYF5l70iGUvA%3A1434452709730">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=13050004000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2011-10-30+%E4%B8%8B%E5%8D%8811.17.47.png&amp;token=ABZ6GAfJTtyAeO1YBEmwznzI9IEW_oy7mw%3A1434452709730&amp;id=1305&amp;mod_ts_token=ABZ6GAeF7NXMa7NEB1gDttxYF5l70iGUvA%3A1434452709730&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=13050004000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2011-10-30+%E4%B8%8B%E5%8D%8811.17.47.png&amp;token=ABZ6GAfJTtyAeO1YBEmwznzI9IEW_oy7mw%3A1434452709730&amp;id=1305&amp;mod_ts_token=ABZ6GAeF7NXMa7NEB1gDttxYF5l70iGUvA%3A1434452709730&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 30 08:20:16 2011">
+ Oct 30, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=1305#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+用firefox试下，你的IE设置似乎不大对。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 30 08:40:53 2011">
+ Oct 30, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=1305#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/104268965277377658117/">liuyu...@gmail.com</a
+></span>
+ 
+<pre>
+火狐+代理有日志了，但是依然无法打开网页。
+火狐的错误提示如下：
+Error response
+
+Error code 502.
+
+Message: ['&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;'].
+
+Error code explanation: 502 = Invalid responses from another server/proxy.. 
+
+谢谢。
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=13050006000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2011-10-30+%E4%B8%8B%E5%8D%8811.39.17.png&amp;token=ABZ6GAd7AZlKt4p_sBcTI-iup39syC6ElA%3A1434452709730&amp;id=1305&amp;mod_ts_token=ABZ6GAeV0FCgs4IpaXM6aJLmkcUxqRfJwA%3A1434452709730">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >屏幕快照 2011-10-30 下午11.39.17.png</b>
+ <br>
+ 76.5 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=13050006000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2011-10-30+%E4%B8%8B%E5%8D%8811.39.17.png&amp;token=ABZ6GAd7AZlKt4p_sBcTI-iup39syC6ElA%3A1434452709730&amp;id=1305&amp;mod_ts_token=ABZ6GAeV0FCgs4IpaXM6aJLmkcUxqRfJwA%3A1434452709730&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=13050006000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2011-10-30+%E4%B8%8B%E5%8D%8811.39.17.png&amp;token=ABZ6GAd7AZlKt4p_sBcTI-iup39syC6ElA%3A1434452709730&amp;id=1305&amp;mod_ts_token=ABZ6GAeV0FCgs4IpaXM6aJLmkcUxqRfJwA%3A1434452709730">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=13050006000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2011-10-30+%E4%B8%8B%E5%8D%8811.39.17.png&amp;token=ABZ6GAd7AZlKt4p_sBcTI-iup39syC6ElA%3A1434452709730&amp;id=1305&amp;mod_ts_token=ABZ6GAeV0FCgs4IpaXM6aJLmkcUxqRfJwA%3A1434452709730&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=13050006000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2011-10-30+%E4%B8%8B%E5%8D%8811.39.17.png&amp;token=ABZ6GAd7AZlKt4p_sBcTI-iup39syC6ElA%3A1434452709730&amp;id=1305&amp;mod_ts_token=ABZ6GAeV0FCgs4IpaXM6aJLmkcUxqRfJwA%3A1434452709730&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 30 08:42:00 2011">
+ Oct 30, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=1305#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/104268965277377658117/">liuyu...@gmail.com</a
+></span>
+ 
+<pre>
+打开百度时候，窗口中的内容如下
+------------------------------------------------------
+GoAgent Version : 1.6.3 (python/2.7.2 pyopenssl/0.12)
+Listen Address  : 127.0.0.1:8087
+Local Proxy     : 10.0.0.172:80
+GAE Mode        : http
+GAE Aera        : cn
+GAE APPID       : 8233657
+------------------------------------------------------
+127.0.0.1:2479 - - [30/Oct/2011 23:37:54] &quot;GET <a href="http://www.google-analytics.com/_" rel="nofollow">http://www.google-analytics.com/_</a>
+_utm.gif?utmwv=5.2.0&amp;utms=3&amp;utmn=1907939397&amp;utmhn=api.app.mozilla.com.cn&amp;utmcs=U
+TF-8&amp;utmsr=1128x653&amp;utmsc=24-bit&amp;utmul=zh-cn&amp;utmje=0&amp;utmfl=10.3%20r183&amp;utmhid=15
+92647193&amp;utmr=-&amp;utmp=%2Finner%2F&amp;utmac=UA-2826582-7&amp;utmcc=__utma%3D265356880.828
+652494.1319988895.1319988895.1319988895.1%3B%2B__utmz%3D265356880.1319988895.1.1
+.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&amp;utmu=qB~ HTTP/1.1&quot; -
+ -
+ERROR - - [30/Oct/2011 23:38:15] LocalProxyHandler.do_GET Error, [Errno 10060]
+Traceback (most recent call last):
+  File &quot;C:\Documents and Settings\Administrator\桌面\phus-goagent-ea7c5ab\local\
+proxy.py&quot;, line 666, in do_METHOD_Direct
+  File &quot;C:\Documents and Settings\Administrator\桌面\phus-goagent-ea7c5ab\local\
+proxy.py&quot;, line 210, in socket_create_connection
+error: [Errno 10060]
+127.0.0.1:2457 - - [30/Oct/2011 23:38:52] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:2457 - - [30/Oct/2011 23:38:52] &quot;GET <a href="http://himg2.huanqiu.com/attachme" rel="nofollow">http://himg2.huanqiu.com/attachme</a>
+nt2010/111028/7b1f3894be.jpg HTTP/1.1&quot; 502 -
+----------------------------------------
+Exception happened during processing of request from ('127.0.0.1', 2457)
+Traceback (most recent call last):
+  File &quot;SocketServer.pyo&quot;, line 582, in process_request_thread
+  File &quot;SocketServer.pyo&quot;, line 323, in finish_request
+  File &quot;SocketServer.pyo&quot;, line 641, in __init__
+  File &quot;SocketServer.pyo&quot;, line 694, in finish
+  File &quot;socket.pyo&quot;, line 303, in flush
+error: [Errno 10053]
+----------------------------------------
+127.0.0.1:2459 - - [30/Oct/2011 23:38:52] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:2459 - - [30/Oct/2011 23:38:52] &quot;GET <a href="http://himg2.huanqiu.com/attachme" rel="nofollow">http://himg2.huanqiu.com/attachme</a>
+nt2010/111028/fd81038468.jpg HTTP/1.1&quot; 502 -
+----------------------------------------
+Exception happened during processing of request from ('127.0.0.1', 2459)
+Traceback (most recent call last):
+  File &quot;SocketServer.pyo&quot;, line 582, in process_request_thread
+  File &quot;SocketServer.pyo&quot;, line 323, in finish_request
+  File &quot;SocketServer.pyo&quot;, line 641, in __init__
+  File &quot;SocketServer.pyo&quot;, line 694, in finish
+  File &quot;socket.pyo&quot;, line 303, in flush
+error: [Errno 10053]
+----------------------------------------
+127.0.0.1:2464 - - [30/Oct/2011 23:38:52] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:2464 - - [30/Oct/2011 23:38:52] &quot;GET <a href="http://himg2.huanqiu.com/attachme" rel="nofollow">http://himg2.huanqiu.com/attachme</a>
+nt2010/111029/e47a1a7cfc.jpg HTTP/1.1&quot; 502 -
+127.0.0.1:2462 - - [30/Oct/2011 23:38:52] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:2460 - - [30/Oct/2011 23:38:52] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:2469 - - [30/Oct/2011 23:38:52] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:2466 - - [30/Oct/2011 23:38:52] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:2466 - - [30/Oct/2011 23:38:52] &quot;GET <a href="http://addons.g-fox.cn/appcenter" rel="nofollow">http://addons.g-fox.cn/appcenter</a>.
+gif?t=0&amp;a=001&amp;d=tab-install&amp;r=0.07532460488346215 HTTP/1.1&quot; 502 -
+127.0.0.1:2469 - - [30/Oct/2011 23:38:52] &quot;GET <a href="http://addons.g-fox.cn/appcenter" rel="nofollow">http://addons.g-fox.cn/appcenter</a>.
+gif?t=0&amp;a=002&amp;d=0&amp;r=0.33557738527284164 HTTP/1.1&quot; 502 -
+127.0.0.1:2460 - - [30/Oct/2011 23:38:52] &quot;GET <a href="http://himg2.huanqiu.com/attachme" rel="nofollow">http://himg2.huanqiu.com/attachme</a>
+nt2010/111027/e6c1c6ef7b.jpg HTTP/1.1&quot; 502 -
+127.0.0.1:2462 - - [30/Oct/2011 23:38:52] &quot;GET <a href="http://himg2.huanqiu.com/attachme" rel="nofollow">http://himg2.huanqiu.com/attachme</a>
+nt2010/111029/15727f6d22.jpg HTTP/1.1&quot; 502 -
+----------------------------------------
+Exception happened during processing of request from (--------------------------
+--------------
+Exception happened during processing of request from ('127.0.0.1'127.0.0.1', 246
+2)
+Traceback (most recent call last):
+', 2460)
+Traceback (most recent call last):
+  File &quot;SocketServer.pyo&quot;, line 582, in process_request_thread
+  File &quot;SocketServer.pyo&quot;, line 323, in finish_request
+  File &quot;SocketServer.pyo&quot;, line 641, in __init__
+  File &quot;SocketServer.pyo&quot;, line 694, in finish
+  File &quot;socket.pyo&quot;, line 303, in flush
+  File &quot;SocketServer.pyo&quot;, line 582, in process_request_thread
+  File &quot;SocketServer.pyo&quot;, line 323, in finish_request
+  File &quot;SocketServer.pyo&quot;, line 641, in __init__
+  File &quot;SocketServer.pyo&quot;, line 694, in finish
+  File &quot;socket.pyo&quot;, line 303, in flush
+error: [Errno 10053]
+----------------------------------------
+error: [Errno 10053]
+----------------------------------------
+127.0.0.1:2472 - - [30/Oct/2011 23:38:53] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:2472 - - [30/Oct/2011 23:38:53] &quot;GET <a href="http://m.weather.com.cn/m/firefox" rel="nofollow">http://m.weather.com.cn/m/firefox</a>
+_home_2011/ HTTP/1.1&quot; 502 -
+----------------------------------------
+Exception happened during processing of request from ('127.0.0.1', 2472)
+Traceback (most recent call last):
+  File &quot;SocketServer.pyo&quot;, line 582, in process_request_thread
+  File &quot;SocketServer.pyo&quot;, line 323, in finish_request
+  File &quot;SocketServer.pyo&quot;, line 641, in __init__
+  File &quot;SocketServer.pyo&quot;, line 694, in finish
+  File &quot;socket.pyo&quot;, line 303, in flush
+error: [Errno 10053]
+----------------------------------------
+127.0.0.1:2475 - - [30/Oct/2011 23:38:57] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:2475 - - [30/Oct/2011 23:38:57] &quot;GET <a href="http://z.alimama.com/alimama.php?" rel="nofollow">http://z.alimama.com/alimama.php?</a>
+i=mm_28347190_2425761_9313994&amp;w=300&amp;h=250&amp;sz=37&amp;re=1128x653&amp;cah=623&amp;caw=1128&amp;ccd
+=24&amp;ctz=8&amp;chl=1&amp;cja=0&amp;cpl=18&amp;cmm=75&amp;cf=10.3&amp;cg=010980ecf7c79b35927e7d5c7b28e1fc&amp;
+ac=3447&amp;pro=19682523&amp;cas=pro&amp;cbh=250&amp;cbw=300&amp;sx=660&amp;sy=723&amp;refpos=,a,null&amp;t=2&amp;tc
+=0000FF&amp;dc=000000&amp;bgc=FFFFFF&amp;bdc=E6E6E6&amp;lc=008000&amp;bmc=FFFFFF&amp;as=0&amp;bgp=0&amp;ic=0&amp;pf=
+1&amp;p4p_ai=1&amp;dx=1&amp;iss=0&amp;u=http%3A%2F%2Fi.firefoxchina.cn%2F&amp;k=&amp;tt=&amp;r=&amp;fu=-1 HTTP/1
+.1&quot; 502 -
+127.0.0.1:2476 - - [30/Oct/2011 23:38:57] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:2477 - - [30/Oct/2011 23:38:57] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:2477 - - [30/Oct/2011 23:38:57] &quot;GET <a href="http://www.baidu.com/" rel="nofollow">http://www.baidu.com/</a> HTTP/1.1&quot; 5
+02 -
+127.0.0.1:2476 - - [30/Oct/2011 23:38:58] &quot;GET <a href="http://www.g-fox.cn/live.php?chan" rel="nofollow">http://www.g-fox.cn/live.php?chan</a>
+nelid=firefox.com.cn&amp;ceversion=2011.9&amp;actcode=kpsjXbcc9ulDirzLMhJRUcrXuQDQnZgvmm
+kQ2fSzTQHKHc9neWmPI1aU4IL072EZIXbuzR8rCrLGJ5KHtv73LWFkoJm2A6+b HTTP/1.1&quot; 502 -
+----------------------------------------
+Exception happened during processing of request from ('127.0.0.1', 2475)
+Traceback (most recent call last):
+  File &quot;SocketServer.pyo&quot;, line 582, in process_request_thread
+  File &quot;SocketServer.pyo&quot;, line 323, in finish_request
+  File &quot;SocketServer.pyo&quot;, line 641, in __init__
+  File &quot;SocketServer.pyo&quot;, line 694, in finish
+  File &quot;socket.pyo&quot;, line 303, in flush
+error: [Errno 10053]
+----------------------------------------
+127.0.0.1:2517 - - [30/Oct/2011 23:40:01] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:2517 - - [30/Oct/2011 23:40:01] &quot;GET <a href="http://www.baidu.com/favicon.ico" rel="nofollow">http://www.baidu.com/favicon.ico</a>
+HTTP/1.1&quot; 502 -
+127.0.0.1:2534 - - [30/Oct/2011 23:41:04] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:2534 - - [30/Oct/2011 23:41:04] &quot;GET <a href="http://www.baidu.com/favicon.ico" rel="nofollow">http://www.baidu.com/favicon.ico</a>
+HTTP/1.1&quot; 502 -
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 30 09:02:56 2011">
+ Oct 30, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=1305#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+似乎10.0.0.172访问google.cn有问题。
+请尝试把mode = http改成mode=https试下，如果还不行就把appspot = cn改成appspot = hk
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 30 09:11:10 2011">
+ Oct 30, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=1305#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/104268965277377658117/">liuyu...@gmail.com</a
+></span>
+ 
+<pre>
+改了这两处后，问题依旧。
+火狐提示:Error response
+
+Error code 502.
+
+Message: ['&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;'].
+
+Error code explanation: 502 = Invalid responses from another server/proxy.. 
+
+代理提示：
+------------------------------------------------------
+GoAgent Version : 1.6.3 (python/2.7.2 pyopenssl/0.12)
+Listen Address  : 127.0.0.1:8087
+Local Proxy     : 10.0.0.172:80
+GAE Mode        : https
+GAE Aera        : hk
+GAE APPID       : 8233657
+------------------------------------------------------
+127.0.0.1:2982 - - [31/Oct/2011 00:07:33] &quot;GET <a href="http://www.google-analytics.com/_" rel="nofollow">http://www.google-analytics.com/_</a>
+_utm.gif?utmwv=5.2.0&amp;utms=7&amp;utmn=738478919&amp;utmhn=api.app.mozilla.com.cn&amp;utmcs=UT
+F-8&amp;utmsr=1128x653&amp;utmsc=24-bit&amp;utmul=zh-cn&amp;utmje=0&amp;utmfl=10.3%20r183&amp;utmhid=533
+774162&amp;utmr=-&amp;utmp=%2Finner%2F&amp;utmac=UA-2826582-7&amp;utmcc=__utma%3D265356880.82865
+2494.1319988895.1319988895.1319988895.1%3B%2B__utmz%3D265356880.1319988895.1.1.u
+tmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&amp;utmu=qB~ HTTP/1.1&quot; - -
+
+ERROR - - [31/Oct/2011 00:07:54] LocalProxyHandler.do_GET Error, [Errno 10060]
+Traceback (most recent call last):
+  File &quot;C:\Documents and Settings\Administrator\桌面\phus-goagent-ea7c5ab\local\
+proxy.py&quot;, line 666, in do_METHOD_Direct
+  File &quot;C:\Documents and Settings\Administrator\桌面\phus-goagent-ea7c5ab\local\
+proxy.py&quot;, line 210, in socket_create_connection
+error: [Errno 10060]
+127.0.0.1:2975 - - [31/Oct/2011 00:08:35] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:2975 - - [31/Oct/2011 00:08:35] &quot;GET <a href="http://i.firefoxchina.cn/" rel="nofollow">http://i.firefoxchina.cn/</a> HTTP/1.
+1&quot; 502 -
+127.0.0.1:2977 - - [31/Oct/2011 00:08:35] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+1----------------------------------------
+Exception happened during processing of request from ('127.0.0.1:2977 - - [31/Oc
+t/2011 00:08:35] &quot;GET <a href="http://addons.g-fox.cn/appcenter.gif?t=0&amp;a=001&amp;d=tab-insta" rel="nofollow">http://addons.g-fox.cn/appcenter.gif?t=0&amp;a=001&amp;d=tab-insta</a>
+ll&amp;r=0.676577570142982 HTTP/1.1&quot; 502 -
+27.0.0.1', 2975)
+Traceback (most recent call last):
+  File &quot;SocketServer.pyo&quot;, line 582, in process_request_thread
+  File &quot;SocketServer.pyo&quot;, line 323, in finish_request
+  File &quot;SocketServer.pyo&quot;, line 641, in __init__
+  File &quot;SocketServer.pyo&quot;, line 694, in finish
+  File &quot;socket.pyo&quot;, line 303, in flush
+error: [Errno 10053]
+----------------------------------------
+127.0.0.1:2978 - - [31/Oct/2011 00:08:35] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:2978 - - [31/Oct/2011 00:08:35] &quot;GET <a href="http://addons.g-fox.cn/appcenter" rel="nofollow">http://addons.g-fox.cn/appcenter</a>.
+gif?t=0&amp;a=002&amp;d=0&amp;r=0.2607556370980657 HTTP/1.1&quot; 502 -
+127.0.0.1:2985 - - [31/Oct/2011 00:08:38] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:2985 - - [31/Oct/2011 00:08:38] &quot;GET <a href="http://i.firefoxchina.cn/nav/ntab" rel="nofollow">http://i.firefoxchina.cn/nav/ntab</a>
+_h.html HTTP/1.1&quot; 502 -
+----------------------------------------
+Exception happened during processing of request from ('127.0.0.1', 2985)
+Traceback (most recent call last):
+  File &quot;SocketServer.pyo&quot;, line 582, in process_request_thread
+  File &quot;SocketServer.pyo&quot;, line 323, in finish_request
+  File &quot;SocketServer.pyo&quot;, line 641, in __init__
+  File &quot;SocketServer.pyo&quot;, line 694, in finish
+  File &quot;socket.pyo&quot;, line 303, in flush
+error: [Errno 10053]
+----------------------------------------
+127.0.0.1:2986 - - [31/Oct/2011 00:08:38] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:2986 - - [31/Oct/2011 00:08:38] &quot;GET <a href="http://i.firefoxchina.cn/newtab/n" rel="nofollow">http://i.firefoxchina.cn/newtab/n</a>
+ewtab_search.html HTTP/1.1&quot; 502 -
+127.0.0.1:2987 - - [31/Oct/2011 00:08:38] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:2987 - - [31/Oct/2011 00:08:38] &quot;GET <a href="http://www.g-fox.cn/livemargins/n" rel="nofollow">http://www.g-fox.cn/livemargins/n</a>
+tab.gif?c=ntab&amp;t=view&amp;a=load&amp;d=quickdial&amp;f=&amp;r=0.06362284102318272 HTTP/1.1&quot; 502
+-
+----------------------------------------
+Exception happened during processing of request from (--------------------------
+--------------
+Exception happened during processing of request from ('127.0.0.1'127.0.0.1', 298
+7)
+', 2986)
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File &quot;SocketServer.pyo&quot;, line 582, in process_request_thread
+  File &quot;SocketServer.pyo&quot;, line 323, in finish_request
+  File &quot;SocketServer.pyo&quot;, line 641, in __init__
+  File &quot;SocketServer.pyo&quot;, line 694, in finish
+  File &quot;socket.pyo&quot;, line 303, in flush
+error: [Errno 10053]
+  File &quot;SocketServer.pyo&quot;, line 582, in process_request_thread
+  File &quot;SocketServer.pyo&quot;, line 323, in finish_request
+  File &quot;SocketServer.pyo&quot;, line 641, in __init__
+  File &quot;SocketServer.pyo&quot;, line 694, in finish
+  File &quot;socket.pyo&quot;, line 303, in flush
+error: [Errno 10053]
+----------------------------------------
+----------------------------------------
+127.0.0.1:2991 - - [31/Oct/2011 00:08:40] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:2991 - - [31/Oct/2011 00:08:40] &quot;GET <a href="http://www.g-fox.cn/live.php?chan" rel="nofollow">http://www.g-fox.cn/live.php?chan</a>
+nelid=firefox.com.cn&amp;ceversion=2011.9&amp;actcode=XhbBv8dhjp/4buXeSyL+m1c8aEQd2lyaXN
+94VxutbBazbbQHs2pyE17Ri9xNM9VfyigkW6JlLEi1pwSu08fbcqjtBtyMg/sC HTTP/1.1&quot; 502 -
+127.0.0.1:2993 - - [31/Oct/2011 00:08:40] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:2993 - - [31/Oct/2011 00:08:40] &quot;GET <a href="http://www.baidu.com/index.php?tn" rel="nofollow">http://www.baidu.com/index.php?tn</a>
+=monline_5_dg HTTP/1.1&quot; 502 -
+----------------------------------------
+Exception happened during processing of request from ('127.0.0.1', 2993)
+Traceback (most recent call last):
+  File &quot;SocketServer.pyo&quot;, line 582, in process_request_thread
+  File &quot;SocketServer.pyo&quot;, line 323, in finish_request
+  File &quot;SocketServer.pyo&quot;, line 641, in __init__
+  File &quot;SocketServer.pyo&quot;, line 694, in finish
+  File &quot;socket.pyo&quot;, line 303, in flush
+error: [Errno 10053]
+----------------------------------------
+127.0.0.1:2997 - - [31/Oct/2011 00:08:46] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:2996 - - [31/Oct/2011 00:08:46] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:2998 - - [31/Oct/2011 00:08:46] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:3003 - - [31/Oct/2011 00:08:50] code 502, message ['&lt;urlopen error [Er
+rno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;', '&lt;urlopen error [Errno 10060] &gt;
+']
+127.0.0.1:3003 - - [31/Oct/2011 00:08:52] &quot;GET <a href="http://www.baidu.com/" rel="nofollow">http://www.baidu.com/</a> HTTP/1.1&quot; 5
+02 -
+127.0.0.1:2998 - - [31/Oct/2011 00:08:52] &quot;GET <a href="http://www.g-fox.cn/livemargins/n" rel="nofollow">http://www.g-fox.cn/livemargins/n</a>
+tab.gif?c=ntab&amp;t=view&amp;a=load&amp;d=quickdial&amp;f=&amp;r=0.6444717703352022 HTTP/1.1&quot; 502 -
+
+127.0.0.1:2996 - - [31/Oct/2011 00:08:52] &quot;GET <a href="http://i.firefoxchina.cn/nav/ntab" rel="nofollow">http://i.firefoxchina.cn/nav/ntab</a>
+_h.html HTTP/1.1&quot; 502 -
+127.0.0.1:2997 - - [31/Oct/2011 00:08:52] &quot;GET <a href="http://i.firefoxchina.cn/newtab/n" rel="nofollow">http://i.firefoxchina.cn/newtab/n</a>
+ewtab_search.html HTTP/1.1&quot; 502 -
+----------------------------------------
+Exception happened during processing of request from ('1------------------------
+----------------
+Exception happened during processing of request from ('-------------------------
+---------------27.0.0.1
+127.0.0.1', 2998)
+Traceback (most recent call last):
+ E File &quot;SocketServer.pyo&quot;, line 582, in process_request_thread
+  File &quot;SocketServer.pyo&quot;, line 323, in finish_request
+  File &quot;SocketServer.pyo&quot;, line 641, in __init__
+  File &quot;SocketServer.pyo&quot;, line 694, in finish
+  File &quot;socket.pyo&quot;, line 303, in flush
+xception happened during processing of request from', 2997)
+ ('127.0Traceback (most recent call last):
+  File &quot;SocketServer.pyo&quot;, line 582, in process_request_thread
+  File &quot;SocketServer.pyo&quot;, line 323, in finish_request
+  File &quot;SocketServer.pyo&quot;, line 641, in __init__
+  File &quot;SocketServer.pyo&quot;, line 694, in finish
+  File &quot;socket.pyo&quot;, line 303, in flush
+.0.1', 2996)
+error: [Errno 10053]
+Traceback (most recent call last):
+  File &quot;SocketServer.pyo&quot;, line 582, in process_request_thread
+  File &quot;SocketServer.pyo&quot;, line 323, in finish_request
+  File &quot;SocketServer.pyo&quot;, line 641, in __init__
+  File &quot;SocketServer.pyo&quot;, line 694, in finish
+----------------------------------------
+  File &quot;socket.pyo&quot;, line 303, in flush
+error: [Errno 10053]
+----------------------------------------
+error: [Errno 10053]
+----------------------------------------
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 30 09:14:19 2011">
+ Oct 30, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=1305#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+看来好像是 10.0.0.172 封锁了google访问
+可以这样确认，火狐直接用 10.0.0.172做代理，看看是否能访问
+<a href="http://www.google.com" rel="nofollow">http://www.google.com</a>
+和
+<a href="https://www.google.com" rel="nofollow">https://www.google.com</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 30 09:27:11 2011">
+ Oct 30, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=1305#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/104268965277377658117/">liuyu...@gmail.com</a
+></span>
+ 
+<pre>
+sorry，前面忘记连接cmwap了，用的是宽带。
+现在连接上cmwap，用10.0.0.172:80代理，访问https://www.google.com，打开的是google手机版，http连接无法访问。
+用127.0.0.1:8087访问https://www.google.com依然是手机版，其他网页无法均无法访问。
+以下是日志：
+
+------------------------------------------------------
+GoAgent Version : 1.6.3 (python/2.7.2 pyopenssl/0.12)
+Listen Address  : 127.0.0.1:8087
+Local Proxy     : 10.0.0.172:80
+GAE Mode        : https
+GAE Aera        : hk
+GAE APPID       : 8233657
+------------------------------------------------------
+127.0.0.1:3350 - - [31/Oct/2011 00:21:44] &quot;GET <a href="http://www.google-analytics.com/_" rel="nofollow">http://www.google-analytics.com/_</a>
+_utm.gif?utmwv=5.2.0&amp;utms=10&amp;utmn=1452262769&amp;utmhn=api.app.mozilla.com.cn&amp;utmcs=
+UTF-8&amp;utmsr=1128x653&amp;utmsc=24-bit&amp;utmul=zh-cn&amp;utmje=0&amp;utmfl=10.3%20r183&amp;utmhid=8
+021875&amp;utmr=-&amp;utmp=%2Finner%2F&amp;utmac=UA-2826582-7&amp;utmcc=__utma%3D265356880.82865
+2494.1319988895.1319988895.1319988895.1%3B%2B__utmz%3D265356880.1319988895.1.1.u
+tmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&amp;utmu=qB~ HTTP/1.1&quot; - -
+
+127.0.0.1:3343 - - [31/Oct/2011 00:21:45] code 502, message ['&lt;urlopen error Tun
+nel connection failed: 403 Forbidden [ZTEOSE]&gt;', '&lt;urlopen error Tunnel connecti
+on failed: 403 Forbidden [ZTEOSE]&gt;', '&lt;urlopen error Tunnel connection failed: 4
+03 Forbidden [ZTEOSE]&gt;']
+127.0.0.1:3343 - - [31/Oct/2011 00:21:45] &quot;GET <a href="http://i.firefoxchina.cn/" rel="nofollow">http://i.firefoxchina.cn/</a> HTTP/1.
+1&quot; 502 -
+127.0.0.1:3345 - - [31/Oct/2011 00:21:46] code 502, message ['&lt;urlopen error Tun
+nel connection failed: 403 Forbidden [ZTEOSE]&gt;', '&lt;urlopen error Tunnel connecti
+on failed: 403 Forbidden [ZTEOSE]&gt;', '&lt;urlopen error Tunnel connection failed: 4
+03 Forbidden [ZTEOSE]&gt;']
+127.0.0.1:3345 - - [31/Oct/2011 00:21:46] &quot;GET <a href="http://addons.g-fox.cn/appcenter" rel="nofollow">http://addons.g-fox.cn/appcenter</a>.
+gif?t=0&amp;a=001&amp;d=tab-install&amp;r=0.2990851343674533 HTTP/1.1&quot; 502 -
+127.0.0.1:3347 - - [31/Oct/2011 00:21:46] code 502, message ['&lt;urlopen error Tun
+nel connection failed: 403 Forbidden [ZTEOSE]&gt;', '&lt;urlopen error Tunnel connecti
+on failed: 403 Forbidden [ZTEOSE]&gt;', '&lt;urlopen error Tunnel connection failed: 4
+03 Forbidden [ZTEOSE]&gt;']
+127.0.0.1:3347 - - [31/Oct/2011 00:21:46] &quot;GET <a href="http://addons.g-fox.cn/appcenter" rel="nofollow">http://addons.g-fox.cn/appcenter</a>.
+gif?t=0&amp;a=002&amp;d=0&amp;r=0.688388025032075 HTTP/1.1&quot; 502 -
+127.0.0.1:3359 - - [31/Oct/2011 00:21:49] code 502, message ['&lt;urlopen error Tun
+nel connection failed: 403 Forbidden [ZTEOSE]&gt;', '&lt;urlopen error Tunnel connecti
+on failed: 403 Forbidden [ZTEOSE]&gt;', '&lt;urlopen error Tunnel connection failed: 4
+03 Forbidden [ZTEOSE]&gt;']
+127.0.0.1:3359 - - [31/Oct/2011 00:21:49] &quot;GET <a href="http://www.g-fox.cn/live.php?chan" rel="nofollow">http://www.g-fox.cn/live.php?chan</a>
+nelid=firefox.com.cn&amp;ceversion=2011.9&amp;actcode=XhbBv8dhjp8olohW8Mu/jHp+hCg5oa5LW5
+331faY+02KXOMvQ5HWh1l32j1ubqNjp63ACDh44DiQVSiXvmkHx3ZrKmC0TfJX HTTP/1.1&quot; 502 -
+127.0.0.1:3362 - - [31/Oct/2011 00:21:50] code 502, message ['&lt;urlopen error Tun
+nel connection failed: 403 Forbidden [ZTEOSE]&gt;', '&lt;urlopen error Tunnel connecti
+on failed: 403 Forbidden [ZTEOSE]&gt;', '&lt;urlopen error Tunnel connection failed: 4
+03 Forbidden [ZTEOSE]&gt;']
+127.0.0.1:3362 - - [31/Oct/2011 00:21:50] &quot;GET <a href="http://www.g-fox.cn/livemargins/n" rel="nofollow">http://www.g-fox.cn/livemargins/n</a>
+tab.gif?c=ntab&amp;t=view&amp;a=load&amp;d=quickdial&amp;f=&amp;r=0.7748159275969017 HTTP/1.1&quot; 502 -
+
+127.0.0.1:3370 - - [31/Oct/2011 00:21:53] code 502, message ['&lt;urlopen error Tun
+nel connection failed: 403 Forbidden [ZTEOSE]&gt;', '&lt;urlopen error Tunnel connecti
+on failed: 403 Forbidden [ZTEOSE]&gt;', '&lt;urlopen error Tunnel connection failed: 4
+03 Forbidden [ZTEOSE]&gt;']
+127.0.0.1:3370 - - [31/Oct/2011 00:21:53] &quot;POST <a href="http://ocsp.thawte.com/" rel="nofollow">http://ocsp.thawte.com/</a> HTTP/1.1
+&quot; 502 -
+127.0.0.1:3374 - - [31/Oct/2011 00:21:54] &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/&amp;ust=1319991744733" rel="nofollow">http://www.google.com.hk/&amp;ust=1319991744733</a>
+695&amp;usg=AFQjCNE6s0__kVG-5FETmCsc2YFOAM8afQ HTTP/1.1&quot; - -
+127.0.0.1:3446 - - [31/Oct/2011 00:26:51] &quot;POST <a href="http://safebrowsing.clients.goog" rel="nofollow">http://safebrowsing.clients.goog</a>
+le.com/safebrowsing/downloads?client=navclient-auto-ffox&amp;appver=7.0.1&amp;pver=2.2&amp;w
+rkey=AKEgNisKe2i0UJ9yT-B39qBe6hSp2RdEBv5TRen-Cm51ZX7VljtmPeSklPtrHUy01q-0O6aRnd7
+fkw7o3SLZew-qrzwHIiRrfQ== HTTP/1.1&quot; - -
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 30 09:39:39 2011">
+ Oct 30, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=1305#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+&lt;urlopen error Tunnel connection failed: 403 Forbidden [ZTEOSE]&gt;
+出这个错误可能有门，不过我没有cmwap网络，没法调试。
+
+建议你把appspot再改回cn试下。
+如果还不行的话，暂时不要尝试了，估计得我有设备的时候才能解决这个问题了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 30 21:34:32 2011">
+ Oct 30, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=1305#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/117431137935809253567/">ablmdr...@gmail.com</a
+></span>
+ 
+<pre>
+不用什么设备吧？直接用手机连接电脑，再下个对应的pc套件就可以了啊，我以前试过，直接用10.0.0.172好像不行，要用动感大挪移把cmwap代理映射到127.0.0.1：6000好像就行了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 14:01:57 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=1305#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+<i>(No comment was entered for this change.)</i>
+</pre>
+ 
+ 
+ <div class="updates">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ 
+ <b>Status:</b>
+ Done
+ 
+ <br>
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D1305&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D1305"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="1305">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A1305',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 1305,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

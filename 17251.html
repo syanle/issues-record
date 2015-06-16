@@ -1,0 +1,735 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"assetHostPath": "https://ssl.gstatic.com/codesite/ph", "domainName": null, "token": null, "profileUrl": null, "loggedInUserEmail": null, "relativeBaseUrl": "", "projectHomeUrl": "/p/goagent", "projectName": "goagent", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 17251 - 
+ goagent -
+ 
+ 使用一会定住了 timeout and no response  - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17251&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17251" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=17251">17251</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >使用一会定住了 timeout and no response </span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 1 person starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A17251">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17251&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17251">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/100623003003084836330/">kiratec...@gmail.com</a
+>,
+ <span class="date" title="Wed Sep 17 05:26:52 2014">Sep 17, 2014</span>
+ 
+ </div>
+<pre>
+Freezing and disconnected while browsing. SHows strip connect and &quot;WARNING - response.read(8192) timeout&quot;
+
+操作系统版本:Ubuntu 14.04.1
+浏览器版本:Chromium
+goagent版本:3.1.24
+<b>goagent日志:</b>
+INFO - [Sep 17 20:17:40] resolve name=google_talk host to iplist=['74.125.31.125']
+INFO - [Sep 17 20:17:41] ssl good_ipaddrs=0, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:41] 127.0.0.1:44704 &quot;STRIP CONNECT apis.google.com:443 HTTP/1.1&quot; - -
+INFO - [Sep 17 20:17:41] 127.0.0.1:44705 &quot;STRIP CONNECT apis.google.com:443 HTTP/1.1&quot; - -
+INFO - [Sep 17 20:17:41] 127.0.0.1:44706 &quot;STRIP CONNECT oauth.googleusercontent.com:443 HTTP/1.1&quot; - -
+INFO - [Sep 17 20:17:41] 127.0.0.1:44707 &quot;STRIP CONNECT oauth.googleusercontent.com:443 HTTP/1.1&quot; - -
+INFO - [Sep 17 20:17:41] 127.0.0.1:44708 &quot;STRIP CONNECT ssl.gstatic.com:443 HTTP/1.1&quot; - -
+INFO - [Sep 17 20:17:41] 127.0.0.1:44709 &quot;STRIP CONNECT ssl.gstatic.com:443 HTTP/1.1&quot; - -
+INFO - [Sep 17 20:17:42] ssl good_ipaddrs=0, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:43] 127.0.0.1:44703 &quot;GAE GET <a href="http://www.bbc.com/news/" rel="nofollow">http://www.bbc.com/news/</a> HTTP/1.1&quot; 200 38840
+INFO - [Sep 17 20:17:43] ssl good_ipaddrs=19, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:43] ssl good_ipaddrs=19, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:43] ssl good_ipaddrs=19, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:43] ssl good_ipaddrs=19, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:43] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:43] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:43] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:43] 127.0.0.1:44761 &quot;GAE GET <a href="http://static.bbci.co.uk/frameworks/barlesque/2.66.0/desktop/3.5/style/main.css" rel="nofollow">http://static.bbci.co.uk/frameworks/barlesque/2.66.0/desktop/3.5/style/main.css</a> HTTP/1.1&quot; 200 6062
+INFO - [Sep 17 20:17:43] 127.0.0.1:44801 &quot;GAE GET <a href="http://news.bbcimg.co.uk/view/3_0_21/cream/hi/shared/type.css" rel="nofollow">http://news.bbcimg.co.uk/view/3_0_21/cream/hi/shared/type.css</a> HTTP/1.1&quot; 200 2460
+INFO - [Sep 17 20:17:43] ssl good_ipaddrs=23, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:43] 127.0.0.1:44804 &quot;GAE GET <a href="http://news.bbcimg.co.uk/view/3_0_21/cream/hi/shared/layout/index.css" rel="nofollow">http://news.bbcimg.co.uk/view/3_0_21/cream/hi/shared/layout/index.css</a> HTTP/1.1&quot; 200 297
+INFO - [Sep 17 20:17:43] ssl good_ipaddrs=23, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:44] 127.0.0.1:44805 &quot;GAE GET <a href="http://news.bbcimg.co.uk/js/locationservices/locator/v4_0/locator.js" rel="nofollow">http://news.bbcimg.co.uk/js/locationservices/locator/v4_0/locator.js</a> HTTP/1.1&quot; 200 8432
+INFO - [Sep 17 20:17:44] ssl good_ipaddrs=23, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:44] 127.0.0.1:44762 &quot;GAE GET <a href="http://static.bbci.co.uk/frameworks/barlesque/2.66.0/desktop/3.5/script/barlesque.js" rel="nofollow">http://static.bbci.co.uk/frameworks/barlesque/2.66.0/desktop/3.5/script/barlesque.js</a> HTTP/1.1&quot; 200 5716
+INFO - [Sep 17 20:17:44] ssl good_ipaddrs=23, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:44] ssl good_ipaddrs=23, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:44] ssl good_ipaddrs=23, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:44] ssl good_ipaddrs=23, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:44] ssl good_ipaddrs=23, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:44] ssl good_ipaddrs=23, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:44] ssl good_ipaddrs=23, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:44] ssl good_ipaddrs=23, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:44] ssl good_ipaddrs=23, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:44] ssl good_ipaddrs=23, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:44] ssl good_ipaddrs=23, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:44] 127.0.0.1:44801 &quot;GAE GET <a href="http://news.bbcimg.co.uk/js/common/3_2_1/bbc_fmtj_common.js" rel="nofollow">http://news.bbcimg.co.uk/js/common/3_2_1/bbc_fmtj_common.js</a> HTTP/1.1&quot; 200 3436
+INFO - [Sep 17 20:17:44] 127.0.0.1:44770 &quot;GAE GET <a href="http://www.bbc.com/news/uk-scotland-scotland-politics-29231440" rel="nofollow">http://www.bbc.com/news/uk-scotland-scotland-politics-29231440</a> HTTP/1.1&quot; 200 56693
+INFO - [Sep 17 20:17:44] ssl good_ipaddrs=24, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:44] 127.0.0.1:44804 &quot;GAE GET <a href="http://news.bbcimg.co.uk/js/config/apps/4_7_2/bbc_fmtj_config.js" rel="nofollow">http://news.bbcimg.co.uk/js/config/apps/4_7_2/bbc_fmtj_config.js</a> HTTP/1.1&quot; 200 350
+INFO - [Sep 17 20:17:44] ssl good_ipaddrs=25, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:44] 127.0.0.1:45072 &quot;GAE GET <a href="http://feeds.bbci.co.uk/modules/comments/getcount/?items=__CPS__29228851,__CPS__29230157,__CPS__29231440" rel="nofollow">http://feeds.bbci.co.uk/modules/comments/getcount/?items=__CPS__29228851,__CPS__29230157,__CPS__29231440</a> HTTP/1.1&quot; 200 288
+INFO - [Sep 17 20:17:45] 127.0.0.1:44755 &quot;GAE GET <a href="http://ichef.bbci.co.uk/wwfeatures/144_81/images/live/p0/26/sy/p026sypm.jpg" rel="nofollow">http://ichef.bbci.co.uk/wwfeatures/144_81/images/live/p0/26/sy/p026sypm.jpg</a> HTTP/1.1&quot; 200 4475
+INFO - [Sep 17 20:17:45] 127.0.0.1:44802 &quot;GAE GET <a href="http://news.bbcimg.co.uk/view/3_0_21/cream/hi/shared/global.css" rel="nofollow">http://news.bbcimg.co.uk/view/3_0_21/cream/hi/shared/global.css</a> HTTP/1.1&quot; 200 3417
+INFO - [Sep 17 20:17:45] 127.0.0.1:44801 &quot;GAE GET <a href="http://news.bbcimg.co.uk/view/1_4_38/cream/hi/news/skin.css" rel="nofollow">http://news.bbcimg.co.uk/view/1_4_38/cream/hi/news/skin.css</a> HTTP/1.1&quot; 200 2248
+INFO - [Sep 17 20:17:45] 127.0.0.1:44762 &quot;GAE GET <a href="http://static.bbci.co.uk/frameworks/barlesque/2.66.0/desktop/3.5/script/vendor/edr.js" rel="nofollow">http://static.bbci.co.uk/frameworks/barlesque/2.66.0/desktop/3.5/script/vendor/edr.js</a> HTTP/1.1&quot; 200 11751
+INFO - [Sep 17 20:17:45] 127.0.0.1:44761 &quot;GAE GET <a href="http://static.bbci.co.uk/frameworks/barlesque/2.64.0/desktop/3.5/img/blq-blocks_grey_alpha.png" rel="nofollow">http://static.bbci.co.uk/frameworks/barlesque/2.64.0/desktop/3.5/img/blq-blocks_grey_alpha.png</a> HTTP/1.1&quot; 200 1020
+INFO - [Sep 17 20:17:45] 127.0.0.1:44763 &quot;GAE GET <a href="http://static.bbci.co.uk/frameworks/barlesque/2.64.0/desktop/3.5/img/blq-search_grey_alpha.png" rel="nofollow">http://static.bbci.co.uk/frameworks/barlesque/2.64.0/desktop/3.5/img/blq-search_grey_alpha.png</a> HTTP/1.1&quot; 200 188
+INFO - [Sep 17 20:17:46] 127.0.0.1:44752 &quot;GAE GET <a href="http://ichef.bbci.co.uk/wwfeatures/144_81/images/live/p0/26/t6/p026t6nv.jpg" rel="nofollow">http://ichef.bbci.co.uk/wwfeatures/144_81/images/live/p0/26/t6/p026t6nv.jpg</a> HTTP/1.1&quot; 200 2615
+INFO - [Sep 17 20:17:46] 127.0.0.1:44804 &quot;GAE GET <a href="http://news.bbcimg.co.uk/js/app/av/emp/2_1_8/compatibility.js" rel="nofollow">http://news.bbcimg.co.uk/js/app/av/emp/2_1_8/compatibility.js</a> HTTP/1.1&quot; 200 1999
+INFO - [Sep 17 20:17:46] ssl good_ipaddrs=34, bad_ipaddrs=20, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:46] ssl good_ipaddrs=35, bad_ipaddrs=20, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:46] 127.0.0.1:44804 &quot;GAE GET <a href="http://news.bbcimg.co.uk/img/1_0_3/cream/hi/news/news-blocks.gif" rel="nofollow">http://news.bbcimg.co.uk/img/1_0_3/cream/hi/news/news-blocks.gif</a> HTTP/1.1&quot; 200 1657
+INFO - [Sep 17 20:17:46] 127.0.0.1:44805 &quot;GAE GET <a href="http://news.bbcimg.co.uk/js/app/av/emp/2_1_8/emp.js" rel="nofollow">http://news.bbcimg.co.uk/js/app/av/emp/2_1_8/emp.js</a> HTTP/1.1&quot; 200 4965
+WARNING - [Sep 17 20:17:46] response.read(8192) timeout
+INFO - [Sep 17 20:17:46] ssl good_ipaddrs=35, bad_ipaddrs=20, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:46] 127.0.0.1:45071 &quot;GAE GET <a href="http://ichef.bbci.co.uk/wwtravel/304_170/images/live/p0/26/1f/p0261fp6.jpg" rel="nofollow">http://ichef.bbci.co.uk/wwtravel/304_170/images/live/p0/26/1f/p0261fp6.jpg</a> HTTP/1.1&quot; 200 20316
+INFO - [Sep 17 20:17:46] 127.0.0.1:44764 &quot;GAE GET <a href="http://static.bbci.co.uk/frameworks/barlesque/2.64.0/desktop/3.5/img/blocks/dark.png" rel="nofollow">http://static.bbci.co.uk/frameworks/barlesque/2.64.0/desktop/3.5/img/blocks/dark.png</a> HTTP/1.1&quot; 200 1023
+INFO - [Sep 17 20:17:46] 127.0.0.1:44753 &quot;GAE GET <a href="http://ichef.bbci.co.uk/wwfeatures/144_81/images/live/p0/26/f2/p026f2p7.jpg" rel="nofollow">http://ichef.bbci.co.uk/wwfeatures/144_81/images/live/p0/26/f2/p026f2p7.jpg</a> HTTP/1.1&quot; 200 26839
+INFO - [Sep 17 20:17:46] 127.0.0.1:44806 &quot;GAE GET <a href="http://news.bbcimg.co.uk/js/core/3_3_1/bbc_fmtj.js" rel="nofollow">http://news.bbcimg.co.uk/js/core/3_3_1/bbc_fmtj.js</a> HTTP/1.1&quot; 200 1409
+INFO - [Sep 17 20:17:46] 127.0.0.1:44803 &quot;GAE GET <a href="http://news.bbcimg.co.uk/view/3_0_21/cream/hi/shared/components/components.css" rel="nofollow">http://news.bbcimg.co.uk/view/3_0_21/cream/hi/shared/components/components.css</a> HTTP/1.1&quot; 200 35259
+WARNING - [Sep 17 20:17:47] response.read(8192) timeout
+INFO - [Sep 17 20:17:47] ssl good_ipaddrs=40, bad_ipaddrs=20, unknown_ipaddrs=0
+WARNING - [Sep 17 20:17:47] response.read(8192) timeout
+INFO - [Sep 17 20:17:47] 127.0.0.1:44756 &quot;GAE GET <a href="http://ichef.bbci.co.uk/wwtravel/304_170/images/live/p0/25/j3/p025j3yl.jpg" rel="nofollow">http://ichef.bbci.co.uk/wwtravel/304_170/images/live/p0/25/j3/p025j3yl.jpg</a> HTTP/1.1&quot; 200 11422
+INFO - [Sep 17 20:17:47] ssl good_ipaddrs=41, bad_ipaddrs=35, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:47] 127.0.0.1:44801 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77637000/jpg/_77637152_023932769.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77637000/jpg/_77637152_023932769.jpg</a> HTTP/1.1&quot; 200 23817
+INFO - [Sep 17 20:17:48] 127.0.0.1:44806 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77633000/jpg/_77633613_77633605.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77633000/jpg/_77633613_77633605.jpg</a> HTTP/1.1&quot; 200 4909
+INFO - [Sep 17 20:17:48] 127.0.0.1:44802 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77639000/jpg/_77639807_77638760.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77639000/jpg/_77639807_77638760.jpg</a> HTTP/1.1&quot; 200 7481
+INFO - [Sep 17 20:17:48] 127.0.0.1:44804 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77629000/jpg/_77629108_77628136.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77629000/jpg/_77629108_77628136.jpg</a> HTTP/1.1&quot; 200 6955
+INFO - [Sep 17 20:17:48] ssl good_ipaddrs=41, bad_ipaddrs=40, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:48] ssl good_ipaddrs=41, bad_ipaddrs=40, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:48] 127.0.0.1:44754 &quot;GAE GET <a href="http://ichef.bbci.co.uk/wwfeatures/144_81/images/live/p0/26/sl/p026slvb.jpg" rel="nofollow">http://ichef.bbci.co.uk/wwfeatures/144_81/images/live/p0/26/sl/p026slvb.jpg</a> HTTP/1.1&quot; 200 3250
+WARNING - [Sep 17 20:17:48] response.read(8192) timeout
+INFO - [Sep 17 20:17:48] 127.0.0.1:44804 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77617000/jpg/_77617762_77614634.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77617000/jpg/_77617762_77614634.jpg</a> HTTP/1.1&quot; 200 7408
+INFO - [Sep 17 20:17:48] 127.0.0.1:44806 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77611000/jpg/_77611685_77611627.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77611000/jpg/_77611685_77611627.jpg</a> HTTP/1.1&quot; 200 7288
+WARNING - [Sep 17 20:17:48] response.read(8192) timeout
+INFO - [Sep 17 20:17:48] ssl good_ipaddrs=41, bad_ipaddrs=40, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:48] 127.0.0.1:44805 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77634000/jpg/_77634408_77634399.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77634000/jpg/_77634408_77634399.jpg</a> HTTP/1.1&quot; 200 4873
+INFO - [Sep 17 20:17:48] 127.0.0.1:44802 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77629000/jpg/_77629089_77628694.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77629000/jpg/_77629089_77628694.jpg</a> HTTP/1.1&quot; 200 5587
+INFO - [Sep 17 20:17:48] ssl good_ipaddrs=41, bad_ipaddrs=40, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:48] ssl good_ipaddrs=41, bad_ipaddrs=40, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:49] ssl good_ipaddrs=41, bad_ipaddrs=40, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:50] 127.0.0.1:44806 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77638000/jpg/_77638924_77637812.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77638000/jpg/_77638924_77637812.jpg</a> HTTP/1.1&quot; 200 11551
+INFO - [Sep 17 20:17:50] 127.0.0.1:44802 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77638000/jpg/_77638814_scotlandmegaphone.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77638000/jpg/_77638814_scotlandmegaphone.jpg</a> HTTP/1.1&quot; 200 3791
+INFO - [Sep 17 20:17:50] ssl good_ipaddrs=39, bad_ipaddrs=42, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:50] ssl good_ipaddrs=39, bad_ipaddrs=42, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:50] 127.0.0.1:44805 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77625000/jpg/_77625917_477118009.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77625000/jpg/_77625917_477118009.jpg</a> HTTP/1.1&quot; 200 5288
+INFO - [Sep 17 20:17:50] ssl good_ipaddrs=38, bad_ipaddrs=43, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:50] 127.0.0.1:44801 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77607000/jpg/_77607424_tv018090449(1).jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77607000/jpg/_77607424_tv018090449(1).jpg</a> HTTP/1.1&quot; 200 4201
+INFO - [Sep 17 20:17:50] ssl good_ipaddrs=38, bad_ipaddrs=43, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:50] 127.0.0.1:44802 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77633000/jpg/_77633641_77633631.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77633000/jpg/_77633641_77633631.jpg</a> HTTP/1.1&quot; 200 5364
+INFO - [Sep 17 20:17:50] 127.0.0.1:44806 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77643000/jpg/_77643659_77638155.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77643000/jpg/_77643659_77638155.jpg</a> HTTP/1.1&quot; 200 7058
+INFO - [Sep 17 20:17:50] ssl good_ipaddrs=38, bad_ipaddrs=43, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:50] ssl good_ipaddrs=38, bad_ipaddrs=43, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:50] 127.0.0.1:45627 &quot;GAE GET <a href="http://www.nytimes.com/" rel="nofollow">http://www.nytimes.com/</a> HTTP/1.1&quot; 200 41767
+INFO - [Sep 17 20:17:50] 127.0.0.1:44801 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/55182000/gif/_55182136__48351578_640x360-world-news-1.gif" rel="nofollow">http://news.bbcimg.co.uk/media/images/55182000/gif/_55182136__48351578_640x360-world-news-1.gif</a> HTTP/1.1&quot; 200 7389
+INFO - [Sep 17 20:17:50] ssl good_ipaddrs=38, bad_ipaddrs=43, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:51] 127.0.0.1:44802 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77638000/jpg/_77638139_77637422.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77638000/jpg/_77638139_77637422.jpg</a> HTTP/1.1&quot; 200 7131
+INFO - [Sep 17 20:17:51] ssl good_ipaddrs=38, bad_ipaddrs=43, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:51] 127.0.0.1:44806 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77627000/jpg/_77627022_77626498.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77627000/jpg/_77627022_77626498.jpg</a> HTTP/1.1&quot; 200 6167
+INFO - [Sep 17 20:17:51] ssl good_ipaddrs=38, bad_ipaddrs=43, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:51] 127.0.0.1:44804 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77612000/jpg/_77612369_77611817.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77612000/jpg/_77612369_77611817.jpg</a> HTTP/1.1&quot; 200 6461
+INFO - [Sep 17 20:17:51] 127.0.0.1:44801 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77633000/jpg/_77633029_77632869.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77633000/jpg/_77633029_77632869.jpg</a> HTTP/1.1&quot; 200 6414
+INFO - [Sep 17 20:17:51] ssl good_ipaddrs=38, bad_ipaddrs=43, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:51] ssl good_ipaddrs=38, bad_ipaddrs=43, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:51] 127.0.0.1:44802 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77637000/jpg/_77637798_3dgetty1024.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77637000/jpg/_77637798_3dgetty1024.jpg</a> HTTP/1.1&quot; 200 6617
+INFO - [Sep 17 20:17:51] 127.0.0.1:44806 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77638000/jpg/_77638942_461201763(1).jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77638000/jpg/_77638942_461201763(1).jpg</a> HTTP/1.1&quot; 200 4483
+INFO - [Sep 17 20:17:51] ssl good_ipaddrs=38, bad_ipaddrs=43, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:51] 127.0.0.1:44804 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77621000/jpg/_77621872_lumix.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77621000/jpg/_77621872_lumix.jpg</a> HTTP/1.1&quot; 200 4803
+INFO - [Sep 17 20:17:51] 127.0.0.1:44801 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77637000/jpg/_77637177_harley1_624ap.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77637000/jpg/_77637177_harley1_624ap.jpg</a> HTTP/1.1&quot; 200 6981
+INFO - [Sep 17 20:17:51] ssl good_ipaddrs=38, bad_ipaddrs=43, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:51] ssl good_ipaddrs=38, bad_ipaddrs=43, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:52] 127.0.0.1:44806 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77633000/jpg/_77633911_21ffe381-0edd-4646-89e8-49783382bf21.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77633000/jpg/_77633911_21ffe381-0edd-4646-89e8-49783382bf21.jpg</a> HTTP/1.1&quot; 200 6866
+INFO - [Sep 17 20:17:52] 127.0.0.1:44802 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77634000/jpg/_77634172_76889093.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77634000/jpg/_77634172_76889093.jpg</a> HTTP/1.1&quot; 200 6196
+INFO - [Sep 17 20:17:52] ssl good_ipaddrs=38, bad_ipaddrs=43, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:52] ssl good_ipaddrs=38, bad_ipaddrs=43, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:52] 127.0.0.1:44805 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77640000/jpg/_77640664_77640655.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77640000/jpg/_77640664_77640655.jpg</a> HTTP/1.1&quot; 200 5871
+INFO - [Sep 17 20:17:52] 127.0.0.1:44804 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77632000/jpg/_77632901_steven_gerrard_reuters.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77632000/jpg/_77632901_steven_gerrard_reuters.jpg</a> HTTP/1.1&quot; 200 5496
+INFO - [Sep 17 20:17:52] 127.0.0.1:44801 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77527000/jpg/_77527649_small-hitler.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77527000/jpg/_77527649_small-hitler.jpg</a> HTTP/1.1&quot; 200 4715
+INFO - [Sep 17 20:17:52] ssl good_ipaddrs=37, bad_ipaddrs=44, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:52] 127.0.0.1:44802 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77642000/jpg/_77642895_koreanpoliceman.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77642000/jpg/_77642895_koreanpoliceman.jpg</a> HTTP/1.1&quot; 200 4983
+INFO - [Sep 17 20:17:52] ssl good_ipaddrs=37, bad_ipaddrs=44, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:52] ssl good_ipaddrs=38, bad_ipaddrs=43, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:52] 127.0.0.1:44804 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77616000/jpg/_77616975_883d688e-2011-4236-a681-354dff259476.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77616000/jpg/_77616975_883d688e-2011-4236-a681-354dff259476.jpg</a> HTTP/1.1&quot; 200 5168
+INFO - [Sep 17 20:17:52] 127.0.0.1:44806 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77600000/jpg/_77600211_6.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77600000/jpg/_77600211_6.jpg</a> HTTP/1.1&quot; 200 5497
+INFO - [Sep 17 20:17:53] 127.0.0.1:44802 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77571000/jpg/_77571551_023882840-1.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77571000/jpg/_77571551_023882840-1.jpg</a> HTTP/1.1&quot; 200 8185
+INFO - [Sep 17 20:17:53] 127.0.0.1:44805 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77554000/jpg/_77554187_77554086.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77554000/jpg/_77554187_77554086.jpg</a> HTTP/1.1&quot; 200 5448
+INFO - [Sep 17 20:17:53] ssl good_ipaddrs=38, bad_ipaddrs=43, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:53] 127.0.0.1:44806 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77545000/jpg/_77545368_minkennenarm_mouth_of_the_river_fosters_pond_2014copy.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77545000/jpg/_77545368_minkennenarm_mouth_of_the_river_fosters_pond_2014copy.jpg</a> HTTP/1.1&quot; 200 4848
+INFO - [Sep 17 20:17:53] ssl good_ipaddrs=39, bad_ipaddrs=42, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:53] 127.0.0.1:44804 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77595000/jpg/_77595536_c7c89ce8-7aea-4a59-a5f7-7167ed13a1f3.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77595000/jpg/_77595536_c7c89ce8-7aea-4a59-a5f7-7167ed13a1f3.jpg</a> HTTP/1.1&quot; 200 6329
+INFO - [Sep 17 20:17:53] 127.0.0.1:44806 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77554000/jpg/_77554034_8b177605-823b-44c8-b718-1f5e210e3b5d.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77554000/jpg/_77554034_8b177605-823b-44c8-b718-1f5e210e3b5d.jpg</a> HTTP/1.1&quot; 200 5455
+INFO - [Sep 17 20:17:53] ssl good_ipaddrs=39, bad_ipaddrs=42, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:53] ssl good_ipaddrs=39, bad_ipaddrs=42, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:54] ssl good_ipaddrs=39, bad_ipaddrs=42, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:54] 127.0.0.1:44806 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77548000/jpg/_77548319_b602ed82-3575-41ff-9099-79f0d9636b8b.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77548000/jpg/_77548319_b602ed82-3575-41ff-9099-79f0d9636b8b.jpg</a> HTTP/1.1&quot; 200 5877
+INFO - [Sep 17 20:17:54] ssl good_ipaddrs=39, bad_ipaddrs=42, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:54] 127.0.0.1:44804 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77413000/jpg/_77413337_77413318.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77413000/jpg/_77413337_77413318.jpg</a> HTTP/1.1&quot; 200 20435
+INFO - [Sep 17 20:17:54] ssl good_ipaddrs=39, bad_ipaddrs=42, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:54] 127.0.0.1:44805 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77623000/jpg/_77623101_whale-and-person-yann-oulia.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77623000/jpg/_77623101_whale-and-person-yann-oulia.jpg</a> HTTP/1.1&quot; 200 3886
+WARNING - [Sep 17 20:17:54] response.read(8192) timeout
+INFO - [Sep 17 20:17:54] ssl good_ipaddrs=38, bad_ipaddrs=43, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:54] 127.0.0.1:44806 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77598000/jpg/_77598883_mexico6.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77598000/jpg/_77598883_mexico6.jpg</a> HTTP/1.1&quot; 200 5206
+INFO - [Sep 17 20:17:54] ssl good_ipaddrs=37, bad_ipaddrs=44, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:54] 127.0.0.1:44805 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77600000/jpg/_77600783_flies_rexfeatures_1580275a.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77600000/jpg/_77600783_flies_rexfeatures_1580275a.jpg</a> HTTP/1.1&quot; 200 5539
+INFO - [Sep 17 20:17:54] ssl good_ipaddrs=37, bad_ipaddrs=44, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:54] 127.0.0.1:44802 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77633000/jpg/_77633050_badge_think.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77633000/jpg/_77633050_badge_think.jpg</a> HTTP/1.1&quot; 200 4158
+INFO - [Sep 17 20:17:54] ssl good_ipaddrs=39, bad_ipaddrs=42, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:55] 127.0.0.1:44805 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77638000/jpg/_77638587_hi000386280.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77638000/jpg/_77638587_hi000386280.jpg</a> HTTP/1.1&quot; 200 5648
+INFO - [Sep 17 20:17:55] ssl good_ipaddrs=38, bad_ipaddrs=43, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:55] 127.0.0.1:44804 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77617000/jpg/_77617539_everett1.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77617000/jpg/_77617539_everett1.jpg</a> HTTP/1.1&quot; 200 4989
+INFO - [Sep 17 20:17:55] 127.0.0.1:44806 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77628000/jpg/_77628472_77625305.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77628000/jpg/_77628472_77625305.jpg</a> HTTP/1.1&quot; 200 5625
+INFO - [Sep 17 20:17:55] ssl good_ipaddrs=39, bad_ipaddrs=42, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:55] 127.0.0.1:44805 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77626000/jpg/_77626855_ebola_promo320x180.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77626000/jpg/_77626855_ebola_promo320x180.jpg</a> HTTP/1.1&quot; 200 4822
+INFO - [Sep 17 20:17:55] ssl good_ipaddrs=39, bad_ipaddrs=42, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:56] 127.0.0.1:44805 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77625000/jpg/_77625413_492964631.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77625000/jpg/_77625413_492964631.jpg</a> HTTP/1.1&quot; 200 4166
+INFO - [Sep 17 20:17:56] 127.0.0.1:44806 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77627000/jpg/_77627662_baby.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77627000/jpg/_77627662_baby.jpg</a> HTTP/1.1&quot; 200 3778
+INFO - [Sep 17 20:17:56] ssl good_ipaddrs=41, bad_ipaddrs=40, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:56] 127.0.0.1:44804 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77638000/jpg/_77638478_006399722-1.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77638000/jpg/_77638478_006399722-1.jpg</a> HTTP/1.1&quot; 200 4650
+INFO - [Sep 17 20:17:56] ssl good_ipaddrs=40, bad_ipaddrs=41, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:56] 127.0.0.1:44802 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77619000/jpg/_77619927_01395912crop.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77619000/jpg/_77619927_01395912crop.jpg</a> HTTP/1.1&quot; 200 4424
+INFO - [Sep 17 20:17:56] ssl good_ipaddrs=40, bad_ipaddrs=41, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:56] 127.0.0.1:44805 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77626000/jpg/_77626588_77626323.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77626000/jpg/_77626588_77626323.jpg</a> HTTP/1.1&quot; 200 4538
+INFO - [Sep 17 20:17:56] ssl good_ipaddrs=41, bad_ipaddrs=40, unknown_ipaddrs=0
+INFO - [Sep 17 20:17:56] 127.0.0.1:44806 &quot;GAE GET <a href="http://news.bbcimg.co.uk/img/1_0_3/cream/hi/news/inline-twitter-v2.jpg" rel="nofollow">http://news.bbcimg.co.uk/img/1_0_3/cream/hi/news/inline-twitter-v2.jpg</a> HTTP/1.1&quot; 200 15332
+INFO - [Sep 17 20:17:56] 127.0.0.1:44804 &quot;GAE GET <a href="http://news.bbcimg.co.uk/img/1_0_3/cream/hi/news/inline-facebook.jpg" rel="nofollow">http://news.bbcimg.co.uk/img/1_0_3/cream/hi/news/inline-facebook.jpg</a> HTTP/1.1&quot; 200 3691
+INFO - [Sep 17 20:17:56] 127.0.0.1:44802 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77302000/jpg/_77302570_p025llqs.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77302000/jpg/_77302570_p025llqs.jpg</a> HTTP/1.1&quot; 200 4522
+INFO - [Sep 17 20:17:56] 127.0.0.1:44805 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77637000/jpg/_77637800_3dgetty1024.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77637000/jpg/_77637800_3dgetty1024.jpg</a> HTTP/1.1&quot; 200 5129
+INFO - [Sep 17 20:17:57] 127.0.0.1:44806 &quot;GAE GET <a href="http://news.bbcimg.co.uk/media/images/77614000/jpg/_77614278_hungary1024.jpg" rel="nofollow">http://news.bbcimg.co.uk/media/images/77614000/jpg/_77614278_hungary1024.jpg</a> HTTP/1.1&quot; 200 4213
+INFO - [Sep 17 20:18:10] extend_iplist start for hosts=['www.google.com', 'mail.google.com', 'www.google.com.hk', 'www.google.com.tw', 'www2.l.google.com', 'www3.l.google.com', 'www4.l.google.com', 'www5.l.google.com', 'www6.l.google.com', 'www.l.google.com', 'mail.l.google.com', 'googleapis.l.google.com', 'googlecode.l.googleusercontent.com', 'maps.l.google.com', 'code.l.google.com']
+INFO - [Sep 17 20:18:13] 127.0.0.1:46654 &quot;STRIP CONNECT ssl.gstatic.com:443 HTTP/1.1&quot; - -
+INFO - [Sep 17 20:18:13] 127.0.0.1:46653 &quot;STRIP CONNECT apis.google.com:443 HTTP/1.1&quot; - -
+INFO - [Sep 17 20:18:13] 127.0.0.1:46652 &quot;STRIP CONNECT apis.google.com:443 HTTP/1.1&quot; - -
+INFO - [Sep 17 20:18:13] 127.0.0.1:46651 &quot;STRIP CONNECT www.google.com.hk:443 HTTP/1.1&quot; - -
+INFO - [Sep 17 20:18:13] 127.0.0.1:46660 &quot;STRIP CONNECT www.google.com.hk:443 HTTP/1.1&quot; - -
+INFO - [Sep 17 20:18:13] 127.0.0.1:46659 &quot;STRIP CONNECT www.google.com.hk:443 HTTP/1.1&quot; - -
+INFO - [Sep 17 20:18:13] 127.0.0.1:46658 &quot;STRIP CONNECT www.google.com.hk:443 HTTP/1.1&quot; - -
+INFO - [Sep 17 20:18:13] 127.0.0.1:46657 &quot;STRIP CONNECT www.google.com.hk:443 HTTP/1.1&quot; - -
+INFO - [Sep 17 20:18:13] 127.0.0.1:46656 &quot;STRIP CONNECT www.google.com.hk:443 HTTP/1.1&quot; - -
+INFO - [Sep 17 20:18:13] 127.0.0.1:46655 &quot;STRIP CONNECT ssl.gstatic.com:443 HTTP/1.1&quot; - -
+INFO - [Sep 17 20:18:13] 127.0.0.1:46661 &quot;STRIP CONNECT www.gstatic.com:443 HTTP/1.1&quot; - -
+INFO - [Sep 17 20:18:13] 127.0.0.1:46662 &quot;STRIP CONNECT www.gstatic.com:443 HTTP/1.1&quot; - -
+INFO - [Sep 17 20:18:13] ssl good_ipaddrs=31, bad_ipaddrs=50, unknown_ipaddrs=0
+INFO - [Sep 17 20:18:13] ssl good_ipaddrs=31, bad_ipaddrs=50, unknown_ipaddrs=0
+INFO - [Sep 17 20:18:13] 127.0.0.1:46711 &quot;STRIP CONNECT oauth.googleusercontent.com:443 HTTP/1.1&quot; - -
+INFO - [Sep 17 20:18:13] 127.0.0.1:46712 &quot;STRIP CONNECT oauth.googleusercontent.com:443 HTTP/1.1&quot; - -
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Sep 17 06:51:58 2014">
+ Sep 17, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=17251#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/110412463922323914316/">TChung...@gmail.com</a
+></span>
+ 
+<pre>
+近幾個版本都出現類似現象，更換了DNS之後有所改善，不過瀏覽youtube視頻還是經常停頓。
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17251&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17251"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="17251">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A17251',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 17251,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

@@ -1,0 +1,1399 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"relativeBaseUrl": "", "projectName": "goagent", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "domainName": null, "profileUrl": null, "projectHomeUrl": "/p/goagent", "loggedInUserEmail": null, "token": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 13062 - 
+ goagent -
+ 
+ 请大家谨慎使用谷歌DNS8.8.8.8及8.8.4.4 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13062&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13062" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=13062">13062</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >请大家谨慎使用谷歌DNS8.8.8.8及8.8.4.4</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 4 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A13062">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13062&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13062">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/100606320421938438539/">macheng...@gmail.com</a
+>,
+ <span class="date" title="Thu Apr  3 01:54:02 2014">Apr 3, 2014</span>
+ 
+ </div>
+<pre>
+从昨晚开始，河南联通在使用谷歌DNS时，打开京东商城网站（www.jd.com）时网站会自动跳转几次，最后地址栏会显示<a href="http://www.jd.com/?utm_source=p.yiqifa.com&amp;utm_medium=tuiguang&amp;utm_campaign=t_1_677712&amp;utm_term=9b0f0a830e974dbf86dacb3f73ca0254，" rel="nofollow">http://www.jd.com/?utm_source=p.yiqifa.com&amp;utm_medium=tuiguang&amp;utm_campaign=t_1_677712&amp;utm_term=9b0f0a830e974dbf86dacb3f73ca0254，</a>
+
+半个小时会跳转一次，半小时内多次打开则不会跳转。
+
+已经确认是谷歌DNS的问题，希望大家谨慎使用此DNS。
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr  3 02:30:40 2014">
+ Apr 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=13062#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/108113986212772662294/">wangjian...@gmail.com</a
+></span>
+ 
+<pre>
+我也发现了 昨天的某个版本（忘了是哪个了）会将很多网站 其中包括 youtube translate.google.com.tw 重定向到一些很奇怪的网站 比如将 <a href="http://guests.met-art.com/" rel="nofollow">http://guests.met-art.com/</a> 重定向到 <a href="http://m.met-art.com/" rel="nofollow">http://m.met-art.com/</a> 不过升级到新版就不再出现了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr  3 02:35:20 2014">
+ Apr 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=13062#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/113741450146766041696/">i...@wencan.org</a
+></span>
+ 
+<pre>
+有其它选择没？
+
+opendns和comodo都比较慢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr  3 02:48:12 2014">
+ Apr 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=13062#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+我可以明确告诉你，这是运营商故意不让你用google dns的，这个问题属于http劫持，dns劫持是做不到这样的效果的
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr  3 03:06:19 2014">
+ Apr 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=13062#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/100606320421938438539/">macheng...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢ls，那请问想继续用谷歌的DNS要怎么解决这个问题呢？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr  3 08:42:06 2014">
+ Apr 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=13062#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/106741628998143766580/">zhao.fei...@gmail.com</a
+></span>
+ 
+<pre>
+要么VPN，要么使用加密的DNS服务。opendns
+有个dnscrypt软件，可以试下。解析慢点但是没有劫持和污染
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr  3 18:50:02 2014">
+ Apr 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=13062#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/112324915573285851727/">lijingyi...@gmail.com</a
+></span>
+ 
+<pre>
+近两月google丢包严重，用其dns打开网页很慢。
+
+adsl，湖北电信
+--------------------
+
+Microsoft Windows [版本 6.1.7601]
+版权所有 (c) 2009 Microsoft Corporation。保留所有权利。
+
+C:\Users\Administrator&gt;ping 8.8.8.8
+
+正在 Ping 8.8.8.8 具有 32 字节的数据:
+请求超时。
+请求超时。
+来自 8.8.8.8 的回复: 字节=32 时间=222ms TTL=34
+来自 8.8.8.8 的回复: 字节=32 时间=219ms TTL=34
+
+8.8.8.8 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 2，丢失 = 2 (50% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 219ms，最长 = 222ms，平均 = 220ms
+
+C:\Users\Administrator&gt;
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr  3 18:53:13 2014">
+ Apr 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=13062#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/105533264391224970143/">SZhan...@gmail.com</a
+></span>
+ 
+<pre>
+这显然是运营商劫持，跟谷歌dns没关系
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr  3 21:12:34 2014">
+ Apr 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=13062#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/109067138922126306483/">lir...@gmail.com</a
+></span>
+ 
+<pre>
+要么是运营商劫持，要么是你的goagent 服务器有问题。yiqifa 是一个广告平台，从yiqifa 跳过来的链接，广告发布者能赚钱。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr  3 21:31:15 2014">
+ Apr 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=13062#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/103887503345730827402/">godtr...@gmail.com</a
+></span>
+ 
+<pre>
+<i>(No comment was entered for this change.)</i>
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=130620010000&amp;name=8888.PNG&amp;token=ABZ6GAfjJPJ_eqqj4NrVpdEwkCH2519NQQ%3A1434455127726&amp;id=13062&amp;mod_ts_token=ABZ6GAdfTQe3ONRAa_nWiDJWW6Gu70STVQ%3A1434455127726">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >8888.PNG</b>
+ <br>
+ 15.8 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=130620010000&amp;name=8888.PNG&amp;token=ABZ6GAfjJPJ_eqqj4NrVpdEwkCH2519NQQ%3A1434455127726&amp;id=13062&amp;mod_ts_token=ABZ6GAdfTQe3ONRAa_nWiDJWW6Gu70STVQ%3A1434455127726&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=130620010000&amp;name=8888.PNG&amp;token=ABZ6GAfjJPJ_eqqj4NrVpdEwkCH2519NQQ%3A1434455127726&amp;id=13062&amp;mod_ts_token=ABZ6GAdfTQe3ONRAa_nWiDJWW6Gu70STVQ%3A1434455127726">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=130620010000&amp;name=8888.PNG&amp;token=ABZ6GAfjJPJ_eqqj4NrVpdEwkCH2519NQQ%3A1434455127726&amp;id=13062&amp;mod_ts_token=ABZ6GAdfTQe3ONRAa_nWiDJWW6Gu70STVQ%3A1434455127726&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=130620010000&amp;name=8888.PNG&amp;token=ABZ6GAfjJPJ_eqqj4NrVpdEwkCH2519NQQ%3A1434455127726&amp;id=13062&amp;mod_ts_token=ABZ6GAdfTQe3ONRAa_nWiDJWW6Gu70STVQ%3A1434455127726&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr  3 22:09:44 2014">
+ Apr 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=13062#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/100606320421938438539/">macheng...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢大家的解答，看来应该是联通的问题，不过很奇怪，只有在使用谷歌的DNS时才会有劫持，使用默认DNS就不会有，可能就像3L说的那样，联通是故意干扰用户使用谷歌的DNS吧
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 23:03:20 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=13062#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/109813705174553991008/">sycsycsy...@gmail.com</a
+></span>
+ 
+<pre>
+用 <a href="https://github.com/jedisct1/dnscrypt-proxy" rel="nofollow">https://github.com/jedisct1/dnscrypt-proxy</a> 看看。OpenDNS的客户端万年没更新了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr  8 00:03:21 2014">
+ Apr 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=13062#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/100606320421938438539/">macheng...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢ls，我这边的情况是除非用默认的DNS，否则就会跳转，（不过，用goagent代理就不会有跳转，奇怪的很），所以我猜应该不是DNS的问题，可能是http劫持吧，束手无策中。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr  8 01:10:57 2014">
+ Apr 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=13062#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/107795591669850984411/">alienwar...@gmail.com</a
+></span>
+ 
+<pre>
+湖北电信还对中华电信DNS(168.95.1.1)搞了BGP劫持，ping只有1ms，可恶
+
+而另外一个中华电信DNS(168.95.192.1)则是正常的
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=130620014000&amp;name=dns.hinet.net.JPG&amp;token=ABZ6GAf6PKZlRWtLLrqNmw3m1xZeYWdaVw%3A1434455127727&amp;id=13062&amp;mod_ts_token=ABZ6GAffZukHbnu_ws1KPKSzdSlIEl6QOA%3A1434455127727">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >dns.hinet.net.JPG</b>
+ <br>
+ 91.7 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=130620014000&amp;name=dns.hinet.net.JPG&amp;token=ABZ6GAf6PKZlRWtLLrqNmw3m1xZeYWdaVw%3A1434455127727&amp;id=13062&amp;mod_ts_token=ABZ6GAffZukHbnu_ws1KPKSzdSlIEl6QOA%3A1434455127727&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=130620014000&amp;name=dns.hinet.net.JPG&amp;token=ABZ6GAf6PKZlRWtLLrqNmw3m1xZeYWdaVw%3A1434455127727&amp;id=13062&amp;mod_ts_token=ABZ6GAffZukHbnu_ws1KPKSzdSlIEl6QOA%3A1434455127727">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=130620014000&amp;name=dns.hinet.net.JPG&amp;token=ABZ6GAf6PKZlRWtLLrqNmw3m1xZeYWdaVw%3A1434455127727&amp;id=13062&amp;mod_ts_token=ABZ6GAffZukHbnu_ws1KPKSzdSlIEl6QOA%3A1434455127727&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=130620014000&amp;name=dns.hinet.net.JPG&amp;token=ABZ6GAf6PKZlRWtLLrqNmw3m1xZeYWdaVw%3A1434455127727&amp;id=13062&amp;mod_ts_token=ABZ6GAffZukHbnu_ws1KPKSzdSlIEl6QOA%3A1434455127727&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr  8 01:16:33 2014">
+ Apr 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=13062#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+啊，之前听说过长城宽带对 114dns 做 BGP 劫持，以为很罕见，现在看连电信这个大 ISP 也这么做。。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 10 20:15:54 2014">
+ Apr 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=13062#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/112535988841208996536/">inert...@gmail.com</a
+></span>
+ 
+<pre>
+魔都的电信也干这个http劫持的
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 11 01:18:00 2014">
+ Apr 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=13062#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/112405280388369516078/">allensha...@gmail.com</a
+></span>
+ 
+<pre>
+投诉丫的
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 11 01:34:15 2014">
+ Apr 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=13062#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/117452782893511213071/">daxiaop...@gmail.com</a
+></span>
+ 
+<pre>
+那这样子算什么？
+
+
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=130620018000&amp;name=QQ%E6%88%AA%E5%9B%BE20140411163405.png&amp;token=ABZ6GAfTaMMTpsk-8Rd1T-Q-511BLBmjeg%3A1434455127727&amp;id=13062&amp;mod_ts_token=ABZ6GAeCOHtRZxzHiTToOw-SslnjGM85Iw%3A1434455127727">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >QQ截图20140411163405.png</b>
+ <br>
+ 64.2 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=130620018000&amp;name=QQ%E6%88%AA%E5%9B%BE20140411163405.png&amp;token=ABZ6GAfTaMMTpsk-8Rd1T-Q-511BLBmjeg%3A1434455127727&amp;id=13062&amp;mod_ts_token=ABZ6GAeCOHtRZxzHiTToOw-SslnjGM85Iw%3A1434455127727&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=130620018000&amp;name=QQ%E6%88%AA%E5%9B%BE20140411163405.png&amp;token=ABZ6GAfTaMMTpsk-8Rd1T-Q-511BLBmjeg%3A1434455127727&amp;id=13062&amp;mod_ts_token=ABZ6GAeCOHtRZxzHiTToOw-SslnjGM85Iw%3A1434455127727">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=130620018000&amp;name=QQ%E6%88%AA%E5%9B%BE20140411163405.png&amp;token=ABZ6GAfTaMMTpsk-8Rd1T-Q-511BLBmjeg%3A1434455127727&amp;id=13062&amp;mod_ts_token=ABZ6GAeCOHtRZxzHiTToOw-SslnjGM85Iw%3A1434455127727&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=130620018000&amp;name=QQ%E6%88%AA%E5%9B%BE20140411163405.png&amp;token=ABZ6GAfTaMMTpsk-8Rd1T-Q-511BLBmjeg%3A1434455127727&amp;id=13062&amp;mod_ts_token=ABZ6GAeCOHtRZxzHiTToOw-SslnjGM85Iw%3A1434455127727&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13062&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13062"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="13062">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A13062',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 13062,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

@@ -1,0 +1,712 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"assetHostPath": "https://ssl.gstatic.com/codesite/ph", "domainName": null, "profileUrl": null, "token": null, "relativeBaseUrl": "", "loggedInUserEmail": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "projectHomeUrl": "/p/goagent", "projectName": "goagent"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 4472 - 
+ goagent -
+ 
+ ios 端代理goodreader同步dropbox文件 只要体积上30m左右就会返回403错误 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D4472&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D4472" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="closed_colors">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=4472">4472</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >ios 端代理goodreader同步dropbox文件 只要体积上30m左右就会返回403错误</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 2 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A4472">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="The requested non-coding task was completed">Done</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ <tr><th align="left" valign="top">Closed:&nbsp;</th>
+ <td align="left" valign="top" width="100%">
+ Dec 2012
+ </td>
+ </tr>
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D4472&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D4472">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/hbyw618/">hbyw618</a
+>,
+ <span class="date" title="Thu Jul 26 06:20:51 2012">Jul 26, 2012</span>
+ 
+ </div>
+<pre>
+
+使用goagent for ios 最新版本在我的ipad上通过GoodReader同步我存在Dropbox上的书籍 只要文件体积上了30m就会返回403 但是把代理去掉就没问题了 可以正常同步 只是速度相当慢。
+这个是GoodReader 的日志信息 希望有用 谢谢
+
+
+GoodReaderIPad 3.16.0
+iPad (iPad3,1; armv7f)
+iPhone OS 5.1.1
+Multitasking: YES
+<a href="/p/goagent/source/detail?r=53c0c7babdb5c13a5181d443a894b857f403e81e">53c0c7babdb5c13a5181d443a894b857f403e81e</a>
+
+2012-07-26 12:42:28 +0000 Started logging
+
+------------------------------------------------
+Beginning sync operation for a folder (/books/AI/) (0/AI)
+[u(/books/AI/) mu((null)) nrrp(books/AI) rfn(AI) spftf(0) spfrf(0/AI) nspfrf(0/AI) stfd(Dropbox: Dropbox) bu((null)) bt((null)) fdu(0) fduftp(0) fs(1) ff(1) st(5) sp(6) fgs(0) fext(0) st(16) sfdo(0) sfdlf(1) sfdrf(0) sfdlodlfeim(0) p(0)]
+------------------------------------------------
+
+------------------------------------------------
+doNextOp: 0x16dbc50: [op(Dropbox_ScanFolder) u(<a href="https://api.dropbox.com/1/metadata/dropbox/books/AI/?list=true" rel="nofollow">https://api.dropbox.com/1/metadata/dropbox/books/AI/?list=true</a>) l(AI) g(/books/AI/)]
+------------------------------------------------
+
+------------------------------------------------
+request: Dropbox_ScanFolder /books/AI/
+------------------------------------------------
+A secure connection
+
+------------------------------------------------
+response: HTTP/1.0 200 OK
+Via: HTTP/1.1 GWA
+X-Google-Cache-Control: remote-fetch
+Server: nginx/1.0.14
+Connection: close
+Pragma: no-cache
+Cache-Control: no-cache
+Date: Thu, 26 Jul 2012 12:42:29 GMT
+X-Frame-Options: SAMEORIGIN
+Content-Type: text/javascript
+Access-Control-Allow-Origin: *
+
+
+------------------------------------------------
+
+------------------------------------------------
+response body: {&quot;hash&quot;: &quot;11d9eb2fbd13bbc9eb08d8baac5a6785&quot;, &quot;revision&quot;: 2862, &quot;rev&quot;: &quot;b2e05ea18ea&quot;, &quot;thumb_exists&quot;: false, &quot;bytes&quot;: 0, &quot;modified&quot;: &quot;Thu, 26 Jul 2012 08:40:18 +0000&quot;, &quot;path&quot;: &quot;/books/AI&quot;, &quot;is_dir&quot;: true, &quot;icon&quot;: &quot;folder&quot;, &quot;root&quot;: &quot;dropbox&quot;, &quot;contents&quot;: [{&quot;revision&quot;: 2864, &quot;rev&quot;: &quot;b3005ea18ea&quot;, &quot;thumb_exists&quot;: false, &quot;bytes&quot;: 36034793, &quot;modified&quot;: &quot;Thu, 26 Jul 2012 09:17:27 +0000&quot;, &quot;client_mtime&quot;: &quot;Thu, 26 Jul 2012 08:11:09 +0000&quot;, &quot;path&quot;: &quot;/books/AI/\u4eba\u5de5\u667a\u80fd\uff1a\u4e00\u79cd\u73b0\u4ee3\u65b9\u6cd5 \uff08\u7b2c2\u7248\uff09_\u90e8\u52061.pdf&quot;, &quot;is_dir&quot;: false, &quot;icon&quot;: &quot;page_white_acrobat&quot;, &quot;root&quot;: &quot;dropbox&quot;, &quot;mime_type&quot;: &quot;application/pdf&quot;, &quot;size&quot;: &quot;34.4 MB&quot;}, {&quot;revision&quot;: 2863, &quot;rev&quot;: &quot;b2f05ea18ea&quot;, &quot;thumb_exists&quot;: false, &quot;bytes&quot;: 33933387, &quot;modified&quot;: &quot;Thu, 26 Jul 2012 08:57:40 +0000&quot;, &quot;client_mtime&quot;: &quot;Thu, 26 Jul 2012 08:35:25 +0000&quot;, &quot;path&quot;: &quot;/books/AI/\u4eba\u5de5\u667a\u80fd\uff1a\u4e00\u79cd\u73b0\u4ee3\u65b9\u6cd5 \uff08\u7b2c2\u7248\uff09_\u90e8\u52062 .pdf&quot;, &quot;is_dir&quot;: false, &quot;icon&quot;: &quot;page_white_acrobat&quot;, &quot;root&quot;: &quot;dropbox&quot;, &quot;mime_type&quot;: &quot;application/pdf&quot;, &quot;size&quot;: &quot;32.4 MB&quot;}], &quot;size&quot;: &quot;0 bytes&quot;}
+------------------------------------------------
+
+------------------------------------------------
+doNextOp: 0x16760f0: [op(Local_DoneScanningServerForSync)]
+------------------------------------------------
+
+------------------------------------------------
+Previous sync: (
+    )
+------------------------------------------------
+Local data: (
+    )
+------------------------------------------------
+Remote data: (
+    (name(&quot;人工智能：一种现代方法 （第2版）_部分1.pdf&quot;) fileSize(36034793) lastModified(1343294247)),
+    (name(&quot;人工智能：一种现代方法 （第2版）_部分2 .pdf&quot;) fileSize(33933387) lastModified(1343293060))
+    )
+------------------------------------------------
+
+------------------------------------------------
+Intermediate sync: (
+    )
+------------------------------------------------
+
+Saving sync
+
+------------------------------------------------
+doNextOp: 0x16760f0: [op(DownloadFile_Dropbox) u(<a href="https://api-content.dropbox.com/1/files/dropbox/books/AI/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%EF%BC%9A%E4%B8%80%E7%A7%8D%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95%20%EF%BC%88%E7%AC%AC2%E7%89%88%EF%BC%89_%E9%83%A8%E5%88%861.pdf" rel="nofollow">https://api-content.dropbox.com/1/files/dropbox/books/AI/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%EF%BC%9A%E4%B8%80%E7%A7%8D%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95%20%EF%BC%88%E7%AC%AC2%E7%89%88%EF%BC%89_%E9%83%A8%E5%88%861.pdf</a>) l(/private/var/mobile/Applications/ECACF2D2-D9FB-4182-AF31-A7335DD0CB16/tmp/WebDownloadFolder36889088/人工智能：一种现代方法 （第2版）_部分1.pdf) m(0/AI/人工智能：一种现代方法 （第2版）_部分1.pdf) g(/books/AI/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%EF%BC%9A%E4%B8%80%E7%A7%8D%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95%20%EF%BC%88%E7%AC%AC2%E7%89%88%EF%BC%89_%E9%83%A8%E5%88%861.pdf)]
+------------------------------------------------
+
+------------------------------------------------
+request: Dropbox_DownloadFile /books/AI/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%EF%BC%9A%E4%B8%80%E7%A7%8D%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95%20%EF%BC%88%E7%AC%AC2%E7%89%88%EF%BC%89_%E9%83%A8%E5%88%861.pdf
+------------------------------------------------
+A secure connection
+
+------------------------------------------------
+response: HTTP/1.0 403 Forbidden
+Via: HTTP/1.1 GWA
+X-Google-Cache-Control: remote-fetch
+Server: nginx/1.0.14
+Connection: close
+Date: Thu, 26 Jul 2012 12:42:31 GMT
+Content-Type: application/json
+
+
+------------------------------------------------
+
+------------------------------------------------
+Done !!!
+------------------------------------------------
+
+
+------------------------------------------------
+Error: Invalid server response:
+HTTP/1.0 403 Forbidden
+
+Occured on file:
+/books/AI/人工智能：一种现代方法 （第2版）_部分1.pdf
+------------------------------------------------
+2012-07-26 12:42:32 +0000 -dealloc
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Aug  1 00:56:35 2012">
+ Aug 1, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=4472#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/hbyw618/">hbyw618</a
+></span>
+ 
+<pre>
+没有人看吗?我觉得GOAGENT可以变得更好,这个问题如果能解决我就能把其它FQ工具全扔了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Dec 15 18:14:01 2012">
+ Dec 15, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=4472#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+<i>(No comment was entered for this change.)</i>
+</pre>
+ 
+ 
+ <div class="updates">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ 
+ <b>Status:</b>
+ Done
+ 
+ <br>
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D4472&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D4472"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="4472">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A4472',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 4472,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

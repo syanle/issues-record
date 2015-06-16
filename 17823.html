@@ -1,0 +1,1039 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ (function(){(function(){function c(a){this.t={};this.tick=function(a,b,c){b=void 0!=c?c:(new Date).getTime();this.t[a]=b;if(void 0==c)try{window.console.timeStamp("CSI/"+a)}catch(d){}};this.tick("start",null,a)}var a;window.performance&&(a=window.performance.timing);var b=a?new c(a.responseStart):new c;window.jstiming={Timer:c,load:b};a&&(b=a.navigationStart,a=a.responseStart,0<b&&a>=b&&(window.jstiming.srt=a-b));try{a=null,window.chrome&&window.chrome.csi&&(a=Math.floor(window.chrome.csi().pageT)),null==a&&
+window.gtbExternal&&(a=window.gtbExternal.pageT()),null==a&&window.external&&(a=window.external.pageT),a&&(window.jstiming.pt=a)}catch(d){}})();})();
+
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"assetHostPath": "https://ssl.gstatic.com/codesite/ph", "loggedInUserEmail": null, "projectHomeUrl": "/p/goagent", "profileUrl": null, "projectName": "goagent", "domainName": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "relativeBaseUrl": "", "token": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 17823 - 
+ goagent -
+ 
+ 3.2.0 youtube经常卡缓冲 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17823&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17823" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=17823">17823</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >3.2.0 youtube经常卡缓冲</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 2 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A17823">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17823&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17823">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/110715073765465568673/">Byz...@gmail.com</a
+>,
+ <span class="date" title="Mon Oct  6 09:57:22 2014">Oct 6, 2014</span>
+ 
+ </div>
+<pre>
+描述：
+youtube视频加载过程中偶尔会出现黄字，一旦出现黄字，这部分就加载失败，虽然如此，但是下载过程依然在继续，但是缓冲条就永远卡在加载失败时的地方了，也就是说后面下载的都是无用功
+运气好会在80%卡住，运气不好10%就卡住
+
+操作系统版本：win7 sp1 x64
+浏览器版本：Firefox 33beta (build 20140918174809)
+host：imouto.host, Ver : 2.11.0468 Sakura Chiyo
+GoAgent 版本：3.2.0
+GoAgent 日志：(卡住前后的日志)
+[code]
+INFO - [Oct 07 00:33:33] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 100530016] 1048576 bytes 209715
+20-22020095/73282598
+INFO - [Oct 07 00:33:34] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 100531296] 1048576 bytes 230686
+72-24117247/73282598
+INFO - [Oct 07 00:33:34] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 100529536] 1048576 bytes 220200
+96-23068671/73282598
+INFO - [Oct 07 00:33:35] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; Successfully reached 24117247 bytes.
+INFO - [Oct 07 00:33:35] ssl good_ipaddrs=16, bad_ipaddrs=309, unknown_ipaddrs=0
+
+INFO - [Oct 07 00:33:35] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; Successfully reached 23068671 bytes.
+INFO - [Oct 07 00:33:35] ssl good_ipaddrs=16, bad_ipaddrs=309, unknown_ipaddrs=0
+
+INFO - [Oct 07 00:33:35] ssl good_ipaddrs=16, bad_ipaddrs=309, unknown_ipaddrs=0
+
+INFO - [Oct 07 00:33:36] ssl good_ipaddrs=19, bad_ipaddrs=306, unknown_ipaddrs=0
+
+WARNING - [Oct 07 00:33:36] RangeFetch &quot;GET https://<a href="/p/goagent/source/detail?r=4">r4</a>---sn-q4f7sn7z.googlevideo
+.com/videoplayback?ratebypass=yes&amp;ipbits=0&amp;mm=31&amp;ms=au&amp;mv=u&amp;upn=I9wVpbwkoSY&amp;mt=1
+412613088&amp;sparams=id%2Cip%2Cipbits%2Citag%2Cmime%2Cmm%2Cms%2Cmv%2Cratebypass%2Cr
+equiressl%2Csource%2Cupn%2Cexpire&amp;requiressl=yes&amp;signature=B13FED2AB0BA32672CD1C
+FE5F3BC7AE142820360.<a href="/p/goagent/source/detail?r=55FE7E1A078F7665239B87654DB575B8AFB0C065">55FE7E1A078F7665239B87654DB575B8AFB0C065</a>&amp;mime=video%2Fmp4&amp;sv
+er=3&amp;itag=18&amp;ip=107.178.200.200&amp;key=yt5&amp;expire=1412634793&amp;source=youtube&amp;fexp=90
+0504%2C927622%2C930666%2C931347%2C931983%2C932404%2C934030%2C941438%2C942465%2C9
+45070%2C946013%2C947209%2C948702%2C952302%2C953801&amp;id=o-APhqUjmAqmox73hmiRBZZmjl
+JAteWGY_xKgzDkEL0fmg&amp;cpn=JGoAy3QpBybWS-MD&amp;ptk=K3eoeo-HGHH11Pevo1MzfQ&amp;oid=35rTwk0
+92vfOXCNgnRfanw&amp;ptchn=K3eoeo-HGHH11Pevo1MzfQ&amp;pltype=content&amp;c=WEB&amp;cver=html5&quot; re
+try 22011904-22020095
+INFO - [Oct 07 00:33:36] ssl good_ipaddrs=19, bad_ipaddrs=306, unknown_ipaddrs=0
+
+INFO - [Oct 07 00:33:36] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 100531296] 1048576 bytes 241172
+48-25165823/73282598
+INFO - [Oct 07 00:33:36] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 100529536] 1048576 bytes 251658
+24-26214399/73282598
+INFO - [Oct 07 00:33:36] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 100530016] 8192 bytes 22011904-
+22020095/73282598
+INFO - [Oct 07 00:33:36] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; Successfully reached 22020095 bytes.
+INFO - [Oct 07 00:33:36] ssl good_ipaddrs=22, bad_ipaddrs=300, unknown_ipaddrs=3
+
+INFO - [Oct 07 00:33:37] ssl good_ipaddrs=20, bad_ipaddrs=305, unknown_ipaddrs=0
+
+WARNING - [Oct 07 00:33:37] RangeFetch &quot;GET https://<a href="/p/goagent/source/detail?r=4">r4</a>---sn-q4f7sn7z.googlevideo
+.com/videoplayback?ratebypass=yes&amp;ipbits=0&amp;mm=31&amp;ms=au&amp;mv=u&amp;upn=I9wVpbwkoSY&amp;mt=1
+412613088&amp;sparams=id%2Cip%2Cipbits%2Citag%2Cmime%2Cmm%2Cms%2Cmv%2Cratebypass%2Cr
+equiressl%2Csource%2Cupn%2Cexpire&amp;requiressl=yes&amp;signature=B13FED2AB0BA32672CD1C
+FE5F3BC7AE142820360.<a href="/p/goagent/source/detail?r=55FE7E1A078F7665239B87654DB575B8AFB0C065">55FE7E1A078F7665239B87654DB575B8AFB0C065</a>&amp;mime=video%2Fmp4&amp;sv
+er=3&amp;itag=18&amp;ip=107.178.200.200&amp;key=yt5&amp;expire=1412634793&amp;source=youtube&amp;fexp=90
+0504%2C927622%2C930666%2C931347%2C931983%2C932404%2C934030%2C941438%2C942465%2C9
+45070%2C946013%2C947209%2C948702%2C952302%2C953801&amp;id=o-APhqUjmAqmox73hmiRBZZmjl
+JAteWGY_xKgzDkEL0fmg&amp;cpn=JGoAy3QpBybWS-MD&amp;ptk=K3eoeo-HGHH11Pevo1MzfQ&amp;oid=35rTwk0
+92vfOXCNgnRfanw&amp;ptchn=K3eoeo-HGHH11Pevo1MzfQ&amp;pltype=content&amp;c=WEB&amp;cver=html5&quot; re
+try 25223168-26214399
+INFO - [Oct 07 00:33:37] ssl good_ipaddrs=20, bad_ipaddrs=305, unknown_ipaddrs=0
+
+INFO - [Oct 07 00:33:37] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; Successfully reached 25165823 bytes.
+INFO - [Oct 07 00:33:37] ssl good_ipaddrs=20, bad_ipaddrs=305, unknown_ipaddrs=0
+
+INFO - [Oct 07 00:33:37] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 100530016] 1048576 bytes 262144
+00-27262975/73282598
+INFO - [Oct 07 00:33:38] 127.0.0.1:50639 &quot;GAE GET <a href="https://i.ytimg.com/sb/rHo1148" rel="nofollow">https://i.ytimg.com/sb/rHo1148</a>
+0Qps/storyboard3_L1/M1.jpg?sigh=KkwGf3rTlFVa8Hli7A2ZsXZhB6s HTTP/1.1&quot; 200 31209
+INFO - [Oct 07 00:33:40] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; Successfully reached 27262975 bytes.
+INFO - [Oct 07 00:33:40] ssl good_ipaddrs=17, bad_ipaddrs=308, unknown_ipaddrs=0
+
+INFO - [Oct 07 00:33:40] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 100530016] 1048576 bytes 283115
+52-29360127/73282598
+INFO - [Oct 07 00:33:44] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; Successfully reached 29360127 bytes.
+[/code]
+
+
+图1：这是卡住之后的，可以看见下载还在继续，但是缓冲条一动不动了
+<a href="http://i.minus.com/iO8rsvH3DWHYP.gif" rel="nofollow">http://i.minus.com/iO8rsvH3DWHYP.gif</a>
+
+图2：下载也并没有下载完成，到了60M左右也停止了
+<a href="http://i.minus.com/iSuiRLPa8uUma.png" rel="nofollow">http://i.minus.com/iSuiRLPa8uUma.png</a>
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct  6 09:59:20 2014">
+ Oct 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=17823#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/110715073765465568673/">Byz...@gmail.com</a
+></span>
+ 
+<pre>
+忘了说，并不是3.2才出现的，以前版本也有类似问题，似乎是从3.1.3+起就如此
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct  6 14:26:53 2014">
+ Oct 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=17823#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/113855780923740859034/">o3183...@gmail.com</a
+></span>
+ 
+<pre>
+我也是这样,3.2.0之前会卡死不动,准确的说是现在用的3.1.22,3.2.0之后虽然也会卡,不过卡一下就又自动连上了,看到有个帖子介绍pagespeed的,说是瞬发流量太大会卡,但是开了pagespeed也一样
+题外话,不知lz是不是用的FoxyProxy?不是的话无视就好,借楼问问
+用gfwlist开自动模式,YouTube的界面有时会一张图片都刷不出,特别是进其他用户的主页,经常刷不出图,但刷新一下就又好了,而评论是死活加载不了,但是全局模式就没问题,都是gfwlist,用chrome的SwitchySharp就没问题
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct  6 19:27:17 2014">
+ Oct 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=17823#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/110715073765465568673/">Byz...@gmail.com</a
+></span>
+ 
+<pre>
+我用autoproxy, 和代理管理客户端没什么关系吧
+介绍pagespeed的帖子地址能提供吗
+
+为什么你会自动重新连上...你的ini配置有更改过什么吗
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct  7 00:42:35 2014">
+ Oct 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=17823#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/113855780923740859034/">o3183...@gmail.com</a
+></span>
+ 
+<pre>
+<a href="http://www.faith.ga/2474.html" rel="nofollow">http://www.faith.ga/2474.html</a>
+用的手动IP,其他都默认配置
+autoproxy不是很早都不更新了么?我之前也用autoproxy,火狐更新到某个版本之后就用不了了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct 18 08:23:42 2014">
+ Oct 18, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=17823#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/108596815415133447874/">troyares...@gmail.com</a
+></span>
+ 
+<pre>
+我系统8.1，用的foxyproxy standard，其他和楼主一样。我也有何楼主一样的问题，稍微比楼主好的是视频卡了以后我的goagent很少断，视频会卡主，但是goagent的还会不断的尝试连接。连接到以后又会继续播放，播放一段可能又卡了，勉强能一卡一卡的把视频看完。运气好的时候断了一下立马就找到很好的地址了，就可以流畅的看完。弄了几个小时不知道是怎么回事。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct 20 04:31:23 2014">
+ Oct 20, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=17823#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/115001297445573747653/">douban...@gmail.com</a
+></span>
+ 
+<pre>
+貌似是youtube引入了新的流媒体文件管理机制，现在的youtube不会像以前一样把视频文件一直缓冲到底，现在缓冲起来是一块一块的
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct 20 04:58:03 2014">
+ Oct 20, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=17823#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/116847175621860423818/">shen...@gmail.com</a
+></span>
+ 
+<pre>
+#6
+youtube一直这样的，你把dash playback选项关了它就一下子全缓冲了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Oct 29 18:02:21 2014">
+ Oct 29, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=17823#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/112157930635821089977/">chengtia...@gmail.com</a
+></span>
+ 
+<pre>
+#7,你说的“dash playback”在哪关？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Oct 29 18:39:51 2014">
+ Oct 29, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=17823#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/110695497033162673037/">yiran000...@gmail.com</a
+></span>
+ 
+<pre>
+ youtube center dash playback的说明  <a href="http://goo.gl/Qz17sE" rel="nofollow">http://goo.gl/Qz17sE</a> 
+ youtube center 主页 <a href="http://goo.gl/5978Fp" rel="nofollow">http://goo.gl/5978Fp</a>
+
+<a title="youtube 用最新版经常卡断，高手支招"  href="/p/goagent/issues/detail?id=18303">Issue 18303</a>
+#2 freetuch...@gmail.com
+chrome 建议你安装 youtube center 或者 Magic Actions for YouTube
+这两款扩展,把youtube的播放器强制更改为FLASH,禁止DASH流,可以有效改善断流,当然了,最主要的还是你的proxy.ini中的IP段
+
+<a title=" 一个极大改善Youtube使用效果的小方法"  href="/p/goagent/issues/detail?id=17825">Issue 17825</a>
+#8 guanglin...@gmail.com
+1. 提高youtube性能，也可尝试安装Magic actions for youtube插件，Chrome/Firefox/Opera版本均有,<a href="http://www.chromeactions.com/" rel="nofollow">http://www.chromeactions.com/</a> 
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Oct 29 20:21:20 2014">
+ Oct 29, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=17823#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/112157930635821089977/">chengtia...@gmail.com</a
+></span>
+ 
+<pre>
+非常感谢#10！用了youtube center 遨游版，很好！
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17823&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17823"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="17823">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A17823',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 17823,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ 
+ <script type="text/javascript">_CS_reportToCsi();</script>
+ 
+ </body>
+</html>
+

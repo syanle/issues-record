@@ -1,0 +1,2026 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ (function(){(function(){function c(a){this.t={};this.tick=function(a,b,c){b=void 0!=c?c:(new Date).getTime();this.t[a]=b;if(void 0==c)try{window.console.timeStamp("CSI/"+a)}catch(d){}};this.tick("start",null,a)}var a;window.performance&&(a=window.performance.timing);var b=a?new c(a.responseStart):new c;window.jstiming={Timer:c,load:b};a&&(b=a.navigationStart,a=a.responseStart,0<b&&a>=b&&(window.jstiming.srt=a-b));try{a=null,window.chrome&&window.chrome.csi&&(a=Math.floor(window.chrome.csi().pageT)),null==a&&
+window.gtbExternal&&(a=window.gtbExternal.pageT()),null==a&&window.external&&(a=window.external.pageT),a&&(window.jstiming.pt=a)}catch(d){}})();})();
+
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"loggedInUserEmail": null, "relativeBaseUrl": "", "projectHomeUrl": "/p/goagent", "projectName": "goagent", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "token": null, "profileUrl": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 11492 - 
+ goagent -
+ 
+ 番茄路由器和DDWRT路由器不能使用新版集成的完整故障贴图 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D11492&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D11492" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=11492">11492</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >番茄路由器和DDWRT路由器不能使用新版集成的完整故障贴图</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 3 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A11492">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D11492&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D11492">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/hejun2002ca@gmail.com/">hejun2002ca@gmail.com</a
+>,
+ <span class="date" title="Fri Nov 15 06:41:36 2013">Nov 15, 2013</span>
+ 
+ </div>
+<pre>
+这是清除内存后的首次运行Goagent的记录，上次开机已经运行一次所以重复了，这次去掉了开机脚本：
+
+ASUS login: root
+Password:
+
+
+Tomato v1.28.20130605 MIPSR2-RT-N5x-Arctic K26 USB Full
+ ========================================================
+ Welcome to the FiberHome HG320 [ASUS]
+ Uptime:  22:29:29 up 7 min
+ Load average: 0.02, 0.16, 0.08
+ Mem usage: 69.7% (used 41.85 of 60.00 MB)
+ Swap usage: 0.1% (used 0.08 of 62.75 MB)
+ WAN : 125.96.20.212/32 @ B8:C7:16:1A:F9:6B
+ LAN : 192.168.1.1/24 @ DHCP: 192.168.1.2 - 192.168.1.51
+ WL0 : ASUS @ ch: 6 @ B8:C7:16:1A:F9:6C
+ WL1 : Tomato-5G @ ch: 0 @
+ ========================================================
+
+root@ASUS:/tmp/home/root# python2.6  /opt/goagent/proxy.py
+WARNING - [Nov 15 22:29:48] please install *libnss3-tools* package to import GoA
+gent root ca
+------------------------------------------------------
+GoAgent Version    : 3.0.8 (python/2.6.8 pyopenssl/0.10)
+Listen Address     : 0.0.0.0:8087
+GAE Mode           : https
+GAE Profile        : google_cn
+GAE APPID          : xxxxx
+Pac Server         : http://127.0.0.1:8086/proxy.pac
+Pac File           : file:///opt/goagent/proxy.pac
+------------------------------------------------------
+
+无浏览时停在这里似乎正常，可以一旦使用代理浏览，出现如下问题：
+
+ERROR - [Nov 15 22:32:00] GAEProxyHandler.do_METHOD_GAE '<a href="http://isdspeed.qq.com/" rel="nofollow">http://isdspeed.qq.com/</a>
+cgi-bin/v.cgi?1=500&amp;flag1=700043&amp;flag2=1' return TypeError(&quot;__init__() got an un
+expected keyword argument 'buffering'&quot;,), try again
+Traceback (most recent call last):
+  File &quot;/opt/goagent/proxy.py&quot;, line 2097, in do_METHOD_GAE
+    response = self.urlfetch(self.command, self.path, request_headers, payload,
+fetchserver, **kwargs)
+  File &quot;/opt/goagent/proxy.py&quot;, line 1632, in gae_urlfetch
+    response = http_util.request(request_method, fetchserver, payload, request_h
+eaders, crlf=need_crlf)
+  File &quot;/opt/goagent/proxy.py&quot;, line 1316, in request
+    return self._request(ssl_sock or sock, method, path, self.protocol_version,
+headers, payload, bufsize=bufsize, crlf=crlf, return_sock=return_sock)
+  File &quot;/opt/goagent/proxy.py&quot;, line 1270, in _request
+    response = httplib.HTTPResponse(sock, buffering=True)
+TypeError: __init__() got an unexpected keyword argument 'buffering'
+
+
+
+Today (moments ago) Delete comment #5 hejun2002ca@gmail.com
+然后浏览器显示无数据
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Nov 15 06:44:56 2013">
+ Nov 15, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=11492#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/hejun2002ca@gmail.com/">hejun2002ca@gmail.com</a
+></span>
+ 
+<pre>
+Traceback (most recent call last):
+  File &quot;/opt/goagent/proxy.py&quot;, line 2097, in do_METHOD_GAE
+    response = self.urlfetch(self.command, self.path, request_headers, payload,
+fetchserver, **kwargs)
+  File &quot;/opt/goagent/proxy.py&quot;, line 1632, in gae_urlfetch
+    response = http_util.request(request_method, fetchserver, payload, request_h
+eaders, crlf=need_crlf)
+  File &quot;/opt/goagent/proxy.py&quot;, line 1316, in request
+    return self._request(ssl_sock or sock, method, path, self.protocol_version,
+headers, payload, bufsize=bufsize, crlf=crlf, return_sock=return_sock)
+  File &quot;/opt/goagent/proxy.py&quot;, line 1270, in _request
+    response = httplib.HTTPResponse(sock, buffering=True)
+TypeError: __init__() got an unexpected keyword argument 'buffering'
+
+每次浏览器点击后，都会在跟踪窗口先出现红色错误提示，然后是以上信息
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Nov 15 06:47:14 2013">
+ Nov 15, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=11492#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/hejun2002ca@gmail.com/">hejun2002ca@gmail.com</a
+></span>
+ 
+<pre>
+首次在路由器上运行出现如下信息：
+
+root@ASUS:/tmp/home/root# python2.6  /opt/goagent/proxy.py
+WARNING - [Nov 15 22:29:48] please install *libnss3-tools* package to import GoA
+gent root ca
+------------------------------------------------------
+GoAgent Version    : 3.0.8 (python/2.6.8 pyopenssl/0.10)
+Listen Address     : 0.0.0.0:8087
+GAE Mode           : https
+GAE Profile        : google_cn
+GAE APPID          : xxxxx
+Pac Server         : http://127.0.0.1:8086/proxy.pac
+Pac File           : file:///opt/goagent/proxy.pac
+------------------------------------------------------
+
+停到这里不动，假如没有使用代理浏览网站的话
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Nov 15 06:52:03 2013">
+ Nov 15, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=11492#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/hejun2002ca@gmail.com/">hejun2002ca@gmail.com</a
+></span>
+ 
+<pre>
+root@ASUS:/tmp/home/root# python2.6  /opt/goagent/proxy.py
+WARNING - [Nov 15 22:29:48] please install *libnss3-tools* package to import GoA
+gent root ca
+------------------------------------------------------
+GoAgent Version    : 3.0.8 (python/2.6.8 pyopenssl/0.10)
+Listen Address     : 0.0.0.0:8087
+GAE Mode           : https
+GAE Profile        : google_cn
+GAE APPID          : xxxxx
+Pac Server         : http://127.0.0.1:8086/proxy.pac
+Pac File           : file:///opt/goagent/proxy.pac
+------------------------------------------------------
+
+从这条警告看，是证书有问题，但是新版里只有CA一个文件和certs目录，全都传进路由器里了，不像老版还有个CA.key 文件
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Nov 15 06:53:08 2013">
+ Nov 15, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=11492#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/hejun2002ca@gmail.com/">hejun2002ca@gmail.com</a
+></span>
+ 
+<pre>
+请问高手改如何解决？能给出个详细步骤吗？谢谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Nov 15 07:18:29 2013">
+ Nov 15, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=11492#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+安装libnss3-tools
+并将python升级到2.7.x 最好是2.7.3或2.7.5
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Nov 15 08:38:58 2013">
+ Nov 15, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=11492#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/hejun2002ca@gmail.com/">hejun2002ca@gmail.com</a
+></span>
+ 
+<pre>
+安装到路由器里还是哪里？如何安装、升级？能给出具体步骤吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Nov 15 08:46:46 2013">
+ Nov 15, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=11492#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/hejun2002ca@gmail.com/">hejun2002ca@gmail.com</a
+></span>
+ 
+<pre>
+路由器固件是刷机去的，这个翻墙是装载USB盘插到路由器的USB口上，加脚本开机运行的，装上述软件只能装载U盘上开机脚本运行。能否给个安装下载的地址和详细方法？最好有教程
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Nov 15 09:04:08 2013">
+ Nov 15, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=11492#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/100472482916698006396/">xuanni...@gmail.com</a
+></span>
+ 
+<pre>
+那你是怎么装的python呢？
+dd-wrt直装goagent很繁琐，我是在dd-wrt上先装的OpenWRT's opkg，然后
+opkg install libc
+opkg update
+opkg install python
+opkg install pyopenssl python-openssl
+说白了就是用OpenWRT的方式了，参考wiki
+然后fix这个<a href="https://code.google.com/p/goagent/issues/detail?id=1488" rel="nofollow">https://code.google.com/p/goagent/issues/detail?id=1488</a>
+之后正常运行至少一周都不会出问题，我并不是高手，只能告你怎么做没有排错的能力，希望对你有所帮助
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Nov 15 09:08:43 2013">
+ Nov 15, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=11492#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/100472482916698006396/">xuanni...@gmail.com</a
+></span>
+ 
+<pre>
+WARNING - [Nov 15 22:29:48] please install *libnss3-tools* package to import GoA
+
+这条错误可以忽略
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Nov 15 14:22:37 2013">
+ Nov 15, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=11492#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+更新到python2.7.x即可
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Nov 15 17:30:06 2013">
+ Nov 15, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=11492#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/hejun2002ca@gmail.com/">hejun2002ca@gmail.com</a
+></span>
+ 
+<pre>
+更新到python2.73后出现新问题：运行后提示：
+root@ASUS:/bin# python2.7 /opt/goagent/proxy.py
+WARNING - [Nov 16 09:23:31] python-openssl not found, please install it!
+WARNING - [Nov 16 09:23:32] please install *libnss3-tools* package to import GoA
+gent root ca
+------------------------------------------------------
+GoAgent Version    : 3.0.8 (python/2.7.3 pyopenssl/Disabled)
+Listen Address     : 0.0.0.0:8087
+GAE Mode           : https
+GAE Profile        : google_cn
+GAE APPID          : xxx
+Pac Server         : http://127.0.0.1:8086/proxy.pac
+Pac File           : file:///opt/goagent/proxy.pac
+------------------------------------------------------
+
+重新安装 python-openssl 提示
+
+root@ASUS:/bin# /opt/bin/ipkg install openssl
+Package openssl (0.9.7m-6) installed in /opt/ is up to date.
+Nothing to be done
+Successfully terminated.
+再运行还是出现上面的情况
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Nov 15 17:38:47 2013">
+ Nov 15, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=11492#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/hejun2002ca@gmail.com/">hejun2002ca@gmail.com</a
+></span>
+ 
+<pre>
+运行老版本不出第一个问题，但是代理浏览出现无数据的问题
+root@ASUS:/bin# python2.6 /opt/goagent/proxy.py
+WARNING - [Nov 16 09:23:02] please install *libnss3-tools* package to import GoA
+gent root ca
+------------------------------------------------------
+GoAgent Version    : 3.0.8 (python/2.6.8 pyopenssl/0.10)
+Listen Address     : 0.0.0.0:8087
+GAE Mode           : https
+GAE Profile        : google_cn
+GAE APPID          : XXX
+Pac Server         : http://127.0.0.1:8086/proxy.pac
+Pac File           : file:///opt/goagent/proxy.pac
+------------------------------------------------------
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Nov 15 19:10:16 2013">
+ Nov 15, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=11492#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+不是openssl，是pyopenssl，两个是不同的东西，而且必须要安装在py27的目录中
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Nov 15 20:56:19 2013">
+ Nov 15, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=11492#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/103002540907848902484/">9oh4c...@gmail.com</a
+></span>
+ 
+<pre>
+Listen Address     : 0.0.0.0:8087
+
+监听地址设置不对啊，应该设置路由内网地址
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Nov 15 22:18:29 2013">
+ Nov 15, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=11492#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/116926720980273343568/">liuhejin...@gmail.com</a
+></span>
+ 
+<pre>
+这个监听地址没有问题，全包括了。以前低版本的时候就是这样的
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Nov 15 22:38:59 2013">
+ Nov 15, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=11492#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/116926720980273343568/">liuhejin...@gmail.com</a
+></span>
+ 
+<pre>
+安装出现如下问题。不成功
+
+root@ASUS:/bin# /opt/bin/ipkg install pyopenssl
+Nothing to be done
+An error ocurred, return value: 4.
+Collected errors:
+Cannot find package pyopenssl.
+Check the spelling or perhaps run 'ipkg update'
+root@ASUS:/bin# ipkg update
+Downloading <a href="http://ipkg.nslu2-linux.org/feeds/optware/ddwrt/cross/stable/Package" rel="nofollow">http://ipkg.nslu2-linux.org/feeds/optware/ddwrt/cross/stable/Package</a>
+s.gz
+Inflating <a href="http://ipkg.nslu2-linux.org/feeds/optware/ddwrt/cross/stable/Packages" rel="nofollow">http://ipkg.nslu2-linux.org/feeds/optware/ddwrt/cross/stable/Packages</a>.
+gz
+Updated list of available packages in /opt/lib/ipkg/lists/optware
+Successfully terminated.
+root@ASUS:/bin# /opt/bin/ipkg install pyopenssl
+Nothing to be done
+An error ocurred, return value: 4.
+Collected errors:
+Cannot find package pyopenssl.
+Check the spelling or perhaps run 'ipkg update'
+root@ASUS:/bin# /opt/bin/ipkg install pyopenssl
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Nov 16 03:31:35 2013">
+ Nov 16, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=11492#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+貌似这个需要自行编译安装，ipkg没有自带pyopenssl
+安装方法
+
+wget <a href="http://pypi.python.org/packages/source/p/pyOpenSSL/pyOpenSSL-0.12.tar.gz" rel="nofollow">http://pypi.python.org/packages/source/p/pyOpenSSL/pyOpenSSL-0.12.tar.gz</a>
+tar zxvf pyOpenSSL-0.12.tar.gz
+cd pyOpenSSL-0.12
+python2.7 setup.py install
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Nov 16 05:10:04 2013">
+ Nov 16, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=11492#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/116926720980273343568/">liuhejin...@gmail.com</a
+></span>
+ 
+<pre>
+在番茄路由器里可以执行这些命令吗？还是需要安装linux系统去编译？
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Nov 16 05:41:24 2013">
+ Nov 16, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=11492#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/116926720980273343568/">liuhejin...@gmail.com</a
+></span>
+ 
+<pre>
+用电脑下载后解压缩，再用winSCOP传到路由器的 opt目录；执行命令后结果如下，缺gcc
+
+root@ASUS:/opt# cd pyOpenSSL-0.12
+root@ASUS:/opt/pyOpenSSL-0.12# python2.7 setup.py install
+/opt/lib/python2.7/distutils/dist.py:267: UserWarning: Unknown distribution opti
+on: 'zip_safe'
+  warnings.warn(msg)
+running install
+running build
+running build_py
+running build_ext
+building 'OpenSSL.crypto' extension
+/opt/bin/gcc -fno-strict-aliasing -g -O2 -DNDEBUG -g -O3 -Wall -Wstrict-prototyp
+es -fPIC -I/opt/include/python2.7 -c OpenSSL/crypto/crypto.c -o build/temp.linux
+-mips-2.7/OpenSSL/crypto/crypto.o
+unable to execute /opt/bin/gcc: No such file or directory
+error: command '/opt/bin/gcc' failed with exit status 1
+root@ASUS:/opt/pyOpenSSL-0.12#
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Nov 16 06:03:53 2013">
+ Nov 16, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=11492#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/116926720980273343568/">liuhejin...@gmail.com</a
+></span>
+ 
+<pre>
+下载了gcc解压缩，把gcc目录拷进 opt/bin也不行，照样出现上面的提示
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Nov 16 14:40:05 2013">
+ Nov 16, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=11492#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+下载下来的gcc要是可执行文件，不是源代码状态，而且检查是否给了可执行权限
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Nov 17 20:42:31 2013">
+ Nov 17, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=11492#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/100472482916698006396/">xuanni...@gmail.com</a
+></span>
+ 
+<pre>
+还是那句话，装opkg，一切迎刃而解
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Nov 17 23:13:09 2013">
+ Nov 17, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=11492#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/116926720980273343568/">liuhejin...@gmail.com</a
+></span>
+ 
+<pre>
+在番茄路由器里如何安装 opkg 组建？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Nov 17 23:28:44 2013">
+ Nov 17, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=11492#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/116926720980273343568/">liuhejin...@gmail.com</a
+></span>
+ 
+<pre>
+CPU型号	Broadcom BCM5357 chip rev 2 pkg 9 好像找不到对应 opkg安装包呀
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Nov 17 23:44:59 2013">
+ Nov 17, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=11492#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/116926720980273343568/">liuhejin...@gmail.com</a
+></span>
+ 
+<pre>
+装gcc好像复杂了，还需要BCM CPU 版本的 gcc，要在路由器内安装
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc26">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov 18 01:25:22 2013">
+ Nov 18, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c26" href="/p/goagent/issues/detail?id=11492#c26">#26</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+试试
+ipkg install gcc
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov 18 04:46:55 2013">
+ Nov 18, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=11492#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/116926720980273343568/">liuhejin...@gmail.com</a
+></span>
+ 
+<pre>
+root@ASUS:/tmp/home/root# ipkg install gcc
+Nothing to be done
+An error ocurred, return value: 4.
+Collected errors:
+Cannot find package gcc.
+Check the spelling or perhaps run 'ipkg update'
+root@ASUS:/tmp/home/root#
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov 18 05:50:27 2013">
+ Nov 18, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=11492#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/100472482916698006396/">xuanni...@gmail.com</a
+></span>
+ 
+<pre>
+这个cpu现在好像不成，等吧，关注这里
+<a href="http://downloads.openwrt.org/snapshots/trunk/" rel="nofollow">http://downloads.openwrt.org/snapshots/trunk/</a>
+gcc问题
+试试
+Ipkg install libgcc
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc29">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov 18 07:27:05 2013">
+ Nov 18, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c29" href="/p/goagent/issues/detail?id=11492#c29">#29</a>
+ 
+
+ <a class="userlink"
+ href="/u/116926720980273343568/">liuhejin...@gmail.com</a
+></span>
+ 
+<pre>
+重新刷了一个新的番茄版本。问题得到解决：
+ASUS login: root
+Password:
+
+
+Tomato v1.28.0114 MIPSR2-20131113.Hyzoom.RT_N5x K26 USB 16M-AIO-AR-TR-PY-GAE
+ ========================================================
+ Welcome to the FiberHome HG320 [ASUS]
+ Uptime:  23:25:19 up 16 min
+ Load average: 0.02, 0.23, 0.23
+ Mem usage: 45.0% (used 27.09 of 60.17 MB)
+ Swap usage: 0.1% (used 0.07 of 62.75 MB)
+ WAN : 125.96.19.105/32 @ B8:C7:16:1A:F9:6B
+ LAN : 192.168.1.1/24 @ DHCP: 192.168.1.2 - 192.168.1.51
+ WL0 : ASUS @ channel: CN8 @ B8:C7:16:1A:F9:6C
+ WL1 : Tomato50 @ channel: auto @
+ ========================================================
+
+root@ASUS:/tmp/home/root# python2.7 /opt/goagent/proxy.py
+WARNING - [Nov 18 23:25:53] please install *libnss3-tools* package to import GoA
+gent root ca
+------------------------------------------------------
+GoAgent Version    : 3.0.8 (python/2.7.3 gevent/1.0dev pyopenssl/0.13)
+Listen Address     : 0.0.0.0:8087
+GAE Mode           : https
+GAE Profile        : google_cn
+GAE APPID          : XXX
+Pac Server         : http://127.0.0.1:8086/proxy.pac
+Pac File           : file:///opt/goagent/proxy.pac
+------------------------------------------------------
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc30">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Nov 22 16:55:15 2013">
+ Nov 22, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c30" href="/p/goagent/issues/detail?id=11492#c30">#30</a>
+ 
+
+ <a class="userlink"
+ href="/u/105261863721622728612/">xnettun...@gmail.com</a
+></span>
+ 
+<pre>
+我是在RHEL6.3裏面跑3.08也同樣的錯誤，python也更新了，還不行，有什麽辦法可解決？
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D11492&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D11492"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="11492">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A11492',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 11492,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ 
+ <script type="text/javascript">_CS_reportToCsi();</script>
+ 
+ </body>
+</html>
+

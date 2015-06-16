@@ -1,0 +1,831 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"projectName": "goagent", "loggedInUserEmail": null, "projectHomeUrl": "/p/goagent", "profileUrl": null, "relativeBaseUrl": "", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "token": null, "domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 18367 - 
+ goagent -
+ 
+ 使用最新版goagent程序打开网页出错或者上传到GAE时出现错误提示，可参考本文。 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18367&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18367" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=18367">18367</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >使用最新版goagent程序打开网页出错或者上传到GAE时出现错误提示，可参考本文。</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 2 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A18367">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18367&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18367">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/107933404572177749153/">inwin...@gmail.com</a
+>,
+ <span class="date" title="Sat Nov  1 06:23:50 2014">Nov 1, 2014</span>
+ 
+ </div>
+<pre>
+因为我发现有很多人出现了以下两个问题，我进行研究之后，发现都可以解决。为了方便他人，我进行一个总结。
+=========================================================================================
+以下只是一家之言，仅供参考，本人不对程序设置出错负责，也不对上传程序的用途负责。
+=========================================================================================
+如果使用goagent打开网站出现以下提示：
+Error: Not Found The requested URL /_gh/ was not found on this server？
+那么就说明你目前使用的goagent版本较高，而谷歌GAE（Google App Engine）服务中上传的goagent版本较老，所以导致了这个问题。
+
+如果你上传最新的goagent程序出现以下错误提示：
+AttributeError: can't set attribute
+请按任意键继续. . .
+也请参考此文。
+=========================================================================================
+下面的解决方法是纯文字的，因为没法在这里上传图片，我把带图片解说的上传到百度文库。
+【真崩溃，文库上传竟然需要审核，我先把本文字发出来，后续会补文库下载链接，如果到时候无法重新编辑本文，我会跟贴补充链接，请注意查看】
+=========================================================================================
+下面要做的就是，重新上传最新goagent版本，然后在GAE中将新上传的版本设置为默认版本即可。
+1、查看GAE中现有的版本（此步骤仅供了解），网址：<a href="https://appengine.google.com/" rel="nofollow">https://appengine.google.com/</a>
+打开后如下图所示，点击你的Application名称，此处我涂掉了自己的。
+ 
+然后进入下图所示，再点击左侧红色位置圈出的Versions（版本号）
+ 
+就可以看到下图所示的当前在GAE中所上传的goagent程序了。默认上传后的版本号都是1
+ 
+2、上传最新版的goagent程序到GAE中。打开proxy.ini文件，在appid那里输入自己的appid。
+需要注意一点，下面我用红色长方形，还圈出了两个谷歌的IP地址，一个是国内的，一个是香港的。
+这两个IP，都是挂VPN或原来可以正常使用的老版本goagent后，利用PING命令得到的。至于为什么要这么做，原因很简单。因为我发现不手工填入可用的谷歌IP，就会导致上传失败，最后不会出现成功提示。这也是我在论坛中发现别人问到的问题，而且我也遇到了，所以就一并指出。当然上传成功后，我觉得这两个IP是可以删除的，请自己尝试。
+ 
+利用PING命令，得到谷歌的IP地址，并复制粘贴到proxy.ini文件中对应的位置，别忘了在后面加一个竖线隔开。
+不要总是照抄我PING到的那两个IP地址，因为这些IP是经常变化的，直接PING最新的复制即可。
+ 
+然后，到下载并解压后的goagent程序文件中，找到以下位置 \server\gae\app.yaml
+ 
+这个文件可以用记事本打开，也可以用比如EditPlus这样的软件打开。区别就在于，用记事本打开显示的比较乱，而用EditPlus打开后，显示的比较整齐，当然，直接用记事本打开应该就可以。
+为什么要打开这个文件呢？因为要修改上传到GAE网站上的程序版本号，如下图所示，在第1步的了解内容中，已经知道上传后的默认程序版本号是1，而goagent默认的程序版本号一直就是1，所以不修改一下版本号的话，可能会导致上传失败或者别的问题。
+ 
+因此，我把即将上传的版本号用记事本修改为2了。如下图所示
+ 
+直接用记事本打开修改应该也可以，只不过显示的比较乱，别改错了。
+ 
+然后，就要以管理员身份运行那个uploader.bat上传程序了。
+请注意，全程都是在VPN或者老版本goagent正常运行的情况下操作的。因为如果不开着代理，你根本就不可能上传到GAE中，原因，你懂的~
+ 
+上传成功的话，就会出现上图最后一句话中“上传成功”的提示。
+然后，按照步骤1中说的方法，进入GAE网站，将下图所示的，新上传的最新版本2程序设置为默认使用的程序。
+就是先选中版本2前面的那个圈，然后点make default（设为默认版本）。就几个简单的英文单词，意思不懂的话自己百度吧。
+ 
+然后，如下图所示，现在程序2就是正在使用的最新版了。此时应该可以正常使用最新的goagent客户端了。
+但是，如果你觉得不爽，此时也可以点程序1后面的那个delete（删除）按钮，把原来的老程序删除。
+默认只有1个程序版本的情况下不允许删除，所以，我们刚才做的就是先改名字上传程序2，并设置成默认，然后才能删除旧的程序1版本。
+ 
+下图所示，会出现一个确认提示，当然是点yes delete
+ 
+现在就剩下一个版本2的程序了。
+ 
+当然如果你觉得还不爽，还可以把app.yaml中的版本号再改回默认的1，然后再上传一次。
+ 
+ 
+上传成功后进入GAE，如下图所示。此时这两个其实都是最新版本，只是名字不同而已。一个是1，一个是2.这个时候可以把程序1设置为默认，然后下一步就可以删除名字为程序2文件了。
+ 
+如下图，现在就可以删除程序2了。
+ 
+ 
+删除成功后如下图所示，现在又成为名字是版本1的文件了。
+只是满足一下某些人的心里不爽情绪，实际上只要把新上传的程序设置为默认，就能正常工作了。
+ 
+以前双击运行goagent后，总要先弹出一个它的类似DOS的对话框，需要手工最小化才行。其实只要把proxy.ini中的一个参数改一下就行了。Visible的值默认是1，改成0以后，再打开goagent，就会自动最小化到右下角了。
+而为了运行不出错，建议以管理员身份运行goagent程序。
+=========================================================================================
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Nov  1 06:30:39 2014">
+ Nov 1, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=18367#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/107933404572177749153/">inwin...@gmail.com</a
+></span>
+ 
+<pre>
+补充：在向GAE上传之前，还要先到谷歌安全中心，将帐户所授权限——不够安全的应用的访问权限，设置为“已启用”，否则也会上传失败。修改地址：<a href="https://www.google.com/settings/security" rel="nofollow">https://www.google.com/settings/security</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Nov  1 20:20:52 2014">
+ Nov 1, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=18367#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/107933404572177749153/">inwin...@gmail.com</a
+></span>
+ 
+<pre>
+文库已上传完毕，补充地址：<a href="http://wenku.baidu.com/view/b8af3dc7b0717fd5360cdcbd.html" rel="nofollow">http://wenku.baidu.com/view/b8af3dc7b0717fd5360cdcbd.html</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Nov  1 21:31:47 2014">
+ Nov 1, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=18367#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/109910484554933941200/">wzxamvf...@gmail.com</a
+></span>
+ 
+<pre>
+有效解决
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Nov  1 22:26:21 2014">
+ Nov 1, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=18367#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/114068444604626574123/">ceelemon...@gmail.com</a
+></span>
+ 
+<pre>
+现在什么网页都打不开怎么办，跪求大神Q_Q
+Facebook、推特、YouTube、nico都打不开
+从昨天下午开始，就是一直停在那加载，始终出不来T_T大神，该怎么办啊
+用了gogotester之后，现在没有黄字红字了，但是仍然不停加载始终打不开。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Nov  2 04:47:50 2014">
+ Nov 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=18367#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/107933404572177749153/">inwin...@gmail.com</a
+></span>
+ 
+<pre>
+我不太会玩这个对话工具，网络上不方便提供Q。你说的gogotester工具，不在我的技术了解范围之内，不作解答。我只是针对goagent作答，按我说的教程操作，最新版goagent即可使用。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Nov  2 05:09:26 2014">
+ Nov 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=18367#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/110660380192047363543/">liuxianl...@gmail.com</a
+></span>
+ 
+<pre>
+本帖非常详尽
+
+已经收录在
+
+<a title="goagent 辅助工具汇总"  href="/p/goagent/issues/detail?id=17929">Issue 17929</a>: 	goagent 辅助工具汇总    #40
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18367&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18367"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="18367">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A18367',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 18367,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

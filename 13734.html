@@ -1,0 +1,1915 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ (function(){(function(){function c(a){this.t={};this.tick=function(a,b,c){b=void 0!=c?c:(new Date).getTime();this.t[a]=b;if(void 0==c)try{window.console.timeStamp("CSI/"+a)}catch(d){}};this.tick("start",null,a)}var a;window.performance&&(a=window.performance.timing);var b=a?new c(a.responseStart):new c;window.jstiming={Timer:c,load:b};a&&(b=a.navigationStart,a=a.responseStart,0<b&&a>=b&&(window.jstiming.srt=a-b));try{a=null,window.chrome&&window.chrome.csi&&(a=Math.floor(window.chrome.csi().pageT)),null==a&&
+window.gtbExternal&&(a=window.gtbExternal.pageT()),null==a&&window.external&&(a=window.external.pageT),a&&(window.jstiming.pt=a)}catch(d){}})();})();
+
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"relativeBaseUrl": "", "projectName": "goagent", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "domainName": null, "profileUrl": null, "projectHomeUrl": "/p/goagent", "loggedInUserEmail": null, "token": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 13734 - 
+ goagent -
+ 
+ ipv6模式下大面积黄字、error10060、以及各种奇怪错误的终极解决办法 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13734&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13734" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=13734">13734</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >ipv6模式下大面积黄字、error10060、以及各种奇怪错误的终极解决办法</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 14 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A13734">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13734&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13734">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/116677286554063567802/">WinterTe...@gmail.com</a
+>,
+ <span class="date" title="Thu May 22 14:10:04 2014">May 22, 2014</span>
+ 
+ </div>
+<pre>
+goagent3.1.11 3.1.12亲测可用，解决了困扰我多年的问题，希望对大家有用
+
+1. 注释掉[iplist]下其它条目，只保留google_ipv6
+如： 
+;google_cn = www.google.cn|www.g.cn
+;google_hk = www.google.com|mail.google.com|www.google.com.hk|www.google.com.tw|www.l.google.com
+;google_talk =talk.google.com|talk.l.google.com|talkx.l.google.com
+google_ipv6 = 2404:6800:4005:c00::64|2404:6800:4005:c00::65|2404:6800:4005:c00::5e|2404:6800:4005:c00::67|2404:6800:4005:c00::2f
+2. [ipv6/hosts]条目下google的域名全部使用ipv6的ip
+如：
+talk.google.com = google_ipv6
+talk.l.google.com = google_ipv6
+talkx.l.google.com = google_ipv6
+.google.com = google_ipv6
+.googleusercontent.com = google_ipv6
+.googleapis.com = google_ipv6
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 22 19:26:04 2014">
+ May 22, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=13734#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/106609195244577015494/">owendsw...@gmail.com</a
+></span>
+ 
+<pre>
+还是不行啊，这ipv6是怎么了！！！……
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 24 05:00:25 2014">
+ May 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=13734#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/104169165199030949265/">paulzhan...@gmail.com</a
+></span>
+ 
+<pre>
+我前一阵子测了一批ipv6的地址 你可以替换你的试试
+2404:6800:4005:c00::64|2404:6800:4005:c00::65|2404:6800:4005:c00::5e|2404:6800:4005:c00::67|2404:6800:4005:c00::2f|2607:f8b0:4007:801::1012|2607:f8b0:4007:804::1013|2607:f8b0:4007:801::1011|2607:f8b0:4005:800::1013|2607:f8b0:4005:802::1010|2607:f8b0:400a:804::1002|2607:f8b0:4009:805::1011|2607:f8b0:4009:806::1012|2607:f8b0:4009:802::1014|2607:f8b0:4009:802::1004|2607:f8b0:400f:800::1010|2607:f8b0:4000:801::1010|2607:f8b0:4001:c00::67|2607:f8b0:4000:808::1014|2607:f8b0:400b:806::1011|2607:f8b0:4002:c06::67|2607:f8b0:4000:802::1011|2404:6800:4005:805::1018|2607:f8b0:4008:801::1012|2607:f8b0:4000:802::100e|2404:6800:4005:800::1003|2404:6800:4008:c02::68|2404:6800:4005:c00::11|2404:6800:4005:806::1010|2404:6800:4008:c03::6a|2607:f8b0:4002:c07::6a|2404:6800:4005:800::1011|2607:f8b0:400d:c04::67|2607:f8b0:4000:802::1014|2404:6800:4005:c00::65|2404:6800:4005:804::1011|2607:f8b0:400c:c03::64|2404:6800:4005:c00::64|2404:6800:4005:c00::5e|2607:f8b0:400c:c03::67|2607:f8b0:4006:806::1007|2404:6800:4005:c00::c7|2404:6800:4005:c00::67|2404:6800:4005:c00::2f|2607:f8b0:400c:c03::68|2607:f8b0:4006:806::1014|2607:f8b0:400c:c03::66|2607:f8b0:400c:c03::6a|2607:f8b0:4006:803::1013|2404:6800:4004:807::1014|2607:f8b0:400a:800::1012|2607:f8b0:400a:800::1001|2a00:1450:4009:804::1013|2607:f8b0:400a:801::1011|2a00:1450:4007:80a::1014|2001:4860:400b:c01::63|2a00:1450:4007:80a::1004|2a00:1450:400c:c06::65|2a00:1450:4007:809::1010|2a00:1450:4007:808::1011|2a00:1450:400c:c06::93|2a00:1450:400b:c02::63|2a00:1450:4001:c02::93|2a00:1450:4001:c02::67|2a00:1450:4001:c02::69|2a00:1450:400a:805::1013|2a00:1450:4013:c01::8b|2a00:1450:4001:807::1010|2a00:1450:4001:802::1011|2a00:1450:4013:c00::69|2a00:1450:4001:c02::64|2a00:1450:4001:809::1013|2a00:1450:4008:c01::69|2a00:1450:4005:808::1010|2a00:1450:4013:c00::66|2a00:1450:4001:80c::1013|2a00:1450:4001:801::1005|2a00:1450:4005:808::1006|2a00:1450:4001:80e::1014|2a00:1450:4001:80a::1010|2a00:1450:4005:809::1013|2a00:1450:4005:809::1012|2a00:1450:4002:804::1004|2a00:1450:4016:803::1012|2a00:1450:4006:801::1010|2a00:1450:4005:800::1012|2a00:1450:4016:803::1011|2a00:1450:4016:800::1000|2a00:1450:4002:804::1010|2a00:1450:4002:805::1006|2a00:1450:4016:800::1011|2a00:1450:4005:800::100e|2a00:1450:4003:803::1010|2a00:1450:4016:800::1010|2a00:1450:4002:805::1011|2a00:1450:400d:805::1012|2a00:1450:400d:805::1006|2404:6800:4003:c00::67|2a00:1450:400d:803::1010|2404:6800:4003:c00::6a|2404:6800:4003:808::1010|2404:6800:4003:807::1012|2800:3f0:4004:800::1012|2404:6800:4003:802::1013|2a00:1450:400f:803::1014|2404:6800:4003:c00::69|2a00:1450:4010:c03::67|2a00:1450:4010:c03::8b|2800:3f0:4002:802::1014|2a00:1450:4010:c03::69|2a00:1450:4010:c03::68|2a00:1450:4010:c04::93|2a00:1450:4010:c04::64|2a00:1450:4010:c03::93|2404:6800:4006:806::1010|2404:6800:4006:806::1002|2404:6800:4006:805::1011|2404:6800:4006:805::1013|2404:6800:4006:804::1013|2404:6800:4006:803::1010|2404:6800:4009:801::1014|2c0f:fb50:4002:800::1013|2c0f:fb50:4002:801::1011
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 24 05:45:56 2014">
+ May 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=13734#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/103265284293004991711/">zhx...@gmail.com</a
+></span>
+ 
+<pre>
+感谢楼主和#2，真的能用了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun 27 08:01:21 2014">
+ Jun 27, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=13734#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/113469008167412954805/">sharp...@gmail.com</a
+></span>
+ 
+<pre>
+求寻找ipv6 iplist的方法
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun 27 08:37:32 2014">
+ Jun 27, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=13734#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/107751214866299606041/">Helloboy...@gmail.com</a
+></span>
+ 
+<pre>
+感谢楼主和二楼，已解决。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 28 00:33:32 2014">
+ Jun 28, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=13734#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/103829951555133795437/">60435690...@gmail.com</a
+></span>
+ 
+<pre>
+per~~~fact!   Thanks a lot ~~~~~~~
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 28 01:40:42 2014">
+ Jun 28, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=13734#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/113528445751976661815/">wangm...@gmail.com</a
+></span>
+ 
+<pre>
+非常感谢！可以用了！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 28 02:01:24 2014">
+ Jun 28, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=13734#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/109953498228529842957/">kxm...@gmail.com</a
+></span>
+ 
+<pre>
+你都能用v6还用翻么?
+提高v6优先级就行了
+netsh int ipv6 set prefix ::1/128 50 0
+netsh int ipv6 set prefix ::/0 40 1
+netsh int ipv6 set prefix 2002::/16 30 1
+netsh int ipv6 set prefix ::/96 20 3
+netsh int ipv6 set prefix ::ffff:0:0/96 10 4
+netsh int ipv6 set prefix 2001::/32 5 1
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 28 06:37:24 2014">
+ Jun 28, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=13734#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/115108218563084031291/">yinqingw...@gmail.com</a
+></span>
+ 
+<pre>
+感谢2楼提供了如此多的IPv6地址，成功解决了问题。
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 28 15:30:44 2014">
+ Jun 28, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=13734#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/117027045147510218098/">zkwan...@gmail.com</a
+></span>
+ 
+<pre>
+经测试可用，虽然有时还出红黄字
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 29 03:15:05 2014">
+ Jun 29, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=13734#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/108624022798487360207/">hongwang...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢分享！很解决问题。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 29 17:30:15 2014">
+ Jun 29, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=13734#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/116831946947187700991/">wonde...@gmail.com</a
+></span>
+ 
+<pre>
+全部用google_ipv6以后G+打不开了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 29 18:47:30 2014">
+ Jun 29, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=13734#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/103116328884248603652/">jay52881...@gmail.com</a
+></span>
+ 
+<pre>
+赞一个，不错！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 29 21:07:11 2014">
+ Jun 29, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=13734#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/116295304182478698349/">zyana...@gmail.com</a
+></span>
+ 
+<pre>
+to #2 paul 
+请问是怎么测试的啊，谢谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 29 23:14:01 2014">
+ Jun 29, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=13734#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/109159362594328605265/">zsf99170...@gmail.com</a
+></span>
+ 
+<pre>
+3.1.18的ipv6地址全部解析失败，建议手动ping确认可用后自行修改
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun 30 00:36:18 2014">
+ Jun 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=13734#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/116831946947187700991/">wonde...@gmail.com</a
+></span>
+ 
+<pre>
+replace 4005 with 4008
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul  2 02:30:23 2014">
+ Jul 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=13734#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/118154744382144356617/">ibrik...@gmail.com</a
+></span>
+ 
+<pre>
+十分感谢二楼，原来是这里出现的问题！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul  2 06:59:52 2014">
+ Jul 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=13734#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/104152439666762773395/">zskyrea...@gmail.com</a
+></span>
+ 
+<pre>
+感谢2楼！看 youtube 果断不卡了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jul  3 01:16:56 2014">
+ Jul 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=13734#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/108194384201478206656/">AmonWalf...@gmail.com</a
+></span>
+ 
+<pre>
+让我膜拜一下#2，原来是给的地址失效了，多谢了！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jul  3 06:11:10 2014">
+ Jul 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=13734#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/112793786761414347005/">standwal...@gmail.com</a
+></span>
+ 
+<pre>
+弱弱的问一句，修改过hosts之后还要用goagent翻墙么？除非hosts里面没有对应的域名吧。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul  9 06:19:36 2014">
+ Jul 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=13734#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/104244135501454217764/">sanjin...@gmail.com</a
+></span>
+ 
+<pre>
+感谢二楼
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jul 10 20:21:56 2014">
+ Jul 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=13734#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/103804436115633344296/">yvettewa...@gmail.com</a
+></span>
+ 
+<pre>
+Thanks for sharing!
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jul 12 20:17:07 2014">
+ Jul 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=13734#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/115386451152395273133/">hsl210...@gmail.com</a
+></span>
+ 
+<pre>
+ganxie1
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jul 17 10:25:48 2014">
+ Jul 17, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=13734#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/117227448491713361155/">Jiongri...@gmail.com</a
+></span>
+ 
+<pre>
+同质疑有ipv6后还要用goagent?
+ipv6下要解决的有且只有DNS污染,配置DNSCrypt就行了. 
+
+
+哦想起来了对于ipv4 only还是要用GoAgent…原来如此
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc26">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jul 18 07:12:18 2014">
+ Jul 18, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c26" href="/p/goagent/issues/detail?id=13734#c26">#26</a>
+ 
+
+ <a class="userlink"
+ href="/u/107184717361682583165/">chinamaj...@gmail.com</a
+></span>
+ 
+<pre>
+不懂...怎么搞啊?
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Aug  5 04:30:02 2014">
+ Aug 5, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=13734#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/104832881316843643129/">xgd...@gmail.com</a
+></span>
+ 
+<pre>
+rangefetch return 403 感觉比以前慢了，是什么原因？是ipv6地址需要更新了吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Aug  7 01:48:24 2014">
+ Aug 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=13734#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/103473276612546405783/">shuangzh...@gmail.com</a
+></span>
+ 
+<pre>
+2404:6800:4008的网段才是可用的，4005不行。2a00/2607开头的地址不是亚太网段，延迟高。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc30">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Aug 17 08:10:45 2014">
+ Aug 17, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c30" href="/p/goagent/issues/detail?id=13734#c30">#30</a>
+ 
+
+ <a class="userlink"
+ href="/u/104223802860910419389/">smallmes...@gmail.com</a
+></span>
+ 
+<pre>
+to #2 paul 
+请问二楼的ipv6地址是怎么找出和测试出来的？哪些地方有分享的？求大侠帮忙
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc33">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Sep 16 02:26:12 2014">
+ Sep 16, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c33" href="/p/goagent/issues/detail?id=13734#c33">#33</a>
+ 
+
+ <a class="userlink"
+ href="/u/yansheng1003/">yansheng1003</a
+></span>
+ 
+<pre>
+请问速度比较快的IPV6
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc34">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Sep 18 20:15:10 2014">
+ Sep 18, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c34" href="/p/goagent/issues/detail?id=13734#c34">#34</a>
+ 
+
+ <a class="userlink"
+ href="/u/103400806181677406634/">lovin...@gmail.com</a
+></span>
+ 
+<pre>
+竟然能用了。。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc35">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Sep 23 06:44:16 2014">
+ Sep 23, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c35" href="/p/goagent/issues/detail?id=13734#c35">#35</a>
+ 
+
+ <a class="userlink"
+ href="/u/102658317581775770238/">Zky...@gmail.com</a
+></span>
+ 
+<pre>
+试问楼主 这个版本哪里来的[ipv6/hosts]？？？？？？？？？？？？
+让我等怎么修改？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc36">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Sep 23 06:45:03 2014">
+ Sep 23, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c36" href="/p/goagent/issues/detail?id=13734#c36">#36</a>
+ 
+
+ <a class="userlink"
+ href="/u/102658317581775770238/">Zky...@gmail.com</a
+></span>
+ 
+<pre>
+google_ipv6 = 这个是你自己加上的？
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13734&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13734"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="13734">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A13734',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 13734,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ 
+ <script type="text/javascript">_CS_reportToCsi();</script>
+ 
+ </body>
+</html>
+

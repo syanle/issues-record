@@ -1,0 +1,975 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "relativeBaseUrl": "", "loggedInUserEmail": null, "projectName": "goagent", "projectHomeUrl": "/p/goagent", "token": null, "profileUrl": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 21372 - 
+ goagent -
+ 
+ 为什么扫描出来的使用不到10几秒主不行了 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21372&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21372" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=21372">21372</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >为什么扫描出来的使用不到10几秒主不行了</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 2 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A21372">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21372&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21372">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/105865869398279063149/">YFX2...@gmail.com</a
+>,
+ <span class="date" title="Sun Jun  7 20:34:03 2015">Jun 7, 2015</span>
+ 
+ </div>
+<pre>
+<b>发issue前先在All issues中搜索是否已经有你要提交的问题。</b>
+
+<b>操作系统版本：</b>
+<b>浏览器版本：</b>
+<b>GoAgent 版本：</b>
+<b>GoAgent 日志：</b>
+
+<b>注意:请尽量填写以上信息，否则可能难以得到帮助</b>
+
+扫描的IP,使用不到10几秒就全部变黄了,试了几次都是这样,用联通的网络却没有问题,电信这个傻逼也太坑爹了,电信封的太利害了,Y2B没法看呀.
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun  7 20:39:08 2015">
+ Jun 7, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=21372#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/110158684434685666353/">cym.zh...@gmail.com</a
+></span>
+ 
+<pre>
+放屁
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun  7 22:07:31 2015">
+ Jun 7, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=21372#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/102414443546224887217/">inl...@gmail.com</a
+></span>
+ 
+<pre>
+INFO - [Jun  8 13:04:53] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 4309964112] 176829 bytes 2097152-2273980/2273981
+INFO - [Jun  8 13:04:54] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; Successfully reached 2273980 bytes.
+INFO - [Jun  8 13:04:54] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; Successfully reached 2097151 bytes.
+INFO - [Jun  8 13:06:24] ssl good_ipaddrs=235, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Jun  8 13:06:25] 127.0.0.1:51444 &quot;GAE POST <a href="https://www.youtube.com/watch_fragments_ajax?v=uGrzs8yrxuo&amp;tr=scroll&amp;distiller=1&amp;frags=comments&amp;spf=load" rel="nofollow">https://www.youtube.com/watch_fragments_ajax?v=uGrzs8yrxuo&amp;tr=scroll&amp;distiller=1&amp;frags=comments&amp;spf=load</a> HTTP/1.1&quot; 200 16590
+INFO - [Jun  8 13:06:32] ssl good_ipaddrs=235, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Jun  8 13:06:34] 127.0.0.1:51444 &quot;GAE GET <a href="https://www.youtube.com/?spf=navigate" rel="nofollow">https://www.youtube.com/?spf=navigate</a> HTTP/1.1&quot; 200 63457
+INFO - [Jun  8 13:06:35] 127.0.0.1:51444 &quot;GAE GET <a href="https://www.youtube.com/&amp;nofeather=True" rel="nofollow">https://www.youtube.com/&amp;nofeather=True</a> HTTP/1.1&quot; 404 513
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun  7 22:08:10 2015">
+ Jun 7, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=21372#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/102414443546224887217/">inl...@gmail.com</a
+></span>
+ 
+<pre>
+灰常OK，及其流畅
+着了一堆20ping以下的，速度杠杠滴
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun  7 23:34:02 2015">
+ Jun 7, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=21372#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/110807761722570332450/">xsl0...@gmail.com</a
+></span>
+ 
+<pre>
+看看是不是mode = https
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  8 00:33:29 2015">
+ Jun 8, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=21372#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/105865869398279063149/">YFX2...@gmail.com</a
+></span>
+ 
+<pre>
+#1 你自己看,用了一会就这样了,基本停止了
+
+INFO - [Jun 08 15:28:31] ssl good_ipaddrs=0, bad_ipaddrs=32, unknown_ipaddrs=0
+WARNING - [Jun 08 15:28:32] create_ssl_connection to 'www.google.com' with [('20
+3.233.18.37', 443), ('210.242.127.74', 443), ('210.242.125.10', 443), ('203.210.
+4.43', 443), ('61.41.59.42', 443), ('61.41.59.36', 443), ('61.41.59.32', 443), (
+'61.41.59.41', 443), ('59.18.44.4', 443), ('61.33.130.218', 443), ('61.37.150.14
+5', 443), ('61.41.59.31', 443), ('61.36.166.6', 443), ('203.233.126.170', 443),
+('157.197.93.13', 443), ('59.18.44.4', 443), ('61.33.130.215', 443), ('121.78.20
+6.85', 443), ('61.41.59.42', 443), ('61.36.166.7', 443), ('61.238.203.111', 443)
+, ('61.33.130.214', 443), ('61.36.166.5', 443), ('61.238.239.69', 443)] return [
+'The handshake operation timed out'], try again.
+ERROR - [Jun 08 15:28:32] create_http_request &quot;GET <a href="https://www.google.com/gen_20" rel="nofollow">https://www.google.com/gen_20</a>
+4?v=3&amp;s=web&amp;e=3700341,3700366,4010073,4023709,4025836,4029416,4029570,4029815,40
+31300,4031450,4031637,4032500,4032522,4032524,4032677,4032710,4033021,4033307,40
+33344,4034425,4034637,4034884,4035816,4035933,4036154,4036435,4036471,4036485,40
+37432,4037457,4037531,4037679,4037849,4038019,4038150,4038203,8300154,8300158,85
+00394,8500572,8501248,8501295,8501350,8501407,8501489,8501594,10200083,10201089,
+10201180&amp;ei=AUR1VcaPL-XvmAX5moAw&amp;cr=r&amp;imp=0&amp;pfa=n.1,ttfc.2921,ttlc.0,cbt.82&amp;pfm=
+n.1,ttfc.2921,ttlc.0,cbt.82&amp;imn=4&amp;atyp=csi&amp;adh=&amp;xjs=init.57.9.sb.55.jsa.2.bbd.0.
+TG8rFw.0.c.0&amp;action=&amp;srt=2566&amp;rt=prt.143,pprt.143,ol.143,jsrt.2929,iml.145&quot; fail
+ed:The handshake operation timed out
+Traceback (most recent call last):
+  File &quot;E:\Program Files\goagent\local\proxylib.py&quot;, line 2078, in create_http_r
+equest
+  File &quot;E:\Program Files\goagent\local\proxylib.py&quot;, line 2057, in create_ssl_co
+nnection
+SSLError: The handshake operation timed out
+
+INFO - [Jun 08 15:28:32] ssl good_ipaddrs=0, bad_ipaddrs=32, unknown_ipaddrs=0
+INFO - [Jun 08 15:28:33] 127.0.0.1:7170 &quot;DIRECT GET <a href="https://www.google.com/gen_2" rel="nofollow">https://www.google.com/gen_2</a>
+04?v=3&amp;s=web&amp;e=3700341,3700366,4010073,4023709,4025836,4029416,4029570,4029815,4
+031300,4031450,4031637,4032500,4032522,4032524,4032677,4032710,4033021,4033307,4
+033344,4034425,4034637,4034884,4035816,4035933,4036154,4036435,4036471,4036485,4
+037432,4037457,4037531,4037679,4037849,4038019,4038150,4038203,8300154,8300158,8
+500394,8500572,8501248,8501295,8501350,8501407,8501489,8501594,10200083,10201089
+,10201180&amp;ei=AUR1VcaPL-XvmAX5moAw&amp;cr=r&amp;imp=0&amp;pfa=n.1,ttfc.2921,ttlc.0,cbt.82&amp;pfm
+=n.1,ttfc.2921,ttlc.0,cbt.82&amp;imn=4&amp;atyp=csi&amp;adh=&amp;xjs=init.57.9.sb.55.jsa.2.bbd.0
+.TG8rFw.0.c.0&amp;action=&amp;srt=2566&amp;rt=prt.143,pprt.143,ol.143,jsrt.2929,iml.145 HTTP
+/1.1&quot; 204 0
+WARNING - [Jun 08 15:28:37] create_ssl_connection to 'ssl.gstatic.com' with [('2
+10.242.127.74', 443), ('210.242.125.10', 443), ('203.210.4.43', 443), ('61.41.59
+.42', 443), ('61.41.59.36', 443), ('61.37.150.144', 443), ('61.37.150.145', 443)
+, ('59.18.44.4', 443), ('121.78.206.92', 443), ('121.78.206.87', 443), ('121.78.
+206.85', 443), ('203.233.63.11', 443), ('61.33.130.215', 443), ('61.238.203.111'
+, 443), ('61.33.130.214', 443)] return ['The handshake operation timed out'], tr
+y again.
+INFO - [Jun 08 15:28:37] ssl good_ipaddrs=0, bad_ipaddrs=32, unknown_ipaddrs=0
+WARNING - [Jun 08 15:28:37] create_ssl_connection to 'www.google.com' with [('21
+0.242.127.74', 443), ('210.242.125.10', 443), ('203.210.4.43', 443), ('61.41.59.
+42', 443), ('61.41.59.36', 443), ('61.37.150.145', 443), ('61.33.130.210', 443),
+ ('61.41.59.46', 443), ('61.37.150.144', 443), ('61.41.59.32', 443), ('203.233.1
+8.37', 443), ('61.238.203.111', 443), ('210.242.127.74', 443), ('61.37.150.169',
+ 443), ('61.41.59.36', 443)] return ['The handshake operation timed out'], try a
+gain.
+INFO - [Jun 08 15:28:37] ssl good_ipaddrs=0, bad_ipaddrs=32, unknown_ipaddrs=0
+WARNING - [Jun 08 15:28:43] create_ssl_connection to 'ssl.gstatic.com' with [('2
+03.210.4.43', 443), ('61.41.59.42', 443), ('61.41.59.36', 443), ('61.41.59.32',
+443), ('61.41.59.41', 443), ('59.18.44.4', 443), ('61.41.59.31', 443), ('121.78.
+206.92', 443), ('61.36.166.7', 443), ('210.242.125.10', 443), ('203.233.18.37',
+443), ('61.238.203.111', 443), ('61.36.166.6', 443), ('61.41.59.38', 443), ('61.
+238.239.69', 443), ('157.197.93.13', 443), ('121.78.206.85', 443), ('61.33.130.2
+10', 443)] return ['The handshake operation timed out'], try again.
+INFO - [Jun 08 15:28:43] ssl good_ipaddrs=0, bad_ipaddrs=32, unknown_ipaddrs=0
+WARNING - [Jun 08 15:28:43] create_ssl_connection to 'www.google.com' with [('20
+3.210.4.43', 443), ('61.41.59.42', 443), ('61.41.59.36', 443), ('61.41.59.32', 4
+43), ('61.41.59.41', 443), ('59.18.44.4', 443), ('61.33.130.218', 443), ('61.41.
+59.36', 443), ('210.242.125.10', 443), ('61.33.130.215', 443), ('61.33.130.214',
+ 443), ('121.78.206.87', 443), ('210.242.127.74', 443), ('61.37.150.169', 443),
+('203.233.18.36', 443), ('61.41.59.41', 443), ('203.233.126.170', 443), ('61.37.
+150.144', 443)] return ['The handshake operation timed out'], try again.
+INFO - [Jun 08 15:28:43] ssl good_ipaddrs=0, bad_ipaddrs=32, unknown_ipaddrs=0
+WARNING - [Jun 08 15:28:49] create_ssl_connection to 'ssl.gstatic.com' with [('2
+03.210.4.43', 443), ('61.41.59.42', 443), ('61.41.59.36', 443), ('61.41.59.32',
+443), ('61.41.59.41', 443), ('59.18.44.4', 443), ('61.41.59.46', 443), ('203.210
+.4.43', 443), ('203.233.126.170', 443), ('203.233.63.11', 443), ('61.37.150.144'
+, 443), ('61.41.59.31', 443), ('61.41.59.32', 443), ('61.33.130.218', 443), ('61
+.41.59.38', 443), ('61.36.166.6', 443), ('210.242.127.74', 443), ('210.242.125.1
+0', 443), ('61.33.130.215', 443), ('61.36.166.7', 443), ('121.78.206.85', 443)]
+return ['The handshake operation timed out'], try again.
+INFO - [Jun 08 15:28:49] ssl good_ipaddrs=0, bad_ipaddrs=32, unknown_ipaddrs=0
+WARNING - [Jun 08 15:28:49] create_ssl_connection to 'www.google.com' with [('20
+3.210.4.43', 443), ('61.41.59.42', 443), ('61.41.59.36', 443), ('61.41.59.32', 4
+43), ('61.41.59.41', 443), ('59.18.44.4', 443), ('61.41.59.46', 443), ('61.37.15
+0.145', 443), ('61.41.59.42', 443), ('157.197.93.13', 443), ('210.242.125.10', 4
+43), ('61.41.59.31', 443), ('61.41.59.41', 443), ('121.78.206.85', 443), ('61.41
+.59.36', 443), ('61.238.203.111', 443), ('61.36.166.5', 443), ('61.41.59.38', 44
+3), ('203.233.63.11', 443), ('61.37.150.169', 443), ('61.36.166.7', 443)] return
+ ['The handshake operation timed out'], try again.
+INFO - [Jun 08 15:28:49] ssl good_ipaddrs=0, bad_ipaddrs=32, unknown_ipaddrs=0
+INFO - [Jun 08 15:28:49] 127.0.0.1:7158 &quot;DIRECT GET <a href="https://ssl.gstatic.com/s2/o" rel="nofollow">https://ssl.gstatic.com/s2/o</a>
+z/images/notifications/spinner_32_794cfa28f324131c58c8934183d55d25.gif HTTP/1.1&quot;
+ 200 27254
+WARNING - [Jun 08 15:28:55] create_ssl_connection to 'www.google.com' with [('61
+.41.59.42', 443), ('61.41.59.36', 443), ('61.41.59.32', 443), ('61.41.59.41', 44
+3), ('59.18.44.4', 443), ('61.41.59.46', 443), ('61.33.130.210', 443), ('61.33.1
+30.215', 443), ('203.233.63.12', 443), ('203.233.126.170', 443), ('61.238.239.69
+', 443), ('203.210.4.43', 443), ('59.18.44.4', 443), ('157.197.93.13', 443), ('6
+1.33.130.210', 443), ('61.41.59.31', 443), ('61.41.59.42', 443), ('121.78.206.92
+', 443), ('61.238.203.111', 443), ('61.41.59.46', 443), ('61.41.59.36', 443), ('
+61.36.166.5', 443), ('61.41.59.38', 443), ('61.37.150.144', 443)] return ['The h
+andshake operation timed out'], try again.
+ERROR - [Jun 08 15:28:55] create_http_request &quot;GET <a href="https://www.google.com/ads/me" rel="nofollow">https://www.google.com/ads/me</a>
+asurement/t&quot; failed:The handshake operation timed out
+Traceback (most recent call last):
+  File &quot;E:\Program Files\goagent\local\proxylib.py&quot;, line 2078, in create_http_r
+equest
+  File &quot;E:\Program Files\goagent\local\proxylib.py&quot;, line 2057, in create_ssl_co
+nnection
+SSLError: The handshake operation timed out
+
+INFO - [Jun 08 15:29:50] extend_iplist start for hosts=[]
+INFO - [Jun 08 15:29:50] extend_iplist finished, added 32
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  8 00:34:57 2015">
+ Jun 8, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=21372#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/105865869398279063149/">YFX2...@gmail.com</a
+></span>
+ 
+<pre>
+#5 xsl0...@gmail.com
+
+看了下,是这样的呀,我没有改动这个
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  8 01:00:54 2015">
+ Jun 8, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=21372#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/106310193510396836732/">philip.t...@gmail.com</a
+></span>
+ 
+<pre>
+问题应该在这儿：create_ssl_connection to 'www.google.com' with xx.xx.xx.xx，现在修改的版本应该不够完善，不知道大神有没有意愿进行优化。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  8 09:09:06 2015">
+ Jun 8, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=21372#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/100969792028133114345/">dqf...@gmail.com</a
+></span>
+ 
+<pre>
+google_talk = 后面不要乱动，否则就会出现像这样的问题
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21372&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21372"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="21372">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A21372',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 21372,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

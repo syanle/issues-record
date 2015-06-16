@@ -1,0 +1,1826 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"domainName": null, "projectHomeUrl": "/p/goagent", "relativeBaseUrl": "", "loggedInUserEmail": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "projectName": "goagent", "profileUrl": null, "token": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 19692 - 
+ goagent -
+ 
+ 请phus.lu老大出来讲讲，我等草民除了人肉翻，以后还有可能这么自由吗？ - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19692&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19692" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=19692">19692</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >请phus.lu老大出来讲讲，我等草民除了人肉翻，以后还有可能这么自由吗？</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 3 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A19692">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19692&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19692">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/113292563919005293118/">xvyongp...@gmail.com</a
+>,
+ <span class="date" title="Mon Feb  2 07:25:07 2015">Feb 2, 2015</span>
+ 
+ </div>
+<pre>
+最近什么情况相信大家都看新闻了吧？不知道请搜 工信部+vpn。
+
+感觉gfw墙是越来越高了，幸好还能扫出几个能用的io，估计今年就快拉起大局域网了吧。呵呵，到时候苦逼的可不只是一小撮、翻出来看看信息的人了吧？留学生、外企等都会受很大影响，内心真的感觉要人肉翻了。
+
+抛开政z.h.i不谈，其实就想问问phuslu老大，作为一个不太了解代码什么的文科小白，以后还能这么自由科学上网吗？有没有可能，以后只让特殊人群科学上网，而普通网民全部被封掉呢？phuslu老大以后还会继续做下去吗？谢谢
+
+最后想问一下，之前安卓手机挂vpn是能在google play刷新应用的。最近挂上vpn能上推、能上google、能上instagram等，但google play那边就显示无法连接到网络，邪了门啦？求知道的大神解救。不胜感激～
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Feb  2 17:41:45 2015">
+ Feb 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=19692#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/104189499024585998899/">qiangliu...@gmail.com</a
+></span>
+ 
+<pre>
+魔高一尺，道高一丈
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Feb  2 18:35:57 2015">
+ Feb 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=19692#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/105288043603731440883/">ygfl...@gmail.com</a
+></span>
+ 
+<pre>
+看形式不排除建我中华大局域网的可能性。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Feb  2 18:55:45 2015">
+ Feb 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=19692#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/101844246839111579817/">wg778...@gmail.com</a
+></span>
+ 
+<pre>
+据传中华大局域网已经建设完毕，目前正在调试中，四月份将正式运行，所有的国外VPN全部封掉，他们口号是不留死角，goagent能不能突破封锁，命运难测。
+VPN个人不准使用，企业或者学术单位需要使用VPN的，必须提出申请，批准后他们会指定使用国内的VPN服务商，以便实施监控
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Feb  2 19:28:31 2015">
+ Feb 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=19692#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/112314821949140664509/">mooner.n...@gmail.com</a
+></span>
+ 
+<pre>
+#3 不要危言耸听，故意以讹传讹。vpn不过是翻土墙的方法之一，还有好多种，你封不掉的，goa只要解决好dns问题，死掉的ip一样跑得溜溜快。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Feb  2 22:28:08 2015">
+ Feb 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=19692#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/106207719761408358259/">ourhonou...@gmail.com</a
+></span>
+ 
+<pre>
+好像有一个 赛风的软件 也可以翻墙(安卓 苹果 window 都可以使用)
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Feb  3 07:29:01 2015">
+ Feb 3, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=19692#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/110330972716879447422/">bob.yang...@gmail.com</a
+></span>
+ 
+<pre>
+#3 你的说法很可怕，更可怕是你在想象吧。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Feb  3 18:08:07 2015">
+ Feb 3, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=19692#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/101844246839111579817/">wg778...@gmail.com</a
+></span>
+ 
+<pre>
+4楼、6楼，你们幼稚得可爱，太不了解他们了，亏你们还翻墙，从墙外得到信息居然没有让你们能够对他们的凶残有清醒的认识，真是太遗憾了。
+你们使用goagent，对goagent的“吾血尚温”老兄不觉得有点惭愧吗？
+看看今天的VOA报道：
+
+纽约—
+新年伊始，作为习近平加紧互联网控制的重要一环，北京当局开始关闭在中国的虚拟私人网络，即VPN，切断在中国的外国用户和试图翻墙的中国用户与全球互联网的最后联系。有专家认为，这是中国试图建立完全封闭的局域网、实现所谓的中国互联网主权的必然步骤。也有学者认为，这是为了阻断涉及最高层权力斗争的反贪政治整肃中“谣言”如暴风骤雨般出口转内销的途径。
+
+今年1月，在中国的外国用户和翻墙的中国用户发现他们使用有年的、可以突破中国防火长城的虚拟私人网络被屏蔽了。对于这一行动中国官方虽没有大张旗鼓地宣传，却也没有否认。
+
+在1月27日“2014年工业通信业发展情况发布会”上，有记者问及对VPN的屏蔽时，中国工业和信息化部通信发展司司长闻库承认了政府这一针对VPN的打击行动，但说这是为了中国网络“健康发展”，并指此类软件在中国属于非法。闻库还说，“新的情况出现一定会有新的政策管理措施跟上。”
+
+VPN供应商Astrill已经通知其在中国的用户，因中国防火长城的升级，多个协议设备无法访问其服务，受影响的主要是使用苹果公司操作系统iOS的设备。另外两家VPN供应商Golden Frog和 Tech Runo也报告了类似情况。
+
+在纽约亚洲协会旗下的中参馆最近就此举行的网络书面讨论中，多位讨论者对中国政府屏蔽VPN的时机及其目的提出了看法。
+
+*意识形态斗争的组成部分*
+
+南华早报金融编辑陈澍写道：“为什么是现在？”他表示，虚拟私人网络服务在中国已经存在了多年。北京当局清楚知道其普遍性，尤其是对在中国的外国人。
+
+陈澍认为，这一关闭行动是习近平领导的意识形态斗争的组成部分，“从网络到大学，现在教师禁止在课堂上发表赞成西方价值观的言论，学生必须认真学习马克思主义。还有对中国人是否必须首先学好中文才可以学英语所进行的辩论。”他预言，不久将会看到因使用或提供“非法虚拟私人网络”而被指控或逮捕的消息。
+
+他表示，具讽刺意味的是北京对社交媒体奉行双重标准，对内对外做着截然相反的事情。陈澍说，最近，官媒如新华社、中新社和中央电视台，纷纷在脸书和推特上建立官方账号。“一方面北京告诉13亿中国人民不得在国内使用脸书和推特，另一方面却允许并鼓励官方媒体去占领外国社交媒体平台，以更好讲述如今在世界聚光灯下的世界第一大经济体中国的故事。”
+
+从事终结中国防火墙的查理·史密斯认为，中国政府屏蔽VPN的目的就是要在中国实现所谓的互联网主权。
+
+*建立中国互联网主权的背水一战*
+
+他认为，去年6月以来当局对互联网的屏蔽控制快速升高。“这只是进一步控制的合乎逻辑的步骤。当局为在中国建立网络主权正背水一战”，他写道。
+
+去年6月谷歌首次被彻底屏蔽， 12月Gmail被完全封锁。10月以来，当局发起了对雅虎、谷歌、微软和苹果的攻击，让敏感用户信息冒更大风险，迫使国内用户对使用外国服务疑虑重重。当局甚至切断或屏蔽许多外国内容输送网络，导致大量间接损失，如HSBC门户网站下线，使其无法为国内外客户从中国汇出、汇入资金；在苹果推出iphone6时屏蔽iTune的下载链接。史密斯说，“我们清楚看到屏蔽在中国既是网络自由问题也是商业问题。”
+
+查理·史密斯表示，加强屏蔽和恶意攻击迫使互联网用户采用翻墙工具。通过屏蔽这些工具当局让人们所剩选择无几，迫使多数人放弃翻墙，转而使用国内服务。“如果当局能说服更多用户使用中国的服务，那么他们就朝着互联网主权方向迈进了一大步。”
+
+ 
+
+“他们不必再要求雅虎交出用户信息；他们不必再要求苹果从其应用商店下架应用软件；他们不必再要求LinkedIn在其平台上自我删除对中国的负面信息了。为什么？因为在中国已经没人可以继续使用这些服务了。”
+
+ 
+
+*VPN有助于非官媒环境的建立*
+
+加州大学柏克莱分校教授、中国数字时代创办人萧强认为，当局关闭VPN的时机有另一个值得关注的现象，那就是“最近几个月政治谣言传播得如暴风骤雨，这些谣言几乎都出自海外网站，都是有关最高层的独家政治消息：周永康的倒台、解放军巨贪将军谷俊山、令计划和他的西山会”，几乎所有这些谣言都很快变成事实，数日、数月，甚至数年于中国政府的官方消息。
+
+萧强说，越来越多的人使用VPN和其他翻墙工具了解政治消息，然后在墙内进一步扩散。“在反贪政治整肃运动在权力最高层进行的时候，这些‘信息经纪人’在VPN和其他翻墙工具帮助下，在中国国内建立一个非官方媒体环境方面正在扮演至关重要的角色。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Feb  3 18:40:27 2015">
+ Feb 3, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=19692#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/106310193510396836732/">philip.t...@gmail.com</a
+></span>
+ 
+<pre>
+#7 楼主你不断强调这些东西是为什么？让大家更恐惧？让更多人放弃翻墙？对付共匪封锁最好的策略就是继续翻墙，无所畏惧，强力突破封锁。我不断翻墙出来透气，同时把墙外的信息快速传入墙内，让共匪的封锁变得愚蠢可笑，我怎么就对不起“午血尚温”四个字了？我就不信在网络无处不在的今天，共匪能闭关锁国。毛死狗那会儿还偷听敌台呢，现在我根本就不怕习大麻。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Feb  3 18:54:41 2015">
+ Feb 3, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=19692#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/101844246839111579817/">wg778...@gmail.com</a
+></span>
+ 
+<pre>
+你的说法很幼稚，我怎么会是想让大家恐惧，话又说回来，生活在这样一个专制暴政的国家，谁有安全感，谁不会感到恐惧，要不恐惧，现在不管有钱无钱的人，但凡有点办法都会移民。我只不过是想告诉大家现在的事实是什么，让大家多想办，相互传播传授更多的翻墙办法和技巧
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Feb  3 19:43:57 2015">
+ Feb 3, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=19692#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/114068444604626574123/">ceelemon...@gmail.com</a
+></span>
+ 
+<pre>
+吾血尚温
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Feb  3 20:03:52 2015">
+ Feb 3, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=19692#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/106310193510396836732/">philip.t...@gmail.com</a
+></span>
+ 
+<pre>
+#9 我的说法幼稚，你的所谓“让大家多想办，相互传播传授更多的翻墙办法和技巧” 难道就不幼稚了？你怎么知道我们就没有努力普及翻墙常识了呢？面对困难和威胁，最好的方法就是先保持镇定，兵来将挡水来土掩，你发的这些东西，到这里来的谁没看到？你凭什么指责我们吾学不温了呢？你真的很可笑，很low，知道吗。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Feb  3 21:37:42 2015">
+ Feb 3, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=19692#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/113990342079320777580/">xiaoling...@gmail.com</a
+></span>
+ 
+<pre>
+其实不管怎么弄都是道高一尺，魔高一丈。他有张良计，我有过墙梯。除非在中国完全禁止英语与计算机，否者怎么都阻止不了的。。。。所以未必要散播言论。（仅此个人观点，不喜勿喷）
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Feb  5 20:32:45 2015">
+ Feb 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=19692#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/116970375866825482826/">wl223...@gmail.com</a
+></span>
+ 
+<pre>
+某宝网的vpn搜索关键词已被屏蔽。下一步应该就是法律形式禁止vpn。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Feb  5 23:06:06 2015">
+ Feb 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=19692#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/110483295073717343851/">zsbstep...@gmail.com</a
+></span>
+ 
+<pre>
+土共对内如此逆行倒施，对外扩军备战，靠经济输出来拉拢国际关系已经难以为继，人口红利逐渐消失，打鸡血过多副经济增长逐渐乏力，环境污染破坏严重生态接近崩溃，兲朝未来真的非常堪忧。
+
+土共该反省，撇除意识形态和历史歧视不谈，为何外面的世界一直视自己为异类而横加指责？为何国际舆论环境越来越风声鹤唳、草木皆兵？为何达赖和热比娅势力像割韭菜一样野火烧不尽？为何屁民们的意识形态已经慢慢被西方同化而越来越管不住？
+
+外筑高墙内堵坑洞，防民之口甚于防川，越这样下去形势只会越来越恶劣，本来言论自由和网络自由就所剩无几，激起民愤拖累外资经济时，恐怕就不只是经济硬着陆房地产泡沫爆破那么简单了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Feb 10 10:43:28 2015">
+ Feb 10, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=19692#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/106088583427384130526/">jasonli...@gmail.com</a
+></span>
+ 
+<pre>
+只是傻瓜翻墙模式的末日, 也就影响门界风之类.
+不翻长城非好汉, 外国人也知道.修破墙就是拿来翻着玩儿的.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Feb 12 10:31:54 2015">
+ Feb 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=19692#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/101451767686227423433/">xueqiwe...@gmail.com</a
+></span>
+ 
+<pre>
+&quot;goa只要解决好dns问题，死掉的ip一样跑得溜溜快。&quot;这句话什么意思，怎么解决。。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Feb 12 15:37:08 2015">
+ Feb 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=19692#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/115354468257486784132/">zzq1...@gmail.com</a
+></span>
+ 
+<pre>
+3楼不像在瞎说。如果是5年前，3楼的话就太夸张。但现在兲朝正腐连Google都封了，最近还开始封VPN，搞局域网也快了。
+个人认为有三种可能：
+1. 你的路由器（或者直接插墙上网线的电脑）分到局域网IP（10.*.*.*，100.64.0.0-100.127.255.255），然后你就不能在家建网站，你的ISP（电信，联通，移动）也可以更进一步限制BT下载，或者再加一堵墙。（这个算最好的）
+2. 关闭家庭用户的国际出口，公司需要申请国际互联网接入。这样一来，所有家庭用户就上不了境外网站（港澳台都不行）
+3. 全国断网（可能性不大，许多80后90后00后会抗议）
+
+解决方案：
+针对1：你可以向ISP投诉，但人家可能会告诉你IPv4地址不够用了才这样。（卧槽，IPv4地址不够用了就快点部署IPv6啊，这很明显是借口）
+针对2：如果你不介意，可以不管，只上国内网站算了（还真有这种人）。否则，请见针对3的方案。
+针对3：如果你确实要上网，准备好电话拨号上网（速度很慢，要有耐心），或者卫星上网（很贵）
+
+通用解决方案：
+1. 推翻TG
+2. 肉身翻墙吧，出了兲朝就没这些事了。
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Feb 14 16:26:27 2015">
+ Feb 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=19692#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/105406260789901238319/">qi531040...@gmail.com</a
+></span>
+ 
+<pre>
+肉身翻墙难啊。。。人家不要我留下来啊。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Feb 14 17:50:03 2015">
+ Feb 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=19692#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/111930984696868206223/">eastsexy...@gmail.com</a
+></span>
+ 
+<pre>
+据说谷歌的免费卫星上网项目有很大进展，土共总不能把墙垒到太空吧。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Feb 14 19:52:54 2015">
+ Feb 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=19692#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/102808092687459593707/">odegr...@gmail.com</a
+></span>
+ 
+<pre>
+等等,现在工信部不是要备案VPN吗?
+也就是说,备案VPN仍然是可以利用的.而且据我所知,这些VPN很大一部分用于教育和企业.
+这次行动的重点是那些奇奇怪怪的小VPN.对一般用户而言它们可能存在安全隐患;还有一部分用广告和来自用户的盈利资助反政府势力.要搁你是政府你封不封?
+TG吃相太难看,但喷要喷到点子上好吗.
+大家翻出来是为了看到更大的世界,而不是盲目地宣扬某种主流或者反主流的观点.没脑子就好好呆着,别给梯子招麻烦.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Feb 14 21:27:09 2015">
+ Feb 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=19692#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/112314821949140664509/">mooner.n...@gmail.com</a
+></span>
+ 
+<pre>
+#21 你这洗脑水平太次了吧，周带鱼比你都能胡扯，你老实呆在匪宣部当喷子就好，翻出来也是丢人现眼的傻2粪。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Feb 14 22:22:29 2015">
+ Feb 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=19692#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/102808092687459593707/">odegr...@gmail.com</a
+></span>
+ 
+<pre>
+喷什么喷,就你丫会骂.
+这是谈政治的地方吗.
+Phus公开声明都发了,你们这些借人家梯子的少惹点麻烦行吗.
+海燕儿啊你可长点心吧.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Feb 14 23:49:42 2015">
+ Feb 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=19692#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/104974928552519433870/">chendaip...@gmail.com</a
+></span>
+ 
+<pre>
+少说话。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Feb 15 00:34:23 2015">
+ Feb 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=19692#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/112314821949140664509/">mooner.n...@gmail.com</a
+></span>
+ 
+<pre>
+#21-23 不说话就能改变现状？当鸵鸟就不用翻墙？你是不是脑子全是大便了？你不说，你有什么权利要别人不说？Phus.lu不说，他也没有权利要求别人不说，什么搭谁的梯子，都是搭的Google的服务器，嚣张个鸟啊。越是噤声越是称了共匪的心意，告诉你，想都不要想。傻2逼，滚吧。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc26">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Feb 15 01:38:11 2015">
+ Feb 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c26" href="/p/goagent/issues/detail?id=19692#c26">#26</a>
+ 
+
+ <a class="userlink"
+ href="/u/102808092687459593707/">odegr...@gmail.com</a
+></span>
+ 
+<pre>
+mooner. an individual who regularly exposes his ass in public - expressing a latent homosexual desire for anoreceptivity.
+这位仁兄傻得可爱,忍不住挂一挂.
+
+另外,mooner,你既没有常识,又缺乏生产力,是什么给了你叫嚣的勇气?
+不用回复,我对你的失败不感兴趣.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Feb 15 01:54:39 2015">
+ Feb 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=19692#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/112314821949140664509/">mooner.n...@gmail.com</a
+></span>
+ 
+<pre>
+odegr...@gmail.com  你不用装逼，我回复与否你没有资格做任何限制。假装掉几句洋文也不体现你的常识和生产力，更无法掩盖你自干五的恶臭气息。叫你滚，你不听，非要自取其辱，那也由得你啊，顺手再给你一耳光就好了嘛。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Feb 15 02:02:17 2015">
+ Feb 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=19692#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/112314821949140664509/">mooner.n...@gmail.com</a
+></span>
+ 
+<pre>
+另外，”是什么给了你叫嚣的勇气?“，言论自由被你这类垃圾五毛狗逼理解为“叫嚣”，而我认可为的底气来自------ At all people are born equal and that human rights are endowed by heaven。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc29">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Feb 15 04:13:27 2015">
+ Feb 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c29" href="/p/goagent/issues/detail?id=19692#c29">#29</a>
+ 
+
+ <a class="userlink"
+ href="/u/107657070678903118341/">kolmai...@gmail.com</a
+></span>
+ 
+<pre>
+写这个帖的楼主，一股很浓的恶气，谁欠你了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc31">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Feb 16 04:06:42 2015">
+ Feb 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c31" href="/p/goagent/issues/detail?id=19692#c31">#31</a>
+ 
+
+ <a class="userlink"
+ href="/u/106088583427384130526/">jasonli...@gmail.com</a
+></span>
+ 
+<pre>
+恐怖分子一向奉毛大帅做偶像, 宣扬恐怖比实际做法更可恶.
+7楼这种伪政治的二逼可以滚.
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19692&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19692"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="19692">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A19692',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 19692,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

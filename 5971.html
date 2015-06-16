@@ -1,0 +1,1919 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"profileUrl": null, "domainName": null, "loggedInUserEmail": null, "token": null, "projectHomeUrl": "/p/goagent", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "relativeBaseUrl": "", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "projectName": "goagent"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 5971 - 
+ goagent -
+ 
+ GoAgent多id部署出现这样的问题。 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D5971&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D5971" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="closed_colors">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=5971">5971</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >GoAgent多id部署出现这样的问题。</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 3 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A5971">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="The requested non-coding task was completed">Done</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ <tr><th align="left" valign="top">Closed:&nbsp;</th>
+ <td align="left" valign="top" width="100%">
+ Dec 2012
+ </td>
+ </tr>
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D5971&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D5971">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/107577834580119138495/">hjjabc...@gmail.com</a
+>,
+ <span class="date" title="Tue Oct 23 21:50:35 2012">Oct 23, 2012</span>
+ 
+ </div>
+<pre>
+
+===============================================================
+ GoAgent服务端部署程序, 开始上传python服务端
+===============================================================
+
+请输入您的appid, 多个appid请用|号隔开
+APPID:
+Application: 
+Host: appengine.google.com
+Rolling back the update.
+Email: 
+Password for : **********
+Traceback (most recent call last):
+  File &quot;boot.py&quot;, line 45, in &lt;module&gt;
+  File &quot;C:\Users\luxyu\AppData\Local\Temp\goagent-bootstrap.py&quot;, line 1, in &lt;mod
+ule&gt;
+    import sys;sys.path.insert(0, 'uploader.zip');import appcfg;appcfg.main()
+  File &quot;uploader.zip\appcfg.py&quot;, line 81, in main
+  File &quot;uploader.zip\appcfg.py&quot;, line 72, in upload
+  File &quot;uploader.zip\google\appengine\tools\appcfg.py&quot;, line 3873, in main
+  File &quot;uploader.zip\google\appengine\tools\appcfg.py&quot;, line 2443, in Run
+  File &quot;uploader.zip\google\appengine\tools\appcfg.py&quot;, line 3638, in __call__
+  File &quot;uploader.zip\google\appengine\tools\appcfg.py&quot;, line 3141, in Rollback
+  File &quot;uploader.zip\google\appengine\tools\appcfg.py&quot;, line 3158, in _Rollback
+  File &quot;uploader.zip\google\appengine\tools\appcfg.py&quot;, line 2018, in Rollback
+  File &quot;uploader.zip\google\appengine\tools\appcfg.py&quot;, line 1698, in Send
+  File &quot;uploader.zip\google\appengine\tools\appengine_rpc.py&quot;, line 378, in Send
+
+  File &quot;uploader.zip\google\appengine\tools\appengine_rpc.py&quot;, line 436, in _Aut
+henticate
+  File &quot;uploader.zip\google\appengine\tools\appengine_rpc.py&quot;, line 280, in _Aut
+henticate
+  File &quot;uploader.zip\google\appengine\tools\appengine_rpc.py&quot;, line 232, in _Get
+AuthToken
+  File &quot;uploader.zip\google\appengine\tools\appengine_rpc.py&quot;, line 94, in __ini
+t__
+AttributeError: can't set attribute
+Exception KeyError: KeyError(25147632,) in &lt;module 'threading' from 'D:\Program
+Files\Goagent\local\proxy.exe\threading.pyo'&gt; ignored
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct 23 22:14:39 2012">
+ Oct 23, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=5971#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/106781204990925295112/">yubinlov...@gmail.com</a
+></span>
+ 
+<pre>
+这是密码错误
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct 23 22:18:42 2012">
+ Oct 23, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=5971#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/107577834580119138495/">hjjabc...@gmail.com</a
+></span>
+ 
+<pre>
+AttributeError：不能设置属性
+异常异常KeyError：KeyError异常（25147632） 。。不懂这个。。刚刚又试着上传一次 KeyError 25540848
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct 23 22:33:12 2012">
+ Oct 23, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=5971#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/107577834580119138495/">hjjabc...@gmail.com</a
+></span>
+ 
+<pre>
+问题解决了。。只能一个一个的上传。。在部署程序里 password for ***@gmail.com这里的密码是 appid的密码。。。我去
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct 23 22:39:09 2012">
+ Oct 23, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=5971#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/107577834580119138495/">hjjabc...@gmail.com</a
+></span>
+ 
+<pre>
+貌似还有有问题。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct 23 23:07:48 2012">
+ Oct 23, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=5971#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/107504182642440095606/">howu6...@gmail.com</a
+></span>
+ 
+<pre>
+application specific password的网站可以上去吗 貌似我这里http://*.google和https的都不行了 即便是用goagent的代理
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct 23 23:08:39 2012">
+ Oct 23, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=5971#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/107577834580119138495/">hjjabc...@gmail.com</a
+></span>
+ 
+<pre>
+问题解决了。。不开启二次验证，建立10个appid后，上传即可。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct 23 23:09:39 2012">
+ Oct 23, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=5971#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/107577834580119138495/">hjjabc...@gmail.com</a
+></span>
+ 
+<pre>
+6楼，可能是你的配置有问题，你的服务器没有部署好
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Oct 24 07:00:53 2012">
+ Oct 24, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=5971#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/112975796274449769667/">ralph.ch...@gmail.com</a
+></span>
+ 
+<pre>
+去掉二次验证也一样，出现一下错误
+goagent-bootstrap.py: error: Not a directory: python
+Exception KeyError: KeyError(35490032,) in &lt;module 'threading' from 'C:\goagent-
+goagent-3f882f7\local\proxy.exe\threading.pyo'&gt; ignored
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Oct 24 07:18:09 2012">
+ Oct 24, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=5971#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/107577834580119138495/">hjjabc...@gmail.com</a
+></span>
+ 
+<pre>
+9楼，在创建appid没有问题吧？你打开<a href="https://appengine.google.com/" rel="nofollow">https://appengine.google.com/</a>  这个网站 查看你的appid的成功 如果上传成功的话 在Current Version下 会全部显示1。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Oct 31 09:02:19 2012">
+ Oct 31, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=5971#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/118442436800936960379/">northca...@gmail.com</a
+></span>
+ 
+<pre>
+这个错误不影响使用啊！！！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Dec 10 18:34:41 2012">
+ Dec 10, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=5971#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/110178749829020813062/">someeve...@gmail.com</a
+></span>
+ 
+<pre>
+与9楼出现同样的问题
+Usage: goagent-bootstrap.py [options] update &lt;directory&gt; [version]
+
+goagent-bootstrap.py: error: Not a directory: python
+Exception KeyError: KeyError(35436784,) in &lt;module 'threading' from 'D:\tools\go
+agent\goagent-goagent-616864c\local\proxy.exe\threading.pyo'&gt; ignored
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Dec 15 18:15:55 2012">
+ Dec 15, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=5971#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+<i>(No comment was entered for this change.)</i>
+</pre>
+ 
+ 
+ <div class="updates">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ 
+ <b>Status:</b>
+ Done
+ 
+ <br>
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jan 11 10:11:14 2013">
+ Jan 11, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=5971#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/108855676103086433565/">luojunqi...@gmail.com</a
+></span>
+ 
+<pre>
+我单appid部署也遇到了“error: Not a directory: python”的错误。
+把uploader.bat中的python路径改成绝对路径就成功了。
+例如：将“set uploaddir=python”改为“set uploaddir=c:/goagent/python”
+
+最后那个KeyError错误还是会出的，没有影响。
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul 17 19:02:21 2013">
+ Jul 17, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=5971#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/107089190896489504030/">yunli...@gmail.com</a
+></span>
+ 
+<pre>
+我单appid出现了和14楼完全一样的情况，请问14楼是怎么改的，uploeader.bat只能双击作为程序打开，在哪里修改它的路径呢？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul 17 19:12:49 2013">
+ Jul 17, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=5971#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/107577834580119138495/">hjjabc...@gmail.com</a
+></span>
+ 
+<pre>
+15楼，，你打开这个 <a href="https://appengine.google.com/" rel="nofollow">https://appengine.google.com/</a>   如果上传成功的话 在Current Version下 会全部显示1。到时候直接在local文件夹下修改proxy.ini文件，添加appid就可以了。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul 17 19:18:47 2013">
+ Jul 17, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=5971#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/107089190896489504030/">yunli...@gmail.com</a
+></span>
+ 
+<pre>
+16楼 谢谢回复！ 看来很明显我没有上传成功，如第一张图显示 Status是non deployed.
+我没有看到哪里有current version，但是点开appid以后显示的就是第二张图的样子
+再点开左边的Versions, 
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=59710017000&amp;name=Capture.PNG&amp;token=ABZ6GAdftTD086SgTnDOUqUT3Wj4Si5yRA%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAdXN6_epLM8CrW2YOioIXORWRDPQQ%3A1434453587912">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >Capture.PNG</b>
+ <br>
+ 9.0 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=59710017000&amp;name=Capture.PNG&amp;token=ABZ6GAdftTD086SgTnDOUqUT3Wj4Si5yRA%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAdXN6_epLM8CrW2YOioIXORWRDPQQ%3A1434453587912&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=59710017000&amp;name=Capture.PNG&amp;token=ABZ6GAdftTD086SgTnDOUqUT3Wj4Si5yRA%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAdXN6_epLM8CrW2YOioIXORWRDPQQ%3A1434453587912">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=59710017000&amp;name=Capture.PNG&amp;token=ABZ6GAdftTD086SgTnDOUqUT3Wj4Si5yRA%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAdXN6_epLM8CrW2YOioIXORWRDPQQ%3A1434453587912&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=59710017000&amp;name=Capture.PNG&amp;token=ABZ6GAdftTD086SgTnDOUqUT3Wj4Si5yRA%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAdXN6_epLM8CrW2YOioIXORWRDPQQ%3A1434453587912&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=59710017001&amp;name=Capture2.PNG&amp;token=ABZ6GAca3wr6VGHTjHk23eKuvktshtLirw%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAebL21RWCu_yKkG7E8uNHSYiVH3DA%3A1434453587912">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >Capture2.PNG</b>
+ <br>
+ 36.5 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=59710017001&amp;name=Capture2.PNG&amp;token=ABZ6GAca3wr6VGHTjHk23eKuvktshtLirw%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAebL21RWCu_yKkG7E8uNHSYiVH3DA%3A1434453587912&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=59710017001&amp;name=Capture2.PNG&amp;token=ABZ6GAca3wr6VGHTjHk23eKuvktshtLirw%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAebL21RWCu_yKkG7E8uNHSYiVH3DA%3A1434453587912">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=59710017001&amp;name=Capture2.PNG&amp;token=ABZ6GAca3wr6VGHTjHk23eKuvktshtLirw%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAebL21RWCu_yKkG7E8uNHSYiVH3DA%3A1434453587912&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=59710017001&amp;name=Capture2.PNG&amp;token=ABZ6GAca3wr6VGHTjHk23eKuvktshtLirw%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAebL21RWCu_yKkG7E8uNHSYiVH3DA%3A1434453587912&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=59710017002&amp;name=Capture3.PNG&amp;token=ABZ6GAdtOPko64j4XPSkn9dmXPwVuajKog%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAfXuEOTgS7dPTMYdKa3T4zVlSHipg%3A1434453587912">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >Capture3.PNG</b>
+ <br>
+ 22.3 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=59710017002&amp;name=Capture3.PNG&amp;token=ABZ6GAdtOPko64j4XPSkn9dmXPwVuajKog%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAfXuEOTgS7dPTMYdKa3T4zVlSHipg%3A1434453587912&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=59710017002&amp;name=Capture3.PNG&amp;token=ABZ6GAdtOPko64j4XPSkn9dmXPwVuajKog%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAfXuEOTgS7dPTMYdKa3T4zVlSHipg%3A1434453587912">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=59710017002&amp;name=Capture3.PNG&amp;token=ABZ6GAdtOPko64j4XPSkn9dmXPwVuajKog%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAfXuEOTgS7dPTMYdKa3T4zVlSHipg%3A1434453587912&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=59710017002&amp;name=Capture3.PNG&amp;token=ABZ6GAdtOPko64j4XPSkn9dmXPwVuajKog%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAfXuEOTgS7dPTMYdKa3T4zVlSHipg%3A1434453587912&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul 17 19:21:47 2013">
+ Jul 17, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=5971#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/107577834580119138495/">hjjabc...@gmail.com</a
+></span>
+ 
+<pre>
+你看我的？重新上传吧。。按照教程里的上传 就不会有问题 。是不是你开启二次密码了？把二次密码取消掉
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=59710018000&amp;name=QQ%E5%9B%BE%E7%89%8720130718102048.jpg&amp;token=ABZ6GAdkxfV07cgSLJpih7SeyXkrvG_pcA%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAfwHVao4PdX9ldUdA9qu1ra6LIQTw%3A1434453587912">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >QQ图片20130718102048.jpg</b>
+ <br>
+ 35.6 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=59710018000&amp;name=QQ%E5%9B%BE%E7%89%8720130718102048.jpg&amp;token=ABZ6GAdkxfV07cgSLJpih7SeyXkrvG_pcA%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAfwHVao4PdX9ldUdA9qu1ra6LIQTw%3A1434453587912&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=59710018000&amp;name=QQ%E5%9B%BE%E7%89%8720130718102048.jpg&amp;token=ABZ6GAdkxfV07cgSLJpih7SeyXkrvG_pcA%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAfwHVao4PdX9ldUdA9qu1ra6LIQTw%3A1434453587912">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=59710018000&amp;name=QQ%E5%9B%BE%E7%89%8720130718102048.jpg&amp;token=ABZ6GAdkxfV07cgSLJpih7SeyXkrvG_pcA%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAfwHVao4PdX9ldUdA9qu1ra6LIQTw%3A1434453587912&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=59710018000&amp;name=QQ%E5%9B%BE%E7%89%8720130718102048.jpg&amp;token=ABZ6GAdkxfV07cgSLJpih7SeyXkrvG_pcA%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAfwHVao4PdX9ldUdA9qu1ra6LIQTw%3A1434453587912&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul 17 19:26:05 2013">
+ Jul 17, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=5971#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/107577834580119138495/">hjjabc...@gmail.com</a
+></span>
+ 
+<pre>
+看这个网站的教程  <a href="https://code.google.com/p/goagent/wiki/InstallGuide" rel="nofollow">https://code.google.com/p/goagent/wiki/InstallGuide</a> 
+
+在Goagent版本更新的时候 注意日期前的是与否 如果是是的话，就需要重新上传appid，如果是否的话，就不用直接修改proxy.ini文件即可。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul 17 19:30:13 2013">
+ Jul 17, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=5971#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/107089190896489504030/">yunli...@gmail.com</a
+></span>
+ 
+<pre>
+我之前是一步一步地按照这个教程来的-》<a href="http://www.appifan.com/jc/201209/35517.html" rel="nofollow">http://www.appifan.com/jc/201209/35517.html</a>
+恩，既然已经清楚status有问题了,我现在正在按照GOOGLE给的步骤走……然后就 无法打开appcfg.py了…………？！
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=59710020000&amp;name=Capture.PNG&amp;token=ABZ6GAcWzuG_oo8sQkm5gUgQwHtptBM4nA%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAfTi_vfMbgKMDkTKFurcMnOKcc6Og%3A1434453587912">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >Capture.PNG</b>
+ <br>
+ 17.0 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=59710020000&amp;name=Capture.PNG&amp;token=ABZ6GAcWzuG_oo8sQkm5gUgQwHtptBM4nA%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAfTi_vfMbgKMDkTKFurcMnOKcc6Og%3A1434453587912&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=59710020000&amp;name=Capture.PNG&amp;token=ABZ6GAcWzuG_oo8sQkm5gUgQwHtptBM4nA%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAfTi_vfMbgKMDkTKFurcMnOKcc6Og%3A1434453587912">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=59710020000&amp;name=Capture.PNG&amp;token=ABZ6GAcWzuG_oo8sQkm5gUgQwHtptBM4nA%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAfTi_vfMbgKMDkTKFurcMnOKcc6Og%3A1434453587912&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=59710020000&amp;name=Capture.PNG&amp;token=ABZ6GAcWzuG_oo8sQkm5gUgQwHtptBM4nA%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAfTi_vfMbgKMDkTKFurcMnOKcc6Og%3A1434453587912&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=59710020001&amp;name=Capture2.PNG&amp;token=ABZ6GAc9TufG8lW5L2iBOOmpW_QaodQgJg%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAfj6XfmPmeKEcjglqK25IYUnDrG6w%3A1434453587912">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >Capture2.PNG</b>
+ <br>
+ 13.1 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=59710020001&amp;name=Capture2.PNG&amp;token=ABZ6GAc9TufG8lW5L2iBOOmpW_QaodQgJg%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAfj6XfmPmeKEcjglqK25IYUnDrG6w%3A1434453587912&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=59710020001&amp;name=Capture2.PNG&amp;token=ABZ6GAc9TufG8lW5L2iBOOmpW_QaodQgJg%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAfj6XfmPmeKEcjglqK25IYUnDrG6w%3A1434453587912">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=59710020001&amp;name=Capture2.PNG&amp;token=ABZ6GAc9TufG8lW5L2iBOOmpW_QaodQgJg%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAfj6XfmPmeKEcjglqK25IYUnDrG6w%3A1434453587912&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=59710020001&amp;name=Capture2.PNG&amp;token=ABZ6GAc9TufG8lW5L2iBOOmpW_QaodQgJg%3A1434453587912&amp;id=5971&amp;mod_ts_token=ABZ6GAfj6XfmPmeKEcjglqK25IYUnDrG6w%3A1434453587912&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=59710020002&amp;name=Capture3.PNG&amp;token=ABZ6GAfMy410xJZ7tbW45dZw6W8HWYjz7Q%3A1434453587913&amp;id=5971&amp;mod_ts_token=ABZ6GAcUz_p-VQse_YBGYNVUGdvtct-llQ%3A1434453587913">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >Capture3.PNG</b>
+ <br>
+ 35.2 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=59710020002&amp;name=Capture3.PNG&amp;token=ABZ6GAfMy410xJZ7tbW45dZw6W8HWYjz7Q%3A1434453587913&amp;id=5971&amp;mod_ts_token=ABZ6GAcUz_p-VQse_YBGYNVUGdvtct-llQ%3A1434453587913&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=59710020002&amp;name=Capture3.PNG&amp;token=ABZ6GAfMy410xJZ7tbW45dZw6W8HWYjz7Q%3A1434453587913&amp;id=5971&amp;mod_ts_token=ABZ6GAcUz_p-VQse_YBGYNVUGdvtct-llQ%3A1434453587913">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=59710020002&amp;name=Capture3.PNG&amp;token=ABZ6GAfMy410xJZ7tbW45dZw6W8HWYjz7Q%3A1434453587913&amp;id=5971&amp;mod_ts_token=ABZ6GAcUz_p-VQse_YBGYNVUGdvtct-llQ%3A1434453587913&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=59710020002&amp;name=Capture3.PNG&amp;token=ABZ6GAfMy410xJZ7tbW45dZw6W8HWYjz7Q%3A1434453587913&amp;id=5971&amp;mod_ts_token=ABZ6GAcUz_p-VQse_YBGYNVUGdvtct-llQ%3A1434453587913&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=59710020003&amp;name=Capture4.PNG&amp;token=ABZ6GAd8xrZGzIr5GgZIzEz0PDjVCT3IMw%3A1434453587913&amp;id=5971&amp;mod_ts_token=ABZ6GAcZU_-16ozcbaRmzGIsbCPfO4X45w%3A1434453587913">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >Capture4.PNG</b>
+ <br>
+ 51.3 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=59710020003&amp;name=Capture4.PNG&amp;token=ABZ6GAd8xrZGzIr5GgZIzEz0PDjVCT3IMw%3A1434453587913&amp;id=5971&amp;mod_ts_token=ABZ6GAcZU_-16ozcbaRmzGIsbCPfO4X45w%3A1434453587913&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=59710020003&amp;name=Capture4.PNG&amp;token=ABZ6GAd8xrZGzIr5GgZIzEz0PDjVCT3IMw%3A1434453587913&amp;id=5971&amp;mod_ts_token=ABZ6GAcZU_-16ozcbaRmzGIsbCPfO4X45w%3A1434453587913">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=59710020003&amp;name=Capture4.PNG&amp;token=ABZ6GAd8xrZGzIr5GgZIzEz0PDjVCT3IMw%3A1434453587913&amp;id=5971&amp;mod_ts_token=ABZ6GAcZU_-16ozcbaRmzGIsbCPfO4X45w%3A1434453587913&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=59710020003&amp;name=Capture4.PNG&amp;token=ABZ6GAd8xrZGzIr5GgZIzEz0PDjVCT3IMw%3A1434453587913&amp;id=5971&amp;mod_ts_token=ABZ6GAcZU_-16ozcbaRmzGIsbCPfO4X45w%3A1434453587913&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul 17 19:33:10 2013">
+ Jul 17, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=5971#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/107577834580119138495/">hjjabc...@gmail.com</a
+></span>
+ 
+<pre>
+哎呀妈呀 你都在弄啥呢。。。瞎弄嘛这不是。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul 17 19:33:58 2013">
+ Jul 17, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=5971#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/107577834580119138495/">hjjabc...@gmail.com</a
+></span>
+ 
+<pre>
+先下载新版本吧。。你这都是什么时候的老黄历了。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul 17 19:35:54 2013">
+ Jul 17, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=5971#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/107577834580119138495/">hjjabc...@gmail.com</a
+></span>
+ 
+<pre>
+看 <a href="https://code.google.com/p/goagent" rel="nofollow">https://code.google.com/p/goagent</a> 的教程。。。官方的很详细了。。。亲。。你的画面我都看不明白了。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul 17 19:40:34 2013">
+ Jul 17, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=5971#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/107089190896489504030/">yunli...@gmail.com</a
+></span>
+ 
+<pre>
+……我是下的3.0.2啊！已经下两遍了！
+好吧 那等我自己琢磨一下………
+
+而且这个问题确实不是我有 好多个ISSUE里都有人问了……
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D5971&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D5971"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="5971">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A5971',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 5971,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

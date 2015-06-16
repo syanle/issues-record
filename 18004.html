@@ -1,0 +1,1579 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"loggedInUserEmail": null, "profileUrl": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "token": null, "projectHomeUrl": "/p/goagent", "projectName": "goagent", "relativeBaseUrl": "", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "domainName": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 18004 - 
+ goagent -
+ 
+ 自由切换用一段时间后导致上不了国内网站 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18004&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18004" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=18004">18004</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >自由切换用一段时间后导致上不了国内网站</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 2 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A18004">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18004&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18004">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/114873707906664981082/">zim...@gmail.com</a
+>,
+ <span class="date" title="Wed Oct 15 02:14:49 2014">Oct 15, 2014</span>
+ 
+ </div>
+<pre>
+需要全局代理，重启chrome后就可以自由切换了， 每天都会出现一次。
+
+操作系统版本：win8.1
+浏览器版本：37
+GoAgent 版本：3.2
+GoAgent 日志：INFO - [Oct 15 16:49:14] ssl good_ipaddrs=8, bad_ipaddrs=356, unknown_ipaddrs=3
+INFO - [Oct 15 16:49:15] ssl good_ipaddrs=9, bad_ipaddrs=355, unknown_ipaddrs=3
+INFO - [Oct 15 16:49:18] GAE &quot;GET <a href="https://r17---sn-q4f7dner.googlevideo.com/vide" rel="nofollow">https://r17---sn-q4f7dner.googlevideo.com/vide</a>
+oplayback?id=o-AF1VUHluN9jP3cBCIIHJekaEt2-iDscIgRJhwwy_4uF9&amp;itag=244&amp;ipbits=0&amp;ke
+y=yt5&amp;ip=107.178.200.193&amp;gir=yes&amp;dur=9492.216&amp;fexp=3300118%2C3300118%2C3300130%2
+C3300130%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%2C3310366%2C3310698%2
+C3310698%2C3312198%2C3312198%2C910829%2C916941%2C927622%2C930666%2C930672%2C9319
+83%2C932404%2C934030%2C941293%2C945240%2C946023%2C947209%2C952302&amp;source=youtube
+&amp;lmt=1392633516042444&amp;clen=112901673&amp;ms=au&amp;mt=1413342524&amp;mv=u&amp;sparams=clen%2Cdur
+%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%2Cmv%2Crequi
+ressl%2Csource%2Cupn%2Cexpire&amp;sver=3&amp;expire=1413364145&amp;signature=51954A2EC1F7FF4
+59E2FAF874512705D84799E35.<a href="/p/goagent/source/detail?r=A23B952E78D3F1AEE589090EF1E3D7CC83C99A29">A23B952E78D3F1AEE589090EF1E3D7CC83C99A29</a>&amp;upn=DZMp17Mn5
+Jc&amp;requiressl=yes&amp;mime=video%2Fwebm&amp;mm=31&amp;cpn=-bm0_Tp2r3VC4hJL&amp;alr=yes&amp;ratebypas
+s=yes&amp;c=WEB&amp;cver=html5&amp;ir=1&amp;rr=13&amp;range=109930456-110584567&amp;keepalive=yes&amp;player
+retry=1&quot; appid='zimutv' timeout('timed out',), retry...
+INFO - [Oct 15 16:49:18] ssl good_ipaddrs=8, bad_ipaddrs=356, unknown_ipaddrs=3
+INFO - [Oct 15 16:49:18] 127.0.0.1:61451 &quot;GAE POST <a href="http://www.iwencai.com/cb/cbl" rel="nofollow">http://www.iwencai.com/cb/cbl</a>
+og HTTP/1.1&quot; 200 20
+INFO - [Oct 15 16:49:19] 127.0.0.1:61538 &quot;GAE GET <a href="http://im.ihi.xiami.com/" rel="nofollow">http://im.ihi.xiami.com/</a> HTTP/
+1.1&quot; 101 0
+INFO - [Oct 15 16:49:24] 127.0.0.1:60272 &quot;MOCK GET <a href="https://www.google.com.hk/url" rel="nofollow">https://www.google.com.hk/url</a>
+?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;ved=0CBsQFjAA&amp;url=%68%74%74%70%3a%2f%2f%63
+%6f%64%65%2e%67%6f%6f%67%6c%65%2e%63%6f%6d%2f%70%2f%67%6f%61%67%65%6e%74%2f%69%7
+3%73%75%65%73%2f%64%65%74%61%69%6c%3f%69%64%3d%39%31%30%36&amp;ei=3jQ-VOSgM5WJuATMpY
+HQAg&amp;usg=AFQjCNESi38VELAHNtuxlAaGU8MbWjhWVg&amp;bvm=bv.77412846,d.aWw&amp;cad=rjt HTTP/1
+.1&quot; 301 0
+INFO - [Oct 15 16:49:24] ssl good_ipaddrs=10, bad_ipaddrs=356, unknown_ipaddrs=1
+
+INFO - [Oct 15 16:49:25] 127.0.0.1:60500 &quot;GAE GET <a href="https://r17---sn-q4f7dner.goog" rel="nofollow">https://r17---sn-q4f7dner.goog</a>
+levideo.com/videoplayback?id=o-AF1VUHluN9jP3cBCIIHJekaEt2-iDscIgRJhwwy_4uF9&amp;itag
+=244&amp;ipbits=0&amp;key=yt5&amp;ip=107.178.200.193&amp;gir=yes&amp;dur=9492.216&amp;fexp=3300118%2C330
+0118%2C3300130%2C3300130%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%2C331
+0366%2C3310698%2C3310698%2C3312198%2C3312198%2C910829%2C916941%2C927622%2C930666
+%2C930672%2C931983%2C932404%2C934030%2C941293%2C945240%2C946023%2C947209%2C95230
+2&amp;source=youtube&amp;lmt=1392633516042444&amp;clen=112901673&amp;ms=au&amp;mt=1413342524&amp;mv=u&amp;sp
+arams=clen%2Cdur%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2
+Cms%2Cmv%2Crequiressl%2Csource%2Cupn%2Cexpire&amp;sver=3&amp;expire=1413364145&amp;signature
+=<a href="/p/goagent/source/detail?r=51954A2EC1F7FF459E2FAF874512705D84799E35">51954A2EC1F7FF459E2FAF874512705D84799E35</a>.A23B952E78D3F1AEE589090EF1E3D7CC83C99A
+29&amp;upn=DZMp17Mn5Jc&amp;requiressl=yes&amp;mime=video%2Fwebm&amp;mm=31&amp;cpn=-bm0_Tp2r3VC4hJL&amp;a
+lr=yes&amp;ratebypass=yes&amp;c=WEB&amp;cver=html5&amp;ir=1&amp;rr=13&amp;range=109930456-110584567&amp;keep
+alive=yes&amp;playerretry=1 HTTP/1.1&quot; 206 654112
+INFO - [Oct 15 16:49:25] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; RangeFetch started('https://<a href="/p/goagent/source/detail?r=17">r17</a>---sn-q4
+f7dner.googlevideo.com/videoplayback?id=o-AF1VUHluN9jP3cBCIIHJekaEt2-iDscIgRJhww
+y_4uF9&amp;itag=244&amp;ipbits=0&amp;key=yt5&amp;ip=107.178.200.193&amp;gir=yes&amp;dur=9492.216&amp;fexp=33
+00118%2C3300118%2C3300130%2C3300130%2C3300137%2C3300137%2C3300161%2C3300161%2C33
+10366%2C3310366%2C3310698%2C3310698%2C3312198%2C3312198%2C910829%2C916941%2C9276
+22%2C930666%2C930672%2C931983%2C932404%2C934030%2C941293%2C945240%2C946023%2C947
+209%2C952302&amp;source=youtube&amp;lmt=1392633516042444&amp;clen=112901673&amp;ms=au&amp;mt=1413342
+524&amp;mv=u&amp;sparams=clen%2Cdur%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2C
+mime%2Cmm%2Cms%2Cmv%2Crequiressl%2Csource%2Cupn%2Cexpire&amp;sver=3&amp;expire=141336414
+5&amp;signature=<a href="/p/goagent/source/detail?r=51954A2EC1F7FF459E2FAF874512705D84799E35">51954A2EC1F7FF459E2FAF874512705D84799E35</a>.A23B952E78D3F1AEE589090EF1E
+3D7CC83C99A29&amp;upn=DZMp17Mn5Jc&amp;requiressl=yes&amp;mime=video%2Fwebm&amp;mm=31&amp;cpn=-bm0_Tp
+2r3VC4hJL&amp;alr=yes&amp;ratebypass=yes&amp;c=WEB&amp;cver=html5&amp;ir=1&amp;rr=13&amp;range=109930456-110
+584567&amp;keepalive=yes&amp;playerretry=1') 0-654111
+INFO - [Oct 15 16:49:25] 127.0.0.1:61563 &quot;GAE POST <a href="http://www.iwencai.com/cb/cbl" rel="nofollow">http://www.iwencai.com/cb/cbl</a>
+og HTTP/1.1&quot; 200 20
+INFO - [Oct 15 16:49:25] ssl good_ipaddrs=10, bad_ipaddrs=356, unknown_ipaddrs=1
+
+INFO - [Oct 15 16:49:29] 127.0.0.1:61649 &quot;STRIP CONNECT im.ihi.xiami.com:80 HTTP
+/1.1&quot; - -
+INFO - [Oct 15 16:49:29] ssl good_ipaddrs=5, bad_ipaddrs=362, unknown_ipaddrs=0
+INFO - [Oct 15 16:49:30] 127.0.0.1:57345 &quot;DIRECT GET <a href="https://code.google.com/p/g" rel="nofollow">https://code.google.com/p/g</a>
+oagent/issues/detail?id=9106 HTTP/1.1&quot; 200 -
+INFO - [Oct 15 16:49:30] ssl good_ipaddrs=5, bad_ipaddrs=362, unknown_ipaddrs=0
+INFO - [Oct 15 16:49:34] 127.0.0.1:57094 &quot;DIRECT GET https://ssl.google-analytic
+s.com/__utm.gif?utmwv=5.6.0&amp;utms=5&amp;utmn=692777153&amp;utmhn=code.google.com&amp;utmcs=UT
+F-8&amp;utmsr=1368x768&amp;utmvp=1368x667&amp;utmsc=24-bit&amp;utmul=en-us&amp;utmje=1&amp;utmfl=15.0%20
+<a href="/p/goagent/source/detail?r=0">r0</a>&amp;utmdt=Issue%209106%20-%20goagent%20-%20%E6%80%8E%E4%B9%88%E6%8A%8Agoagent%E7%
+9A%84%E6%97%A5%E5%BF%97%E4%BF%A1%E6%81%AF%E4%BF%9D%E5%AD%98%E5%88%B0%E6%96%87%E4
+%BB%B6%EF%BC%9F%20-%20a%20gae%20proxy%20https%3A%2F%2Fgoagent.github.io%20-%20Go
+ogle%20Project%20Hosting&amp;utmhid=1165382677&amp;utmr=https%3A%2F%2Fwww.google.com.hk%
+2F&amp;utmp=%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D9106&amp;utmht=1413362970787&amp;utmac=U
+A-18071-1&amp;utmcc=__utma%3D247248150.413589400.1406884244.1413341777.1413362695.63
+%3B%2B__utmz%3D247248150.1413295724.61.20.utmcsr%3Dgoogle%7Cutmccn%3D(organic)%7
+Cutmcmd%3Dorganic%7Cutmctr%3D(not%2520provided)%3B&amp;utmjid=&amp;utmu=qAAgAAAAAAAAAAAA
+AAAAAAQE~ HTTP/1.1&quot; 200 35
+INFO - [Oct 15 16:49:34] ssl good_ipaddrs=9, bad_ipaddrs=358, unknown_ipaddrs=0
+INFO - [Oct 15 16:49:34] ssl good_ipaddrs=9, bad_ipaddrs=358, unknown_ipaddrs=0
+INFO - [Oct 15 16:49:34] ssl good_ipaddrs=9, bad_ipaddrs=358, unknown_ipaddrs=0
+INFO - [Oct 15 16:49:35] 127.0.0.1:61630 &quot;GAE POST <a href="http://www.iwencai.com/cb/cbl" rel="nofollow">http://www.iwencai.com/cb/cbl</a>
+og HTTP/1.1&quot; 200 20
+INFO - [Oct 15 16:49:35] ssl good_ipaddrs=9, bad_ipaddrs=358, unknown_ipaddrs=0
+INFO - [Oct 15 16:49:36] ssl good_ipaddrs=9, bad_ipaddrs=358, unknown_ipaddrs=0
+INFO - [Oct 15 16:49:38] 127.0.0.1:57094 &quot;DIRECT GET https://ssl.google-analytic
+s.com/__utm.gif?utmwv=5.6.0&amp;utms=6&amp;utmn=2061358577&amp;utmhn=code.google.com&amp;utmt=ev
+ent&amp;utme=14(10000*0*0*6200*10*40*6500*6500)(10048*0*0*6218*12*49*6577*6577)&amp;utmc
+s=UTF-8&amp;utmsr=1368x768&amp;utmvp=1368x667&amp;utmsc=24-bit&amp;utmul=en-us&amp;utmje=1&amp;utmfl=15.
+0%20r0&amp;utmdt=Issue%209106%20-%20goagent%20-%20%E6%80%8E%E4%B9%88%E6%8A%8Agoagent
+%E7%9A%84%E6%97%A5%E5%BF%97%E4%BF%A1%E6%81%AF%E4%BF%9D%E5%AD%98%E5%88%B0%E6%96%8
+7%E4%BB%B6%EF%BC%9F%20-%20a%20gae%20proxy%20https%3A%2F%2Fgoagent.github.io%20-%
+20Google%20Project%20Hosting&amp;utmhid=1165382677&amp;utmr=https%3A%2F%2Fwww.google.com
+.hk%2F&amp;utmp=%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D9106&amp;utmht=1413362974419&amp;utm
+ac=UA-18071-1&amp;utmcc=__utma%3D247248150.413589400.1406884244.1413341777.141336269
+5.63%3B%2B__utmz%3D247248150.1413295724.61.20.utmcsr%3Dgoogle%7Cutmccn%3D(organi
+c)%7Cutmcmd%3Dorganic%7Cutmctr%3D(not%2520provided)%3B&amp;utmjid=&amp;utmu=qAAgAAAAAAAA
+AAAAAAAAAAQE~ HTTP/1.1&quot; 200 35
+INFO - [Oct 15 16:49:39] 127.0.0.1:57387 &quot;DIRECT POST <a href="https://code.google.com/ho" rel="nofollow">https://code.google.com/ho</a>
+sting/multilogin HTTP/1.1&quot; 200 -
+INFO - [Oct 15 16:49:41] 127.0.0.1:60594 &quot;GAE GET <a href="http://rm.api.weibo.com/2/remi" rel="nofollow">http://rm.api.weibo.com/2/remi</a>
+nd/push_count.json?trim_null=1&amp;with_settings=1&amp;exclude_attitude=1&amp;with_moments=1
+&amp;with_dm_unread=1&amp;msgbox=true&amp;_pid=10001&amp;count=62&amp;source=3818214747&amp;status_type=
+0&amp;callback=STK_1413359572777315 HTTP/1.1&quot; 200 133
+INFO - [Oct 15 16:49:41] 127.0.0.1:57345 &quot;DIRECT POST <a href="https://code.google.com/ho" rel="nofollow">https://code.google.com/ho</a>
+sting/projects HTTP/1.1&quot; 200 -
+INFO - [Oct 15 16:49:41] ssl good_ipaddrs=5, bad_ipaddrs=362, unknown_ipaddrs=0
+INFO - [Oct 15 16:49:43] 127.0.0.1:61649 &quot;GAE GET <a href="http://im.ihi.xiami.com/" rel="nofollow">http://im.ihi.xiami.com/</a> HTTP/
+1.1&quot; 101 0
+INFO - [Oct 15 16:49:46] ssl good_ipaddrs=6, bad_ipaddrs=353, unknown_ipaddrs=8
+INFO - [Oct 15 16:49:47] 127.0.0.1:61756 &quot;GAE POST <a href="http://www.iwencai.com/cb/cbl" rel="nofollow">http://www.iwencai.com/cb/cbl</a>
+og HTTP/1.1&quot; 200 20
+INFO - [Oct 15 16:49:49] 127.0.0.1:57345 &quot;DIRECT POST <a href="https://code.google.com/ap" rel="nofollow">https://code.google.com/ap</a>
+is/ajax/playground/get_projects HTTP/1.1&quot; 301 247
+INFO - [Oct 15 16:49:49] 127.0.0.1:61830 &quot;STRIP CONNECT developers.google.com:44
+3 HTTP/1.1&quot; - -
+INFO - [Oct 15 16:49:49] ssl good_ipaddrs=6, bad_ipaddrs=347, unknown_ipaddrs=14
+
+INFO - [Oct 15 16:49:53] 127.0.0.1:61830 &quot;DIRECT GET https://developers.google.c
+om/apis-explorer/?csw=1 HTTP/1.1&quot; 200 609
+INFO - [Oct 15 16:49:54] 127.0.0.1:61855 &quot;STRIP CONNECT im.ihi.xiami.com:80 HTTP
+/1.1&quot; - -
+INFO - [Oct 15 16:49:54] ssl good_ipaddrs=7, bad_ipaddrs=352, unknown_ipaddrs=8
+INFO - [Oct 15 16:49:55] ssl good_ipaddrs=8, bad_ipaddrs=351, unknown_ipaddrs=8
+INFO - [Oct 15 16:49:56] ssl good_ipaddrs=8, bad_ipaddrs=346, unknown_ipaddrs=13
+
+INFO - [Oct 15 16:50:00] 127.0.0.1:59310 &quot;MOCK GET <a href="https://www.google.com.hk/url" rel="nofollow">https://www.google.com.hk/url</a>
+?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=5&amp;ved=0CCoQFjAE&amp;url=%68%74%74%70%73%3a%2f%2f
+%63%6f%64%65%2e%67%6f%6f%67%6c%65%2e%63%6f%6d%2f%70%2f%67%6f%61%67%65%6e%74%2f%6
+9%73%73%75%65%73%2f%64%65%74%61%69%6c%3f%69%64%3d%31%37%32%39%37&amp;ei=3jQ-VOSgM5WJ
+uATMpYHQAg&amp;usg=AFQjCNGoLUnCx2jispV_5ryrkTqD3-wqOA&amp;bvm=bv.77412846,d.aWw&amp;cad=rjt
+HTTP/1.1&quot; 301 0
+INFO - [Oct 15 16:50:00] ssl good_ipaddrs=7, bad_ipaddrs=354, unknown_ipaddrs=6
+INFO - [Oct 15 16:50:00] 127.0.0.1:61805 &quot;GAE POST <a href="http://www.iwencai.com/cb/cbl" rel="nofollow">http://www.iwencai.com/cb/cbl</a>
+og HTTP/1.1&quot; 200 20
+INFO - [Oct 15 16:50:00] 127.0.0.1:61855 &quot;GAE GET <a href="http://im.ihi.xiami.com/" rel="nofollow">http://im.ihi.xiami.com/</a> HTTP/
+1.1&quot; 101 0
+INFO - [Oct 15 16:50:02] 127.0.0.1:60594 &quot;GAE GET <a href="http://rm.api.weibo.com/2/remi" rel="nofollow">http://rm.api.weibo.com/2/remi</a>
+nd/unread_hint.json?source=3818214747&amp;with_url=1&amp;appkeys=2083995643,603152360,99
+075054,2842762591,4194184051,2180638397,1199065384,2936099636,2900908525,3073740
+076,846367063,125932898,846367063,2698881363,2936099636,3845272542,409213208,103
+9857299,1770094579,125932898&amp;group_ids=3667785802935093,3700110100143864&amp;callbac
+k=STK_1413359572777317 HTTP/1.1&quot; 200 147
+INFO - [Oct 15 16:50:02] ssl good_ipaddrs=9, bad_ipaddrs=358, unknown_ipaddrs=0
+INFO - [Oct 15 16:50:05] ssl good_ipaddrs=8, bad_ipaddrs=359, unknown_ipaddrs=0
+INFO - [Oct 15 16:50:06] ssl good_ipaddrs=5, bad_ipaddrs=362, unknown_ipaddrs=0
+INFO - [Oct 15 16:50:08] 127.0.0.1:57345 &quot;DIRECT GET <a href="https://code.google.com/p/g" rel="nofollow">https://code.google.com/p/g</a>
+oagent/issues/detail?id=17297 HTTP/1.1&quot; 200 -
+INFO - [Oct 15 16:50:09] 127.0.0.1:61905 &quot;GAE POST <a href="http://www.iwencai.com/cb/cbl" rel="nofollow">http://www.iwencai.com/cb/cbl</a>
+og HTTP/1.1&quot; 200 20
+INFO - [Oct 15 16:50:10] 127.0.0.1:59572 &quot;GAE GET <a href="http://beacon.sina.com.cn/e.gi" rel="nofollow">http://beacon.sina.com.cn/e.gi</a>
+f?UATrack||1943820554297.4175.1384343668353||3402054638136.178.1393046467934||::
+1587081392::||tblog_unread_group||group_show:3700110100143864||http%3A//weibo.co
+m/p/1005052834256503/weibo%3Ffrom%3Dpage_100505%26mod%3Dtab||||||WEIBO-V5:&amp;gUid_
+1413363002755 HTTP/1.1&quot; 200 35
+INFO - [Oct 15 16:50:11] ssl good_ipaddrs=6, bad_ipaddrs=361, unknown_ipaddrs=0
+INFO - [Oct 15 16:50:11] 127.0.0.1:62032 &quot;STRIP CONNECT im.ihi.xiami.com:80 HTTP
+/1.1&quot; - -
+INFO - [Oct 15 16:50:11] ssl good_ipaddrs=6, bad_ipaddrs=354, unknown_ipaddrs=7
+INFO - [Oct 15 16:50:13] 127.0.0.1:57094 &quot;DIRECT GET https://ssl.google-analytic
+s.com/__utm.gif?utmwv=5.6.0&amp;utms=7&amp;utmn=1607496155&amp;utmhn=code.google.com&amp;utmcs=U
+TF-8&amp;utmsr=1368x768&amp;utmvp=1351x667&amp;utmsc=24-bit&amp;utmul=en-us&amp;utmje=1&amp;utmfl=15.0%2
+0r0&amp;utmdt=Issue%2017297%20-%20goagent%20-%20%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3
+%E9%97%AE%E6%97%A5%E5%BF%97%E6%80%8E%E4%B9%88%E5%A4%8D%E5%88%B6%E4%B8%8B%E6%9D%A
+5%E3%80%82%E3%80%82%E3%80%82%20-%20a%20gae%20proxy%20https%3A%2F%2Fgoagent.githu
+b.io%20-%20Google%20Project%20Hosting&amp;utmhid=539872406&amp;utmr=https%3A%2F%2Fwww.go
+ogle.com.hk%2F&amp;utmp=%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17297&amp;utmht=14133630
+11121&amp;utmac=UA-18071-1&amp;utmcc=__utma%3D247248150.413589400.1406884244.1413341777.
+1413362695.63%3B%2B__utmz%3D247248150.1413295724.61.20.utmcsr%3Dgoogle%7Cutmccn%
+3D(organic)%7Cutmcmd%3Dorganic%7Cutmctr%3D(not%2520provided)%3B&amp;utmjid=&amp;utmu=qAA
+gAAAAAAAAAAAAAAAAAAQE~ HTTP/1.1&quot; 200 35
+INFO - [Oct 15 16:50:13] ssl good_ipaddrs=6, bad_ipaddrs=354, unknown_ipaddrs=7
+INFO - [Oct 15 16:50:13] ssl good_ipaddrs=6, bad_ipaddrs=354, unknown_ipaddrs=7
+INFO - [Oct 15 16:50:13] ssl good_ipaddrs=6, bad_ipaddrs=354, unknown_ipaddrs=7
+INFO - [Oct 15 16:50:16] ssl good_ipaddrs=8, bad_ipaddrs=359, unknown_ipaddrs=0
+INFO - [Oct 15 16:50:17] 127.0.0.1:57094 &quot;DIRECT GET https://ssl.google-analytic
+s.com/__utm.gif?utmwv=5.6.0&amp;utms=8&amp;utmn=2060082335&amp;utmhn=code.google.com&amp;utmt=ev
+ent&amp;utme=14(13100*0*0*8000*2860*30*11000*11000)(13138*0*0*8011*2867*39*11015*110
+15)&amp;utmcs=UTF-8&amp;utmsr=1368x768&amp;utmvp=1351x667&amp;utmsc=24-bit&amp;utmul=en-us&amp;utmje=1&amp;u
+tmfl=15.0%20r0&amp;utmdt=Issue%2017297%20-%20goagent%20-%20%E6%88%91%E5%8F%AA%E6%98%
+AF%E6%83%B3%E9%97%AE%E6%97%A5%E5%BF%97%E6%80%8E%E4%B9%88%E5%A4%8D%E5%88%B6%E4%B8
+%8B%E6%9D%A5%E3%80%82%E3%80%82%E3%80%82%20-%20a%20gae%20proxy%20https%3A%2F%2Fgo
+agent.github.io%20-%20Google%20Project%20Hosting&amp;utmhid=539872406&amp;utmr=https%3A%
+2F%2Fwww.google.com.hk%2F&amp;utmp=%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17297&amp;utm
+ht=1413363013210&amp;utmac=UA-18071-1&amp;utmcc=__utma%3D247248150.413589400.1406884244.
+1413341777.1413362695.63%3B%2B__utmz%3D247248150.1413295724.61.20.utmcsr%3Dgoogl
+e%7Cutmccn%3D(organic)%7Cutmcmd%3Dorganic%7Cutmctr%3D(not%2520provided)%3B&amp;utmji
+d=&amp;utmu=qAAgAAAAAAAAAAAAAAAAAAQE~ HTTP/1.1&quot; 200 35
+INFO - [Oct 15 16:50:18] 127.0.0.1:62002 &quot;GAE POST <a href="http://www.iwencai.com/cb/cbl" rel="nofollow">http://www.iwencai.com/cb/cbl</a>
+og HTTP/1.1&quot; 200 20
+INFO - [Oct 15 16:50:20] 127.0.0.1:57345 &quot;DIRECT POST <a href="https://code.google.com/ho" rel="nofollow">https://code.google.com/ho</a>
+sting/projects HTTP/1.1&quot; 200 -
+INFO - [Oct 15 16:50:20] ssl good_ipaddrs=7, bad_ipaddrs=352, unknown_ipaddrs=8
+INFO - [Oct 15 16:50:25] 127.0.0.1:57387 &quot;DIRECT POST <a href="https://code.google.com/ho" rel="nofollow">https://code.google.com/ho</a>
+sting/multilogin HTTP/1.1&quot; 200 -
+INFO - [Oct 15 16:50:26] ssl good_ipaddrs=9, bad_ipaddrs=357, unknown_ipaddrs=1
+INFO - [Oct 15 16:50:28] 127.0.0.1:62032 &quot;GAE GET <a href="http://im.ihi.xiami.com/" rel="nofollow">http://im.ihi.xiami.com/</a> HTTP/
+1.1&quot; 101 0
+INFO - [Oct 15 16:50:31] 127.0.0.1:60594 &quot;GAE GET <a href="http://rm.api.weibo.com/2/remi" rel="nofollow">http://rm.api.weibo.com/2/remi</a>
+nd/push_count.json?trim_null=1&amp;with_settings=1&amp;exclude_attitude=1&amp;with_moments=1
+&amp;with_dm_unread=1&amp;msgbox=true&amp;_pid=10001&amp;count=63&amp;source=3818214747&amp;status_type=
+0&amp;callback=STK_1413359572777319 HTTP/1.1&quot; 200 133
+INFO - [Oct 15 16:50:35] ssl good_ipaddrs=9, bad_ipaddrs=358, unknown_ipaddrs=0
+INFO - [Oct 15 16:50:36] 127.0.0.1:62110 &quot;GAE POST <a href="http://www.iwencai.com/cb/cbl" rel="nofollow">http://www.iwencai.com/cb/cbl</a>
+og HTTP/1.1&quot; 200 20
+INFO - [Oct 15 16:50:36] ssl good_ipaddrs=9, bad_ipaddrs=358, unknown_ipaddrs=0
+WARNING - [Oct 15 16:50:36] create_ssl_connection to 'code.google.com' with [('1
+73.194.65.90', 443), ('74.125.192.90', 443), ('173.194.127.215', 443), ('173.194
+.127.161', 443), ('173.194.72.95', 443), ('74.125.23.17', 443), ('74.125.21.90',
+ 443), ('74.125.235.224', 443), ('173.194.72.82', 443), ('173.194.127.197', 443)
+, ('74.125.136.83', 443), ('173.194.127.55', 443), ('74.125.137.90', 443), ('74.
+125.203.18', 443), ('74.125.235.238', 443), ('74.125.23.199', 443), ('173.194.72
+.101', 443), ('173.194.72.99', 443), ('173.194.72.106', 443), ('173.194.127.130'
+, 443), ('74.125.227.118', 443), ('74.125.203.95', 443), ('173.194.118.85', 443)
+, ('173.194.127.55', 443)] return ['timed out', &quot;(-1, 'Unexpected EOF')&quot;], try a
+gain.
+INFO - [Oct 15 16:50:36] ssl good_ipaddrs=8, bad_ipaddrs=359, unknown_ipaddrs=0
+INFO - [Oct 15 16:50:39] 127.0.0.1:62260 &quot;STRIP CONNECT im.ihi.xiami.com:80 HTTP
+/1.1&quot; - -
+INFO - [Oct 15 16:50:39] ssl good_ipaddrs=8, bad_ipaddrs=338, unknown_ipaddrs=21
+
+INFO - [Oct 15 16:50:41] 127.0.0.1:57345 &quot;DIRECT POST <a href="https://code.google.com/ap" rel="nofollow">https://code.google.com/ap</a>
+is/ajax/playground/get_projects HTTP/1.1&quot; 301 247
+INFO - [Oct 15 16:50:43] 127.0.0.1:62208 &quot;GAE POST <a href="http://www.iwencai.com/cb/cbl" rel="nofollow">http://www.iwencai.com/cb/cbl</a>
+og HTTP/1.1&quot; 200 20
+INFO - [Oct 15 16:50:46] 127.0.0.1:62159 &quot;GAE POST <a href="http://www.iwencai.com/cb/cbl" rel="nofollow">http://www.iwencai.com/cb/cbl</a>
+og HTTP/1.1&quot; 200 20
+INFO - [Oct 15 16:50:46] ssl good_ipaddrs=8, bad_ipaddrs=332, unknown_ipaddrs=27
+
+WARNING - [Oct 15 16:50:49] create_ssl_connection to 'zimutv.appspot.com' with [
+('173.194.65.90', 443), ('173.194.45.118', 443), ('74.125.196.90', 443), ('74.12
+5.192.90', 443), ('74.125.136.83', 443), ('173.194.127.55', 443), ('74.125.137.9
+0', 443), ('74.125.203.18', 443), ('74.125.235.238', 443), ('74.125.23.199', 443
+), ('173.194.72.101', 443), ('173.194.72.99', 443), ('74.125.23.138', 443), ('74
+.125.31.100', 443), ('173.194.78.90', 443), ('173.194.127.146', 443), ('74.125.3
+1.99', 443), ('74.125.235.225', 443), ('173.194.127.209', 443), ('64.233.181.90'
+, 443), ('173.194.127.100', 443), ('173.194.127.179', 443), ('173.194.39.214', 4
+43), ('173.194.127.233', 443)] return ['timed out'], try again.
+INFO - [Oct 15 16:50:49] ssl good_ipaddrs=6, bad_ipaddrs=331, unknown_ipaddrs=30
+
+INFO - [Oct 15 16:50:52] 127.0.0.1:62260 &quot;GAE GET <a href="http://im.ihi.xiami.com/" rel="nofollow">http://im.ihi.xiami.com/</a> HTTP/
+1.1&quot; 101 0
+INFO - [Oct 15 16:50:56] ssl good_ipaddrs=8, bad_ipaddrs=345, unknown_ipaddrs=14
+
+INFO - [Oct 15 16:50:58] 127.0.0.1:62285 &quot;GAE POST <a href="http://www.iwencai.com/cb/cbl" rel="nofollow">http://www.iwencai.com/cb/cbl</a>
+og HTTP/1.1&quot; 200 20
+INFO - [Oct 15 16:51:02] 127.0.0.1:62362 &quot;STRIP CONNECT im.ihi.xiami.com:80 HTTP
+/1.1&quot; - -
+INFO - [Oct 15 16:51:02] ssl good_ipaddrs=9, bad_ipaddrs=350, unknown_ipaddrs=8
+INFO - [Oct 15 16:51:04] 127.0.0.1:62337 &quot;GAE POST <a href="http://www.iwencai.com/cb/cbl" rel="nofollow">http://www.iwencai.com/cb/cbl</a>
+og HTTP/1.1&quot; 200 20
+INFO - [Oct 15 16:51:05] 127.0.0.1:62362 &quot;GAE GET <a href="http://im.ihi.xiami.com/" rel="nofollow">http://im.ihi.xiami.com/</a> HTTP/
+1.1&quot; 101 0
+INFO - [Oct 15 16:51:05] ssl good_ipaddrs=9, bad_ipaddrs=349, unknown_ipaddrs=9
+WARNING - [Oct 15 16:51:06] create_ssl_connection to 'zimutv.appspot.com' with [
+('173.194.65.90', 443), ('173.194.127.231', 443), ('74.125.31.138', 443), ('173.
+194.127.145', 443), ('74.125.235.206', 443), ('173.194.127.84', 443), ('74.125.2
+35.196', 443), ('173.194.127.56', 443), ('173.194.127.226', 443), ('74.125.235.1
+99', 443), ('74.125.23.94', 443), ('173.194.127.148', 443), ('64.233.167.90', 44
+3), ('173.194.127.201', 443), ('74.125.23.113', 443), ('74.125.235.213', 443), (
+'64.233.186.83', 443), ('173.194.73.90', 443), ('74.125.204.118', 443), ('173.19
+4.127.72', 443), ('173.194.127.87', 443), ('173.194.127.167', 443), ('74.125.201
+.90', 443), ('74.125.235.224', 443), ('173.194.127.165', 443), ('74.125.203.103'
+, 443), ('74.125.203.105', 443)] return ['timed out', &quot;(-1, 'Unexpected EOF')&quot;],
+ try again.
+INFO - [Oct 15 16:51:06] ssl good_ipaddrs=9, bad_ipaddrs=347, unknown_ipaddrs=11
+
+INFO - [Oct 15 16:51:06] ssl good_ipaddrs=8, bad_ipaddrs=357, unknown_ipaddrs=2
+INFO - [Oct 15 16:51:13] 127.0.0.1:62442 &quot;GAE POST <a href="http://www.iwencai.com/cb/cbl" rel="nofollow">http://www.iwencai.com/cb/cbl</a>
+og HTTP/1.1&quot; 200 20
+INFO - [Oct 15 16:51:15] 127.0.0.1:62468 &quot;STRIP CONNECT im.ihi.xiami.com:80 HTTP
+/1.1&quot; - -
+INFO - [Oct 15 16:51:15] ssl good_ipaddrs=8, bad_ipaddrs=358, unknown_ipaddrs=1
+INFO - [Oct 15 16:51:16] ssl good_ipaddrs=8, bad_ipaddrs=358, unknown_ipaddrs=1
+INFO - [Oct 15 16:51:20] 127.0.0.1:62468 &quot;GAE GET <a href="http://im.ihi.xiami.com/" rel="nofollow">http://im.ihi.xiami.com/</a> HTTP/
+1.1&quot; 101 0
+INFO - [Oct 15 16:51:26] ssl good_ipaddrs=7, bad_ipaddrs=360, unknown_ipaddrs=0
+WARNING - [Oct 15 16:51:27] create_ssl_connection to 'zimutv.appspot.com' with [
+('74.125.235.213', 443), ('173.194.73.90', 443), ('74.125.31.102', 443), ('74.12
+5.196.90', 443), ('74.125.204.94', 443), ('74.125.203.139', 443), ('74.125.235.1
+94', 443), ('173.194.127.201', 443), ('74.125.23.94', 443), ('64.233.186.83', 44
+3), ('74.125.204.104', 443), ('74.125.23.113', 443), ('173.194.127.176', 443), (
+'74.125.204.118', 443), ('173.194.127.127', 443), ('173.194.67.90', 443), ('173.
+194.127.133', 443), ('74.125.138.90', 443), ('74.125.204.101', 443), ('74.125.19
+5.90', 443), ('173.194.118.86', 443), ('74.125.24.83', 443), ('74.125.23.19', 44
+3), ('173.194.127.63', 443), ('74.125.235.213', 443), ('173.194.127.101', 443),
+('64.233.186.18', 443), ('74.125.31.138', 443), ('173.194.127.65', 443), ('74.12
+5.23.106', 443)] return ['timed out', &quot;(10053, 'Software caused connection abort
+')&quot;, &quot;(-1, 'Unexpected EOF')&quot;], try again.
+INFO - [Oct 15 16:51:27] ssl good_ipaddrs=8, bad_ipaddrs=359, unknown_ipaddrs=0
+INFO - [Oct 15 16:51:28] 127.0.0.1:62493 &quot;GAE POST <a href="http://www.iwencai.com/cb/cbl" rel="nofollow">http://www.iwencai.com/cb/cbl</a>
+og HTTP/1.1&quot; 200 20
+INFO - [Oct 15 16:51:30] 127.0.0.1:62576 &quot;STRIP CONNECT im.ihi.xiami.com:80 HTTP
+/1.1&quot; - -
+INFO - [Oct 15 16:51:30] ssl good_ipaddrs=10, bad_ipaddrs=357, unknown_ipaddrs=0
+
+INFO - [Oct 15 16:51:33] 127.0.0.1:60594 &quot;GAE GET <a href="http://rm.api.weibo.com/2/remi" rel="nofollow">http://rm.api.weibo.com/2/remi</a>
+nd/push_count.json?trim_null=1&amp;with_settings=1&amp;exclude_attitude=1&amp;with_moments=1
+&amp;with_dm_unread=1&amp;msgbox=true&amp;_pid=10001&amp;count=64&amp;source=3818214747&amp;status_type=
+0&amp;callback=STK_1413359572777321 HTTP/1.1&quot; 200 133
+INFO - [Oct 15 16:51:35] ssl good_ipaddrs=8, bad_ipaddrs=358, unknown_ipaddrs=1
+
+<b>注意:请尽量填写以上信息，否则可能难以得到帮助</b>
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Oct 15 20:30:07 2014">
+ Oct 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=18004#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/114873707906664981082/">zim...@gmail.com</a
+></span>
+ 
+<pre>
+没人帮忙解决吗
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct 16 04:06:10 2014">
+ Oct 16, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=18004#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/114873707906664981082/">zim...@gmail.com</a
+></span>
+ 
+<pre>
+今天的代码：
+
+/1.1&quot; - -
+INFO - [Oct 16 18:20:55] ssl good_ipaddrs=7, bad_ipaddrs=149, unknown_ipaddrs=19
+3
+INFO - [Oct 16 18:20:55] ssl good_ipaddrs=7, bad_ipaddrs=149, unknown_ipaddrs=19
+3
+INFO - [Oct 16 18:20:55] 127.0.0.1:49925 &quot;STRIP CONNECT ssl.gstatic.com:443 HTTP
+/1.1&quot; - -
+INFO - [Oct 16 18:20:55] ssl good_ipaddrs=7, bad_ipaddrs=149, unknown_ipaddrs=19
+3
+INFO - [Oct 16 18:20:55] ssl good_ipaddrs=7, bad_ipaddrs=149, unknown_ipaddrs=19
+3
+WARNING - [Oct 16 18:20:59] create_ssl_connection to 'ssl.gstatic.com' with [('6
+4.233.182.90', 443), ('74.125.26.90', 443), ('74.125.24.90', 443), ('173.194.67.
+90', 443), ('173.194.45.118', 443), ('64.233.186.83', 443), ('74.125.69.90', 443
+), ('74.125.142.90', 443), ('173.194.127.104', 443), ('173.194.72.18', 443), ('1
+73.194.127.21', 443), ('173.194.127.216', 443), ('173.194.127.120', 443), ('74.1
+25.203.94', 443), ('74.125.235.224', 443), ('173.194.127.71', 443), ('74.125.204
+.17', 443), ('173.194.127.47', 443), ('173.194.127.102', 443), ('173.194.127.98'
+, 443), ('74.125.203.103', 443), ('173.194.127.113', 443), ('74.125.229.181', 44
+3), ('173.194.127.167', 443)] return ['timed out'], try again.
+INFO - [Oct 16 18:20:59] ssl good_ipaddrs=2, bad_ipaddrs=184, unknown_ipaddrs=16
+3
+INFO - [Oct 16 18:20:59] 127.0.0.1:49896 &quot;DIRECT GET <a href="https://ssl.gstatic.com/cod" rel="nofollow">https://ssl.gstatic.com/cod</a>
+esite/ph/10868592318973270098/css/core.css HTTP/1.1&quot; 304 -
+WARNING - [Oct 16 18:20:59] create_ssl_connection to 'ssl.gstatic.com' with [('6
+4.233.182.90', 443), ('74.125.26.90', 443), ('74.125.24.90', 443), ('173.194.67.
+90', 443), ('173.194.45.118', 443), ('64.233.186.83', 443), ('74.125.69.90', 443
+), ('74.125.24.18', 443), ('74.125.136.83', 443), ('173.194.127.46', 443), ('173
+.194.127.167', 443), ('173.194.72.105', 443), ('74.125.204.139', 443), ('173.194
+.127.206', 443), ('173.194.127.227', 443), ('173.194.127.71', 443), ('74.125.204
+.17', 443), ('173.194.127.47', 443), ('173.194.127.102', 443), ('173.194.127.98'
+, 443), ('74.125.203.103', 443), ('173.194.127.113', 443), ('74.125.229.181', 44
+3), ('173.194.127.208', 443)] return ['timed out'], try again.
+INFO - [Oct 16 18:20:59] ssl good_ipaddrs=1, bad_ipaddrs=207, unknown_ipaddrs=14
+1
+INFO - [Oct 16 18:20:59] ssl good_ipaddrs=1, bad_ipaddrs=207, unknown_ipaddrs=14
+1
+INFO - [Oct 16 18:20:59] 127.0.0.1:49924 &quot;DIRECT GET <a href="https://ssl.gstatic.com/cod" rel="nofollow">https://ssl.gstatic.com/cod</a>
+esite/ph/images/star_off.gif HTTP/1.1&quot; 304 -
+INFO - [Oct 16 18:20:59] ssl good_ipaddrs=1, bad_ipaddrs=207, unknown_ipaddrs=14
+1
+INFO - [Oct 16 18:21:01] 127.0.0.1:49922 &quot;DIRECT GET <a href="https://ssl.gstatic.com/cod" rel="nofollow">https://ssl.gstatic.com/cod</a>
+esite/ph/10868592318973270098/css/ph_detail.css HTTP/1.1&quot; 304 -
+INFO - [Oct 16 18:21:01] 127.0.0.1:49925 &quot;DIRECT GET <a href="https://ssl.gstatic.com/cod" rel="nofollow">https://ssl.gstatic.com/cod</a>
+esite/ph/images/star_on.gif HTTP/1.1&quot; 304 -
+INFO - [Oct 16 18:21:01] ssl good_ipaddrs=6, bad_ipaddrs=203, unknown_ipaddrs=14
+0
+INFO - [Oct 16 18:21:01] 127.0.0.1:49921 &quot;DIRECT GET <a href="https://ssl.gstatic.com/cod" rel="nofollow">https://ssl.gstatic.com/cod</a>
+esite/ph/10868592318973270098/css/ph_list.css HTTP/1.1&quot; 304 -
+INFO - [Oct 16 18:21:01] 127.0.0.1:50206 &quot;STRIP CONNECT apis.google.com:443 HTTP
+/1.1&quot; - -
+INFO - [Oct 16 18:21:01] ssl good_ipaddrs=6, bad_ipaddrs=203, unknown_ipaddrs=14
+0
+INFO - [Oct 16 18:21:02] 127.0.0.1:49896 &quot;DIRECT GET <a href="https://ssl.gstatic.com/cod" rel="nofollow">https://ssl.gstatic.com/cod</a>
+esite/ph/10868592318973270098/js/dit_scripts.js HTTP/1.1&quot; 304 -
+INFO - [Oct 16 18:21:03] 127.0.0.1:49923 &quot;DIRECT GET <a href="https://ssl.gstatic.com/cod" rel="nofollow">https://ssl.gstatic.com/cod</a>
+esite/ph/images/defaultlogo.png HTTP/1.1&quot; 200 918
+INFO - [Oct 16 18:21:03] 127.0.0.1:49924 &quot;DIRECT GET <a href="https://ssl.gstatic.com/cod" rel="nofollow">https://ssl.gstatic.com/cod</a>
+esite/ph/10868592318973270098/js/kibbles.js HTTP/1.1&quot; 304 -
+INFO - [Oct 16 18:21:03] 127.0.0.1:49894 &quot;DIRECT GET https://ssl.google-analytic
+s.com/ga.js HTTP/1.1&quot; 304 -
+INFO - [Oct 16 18:21:03] ssl good_ipaddrs=10, bad_ipaddrs=231, unknown_ipaddrs=1
+08
+INFO - [Oct 16 18:21:03] 127.0.0.1:49922 &quot;DIRECT GET <a href="https://ssl.gstatic.com/cod" rel="nofollow">https://ssl.gstatic.com/cod</a>
+esite/ph/10868592318973270098/js/ph_core.js HTTP/1.1&quot; 304 -
+INFO - [Oct 16 18:21:04] 127.0.0.1:50206 &quot;DIRECT GET <a href="https://apis.google.com/js/" rel="nofollow">https://apis.google.com/js/</a>
+plusone.js HTTP/1.1&quot; 304 -
+INFO - [Oct 16 18:21:05] ssl good_ipaddrs=12, bad_ipaddrs=225, unknown_ipaddrs=1
+12
+INFO - [Oct 16 18:21:07] 127.0.0.1:49894 &quot;DIRECT GET https://ssl.google-analytic
+s.com/r/__utm.gif?utmwv=5.6.0&amp;utms=1&amp;utmn=1913288997&amp;utmhn=code.google.com&amp;utmcs
+=UTF-8&amp;utmsr=1368x768&amp;utmvp=1351x667&amp;utmsc=24-bit&amp;utmul=en-us&amp;utmje=1&amp;utmfl=15.0
+%20r0&amp;utmdt=Issues%20-%20goagent%20-%20https%3A%2F%2Fgoagent.github.io%20-%20Goo
+gle%20Project%20Hosting&amp;utmhid=1298390689&amp;utmr=-&amp;utmp=%2Fp%2Fgoagent%2Fissues%2F
+list&amp;utmht=1413454863827&amp;utmac=UA-18071-1&amp;utmcc=__utma%3D247248150.413589400.140
+6884244.1413451076.1413454864.71%3B%2B__utmz%3D247248150.1413295724.61.20.utmcsr
+%3Dgoogle%7Cutmccn%3D(organic)%7Cutmcmd%3Dorganic%7Cutmctr%3D(not%2520provided)%
+3B&amp;utmjid=238431543&amp;utmredir=1&amp;utmu=qAAgAAAAAAAAAAAAAAAAAAAE~ HTTP/1.1&quot; 200 35
+INFO - [Oct 16 18:21:09] 127.0.0.1:50206 &quot;DIRECT GET <a href="https://apis.google.com/_/s" rel="nofollow">https://apis.google.com/_/s</a>
+cs/apps-static/_/js/k=oz.gapi.en.xgucjBarRqg.O/m=plusone/rt=j/sv=1/d=1/ed=1/am=A
+Q/rs=AGLTcCPur5Ym7buslu8LrfTs9pG7vibCWA/cb=gapi.loaded_0 HTTP/1.1&quot; 304 -
+INFO - [Oct 16 18:21:09] ssl good_ipaddrs=13, bad_ipaddrs=249, unknown_ipaddrs=8
+7
+INFO - [Oct 16 18:21:09] ssl good_ipaddrs=13, bad_ipaddrs=249, unknown_ipaddrs=8
+7
+INFO - [Oct 16 18:21:09] 127.0.0.1:50281 &quot;STRIP CONNECT code.google.com:443 HTTP
+/1.1&quot; - -
+INFO - [Oct 16 18:21:09] ssl good_ipaddrs=13, bad_ipaddrs=249, unknown_ipaddrs=8
+7
+INFO - [Oct 16 18:23:15] 127.0.0.1:50336 &quot;STRIP CONNECT ssl.google-analytics.com
+:443 HTTP/1.1&quot; - -
+INFO - [Oct 16 18:23:15] ssl good_ipaddrs=11, bad_ipaddrs=174, unknown_ipaddrs=1
+64
+INFO - [Oct 16 18:23:20] 127.0.0.1:50336 &quot;DIRECT GET https://ssl.google-analytic
+s.com/__utm.gif?utmwv=5.6.0&amp;utms=2&amp;utmn=200394753&amp;utmhn=code.google.com&amp;utmt=eve
+nt&amp;utme=14(21000*0*130*5700*1750*0*15300*15300)(21081*0*138*5715*1753*1*15304*15
+304)&amp;utmcs=UTF-8&amp;utmsr=1368x768&amp;utmvp=1351x667&amp;utmsc=24-bit&amp;utmul=en-us&amp;utmje=1&amp;
+utmfl=15.0%20r0&amp;utmdt=Issues%20-%20goagent%20-%20https%3A%2F%2Fgoagent.github.io
+%20-%20Google%20Project%20Hosting&amp;utmhid=1298390689&amp;utmr=-&amp;utmp=%2Fp%2Fgoagent%2
+Fissues%2Flist&amp;utmht=1413454869819&amp;utmac=UA-18071-1&amp;utmcc=__utma%3D247248150.413
+589400.1406884244.1413451076.1413454864.71%3B%2B__utmz%3D247248150.1413295724.61
+.20.utmcsr%3Dgoogle%7Cutmccn%3D(organic)%7Cutmcmd%3Dorganic%7Cutmctr%3D(not%2520
+provided)%3B&amp;utmjid=&amp;utmu=qAAgAAAAAAAAAAAAAAAAAAAE~ HTTP/1.1&quot; 200 35
+INFO - [Oct 16 18:29:23] 127.0.0.1:50362 &quot;STRIP CONNECT plus.google.com:443 HTTP
+/1.1&quot; - -
+INFO - [Oct 16 18:29:23] ssl good_ipaddrs=11, bad_ipaddrs=0, unknown_ipaddrs=338
+
+INFO - [Oct 16 18:29:31] 127.0.0.1:50362 &quot;DIRECT POST <a href="https://plus.google.com/_/" rel="nofollow">https://plus.google.com/_/</a>
+n/bg/fetchcount?soc-app=111&amp;cid=0&amp;soc-platform=1&amp;ozv=es_oz_20141014.11_p1&amp;f.sid=
+58653408&amp;_reqid=1732874&amp;rt=j HTTP/1.1&quot; 200 -
+INFO - [Oct 16 18:35:38] 127.0.0.1:50375 &quot;STRIP CONNECT clients4.google.com:443
+HTTP/1.1&quot; - -
+INFO - [Oct 16 18:35:38] ssl good_ipaddrs=9, bad_ipaddrs=0, unknown_ipaddrs=340
+INFO - [Oct 16 18:35:46] 127.0.0.1:50375 &quot;DIRECT POST <a href="https://clients4.google.co" rel="nofollow">https://clients4.google.co</a>
+m/invalidation/android/request/CHES4QEStwFBUEE5MWJFbzlxeUlobTF0TXZRcm9WdWp2UTdPY
+2ZCYlk5Q1FGV283a2Z2ZTBvU3BTWjVoOURkdktESjlaNHJad2t6T0l2UGgxV29yaUh6OHRUNFNFUGNaS
+VVxVC1hd19pTGcyX1hhbU4wcHRaUm5jdU9EN2dYWHZHaXFYbVpJWXFuNTd0TlREUDVhLTl5NDUxbW9NO
+GF2NWY3OGpqUkwyeEt5SFNRSGVpWHNHdjB4UVJhUUZzMm8aACoCCAAyH2NvbS5nb29nbGUuY2hyb21lL
+mludmFsaWRhdGlvbnM HTTP/1.1&quot; 204 -
+INFO - [Oct 16 18:38:24] 127.0.0.1:50388 &quot;STRIP CONNECT www.google.com.hk:443 HT
+TP/1.1&quot; - -
+INFO - [Oct 16 18:38:26] ssl good_ipaddrs=10, bad_ipaddrs=7, unknown_ipaddrs=332
+
+INFO - [Oct 16 18:38:27] 127.0.0.1:50401 &quot;STRIP CONNECT www.google.com.hk:443 HT
+TP/1.1&quot; - -
+INFO - [Oct 16 18:38:27] ssl good_ipaddrs=10, bad_ipaddrs=7, unknown_ipaddrs=332
+
+INFO - [Oct 16 18:38:27] 127.0.0.1:50414 &quot;STRIP CONNECT www.google.com.hk:443 HT
+TP/1.1&quot; - -
+INFO - [Oct 16 18:38:27] ssl good_ipaddrs=10, bad_ipaddrs=7, unknown_ipaddrs=332
+
+INFO - [Oct 16 18:38:27] 127.0.0.1:50427 &quot;STRIP CONNECT www.google.com.hk:443 HT
+TP/1.1&quot; - -
+INFO - [Oct 16 18:38:27] ssl good_ipaddrs=10, bad_ipaddrs=7, unknown_ipaddrs=332
+
+INFO - [Oct 16 18:38:27] 127.0.0.1:50440 &quot;STRIP CONNECT www.google.com.hk:443 HT
+TP/1.1&quot; - -
+INFO - [Oct 16 18:38:27] ssl good_ipaddrs=10, bad_ipaddrs=7, unknown_ipaddrs=332
+
+INFO - [Oct 16 18:38:28] 127.0.0.1:50453 &quot;STRIP CONNECT www.google.com.hk:443 HT
+TP/1.1&quot; - -
+INFO - [Oct 16 18:38:28] ssl good_ipaddrs=10, bad_ipaddrs=7, unknown_ipaddrs=332
+
+INFO - [Oct 16 18:38:28] 127.0.0.1:50466 &quot;STRIP CONNECT www.google.com.hk:443 HT
+TP/1.1&quot; - -
+INFO - [Oct 16 18:38:29] ssl good_ipaddrs=10, bad_ipaddrs=7, unknown_ipaddrs=332
+
+INFO - [Oct 16 18:38:29] 127.0.0.1:50479 &quot;STRIP CONNECT www.google.com.hk:443 HT
+TP/1.1&quot; - -
+INFO - [Oct 16 18:38:29] ssl good_ipaddrs=10, bad_ipaddrs=7, unknown_ipaddrs=332
+
+INFO - [Oct 16 18:38:30] 127.0.0.1:50492 &quot;STRIP CONNECT www.google.com.hk:443 HT
+TP/1.1&quot; - -
+INFO - [Oct 16 18:38:30] ssl good_ipaddrs=10, bad_ipaddrs=7, unknown_ipaddrs=332
+
+INFO - [Oct 16 18:38:30] 127.0.0.1:50505 &quot;STRIP CONNECT www.google.com.hk:443 HT
+TP/1.1&quot; - -
+INFO - [Oct 16 18:38:30] ssl good_ipaddrs=10, bad_ipaddrs=7, unknown_ipaddrs=332
+
+INFO - [Oct 16 18:38:33] 127.0.0.1:50401 &quot;DIRECT GET <a href="https://www.google.com.hk/c" rel="nofollow">https://www.google.com.hk/c</a>
+omplete/search?client=serp&amp;hl=zh-CN&amp;gs_rn=56&amp;gs_ri=serp&amp;pq=takemitsu&amp;cp=7&amp;gs_id=
+o41&amp;q=takemit&amp;xhr=t HTTP/1.1&quot; 200 -
+INFO - [Oct 16 18:38:34] 127.0.0.1:50453 &quot;DIRECT GET <a href="https://www.google.com.hk/c" rel="nofollow">https://www.google.com.hk/c</a>
+omplete/search?client=serp&amp;hl=zh-CN&amp;gs_rn=56&amp;gs_ri=serp&amp;pq=takemitsu&amp;cp=1&amp;gs_id=
+o6t&amp;q=o&amp;xhr=t HTTP/1.1&quot; 200 -
+INFO - [Oct 16 18:38:34] 127.0.0.1:50440 &quot;DIRECT GET <a href="https://www.google.com.hk/c" rel="nofollow">https://www.google.com.hk/c</a>
+omplete/search?client=serp&amp;hl=zh-CN&amp;gs_rn=56&amp;gs_ri=serp&amp;pq=takemitsu&amp;cp=1&amp;gs_id=
+o4r&amp;q=t&amp;xhr=t HTTP/1.1&quot; 200 -
+INFO - [Oct 16 18:38:34] 127.0.0.1:50466 &quot;DIRECT GET <a href="https://www.google.com.hk/c" rel="nofollow">https://www.google.com.hk/c</a>
+omplete/search?client=serp&amp;hl=zh-CN&amp;gs_rn=56&amp;gs_ri=serp&amp;pq=takemitsu&amp;cp=2&amp;gs_id=
+o8c&amp;q=oz&amp;xhr=t HTTP/1.1&quot; 200 -
+WARNING - [Oct 16 18:38:34] create_ssl_connection to 'www.google.com.hk' with [(
+'74.125.201.18', 443), ('74.125.202.90', 443), ('74.125.201.83', 443), ('173.194
+.45.117', 443), ('173.194.127.191', 443), ('74.125.23.118', 443), ('173.194.127.
+101', 443), ('74.125.204.102', 443), ('173.194.72.105', 443), ('173.194.127.144'
+, 443), ('173.194.72.118', 443), ('173.194.127.114', 443)] return ['timed out'],
+ try again.
+INFO - [Oct 16 18:38:34] ssl good_ipaddrs=7, bad_ipaddrs=44, unknown_ipaddrs=298
+
+INFO - [Oct 16 18:38:34] 127.0.0.1:50479 &quot;DIRECT GET <a href="https://www.google.com.hk/c" rel="nofollow">https://www.google.com.hk/c</a>
+omplete/search?client=serp&amp;hl=zh-CN&amp;gs_rn=56&amp;gs_ri=serp&amp;pq=takemitsu&amp;cp=3&amp;gs_id=
+o92&amp;q=oza&amp;xhr=t HTTP/1.1&quot; 200 -
+INFO - [Oct 16 18:38:37] 127.0.0.1:50492 &quot;DIRECT GET <a href="https://www.google.com.hk/c" rel="nofollow">https://www.google.com.hk/c</a>
+omplete/search?client=serp&amp;hl=zh-CN&amp;gs_rn=56&amp;gs_ri=serp&amp;pq=takemitsu&amp;cp=5&amp;gs_id=
+oaf&amp;q=ozawa&amp;xhr=t HTTP/1.1&quot; 200 -
+INFO - [Oct 16 18:38:37] 127.0.0.1:50427 &quot;DIRECT GET <a href="https://www.google.com.hk/c" rel="nofollow">https://www.google.com.hk/c</a>
+omplete/search?client=serp&amp;hl=zh-CN&amp;gs_rn=56&amp;gs_ri=serp&amp;pq=takemitsu&amp;cp=2&amp;gs_id=
+o4m&amp;q=ta&amp;xhr=t HTTP/1.1&quot; 200 -
+INFO - [Oct 16 18:38:38] 127.0.0.1:50414 &quot;DIRECT GET <a href="https://www.google.com.hk/c" rel="nofollow">https://www.google.com.hk/c</a>
+omplete/search?client=serp&amp;hl=zh-CN&amp;gs_rn=56&amp;gs_ri=serp&amp;pq=takemitsu&amp;cp=5&amp;gs_id=
+o48&amp;q=takem&amp;xhr=t HTTP/1.1&quot; 200 -
+INFO - [Oct 16 18:38:40] 127.0.0.1:50505 &quot;DIRECT GET <a href="https://www.google.com.hk/s" rel="nofollow">https://www.google.com.hk/s</a>
+earch?newwindow=1&amp;safe=strict&amp;hl=zh-CN&amp;biw=1368&amp;bih=667&amp;site=webhp&amp;q=ozawa&amp;oq=oz
+awa&amp;gs_l=serp.3...1390903.1393798.2.1394743.13.9.0.0.0.0.0.0..0.0....0...1c.1.56
+.serp..13.0.0.blo4QRS3AtY&amp;bav=on.2,or.&amp;bvm=bv.77648437,d.dGY&amp;fp=bd47c9c56cf2ec8a
+&amp;tch=1&amp;ech=1&amp;psi=fJo_VPHuHcTAmwX62ILoBg.1413454498765.5 HTTP/1.1&quot; 200 -
+INFO - [Oct 16 18:38:40] 127.0.0.1:50545 &quot;STRIP CONNECT id.google.com.hk:443 HTT
+P/1.1&quot; - -
+INFO - [Oct 16 18:38:40] ssl good_ipaddrs=12, bad_ipaddrs=49, unknown_ipaddrs=28
+8
+INFO - [Oct 16 18:38:41] ssl good_ipaddrs=12, bad_ipaddrs=49, unknown_ipaddrs=28
+8
+INFO - [Oct 16 18:38:42] 127.0.0.1:50388 &quot;DIRECT GET <a href="https://www.google.com.hk/c" rel="nofollow">https://www.google.com.hk/c</a>
+omplete/search?client=serp&amp;hl=zh-CN&amp;gs_rn=56&amp;gs_ri=serp&amp;pq=takemitsu&amp;cp=8&amp;gs_id=
+o2t&amp;q=takemits&amp;xhr=t HTTP/1.1&quot; 200 -
+INFO - [Oct 16 18:38:45] 127.0.0.1:50505 &quot;DIRECT GET <a href="https://www.google.com.hk/g" rel="nofollow">https://www.google.com.hk/g</a>
+en_204?v=3&amp;s=web&amp;ei=C6A_VIbSB8HDmQWr-oGoBA&amp;cr=n&amp;imp=0&amp;e=4897,17259,3300118,33001
+30,3300137,3300161,3310366,3310698,3312198,3700339,3700343,3700348,4007661,40081
+42,4009033,4010858,4010899,4011679,4012373,4014789,4016377,4016824,4017981,40182
+51,4018686,4019182,4019841,4020250,4020379,4020381,4020383,4020385,4020500,40205
+62,4020685,4020726,4020821,4020948,4021015,4021071,4021092,4021125,4021440,40214
+98,4021553,4021735,4021737,4021739,4021775,4022140,4022271,4022347,4022468,40225
+08,4022559,4022575,4022601,4022756,4022882,4022924,4022933,4022937,4022996,40230
+21,4023044,4023082,4023133,4023153,4023180,4023407,8300063,8300072,8300084,83000
+87,8500271,8500325,8500394,8500585,8500593,8500615,8500697,10100012,10200045,102
+00083,10200297,10200581,10200631,10200702,10200708,10200712,10200724,10200726,10
+200730,10200733&amp;pfa=n.1,ttfc.3539,ttlc.0,cbt.289&amp;pfm=n.1,ttfc.3539,ttlc.0,cbt.28
+9&amp;imn=2&amp;atyp=csi&amp;adh=&amp;xjs=init.50.25.sb.19.m.7.dvl.6.foot.4.spch.3,dispose.35.16
+.jsa.12.sb.8.fpe.5.m.4.bbd.1&amp;action=&amp;rt=prt.534,pprt.534,ol.536,jsrt.9683,iml.53
+8,rspt.689,rqst.10113 HTTP/1.1&quot; 204 0
+INFO - [Oct 16 18:38:46] 127.0.0.1:50545 &quot;DIRECT GET <a href="https://id.google.com.hk/ve" rel="nofollow">https://id.google.com.hk/ve</a>
+rify/EAAAAN8qgMuPRkbHaoAyNkGArhw HTTP/1.1&quot; 200 0
+INFO - [Oct 16 18:59:35] 127.0.0.1:50582 &quot;STRIP CONNECT clients4.google.com:443
+HTTP/1.1&quot; - -
+INFO - [Oct 16 18:59:35] ssl good_ipaddrs=11, bad_ipaddrs=0, unknown_ipaddrs=338
+
+INFO - [Oct 16 19:03:22] 127.0.0.1:50595 &quot;STRIP CONNECT www.google.com.hk:443 HT
+TP/1.1&quot; - -
+INFO - [Oct 16 19:03:22] ssl good_ipaddrs=12, bad_ipaddrs=7, unknown_ipaddrs=330
+
+INFO - [Oct 16 19:03:28] 127.0.0.1:50595 &quot;DIRECT GET <a href="https://www.google.com.hk/w" rel="nofollow">https://www.google.com.hk/w</a>
+ebhp?hl=zh-CN HTTP/1.1&quot; 200 -
+INFO - [Oct 16 19:03:28] 127.0.0.1:50608 &quot;STRIP CONNECT ssl.gstatic.com:443 HTTP
+/1.1&quot; - -
+INFO - [Oct 16 19:03:28] ssl good_ipaddrs=12, bad_ipaddrs=11, unknown_ipaddrs=32
+6
+INFO - [Oct 16 19:03:28] 127.0.0.1:50609 &quot;STRIP CONNECT www.google.com.hk:443 HT
+TP/1.1&quot; - -
+INFO - [Oct 16 19:03:28] ssl good_ipaddrs=12, bad_ipaddrs=11, unknown_ipaddrs=32
+6
+INFO - [Oct 16 19:03:28] 127.0.0.1:50621 &quot;STRIP CONNECT www.google.com.hk:443 HT
+TP/1.1&quot; - -
+INFO - [Oct 16 19:03:28] ssl good_ipaddrs=12, bad_ipaddrs=11, unknown_ipaddrs=32
+6
+INFO - [Oct 16 19:03:28] ssl good_ipaddrs=12, bad_ipaddrs=11, unknown_ipaddrs=32
+6
+INFO - [Oct 16 19:03:31] 127.0.0.1:50595 &quot;DIRECT GET <a href="https://www.google.com.hk/i" rel="nofollow">https://www.google.com.hk/i</a>
+mages/nav_logo195.png HTTP/1.1&quot; 304 -
+INFO - [Oct 16 19:03:31] 127.0.0.1:50609 &quot;DIRECT GET <a href="https://www.google.com.hk/x" rel="nofollow">https://www.google.com.hk/x</a>
+js/_/js/k=xjs.s.zh_CN.BjRaU9T-wO8.O/m=sx,c,sb,cr,elog,jsa,r,hsm,j,pcc,csi/am=BOr
+_U8EgzAgUMAEEqwM/rt=j/d=1/t=zcms/rs=ACT90oEbdBPT63SB6pQmMSgfB5ctnpFijA HTTP/1.1&quot;
+ 304 -
+INFO - [Oct 16 19:03:31] 127.0.0.1:50621 &quot;DIRECT GET <a href="https://www.google.com.hk/i" rel="nofollow">https://www.google.com.hk/i</a>
+mages/srpr/logo11w.png HTTP/1.1&quot; 304 -
+INFO - [Oct 16 19:03:31] 127.0.0.1:50659 &quot;STRIP CONNECT www.google.com:443 HTTP/
+1.1&quot; - -
+INFO - [Oct 16 19:03:32] ssl good_ipaddrs=12, bad_ipaddrs=10, unknown_ipaddrs=32
+7
+INFO - [Oct 16 19:03:32] ssl good_ipaddrs=12, bad_ipaddrs=10, unknown_ipaddrs=32
+7
+INFO - [Oct 16 19:03:32] ssl good_ipaddrs=12, bad_ipaddrs=10, unknown_ipaddrs=32
+7
+INFO - [Oct 16 19:03:32] 127.0.0.1:50663 &quot;STRIP CONNECT id.google.com.hk:443 HTT
+P/1.1&quot; - -
+INFO - [Oct 16 19:03:32] ssl good_ipaddrs=12, bad_ipaddrs=10, unknown_ipaddrs=32
+7
+INFO - [Oct 16 19:03:32] 127.0.0.1:50608 &quot;DIRECT GET <a href="https://ssl.gstatic.com/gb/" rel="nofollow">https://ssl.gstatic.com/gb/</a>
+images/b_8d5afc09.png HTTP/1.1&quot; 304 -
+INFO - [Oct 16 19:03:37] ssl good_ipaddrs=12, bad_ipaddrs=41, unknown_ipaddrs=29
+6
+INFO - [Oct 16 19:03:38] 127.0.0.1:50609 &quot;DIRECT GET <a href="https://www.google.com.hk/g" rel="nofollow">https://www.google.com.hk/g</a>
+en_204?atyp=i&amp;ct=backbutton&amp;cad=&amp;ei=C6A_VIbSB8HDmQWr-oGoBA&amp;zx=1413457412035 HTTP
+/1.1&quot; 204 0
+INFO - [Oct 16 19:03:38] 127.0.0.1:50659 &quot;DIRECT GET <a href="https://www.google.com/text" rel="nofollow">https://www.google.com/text</a>
+inputassistant/tia.png HTTP/1.1&quot; 304 -
+INFO - [Oct 16 19:03:38] 127.0.0.1:50621 &quot;DIRECT GET <a href="https://www.google.com.hk/x" rel="nofollow">https://www.google.com.hk/x</a>
+js/_/js/k=xjs.s.zh_CN.BjRaU9T-wO8.O/m=sy9,abd,sy188,adp,sy66,sy67,async,sy37,cdo
+s,sy176,sy317,sy318,sy10,sy84,sy319,sy330,sy22,sy331,dvl,sy68,foot,fpe,sy168,hv,
+idck,sy81,lc,sy87,sy292,sy293,lrct,sy117,sy225,lu,sy335,m,sy82,sy83,sy115,nqsb,s
+f,sy94,sy93,sy92,sy129,sy142,sy95,sy130,sy104,sy143,sy144,sy146,sy113,sy131,sy19
+4,sy100,sy105,sy141,sy148,sy192,sy193,sy191,spch,sy88,sy121,em9,vs,sy71,sy72,sy7
+4,sy76,sy73,sy77,sy69,sy75,sy78,tnv,sy325,cdrtoc,me/am=BOr_U8EgzAgUMAEEqwM/rt=j/
+d=0/t=zcms/rs=ACT90oEbdBPT63SB6pQmMSgfB5ctnpFijA HTTP/1.1&quot; 200 62570
+INFO - [Oct 16 19:03:38] 127.0.0.1:50663 &quot;DIRECT GET <a href="https://id.google.com.hk/ve" rel="nofollow">https://id.google.com.hk/ve</a>
+rify/EAAAAN8qgMuPRkbHaoAyNkGArhw HTTP/1.1&quot; 200 0
+INFO - [Oct 16 19:03:40] 127.0.0.1:50727 &quot;STRIP CONNECT www.googleapis.com:443 H
+TTP/1.1&quot; - -
+INFO - [Oct 16 19:03:40] ssl good_ipaddrs=12, bad_ipaddrs=40, unknown_ipaddrs=29
+7
+INFO - [Oct 16 19:03:41] 127.0.0.1:50595 &quot;DIRECT GET <a href="https://www.google.com.hk/c" rel="nofollow">https://www.google.com.hk/c</a>
+omplete/search?client=chrome-omni&amp;gs_ri=chrome-ext&amp;xssi=t&amp;q=&amp;oit=0&amp;url=http%3A%2
+F%2Fweibo.com%2F1587081392%2Fmyfollow%3Frightmod%3D1%26wvr%3D5&amp;sugkey=AIzaSyBOti
+4mM-6x9WDnZIjIeyEU21OpBXqWBgw HTTP/1.1&quot; 200 -
+INFO - [Oct 16 19:03:43] ssl good_ipaddrs=12, bad_ipaddrs=45, unknown_ipaddrs=29
+2
+INFO - [Oct 16 19:03:46] 127.0.0.1:50727 &quot;DIRECT POST <a href="https://www.googleapis.com" rel="nofollow">https://www.googleapis.com</a>
+/rpc HTTP/1.1&quot; 200 -
+INFO - [Oct 16 19:03:47] 127.0.0.1:50621 &quot;DIRECT GET <a href="https://www.google.com.hk/f" rel="nofollow">https://www.google.com.hk/f</a>
+avicon.ico HTTP/1.1&quot; 200 982
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct 18 07:15:54 2014">
+ Oct 18, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=18004#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/114873707906664981082/">zim...@gmail.com</a
+></span>
+ 
+<pre>
+2C3300118%2C3300130%2C3300130%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%
+2C3310366%2C3310698%2C3310698%2C3312198%2C3312198%2C910829%2C927622%2C930666%2C9
+30672%2C931983%2C932404%2C934030%2C941293%2C945240%2C946023%2C947209%2C952302&amp;mi
+me=video%2Fwebm&amp;ip=107.178.200.5&amp;keepalive=yes&amp;expire=1413661131&amp;key=yt5&amp;cpn=Rrc
+gawW4j6zxdFKL&amp;alr=yes&amp;ratebypass=yes&amp;c=WEB&amp;cver=html5&amp;range=16025084-16808019'
+INFO - [Oct 18 22:15:27] ssl good_ipaddrs=15, bad_ipaddrs=274, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:27] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; Successfully reached 782916 bytes.
+INFO - [Oct 18 22:15:28] 127.0.0.1:64963 &quot;GAE GET <a href="https://r5---sn-q4f7dnel.googl" rel="nofollow">https://r5---sn-q4f7dnel.googl</a>
+evideo.com/videoplayback?ipbits=0&amp;mm=31&amp;requiressl=yes&amp;sver=3&amp;sparams=clen%2Cdur
+%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%2Cmv%2Crequi
+ressl%2Csource%2Cupn%2Cexpire&amp;gir=yes&amp;itag=244&amp;mt=1413638859&amp;dur=14443.750&amp;id=o-
+AFxczTgkNkFJuzJBSm3YiLfdH7nW9NqrMmmMg1rPzQNk&amp;source=youtube&amp;mv=u&amp;clen=282859638&amp;
+signature=<a href="/p/goagent/source/detail?r=C60E4D4A580CC3A1F3CB51026477FAFF83D2CDB6">C60E4D4A580CC3A1F3CB51026477FAFF83D2CDB6</a>.B8D8D18FDB31F8C3A108253DFBB05
+525A68C5B8C&amp;ms=au&amp;lmt=1393810272265816&amp;upn=l0ySL9H9DN4&amp;fexp=3300118%2C3300118%2C
+3300130%2C3300130%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%2C3310366%2C
+3310698%2C3310698%2C3312198%2C3312198%2C910829%2C927622%2C930666%2C930672%2C9319
+83%2C932404%2C934030%2C941293%2C945240%2C946023%2C947209%2C952302&amp;mime=video%2Fw
+ebm&amp;ip=107.178.200.5&amp;keepalive=yes&amp;expire=1413661131&amp;key=yt5&amp;cpn=RrcgawW4j6zxdFK
+L&amp;alr=yes&amp;ratebypass=yes&amp;c=WEB&amp;cver=html5&amp;range=16025084-16808019 HTTP/1.1&quot; 206
+782936
+INFO - [Oct 18 22:15:28] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; RangeFetch started('https://<a href="/p/goagent/source/detail?r=5">r5</a>---sn-q4f
+7dnel.googlevideo.com/videoplayback?ipbits=0&amp;mm=31&amp;requiressl=yes&amp;sver=3&amp;sparams
+=clen%2Cdur%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%2
+Cmv%2Crequiressl%2Csource%2Cupn%2Cexpire&amp;gir=yes&amp;itag=244&amp;mt=1413638859&amp;dur=1444
+3.750&amp;id=o-AFxczTgkNkFJuzJBSm3YiLfdH7nW9NqrMmmMg1rPzQNk&amp;source=youtube&amp;mv=u&amp;clen
+=282859638&amp;signature=<a href="/p/goagent/source/detail?r=C60E4D4A580CC3A1F3CB51026477FAFF83D2CDB6">C60E4D4A580CC3A1F3CB51026477FAFF83D2CDB6</a>.B8D8D18FDB31F8C3A1
+08253DFBB05525A68C5B8C&amp;ms=au&amp;lmt=1393810272265816&amp;upn=l0ySL9H9DN4&amp;fexp=3300118%2
+C3300118%2C3300130%2C3300130%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%2
+C3310366%2C3310698%2C3310698%2C3312198%2C3312198%2C910829%2C927622%2C930666%2C93
+0672%2C931983%2C932404%2C934030%2C941293%2C945240%2C946023%2C947209%2C952302&amp;mim
+e=video%2Fwebm&amp;ip=107.178.200.5&amp;keepalive=yes&amp;expire=1413661131&amp;key=yt5&amp;cpn=Rrcg
+awW4j6zxdFKL&amp;alr=yes&amp;ratebypass=yes&amp;c=WEB&amp;cver=html5&amp;range=16025084-16808019') 0
+-782935
+INFO - [Oct 18 22:15:28] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 59535808] 782936 bytes 0-782935
+/782936
+INFO - [Oct 18 22:15:28] 127.0.0.1:65018 &quot;DIRECT GET <a href="https://www.google.com.hk/c" rel="nofollow">https://www.google.com.hk/c</a>
+omplete/search?client=chrome-omni&amp;gs_ri=chrome-ext&amp;xssi=t&amp;q=go&amp;oit=1&amp;cp=2&amp;pgcl=7
+&amp;sugkey=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw HTTP/1.1&quot; 200 -
+INFO - [Oct 18 22:15:30] Found [autorange]endswith match url='https://<a href="/p/goagent/source/detail?r=5">r5</a>---sn-q4
+f7dnel.googlevideo.com/videoplayback?ipbits=0&amp;mm=31&amp;requiressl=yes&amp;sver=3&amp;sparam
+s=clen%2Cdur%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%
+2Cmv%2Crequiressl%2Csource%2Cupn%2Cexpire&amp;gir=yes&amp;itag=244&amp;mt=1413638859&amp;dur=144
+43.750&amp;id=o-AFxczTgkNkFJuzJBSm3YiLfdH7nW9NqrMmmMg1rPzQNk&amp;source=youtube&amp;mv=u&amp;cle
+n=282859638&amp;signature=<a href="/p/goagent/source/detail?r=C60E4D4A580CC3A1F3CB51026477FAFF83D2CDB6">C60E4D4A580CC3A1F3CB51026477FAFF83D2CDB6</a>.B8D8D18FDB31F8C3A
+108253DFBB05525A68C5B8C&amp;ms=au&amp;lmt=1393810272265816&amp;upn=l0ySL9H9DN4&amp;fexp=3300118%
+2C3300118%2C3300130%2C3300130%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%
+2C3310366%2C3310698%2C3310698%2C3312198%2C3312198%2C910829%2C927622%2C930666%2C9
+30672%2C931983%2C932404%2C934030%2C941293%2C945240%2C946023%2C947209%2C952302&amp;mi
+me=video%2Fwebm&amp;ip=107.178.200.5&amp;keepalive=yes&amp;expire=1413661131&amp;key=yt5&amp;cpn=Rrc
+gawW4j6zxdFKL&amp;alr=yes&amp;ratebypass=yes&amp;c=WEB&amp;cver=html5&amp;range=16808020-17591349'
+INFO - [Oct 18 22:15:30] ssl good_ipaddrs=13, bad_ipaddrs=276, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:30] ssl good_ipaddrs=13, bad_ipaddrs=276, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:30] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; Successfully reached 782935 bytes.
+INFO - [Oct 18 22:15:32] 127.0.0.1:64311 &quot;GAE GET <a href="https://r5---sn-q4f7dnel.googl" rel="nofollow">https://r5---sn-q4f7dnel.googl</a>
+evideo.com/videoplayback?ipbits=0&amp;mm=31&amp;requiressl=yes&amp;sver=3&amp;sparams=clen%2Cdur
+%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%2Cmv%2Crequi
+ressl%2Csource%2Cupn%2Cexpire&amp;gir=yes&amp;itag=244&amp;mt=1413638859&amp;dur=14443.750&amp;id=o-
+AFxczTgkNkFJuzJBSm3YiLfdH7nW9NqrMmmMg1rPzQNk&amp;source=youtube&amp;mv=u&amp;clen=282859638&amp;
+signature=<a href="/p/goagent/source/detail?r=C60E4D4A580CC3A1F3CB51026477FAFF83D2CDB6">C60E4D4A580CC3A1F3CB51026477FAFF83D2CDB6</a>.B8D8D18FDB31F8C3A108253DFBB05
+525A68C5B8C&amp;ms=au&amp;lmt=1393810272265816&amp;upn=l0ySL9H9DN4&amp;fexp=3300118%2C3300118%2C
+3300130%2C3300130%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%2C3310366%2C
+3310698%2C3310698%2C3312198%2C3312198%2C910829%2C927622%2C930666%2C930672%2C9319
+83%2C932404%2C934030%2C941293%2C945240%2C946023%2C947209%2C952302&amp;mime=video%2Fw
+ebm&amp;ip=107.178.200.5&amp;keepalive=yes&amp;expire=1413661131&amp;key=yt5&amp;cpn=RrcgawW4j6zxdFK
+L&amp;alr=yes&amp;ratebypass=yes&amp;c=WEB&amp;cver=html5&amp;range=16808020-17591349 HTTP/1.1&quot; 206
+783330
+INFO - [Oct 18 22:15:32] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; RangeFetch started('https://<a href="/p/goagent/source/detail?r=5">r5</a>---sn-q4f
+7dnel.googlevideo.com/videoplayback?ipbits=0&amp;mm=31&amp;requiressl=yes&amp;sver=3&amp;sparams
+=clen%2Cdur%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%2
+Cmv%2Crequiressl%2Csource%2Cupn%2Cexpire&amp;gir=yes&amp;itag=244&amp;mt=1413638859&amp;dur=1444
+3.750&amp;id=o-AFxczTgkNkFJuzJBSm3YiLfdH7nW9NqrMmmMg1rPzQNk&amp;source=youtube&amp;mv=u&amp;clen
+=282859638&amp;signature=<a href="/p/goagent/source/detail?r=C60E4D4A580CC3A1F3CB51026477FAFF83D2CDB6">C60E4D4A580CC3A1F3CB51026477FAFF83D2CDB6</a>.B8D8D18FDB31F8C3A1
+08253DFBB05525A68C5B8C&amp;ms=au&amp;lmt=1393810272265816&amp;upn=l0ySL9H9DN4&amp;fexp=3300118%2
+C3300118%2C3300130%2C3300130%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%2
+C3310366%2C3310698%2C3310698%2C3312198%2C3312198%2C910829%2C927622%2C930666%2C93
+0672%2C931983%2C932404%2C934030%2C941293%2C945240%2C946023%2C947209%2C952302&amp;mim
+e=video%2Fwebm&amp;ip=107.178.200.5&amp;keepalive=yes&amp;expire=1413661131&amp;key=yt5&amp;cpn=Rrcg
+awW4j6zxdFKL&amp;alr=yes&amp;ratebypass=yes&amp;c=WEB&amp;cver=html5&amp;range=16808020-17591349') 0
+-783329
+INFO - [Oct 18 22:15:32] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 61357712] 783330 bytes 0-783329
+/783330
+INFO - [Oct 18 22:15:32] 127.0.0.1:64312 &quot;GAE GET <a href="https://s.youtube.com/api/stat" rel="nofollow">https://s.youtube.com/api/stat</a>
+s/watchtime?ns=yt&amp;el=detailpage&amp;cpn=RrcgawW4j6zxdFKL&amp;docid=CcsUYu0PVxY&amp;ver=2&amp;ref
+errer=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DivJrE_Wory0&amp;cmt=619.108&amp;plid=A
+AUFspodd2bmhn1s&amp;ei=a21CVIjqDpeUqQOHtoDQDg&amp;fmt=244&amp;fs=0&amp;rt=2156.633&amp;c=WEB&amp;cver=ht
+ml5&amp;of=WlvwkT0pmq-r2yjajuEzXw&amp;lact=615365&amp;cbr=Chrome&amp;cbrver=38.0.2125.104&amp;cos=Wi
+ndows&amp;cosver=6.3&amp;cl=77868958&amp;state=playing&amp;hl=en_US&amp;cr=US&amp;uga=m26&amp;len=14443&amp;rtn=
+2196&amp;feature=related&amp;afmt=140&amp;idpj=-7&amp;ldpj=-33&amp;rti=2156&amp;st=579.11&amp;et=619.108&amp;vis
+=3 HTTP/1.1&quot; 204 0
+INFO - [Oct 18 22:15:32] ssl good_ipaddrs=13, bad_ipaddrs=276, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:33] 127.0.0.1:64312 &quot;GAE GET <a href="https://s.youtube.com/api/stat" rel="nofollow">https://s.youtube.com/api/stat</a>
+s/qoe?event=streamingstats&amp;fmt=244&amp;afmt=140&amp;cpn=RrcgawW4j6zxdFKL&amp;ei=a21CVIjqDpeU
+qQOHtoDQDg&amp;el=detailpage&amp;docid=CcsUYu0PVxY&amp;ns=yt&amp;fexp=3300118%2C3300130%2C330013
+7%2C3300161%2C3310366%2C3310698%2C3312198%2C910829%2C927622%2C930666%2C930672%2C
+931983%2C932404%2C934030%2C941293%2C945240%2C946023%2C947209%2C952302&amp;cl=7786895
+8&amp;html5=1&amp;c=WEB&amp;cver=html5&amp;cbr=Chrome&amp;cbrver=38.0.2125.104&amp;cos=Windows&amp;cosver=6.
+3&amp;vps=2158.616:PL&amp;bwm=2158.616:3132119:31.244&amp;bwe=2158.616:129313&amp;bh=2158.616:47
+3.141&amp;cmt=2158.616:621.11421 HTTP/1.1&quot; 204 0
+INFO - [Oct 18 22:15:37] 127.0.0.1:65127 &quot;STRIP CONNECT safebrowsing.google.com:
+443 HTTP/1.1&quot; - -
+INFO - [Oct 18 22:15:37] 127.0.0.1:65128 &quot;STRIP CONNECT code.google.com:443 HTTP
+/1.1&quot; - -
+INFO - [Oct 18 22:15:38] ssl good_ipaddrs=14, bad_ipaddrs=275, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:38] ssl good_ipaddrs=14, bad_ipaddrs=275, unknown_ipaddrs=0
+
+WARNING - [Oct 18 22:15:39] RangeFetch &quot;GET https://<a href="/p/goagent/source/detail?r=5">r5</a>---sn-q4f7dnel.googlevideo
+.com/videoplayback?ipbits=0&amp;mm=31&amp;requiressl=yes&amp;sver=3&amp;sparams=clen%2Cdur%2Cgir
+%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%2Cmv%2Crequiressl%
+2Csource%2Cupn%2Cexpire&amp;gir=yes&amp;itag=244&amp;mt=1413638859&amp;dur=14443.750&amp;id=o-AFxczT
+gkNkFJuzJBSm3YiLfdH7nW9NqrMmmMg1rPzQNk&amp;source=youtube&amp;mv=u&amp;clen=282859638&amp;signat
+ure=<a href="/p/goagent/source/detail?r=C60E4D4A580CC3A1F3CB51026477FAFF83D2CDB6">C60E4D4A580CC3A1F3CB51026477FAFF83D2CDB6</a>.B8D8D18FDB31F8C3A108253DFBB05525A68
+C5B8C&amp;ms=au&amp;lmt=1393810272265816&amp;upn=l0ySL9H9DN4&amp;fexp=3300118%2C3300118%2C330013
+0%2C3300130%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%2C3310366%2C331069
+8%2C3310698%2C3312198%2C3312198%2C910829%2C927622%2C930666%2C930672%2C931983%2C9
+32404%2C934030%2C941293%2C945240%2C946023%2C947209%2C952302&amp;mime=video%2Fwebm&amp;ip
+=107.178.200.5&amp;keepalive=yes&amp;expire=1413661131&amp;key=yt5&amp;cpn=RrcgawW4j6zxdFKL&amp;alr=
+yes&amp;ratebypass=yes&amp;c=WEB&amp;cver=html5&amp;range=16808020-17591349&quot; retry 278528-783329
+
+INFO - [Oct 18 22:15:39] ssl good_ipaddrs=14, bad_ipaddrs=275, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:43] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 61357712] 504802 bytes 278528-7
+83329/783330
+INFO - [Oct 18 22:15:44] 127.0.0.1:65128 &quot;DIRECT GET <a href="https://code.google.com/p/g" rel="nofollow">https://code.google.com/p/g</a>
+oagent/issues/list HTTP/1.1&quot; 200 -
+INFO - [Oct 18 22:15:44] 127.0.0.1:65183 &quot;STRIP CONNECT ssl.gstatic.com:443 HTTP
+/1.1&quot; - -
+INFO - [Oct 18 22:15:44] 127.0.0.1:65185 &quot;STRIP CONNECT ssl.gstatic.com:443 HTTP
+/1.1&quot; - -
+INFO - [Oct 18 22:15:44] 127.0.0.1:65184 &quot;STRIP CONNECT ssl.gstatic.com:443 HTTP
+/1.1&quot; - -
+INFO - [Oct 18 22:15:44] 127.0.0.1:65187 &quot;STRIP CONNECT ssl.gstatic.com:443 HTTP
+/1.1&quot; - -
+INFO - [Oct 18 22:15:44] 127.0.0.1:65186 &quot;STRIP CONNECT ssl.gstatic.com:443 HTTP
+/1.1&quot; - -
+INFO - [Oct 18 22:15:44] ssl good_ipaddrs=14, bad_ipaddrs=275, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:44] ssl good_ipaddrs=14, bad_ipaddrs=275, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:44] ssl good_ipaddrs=14, bad_ipaddrs=275, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:44] ssl good_ipaddrs=14, bad_ipaddrs=275, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:44] ssl good_ipaddrs=14, bad_ipaddrs=275, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:45] 127.0.0.1:65127 &quot;DIRECT POST <a href="https://safebrowsing.googl" rel="nofollow">https://safebrowsing.googl</a>
+e.com/safebrowsing/downloads?client=googlechrome&amp;appver=38.0.2125.104&amp;pver=3.0&amp;k
+ey=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw HTTP/1.1&quot; 200 998
+INFO - [Oct 18 22:15:45] 127.0.0.1:65278 &quot;STRIP CONNECT safebrowsing-cache.googl
+e.com:443 HTTP/1.1&quot; - -
+INFO - [Oct 18 22:15:45] ssl good_ipaddrs=14, bad_ipaddrs=275, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:45] 127.0.0.1:65297 &quot;STRIP CONNECT ssl.gstatic.com:443 HTTP
+/1.1&quot; - -
+INFO - [Oct 18 22:15:45] ssl good_ipaddrs=14, bad_ipaddrs=275, unknown_ipaddrs=0
+
+WARNING - [Oct 18 22:15:49] RangeFetch &quot;GET https://<a href="/p/goagent/source/detail?r=5">r5</a>---sn-q4f7dnel.googlevideo
+.com/videoplayback?ipbits=0&amp;mm=31&amp;requiressl=yes&amp;sver=3&amp;sparams=clen%2Cdur%2Cgir
+%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%2Cmv%2Crequiressl%
+2Csource%2Cupn%2Cexpire&amp;gir=yes&amp;itag=244&amp;mt=1413638859&amp;dur=14443.750&amp;id=o-AFxczT
+gkNkFJuzJBSm3YiLfdH7nW9NqrMmmMg1rPzQNk&amp;source=youtube&amp;mv=u&amp;clen=282859638&amp;signat
+ure=<a href="/p/goagent/source/detail?r=C60E4D4A580CC3A1F3CB51026477FAFF83D2CDB6">C60E4D4A580CC3A1F3CB51026477FAFF83D2CDB6</a>.B8D8D18FDB31F8C3A108253DFBB05525A68
+C5B8C&amp;ms=au&amp;lmt=1393810272265816&amp;upn=l0ySL9H9DN4&amp;fexp=3300118%2C3300118%2C330013
+0%2C3300130%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%2C3310366%2C331069
+8%2C3310698%2C3312198%2C3312198%2C910829%2C927622%2C930666%2C930672%2C931983%2C9
+32404%2C934030%2C941293%2C945240%2C946023%2C947209%2C952302&amp;mime=video%2Fwebm&amp;ip
+=107.178.200.5&amp;keepalive=yes&amp;expire=1413661131&amp;key=yt5&amp;cpn=RrcgawW4j6zxdFKL&amp;alr=
+yes&amp;ratebypass=yes&amp;c=WEB&amp;cver=html5&amp;range=16808020-17591349&quot; retry 409600-783329
+
+INFO - [Oct 18 22:15:49] ssl good_ipaddrs=8, bad_ipaddrs=281, unknown_ipaddrs=0
+INFO - [Oct 18 22:15:50] 127.0.0.1:65185 &quot;DIRECT GET <a href="https://ssl.gstatic.com/cod" rel="nofollow">https://ssl.gstatic.com/cod</a>
+esite/ph/10868592318973270098/css/ph_list.css HTTP/1.1&quot; 200 936
+INFO - [Oct 18 22:15:50] ssl good_ipaddrs=12, bad_ipaddrs=277, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:50] 127.0.0.1:65184 &quot;DIRECT GET <a href="https://ssl.gstatic.com/cod" rel="nofollow">https://ssl.gstatic.com/cod</a>
+esite/ph/10868592318973270098/css/ph_detail.css HTTP/1.1&quot; 200 2064
+INFO - [Oct 18 22:15:50] ssl good_ipaddrs=13, bad_ipaddrs=276, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:50] 127.0.0.1:65186 &quot;DIRECT GET <a href="https://ssl.gstatic.com/cod" rel="nofollow">https://ssl.gstatic.com/cod</a>
+esite/ph/images/star_off.gif HTTP/1.1&quot; 200 179
+INFO - [Oct 18 22:15:50] ssl good_ipaddrs=13, bad_ipaddrs=276, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:50] 127.0.0.1:65183 &quot;DIRECT GET <a href="https://ssl.gstatic.com/cod" rel="nofollow">https://ssl.gstatic.com/cod</a>
+esite/ph/10868592318973270098/css/core.css HTTP/1.1&quot; 200 3560
+INFO - [Oct 18 22:15:50] 127.0.0.1:65297 &quot;DIRECT GET <a href="https://ssl.gstatic.com/cod" rel="nofollow">https://ssl.gstatic.com/cod</a>
+esite/ph/images/star_on.gif HTTP/1.1&quot; 200 262
+INFO - [Oct 18 22:15:50] 127.0.0.1:65394 &quot;STRIP CONNECT apis.google.com:443 HTTP
+/1.1&quot; - -
+INFO - [Oct 18 22:15:50] ssl good_ipaddrs=14, bad_ipaddrs=275, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:50] 127.0.0.1:65187 &quot;DIRECT GET <a href="https://ssl.gstatic.com/cod" rel="nofollow">https://ssl.gstatic.com/cod</a>
+esite/ph/images/defaultlogo.png HTTP/1.1&quot; 200 918
+INFO - [Oct 18 22:15:51] 127.0.0.1:65278 &quot;DIRECT GET https://safebrowsing-cache
+google.com/safebrowsing/rd/ChVnb29nLWJhZGJpbnVybC1zaGF2YXIQARjBlQIggJgCKincigAA_
+_______________________________________________HzIIwYoAAP___wc4AQ HTTP/1.1&quot; 200
+1295
+INFO - [Oct 18 22:15:51] 127.0.0.1:65185 &quot;DIRECT GET <a href="https://ssl.gstatic.com/cod" rel="nofollow">https://ssl.gstatic.com/cod</a>
+esite/ph/10868592318973270098/js/dit_scripts.js HTTP/1.1&quot; 200 18705
+INFO - [Oct 18 22:15:51] ssl good_ipaddrs=15, bad_ipaddrs=274, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:52] 127.0.0.1:65278 &quot;DIRECT GET https://safebrowsing-cache
+google.com/safebrowsing/rd/ChVnb29nLWJhZGJpbnVybC1zaGF2YXIQABj17gEgiO8BKgZ9dwAA_
+w8yBnV3AAD_ADgB HTTP/1.1&quot; 200 2926
+INFO - [Oct 18 22:15:52] 127.0.0.1:65394 &quot;DIRECT GET <a href="https://apis.google.com/js/" rel="nofollow">https://apis.google.com/js/</a>
+plusone.js HTTP/1.1&quot; 200 -
+INFO - [Oct 18 22:15:52] ssl good_ipaddrs=16, bad_ipaddrs=273, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:52] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 61357712] 373730 bytes 409600-7
+83329/783330
+INFO - [Oct 18 22:15:52] ssl good_ipaddrs=16, bad_ipaddrs=273, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:52] 127.0.0.1:65278 &quot;DIRECT GET https://safebrowsing-cache
+google.com/safebrowsing/rd/ChNnb29nLW1hbHdhcmUtc2hhdmFyEAEY-e8IIKDwCCoHCzgCAP__P
+zIH-TcCAP__AzgB HTTP/1.1&quot; 200 4182
+INFO - [Oct 18 22:15:52] ssl good_ipaddrs=16, bad_ipaddrs=273, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:52] 127.0.0.1:65184 &quot;DIRECT GET <a href="https://ssl.gstatic.com/cod" rel="nofollow">https://ssl.gstatic.com/cod</a>
+esite/ph/10868592318973270098/js/kibbles.js HTTP/1.1&quot; 200 1865
+INFO - [Oct 18 22:15:52] 127.0.0.1:65186 &quot;DIRECT GET <a href="https://ssl.gstatic.com/cod" rel="nofollow">https://ssl.gstatic.com/cod</a>
+esite/ph/10868592318973270098/js/ph_core.js HTTP/1.1&quot; 200 15593
+INFO - [Oct 18 22:15:52] 127.0.0.1:65394 &quot;DIRECT GET <a href="https://apis.google.com/_/s" rel="nofollow">https://apis.google.com/_/s</a>
+cs/apps-static/_/js/k=oz.gapi.en.XI68EMobTAw.O/m=plusone/rt=j/sv=1/d=1/ed=1/am=A
+Q/rs=AGLTcCNChh_HL52Me8N4MXj5VaWu5whrCg/cb=gapi.loaded_0 HTTP/1.1&quot; 200 40144
+INFO - [Oct 18 22:15:53] Found [autorange]endswith match url='https://<a href="/p/goagent/source/detail?r=5">r5</a>---sn-q4
+f7dnel.googlevideo.com/videoplayback?ipbits=0&amp;mm=31&amp;requiressl=yes&amp;sver=3&amp;sparam
+s=clen%2Cdur%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%
+2Cmv%2Crequiressl%2Csource%2Cupn%2Cexpire&amp;gir=yes&amp;itag=244&amp;mt=1413638859&amp;dur=144
+43.750&amp;id=o-AFxczTgkNkFJuzJBSm3YiLfdH7nW9NqrMmmMg1rPzQNk&amp;source=youtube&amp;mv=u&amp;cle
+n=282859638&amp;signature=<a href="/p/goagent/source/detail?r=C60E4D4A580CC3A1F3CB51026477FAFF83D2CDB6">C60E4D4A580CC3A1F3CB51026477FAFF83D2CDB6</a>.B8D8D18FDB31F8C3A
+108253DFBB05525A68C5B8C&amp;ms=au&amp;lmt=1393810272265816&amp;upn=l0ySL9H9DN4&amp;fexp=3300118%
+2C3300118%2C3300130%2C3300130%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%
+2C3310366%2C3310698%2C3310698%2C3312198%2C3312198%2C910829%2C927622%2C930666%2C9
+30672%2C931983%2C932404%2C934030%2C941293%2C945240%2C946023%2C947209%2C952302&amp;mi
+me=video%2Fwebm&amp;ip=107.178.200.5&amp;keepalive=yes&amp;expire=1413661131&amp;key=yt5&amp;cpn=Rrc
+gawW4j6zxdFKL&amp;alr=yes&amp;ratebypass=yes&amp;c=WEB&amp;cver=html5&amp;range=17591350-18374269'
+INFO - [Oct 18 22:15:53] ssl good_ipaddrs=16, bad_ipaddrs=273, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:53] 127.0.0.1:65278 &quot;DIRECT GET https://safebrowsing-cache
+google.com/safebrowsing/rd/ChNnb29nLW1hbHdhcmUtc2hhdmFyEAAY-bUJIKC2CSoGGVsCAP8AM
+gn5WgIA_____wA4AQ HTTP/1.1&quot; 200 3921
+INFO - [Oct 18 22:15:53] ssl good_ipaddrs=16, bad_ipaddrs=273, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:53] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; Successfully reached 783329 bytes.
+INFO - [Oct 18 22:15:53] 127.0.0.1:65278 &quot;DIRECT GET https://safebrowsing-cache
+google.com/safebrowsing/rd/ChFnb29nLXBoaXNoLXNoYXZhchABGOHBCyCAwwsqFf3gAgD______
+_______________DzII4eACAP___w84AQ HTTP/1.1&quot; 200 2352
+INFO - [Oct 18 22:15:53] ssl good_ipaddrs=16, bad_ipaddrs=273, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:53] ssl good_ipaddrs=16, bad_ipaddrs=273, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:53] 127.0.0.1:65521 &quot;STRIP CONNECT code.google.com:443 HTTP
+/1.1&quot; - -
+INFO - [Oct 18 22:15:53] ssl good_ipaddrs=16, bad_ipaddrs=273, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:54] 127.0.0.1:65278 &quot;DIRECT GET https://safebrowsing-cache
+google.com/safebrowsing/rd/ChFnb29nLXBoaXNoLXNoYXZhchAAGMnTFSDw0xUqB91pBQD__w8yB
+8lpBQD__w84AQ HTTP/1.1&quot; 200 4011
+INFO - [Oct 18 22:15:54] 127.0.0.1:64963 &quot;GAE GET <a href="https://r5---sn-q4f7dnel.googl" rel="nofollow">https://r5---sn-q4f7dnel.googl</a>
+evideo.com/videoplayback?ipbits=0&amp;mm=31&amp;requiressl=yes&amp;sver=3&amp;sparams=clen%2Cdur
+%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%2Cmv%2Crequi
+ressl%2Csource%2Cupn%2Cexpire&amp;gir=yes&amp;itag=244&amp;mt=1413638859&amp;dur=14443.750&amp;id=o-
+AFxczTgkNkFJuzJBSm3YiLfdH7nW9NqrMmmMg1rPzQNk&amp;source=youtube&amp;mv=u&amp;clen=282859638&amp;
+signature=<a href="/p/goagent/source/detail?r=C60E4D4A580CC3A1F3CB51026477FAFF83D2CDB6">C60E4D4A580CC3A1F3CB51026477FAFF83D2CDB6</a>.B8D8D18FDB31F8C3A108253DFBB05
+525A68C5B8C&amp;ms=au&amp;lmt=1393810272265816&amp;upn=l0ySL9H9DN4&amp;fexp=3300118%2C3300118%2C
+3300130%2C3300130%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%2C3310366%2C
+3310698%2C3310698%2C3312198%2C3312198%2C910829%2C927622%2C930666%2C930672%2C9319
+83%2C932404%2C934030%2C941293%2C945240%2C946023%2C947209%2C952302&amp;mime=video%2Fw
+ebm&amp;ip=107.178.200.5&amp;keepalive=yes&amp;expire=1413661131&amp;key=yt5&amp;cpn=RrcgawW4j6zxdFK
+L&amp;alr=yes&amp;ratebypass=yes&amp;c=WEB&amp;cver=html5&amp;range=17591350-18374269 HTTP/1.1&quot; 206
+782920
+INFO - [Oct 18 22:15:54] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; RangeFetch started('https://<a href="/p/goagent/source/detail?r=5">r5</a>---sn-q4f
+7dnel.googlevideo.com/videoplayback?ipbits=0&amp;mm=31&amp;requiressl=yes&amp;sver=3&amp;sparams
+=clen%2Cdur%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%2
+Cmv%2Crequiressl%2Csource%2Cupn%2Cexpire&amp;gir=yes&amp;itag=244&amp;mt=1413638859&amp;dur=1444
+3.750&amp;id=o-AFxczTgkNkFJuzJBSm3YiLfdH7nW9NqrMmmMg1rPzQNk&amp;source=youtube&amp;mv=u&amp;clen
+=282859638&amp;signature=<a href="/p/goagent/source/detail?r=C60E4D4A580CC3A1F3CB51026477FAFF83D2CDB6">C60E4D4A580CC3A1F3CB51026477FAFF83D2CDB6</a>.B8D8D18FDB31F8C3A1
+08253DFBB05525A68C5B8C&amp;ms=au&amp;lmt=1393810272265816&amp;upn=l0ySL9H9DN4&amp;fexp=3300118%2
+C3300118%2C3300130%2C3300130%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%2
+C3310366%2C3310698%2C3310698%2C3312198%2C3312198%2C910829%2C927622%2C930666%2C93
+0672%2C931983%2C932404%2C934030%2C941293%2C945240%2C946023%2C947209%2C952302&amp;mim
+e=video%2Fwebm&amp;ip=107.178.200.5&amp;keepalive=yes&amp;expire=1413661131&amp;key=yt5&amp;cpn=Rrcg
+awW4j6zxdFKL&amp;alr=yes&amp;ratebypass=yes&amp;c=WEB&amp;cver=html5&amp;range=17591350-18374269') 0
+-782919
+INFO - [Oct 18 22:15:54] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 59535968] 782920 bytes 0-782919
+/782920
+INFO - [Oct 18 22:15:54] 127.0.0.1:65128 &quot;DIRECT POST <a href="https://code.google.com/ho" rel="nofollow">https://code.google.com/ho</a>
+sting/projects HTTP/1.1&quot; 200 -
+INFO - [Oct 18 22:15:54] ssl good_ipaddrs=16, bad_ipaddrs=273, unknown_ipaddrs=0
+
+INFO - [Oct 18 22:15:54] 127.0.0.1:65521 &quot;DIRECT POST <a href="https://code.google.com/ho" rel="nofollow">https://code.google.com/ho</a>
+sting/multilogin HTTP/1.1&quot; 200 -
+INFO - [Oct 18 22:15:54] 127.0.0.1:65128 &quot;DIRECT POST <a href="https://code.google.com/ap" rel="nofollow">https://code.google.com/ap</a>
+is/ajax/playground/get_projects HTTP/1.1&quot; 301 247
+INFO - [Oct 18 22:15:54] 127.0.0.1:49473 &quot;STRIP CONNECT developers.google.com:44
+3 HTTP/1.1&quot; - -
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct 18 18:24:26 2014">
+ Oct 18, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=18004#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/110158684434685666353/">cym.zh...@gmail.com</a
+></span>
+ 
+<pre>
+有病
+
+得治
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18004&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18004"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="18004">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A18004',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 18004,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

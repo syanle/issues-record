@@ -1,0 +1,3069 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"relativeBaseUrl": "", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "projectName": "goagent", "loggedInUserEmail": null, "token": null, "projectHomeUrl": "/p/goagent", "profileUrl": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 17879 - 
+ goagent -
+ 
+ dnsforward 2.7不如goagent自带dns好用容易触发Q规则。 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17879&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17879" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=17879">17879</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >dnsforward 2.7不如goagent自带dns好用容易触发Q规则。</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 4 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A17879">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17879&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17879">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/110660380192047363543/">liuxianl...@gmail.com</a
+>,
+ <span class="date" title="Wed Oct  8 18:51:25 2014">Oct 8, 2014</span>
+ 
+ </div>
+<pre>
+dnsforward日志
+
+DNSforwarder by holmium. Free for non-commercial use. Version 2.7 .
+Time of compilation : Mar  2 2014 11:54:34.
+
+Configure File : D:\Program Files\dnsforwarder27\dnsforwarder.config
+
+
+Local working interface:127.0.0.1
+Local working port:53
+Local TCP is opened:No
+Primary server:UDP
+TCP Server:8.8.4.4
+TCP Server:8.8.8.8
+TCP Server:168.95.1.1
+TCP Server:168.95.192.1
+UDP Server:114.114.115.115
+UDP Parallel Query:Yes
+UDP Anti-pollution:No
+Hosts File:<a href="https://raw.githubusercontent.com/phoenixlzx/imouto.host/master/imout" rel="nofollow">https://raw.githubusercontent.com/phoenixlzx/imouto.host/master/imout</a>
+o.host.txt
+Use cache:No
+Memory Cache:Yes
+Ignore TTL:No
+GFW List:<a href="http://www.woodbunny.com/gfwlist.txt" rel="nofollow">http://www.woodbunny.com/gfwlist.txt</a>
+
+[INFO] Excluded &amp; Disabled list initialized.
+[INFO] Loading the existing GFW List ...
+[INFO] Loading the existing GFW List completed. 2399 effective items.
+[INFO] Starting UDP socket 127.0.0.1:53 successfully.
+[INFO] Loading the existing Hosts ...
+[INFO] IPv4 Host domain is duplicated : ad-apac.doubleclick.net, take only the f
+irst occurrence.
+[INFO] IPv4 Host domain is duplicated : ad-emea.doubleclick.net, take only the f
+irst occurrence.
+[INFO] IPv4 Host domain is duplicated : ad.mo.doubleclick.net, take only the fir
+st occurrence.
+[INFO] IPv4 Host domain is duplicated : ad.userporn.com, take only the first occ
+urrence.
+[INFO] IPv4 Host domain is duplicated : adguanggao.eee114.com, take only the fir
+st occurrence.
+[INFO] IPv4 Host domain is duplicated : api.admob.com, take only the first occur
+rence.
+[INFO] IPv4 Host domain is duplicated : cctv.adsunion.com, take only the first o
+ccurrence.
+[INFO] IPv4 Host domain is duplicated : focusbaiduafp.allyes.com, take only the
+first occurrence.
+[INFO] IPv4 Host domain is duplicated : ma.baidu.com, take only the first occurr
+ence.
+[INFO] IPv4 Host domain is duplicated : mm.admob.com, take only the first occurr
+ence.
+[INFO] IPv4 Host domain is duplicated : nsclick.baidu.com, take only the first o
+ccurrence.
+[INFO] IPv4 Host domain is duplicated : r.admob.com, take only the first occurre
+nce.
+[INFO] IPv4 Host domain is duplicated : spcode.baidu.com, take only the first oc
+currence.
+[INFO] IPv4 Host domain is duplicated : tk.baidu.com, take only the first occurr
+ence.
+[INFO] IPv4 Host domain is duplicated : ucstat.baidu.com, take only the first oc
+currence.
+[INFO] IPv4 Host domain is duplicated : union.baidu.com, take only the first occ
+urrence.
+[INFO] IPv4 Host domain is duplicated : utility.baidu.com, take only the first o
+ccurrence.
+[INFO] IPv4 Host domain is duplicated : utk.baidu.com, take only the first occur
+rence.
+[INFO] IPv4 Host domain is duplicated : ja.wikipedia.org, take only the first oc
+currence.
+[INFO] IPv4 Host domain is duplicated : pl.wikipedia.org, take only the first oc
+currence.
+[INFO] IPv4 Host domain is duplicated : pt.wikipedia.org, take only the first oc
+currence.
+[INFO] IPv4 Host domain is duplicated : www.wikipedia.org, take only the first o
+ccurrence.
+[INFO] IPv4 Host domain is duplicated : bigzipfiles.facebook.com, take only the
+first occurrence.
+[INFO] IPv4 Host domain is duplicated : creative.ak.fbcdn.net, take only the fir
+st occurrence.
+[INFO] IPv4 Host domain is duplicated : uploads.clients.google.com, take only th
+e first occurrence.
+[INFO] IPv4 Host domain is duplicated : android.googlesource.com, take only the
+first occurrence.
+[INFO] IPv4 Host domain is duplicated : www.googlesource.com, take only the firs
+t occurrence.
+[INFO] IPv4 Host domain is duplicated : chatenabled.mail.google.com, take only t
+he first occurrence.
+[INFO] Loading Hosts completed, 4266 IPv4 Hosts, 1 IPv6 Hosts, 0 CName Redirecti
+ons, 0 items are excluded.
+[INFO] Now you can set DNS to 127.0.0.1.
+[INFO] Loading GFW List From <a href="http://www.woodbunny.com/gfwlist.txt" rel="nofollow">http://www.woodbunny.com/gfwlist.txt</a> ...
+[INFO] Hosts File : &quot;<a href="https://raw.githubusercontent.com/phoenixlzx/imouto.host/ma" rel="nofollow">https://raw.githubusercontent.com/phoenixlzx/imouto.host/ma</a>
+ster/imouto.host.txt&quot; -&gt; &quot;D:\Program Files\dnsforwarder27\hosts.txt&quot;
+[INFO] Getting Hosts From <a href="https://raw.githubusercontent.com/phoenixlzx/imouto.ho" rel="nofollow">https://raw.githubusercontent.com/phoenixlzx/imouto.ho</a>
+st/master/imouto.host.txt ...
+[INFO] GFW List saved at D:\Program Files\dnsforwarder27\gfwlist.txt.
+[INFO] Loading GFW List completed. 2399 effective items.
+[INFO] Hosts saved at D:\Program Files\dnsforwarder27\hosts.txt.
+[INFO] IPv4 Host domain is duplicated : ad-apac.doubleclick.net, take only the f
+irst occurrence.
+[INFO] IPv4 Host domain is duplicated : ad-emea.doubleclick.net, take only the f
+irst occurrence.
+[INFO] IPv4 Host domain is duplicated : ad.mo.doubleclick.net, take only the fir
+st occurrence.
+[INFO] IPv4 Host domain is duplicated : ad.userporn.com, take only the first occ
+urrence.
+[INFO] IPv4 Host domain is duplicated : adguanggao.eee114.com, take only the fir
+st occurrence.
+[INFO] IPv4 Host domain is duplicated : api.admob.com, take only the first occur
+rence.
+[INFO] IPv4 Host domain is duplicated : cctv.adsunion.com, take only the first o
+ccurrence.
+[INFO] IPv4 Host domain is duplicated : focusbaiduafp.allyes.com, take only the
+first occurrence.
+[INFO] IPv4 Host domain is duplicated : ma.baidu.com, take only the first occurr
+ence.
+[INFO] IPv4 Host domain is duplicated : mm.admob.com, take only the first occurr
+ence.
+[INFO] IPv4 Host domain is duplicated : nsclick.baidu.com, take only the first o
+ccurrence.
+[INFO] IPv4 Host domain is duplicated : r.admob.com, take only the first occurre
+nce.
+[INFO] IPv4 Host domain is duplicated : spcode.baidu.com, take only the first oc
+currence.
+[INFO] IPv4 Host domain is duplicated : tk.baidu.com, take only the first occurr
+ence.
+[INFO] IPv4 Host domain is duplicated : ucstat.baidu.com, take only the first oc
+currence.
+[INFO] IPv4 Host domain is duplicated : union.baidu.com, take only the first occ
+urrence.
+[INFO] IPv4 Host domain is duplicated : utility.baidu.com, take only the first o
+ccurrence.
+[INFO] IPv4 Host domain is duplicated : utk.baidu.com, take only the first occur
+rence.
+[INFO] IPv4 Host domain is duplicated : ja.wikipedia.org, take only the first oc
+currence.
+[INFO] IPv4 Host domain is duplicated : pl.wikipedia.org, take only the first oc
+currence.
+[INFO] IPv4 Host domain is duplicated : pt.wikipedia.org, take only the first oc
+currence.
+[INFO] IPv4 Host domain is duplicated : www.wikipedia.org, take only the first o
+ccurrence.
+[INFO] IPv4 Host domain is duplicated : bigzipfiles.facebook.com, take only the
+first occurrence.
+[INFO] IPv4 Host domain is duplicated : creative.ak.fbcdn.net, take only the fir
+st occurrence.
+[INFO] IPv4 Host domain is duplicated : uploads.clients.google.com, take only th
+e first occurrence.
+[INFO] IPv4 Host domain is duplicated : android.googlesource.com, take only the
+first occurrence.
+[INFO] IPv4 Host domain is duplicated : www.googlesource.com, take only the firs
+t occurrence.
+[INFO] IPv4 Host domain is duplicated : chatenabled.mail.google.com, take only t
+he first occurrence.
+[INFO] Loading Hosts completed, 4266 IPv4 Hosts, 1 IPv6 Hosts, 0 CName Redirecti
+ons, 0 items are excluded.
+Oct 09 09:43:36 [H][127.0.0.1][IPv4 Address][www.youtube.com] : 49 bytes
+   IPv4 Address:64.233.168.100
+Oct 09 09:43:38 [H][127.0.0.1][IPv4 Address][s.ytimg.com] : 45 bytes
+   IPv4 Address:74.125.207.113
+Oct 09 09:43:43 [H][127.0.0.1][IPv4 Address][twitter.com] : 45 bytes
+   IPv4 Address:199.16.158.8
+[INFO] (Connecting to server Successfully.)
+Oct 09 09:43:45 [T][127.0.0.1][IPv4 Address][abs.twimg.com] : 86 bytes
+   Canonical Name:cs107.wac.edgecastcdn.net
+   IPv4 Address:117.18.237.139
+An error occured while receiving from 127.0.0.1 : 10054 : An existing connection
+ was forcibly closed by the remote host.
+ .
+[INFO] (Connecting to server Successfully.)
+Oct 09 09:43:47 [T][127.0.0.1][IPv4 Address][pbs.twimg.com] : 97 bytes
+   Canonical Name:wildcard.twimg.com.tw.map.fastly.net
+   IPv4 Address:199.96.57.7
+An error occured while receiving from 127.0.0.1 : 10054 : An existing connection
+ was forcibly closed by the remote host.
+ .
+Oct 09 09:43:51 [H][127.0.0.1][IPv4 Address][i.ytimg.com] : 45 bytes
+   IPv4 Address:74.125.207.113
+[INFO] (Connecting to server Successfully.)
+Oct 09 09:44:33 [T][127.0.0.1][IPv4 Address][<a href="/p/goagent/source/detail?r=8">r8</a>---sn-q4f7dnl7.googlevideo.com] :
+ 95 bytes
+   Canonical Name:<a href="/p/goagent/source/detail?r=8">r8</a>.sn-q4f7dnl7.googlevideo.com
+   IPv4 Address:173.194.57.77
+An error occured while receiving from 127.0.0.1 : 10054 : An existing connection
+ was forcibly closed by the remote host.
+ .
+[INFO] (Connecting to server Successfully.)
+Oct 09 09:44:55 [T][127.0.0.1][IPv4 Address][s.youtube.com] : 242 bytes
+   Canonical Name:video-stats.l.google.com
+   IPv4 Address:173.194.127.200
+   IPv4 Address:173.194.127.201
+   IPv4 Address:173.194.127.193
+   IPv4 Address:173.194.127.197
+   IPv4 Address:173.194.127.195
+   IPv4 Address:173.194.127.192
+   IPv4 Address:173.194.127.198
+   IPv4 Address:173.194.127.206
+   IPv4 Address:173.194.127.199
+   IPv4 Address:173.194.127.196
+   IPv4 Address:173.194.127.194
+An error occured while receiving from 127.0.0.1 : 10054 : An existing connection
+ was forcibly closed by the remote host.
+ .
+Oct 09 09:46:10 [U][127.0.0.1][IPv4 Address][addons.g-fox.cn] : 189 bytes
+   Canonical Name:addons.g-fox.cn.cloudcdn.net
+   Canonical Name:c01.i05.ctlzj.hadns.net
+   IPv4 Address:122.228.227.137
+   IPv4 Address:122.228.227.139
+   IPv4 Address:183.136.166.147
+   IPv4 Address:122.226.182.72
+   IPv4 Address:122.226.182.71
+Oct 09 09:46:11 [U][127.0.0.1][IPv4 Address][offlintab.firefoxchina.cn] An error
+ occured : 10060 : A connection attempt failed because the connected party did n
+ot properly respond after a period of time, or established connection failed bec
+ause connected host has failed to respond.
+ .
+Oct 09 09:46:27 [U][127.0.0.1][IPv4 Address][offlintab.firefoxchina.cn] An error
+ occured : 10060 : A connection attempt failed because the connected party did n
+ot properly respond after a period of time, or established connection failed bec
+ause connected host has failed to respond.
+ .
+
+马上切换会goagent 3.2.07 开dns 毫无压力
+
+一片全是黑色，放弃dnsforward了
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 02:05:12 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=17879#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/110784163027609995489/">hitwangy...@gmail.com</a
+></span>
+ 
+<pre>
+to
+”#1 liuxianl...@gmail.com
+我刚才发现，goagent要配合本地dns+hosts，这样访问速度最快，缺少任何一个都会有延迟。“
+
+具体是怎么做的呢？指点下
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 02:47:32 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=17879#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/110483295073717343851/">zsbstep...@gmail.com</a
+></span>
+ 
+<pre>
+什么是Q规则？搜不到，不懂……
+不过貌似dnsforwarder的机制，确实是有几率在TCP查询时被GFW干扰阻断。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 02:58:35 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=17879#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/110660380192047363543/">liuxianl...@gmail.com</a
+></span>
+ 
+<pre>
+1004] getaddrinfo '' from ['223.6.6.6'] failed
+WARNING - [Oct 09 17:57:41] dnslib_resolve_over_tcp '' with ['223.5.5.5'] return
+ timeout('timed out',)
+INFO - [Oct 09 17:57:41] dnslib_resolve_over_tcp remote host='' failed: [Errno 1
+1004] getaddrinfo '' from ['223.5.5.5'] failed
+WARNING - [Oct 09 17:57:41] dnslib_resolve_over_tcp '' with ['168.95.192.1'] ret
+urn timeout('timed out',)
+INFO - [Oct 09 17:57:41] dnslib_resolve_over_tcp remote host='' failed: [Errno 1
+1004] getaddrinfo '' from ['168.95.192.1'] failed
+WARNING - [Oct 09 17:57:41] dnslib_resolve_over_tcp '' with ['114.114.115.115']
+return timeout('timed out',)
+INFO - [Oct 09 17:57:41] dnslib_resolve_over_tcp remote host='' failed: [Errno 1
+1004] getaddrinfo '' from ['114.114.115.115'] failed
+WARNING - [Oct 09 17:57:41] dnslib_resolve_over_tcp '' with ['114.114.114.114']
+return timeout('timed out',)
+INFO - [Oct 09 17:57:41] dnslib_resolve_over_tcp remote host='' failed: [Errno 1
+1004] getaddrinfo '' from ['114.114.114.114'] failed
+WARNING - [Oct 09 17:57:42] dnslib_resolve_over_tcp '' with ['168.95.1.1'] retur
+n timeout('timed out',)
+INFO - [Oct 09 17:57:42] dnslib_resolve_over_tcp remote host='' failed: [Errno 1
+1004] getaddrinfo '' from ['168.95.1.1'] failed
+INFO - [Oct 09 17:57:47] 127.0.0.1:3467 &quot;DIRECT GET <a href="https://developers.google.co" rel="nofollow">https://developers.google.co</a>
+m/apis-explorer/?csw=1 HTTP/1.1&quot; 200 603
+INFO - [Oct 09 17:57:54] extend_iplist finished, added 54
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 03:35:05 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=17879#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/110784163027609995489/">hitwangy...@gmail.com</a
+></span>
+ 
+<pre>
+#4
+WARNING - [Oct 09 17:57:42] dnslib_resolve_over_tcp '' with ['168.95.1.1'] retur
+n timeout('timed out',)
+这种错误就是dns被污染了吧
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 04:16:39 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=17879#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+用dnsforwarder從來沒有遇到這樣的情況，參數設置很重要，同時推薦使用5.x版本的dnsforwarder，重構架構，效率更高，非常穩定。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 04:37:22 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=17879#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/102013212251338154536/">vvkk2...@gmail.com</a
+></span>
+ 
+<pre>
+求配置#6
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 05:13:44 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=17879#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/102013212251338154536/">vvkk2...@gmail.com</a
+></span>
+ 
+<pre>
+david.求配置多谢啊
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 05:23:26 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=17879#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/102013212251338154536/">vvkk2...@gmail.com</a
+></span>
+ 
+<pre>
+#8如何使用啊
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 05:39:57 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=17879#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/102013212251338154536/">vvkk2...@gmail.com</a
+></span>
+ 
+<pre>
+unbound 如何使用
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 05:43:48 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=17879#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/118151213964428623999/">grey1982...@gmail.com</a
+></span>
+ 
+<pre>
+unbound 和 DF其实是一样的，主要还是看配置，配置好了，非常好用~！！！！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 05:47:50 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=17879#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/102013212251338154536/">vvkk2...@gmail.com</a
+></span>
+ 
+<pre>
+我刚下载了为什么窗口无法滚动呢，我下载的是免安装，
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 05:49:06 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=17879#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/102013212251338154536/">vvkk2...@gmail.com</a
+></span>
+ 
+<pre>
+[1412858263] E:\Program Files\unbound\unbound.exe[2488:0] notice: init module 0: validator
+[1412858263] E:\Program Files\unbound\unbound.exe[2488:0] notice: init module 1: iterator
+[1412858263] E:\Program Files\unbound\unbound.exe[2488:0] info: start of service (unbound 1.4.22).
+[1412858272] E:\Program Files\unbound\unbound.exe[2488:0] info: 127.0.0.1 img.maxthon.cn. A IN
+[1412858273] E:\Program Files\unbound\unbound.exe[2488:0] info: 127.0.0.1 img.maxthon.cn. A IN
+[1412858282] E:\Program Files\unbound\unbound.exe[2488:0] info: 127.0.0.1 <a href="/p/goagent/source/detail?r=15">r15</a>---sn-a5m7znek.googlevideo.com. A IN
+[1412858283] E:\Program Files\unbound\unbound.exe[2488:0] info: 127.0.0.1 <a href="/p/goagent/source/detail?r=15">r15</a>---sn-a5m7znek.googlevideo.com. A IN
+[1412858290] E:\Program Files\unbound\unbound.exe[2488:0] info: 127.0.0.1 s.youtube.com. A IN
+[1412858290] E:\Program Files\unbound\unbound.exe[2488:0] info: 127.0.0.1 www.youtube-nocookie.com. A IN
+[1412858291] E:\Program Files\unbound\unbound.exe[2488:0] info: 127.0.0.1 s.youtube.com. A IN
+[1412858291] E:\Program Files\unbound\unbound.exe[2488:0] info: 127.0.0.1 www.youtube-nocookie.com. A IN
+[1412858351] E:\Program Files\unbound\unbound.exe[2488:0] info: 127.0.0.1 liveupdate.symantecliveupdate.com. A IN
+[1412858352] E:\Program Files\unbound\unbound.exe[2488:0] info: 127.0.0.1 liveupdate.symantecliveupdate.com. A IN
+[1412858469] E:\Program Files\unbound\unbound.exe[4204:0] notice: init module 0: validator
+[1412858469] E:\Program Files\unbound\unbound.exe[4204:0] notice: init module 1: iterator
+[1412858469] E:\Program Files\unbound\unbound.exe[4204:0] info: start of service (unbound 1.4.22).
+[1412858580] E:\Program Files\unbound\unbound.exe[4132:0] notice: init module 0: validator
+[1412858580] E:\Program Files\unbound\unbound.exe[4132:0] notice: init module 1: iterator
+[1412858580] E:\Program Files\unbound\unbound.exe[4132:0] info: start of service (unbound 1.4.22).
+[1412858620] E:\Program Files\unbound\unbound.exe[3212:0] notice: init module 0: validator
+[1412858620] E:\Program Files\unbound\unbound.exe[3212:0] notice: init module 1: iterator
+[1412858620] E:\Program Files\unbound\unbound.exe[3212:0] info: start of service (unbound 1.4.22).
+[1412858632] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 hb.lifecycle.norton.com. A IN
+[1412858632] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 hb.lifecycle.norton.com. AAAA IN
+[1412858633] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 hb.lifecycle.norton.com. AAAA IN
+[1412858634] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 hb.lifecycle.norton.com. AAAA IN
+[1412858655] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 liveupdate.symantecliveupdate.com. A IN
+[1412858656] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 liveupdate.symantecliveupdate.com. A IN
+[1412858663] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 nono.qisns.com. A IN
+[1412858664] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 img.t.sinajs.cn. A IN
+[1412858664] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 static.duoshuo.com. A IN
+[1412858665] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 img.t.sinajs.cn. A IN
+[1412858666] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 hi.baidu.com. A IN
+[1412858666] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 hyyz17200.lofter.com. A IN
+[1412858666] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 ddatsh.com. A IN
+[1412858667] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 nonofiles.qisns.com. A IN
+[1412858667] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 hi.baidu.com. A IN
+[1412858667] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 ddatsh.com. A IN
+[1412858667] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 pan.baidu.com. A IN
+[1412858667] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 hyyz17200.duoshuo.com. A IN
+[1412858667] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 site.douban.com. A IN
+[1412858668] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 nonofiles.qisns.com. A IN
+[1412858668] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 pan.baidu.com. A IN
+[1412858668] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 hyyz17200.duoshuo.com. A IN
+[1412858668] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 site.douban.com. A IN
+[1412858669] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 ifanqiang.com. A IN
+[1412858686] E:\Program Files\unbound\unbound.exe[3212:0] info: 127.0.0.1 allinfa.com. A IN
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 05:50:52 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=17879#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/102013212251338154536/">vvkk2...@gmail.com</a
+></span>
+ 
+<pre>
+这是日子，我按作者那样修改了，然后，在C:\Program Files\unbound也放置了service.conf，点击运行unboud.exe窗口里面就是显示一个横杆一闪一闪，不走字
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 05:59:27 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=17879#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/102013212251338154536/">vvkk2...@gmail.com</a
+></span>
+ 
+<pre>
+8楼 12楼高手解答一下
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 07:50:11 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=17879#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/115863406264366476075/">wangx...@gmail.com</a
+></span>
+ 
+<pre>
+我这边goagent配合dnsforward无楼主的问题。
+我看到楼主加载了imout的hosts，我估计自定义的hosts对goagent有影响。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 08:24:13 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=17879#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/102013212251338154536/">vvkk2...@gmail.com</a
+></span>
+ 
+<pre>
+求dnsforward正常CMD窗口运行图片，自己DIY了几天TCP还是TIME OUT，不知道是那里设置问题，
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 17:53:46 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=17879#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/118151213964428623999/">grey1982...@gmail.com</a
+></span>
+ 
+<pre>
+不要使用默认设置，自己寻找其他的DNS，而且启用非标准端口，53端口很多都被封掉了！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 18:55:26 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=17879#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/110660380192047363543/">liuxianl...@gmail.com</a
+></span>
+ 
+<pre>
+#18 不自定义hosts，解析会很慢
+
+#20 如果不使用自定义配置，找dns可能会解决，目前就是很容易被Q
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 23:40:05 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=17879#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+#21 你根本沒明白 #20的建議，用他說的方法怎麼可能被牆，那估計你根本沒吃透dnsforwarder的配置文件。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Oct 10 05:05:00 2014">
+ Oct 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=17879#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/102013212251338154536/">vvkk2...@gmail.com</a
+></span>
+ 
+<pre>
+求配置21楼2yoo@163.com 求配置21楼2yoo@163.com求配置21楼2yoo@163.com求配置21楼2yoo@163.com求配置21楼2yoo@163.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct 11 08:36:47 2014">
+ Oct 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=17879#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/110660380192047363543/">liuxianl...@gmail.com</a
+></span>
+ 
+<pre>
+#20 我参照你的建议，使用了第二套方案（gwlist）
+1、同时将本地gwlist加载，而不是单加在线
+2、udp使用114，有时候使用其他国内dns，会出现污染现象
+3、tcp使用DNSbenchmark，搜索了一些国外较快dns
+4、之前的配置，是因为我系统使用了hosts，同时又加载了网络hosts，可能会有冲突
+
+效果，目前使用还算ok，没有出现太大问题。希望能够看到优秀的配置，关键数据可以隐去
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct 11 08:37:51 2014">
+ Oct 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=17879#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/110660380192047363543/">liuxianl...@gmail.com</a
+></span>
+ 
+<pre>
+#20  #22 启用非标准端口，是对本机而言，还是对服务器端而言？我修改了本机监听端口53，系统就无法识别了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc26">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct 11 10:52:42 2014">
+ Oct 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c26" href="/p/goagent/issues/detail?id=17879#c26">#26</a>
+ 
+
+ <a class="userlink"
+ href="/u/118151213964428623999/">grey1982...@gmail.com</a
+></span>
+ 
+<pre>
+服务器的特殊端口，不是本机的！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct 11 17:09:58 2014">
+ Oct 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=17879#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/110660380192047363543/">liuxianl...@gmail.com</a
+></span>
+ 
+<pre>
+#26 服务器特殊端口？在哪里设置呢
+
+这个要特殊的dns才支持吧
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct 11 18:02:22 2014">
+ Oct 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=17879#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/118151213964428623999/">grey1982...@gmail.com</a
+></span>
+ 
+<pre>
+当然，因为现在Q已经在所有进行53端口的通讯投毒，所以很多DNS都用不了，只有个别支持非标准端口的DNS可以使用，比如opendns....
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc29">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct 11 20:49:27 2014">
+ Oct 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c29" href="/p/goagent/issues/detail?id=17879#c29">#29</a>
+ 
+
+ <a class="userlink"
+ href="/u/110660380192047363543/">liuxianl...@gmail.com</a
+></span>
+ 
+<pre>
+@28 这个有可能，所以如果是dnsforward的话，它自己查询并没有加密吧
+
+tcp还是会被阻断
+
+我是想知道，远程dns的端口在哪里设置
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc30">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct 11 21:16:53 2014">
+ Oct 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c30" href="/p/goagent/issues/detail?id=17879#c30">#30</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+#29 你不可能設置服務器的端口，我知道的是208.67.220.220:5353,208.67.222.222:5353可以用，dnsforwarder的本地端口不用修改保持53，但是可以開啟disabled ip黑名單，把投毒的ip放進去，再從tcp查詢海外的ip，那麼就可以徹底避開污染了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc31">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct 11 23:19:54 2014">
+ Oct 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c31" href="/p/goagent/issues/detail?id=17879#c31">#31</a>
+ 
+
+ <a class="userlink"
+ href="/u/102013212251338154536/">vvkk2...@gmail.com</a
+></span>
+ 
+<pre>
+我发现不用修改HOSTS文件，否则dnsforward里面就不走字了，用原版的就非常不错，
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc32">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct 11 23:28:02 2014">
+ Oct 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c32" href="/p/goagent/issues/detail?id=17879#c32">#32</a>
+ 
+
+ <a class="userlink"
+ href="/u/110660380192047363543/">liuxianl...@gmail.com</a
+></span>
+ 
+<pre>
+#30 投毒ip是投毒的dns的dip地址吧？ 就是在dns列表后面，加上该dns的服务器远程的端口 。  
+
+
+#31 如果hosts里有，是不是优先走hosts？ 原版的，在某些地区应该是ok了，在其他地区未必。 
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc33">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct 11 23:55:33 2014">
+ Oct 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c33" href="/p/goagent/issues/detail?id=17879#c33">#33</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+#32 對，你需要把配置文件中的UDPBlock_IP 後邊填上所有的投毒ip，就是這樣：
+UDPBlock_IP 1.1.1.1|1.2.4.8|118.123.242.119|118.5.49.6|128.121.126.139|159.106.121.75|169.132.13.103|188.5.4.96|189.163.17.5|192.67.198.6|197.4.4.12|202.106.1.2|202.181.7.85|203.161.230.171|203.98.7.65|207.12.88.98|208.56.31.43|209.145.54.50|209.220.30.174|209.36.73.33|209.85.229.138|210.2.4.8|211.94.66.147|213.169.251.35|216.221.188.182|216.234.179.13|23.89.5.60|243.185.187.3|243.185.187.39|249.129.46.48|253.157.14.165|255.255.255.255|37.208.111.120|37.61.54.158|4.36.66.178|46.82.174.68|49.2.123.56|54.76.135.1|59.24.3.173|64.33.88.161|64.33.99.47|64.66.163.251|65.104.202.252|65.160.219.113|66.45.252.237|72.14.205.104|72.14.205.99|74.125.127.102|74.125.155.102|74.125.39.102|74.125.39.113|77.4.7.92|78.16.49.15|8.7.198.45|93.46.8.89|183.207.232.
+
+#31 不要載入hosts文件，容易導致gfwlist.txt 的加載出現異常，另外dnsforwarder已經升級到5.0.12，支持tcpproxy，很不錯，找幾個socket5的代理，加入配置文件，完全抵禦dns的投毒。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc34">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 12 00:41:26 2014">
+ Oct 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c34" href="/p/goagent/issues/detail?id=17879#c34">#34</a>
+ 
+
+ <a class="userlink"
+ href="/u/110660380192047363543/">liuxianl...@gmail.com</a
+></span>
+ 
+<pre>
+#32 tcpproxy，是指的dnsrward前置代理？那这个基本上就没法Q了。我买了ss，做前置代理妥妥的。
+
+#33 你的udpblock-ip 是从goagent里来的吧？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc35">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 12 00:52:07 2014">
+ Oct 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c35" href="/p/goagent/issues/detail?id=17879#c35">#35</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+GOA有一些，wikipedai有一些，issue裡有一些。你說的是shadowsocks？那個不行的，要網上去找socket5 proxy，很多，一搜一大把。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc36">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 12 01:20:20 2014">
+ Oct 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c36" href="/p/goagent/issues/detail?id=17879#c36">#36</a>
+ 
+
+ <a class="userlink"
+ href="/u/110660380192047363543/">liuxianl...@gmail.com</a
+></span>
+ 
+<pre>
+#35 ss是支持socket5的，为何不行？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc37">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 12 02:00:31 2014">
+ Oct 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c37" href="/p/goagent/issues/detail?id=17879#c37">#37</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+ss需要密碼登入，dnsforwarder支持的是匿名的socket5代理。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc38">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 12 02:09:31 2014">
+ Oct 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c38" href="/p/goagent/issues/detail?id=17879#c38">#38</a>
+ 
+
+ <a class="userlink"
+ href="/u/110660380192047363543/">liuxianl...@gmail.com</a
+></span>
+ 
+<pre>
+#37 这个倒是，不过不是提供一个端口吗？不太理解，我没用过这个版本的dnsforwarder
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc39">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 12 04:42:20 2014">
+ Oct 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c39" href="/p/goagent/issues/detail?id=17879#c39">#39</a>
+ 
+
+ <a class="userlink"
+ href="/u/102013212251338154536/">vvkk2...@gmail.com</a
+></span>
+ 
+<pre>
+如何在配置下面填写TCPProxy 格式啊，david
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc40">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 12 04:57:29 2014">
+ Oct 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c40" href="/p/goagent/issues/detail?id=17879#c40">#40</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+#39 配置文件有提示啊，你需要換成作者更新的defautl.config文件，格式就是xx.xx.xx.xx:xxx
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc41">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 12 05:28:51 2014">
+ Oct 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c41" href="/p/goagent/issues/detail?id=17879#c41">#41</a>
+ 
+
+ <a class="userlink"
+ href="/u/102013212251338154536/">vvkk2...@gmail.com</a
+></span>
+ 
+<pre>
+明白，还有个问题，单独用系统的HOSTS加上dnsforwarder,就可以走动，但是打开网页速度不怎么快，而用修改后的HOSTS单独打开网页速度就比较快了，而一旦用修改过的HOSTS替换，原系统的HOSTS，dnsforwarder,不走动，出现很多time out！！而且我用了dnsforwarder+goagent播放youtube的速度并没有提升很多，这个我实在搞不懂，
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc42">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 12 06:34:26 2014">
+ Oct 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c42" href="/p/goagent/issues/detail?id=17879#c42">#42</a>
+ 
+
+ <a class="userlink"
+ href="/u/110811602421569375397/">jingzhou...@gmail.com</a
+></span>
+ 
+<pre>
+#40  网上找的socks5代理可能没几天就变了，那不是要随时更换啊？这样不是很麻烦？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc43">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 12 07:02:55 2014">
+ Oct 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c43" href="/p/goagent/issues/detail?id=17879#c43">#43</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+#42 那沒有辦法，如果想穩定就自己搭建一個吧。又不費事。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc44">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 12 07:52:05 2014">
+ Oct 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c44" href="/p/goagent/issues/detail?id=17879#c44">#44</a>
+ 
+
+ <a class="userlink"
+ href="/u/110811602421569375397/">jingzhou...@gmail.com</a
+></span>
+ 
+<pre>
+#43 怎么搭建啊？能否指导一下，好方便搜索，谢谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc45">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 12 11:06:01 2014">
+ Oct 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c45" href="/p/goagent/issues/detail?id=17879#c45">#45</a>
+ 
+
+ <a class="userlink"
+ href="/u/115170559629428551409/">K1261...@gmail.com</a
+></span>
+ 
+<pre>
+#33 david.da...@gmail.com 更新的那个dnsforwarder 5.0.12请你发给我 之前用的老版
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc46">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 12 11:10:07 2014">
+ Oct 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c46" href="/p/goagent/issues/detail?id=17879#c46">#46</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+在這裡，自己去下吧。 <a href="https://github.com/holmium/dnsforwarder/tree/5/codeblocks_win/bin" rel="nofollow">https://github.com/holmium/dnsforwarder/tree/5/codeblocks_win/bin</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc47">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct 13 05:06:54 2014">
+ Oct 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c47" href="/p/goagent/issues/detail?id=17879#c47">#47</a>
+ 
+
+ <a class="userlink"
+ href="/u/102782968046662718730/">yangchon...@gmail.com</a
+></span>
+ 
+<pre>
+dnsforwarder的本地端口53不用改的，这是统一转发到指定DNS服务器，墙外网站还是别用主流的DNS比较好。不用加载hosts，在解析的时候会用到系统的hosts的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc48">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct 13 05:11:08 2014">
+ Oct 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c48" href="/p/goagent/issues/detail?id=17879#c48">#48</a>
+ 
+
+ <a class="userlink"
+ href="/u/110660380192047363543/">liuxianl...@gmail.com</a
+></span>
+ 
+<pre>
+#47 不用和hosts一起用吗？我系统hosts有修改的。这个怎样？貌似还是会快些吧
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc49">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct 13 08:09:00 2014">
+ Oct 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c49" href="/p/goagent/issues/detail?id=17879#c49">#49</a>
+ 
+
+ <a class="userlink"
+ href="/u/102782968046662718730/">yangchon...@gmail.com</a
+></span>
+ 
+<pre>
+加不加载都行，但加载了修改过的hosts会增加dnsforwarder的负担
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc50">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct 13 08:30:49 2014">
+ Oct 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c50" href="/p/goagent/issues/detail?id=17879#c50">#50</a>
+ 
+
+ <a class="userlink"
+ href="/u/110660380192047363543/">liuxianl...@gmail.com</a
+></span>
+ 
+<pre>
+#49 怎么会增加负担呢？hosts的优先级不是高于dns查询吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc51">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Oct 17 02:46:46 2014">
+ Oct 17, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c51" href="/p/goagent/issues/detail?id=17879#c51">#51</a>
+ 
+
+ <a class="userlink"
+ href="/u/115170559629428551409/">K1261...@gmail.com</a
+></span>
+ 
+<pre>
+#46 david.da...@gmail.com
+用了最新5.0.12dnsforwarder之后百度网站视频完全看不到了，怎么办？链接在这<a href="http://baidu.ku6.com/kan/Ogtf?fr=v.baidu.com/" rel="nofollow">http://baidu.ku6.com/kan/Ogtf?fr=v.baidu.com/</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc52">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Oct 17 04:19:05 2014">
+ Oct 17, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c52" href="/p/goagent/issues/detail?id=17879#c52">#52</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+#51沒有問題啊，我使用一切正常，你的瀏覽器問題。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc53">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Oct 17 07:38:17 2014">
+ Oct 17, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c53" href="/p/goagent/issues/detail?id=17879#c53">#53</a>
+ 
+
+ <a class="userlink"
+ href="/u/115170559629428551409/">K1261...@gmail.com</a
+></span>
+ 
+<pre>
+#52 david.da...@gmail.com
+
+谷歌浏览器版本 31.0.1650.63
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc54">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 19 22:09:04 2014">
+ Oct 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c54" href="/p/goagent/issues/detail?id=17879#c54">#54</a>
+ 
+
+ <a class="userlink"
+ href="/u/110811602421569375397/">jingzhou...@gmail.com</a
+></span>
+ 
+<pre>
+ #52 david.da...@gmail.com
+
+求搭建socks5匿名代理方法
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc55">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Oct 22 08:26:23 2014">
+ Oct 22, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c55" href="/p/goagent/issues/detail?id=17879#c55">#55</a>
+ 
+
+ <a class="userlink"
+ href="/u/102013212251338154536/">vvkk2...@gmail.com</a
+></span>
+ 
+<pre>
+51楼用PAC模式可以观看，用全局模式确实看不了，我这里也是！！！
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17879&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17879"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="17879">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A17879',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 17879,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

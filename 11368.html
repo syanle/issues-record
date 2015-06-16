@@ -1,0 +1,1735 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"token": null, "profileUrl": null, "domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "projectHomeUrl": "/p/goagent", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "loggedInUserEmail": null, "projectName": "goagent", "relativeBaseUrl": ""};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 11368 - 
+ goagent -
+ 
+ 蒙对了？修改了下app.yaml好像youtube不卡了 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D11368&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D11368" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=11368">11368</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >蒙对了？修改了下app.yaml好像youtube不卡了</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 3 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A11368">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D11368&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D11368">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/112315862557397991300/">hellomai...@gmail.com</a
+>,
+ <span class="date" title="Mon Nov 11 19:24:42 2013">Nov 11, 2013</span>
+ 
+ </div>
+<pre>
+修改了server\python\app.yaml 中的application=你的appid  ，然后youtube似乎没问题了
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov 11 19:51:14 2013">
+ Nov 11, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=11368#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/118157386861532467702/">mz11ou1...@gmail.com</a
+></span>
+ 
+<pre>
+晕，这也要蒙啊，只是你不知道这个常识而已，有的教程里面就有的。
+更换goagent新版本之后根本不用重新上传ID的，要做的就是要修改两个地方的ID,一个是proxy.ini里面的，另一个就是app.yaml中的。修改这两地方后就可以直接使用goagent了，不用重新上传ID。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov 11 19:54:21 2013">
+ Nov 11, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=11368#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/118157386861532467702/">mz11ou1...@gmail.com</a
+></span>
+ 
+<pre>
+搞不明白你以前怎么用的，多个ID之间要切换的话，必须要修改app.yaml里面的ID，对于我来说，一个ID根本不够用，一个ID一天只有一个G的流量，把app.yaml里面的ID修改成自己的ID（多个ID用|分开），这几个ID在使用时自动切换，用完一个G后goagent就自动切换成另一个ID。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov 11 20:06:54 2013">
+ Nov 11, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=11368#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/111697909833153894447/">softw...@gmail.com</a
+></span>
+ 
+<pre>
+刚知道还要改这个...以前看的教程里没写
+#1说的不对，某些版本要重新上传服务端的，否则无法正常使用，官方有说明的
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov 11 20:28:07 2013">
+ Nov 11, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=11368#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/sunzhizhongd/">sunzhizhongd</a
+></span>
+ 
+<pre>
+我也是第一次注意到，原来我以前都是只用的一个IP啊……
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov 11 20:36:37 2013">
+ Nov 11, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=11368#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/114973502291790249329/">zhangpei...@gmail.com</a
+></span>
+ 
+<pre>
+这个文件夹是在server文件件里的啊，没有必要改吧，只要重新上传了，应该是自动调用ini文件里的信息的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov 11 20:39:27 2013">
+ Nov 11, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=11368#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/106017228722240267718/">terryche...@gmail.com</a
+></span>
+ 
+<pre>
+#1楼。。哪里有提过这个？你找给我看看？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov 11 21:16:43 2013">
+ Nov 11, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=11368#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/110926411631951729596/">konggao...@gmail.com</a
+></span>
+ 
+<pre>
+app.yaml ~~这个东西需要手动修改?~
+我怎么感觉不对呢，上传时候，在命令提示符窗口里输入的appid，会自动用来修改这个。
+并且每个应用里的app.yaml文件里的appid只能有一个，就是当前这个应用的名字。
+即使你改成了多个appid,最后也会自动被替换成单个的~
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov 11 21:47:54 2013">
+ Nov 11, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=11368#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/118157386861532467702/">mz11ou1...@gmail.com</a
+></span>
+ 
+<pre>
+#7当然需要改啦，改过后就不需要重新上传了，你觉得改麻烦呢还是重新上传麻烦？当然重新上传麻烦！你要是重新上传的话当然改了也没用，你要是改的话就不应该重新上传了，有人说有的版本不重新上传没法用，我的ID咋从来没有重新上传照样用的好好的，而且我的版本一直跟着官方在更新。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov 11 21:50:53 2013">
+ Nov 11, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=11368#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/118157386861532467702/">mz11ou1...@gmail.com</a
+></span>
+ 
+<pre>
+你修改那文件里的ID只需要几秒钟，你上传多个ID怎么也得好几分钟吧？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov 11 21:56:27 2013">
+ Nov 11, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=11368#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/118157386861532467702/">mz11ou1...@gmail.com</a
+></span>
+ 
+<pre>
+@#7 app.yaml文件里面的appid就是要多个才能自动切换，不能重新上传，重新上传后就变成一个了，流量用完，网页上就显示“quoto over”，而且还要重新上传另一个ID，何必这么麻烦呢？？如果 那个文件de appid 换成多个，他们之间自动切换，一个ID用完了自动切换到另一个ID，网页上也不会显示“quoto over”了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov 11 22:19:44 2013">
+ Nov 11, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=11368#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/109700506104043355655/">rulairuf...@gmail.com</a
+></span>
+ 
+<pre>
+我也是刚刚发现
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov 11 23:17:46 2013">
+ Nov 11, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=11368#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/107795591669850984411/">alienwar...@gmail.com</a
+></span>
+ 
+<pre>
+若修改了wsgi.py是不是同样不需要上传，只修改app.yaml呢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov 11 23:35:07 2013">
+ Nov 11, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=11368#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/104408105920610331290/">marco.ts...@gmail.com</a
+></span>
+ 
+<pre>
+mz11ou1...@gmail.com
+1\這位朋友是停留在啥時代呀,近代版本上傳根本不需要修改app.yaml文件了
+2\不上傳服務端,敢情你單單修改自己本地的服務文件,就可以用上新配置的服務端了???(回你的1#回覆)
+3\使用過程中,俺根本就可以刪除服務端的上傳文件夾,憑啥你一廂情願的說修改了app.yaml多ID,goagent就如你所願自動切換呀??(回你的2#)
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov 11 23:38:38 2013">
+ Nov 11, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=11368#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/104408105920610331290/">marco.ts...@gmail.com</a
+></span>
+ 
+<pre>
+回10#,你就不會看首頁,修改相關的多ID?
+一次性上傳完成自動切換的事,到你這反而遇到超了你才去上傳另一個ID????真不知道哪個叫麻煩
+
+引用首頁:
+14.支持多个appid做负载平衡吗？
+目前goagent最新版是支持的，在proxy.ini中的[gae]项目下这样配置即可appid=id1|id2|id3
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Nov 12 00:16:04 2013">
+ Nov 12, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=11368#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/118157386861532467702/">mz11ou1...@gmail.com</a
+></span>
+ 
+<pre>
+@#13 ,对于你的第1条，我上面回答过了，修改比重新上传省时间，省步骤
+第2条，是的，只要修改下就可以，就只需要修改这两地方的ID即可，整个更新的过程只需要几秒钟
+第3，我看不懂你写的东西，服务端的上传文件夹是啥东西，我从来没用过，自动切换也是我长期使用过程中得出的结论，以前我就是傻傻的一个ID用完了就重新上传，后来才发现这个方法，省去了很多麻烦，也省了时间
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Nov 12 00:18:35 2013">
+ Nov 12, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=11368#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/118157386861532467702/">mz11ou1...@gmail.com</a
+></span>
+ 
+<pre>
+@#12，更新goagent，只需要改两地方的ID，除非你用ipv6网络还要设置下IPV6网络，整个更新过程顶多十几秒就搞定。更新完了就可以直接使用goagent翻墙了，没有有些人说的那么麻烦
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Nov 12 00:22:51 2013">
+ Nov 12, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=11368#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/118157386861532467702/">mz11ou1...@gmail.com</a
+></span>
+ 
+<pre>
+@14，你就这么相信官网？？官网漏掉了我这个重要信息就不可能么？？你没有看懂我说的，我是说改了app.yaml里面的ID群，就不用一个一个的去上传了，连一起上传都不需要了，整个过程只需要几秒钟，你把所有的重新上传至少得有一分多钟吧？？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Nov 12 00:38:51 2013">
+ Nov 12, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=11368#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/118157386861532467702/">mz11ou1...@gmail.com</a
+></span>
+ 
+<pre>
+刚做了个试验，把app.yaml中的ID群改回原来的application: your_appid ,也可以翻墙，但是速度满了不少。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Nov 12 00:51:10 2013">
+ Nov 12, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=11368#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/106781204990925295112/">yubinlov...@gmail.com</a
+></span>
+ 
+<pre>
+运行uploader.bat会让你输appid，程序会自动把你输的appid一个一个的填到app.yaml中然后上传，上传完一个后会把下一个appid填进去，然后上传，直到所有的appid都上传完毕
+
+所有修改app.yaml完全是没有任何意义的！如果一不小心修改错了反而会出问题
+
+app.yaml是被上传到GAE服务器的，这是GAE服务器的配置文件，本地是不会调用这里面的东西的，本地是读取的proxy.ini里面的appid
+
+楼上只是刚好碰到两个版本的server之间没什么变动，所以没有出错
+
+至于速度什么的可能是偶然因素或者是心理作用，比如网络速度并不是一直恒定的
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Nov 12 00:55:56 2013">
+ Nov 12, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=11368#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/104408105920610331290/">marco.ts...@gmail.com</a
+></span>
+ 
+<pre>
+不想為這些事辯論,自以為是的人無法溝通,瞎貓碰上死老鼠的事常見
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Nov 12 00:57:59 2013">
+ Nov 12, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=11368#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/118157386861532467702/">mz11ou1...@gmail.com</a
+></span>
+ 
+<pre>
+@20 ，谢谢专业人士的回答，很多东西我不懂，完全是自己瞎琢磨出来的
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Nov 12 01:04:34 2013">
+ Nov 12, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=11368#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/118157386861532467702/">mz11ou1...@gmail.com</a
+></span>
+ 
+<pre>
+@#21，从你这就话就可以，你有沟通的态度？？你看看你上面是怎么回复我的，还怪别人自以为是、不可沟通，通常怎么指责别人的人他自己就是那种人，而且程度还更重，即使我的经验有误又咋啦，平和的说一下不就行了么？你看看20楼的专业人士怎么回答的，他可有像你一样边指出人的错误还边冷嘲热讽的？？？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Nov 12 01:11:00 2013">
+ Nov 12, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=11368#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/100472482916698006396/">xuanni...@gmail.com</a
+></span>
+ 
+<pre>
+呵呵，抛开证书有关的文件，在本地发挥作用的只有proxy.py和proxy.ini，其他都可删掉，何谈修改呢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Nov 12 01:21:12 2013">
+ Nov 12, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=11368#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/107795591669850984411/">alienwar...@gmail.com</a
+></span>
+ 
+<pre>
+G#17，GoAgent每次更新后我都会在github上看看服务端代码有没有更新，若有则重新上传，若没有则不用上传
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc26">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Nov 12 02:30:11 2013">
+ Nov 12, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c26" href="/p/goagent/issues/detail?id=11368#c26">#26</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+遇到不懂得永远不要相信贴吧之类的东西，那些人不懂就瞎扯淡
+如marco.ts...@gmail.com这位兄台说的，你的确被一些煞笔教程给蒙蔽了
+yubinlov...@gmail.com作为project member给了你一个客观的解答
+在这里吵架有什么意思，不如去纠正那些还蒙在鼓里的人们
+
+要是想装大牛，就自己看代码，看懂了再说，你这样只会误导小白们
+
+想一想就知道的常识，server端的文件是需要上传的，怎么可能在本地端简单修改即可，app.yaml是gae的配置文件具体含义可以去gae的官网看文档，用|分割只会导致错误，只不过uploader帮你强制重写了而已
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Nov 12 03:42:04 2013">
+ Nov 12, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=11368#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/106017228722240267718/">terryche...@gmail.com</a
+></span>
+ 
+<pre>
+#26楼 +10086
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Nov 12 09:15:45 2013">
+ Nov 12, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=11368#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/106208609763832502853/">xie0...@gmail.com</a
+></span>
+ 
+<pre>
+不懂装懂的傻13
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc29">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Nov 12 23:08:13 2013">
+ Nov 12, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c29" href="/p/goagent/issues/detail?id=11368#c29">#29</a>
+ 
+
+ <a class="userlink"
+ href="/u/115723986901104934060/">waxs...@gmail.com</a
+></span>
+ 
+<pre>
+1楼的孩子。。。。。。 服务端的东西 改本地不上传 就能生效 黑科技？
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D11368&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D11368"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="11368">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A11368',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 11368,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

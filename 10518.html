@@ -1,0 +1,1333 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"relativeBaseUrl": "", "projectName": "goagent", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "domainName": null, "profileUrl": null, "projectHomeUrl": "/p/goagent", "loggedInUserEmail": null, "token": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 10518 - 
+ goagent -
+ 
+ 怎么用goagent实现共享WIFI也走代理 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D10518&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D10518" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=10518">10518</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >怎么用goagent实现共享WIFI也走代理</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 5 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A10518">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D10518&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D10518">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/101626002696175525303/">dls...@gmail.com</a
+>,
+ <span class="date" title="Mon Oct  7 00:28:07 2013">Oct 7, 2013</span>
+ 
+ </div>
+<pre>
+用电脑开wifi给手机用想让手机也能用上goagent，wp8。
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct  7 01:19:31 2013">
+ Oct 7, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=10518#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/111353698227899229963/">gaosheng...@gmail.com</a
+></span>
+ 
+<pre>
+把电脑的listen ip改成0.0.0.0 然后再wp8上把wifi代理设置成电脑的局域网ip，再加上端口号。比如192.168.1.50:8087 再把证书导入wp8就行了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct  7 02:54:42 2013">
+ Oct 7, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=10518#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/101626002696175525303/">dls...@gmail.com</a
+></span>
+ 
+<pre>
+怎么修改电脑的listen ip啊
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct  7 06:16:49 2013">
+ Oct 7, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=10518#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/yfdyh000/">yfdyh000</a
+></span>
+ 
+<pre>
+proxy.ini第一项
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct  7 07:05:25 2013">
+ Oct 7, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=10518#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/101626002696175525303/">dls...@gmail.com</a
+></span>
+ 
+<pre>
+已经改了，请问在安卓上怎么实现？那个代理服务器主机名填哪个IP，无线网络的的IP需要设置成静态IP？改成哪个？，我是通过破解天翼校园客户端PPPOE上网的。非常感谢！
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=105180004000&amp;name=%E6%8D%95%E8%8E%B7.PNG&amp;token=ABZ6GAefLjNaADli2zZRsmrck1JZQHwJbA%3A1434454476298&amp;id=10518&amp;mod_ts_token=ABZ6GAc4e0EpgSbIV7iQyWRg7BA-aKP8AA%3A1434454476298">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >捕获.PNG</b>
+ <br>
+ 18.2 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=105180004000&amp;name=%E6%8D%95%E8%8E%B7.PNG&amp;token=ABZ6GAefLjNaADli2zZRsmrck1JZQHwJbA%3A1434454476298&amp;id=10518&amp;mod_ts_token=ABZ6GAc4e0EpgSbIV7iQyWRg7BA-aKP8AA%3A1434454476298&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=105180004000&amp;name=%E6%8D%95%E8%8E%B7.PNG&amp;token=ABZ6GAefLjNaADli2zZRsmrck1JZQHwJbA%3A1434454476298&amp;id=10518&amp;mod_ts_token=ABZ6GAc4e0EpgSbIV7iQyWRg7BA-aKP8AA%3A1434454476298">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=105180004000&amp;name=%E6%8D%95%E8%8E%B7.PNG&amp;token=ABZ6GAefLjNaADli2zZRsmrck1JZQHwJbA%3A1434454476298&amp;id=10518&amp;mod_ts_token=ABZ6GAc4e0EpgSbIV7iQyWRg7BA-aKP8AA%3A1434454476298&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=105180004000&amp;name=%E6%8D%95%E8%8E%B7.PNG&amp;token=ABZ6GAefLjNaADli2zZRsmrck1JZQHwJbA%3A1434454476298&amp;id=10518&amp;mod_ts_token=ABZ6GAc4e0EpgSbIV7iQyWRg7BA-aKP8AA%3A1434454476298&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=105180004001&amp;name=%E6%8D%95%E8%8E%B71.PNG&amp;token=ABZ6GAcFCGsga2IXCs_MqCVV5nMOqfi9-w%3A1434454476298&amp;id=10518&amp;mod_ts_token=ABZ6GAdtUe6cCEoHJ5f6liFn1emgEZMOig%3A1434454476298">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >捕获1.PNG</b>
+ <br>
+ 22.2 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=105180004001&amp;name=%E6%8D%95%E8%8E%B71.PNG&amp;token=ABZ6GAcFCGsga2IXCs_MqCVV5nMOqfi9-w%3A1434454476298&amp;id=10518&amp;mod_ts_token=ABZ6GAdtUe6cCEoHJ5f6liFn1emgEZMOig%3A1434454476298&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=105180004001&amp;name=%E6%8D%95%E8%8E%B71.PNG&amp;token=ABZ6GAcFCGsga2IXCs_MqCVV5nMOqfi9-w%3A1434454476298&amp;id=10518&amp;mod_ts_token=ABZ6GAdtUe6cCEoHJ5f6liFn1emgEZMOig%3A1434454476298">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=105180004001&amp;name=%E6%8D%95%E8%8E%B71.PNG&amp;token=ABZ6GAcFCGsga2IXCs_MqCVV5nMOqfi9-w%3A1434454476298&amp;id=10518&amp;mod_ts_token=ABZ6GAdtUe6cCEoHJ5f6liFn1emgEZMOig%3A1434454476298&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=105180004001&amp;name=%E6%8D%95%E8%8E%B71.PNG&amp;token=ABZ6GAcFCGsga2IXCs_MqCVV5nMOqfi9-w%3A1434454476298&amp;id=10518&amp;mod_ts_token=ABZ6GAdtUe6cCEoHJ5f6liFn1emgEZMOig%3A1434454476298&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=105180004002&amp;name=Screenshot_2013-10-07-21-58-17.png&amp;token=ABZ6GAdsl4y_ZmD9U4rhNpREEKRoWq6xLw%3A1434454476298&amp;id=10518&amp;mod_ts_token=ABZ6GAfriFGB3uZn50dZlSP5_KrW5lH3vA%3A1434454476298">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >Screenshot_2013-10-07-21-58-17.png</b>
+ <br>
+ 107 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=105180004002&amp;name=Screenshot_2013-10-07-21-58-17.png&amp;token=ABZ6GAdsl4y_ZmD9U4rhNpREEKRoWq6xLw%3A1434454476298&amp;id=10518&amp;mod_ts_token=ABZ6GAfriFGB3uZn50dZlSP5_KrW5lH3vA%3A1434454476298&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=105180004002&amp;name=Screenshot_2013-10-07-21-58-17.png&amp;token=ABZ6GAdsl4y_ZmD9U4rhNpREEKRoWq6xLw%3A1434454476298&amp;id=10518&amp;mod_ts_token=ABZ6GAfriFGB3uZn50dZlSP5_KrW5lH3vA%3A1434454476298">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=105180004002&amp;name=Screenshot_2013-10-07-21-58-17.png&amp;token=ABZ6GAdsl4y_ZmD9U4rhNpREEKRoWq6xLw%3A1434454476298&amp;id=10518&amp;mod_ts_token=ABZ6GAfriFGB3uZn50dZlSP5_KrW5lH3vA%3A1434454476298&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=105180004002&amp;name=Screenshot_2013-10-07-21-58-17.png&amp;token=ABZ6GAdsl4y_ZmD9U4rhNpREEKRoWq6xLw%3A1434454476298&amp;id=10518&amp;mod_ts_token=ABZ6GAfriFGB3uZn50dZlSP5_KrW5lH3vA%3A1434454476298&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=105180004003&amp;name=Screenshot_2013-10-07-22-01-47.png&amp;token=ABZ6GAfMkGMp9Jn_8OOWkQPyoHWa4ncJmA%3A1434454476298&amp;id=10518&amp;mod_ts_token=ABZ6GAd99eW3QTHuAarc8xivu__pObmGCA%3A1434454476298">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >Screenshot_2013-10-07-22-01-47.png</b>
+ <br>
+ 109 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=105180004003&amp;name=Screenshot_2013-10-07-22-01-47.png&amp;token=ABZ6GAfMkGMp9Jn_8OOWkQPyoHWa4ncJmA%3A1434454476298&amp;id=10518&amp;mod_ts_token=ABZ6GAd99eW3QTHuAarc8xivu__pObmGCA%3A1434454476298&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=105180004003&amp;name=Screenshot_2013-10-07-22-01-47.png&amp;token=ABZ6GAfMkGMp9Jn_8OOWkQPyoHWa4ncJmA%3A1434454476298&amp;id=10518&amp;mod_ts_token=ABZ6GAd99eW3QTHuAarc8xivu__pObmGCA%3A1434454476298">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=105180004003&amp;name=Screenshot_2013-10-07-22-01-47.png&amp;token=ABZ6GAfMkGMp9Jn_8OOWkQPyoHWa4ncJmA%3A1434454476298&amp;id=10518&amp;mod_ts_token=ABZ6GAd99eW3QTHuAarc8xivu__pObmGCA%3A1434454476298&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=105180004003&amp;name=Screenshot_2013-10-07-22-01-47.png&amp;token=ABZ6GAfMkGMp9Jn_8OOWkQPyoHWa4ncJmA%3A1434454476298&amp;id=10518&amp;mod_ts_token=ABZ6GAd99eW3QTHuAarc8xivu__pObmGCA%3A1434454476298&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct  7 07:40:48 2013">
+ Oct 7, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=10518#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/116360773450449083292/">weitung....@gmail.com</a
+></span>
+ 
+<pre>
+我觉得可以写个教程。
+
+现在各种共享wifi还是蛮多的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct  7 14:05:06 2013">
+ Oct 7, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=10518#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/116961318642054610638/">chineseg...@gmail.com</a
+></span>
+ 
+<pre>
+电脑上的配置文件就按照上面那样修改好。手机的网络选项中，代理服务器地址填为电脑的ip，端口8087。安装好证书。手机不需要设置静态ip。
+
+这样设置的缺点是手机上网全局走电脑的goagent代理。
+不知道你说的破解拨号是否在无线路由自动完成拨号，如果是在手机上拨号，通过代理是播不了号的。
+
+最好是使用一个pac文件作为自动代理设置，电脑ip设为固定，按需连接此ip的8087端口
+
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct  7 19:35:55 2013">
+ Oct 7, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=10518#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/101626002696175525303/">dls...@gmail.com</a
+></span>
+ 
+<pre>
+代理服务器写哪一个ip？本地连接的还是WiFi的还是pppoe的证书安装时是选择VPN还是wifi
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct  8 04:45:30 2013">
+ Oct 8, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=10518#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/101626002696175525303/">dls...@gmail.com</a
+></span>
+ 
+<pre>
+等你教程哦~
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct  8 22:47:55 2013">
+ Oct 8, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=10518#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+教程来了，最新最简单的goagent配置教程：
+含一键配置包（仅实现自动配置，未更改官方包）、2000个公共id、官方包配置教程、局域网内goagent代理服务器教程。
+
+<a href="http://kuai.xunlei.com/d/HdFlAQLlYgCn7FRS2b7" rel="nofollow">http://kuai.xunlei.com/d/HdFlAQLlYgCn7FRS2b7</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct  8 23:37:56 2013">
+ Oct 8, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=10518#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/101626002696175525303/">dls...@gmail.com</a
+></span>
+ 
+<pre>
+被屏蔽了………
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Oct  9 00:48:24 2013">
+ Oct 9, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=10518#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+<a href="https://app.box.com/files/0/f/0/1/f_10908871177" rel="nofollow">https://app.box.com/files/0/f/0/1/f_10908871177</a>
+
+新地址
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Oct  9 01:31:58 2013">
+ Oct 9, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=10518#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+这个地址无需登录了：
+<a href="https://app.box.com/s/9w5967o98jbkvtm58qo0" rel="nofollow">https://app.box.com/s/9w5967o98jbkvtm58qo0</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov 25 19:32:24 2013">
+ Nov 25, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=10518#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/109976261394979967814/">wayze.s...@gmail.com</a
+></span>
+ 
+<pre>
+这样设置手机是全局代理，有没有其它方法可以实现自动切换的？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May 18 01:46:21 2014">
+ May 18, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=10518#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/110417593146798359783/">zuozhang...@gmail.com</a
+></span>
+ 
+<pre>
+如何把证书导入wp8？？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May 18 21:01:57 2014">
+ May 18, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=10518#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/101886394825393757573/">nekki.ba...@gmail.com</a
+></span>
+ 
+<pre>
+不用pac的话访问国内网站会相当蛋疼
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D10518&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D10518"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="10518">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A10518',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 10518,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

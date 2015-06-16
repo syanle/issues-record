@@ -1,0 +1,3796 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"loggedInUserEmail": null, "profileUrl": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "token": null, "projectHomeUrl": "/p/goagent", "projectName": "goagent", "relativeBaseUrl": "", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "domainName": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 13165 - 
+ goagent -
+ 
+ 让你的goagent实现自动更新 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13165&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13165" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=13165">13165</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >让你的goagent实现自动更新</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 43 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A13165">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13165&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13165">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+>,
+ <span class="date" title="Tue Apr  8 08:42:08 2014">Apr 8, 2014</span>
+ 
+ </div>
+<pre>
+由于box网盘的下载地址被墙，导致很多人无法下载，重新开贴～
+
+
+---------------------------------------------------------------------
+最近youtube问题连连，goagent频繁更新，是不是更新更到了手软？？？
+
+自己制作了一个批处理辅助自动更新程序：
+
+默认第一次安装会自动从官网下载最新goagent，并启动自动配置向导，就算是没用过goagent的新手也可以轻松配置。
+
+正常使用，启动配置批处理，按0即可实现一键升级更新，方便快捷，会自动读取之前配置过的appid并导入，无需再手工下载配置。
+
+并带有其他更多功能，可自己探索。。。
+
+全部用批处理实现，自解压包，懂批处理的可解压看到所有文件源码，安全可靠！
+
+-----------------------------------------------------------------------
+
+原有0.9版本有bug，有一个目录错误导致无法正常更新goagent到新版，请下载最新版（0.9.1）覆盖安装即可。
+
+下载地址：
+<a href="http://goo.gl/QAj8S4" rel="nofollow">http://goo.gl/QAj8S4</a>
+
+<a href="https://bintray.com/zane/Goagent/Goagent_Assistant" rel="nofollow">https://bintray.com/zane/Goagent/Goagent_Assistant</a>
+
+<a href="https://www.mediafire.com/folder/9ly5p0g1fkdap/goagent" rel="nofollow">https://www.mediafire.com/folder/9ly5p0g1fkdap/goagent</a>
+
+
+</pre>
+
+ <div class="attachments">
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=131650000000&amp;name=bcd.jpg&amp;token=ABZ6GAfHa9Qo2_bFAf8NrVeVituXu03rKg%3A1434455158275&amp;id=13165&amp;mod_ts_token=ABZ6GAcFFhpq4O0BRKOb_K5boSXYHSKM0A%3A1434455158275">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >bcd.jpg</b>
+ <br>
+ 102 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=131650000000&amp;name=bcd.jpg&amp;token=ABZ6GAfHa9Qo2_bFAf8NrVeVituXu03rKg%3A1434455158275&amp;id=13165&amp;mod_ts_token=ABZ6GAcFFhpq4O0BRKOb_K5boSXYHSKM0A%3A1434455158275&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=131650000000&amp;name=bcd.jpg&amp;token=ABZ6GAfHa9Qo2_bFAf8NrVeVituXu03rKg%3A1434455158275&amp;id=13165&amp;mod_ts_token=ABZ6GAcFFhpq4O0BRKOb_K5boSXYHSKM0A%3A1434455158275">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=131650000000&amp;name=bcd.jpg&amp;token=ABZ6GAfHa9Qo2_bFAf8NrVeVituXu03rKg%3A1434455158275&amp;id=13165&amp;mod_ts_token=ABZ6GAcFFhpq4O0BRKOb_K5boSXYHSKM0A%3A1434455158275&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=131650000000&amp;name=bcd.jpg&amp;token=ABZ6GAfHa9Qo2_bFAf8NrVeVituXu03rKg%3A1434455158275&amp;id=13165&amp;mod_ts_token=ABZ6GAcFFhpq4O0BRKOb_K5boSXYHSKM0A%3A1434455158275&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=131650000001&amp;name=abc.jpg&amp;token=ABZ6GAdFSxBG2DIakFQKxgSMEPrXzLfFYA%3A1434455158275&amp;id=13165&amp;mod_ts_token=ABZ6GAea5rz2k17MRZ-1EteNYSQ7y12AHg%3A1434455158275">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >abc.jpg</b>
+ <br>
+ 96.2 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=131650000001&amp;name=abc.jpg&amp;token=ABZ6GAdFSxBG2DIakFQKxgSMEPrXzLfFYA%3A1434455158275&amp;id=13165&amp;mod_ts_token=ABZ6GAea5rz2k17MRZ-1EteNYSQ7y12AHg%3A1434455158275&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=131650000001&amp;name=abc.jpg&amp;token=ABZ6GAdFSxBG2DIakFQKxgSMEPrXzLfFYA%3A1434455158275&amp;id=13165&amp;mod_ts_token=ABZ6GAea5rz2k17MRZ-1EteNYSQ7y12AHg%3A1434455158275">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=131650000001&amp;name=abc.jpg&amp;token=ABZ6GAdFSxBG2DIakFQKxgSMEPrXzLfFYA%3A1434455158275&amp;id=13165&amp;mod_ts_token=ABZ6GAea5rz2k17MRZ-1EteNYSQ7y12AHg%3A1434455158275&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=131650000001&amp;name=abc.jpg&amp;token=ABZ6GAdFSxBG2DIakFQKxgSMEPrXzLfFYA%3A1434455158275&amp;id=13165&amp;mod_ts_token=ABZ6GAea5rz2k17MRZ-1EteNYSQ7y12AHg%3A1434455158275&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr  8 09:27:55 2014">
+ Apr 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=13165#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/117452782893511213071/">daxiaop...@gmail.com</a
+></span>
+ 
+<pre>
+嗯，已经更新到最新了。感谢你！
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr  8 09:34:10 2014">
+ Apr 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=13165#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/117452782893511213071/">daxiaop...@gmail.com</a
+></span>
+ 
+<pre>
+建议下载链接使用PLUS提供的最新链接，速度极快：
+
+<a href="http://git.oschina.net/goagent/goagent/repository/archive?ref=3.0" rel="nofollow">http://git.oschina.net/goagent/goagent/repository/archive?ref=3.0</a>
+
+请测试为盼！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr  8 22:32:16 2014">
+ Apr 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=13165#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/105773754172221224141/">gcy954...@gmail.com</a
+></span>
+ 
+<pre>
+謝謝！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr  8 22:36:44 2014">
+ Apr 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=13165#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/117452782893511213071/">daxiaop...@gmail.com</a
+></span>
+ 
+<pre>
+该链接是PLUS提供和推荐的，应该是最新同步链接。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr  8 22:38:05 2014">
+ Apr 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=13165#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/117452782893511213071/">daxiaop...@gmail.com</a
+></span>
+ 
+<pre>
+替换过，但是下载进度显示会有一点点小问题，如图：
+
+
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=131650007000&amp;name=QQ%E6%88%AA%E5%9B%BE20140409133738.png&amp;token=ABZ6GAeHXdirjSQrLdfVDBR2xiZaBn6DNA%3A1434455158276&amp;id=13165&amp;mod_ts_token=ABZ6GAeqU8KDUa3edk1l-cvE5JAhwIH4nw%3A1434455158276">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >QQ截图20140409133738.png</b>
+ <br>
+ 22.5 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=131650007000&amp;name=QQ%E6%88%AA%E5%9B%BE20140409133738.png&amp;token=ABZ6GAeHXdirjSQrLdfVDBR2xiZaBn6DNA%3A1434455158276&amp;id=13165&amp;mod_ts_token=ABZ6GAeqU8KDUa3edk1l-cvE5JAhwIH4nw%3A1434455158276&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=131650007000&amp;name=QQ%E6%88%AA%E5%9B%BE20140409133738.png&amp;token=ABZ6GAeHXdirjSQrLdfVDBR2xiZaBn6DNA%3A1434455158276&amp;id=13165&amp;mod_ts_token=ABZ6GAeqU8KDUa3edk1l-cvE5JAhwIH4nw%3A1434455158276">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=131650007000&amp;name=QQ%E6%88%AA%E5%9B%BE20140409133738.png&amp;token=ABZ6GAeHXdirjSQrLdfVDBR2xiZaBn6DNA%3A1434455158276&amp;id=13165&amp;mod_ts_token=ABZ6GAeqU8KDUa3edk1l-cvE5JAhwIH4nw%3A1434455158276&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=131650007000&amp;name=QQ%E6%88%AA%E5%9B%BE20140409133738.png&amp;token=ABZ6GAeHXdirjSQrLdfVDBR2xiZaBn6DNA%3A1434455158276&amp;id=13165&amp;mod_ts_token=ABZ6GAeqU8KDUa3edk1l-cvE5JAhwIH4nw%3A1434455158276&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr  8 22:40:53 2014">
+ Apr 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=13165#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/117452782893511213071/">daxiaop...@gmail.com</a
+></span>
+ 
+<pre>
+而且，下载完成后回车，程序有时会失去响应。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr  8 23:02:13 2014">
+ Apr 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=13165#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/117452782893511213071/">daxiaop...@gmail.com</a
+></span>
+ 
+<pre>
+#9 就是回车无反应，没有运行结果。我还在测试。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr  9 01:04:19 2014">
+ Apr 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=13165#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/117452782893511213071/">daxiaop...@gmail.com</a
+></span>
+ 
+<pre>
+测试情况确实是卡在导入证书之前的状态上。没有任何运行输出结果。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr  9 07:30:42 2014">
+ Apr 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=13165#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/117452782893511213071/">daxiaop...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢#12 啦！辛苦你了。我今天也查找了半天原因。
+
+还是最新的地址下载快得多，而且不需要走代理。可以达到下载速度的顶峰值。我去修改一下，测试。
+
+再次感谢你！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr  9 07:33:02 2014">
+ Apr 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=13165#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+0.9版本是存在这个问题，但0.9.1已经解决了～
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr  9 07:34:03 2014">
+ Apr 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=13165#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/117452782893511213071/">daxiaop...@gmail.com</a
+></span>
+ 
+<pre>
+#12 还有一个问题，用你原版的升级，为什么当版本号升级时，不能下载升级到呢？比如3.1.6到3.1.7，现在从3.1.7升不到3.1.8 。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr  9 07:34:33 2014">
+ Apr 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=13165#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/117452782893511213071/">daxiaop...@gmail.com</a
+></span>
+ 
+<pre>
+#12  修改测试后，仍然卡住，不能进入证书安装阶段。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr  9 07:39:34 2014">
+ Apr 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=13165#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/117452782893511213071/">daxiaop...@gmail.com</a
+></span>
+ 
+<pre>
+#15 没有。我现在就是升级不到3.1.8 ，一直显示3.1.7
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr  9 07:40:11 2014">
+ Apr 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=13165#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+至于版本不能到3.1.8是因为当前下载最新包，里面的配置文件里写的还是3.1.7
+
+你先看一下，将local同级目录里的那个goagent目录删除掉再试试～
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr  9 07:41:41 2014">
+ Apr 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=13165#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/117452782893511213071/">daxiaop...@gmail.com</a
+></span>
+ 
+<pre>
+这倒是有可能的。我测试看一下。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr  9 07:42:02 2014">
+ Apr 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=13165#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+看这里，官方github：
+<a href="https://github.com/goagent/goagent/blob/3.0/local/proxy.py#L40" rel="nofollow">https://github.com/goagent/goagent/blob/3.0/local/proxy.py#L40</a>
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr  9 07:44:51 2014">
+ Apr 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=13165#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/117452782893511213071/">daxiaop...@gmail.com</a
+></span>
+ 
+<pre>
+#21 嗯，注意到了，虽然首页写的是3.1.8正式版，但是源码版本号还没有改过来。对了，烦请再看一下我前面提到的新的修改仍然卡住的问题吧。谢谢。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr  9 07:58:27 2014">
+ Apr 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=13165#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/106781204990925295112/">yubinlov...@gmail.com</a
+></span>
+ 
+<pre>
+建议lz wget直接加-o参数指定保存的文件名，不要用content-disposition
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr  9 08:20:31 2014">
+ Apr 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=13165#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+已经使用wget -O goagent.zip ，但两个下载地址下载的包，用7z.exe x goagent.zip 解压后，得到的目录的确不同，一个是goagent-goagent-xxxxxx   这里的xxxxxx是每个版本随机生成的那个类似版本uuid，另一个oschina下载到的zip包，解压后得到的就是goagent目录，没有uuid号～
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr  9 08:28:23 2014">
+ Apr 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=13165#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/117452782893511213071/">daxiaop...@gmail.com</a
+></span>
+ 
+<pre>
+确实如上所述。我也发现文件名的格式之不同。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc26">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr  9 08:43:11 2014">
+ Apr 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c26" href="/p/goagent/issues/detail?id=13165#c26">#26</a>
+ 
+
+ <a class="userlink"
+ href="/u/117452782893511213071/">daxiaop...@gmail.com</a
+></span>
+ 
+<pre>
+按照楼主的修改（共两部分修改）：
+1、
+如果想提前自行替换的话，可以右键编辑桌面goagent快捷方式文件，找到下面一行（整个是一行，没有断行...）：
+@path %PATH%;%windir%;%windir%\system32
+@netstat -an|find &quot;LISTENING&quot;|find &quot;:8087&quot; &amp;&amp; set HTTP_PROXY=http://127.0.0.1:8087 &amp;&amp; set HTTPS_PROXY=http://127.0.0.1:8087
+@wget.exe -O goagent.zip --no-check-certificate <a href="https://nodeload.github.com/goagent/goagent/legacy.zip/3.0" rel="nofollow">https://nodeload.github.com/goagent/goagent/legacy.zip/3.0</a> ||echo %downloaderror%  &amp;&amp;pause &amp;&amp;exit
+
+替换成：
+
+wget.exe -O goagent.zip <a href="http://git.oschina.net/goagent/goagent/repository/archive?ref=3.0" rel="nofollow">http://git.oschina.net/goagent/goagent/repository/archive?ref=3.0</a> ||echo %downloaderror%  &amp;&amp;pause &amp;&amp;exit
+
+2、
+将如下三行字段：
+
+for /f &quot;delims=&quot; %%a in ('dir /b /d goagent-*') do @set pathA=%%~nxa
+xcopy &quot;%pathA%&quot;\*.* . /s /e /y 1&gt;nul 2&gt;nul
+rd /s /q &quot;%pathA%&quot; 1&gt;nul 2&gt;nul
+
+修改为：
+
+xcopy goagent\*.* . /s /e /y 1&gt;nul 2&gt;nul
+rd /s /q goagent 1&gt;nul 2&gt;nul
+
+经测试完美成功！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 10 07:29:33 2014">
+ Apr 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=13165#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/117452782893511213071/">daxiaop...@gmail.com</a
+></span>
+ 
+<pre>
+#27 辛苦了。谢谢！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc29">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 10 07:52:12 2014">
+ Apr 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c29" href="/p/goagent/issues/detail?id=13165#c29">#29</a>
+ 
+
+ <a class="userlink"
+ href="/u/102324487323670625505/">sikao...@gmail.com</a
+></span>
+ 
+<pre>
+请把wget.exe命令加上-c断点续传功能！这个功能很重要。万一使用的是笔记本移动情况下，这条功能比较好！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc31">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 10 21:00:21 2014">
+ Apr 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c31" href="/p/goagent/issues/detail?id=13165#c31">#31</a>
+ 
+
+ <a class="userlink"
+ href="/u/101812342362968823799/">jiapeng...@gmail.com</a
+></span>
+ 
+<pre>
+我都是到<a href="https://github.com/goagent/goagent/releases" rel="nofollow">https://github.com/goagent/goagent/releases</a>
+找到链接地址直接用aria2c下载的，网页链接下载被屏蔽的厉害
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc32">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr 12 03:57:56 2014">
+ Apr 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c32" href="/p/goagent/issues/detail?id=13165#c32">#32</a>
+ 
+
+ <a class="userlink"
+ href="/u/117452782893511213071/">daxiaop...@gmail.com</a
+></span>
+ 
+<pre>
+#29 断点续传确实不错的功能。已经测试，很好用。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc33">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr 16 06:27:09 2014">
+ Apr 16, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c33" href="/p/goagent/issues/detail?id=13165#c33">#33</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+<a title="让你的goagent实现自动更新" class=closed_ref href="/p/goagent/issues/detail?id=11087"> Issue 11087 </a> has been merged into this issue.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc36">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 22 01:36:44 2014">
+ Apr 22, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c36" href="/p/goagent/issues/detail?id=13165#c36">#36</a>
+ 
+
+ <a class="userlink"
+ href="/u/111365658317698794967/">yahaos...@gmail.com</a
+></span>
+ 
+<pre>
+wget.exe默认好像不是走代理的，我刚才测试时有开着goagent，github上的文件下载不了，加上了代理参数才下载完成。
+
+如：
+wget.exe -O goagent.zip --no-check-certificate -e &quot;http_proxy = http://127.0.0.1:8087 <a href="http://goo.gl/qFyRk" rel="nofollow">http://goo.gl/qFyRk</a>
+
+若不使用http_proxy参数则显示：
+Connecting to goo.gl|74.125.128.100|:80... connected.
+HTTP request sent, awaiting response... Read error (Connection reset by peer) in headers.
+Retrying.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc37">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 22 17:54:35 2014">
+ Apr 22, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c37" href="/p/goagent/issues/detail?id=13165#c37">#37</a>
+ 
+
+ <a class="userlink"
+ href="/u/110833924393670728811/">linjiawe...@gmail.com</a
+></span>
+ 
+<pre>
+下载框经常提示
+
+开始下载当前最新版本Goagent，请稍等......
+  TCP    127.0.0.1:8087         0.0.0.0:0              LISTENING
+'wget.exe' 不是内部或外部命令，也不是可运行的程序
+或批处理文件。
+下载失败，请设置DNS为8.8.4.4后重试...
+请按任意键继续. . .
+
+造成无法下载
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc38">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 22 18:50:57 2014">
+ Apr 22, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c38" href="/p/goagent/issues/detail?id=13165#c38">#38</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+@#37 你这个路径错误造成的，请重新运行运行安装包～
+
+请保证正常情况下wget.exe、7z.exe和local目录在同级目录，而goagent.bat在local目录下。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc39">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 22 19:33:59 2014">
+ Apr 22, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c39" href="/p/goagent/issues/detail?id=13165#c39">#39</a>
+ 
+
+ <a class="userlink"
+ href="/u/110833924393670728811/">linjiawe...@gmail.com</a
+></span>
+ 
+<pre>
+楼上的朋友，我就是运行wget.exe、7z.exe和local目录在同级目录的goagent.bat出错，运行local下的goagent.bat，还是一样的错误。
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc40">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr 23 08:29:58 2014">
+ Apr 23, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c40" href="/p/goagent/issues/detail?id=13165#c40">#40</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+请问你是直接双击运行自动包的还是手工解压后运行的goagent.bat？？？
+
+请直接重新默认安装自动包试试。
+
+如非要手动解压，请在解压后进入目录运行auto.bat
+
+还有尽量保证所在的路径里不要有中文和空格
+
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc41">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr 23 17:42:46 2014">
+ Apr 23, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c41" href="/p/goagent/issues/detail?id=13165#c41">#41</a>
+ 
+
+ <a class="userlink"
+ href="/u/110833924393670728811/">linjiawe...@gmail.com</a
+></span>
+ 
+<pre>
+手动解压。
+文件路径D:\Tools\goagent\local ，管理员权限运行auto.bat也不行。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc42">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr 23 19:19:03 2014">
+ Apr 23, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c42" href="/p/goagent/issues/detail?id=13165#c42">#42</a>
+ 
+
+ <a class="userlink"
+ href="/u/114858491409111830929/">putin...@gmail.com</a
+></span>
+ 
+<pre>
+提示密码错误，请问在哪里设置密码？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc43">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr 23 19:41:24 2014">
+ Apr 23, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c43" href="/p/goagent/issues/detail?id=13165#c43">#43</a>
+ 
+
+ <a class="userlink"
+ href="/u/112725525955099629120/">mack...@gmail.com</a
+></span>
+ 
+<pre>
+出现下面错误怎么办？谁遇到同样情况？
+
+
+
+
+如您已经下载了官方最新的Goagent包，请将软件包拖放到本窗口并回车；如没有直接回车
+将自动为您下载当前最新版本：
+        开始下载当前最新版本Goagent，请稍等......
+  TCP    127.0.0.1:8087         0.0.0.0:0              LISTENING
+--2014-04-24 10:37:29--  <a href="https://nodeload.github.com/goagent/goagent/legacy.zip/" rel="nofollow">https://nodeload.github.com/goagent/goagent/legacy.zip/</a>
+3.0
+Connecting to 127.0.0.1:8087... connected.
+Unable to establish SSL connection.
+下载失败，请设置DNS为8.8.4.4后重试...
+请按任意键继续. . .
+
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc45">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed May 28 00:24:47 2014">
+ May 28, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c45" href="/p/goagent/issues/detail?id=13165#c45">#45</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+...... 
+
+作者又改回TLSv1了，如遇到无法自动更新，请参考#34楼：
+
+
+<a href="https://code.google.com/p/goagent/issues/detail?id=13165#c34" rel="nofollow">https://code.google.com/p/goagent/issues/detail?id=13165#c34</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc46">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed May 28 03:15:59 2014">
+ May 28, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c46" href="/p/goagent/issues/detail?id=13165#c46">#46</a>
+ 
+
+ <a class="userlink"
+ href="/u/112814241450362324322/">Mrke...@gmail.com</a
+></span>
+ 
+<pre>
+按照45楼的指引，自动更新好用了！严重感谢~~
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc47">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun 10 03:20:06 2014">
+ Jun 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c47" href="/p/goagent/issues/detail?id=13165#c47">#47</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+版本升级到0.9.2
+
+由于goagent3.1.17和3.1.18在win8和win8.1策略上有所改变，
+新版本解决了0.9.1及之前版本在自动更新goagent到3.1.17和3.1.18后无法使用的问题。
+
+下载地址请见顶层，地址不变。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc48">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun 10 04:38:21 2014">
+ Jun 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c48" href="/p/goagent/issues/detail?id=13165#c48">#48</a>
+ 
+
+ <a class="userlink"
+ href="/u/117027045147510218098/">zkwan...@gmail.com</a
+></span>
+ 
+<pre>
+有空试一下
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc49">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun 13 08:54:25 2014">
+ Jun 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c49" href="/p/goagent/issues/detail?id=13165#c49">#49</a>
+ 
+
+ <a class="userlink"
+ href="/u/mygo008/">mygo008</a
+></span>
+ 
+<pre>
+从以前到现在一直在用寒星写的GoAgent配置工具，虽然无法实现完美自动全配置，但也很实用了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc50">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun 13 09:01:18 2014">
+ Jun 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c50" href="/p/goagent/issues/detail?id=13165#c50">#50</a>
+ 
+
+ <a class="userlink"
+ href="/u/113292563919005293118/">xvyongp...@gmail.com</a
+></span>
+ 
+<pre>
+#49 mygo008 求共享 谢谢了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc51">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun 20 04:01:56 2014">
+ Jun 20, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c51" href="/p/goagent/issues/detail?id=13165#c51">#51</a>
+ 
+
+ <a class="userlink"
+ href="/u/118300522273799827336/">mxmx...@gmail.com</a
+></span>
+ 
+<pre>
+#3 请问程序中的自动代理等选项和Proxy SwitchySharp插件的选项是啥关系
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc52">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 21 09:52:52 2014">
+ Jun 21, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c52" href="/p/goagent/issues/detail?id=13165#c52">#52</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+程序中的自动或全局代理，和右下角goagent托盘图标设置的proxy.pac、8087是一样的，适用于非PPPoE宽带直接拨号的局域网网络，支持所有浏览器，而switchysharp 仅支持chrome浏览器
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc53">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jul 24 10:47:02 2014">
+ Jul 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c53" href="/p/goagent/issues/detail?id=13165#c53">#53</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+版本升级到0.9.3
+增加dnscrypt-proxy功能：一键开启并配置goagent使用dnscrypt-proxy服务，减少dns干扰；
+增加快捷添加iplist功能：一键添加自己找到的google服务器IP地址，免去每次修改配置文件的痛苦。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc57">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jul 26 01:31:26 2014">
+ Jul 26, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c57" href="/p/goagent/issues/detail?id=13165#c57">#57</a>
+ 
+
+ <a class="userlink"
+ href="/u/111323823023093635021/">radlyhar...@gmail.com</a
+></span>
+ 
+<pre>
+不更新可不可以~更新有什么优点？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc58">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jul 26 17:51:26 2014">
+ Jul 26, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c58" href="/p/goagent/issues/detail?id=13165#c58">#58</a>
+ 
+
+ <a class="userlink"
+ href="/u/116792159579627093875/">safetyin...@gmail.com</a
+></span>
+ 
+<pre>
+xp管理员下，不能启动 DNSCrypt
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=131650058000&amp;name=03.JPG&amp;token=ABZ6GAeE4lHewdEK2cyITWD6fngxafM3JQ%3A1434455158295&amp;id=13165&amp;mod_ts_token=ABZ6GAfkDm0BfCU0c-PtFIRsb14W5zSgjw%3A1434455158295">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >03.JPG</b>
+ <br>
+ 34.6 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=131650058000&amp;name=03.JPG&amp;token=ABZ6GAeE4lHewdEK2cyITWD6fngxafM3JQ%3A1434455158295&amp;id=13165&amp;mod_ts_token=ABZ6GAfkDm0BfCU0c-PtFIRsb14W5zSgjw%3A1434455158295&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=131650058000&amp;name=03.JPG&amp;token=ABZ6GAeE4lHewdEK2cyITWD6fngxafM3JQ%3A1434455158295&amp;id=13165&amp;mod_ts_token=ABZ6GAfkDm0BfCU0c-PtFIRsb14W5zSgjw%3A1434455158295">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=131650058000&amp;name=03.JPG&amp;token=ABZ6GAeE4lHewdEK2cyITWD6fngxafM3JQ%3A1434455158295&amp;id=13165&amp;mod_ts_token=ABZ6GAfkDm0BfCU0c-PtFIRsb14W5zSgjw%3A1434455158295&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=131650058000&amp;name=03.JPG&amp;token=ABZ6GAeE4lHewdEK2cyITWD6fngxafM3JQ%3A1434455158295&amp;id=13165&amp;mod_ts_token=ABZ6GAfkDm0BfCU0c-PtFIRsb14W5zSgjw%3A1434455158295&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc59">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jul 26 23:48:35 2014">
+ Jul 26, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c59" href="/p/goagent/issues/detail?id=13165#c59">#59</a>
+ 
+
+ <a class="userlink"
+ href="/u/114902295707394912258/">gyk66...@gmail.com</a
+></span>
+ 
+<pre>
+#58 请确认你的goagent路径在哪。楼主默认goagent是在C盘根目录下。想更改路径，请修改bat文件里相关路径。如果不会建议放在C盘下。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc60">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jul 27 20:48:47 2014">
+ Jul 27, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c60" href="/p/goagent/issues/detail?id=13165#c60">#60</a>
+ 
+
+ <a class="userlink"
+ href="/u/115489195014150358281/">lsb1...@gmail.com</a
+></span>
+ 
+<pre>
+这个软件的确是太方便了，不过。。。请问如果此软件本身更新的话，会自动提示我更新吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc61">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jul 29 08:19:21 2014">
+ Jul 29, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c61" href="/p/goagent/issues/detail?id=13165#c61">#61</a>
+ 
+
+ <a class="userlink"
+ href="/u/112983042847560253980/">calf.z...@gmail.com</a
+></span>
+ 
+<pre>
+直接git clone下来，定期pull不就行了？要是能把配置文件放在~/里面就完美了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc62">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jul 29 15:35:03 2014">
+ Jul 29, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c62" href="/p/goagent/issues/detail?id=13165#c62">#62</a>
+ 
+
+ <a class="userlink"
+ href="/u/112793386201687581458/">wuli...@gmail.com</a
+></span>
+ 
+<pre>
+说实话 功能太眼花了 看都不想看 自动更新自动更新 做这么复杂叫什么自动
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc63">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Aug  3 16:52:04 2014">
+ Aug 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c63" href="/p/goagent/issues/detail?id=13165#c63">#63</a>
+ 
+
+ <a class="userlink"
+ href="/u/113320628234963501671/">silverwa...@gmail.com</a
+></span>
+ 
+<pre>
+#62思维有点问题，我明白你的自动更新的想法，那就是全自动的，不需要人去选择。可是如果那样外一新版的软件有问题咋办？zane的这个可以根据使用者的意愿来自动的选择，这算是很人性化的了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc65">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Aug  5 05:55:01 2014">
+ Aug 5, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c65" href="/p/goagent/issues/detail?id=13165#c65">#65</a>
+ 
+
+ <a class="userlink"
+ href="/u/102106608336571773012/">nancheng...@gmail.com</a
+></span>
+ 
+<pre>
+下载的0.94版本怎么直接被360提示是病毒删除了下0.93都没任何问题
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc67">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Aug  5 19:20:33 2014">
+ Aug 5, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c67" href="/p/goagent/issues/detail?id=13165#c67">#67</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+恩，第二个的确是应该写成相对路径，疏忽了～
+
+另外，第一个问题，可能是你的压缩包放在了有空格的路径里，比如Program Files这样的目录，因为空格目录好多命令或参数会不认，或者处理起来比较复杂，导致找不到文件就直接去下载了～～
+
+后面的版本会逐步修正，多谢～
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc68">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Aug  6 00:34:43 2014">
+ Aug 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c68" href="/p/goagent/issues/detail?id=13165#c68">#68</a>
+ 
+
+ <a class="userlink"
+ href="/u/115048519081252336227/">lawliet...@gmail.com</a
+></span>
+ 
+<pre>
+这个赞， 非常感谢。
+正在下载 准备测试下
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc71">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Aug  6 10:00:01 2014">
+ Aug 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c71" href="/p/goagent/issues/detail?id=13165#c71">#71</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+已经更新至0.9.5，解决了错误的绝对路径问题，解决了一些了逻辑错误。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc74">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Aug  6 19:02:43 2014">
+ Aug 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c74" href="/p/goagent/issues/detail?id=13165#c74">#74</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+右键解压没问题的啊～～～
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc76">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Aug 12 00:20:30 2014">
+ Aug 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c76" href="/p/goagent/issues/detail?id=13165#c76">#76</a>
+ 
+
+ <a class="userlink"
+ href="/u/102106608336571773012/">nancheng...@gmail.com</a
+></span>
+ 
+<pre>
+楼主人呢  你这个0.95版本还能正常使用吗
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc77">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Aug 12 20:05:22 2014">
+ Aug 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c77" href="/p/goagent/issues/detail?id=13165#c77">#77</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+没问题啊，由于最近phus.lu调整了SSL加密方式，如出现一键更新无法下载（报503等错误）的情况，请将原目录删除重新安装一下0.9.5的包即可～～
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc78">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Aug 19 22:48:06 2014">
+ Aug 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c78" href="/p/goagent/issues/detail?id=13165#c78">#78</a>
+ 
+
+ <a class="userlink"
+ href="/u/117158532779626932966/">WisdomB...@gmail.com</a
+></span>
+ 
+<pre>
+已经使用上,非常人性化,谢谢作者.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc79">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Aug 20 02:19:41 2014">
+ Aug 20, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c79" href="/p/goagent/issues/detail?id=13165#c79">#79</a>
+ 
+
+ <a class="userlink"
+ href="/u/112051632781351850914/">wsg...@gmail.com</a
+></span>
+ 
+<pre>
+欢迎大家提交更加优秀的方案
+<a href="http://wsgzao.github.io/post/gfw-break/" rel="nofollow">http://wsgzao.github.io/post/gfw-break/</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc80">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Sep  5 01:41:03 2014">
+ Sep 5, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c80" href="/p/goagent/issues/detail?id=13165#c80">#80</a>
+ 
+
+ <a class="userlink"
+ href="/u/110660380192047363543/">liuxianl...@gmail.com</a
+></span>
+ 
+<pre>
+有个疑问，楼主的导入证书到底是谁的证书？
+
+是新的版本解压包的，还是原有的
+
+因为我是老用户，已经有证书，配置什么，更新还自动导入证书是什么道理？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc82">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Sep 11 06:46:53 2014">
+ Sep 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c82" href="/p/goagent/issues/detail?id=13165#c82">#82</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+导入的当然是新解压版本的证书了，为了达成通用包的目的，在官方如果更新CA.crt文件后，能够最大化的正常使用（如果自动升级后不主动导入证书，官方哪天升级更换证书文件了，会导致大量因自动升级而无法使用的情况），况且，命令导入证书是覆盖的，保证你每次更新用到的证书永远是最新的！
+
+如果你自己调整过证书（删除CA.crt并重新生成该文件），可以在文件生成后，用主界面的5来重新导入即可！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc83">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Sep 11 23:16:05 2014">
+ Sep 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c83" href="/p/goagent/issues/detail?id=13165#c83">#83</a>
+ 
+
+ <a class="userlink"
+ href="/u/105159952411583157572/">bladecam...@gmail.com</a
+></span>
+ 
+<pre>
+为什么运行0.9.5中文都是乱码的。
+新装的系统，新下载的0.9.5
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc84">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Sep 11 23:32:29 2014">
+ Sep 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c84" href="/p/goagent/issues/detail?id=13165#c84">#84</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+控制面板里找区域和语言，查看并保证里面每一项都是中国、中文（简体，中国），
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc85">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Sep 11 23:33:18 2014">
+ Sep 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c85" href="/p/goagent/issues/detail?id=13165#c85">#85</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+包括格式、位置、键盘和语言、管理
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc86">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Sep 23 00:14:25 2014">
+ Sep 23, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c86" href="/p/goagent/issues/detail?id=13165#c86">#86</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+由于官方暂时是3.2测试版，还没最终定下在连接地址，如果想使用“全自动下载配置辅助工具”升级到最新版本的话，请右键点击桌面goagent图标，点编辑
+
+查找下载链接地址将：
+<a href="https://nodeload.github.com/goagent/goagent/legacy.zip/3.0" rel="nofollow">https://nodeload.github.com/goagent/goagent/legacy.zip/3.0</a>
+
+修改成：
+<a href="https://nodeload.github.com/goagent/goagent/legacy.zip/3.0-test" rel="nofollow">https://nodeload.github.com/goagent/goagent/legacy.zip/3.0-test</a>
+
+即可！
+
+官方确定下来后再随时更改此地址！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc87">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Nov 16 05:09:08 2014">
+ Nov 16, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c87" href="/p/goagent/issues/detail?id=13165#c87">#87</a>
+ 
+
+ <a class="userlink"
+ href="/u/111408663464998372641/">ghost.l...@gmail.com</a
+></span>
+ 
+<pre>
+很不错！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc88">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Nov 19 23:54:41 2014">
+ Nov 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c88" href="/p/goagent/issues/detail?id=13165#c88">#88</a>
+ 
+
+ <a class="userlink"
+ href="/u/104142858055300276720/">linji...@gmail.com</a
+></span>
+ 
+<pre>
+原来就在用了 很实用 感谢分享
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc89">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jan 21 08:25:20 2015">
+ Jan 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c89" href="/p/goagent/issues/detail?id=13165#c89">#89</a>
+ 
+
+ <a class="userlink"
+ href="/u/112819130562941379416/">solo...@gmail.com</a
+></span>
+ 
+<pre>
+0.9.6版本不下载的话，自己拉文件进去无效，下载慢的要命。。。。我等了2个小时你敢信？
+老板能出个详细的攻略介绍下所有功能吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc90">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jan 25 21:27:22 2015">
+ Jan 25, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c90" href="/p/goagent/issues/detail?id=13165#c90">#90</a>
+ 
+
+ <a class="userlink"
+ href="/u/114535663211895562568/">NiuDeq...@gmail.com</a
+></span>
+ 
+<pre>
+#89楼，拖进去无效，可能是权限问题，那你可以手工输入你已经下载好的goagent-xxxx.zip文件的绝对路径也可以啊～
+
+还有就是，存放官方zip包的路径里，最好不要含有中文或带有空格的目录～
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13165&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13165"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="13165">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A13165',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 13165,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

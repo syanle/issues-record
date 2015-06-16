@@ -1,0 +1,950 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"profileUrl": null, "domainName": null, "loggedInUserEmail": null, "token": null, "projectHomeUrl": "/p/goagent", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "relativeBaseUrl": "", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "projectName": "goagent"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 3595 - 
+ goagent -
+ 
+ PHP模式错误 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D3595&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D3595" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="closed_colors">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=3595">3595</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >PHP模式错误</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 2 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A3595">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="The requested non-coding task was completed">Done</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ <tr><th align="left" valign="top">Closed:&nbsp;</th>
+ <td align="left" valign="top" width="100%">
+ Dec 2012
+ </td>
+ </tr>
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D3595&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D3595">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/104059586008320071892/">chengbj...@gmail.com</a
+>,
+ <span class="date" title="Sun May  6 11:21:34 2012">May 6, 2012</span>
+ 
+ </div>
+<pre>
+
+我选择PHP模式，开始几分钟能正常使用，过一会就不行了，提示错误。是什么原因。
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May  6 12:06:59 2012">
+ May 6, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=3595#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/104059586008320071892/">chengbj...@gmail.com</a
+></span>
+ 
+<pre>
+cket_create_connection returns an empty list&gt;
+WARNING - - [May 07 03:01:06] MultiplexConnection Connect hosts ('31.170.166.118
+',):80 fail 3 times!
+ERROR - - [May 07 03:01:06] socket_create_connection connect fail: (('31.170.166
+.118',), 80)
+WARNING - - [May 07 03:01:06] MultiplexConnection Connect hosts ('31.170.166.118
+',):80 fail 3 times!
+INFO - - [May 07 03:01:06] urlfetch error=&lt;urlopen error socket_create_connectio
+n returns an empty list&gt; on_error=&lt;bound method PHPProxyHandler.handle_fetch_err
+or of &lt;__main__.PHPProxyHandler instance at 0x02973AD0&gt;&gt;
+ERROR - - [May 07 03:01:06] socket_create_connection connect fail: (('31.170.166
+.118',), 80)
+ERROR - - [May 07 03:01:06] PHPProxyHandler handle_fetch_error &lt;urlopen error so
+cket_create_connection returns an empty list&gt;
+INFO - - [May 07 03:01:06] urlfetch error=&lt;urlopen error socket_create_connectio
+n returns an empty list&gt; on_error=&lt;bound method PHPProxyHandler.handle_fetch_err
+or of &lt;__main__.PHPProxyHandler instance at 0x04B6B698&gt;&gt;
+ERROR - - [May 07 03:01:06] PHPProxyHandler handle_fetch_error &lt;urlopen error so
+cket_create_connection returns an empty list&gt;
+WARNING - - [May 07 03:01:06] MultiplexConnection Connect hosts ('31.170.166.118
+',):80 fail 3 times!
+ERROR - - [May 07 03:01:06] socket_create_connection connect fail: (('31.170.166
+.118',), 80)
+INFO - - [May 07 03:01:06] urlfetch error=&lt;urlopen error socket_create_connectio
+n returns an empty list&gt; on_error=&lt;bound method PHPProxyHandler.handle_fetch_err
+or of &lt;__main__.PHPProxyHandler instance at 0x02829288&gt;&gt;
+ERROR - - [May 07 03:01:06] PHPProxyHandler handle_fetch_error &lt;urlopen error so
+cket_create_connection returns an empty list&gt;
+127.0.0.1:54286 - - [May 07 03:01:09] code 502, message ['&lt;urlopen error socket_
+create_connection returns an empty list&gt;', '&lt;urlopen error socket_create_connect
+ion returns an empty list&gt;', '&lt;urlopen error socket_create_connection returns an
+ empty list&gt;']
+127.0.0.1:54286 - - [May 07 03:01:09] &quot;GET <a href="http://clients1.google.com/generate_2" rel="nofollow">http://clients1.google.com/generate_2</a>
+04 HTTP/1.1&quot; 502 -
+127.0.0.1:54287 - - [May 07 03:01:09] code 502, message ['&lt;urlopen error socket_
+create_connection returns an empty list&gt;', '&lt;urlopen error socket_create_connect
+ion returns an empty list&gt;', '&lt;urlopen error socket_create_connection returns an
+ empty list&gt;']
+127.0.0.1:54287 - - [May 07 03:01:09] &quot;GET <a href="https://clients1.google.com:443/compl" rel="nofollow">https://clients1.google.com:443/compl</a>
+ete/init?callback=google.sbox.hi0&amp;tok=R1ssh5z83ourzrby99InVg HTTP/1.0&quot; 502 -
+127.0.0.1:54283 - - [May 07 03:01:09] code 502, message ['&lt;urlopen error socket_
+create_connection returns an empty list&gt;', '&lt;urlopen error socket_create_connect
+ion returns an empty list&gt;', '&lt;urlopen error socket_create_connection returns an
+ empty list&gt;']
+127.0.0.1:54283 - - [May 07 03:01:09] &quot;GET <a href="http://googleads.g.doubleclick.net/pa" rel="nofollow">http://googleads.g.doubleclick.net/pa</a>
+gead/ads?ad_block=3&amp;client=ca-pub-6219811747049371&amp;output=js&amp;num_ads=1&amp;channel=P
+yvWatchInRelated%2BPyvYTWatch%2BPyvWatchNoAdX%2Blpw%2Bafv_ugc%2Byt_mpvid_AAS_YsB
+d4vvtGHpd%2Bytexp_914023.912602.916201.901027.919306%2BVertical_Banner_3%2BVidVe
+rt3%2BVertical_3&amp;ad_type=text&amp;ea=0&amp;flash=11.2.202&amp;hl=zh&amp;url=http%3A%2F%2Fwww.you
+tube.com%2Fvideo%2FeVVxVc3qQwg&amp;video_doc_id=yt_eVVxVc3qQwg&amp;pyv=1&amp;dt=133633080323
+0&amp;shv=<a href="/p/goagent/source/detail?r=20120425">r20120425</a>&amp;jsv=<a href="/p/goagent/source/detail?r=20110914">r20110914</a>&amp;saldr=1&amp;correlator=1336330803232&amp;frm=23&amp;adk=511001
+906&amp;ga_vid=1640626810.1334187225&amp;ga_sid=1336330803&amp;ga_hid=1295357464&amp;ga_fc=1&amp;u_t
+z=480&amp;u_his=4&amp;u_java=1&amp;u_h=800&amp;u_w=1280&amp;u_ah=760&amp;u_aw=1280&amp;u_cd=32&amp;u_nplug=22&amp;u_
+nmime=43&amp;dff=simsun&amp;dfs=16&amp;biw=1263&amp;bih=675&amp;isw=300&amp;ish=150&amp;ifk=3035827551&amp;oid=3
+&amp;loc=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DeVVxVc3qQwg%26feature%3Dg-vrec&amp;f
+u=4&amp;ifi=1&amp;dtd=8 HTTP/1.1&quot; 502 -
+127.0.0.1:54275 - - [May 07 03:01:09] code 502, message ['&lt;urlopen error socket_
+create_connection returns an empty list&gt;', '&lt;urlopen error socket_create_connect
+ion returns an empty list&gt;', '&lt;urlopen error socket_create_connection returns an
+ empty list&gt;']
+127.0.0.1:54275 - - [May 07 03:01:09] &quot;GET <a href="http://i2.ytimg.com/vi/-r1AmVzDs3A/de" rel="nofollow">http://i2.ytimg.com/vi/-r1AmVzDs3A/de</a>
+fault.jpg HTTP/1.1&quot; 502 -
+127.0.0.1:54268 - - [May 07 03:01:09] code 502, message ['&lt;urlopen error socket_
+create_connection returns an empty list&gt;', '&lt;urlopen error socket_create_connect
+ion returns an empty list&gt;', '&lt;urlopen error socket_create_connection returns an
+ empty list&gt;']
+127.0.0.1:54268 - - [May 07 03:01:09] &quot;GET <a href="http://i2.ytimg.com/vi/9vGuV3KMwEs/de" rel="nofollow">http://i2.ytimg.com/vi/9vGuV3KMwEs/de</a>
+fault.jpg HTTP/1.1&quot; 502 -
+127.0.0.1:54273 - - [May 07 03:01:09] code 502, message ['&lt;urlopen error socket_
+create_connection returns an empty list&gt;', '&lt;urlopen error socket_create_connect
+ion returns an empty list&gt;', '&lt;urlopen error socket_create_connection returns an
+ empty list&gt;']
+127.0.0.1:54273 - - [May 07 03:01:09] &quot;GET <a href="http://i3.ytimg.com/vi/rjwNSKLGnoM/de" rel="nofollow">http://i3.ytimg.com/vi/rjwNSKLGnoM/de</a>
+fault.jpg HTTP/1.1&quot; 502 -
+127.0.0.1:54274 - - [May 07 03:01:09] code 502, message ['&lt;urlopen error socket_
+create_connection returns an empty list&gt;', '&lt;urlopen error socket_create_connect
+ion returns an empty list&gt;', '&lt;urlopen error socket_create_connection returns an
+ empty list&gt;']
+127.0.0.1:54274 - - [May 07 03:01:09] &quot;GET <a href="http://i2.ytimg.com/vi/aHRQxhp0ctM/de" rel="nofollow">http://i2.ytimg.com/vi/aHRQxhp0ctM/de</a>
+fault.jpg HTTP/1.1&quot; 502 -
+127.0.0.1:54272 - - [May 07 03:01:09] code 502, message ['&lt;urlopen error socket_
+create_connection returns an empty list&gt;', '&lt;urlopen error socket_create_connect
+ion returns an empty list&gt;', '&lt;urlopen error socket_create_connection returns an
+ empty list&gt;']
+127.0.0.1:54272 - - [May 07 03:01:09] &quot;GET <a href="http://i3.ytimg.com/vi/2KSl2OuL-Rs/de" rel="nofollow">http://i3.ytimg.com/vi/2KSl2OuL-Rs/de</a>
+fault.jpg HTTP/1.1&quot; 502 -
+127.0.0.1:54271 - - [May 07 03:01:09] code 502, message ['&lt;urlopen error socket_
+create_connection returns an empty list&gt;', '&lt;urlopen error socket_create_connect
+ion returns an empty list&gt;', '&lt;urlopen error socket_create_connection returns an
+ empty list&gt;']
+127.0.0.1:54271 - - [May 07 03:01:09] &quot;GET <a href="http://i3.ytimg.com/vi/bkGowhtbcjQ/de" rel="nofollow">http://i3.ytimg.com/vi/bkGowhtbcjQ/de</a>
+fault.jpg HTTP/1.1&quot; 502 -
+127.0.0.1:54267 - - [May 07 03:01:09] code 502, message ['&lt;urlopen error socket_
+create_connection returns an empty list&gt;', '&lt;urlopen error socket_create_connect
+ion returns an empty list&gt;', '&lt;urlopen error socket_create_connection returns an
+ empty list&gt;']
+127.0.0.1:54267 - - [May 07 03:01:09] &quot;GET <a href="http://i4.ytimg.com/vi/SngYafHws4I/de" rel="nofollow">http://i4.ytimg.com/vi/SngYafHws4I/de</a>
+fault.jpg HTTP/1.1&quot; 502 -
+127.0.0.1:54269 - - [May 07 03:01:09] code 502, message ['&lt;urlopen error socket_
+create_connection returns an empty list&gt;', '&lt;urlopen error socket_create_connect
+ion returns an empty list&gt;', '&lt;urlopen error socket_create_connection returns an
+ empty list&gt;']
+127.0.0.1:54269 - - [May 07 03:01:09] &quot;GET <a href="http://i3.ytimg.com/vi/nEDqqPpNk-Q/de" rel="nofollow">http://i3.ytimg.com/vi/nEDqqPpNk-Q/de</a>
+fault.jpg HTTP/1.1&quot; 502 -
+127.0.0.1:54290 - - [May 07 03:01:09] code 502, message ['&lt;urlopen error socket_
+create_connection returns an empty list&gt;', '&lt;urlopen error socket_create_connect
+ion returns an empty list&gt;', '&lt;urlopen error socket_create_connection returns an
+ empty list&gt;']
+127.0.0.1:54290 - - [May 07 03:01:09] &quot;GET <a href="http://s.youtube.com/s?html5=1&amp;ns=yt&amp;" rel="nofollow">http://s.youtube.com/s?html5=1&amp;ns=yt&amp;</a>
+el=detailpage&amp;hl=zh_CN&amp;cr=US&amp;docid=eVVxVc3qQwg&amp;referrer=http%3A%2F%2Fwww.youtube
+.com%2F&amp;plid=AAS_YsBdaNatigk7&amp;fmt=43&amp;fs=0&amp;screenw=1280&amp;screenh=800&amp;w=480&amp;h=360&amp;v
+w=320&amp;vh=240&amp;playerw=640&amp;playerh=390&amp;vid=MFJp_ufoGNL2DXf4XU-dSFkKkiG0iEjdR&amp;rt=37
+.338&amp;mos=0&amp;volume=100&amp;csipt=html5_watch&amp;feature=g-vrec&amp;lact=2201&amp;vtmp=1&amp;uga=m33&amp;
+len=2970.76&amp;fexp=914023%2C912602%2C916201%2C901027%2C919306&amp;hmewdfc=756&amp;hmewdrop
+=2&amp;hmewvdbc=403649&amp;hmewadbc=500446&amp;st=20.087&amp;et=30.032 HTTP/1.1&quot; 502 -
+WARNING - - [May 07 03:01:11] MultiplexConnection Connect hosts ('31.170.166.118
+',):80 fail 3 times!
+ERROR - - [May 07 03:01:11] socket_create_connection connect fail: (('31.170.166
+.118',), 80)
+INFO - - [May 07 03:01:11] urlfetch error=&lt;urlopen error socket_create_connectio
+n returns an empty list&gt; on_error=&lt;bound method PHPProxyHandler.handle_fetch_err
+or of &lt;__main__.PHPProxyHandler instance at 0x04B7C3A0&gt;&gt;
+ERROR - - [May 07 03:01:11] PHPProxyHandler handle_fetch_error &lt;urlopen error so
+cket_create_connection returns an empty list&gt;
+WARNING - - [May 07 03:01:12] MultiplexConnection Connect hosts ('31.170.166.118
+',):80 fail 3 times!
+ERROR - - [May 07 03:01:12] socket_create_connection connect fail: (('31.170.166
+.118',), 80)
+INFO - - [May 07 03:01:12] urlfetch error=&lt;urlopen error socket_create_connectio
+n returns an empty list&gt; on_error=&lt;bound method PHPProxyHandler.handle_fetch_err
+or of &lt;__main__.PHPProxyHandler instance at 0x02804AF8&gt;&gt;
+ERROR - - [May 07 03:01:12] PHPProxyHandler handle_fetch_error &lt;urlopen error so
+cket_create_connection returns an empty list&gt;
+127.0.0.1:54304 - - [May 07 03:01:14] code 502, message ['&lt;urlopen error socket_
+create_connection returns an empty list&gt;', '&lt;urlopen error socket_create_connect
+ion returns an empty list&gt;', '&lt;urlopen error socket_create_connection returns an
+ empty list&gt;']
+127.0.0.1:54304 - - [May 07 03:01:14] &quot;POST <a href="https://www.dnspod.cn:443/Api/Domain" rel="nofollow">https://www.dnspod.cn:443/Api/Domain</a>
+.List HTTP/1.0&quot; 502 -
+WARNING - - [May 07 03:01:17] MultiplexConnection Connect hosts ('31.170.166.118
+',):80 fail 3 times!
+ERROR - - [May 07 03:01:17] socket_create_connection connect fail: (('31.170.166
+.118',), 80)
+INFO - - [May 07 03:01:17] urlfetch error=&lt;urlopen error socket_create_connectio
+n returns an empty list&gt; on_error=&lt;bound method PHPProxyHandler.handle_fetch_err
+or of &lt;__main__.PHPProxyHandler instance at 0x04B72440&gt;&gt;
+ERROR - - [May 07 03:01:17] PHPProxyHandler handle_fetch_error &lt;urlopen error so
+cket_create_connection returns an empty list&gt;
+WARNING - - [May 07 03:01:22] MultiplexConnection Connect hosts ('31.170.166.118
+',):80 fail 3 times!
+ERROR - - [May 07 03:01:22] socket_create_connection connect fail: (('31.170.166
+.118',), 80)
+INFO - - [May 07 03:01:22] urlfetch error=&lt;urlopen error socket_create_connectio
+n returns an empty list&gt; on_error=&lt;bound method PHPProxyHandler.handle_fetch_err
+or of &lt;__main__.PHPProxyHandler instance at 0x04B63E40&gt;&gt;
+ERROR - - [May 07 03:01:22] PHPProxyHandler handle_fetch_error &lt;urlopen error so
+cket_create_connection returns an empty list&gt;
+WARNING - - [May 07 03:01:45] MultiplexConnection Connect hosts ('31.170.166.118
+',):80 fail 3 times!
+ERROR - - [May 07 03:01:45] socket_create_connection connect fail: (('31.170.166
+.118',), 80)
+INFO - - [May 07 03:01:45] urlfetch error=&lt;urlopen error socket_create_connectio
+n returns an empty list&gt; on_error=&lt;bound method PHPProxyHandler.handle_fetch_err
+or of &lt;__main__.PHPProxyHandler instance at 0x02814850&gt;&gt;
+ERROR - - [May 07 03:01:45] PHPProxyHandler handle_fetch_error &lt;urlopen error so
+cket_create_connection returns an empty list&gt;
+WARNING - - [May 07 03:01:55] MultiplexConnection Connect hosts ('31.170.166.118
+',):80 fail 3 times!
+ERROR - - [May 07 03:01:55] socket_create_connection connect fail: (('31.170.166
+.118',), 80)
+INFO - - [May 07 03:01:55] urlfetch error=&lt;urlopen error socket_create_connectio
+n returns an empty list&gt; on_error=&lt;bound method PHPProxyHandler.handle_fetch_err
+or of &lt;__main__.PHPProxyHandler instance at 0x02804AF8&gt;&gt;
+ERROR - - [May 07 03:01:55] PHPProxyHandler handle_fetch_error &lt;urlopen error so
+cket_create_connection returns an empty list&gt;
+WARNING - - [May 07 03:02:01] MultiplexConnection Connect hosts ('31.170.166.118
+',):80 fail 3 times!
+ERROR - - [May 07 03:02:01] socket_create_connection connect fail: (('31.170.166
+.118',), 80)
+INFO - - [May 07 03:02:01] urlfetch error=&lt;urlopen error socket_create_connectio
+n returns an empty list&gt; on_error=&lt;bound method PHPProxyHandler.handle_fetch_err
+or of &lt;__main__.PHPProxyHandler instance at 0x04B72440&gt;&gt;
+ERROR - - [May 07 03:02:01] PHPProxyHandler handle_fetch_error &lt;urlopen error so
+cket_create_connection returns an empty list&gt;
+ERROR - - [May 07 03:02:04] Range Fetch fail 1 times, retry after 4 secs!
+WARNING - - [May 07 03:02:06] MultiplexConnection Connect hosts ('31.170.166.118
+',):80 fail 3 times!
+ERROR - - [May 07 03:02:06] socket_create_connection connect fail: (('31.170.166
+.118',), 80)
+INFO - - [May 07 03:02:06] urlfetch error=&lt;urlopen error socket_create_connectio
+n returns an empty list&gt; on_error=&lt;bound method PHPProxyHandler.handle_fetch_err
+or of &lt;__main__.PHPProxyHandler instance at 0x04B63E40&gt;&gt;
+ERROR - - [May 07 03:02:06] PHPProxyHandler handle_fetch_error &lt;urlopen error so
+cket_create_connection returns an empty list&gt;
+WARNING - - [May 07 03:02:07] MultiplexConnection Connect hosts ('31.170.166.118
+',):80 fail 3 times!
+ERROR - - [May 07 03:02:07] socket_create_connection connect fail: (('31.170.166
+.118',), 80)
+INFO - - [May 07 03:02:07] urlfetch error=&lt;urlopen error socket_create_connectio
+n returns an empty list&gt; on_error=&lt;bound method PHPProxyHandler.handle_fetch_err
+or of &lt;__main__.PHPProxyHandler instance at 0x04B6E2B0&gt;&gt;
+ERROR - - [May 07 03:02:07] PHPProxyHandler handle_fetch_error &lt;urlopen error so
+cket_create_connection returns an empty list&gt;
+127.0.0.1:54266 - - [May 07 03:02:09] code 502, message ['&lt;urlopen error [Errno
+10060] &gt;', '&lt;urlopen error socket_create_connection returns an empty list&gt;', '&lt;u
+rlopen error socket_create_connection returns an empty list&gt;']
+127.0.0.1:54266 - - [May 07 03:02:09] &quot;GET <a href="http://i3.ytimg.com/vi/6uowAJK81-c/de" rel="nofollow">http://i3.ytimg.com/vi/6uowAJK81-c/de</a>
+fault.jpg HTTP/1.1&quot; 502 -
+WARNING - - [May 07 03:02:50] MultiplexConnection Connect hosts ('31.170.166.118
+',):80 fail 3 times!
+ERROR - - [May 07 03:02:50] socket_create_connection connect fail: (('31.170.166
+.118',), 80)
+INFO - - [May 07 03:02:50] urlfetch error=&lt;urlopen error socket_create_connectio
+n returns an empty list&gt; on_error=&lt;bound method PHPProxyHandler.handle_fetch_err
+or of &lt;__main__.PHPProxyHandler instance at 0x02814850&gt;&gt;
+ERROR - - [May 07 03:02:50] PHPProxyHandler handle_fetch_error &lt;urlopen error so
+cket_create_connection returns an empty list&gt;
+127.0.0.1:54359 - - [May 07 03:02:53] code 502, message ['&lt;urlopen error socket_
+create_connection returns an empty list&gt;', '&lt;urlopen error socket_create_connect
+ion returns an empty list&gt;', '&lt;urlopen error socket_create_connection returns an
+ empty list&gt;']
+127.0.0.1:54359 - - [May 07 03:02:53] &quot;GET <a href="http://s.youtube.com/stream_204?ns=yt" rel="nofollow">http://s.youtube.com/stream_204?ns=yt</a>
+&amp;html5=1&amp;el=detailpage&amp;fexp=914023%2C912602%2C916201%2C901027%2C919306&amp;event=str
+eamingerror&amp;ec=300&amp;rt=67.378&amp;fmt=43&amp;plid=AAS_YsBdaNatigk7&amp;hmewdfc=1507&amp;hmewdrop=
+2&amp;hmewvdbc=812919&amp;hmewadbc=979818&amp;volume=100&amp;mos=0 HTTP/1.1&quot; 502 -
+WARNING - - [May 07 03:03:00] MultiplexConnection Connect hosts ('31.170.166.118
+',):80 fail 3 times!
+ERROR - - [May 07 03:03:00] socket_create_connection connect fail: (('31.170.166
+.118',), 80)
+INFO - - [May 07 03:03:00] urlfetch error=&lt;urlopen error socket_create_connectio
+n returns an empty list&gt; on_error=&lt;bound method PHPProxyHandler.handle_fetch_err
+or of &lt;__main__.PHPProxyHandler instance at 0x02804AF8&gt;&gt;
+ERROR - - [May 07 03:03:00] PHPProxyHandler handle_fetch_error &lt;urlopen error so
+cket_create_connection returns an empty list&gt;
+127.0.0.1:54378 - - [May 07 03:03:03] code 502, message ['&lt;urlopen error socket_
+create_connection returns an empty list&gt;', '&lt;urlopen error socket_create_connect
+ion returns an empty list&gt;', '&lt;urlopen error socket_create_connection returns an
+ empty list&gt;']
+127.0.0.1:54378 - - [May 07 03:03:03] &quot;GET <a href="http://s.youtube.com/s?html5=1&amp;ns=yt&amp;" rel="nofollow">http://s.youtube.com/s?html5=1&amp;ns=yt&amp;</a>
+el=detailpage&amp;hl=zh_CN&amp;cr=US&amp;docid=eVVxVc3qQwg&amp;referrer=http%3A%2F%2Fwww.youtube
+.com%2F&amp;plid=AAS_YsBdaNatigk7&amp;fmt=43&amp;fs=0&amp;screenw=1280&amp;screenh=800&amp;w=480&amp;h=360&amp;v
+w=320&amp;vh=240&amp;playerw=640&amp;playerh=390&amp;vid=MFJp_ufoGNL2DXf4XU-dSFkKkiG0iEjdR&amp;rt=77
+.339&amp;mos=0&amp;volume=100&amp;csipt=html5_watch&amp;feature=g-vrec&amp;lact=42203&amp;vtmp=1&amp;uga=m33
+&amp;len=2970.76&amp;fexp=914023%2C912602%2C916201%2C901027%2C919306&amp;hmewdfc=1756&amp;hmewdr
+op=2&amp;hmewvdbc=945871&amp;hmewadbc=1140717&amp;st=30.032&amp;et=70.086 HTTP/1.1&quot; 502 -
+WARNING - - [May 07 03:03:08] MultiplexConnection Connect hosts ('31.170.166.118
+',):80 fail 3 times!
+ERROR - - [May 07 03:03:08] socket_create_connection connect fail: (('31.170.166
+.118',), 80)
+INFO - - [May 07 03:03:08] urlfetch error=&lt;urlopen error socket_create_connectio
+n returns an empty list&gt; on_error=&lt;bound method PHPProxyHandler.handle_fetch_err
+or of &lt;__main__.PHPProxyHandler instance at 0x01884A08&gt;&gt;
+ERROR - - [May 07 03:03:08] PHPProxyHandler handle_fetch_error &lt;urlopen error so
+cket_create_connection returns an empty list&gt;
+WARNING - - [May 07 03:03:11] MultiplexConnection Connect hosts ('31.170.166.118
+',):80 fail 3 times!
+ERROR - - [May 07 03:03:11] socket_create_connection connect fail: (('31.170.166
+.118',), 80)
+INFO - - [May 07 03:03:11] urlfetch error=&lt;urlopen error socket_create_connectio
+n returns an empty list&gt; on_error=&lt;bound method PHPProxyHandler.handle_fetch_err
+or of &lt;__main__.PHPProxyHandler instance at 0x04B6E2B0&gt;&gt;
+ERROR - - [May 07 03:03:11] PHPProxyHandler handle_fetch_error &lt;urlopen error so
+cket_create_connection returns an empty list&gt;
+WARNING - - [May 07 03:03:11] MultiplexConnection Connect hosts ('31.170.166.118
+',):80 fail 3 times!
+ERROR - - [May 07 03:03:11] socket_create_connection connect fail: (('31.170.166
+.118',), 80)
+INFO - - [May 07 03:03:11] urlfetch error=&lt;urlopen error socket_create_connectio
+n returns an empty list&gt; on_error=&lt;bound method PHPProxyHandler.handle_fetch_err
+or of &lt;__main__.PHPProxyHandler instance at 0x04B72440&gt;&gt;
+ERROR - - [May 07 03:03:11] PHPProxyHandler handle_fetch_error &lt;urlopen error so
+cket_create_connection returns an empty list&gt;
+WARNING - - [May 07 03:03:38] MultiplexConnection Connect hosts ('31.170.166.118
+',):80 fail 3 times!
+ERROR - - [May 07 03:03:38] socket_create_connection connect fail: (('31.170.166
+.118',), 80)
+INFO - - [May 07 03:03:38] urlfetch error=&lt;urlopen error socket_create_connectio
+n returns an empty list&gt; on_error=&lt;bound method PHPProxyHandler.handle_fetch_err
+or of &lt;__main__.PHPProxyHandler instance at 0x04B63170&gt;&gt;
+ERROR - - [May 07 03:03:38] PHPProxyHandler handle_fetch_error &lt;urlopen error so
+cket_create_connection returns an empty list&gt;
+WARNING - - [May 07 03:03:48] MultiplexConnection Connect hosts ('31.170.166.118
+',):80 fail 3 times!
+ERROR - - [May 07 03:03:48] socket_create_connection connect fail: (('31.170.166
+.118',), 80)
+INFO - - [May 07 03:03:48] urlfetch error=&lt;urlopen error socket_create_connectio
+n returns an empty list&gt; on_error=&lt;bound method PHPProxyHandler.handle_fetch_err
+or of &lt;__main__.PHPProxyHandler instance at 0x02959AD0&gt;&gt;
+ERROR - - [May 07 03:03:48] PHPProxyHandler handle_fetch_error &lt;urlopen error so
+cket_create_connection returns an empty list&gt;
+WARNING - - [May 07 03:04:45] MultiplexConnection Connect hosts ('31.170.166.118
+',):80 fail 3 times!
+ERROR - - [May 07 03:04:45] socket_create_connection connect fail: (('31.170.166
+.118',), 80)
+INFO - - [May 07 03:04:45] urlfetch error=&lt;urlopen error socket_create_connectio
+n returns an empty list&gt; on_error=&lt;bound method PHPProxyHandler.handle_fetch_err
+or of &lt;__main__.PHPProxyHandler instance at 0x01884A08&gt;&gt;
+ERROR - - [May 07 03:04:45] PHPProxyHandler handle_fetch_error &lt;urlopen error so
+cket_create_connection returns an empty list&gt;
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun 18 12:41:21 2012">
+ Jun 18, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=3595#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/111720351524127703779/">ericlu....@gmail.com</a
+></span>
+ 
+<pre>
+检查你的防火墙设置，看看访问规则是否将python.exe(proxy.py)或者proxy.exe的Internet访问禁止了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Dec 15 18:13:13 2012">
+ Dec 15, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=3595#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+<i>(No comment was entered for this change.)</i>
+</pre>
+ 
+ 
+ <div class="updates">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ 
+ <b>Status:</b>
+ Done
+ 
+ <br>
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D3595&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D3595"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="3595">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A3595',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 3595,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

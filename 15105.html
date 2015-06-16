@@ -1,0 +1,777 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"token": null, "profileUrl": null, "domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "projectHomeUrl": "/p/goagent", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "loggedInUserEmail": null, "projectName": "goagent", "relativeBaseUrl": ""};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 15105 - 
+ goagent -
+ 
+ 墙对ipv4/ipv6协议的审查（看了维基百科，加上亲测，我在墙外） - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D15105&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D15105" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=15105">15105</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >墙对ipv4/ipv6协议的审查（看了维基百科，加上亲测，我在墙外）</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 3 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A15105">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D15105&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D15105">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/115354468257486784132/">zzq1...@gmail.com</a
+>,
+ <span class="date" title="Tue Jul  1 13:02:55 2014">Jul 1, 2014</span>
+ 
+ </div>
+<pre>
+注：本人使用6rd连接ipv6，虽然非常接近原生ipv6，但毕竟还是使用隧道。
+
+先说说某FW对于ipv4常见的三道墙：
+
+1、IP封锁
+修改路由表，引导至黑洞路由，使目标IP无法到达（来自维基百科）
+如何判断：tracert (Windows) 或 traceroute (Linux) 至已被封的IP，看看是不是卡在202.97.32.0 - 202.97.63.255（电信骨干网）， 219.158.0.0 - 219.158.63.255（联通骨干网），或者其他国内IP上（就是这一跳以后是否全是星）
+
+2、关键字过滤
+在某朝，谷歌里输入“江”字连接会被重置，大家都知道吧。某FW伪造了两个RST包，一个发给你电脑，一个发给谷歌，导致你电脑以为谷歌服务器出问题了，而谷歌以为你电脑出问题了，90秒内（本人使用秒表测试）某FW会发RST包阻断连接。而且这套系统是双向工作的（敏感词列表有点不一样，墙外到墙内的过滤更松），这就是我在墙外也能测试的原因。
+
+3、DNS污染（某FW的必杀技，原理较复杂）
+今年1月21日的全国断网记得吧，应该是某FW配置错误导致非CN域名被DNS污染至65.49.2.178，（CN域名服务器在国内，没被污染）。
+原理是这样滴：你电脑向境外服务器发DNS请求（UDP 53端口），某FW一看，哇，UDP，正是下手的好机会，于是伪造一个DNS应答，抢先返回，你电脑只取第一个应答，当真正的DNS应答屁颠屁颠的从墙外到你电脑时，你电脑上的程序不鸟它了~（听说“敏感时期直接拦截真正的DNS应答，只返回假的到你电脑”，不知是真是假）
+那为什么我查ISP的DNS一样会被污染呢？（就是这里复杂）
+【假设没有DNS污染】
+你ISP的DNS一查自己的缓存，发现也不知道目标域名（本人拿youtube.com举例）的IP地址，于是
+1. 你ISP的DNS向根域名服务器（*.root-servers.net）发DNS请求，根域名服务器返回.COM域名服务器（*.gtld-servers.net）的IP
+2. 你ISP的DNS向.COM域名服务器发DNS请求，.COM域名服务器返回youtube.com的权威服务器（ns*.google.com）。
+3. 你ISP的DNS向ns*.google.com发DNS请求，ns*.google.com返回youtube.com的IP（通常以74.125或173.194开头）。
+4. 你ISP的DNS拿到IP后，将其写入缓存，并把结果返回到你电脑。以后有别人使用你ISP的DNS查询同一域名，DNS直接从缓存提取结果并返回。
+5. 域名记录都有TTL（Time To Live，生存时间）且以秒为单位，当它到零时，你ISP的DNS从缓存中删掉这条记录，下次有人查同一域名时，你ISP的DNS只好从第一步开始重查。
+【可这是某朝，有DNS污染】
+第一步中，某墙伪造.COM域名服务器（*.gtld-servers.net）返回假IP，然后到第四步。
+
+那怎么知道污染存在呢？
+测试方法：由于GFW对所有经过它，基于UDP，在53端口上的DNS请求做检查，如果匹配黑名单，则返回虚假DNS应答，所以可以nslookup或dig一个黑名单上的网站（比如著名的youtube.com），用一个位于墙外，无效的DNS服务器查询（如果在墙外上网，用一个用一个位于墙内，无效的DNS服务器查询）。比如在墙内nslookup youtube.com 66.12.34.56（随机墙外IP）或在墙外nslookup youtube.com 123.123.123.123（随机墙内IP），返回一个符合如下特征的DNS应答：
+a) TTL为300至几万
+b) 永远返回A记录，不论你查询什么记录（AAAA，NS，CNAME，TXT，ANY等）
+c) A记录为以下IP：（维基百科的“DNS污染”条目的IP列表太长，本人测试好多都没碰上）
+59.24.3.173（最常见，倒霉的韩国IP）
+37.61.54.158（第二，阿塞拜疆IP）
+（下面IP频率差不多）
+8.7.198.45（米国 Level 3通信公司）
+46.82.174.68（德国电信？？）
+78.16.49.15（爱尔兰）
+93.46.8.89（意大利）
+159.106.121.75（米国 DoD Network Information Center）
+203.98.7.65（新西兰）
+243.185.187.39（IANA保留：240.0.0.0 - 255.255.255.255）
+1.1.1.1（最少，本人只见过一次）
+d) 某FW的DNS黑名单使用通配符匹配（*youtube.com），所以不仅youtube.com及*.youtube.com被污染，aaa111bbb222youtube.com也会被污染
+
+墙对IPv4的审查（某FWv4）讲完了，讲它对IPv6的审查（某FWv6）
+1、IP封锁
+在IPv6中依然可使用，因为只有知道目标IP才能传输数据包
+
+2、关键字过滤
+仍存在，但没有了90秒内发RST包断开连接（不知道是不是因为我使用了隧道）
+
+3、DNS污染
+没有发现，有IPv6的网友可以帮助测试
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul  2 04:16:07 2014">
+ Jul 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=15105#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/105406260789901238319/">qi531040...@gmail.com</a
+></span>
+ 
+<pre>
+想问一下，怎么用cmd来看dns污染啊？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul  2 05:44:36 2014">
+ Jul 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=15105#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/103265284293004991711/">zhx...@gmail.com</a
+></span>
+ 
+<pre>
+教育网ipv6 Google目前很好，其他不行
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Mar  5 15:47:58 2015">
+ Mar 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=15105#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/115354468257486784132/">zzq1...@gmail.com</a
+></span>
+ 
+<pre>
+更新：
+GFW针对IPv6也进行DNS污染
+<a href="https://code.google.com/p/goagent/issues/detail?id=17571" rel="nofollow">https://code.google.com/p/goagent/issues/detail?id=17571</a>
+
+GFW对DNS进行污染至随机IP地址
+<a href="https://code.google.com/p/goagent/issues/detail?id=19330" rel="nofollow">https://code.google.com/p/goagent/issues/detail?id=19330</a>
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Mar  5 20:07:31 2015">
+ Mar 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=15105#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/108624022798487360207/">hongwang...@gmail.com</a
+></span>
+ 
+<pre>
+电信开通ipv6接入，但只限于境内。境外不行。看来一时是不行了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Mar  5 20:36:43 2015">
+ Mar 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=15105#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/115354468257486784132/">zzq1...@gmail.com</a
+></span>
+ 
+<pre>
+to #4：
+没错，就是DNS污染，GFW抢在真正DNS应答到达之前伪造应答
+为什么不封IP？封IP太费成本（无论用ACL还是路由表污染），同样的，HTTP劫持（其他搞网络审查的国家就是这么干的）和伪造RST重置包不行，也是同样道理。试想全中国的电脑访问被封网站，对每一台电脑都要运算（判断IP是否在黑名单内，伪造RST包等），真这样GFW得累死。
+DNS污染降低了成本，因为大多数人使用的是ISP的DNS，污染一次可以持续几万秒（DNS记录的TTL值），至于用Google公共DNS和OpenDNS的毕竟是少数（你查一次就污染一次，有时候还会污染失败）
+
+to #6：
+什么叫只限于境内？只能连境内IP吗？ nslookup www.google.com 2001:4860:4860::8888 不行？
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D15105&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D15105"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="15105">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A15105',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 15105,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

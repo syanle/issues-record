@@ -1,0 +1,2381 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"token": null, "profileUrl": null, "projectName": "goagent", "projectHomeUrl": "/p/goagent", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "loggedInUserEmail": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "domainName": null, "relativeBaseUrl": ""};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 20538 - 
+ goagent -
+ 
+ linux/Ubuntu/Debian下搞不定Tor的伙计们有福了，本座在此开坛讲座为尔等指点迷津 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20538&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20538" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=20538">20538</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >linux/Ubuntu/Debian下搞不定Tor的伙计们有福了，本座在此开坛讲座为尔等指点迷津</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 7 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A20538">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20538&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20538">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+>,
+ <span class="date" title="Fri May  1 20:31:47 2015">May 1, 2015</span>
+ 
+ </div>
+<pre>
+linux/Ubuntu/Debian下搞不定Tor的伙计们有福了，本座在此开坛讲座为尔等指点迷津
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May  1 21:31:44 2015">
+ May 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=20538#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/106310193510396836732/">philip.t...@gmail.com</a
+></span>
+ 
+<pre>
+上，上，上。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May  1 23:52:19 2015">
+ May 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=20538#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/xyuanmu/">xyuanmu</a
+></span>
+ 
+<pre>
+今天好奇也用了下，新版本配置挺简单的，不过只有fte可以使用，而且看youtube还能720p，其他的meek，obfs都连不上不知咋回事。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May  2 00:21:39 2015">
+ May 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=20538#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/106404608224580029606/">luyuanfe...@gmail.com</a
+></span>
+ 
+<pre>
+用tor能上普通网页吗？
+国内有蜜罐吗？
+tor有icq吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May  2 04:28:11 2015">
+ May 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=20538#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+首先，我要说一下：很多人都说torrc是tor的灵魂，torrc搞得不对，tor肯定不能用。
+这句话在win下适用，但是在linux下就不适用了。linux下就算是torrc是对的，只有linux的运行环境没有配置对，torrc照样死活不能用。
+
+linux环境下运行torrc，的确是一件非常有挑战性的事。 我也是历经艰难苦苦研究，查阅大量资料，试验过多次，才成功得道。到达了非常有把握的程度，才敢在这里开坛讲法。
+
+好了废话不多说，我来讲下linux下安装配置tor的关键要点。
+
+第一步：到tor官网下载linux版TBB： <a href="https://www.torproject.org/download/download-easy.html.en　（TBB" rel="nofollow">https://www.torproject.org/download/download-easy.html.en　（TBB</a> Version 4.5 - Linux, Unix, BSD）　　
+
+注意一定是linux版，不要搞错了。　下载得到文件：tor-browser-linux32-4.5_en-US.tar.xz
+然后解压到home目录下。
+
+　　在这里不得不说，他妈tor org做的这个包实在是太烂了，那个browser目录下start-to-browser有很大的bug, 首先是bash文件没有执行权限，用chmod +X给了执行权限以后，再运行尼玛接着报错，说什么整数行错误，晕倒！　这么烂的东西，他们是怎么放出去的。那个win的ＴBB一样很难，打开以后直接闪退，难道他们都没有测试过，就这样放出来了吗。幸亏有ＥＢＢ的打包高手，否则你让菜鸟们怎么用？
+　　好了，下面一步，只提取TorBrowser目录到Ｈome 目录下，其余的不要。
+
+到此为止安装的准备工作就搞得差不多了。很多人说再把torrc文件修改一下，不就搞定了吗，哼哼，你试试看？只要尼玛，运行torrc -f torrc,保证报错：
+
+root@garyyuan-To-be-filled-by-O-E-M:/home/garyyuan/TorBrowser/Tor# tor -f torrc
+Apr 25 12:22:01.251 [notice] Tor v0.2.4.23 (git-05b81fcd2a655c5a) running on Linux with Libevent 2.0.21-stable and OpenSSL 1.0.1f.
+Apr 25 12:22:01.251 [notice] Tor can't help you if you use it wrong! Learn how to be safe at <a href="https://www.torproject.org/download/download#warning" rel="nofollow">https://www.torproject.org/download/download#warning</a>
+Apr 25 12:22:01.251 [notice] Read configuration file &quot;/home/garyyuan/TorBrowser/Tor/torrc&quot;.
+Apr 25 12:22:01.254 [warn] You have asked to exclude certain relays from all positions in your circuits. Expect hidden services and other Tor features to be broken in unpredictable ways.
+Apr 25 12:22:01.254 [warn] Key digest for Bridge is wrong length.
+Apr 25 12:22:01.254 [warn] Failed to parse/validate config: Bridge line did not parse. See logs for details.
+Apr 25 12:22:01.254 [err] Reading config failed--see warnings above.
+
+为什么？　因为环境没有配好，这是我下面要讲的重点？
+
+　
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May  2 04:48:54 2015">
+ May 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=20538#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+要想tor在linux环境运行成功，一定不要提前做一件蠢事。妈的，我忍不住又要吗tor org，尼玛专门发些烂文件误导用户：
+
+说什么ubuntu／debian用户,要通过在线安装：　apt-get install tor, 来安装tor,尼玛自从安了这个，噩梦就开始了。
+只要运行tor -f torrc 就会报上面的错：
+root@garyyuan-To-be-filled-by-O-E-M:/home/garyyuan/TorBrowser/Tor# tor -f torrc
+Apr 25 12:22:01.251 [notice] Tor v0.2.4.23 (git-05b81fcd2a655c5a) running on Linux with Libevent 2.0.21-stable and OpenSSL 1.0.1f.
+Apr 25 12:22:01.251 [notice] Tor can't help you if you use it wrong! Learn how to be safe at <a href="https://www.torproject.org/download/download#warning" rel="nofollow">https://www.torproject.org/download/download#warning</a>
+Apr 25 12:22:01.251 [notice] Read configuration file &quot;/home/garyyuan/TorBrowser/Tor/torrc&quot;.
+Apr 25 12:22:01.254 [warn] You have asked to exclude certain relays from all positions in your circuits. Expect hidden services and other Tor features to be broken in unpredictable ways.
+Apr 25 12:22:01.254 [warn] Key digest for Bridge is wrong length.
+Apr 25 12:22:01.254 [warn] Failed to parse/validate config: Bridge line did not parse. See logs for details.
+Apr 25 12:22:01.254 [err] Reading config failed--see warnings above.
+
+为什么会这样?  你们注意看上面的tor版本号是多少？　是Tor v0.2.4.23 ，而TBB中tor最新的版本号是多少？　是v0.2.6.7。
+发现问题了吗？原来系统默认调用的linux已经安装好的tor，而不是你拷贝的tor.
+通过运行下面一个命令就很清楚了：
+garyyuan@garyyuan-To-be-filled-by-O-E-M:~$ which tor
+/usr/sbin/tor
+garyyuan@garyyuan-To-be-filled-by-O-E-M:~$ 
+
+tor命令的默认执行路径是/usr/sbin/tor，所以你就算是在你拷贝的最新TorBrowser目录下运行tor也没有用，系统会自动调用它预先安装好的tor.
+补充说一下：前面提取的TorBrowser包含了Tor, Data,Doc三个目录，其中Tor目录下又有PluggableTransports重要的bridge插件目录和tor运行程序。
+为了方便管理，我把GeoIP，GeoIP6都放在了Tor目录下。
+
+然后回到正题，要解决上面的调用错误版本的问题，有两种办法：
+１．　替换掉系统默认tor文件：　cp ~/TorBrower/Tor/tor  /usr/sbin/tor,这样从根本上解决问题。
+２．　在工作目录下运行tor，加一个限定符：./
+cd /TorBrower/Tor/tor
+./tor -f torrc 
+
+这样就解决问题了吗，当然没有。不信，你运行torrc -f torrc，试试看，照样报错，说找不到什么libssl.so.1.0.0的运行库。怎么解决呢，这个问题就很有点难度哦。
+
+
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May  2 04:59:49 2015">
+ May 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=20538#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+具体报错信息：error while loading shared libraries: libstdc++.so.6: cannot open shared object file。
+
+这个问题怎么解决? 是不是用apt-get install 安装相应的库，就可以解决了呢，绝对不是，不信。
+你试试，有的库可以搞定，有的则不一定。
+
+然后你运行一下：　locate命令
+garyyuan@garyyuan-To-be-filled-by-O-E-M:~$ locate libssl.so.1.0.0
+/home/garyyuan/tor-browser4.5/Browser/TorBrowser/Tor/libssl.so.1.0.0
+/lib/x86_64-linux-gnu/libssl.so.1.0.0
+garyyuan@garyyuan-To-be-filled-by-O-E-M:~$ 
+
+就会发现系统自带的lib库，好像用对应函数库，但是为什么还是报错呢? 应该怎么解决？今天说累了，明天接着讲。
+
+
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May  2 05:28:46 2015">
+ May 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=20538#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/107657070678903118341/">kolmai...@gmail.com</a
+></span>
+ 
+<pre>
+鼓掌支持！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May  2 05:37:02 2015">
+ May 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=20538#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/109915319819232866192/">qgt...@gmail.com</a
+></span>
+ 
+<pre>
+为什么要用32位的呢，我下载64位的一次就成功了啊。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May  2 05:41:28 2015">
+ May 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=20538#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+我不是32位的，我就是64位的Ubuntu14.10
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May  2 06:03:14 2015">
+ May 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=20538#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+#11
+你说的没错，我刚才试过了，６４位的ＴＢＢ用图形界面的确没有问题，但是此次我主要是讲解命令行界面的，情况会有所不同。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May  2 07:07:31 2015">
+ May 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=20538#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/109915319819232866192/">qgt...@gmail.com</a
+></span>
+ 
+<pre>
+#13
+命令行更没有问题啊，直接解压后运行就行了。简单问题复杂化了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May  2 07:40:00 2015">
+ May 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=20538#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+没错，从理论上讲，图形界面OK的话，作为底层的命令行也应该没有问题。但是我想说的是在实际操作中，这种刚刚好的情况其实很少见，完美匹配在很大程度上有运气的因素。而我们实际的情形是会遇到各种各样稀奇古怪的问题，正是在解决这些问题的过程中，不断让自己得到提高，并发现了以前从来都不知道的技巧。所以，我并不认为这是把简单的问题复杂化了。
+明天我会讲解一些高级的排错技巧。如果你一开始走的很顺，根本就不可能发现这些高级技巧。
+另外图形界面我试过了，不加前置代理的情况，基本只有fte模式可以连，且速度很慢，；obfs4网桥无法连接。
+但是如果是命令行模式下，通过自定义网桥可以极大的提高连接的速度和网速，这是图形模式所不能比拟的。我这里所讲的都是直连模式，不是前置代理模式，而且是纯命令行模式，只是纯粹把tor当作sock代理。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May  2 07:49:26 2015">
+ May 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=20538#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/109915319819232866192/">qgt...@gmail.com</a
+></span>
+ 
+<pre>
+您继续，我只是说在64位Ubuntu下面这么曲折的去用32位TOR，然后再去解决有点复杂。不如直接用64位Tor来开坛讲后面的高级应用更好。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May  2 07:54:51 2015">
+ May 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=20538#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/110158684434685666353/">cym.zh...@gmail.com</a
+></span>
+ 
+<pre>
+只要确保www.google.com的hosts有效
+
+google的meek模式很正常
+
+除了视频没法比，文字浏览非常快，也是傻瓜连接不劳神
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May  4 07:46:59 2015">
+ May 4, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=20538#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/104390334475886160790/">hubenb...@gmail.com</a
+></span>
+ 
+<pre>
+这位兄台请继续。前几天在自己的机器上试着设置tor出口节点，但是总不成功，希望从您的探索中获得启发。谢谢。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May  4 19:48:34 2015">
+ May 4, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=20538#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+这几天很忙，今天晚上更新
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May  4 23:09:12 2015">
+ May 4, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=20538#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/110330972716879447422/">bob.yang...@gmail.com</a
+></span>
+ 
+<pre>
+楼主请指教一二:
+ubuntu 14.04 / tor 自己指定路径编译安装的没问题.(非含浏览器的版本,我习惯firefox了).
+obfs4和meek怎么安装啊?meek以前自己用go源码编译过忘了.obfs4没玩过....那个源?怎么装?也的编译吗?
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May  4 23:45:12 2015">
+ May 4, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=20538#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+不要用编译安装的，编译安装的Tor版本太老（ v0.2.4.23），不能跟最新的网桥插件匹配上。
+
+这个我试验过多次了，编译安装的就是不行。所以apt-get install  之流的就不要试了。
+你要用带浏览器版本TBB的提取Tor（64位ubuntu装64位TBB,32位的ubuntu装32位的TBB）,直接运行。
+
+obfs4和meek都需要编辑torrc文件，这个我后面会讲。
+
+obfs4的网桥很少，不建议使用，如果你手上已经有了很多obfs4的节点，那就另当别论。。
+meek的已经被GFW完全封死，不加前置代理的话，根本无法连上。
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May  5 02:06:13 2015">
+ May 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=20538#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/110330972716879447422/">bob.yang...@gmail.com</a
+></span>
+ 
+<pre>
+#21
+我是 ./configure &amp;&amp; make...从tor官网下源代码自己编译的,升级到 tor-0.2.6.7 应该最新了.
+meek应该下go源码编译后再torrc文件设置基本没问题我以前用过.
+obfs4不太清楚...源码编译吗?
+另外: apt-get install是从源安装,不是编译安装.编译安装是从源代码自己编译,应该最新.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May  5 02:29:59 2015">
+ May 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=20538#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+22# 你看看你的网桥插件的目录在哪里，把路径报给我
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May  5 03:07:59 2015">
+ May 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=20538#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/110158684434685666353/">cym.zh...@gmail.com</a
+></span>
+ 
+<pre>
+#23 www.leno...@gmail.com
+
+meek-google没封，在我这最快
+
+meek-Amazon次之，可能也是最难封的
+
+meek-Azure最慢，也只有在win7上成功过
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc26">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May  5 04:54:56 2015">
+ May 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c26" href="/p/goagent/issues/detail?id=20538#c26">#26</a>
+ 
+
+ <a class="userlink"
+ href="/u/116326853761552387466/">scattere...@gmail.com</a
+></span>
+ 
+<pre>
+#23
+
+用goagent的，手上都不乏google ip, 丢几个到hosts里，域名用www.google.com就可以用meek-google
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May  5 05:11:24 2015">
+ May 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=20538#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/116326853761552387466/">scattere...@gmail.com</a
+></span>
+ 
+<pre>
+#22
+
+#22
+
+# <a href="https://www.torproject.org/docs/debian.html.en" rel="nofollow">https://www.torproject.org/docs/debian.html.en</a>
+# <a href="https://lists.alioth.debian.org/pipermail/pkg-anonymity-tools/Week-of-Mon-20150202/001124.html" rel="nofollow">https://lists.alioth.debian.org/pipermail/pkg-anonymity-tools/Week-of-Mon-20150202/001124.html</a>
+# <a href="https://fteproxy.org/download" rel="nofollow">https://fteproxy.org/download</a>
+
+### ubuntu 14.04 trusty
+
+cat &gt; /etc/apt/sources.list.d/trusty-tor.list &lt;&lt;EOF
+deb <a href="http://deb.torproject.org/torproject.org" rel="nofollow">http://deb.torproject.org/torproject.org</a> trusty main
+deb <a href="http://deb.torproject.org/torproject.org" rel="nofollow">http://deb.torproject.org/torproject.org</a> obfs4proxy main
+EOF
+
+gpg --keyserver keys.gnupg.net --recv 886DDD89
+gpg --export <a href="/p/goagent/source/detail?r=A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89">A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89</a> | apt-key add -
+apt-get update
+apt-get install tor deb.torproject.org-keyring obfs4proxy obfsproxy python-dev python-pip libgmp-dev build-essential
+pip install fteproxy
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May  5 05:25:23 2015">
+ May 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=20538#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/116326853761552387466/">scattere...@gmail.com</a
+></span>
+ 
+<pre>
+#8
+
+torproject没误导人，只是有些属于基本操作，原以为提一下你就应该知道了
+
+cd TorBrowser/Tor
+export LD_LIBRARY_PATH=$(pwd):$LD_LIBRARY_PATH
+./tor -f torrc
+
+如果系统中已经安装了tor, 要么卸载掉，要么TorBrowser下的torrc端口改下也成
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc29">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May  5 05:31:46 2015">
+ May 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c29" href="/p/goagent/issues/detail?id=20538#c29">#29</a>
+ 
+
+ <a class="userlink"
+ href="/u/116326853761552387466/">scattere...@gmail.com</a
+></span>
+ 
+<pre>
+#6
+
+有些网站对tor有限制
+我没有限制出口节点，就我所看到的，中国节点已经很长时间看不到了
+有个torchat，不过我没用过，你可以试下
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc30">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May  5 05:44:18 2015">
+ May 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c30" href="/p/goagent/issues/detail?id=20538#c30">#30</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+接着我第九楼的内容讲：
+error while loading shared libraries: libstdc++.so.6: cannot open shared object file。
+
+这个错误用下面的命令解决掉：
+
+cd ~/TorBrowser/Tor
+cp lib*.* /usr/lib
+
+这样就OK了
+
+下面讲一下重头戏obfs网桥的配置：
+
+这里的关键点是，linux下tor是用obfsproxy4代理这obfs3,scramblesuit,obfs4 三种网桥，所以加载网桥的关键语句是：
+
+ClientTransportPlugin obfs3,scramblesuit,obfs4 exec ./PluggableTransports/obfs4proxy managed
+
+然后下面接网桥的ＩＰ和端口：
+比如：
+Bridge obfs3　ＩＰ: PORT
+Bridge scramblesuit ＩＰ: PORT
+Bridge obfs4 ＩＰ: PORT cert=xxx
+
+然后torrc文件的开头部分可以这样写：
+
+Log notice file ./tor.log
+SocksListenAddress 127.0.0.1
+SocksPort 9050
+ClientOnly 1
+
+UpdateBridgesFromAuthority 1
+UseBridges 1
+GeoIPFile ./geoip
+GeoIPv6File ./geoip6
+SafeLogging 0
+ExcludeNodes SlowServer,AD},{AE},{AF},{AG},{AI},{AL},{AM},{AM},{AO},{AQ},{AR},{AS},{AT},{AU},{AW},{AX},{AZ},{AZ},{BA},{BB},{BD},{BE},{BF},{BG},{BH},{BI},{BJ},{BL},{BM},{BN},{BO},{BQ},{BR},{BS},{BT},{BV},{BW},{BY},{BZ},{CA},{CC},{CD},{CF},{CG},{CH},{CI},{CK},{CL},{CM},{CN},{CO},{CR},{CU},{CV},{CW},{CX},{CY},{CY},{CZ},{DJ},{DK},{DM},{DO},{DZ},{EC},{EE},{EG},{EH},{ER},{ES},{ET},{FI},{FJ},{FK},{FM},{FO},{FR},{GA},{GD},{GE},{GE},{GF},{GG},{GH},{GI},{GL},{GM},{GN},{GP},{GQ},{GR},{GS},{GT},{GU},{GW},{GY},{HK},{HM},{HN},{HR},{HT},{HU},{ID},{IE},{IL},{IM},{IN},{IO},{IQ},{IR},{IS},{IT},{JE},{JM},{JO},{JP},{KE},{KG},{KH},{KI},{KM},{KN},{KP},{KR},{KW},{KY},{KZ},{KZ},{LA},{LB},{LC},{LI},{LK},{LR},{LS},{LT},{LU},{LV},{LY},{MA},{MC},{MD},{ME},{MF},{MG},{MH},{MK},{ML},{MM},{MN},{MO},{MP},{MQ},{MR},{MS},{MT},{MU},{MV},{MW},{MX},{MY},{MZ},{NA},{NC},{NE},{NF},{NG},{NI},{NL},{NO},{NP},{NR},{NU},{NZ},{OM},{PA},{PE},{PF},{PG},{PH},{PK},{PL},{PM},{PN},{PR},{PS},{PT},{PW},{PY},{QA},{RE},{RO},{RS},{RU},{RU},{RW},{SA},{SB},{SC},{SD},{SE},{SG},{SH},{SI},{SJ},{SK},{SL},{SM},{SN},{SO},{SR},{SS},{ST},{SV},{SX},{SY},{SZ},{TC},{TD},{TF},{TG},{TH},{TJ},{TK},{TL},{TM},{TN},{TO},{TR},{TR},{TT},{TV},{TW},{TZ},{UA},{UG},{UM},{UM},{UY},{UZ},{VA},{VC},{VE},{VG},{VI},{VN},{VU},{WF},{WS},{YE},{YT},{ZA},{ZM},{ZW},{??}
+ExcludeExitNodes SlowServer,AD},{AE},{AF},{AG},{AI},{AL},{AM},{AM},{AO},{AQ},{AR},{AS},{AT},{AU},{AW},{AX},{AZ},{AZ},{BA},{BB},{BD},{BE},{BF},{BG},{BH},{BI},{BJ},{BL},{BM},{BN},{BO},{BQ},{BR},{BS},{BT},{BV},{BW},{BY},{BZ},{CA},{CC},{CD},{CF},{CG},{CH},{CI},{CK},{CL},{CM},{CN},{CO},{CR},{CU},{CV},{CW},{CX},{CY},{CY},{CZ},{DJ},{DK},{DM},{DO},{DZ},{EC},{EE},{EG},{EH},{ER},{ES},{ET},{FI},{FJ},{FK},{FM},{FO},{FR},{GA},{GD},{GE},{GE},{GF},{GG},{GH},{GI},{GL},{GM},{GN},{GP},{GQ},{GR},{GS},{GT},{GU},{GW},{GY},{HK},{HM},{HN},{HR},{HT},{HU},{ID},{IE},{IL},{IM},{IN},{IO},{IQ},{IR},{IS},{IT},{JE},{JM},{JO},{JP},{KE},{KG},{KH},{KI},{KM},{KN},{KP},{KR},{KW},{KY},{KZ},{KZ},{LA},{LB},{LC},{LI},{LK},{LR},{LS},{LT},{LU},{LV},{LY},{MA},{MC},{MD},{ME},{MF},{MG},{MH},{MK},{ML},{MM},{MN},{MO},{MP},{MQ},{MR},{MS},{MT},{MU},{MV},{MW},{MX},{MY},{MZ},{NA},{NC},{NE},{NF},{NG},{NI},{NL},{NO},{NP},{NR},{NU},{NZ},{OM},{PA},{PE},{PF},{PG},{PH},{PK},{PL},{PM},{PN},{PR},{PS},{PT},{PW},{PY},{QA},{RE},{RO},{RS},{RU},{RU},{RW},{SA},{SB},{SC},{SD},{SE},{SG},{SH},{SI},{SJ},{SK},{SL},{SM},{SN},{SO},{SR},{SS},{ST},{SV},{SX},{SY},{SZ},{TC},{TD},{TF},{TG},{TH},{TJ},{TK},{TL},{TM},{TN},{TO},{TR},{TR},{TT},{TV},{TW},{TZ},{UA},{UG},{UM},{UM},{UY},{UZ},{VA},{VC},{VE},{VG},{VI},{VN},{VU},{WF},{WS},{YE},{YT},{ZA},{ZM},{ZW},{??}
+StrictNodes 1
+UpdateBridgesFromAuthority 1
+CloseHSClientCircuitsImmediatelyOnTimeout 1
+CloseHSServiceRendCircuitsImmediatelyOnTimeout 1
+MaxCircuitDirtiness 86400
+MaxClientCircuitsPending 1024
+
+ExitNodes　*.*.*.*
+
+出口节点和obfs3等网桥需要自己去找，我这里就不公布具体网桥地址，免得被封
+
+<a href="https://bridges.torproject.org/bridges?transport=obfs3" rel="nofollow">https://bridges.torproject.org/bridges?transport=obfs3</a> 获取obfs3网桥
+ <a href="https://bridges.torproject.org/bridges?transport=obfs4" rel="nofollow">https://bridges.torproject.org/bridges?transport=obfs4</a> 获取obfs4网桥
+<a href="https://bridges.torproject.org/bridges?transport=scramblesuit" rel="nofollow">https://bridges.torproject.org/bridges?transport=scramblesuit</a> 获取scramblesuit网桥
+<a href="https://check.torproject.org/exit-addresses" rel="nofollow">https://check.torproject.org/exit-addresses</a> 获取实时的出口节点（exit nude）
+<a href="https://atlas.torproject.org/#search/04D5582A15706C667C8753C030DA6B0EEA588FD9" rel="nofollow">https://atlas.torproject.org/#search/04D5582A15706C667C8753C030DA6B0EEA588FD9</a>: 测试出口节点的带宽
+
+排错的日志在当前目录的tor里面可以查看（这个排错的log我没有放到Data目录里而是当前目录）
+
+所有这些配好以后，运行：tor -f torrc
+就可以了，出现这样的字样就表明成功了：
+garyyuan@garyyuan-To-be-filled-by-O-E-M:/etc/tor$ tor -f torrc
+May 05 20:03:23.829 [notice] Tor v0.2.6.7 (git-ac600bec40c14864) running on Linux with Libevent 2.0.21-stable, OpenSSL 1.0.1m and Zlib 1.2.8.
+May 05 20:03:23.829 [notice] Tor can't help you if you use it wrong! Learn how to be safe at <a href="https://www.torproject.org/download/download#warning" rel="nofollow">https://www.torproject.org/download/download#warning</a>
+May 05 20:03:23.829 [notice] Read configuration file &quot;/etc/tor/torrc&quot;.
+May 05 20:03:23.831 [warn] You have asked to exclude certain relays from all positions in your circuits. Expect hidden services and other Tor features to be broken in unpredictable ways.
+May 05 20:03:23.832 [notice] Opening Socks listener on 127.0.0.1:9050
+
+然后到tor日志里面去看：
+到了这一步：
+May 05 20:03:49.000 [notice] Bootstrapped 80%: Connecting to the Tor network
+May 05 20:03:49.000 [notice] Bootstrapped 90%: Establishing a Tor circuit
+May 05 20:03:52.000 [notice] Tor has successfully opened a circuit. Looks like client functionality is working.
+May 05 20:03:52.000 [notice] Bootstrapped 100%: Done
+
+Tor就连接成功了，然后再浏览器的代理里面增加一个代理场景：sock5 127:0.0.1,代理端口：９０５０，这样就可以通过tor翻墙上网了。
+
+
+异常情况的处理：
+
+端口占用，tor无法运行，如果出现以下报错信息：
+May 03 07:21:37.848 [notice] Tor v0.2.6.7 (git-ac600bec40c14864) running on Linux with Libevent 2.0.21-stable, OpenSSL 1.0.1m and Zlib 1.2.8.
+May 03 07:21:37.848 [notice] Tor can't help you if you use it wrong! Learn how to be safe at <a href="https://www.torproject.org/download/download#warning" rel="nofollow">https://www.torproject.org/download/download#warning</a>
+May 03 07:21:37.848 [notice] Read configuration file &quot;/home/garyyuan/TorBrowser/Tor/torrc-fte&quot;.
+May 03 07:21:37.855 [warn] You have asked to exclude certain relays from all positions in your circuits. Expect hidden services and other Tor features to be broken in unpredictable ways.
+May 03 07:21:37.856 [notice] Opening Socks listener on 127.0.0.1:9050
+May 03 07:21:37.856 [warn] Could not bind to 127.0.0.1:9050: Address already in use. Is Tor already running?
+May 03 07:21:37.856 [warn] Failed to parse/validate config: Failed to bind one of the listener ports.
+May 03 07:21:37.856 [err] Reading config failed--see warnings above.
+
+就表明tor没有正常退出，端口被占用了，再次运行tor就会失败，怎么解决，这里介绍一个非常高级的技巧：
+
+运行命令：ps -aux|grep tor
+然后会出现有关tor关键字的PID进程列表：
+
+garyyuan@garyyuan-To-be-filled-by-O-E-M:~$ ps -aux|grep tor
+garyyuan  2362  0.0  0.1 335540  6576 ?        Ssl  18:59   0:00 /usr/lib/x86_64-linux-gnu/indicator-messages/indicator-messages-service
+garyyuan  2363  0.0  0.1 264088  7840 ?        Ssl  18:59   0:00 /usr/lib/x86_64-linux-gnu/indicator-bluetooth/indicator-bluetooth-service
+garyyuan  2364  0.0  0.0 353168  5464 ?        Ssl  18:59   0:00 /usr/lib/x86_64-linux-gnu/indicator-power/indicator-power-service
+garyyuan  2366  0.0  0.2 1172396 17900 ?       Ssl  18:59   0:00 /usr/lib/x86_64-linux-gnu/indicator-datetime/indicator-datetime-service
+garyyuan  2369  0.0  0.4 731708 28940 ?        Ssl  18:59   0:00 /usr/lib/x86_64-linux-gnu/indicator-keyboard/indicator-keyboard-service --use-gtk
+garyyuan  2373  0.0  0.2 550632 12492 ?        Ssl  18:59   0:00 /usr/lib/x86_64-linux-gnu/indicator-sound/indicator-sound-service
+garyyuan  2375  0.0  0.3 453564 22384 ?        Ssl  18:59   0:00 /usr/lib/x86_64-linux-gnu/indicator-printers/indicator-printers-service
+garyyuan  2381  0.0  0.1 885492  8912 ?        Ssl  18:59   0:00 /usr/lib/x86_64-linux-gnu/indicator-session/indicator-session-service
+garyyuan  2451  0.0  0.1 380876 11672 ?        Ssl  18:59   0:01 /usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service
+garyyuan  2498  0.0  0.1 282580  8092 ?        Sl   18:59   0:00 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+garyyuan  2511  0.0  0.0 204252  5736 ?        Sl   18:59   0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+garyyuan  2518  0.0  0.1 298720  9424 ?        Sl   18:59   0:00 /usr/lib/gvfs/gvfs-afc-volume-monitor
+garyyuan  2524  0.0  0.0 196576  5608 ?        Sl   18:59   0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+garyyuan  2532  0.0  0.9 1190968 59632 ?       Sl   18:59   0:00 /usr/lib/evolution/evolution-calendar-factory
+garyyuan  2759  0.0  0.3 462448 23488 ?        Sl   19:00   0:00 telepathy-indicator
+garyyuan  3567  0.0  0.1 369548  7188 ?        Sl   19:01   0:00 /usr/lib/x86_64-linux-gnu/deja-dup/deja-dup-monitor
+garyyuan 23371  0.1  0.4  27628 26644 pts/6    S+   20:03   0:02 tor -f torrc
+garyyuan 31315  0.0  0.0  13676  2148 pts/9    S+   20:31   0:00 grep --color=auto tor
+garyyuan@garyyuan-To-be-filled-by-O-E-M:~$ 
+
+这里找到跟torrc有关的进程，比如23371
+然后运行 kill 23371
+就ok了。
+然后再运行： tor -f torrc 
+就好了
+
+关于meek，我测试过，我这边长宽已经被封，只能通过加SS的前置代理连接（TBB图形界面），命令行我加了Socks5Proxy 127.0.0.1:1080没有成功，不知道什么原因。报错如下：
+May 05 19:38:49.000 [warn] Managed proxy failed to configure the pluggable transport's outgoing proxy. (don't understand proxy URL scheme &quot;socks5&quot;)
+May 05 19:38:49.000 [warn] Managed proxy at './PluggableTransports/meek-client' failed the configuration protocol and will be destroyed.
+
+我相信我的torrc配置是正确的，meek配置如下：
+ClientTransportPlugin meek exec ./PluggableTransports/meek-client --log ./meek.log
+bridge meek 0.0.2.0:1 url=<a href="https://meek-reflect.appspot.com/" rel="nofollow">https://meek-reflect.appspot.com/</a> front=www.google.com
+Bridge meek 0.0.2.0:2 url=<a href="https://d2zfqthxsdq309.cloudfront.net/" rel="nofollow">https://d2zfqthxsdq309.cloudfront.net/</a> front=a0.awsstatic.com
+Bridge meek 0.0.2.0:3 url=<a href="https://az668014.vo.msecnd.net/" rel="nofollow">https://az668014.vo.msecnd.net/</a> front=ajax.aspnetcdn.com
+
+具体原因还要排查。
+
+关于fte, 貌似只能通过TBB图形界面的连接，通过命令行的torrc无法加载成功：
+ClientTransportPlugin fte exec ./PluggableTransports/fteproxy.bin --managed
+
+
+Bridge fte 194.132.208.189:1608 <a href="/p/goagent/source/detail?r=31DABA8C28960C04E7FEAD895C12D8FFC926F7D6">31DABA8C28960C04E7FEAD895C12D8FFC926F7D6</a>
+Bridge fte 194.132.208.19:13715 <a href="/p/goagent/source/detail?r=0683E1AD3E1B3A47F88A778CFEC0C0F7BD14E137">0683E1AD3E1B3A47F88A778CFEC0C0F7BD14E137</a>
+Bridge fte 23.23.68.81:22935 <a href="/p/goagent/source/detail?r=2CA30CF61B14060A8D3C478FEA5333ECCF199BD8">2CA30CF61B14060A8D3C478FEA5333ECCF199BD8</a>
+
+报错如下：
+
+May 02 19:03:16.000 [notice] Delaying directory fetches: No running bridges
+May 02 19:03:17.000 [warn] The communication stream of managed proxy './PluggableTransports/fteproxy.bin' is 'closed'. Most probably the managed proxy stopped running. This might be a bug of the managed proxy, a bug of Tor, or a misconfiguration. Please enable logging on your managed proxy and check the logs for errors.
+
+这个就纠结了，直接通过图形界面连接好了。
+
+由于时间仓促， 我就写这么多，关于obfs部分大家可以尽情想我提问。 meek和fte部分请用图形界面连接（meek需要加SS前置代理，fte可以直连），谢谢！
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc31">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May  5 05:52:17 2015">
+ May 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c31" href="/p/goagent/issues/detail?id=20538#c31">#31</a>
+ 
+
+ <a class="userlink"
+ href="/u/116326853761552387466/">scattere...@gmail.com</a
+></span>
+ 
+<pre>
+#4
+
+用 torify / torsocks 运行程序
+
+有些应用可以直接支持socks5，比如curl
+curl -x socks5://localhost:9050 www.google.com
+
+也可以用privoxy或polipo转socks5为https代理，再设置代理的环境变量, 比如
+export http{s,}_proxy=http://localhost:8118
+lynx www.google.com
+
+但不是所有的都可以转为tor访问，详细的可以看
+<a href="https://trac.torproject.org/projects/tor/wiki/doc/TorifyHOWTO" rel="nofollow">https://trac.torproject.org/projects/tor/wiki/doc/TorifyHOWTO</a>
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc32">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May  5 08:23:32 2015">
+ May 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c32" href="/p/goagent/issues/detail?id=20538#c32">#32</a>
+ 
+
+ <a class="userlink"
+ href="/u/110330972716879447422/">bob.yang...@gmail.com</a
+></span>
+ 
+<pre>
+#24&amp;#27
+谢谢各位的关心,我一直懒得很,看来楼主帖子心血来潮,已经自己搞定了.
+单独tor(ubuntu/32 源码编译)所有配置及插件都没问题.太简单了.
+有一个严重问题:桥,meet,哪里找(官网mail别提了)......
+个人感觉如果必须用tor/还是老老实实前置吧(无论https/socks/ssh......正解).
+我用tor是10年前的事情了,那是连自由门都没有.......
+希望后生有更好的:桥/meet/.....
+torrc各位一定好好看,很多内容啊........
+谢谢各位!谢谢
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc33">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May  5 19:30:00 2015">
+ May 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c33" href="/p/goagent/issues/detail?id=20538#c33">#33</a>
+ 
+
+ <a class="userlink"
+ href="/u/110330972716879447422/">bob.yang...@gmail.com</a
+></span>
+ 
+<pre>
+# 30
+--managed 具体起什么作用?
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc34">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May  5 20:14:52 2015">
+ May 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c34" href="/p/goagent/issues/detail?id=20538#c34">#34</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+就是一个开关参数
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc36">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed May  6 08:48:26 2015">
+ May 6, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c36" href="/p/goagent/issues/detail?id=20538#c36">#36</a>
+ 
+
+ <a class="userlink"
+ href="/u/110330972716879447422/">bob.yang...@gmail.com</a
+></span>
+ 
+<pre>
+#34  --managed 
+好像没有也无妨?作用是什么,为什么需要它?没有一切正常啊?
+我只是技术探究别见怪.因为我不能糊涂的用一个应用!
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc37">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May  7 01:18:49 2015">
+ May 7, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c37" href="/p/goagent/issues/detail?id=20538#c37">#37</a>
+ 
+
+ <a class="userlink"
+ href="/u/116326853761552387466/">scattere...@gmail.com</a
+></span>
+ 
+<pre>
+从tor的手册中可以看出, --managed不是tor定义的, 是作为参数传给TransportPlugin, 由TransportPlugin负责解释
+obfsproxy的手册中有提到类似的managed, 在obfsproxy中的作用是把启动和控制托管给tor
+fteproxy作用应该也是类似, 不过参数名换成了--managed
+要探究就看看tor和相关插件的代码, 反正都是公开的
+
+----
+tor manpage
+       ClientTransportPlugin transport socks4|socks5
+       IP:PORT, ClientTransportPlugin transport exec
+       path-to-binary [options]
+           In its second form, when set along with a
+           corresponding Bridge line, the Tor client
+           launches the pluggable transport proxy
+           executable in path-to-binary using options as
+           its command-line options, and forwards its
+           traffic to it. It’s the duty of that proxy to
+           properly forward the traffic to the bridge.
+
+obfsproxy manpage
+MANAGED TRANSPORT
+       Using managed as TRANSPORT allows Tor to start and
+       control obfsproxy by itself.
+       When connecting to an obfuscated bridge, adapt the
+       following:
+
+           ClientTransportPlugin obfs2,obfs3 exec /usr/bin/obfsproxy managed
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc38">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May  7 01:22:24 2015">
+ May 7, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c38" href="/p/goagent/issues/detail?id=20538#c38">#38</a>
+ 
+
+ <a class="userlink"
+ href="/u/116326853761552387466/">scattere...@gmail.com</a
+></span>
+ 
+<pre>
+很多人对tor的关注走偏了
+tor是匿名工具, 但匿名仅仅有tor是不够的
+绝大多数有匿名需求的人很难真正弄懂tor参数的含义
+也别学什么架设双虚拟机, 劳心费力不说, 未必有你想象中安全
+学学使用Whonix, Whonix远不是简单地采用双虚拟机隔离
+即使你不能够真正理解Whonix的运作机理，Whonix也在尽可能的防止你犯错
+专业的东西还是交给专业人员去处理, 如果Whonix不能保证你的安全, 你自己架设的更不安全
+以上针对真正需要匿名的非专业人员而言, 把tor当成玩具的可以无视
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc39">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May  7 01:39:37 2015">
+ May 7, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c39" href="/p/goagent/issues/detail?id=20538#c39">#39</a>
+ 
+
+ <a class="userlink"
+ href="/u/106088583427384130526/">jasonli...@gmail.com</a
+></span>
+ 
+<pre>
+#38 哈, 你这大白鲨好久不现身了.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc40">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May  7 09:06:45 2015">
+ May 7, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c40" href="/p/goagent/issues/detail?id=20538#c40">#40</a>
+ 
+
+ <a class="userlink"
+ href="/u/110330972716879447422/">bob.yang...@gmail.com</a
+></span>
+ 
+<pre>
+#38
+哈哈，匿名对我没用。我把它当学习的对象，无视你的观点了！支持深入讨论下去。有意思啊。
+需要匿名的去天地行等专门网站和论坛吧，哪里东西多了。。。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20538&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20538"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="20538">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A20538',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 20538,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

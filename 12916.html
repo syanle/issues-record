@@ -1,0 +1,2530 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"token": null, "profileUrl": null, "domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "projectHomeUrl": "/p/goagent", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "loggedInUserEmail": null, "projectName": "goagent", "relativeBaseUrl": ""};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 12916 - 
+ goagent -
+ 
+ 近来国内骨干网丢包率高! - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12916&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12916" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=12916">12916</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >近来国内骨干网丢包率高!</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 3 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A12916">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12916&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12916">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/110330972716879447422/">bob.yang...@gmail.com</a
+>,
+ <span class="date" title="Sun Mar 23 21:31:58 2014">Mar 23, 2014</span>
+ 
+ </div>
+<pre>
+google常见ip地址ping都在150左右，其它国外线路速度也大幅下降，好像不是单独针对Google的SSL丢包。但是现象就是Goagent速度也变慢了。
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Mar 23 21:41:57 2014">
+ Mar 23, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=12916#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/108337696068416759062/">haoqing_...@yahoo.com</a
+></span>
+ 
+<pre>
+那就是新安装了报文过滤检测设备，对于所有出口报文100%检测，所以慢了。他们也不怕这个设备崩溃。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Mar 23 21:59:19 2014">
+ Mar 23, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=12916#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/106781204990925295112/">yubinlov...@gmail.com</a
+></span>
+ 
+<pre>
+正在 Ping 74.125.128.100 具有 32 字节的数据:
+来自 74.125.128.100 的回复: 字节=32 时间=58ms TTL=41
+来自 74.125.128.100 的回复: 字节=32 时间=58ms TTL=41
+来自 74.125.128.100 的回复: 字节=32 时间=58ms TTL=41
+来自 74.125.128.100 的回复: 字节=32 时间=58ms TTL=41
+
+我这边没问题
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Mar 23 22:03:05 2014">
+ Mar 23, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=12916#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/110411062881516663952/">yanyingj...@gmail.com</a
+></span>
+ 
+<pre>
+Microsoft Windows [版本 6.1.7601]
+版权所有 (c) 2009 Microsoft Corporation。保留所有权利。
+
+C:\Users\xxx&gt;ping 74.125.128.100
+
+正在 Ping 74.125.128.100 具有 32 字节的数据:
+来自 74.125.128.100 的回复: 字节=32 时间=312ms TTL=36
+请求超时。
+来自 74.125.128.100 的回复: 字节=32 时间=311ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=307ms TTL=36
+
+74.125.128.100 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 3，丢失 = 1 (25% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 307ms，最长 = 312ms，平均 = 310ms
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Mar 23 22:10:30 2014">
+ Mar 23, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=12916#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/110285439660731624780/">tim...@gmail.com</a
+></span>
+ 
+<pre>
+这两周确实明显慢。
+
+正在 Ping 74.125.128.100 具有 32 字节的数据:
+来自 74.125.128.100 的回复: 字节=32 时间=225ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=217ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=218ms TTL=36
+请求超时。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Mar 23 22:30:40 2014">
+ Mar 23, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=12916#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/108337696068416759062/">haoqing_...@yahoo.com</a
+></span>
+ 
+<pre>
+在虹桥机场用的机场WiFi，结果如下。
+
+Microsoft Windows [版本 6.3.9600]
+(c) 2013 Microsoft Corporation。保留所有权利。
+
+C:\WINDOWS\system32&gt;ping 74.125.128.100
+
+正在 Ping 74.125.128.100 具有 32 字节的数据:
+请求超时。
+请求超时。
+请求超时。
+请求超时。
+
+74.125.128.100 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 0，丢失 = 4 (100% 丢失)，
+
+C:\WINDOWS\system32&gt;ping 74.125.128.100
+
+正在 Ping 74.125.128.100 具有 32 字节的数据:
+请求超时。
+请求超时。
+请求超时。
+请求超时。
+
+74.125.128.100 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 0，丢失 = 4 (100% 丢失)，
+
+C:\WINDOWS\system32&gt;
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Mar 23 23:04:49 2014">
+ Mar 23, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=12916#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/114838760962084089768/">joeyao02...@gmail.com</a
+></span>
+ 
+<pre>
+&gt;&gt;ping 74.125.128.100
+
+Pinging 74.125.128.100 with 32 bytes of data:
+
+Reply from 74.125.128.100: bytes=32 time=70ms TTL=34
+Request timed out.
+Reply from 74.125.128.100: bytes=32 time=69ms TTL=34
+Reply from 74.125.128.100: bytes=32 time=69ms TTL=34
+
+Ping statistics for 74.125.128.100:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 69ms, Maximum = 70ms, Average = 69ms
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Mar 23 23:49:00 2014">
+ Mar 23, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=12916#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/100532986440942236333/">drlif...@gmail.com</a
+></span>
+ 
+<pre>
+C:\Users\Administrator&gt;ping 74.125.128.100
+
+正在 Ping 74.125.128.100 具有 32 字节的数据:
+请求超时。
+来自 74.125.128.100 的回复: 字节=32 时间=456ms TTL=40
+来自 74.125.128.100 的回复: 字节=32 时间=450ms TTL=40
+请求超时。
+
+74.125.128.100 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 2，丢失 = 2 (50% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 450ms，最长 = 456ms，平均 = 453ms
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar 24 00:47:59 2014">
+ Mar 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=12916#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/107795591669850984411/">alienwar...@gmail.com</a
+></span>
+ 
+<pre>
+湖北电信，ICMP正常，HTTPS干扰严重，到晚上时延迟会破200ms
+
+Microsoft Windows [版本 6.2.9200]
+(c) 2012 Microsoft Corporation。保留所有权利。
+
+C:\Users\hp&gt;ping 74.125.128.100
+
+正在 Ping 74.125.128.100 具有 32 字节的数据:
+来自 74.125.128.100 的回复: 字节=32 时间=22ms TTL=48
+来自 74.125.128.100 的回复: 字节=32 时间=23ms TTL=48
+来自 74.125.128.100 的回复: 字节=32 时间=23ms TTL=48
+来自 74.125.128.100 的回复: 字节=32 时间=23ms TTL=48
+
+74.125.128.100 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 22ms，最长 = 23ms，平均 = 22ms
+
+C:\Users\hp&gt;tcping 74.125.128.100 443
+
+Probing 74.125.128.100:443/tcp - No error (0) - time=2002.063ms
+Probing 74.125.128.100:443/tcp - Port is open - time=26.001ms
+Probing 74.125.128.100:443/tcp - Port is open - time=25.548ms
+Probing 74.125.128.100:443/tcp - No error (0) - time=2002.139ms
+
+Ping statistics for 74.125.128.100:443
+     4 probes sent.
+     2 successful, 2 failed.
+Approximate trip times in milli-seconds (successful connections only):
+     Minimum = 25.548ms, Maximum = 26.001ms, Average = 25.774ms
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar 24 00:52:14 2014">
+ Mar 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=12916#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/113124231603289201734/">anonymou...@gmail.com</a
+></span>
+ 
+<pre>
+不只是国内主干网，国外线路也有问题，都有变慢的现象。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar 24 01:07:49 2014">
+ Mar 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=12916#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/115001297445573747653/">douban...@gmail.com</a
+></span>
+ 
+<pre>
+最近两周有明显感觉访问国外互联网变慢的现象（非goagent代理下），goagent代理下速度也不快。北京联通光纤。
+
+Ping 已启动…
+
+PING 74.125.128.100 (74.125.128.100): 56 data bytes
+64 bytes from 74.125.128.100: icmp_seq=0 ttl=35 time=238.665 ms
+64 bytes from 74.125.128.100: icmp_seq=1 ttl=35 time=255.193 ms
+64 bytes from 74.125.128.100: icmp_seq=2 ttl=35 time=289.167 ms
+64 bytes from 74.125.128.100: icmp_seq=3 ttl=35 time=309.090 ms
+64 bytes from 74.125.128.100: icmp_seq=4 ttl=35 time=230.108 ms
+64 bytes from 74.125.128.100: icmp_seq=5 ttl=35 time=246.250 ms
+64 bytes from 74.125.128.100: icmp_seq=6 ttl=35 time=279.875 ms
+64 bytes from 74.125.128.100: icmp_seq=7 ttl=35 time=299.225 ms
+64 bytes from 74.125.128.100: icmp_seq=8 ttl=35 time=315.134 ms
+64 bytes from 74.125.128.100: icmp_seq=9 ttl=35 time=235.547 ms
+
+--- 74.125.128.100 ping statistics ---
+10 packets transmitted, 10 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 230.108/269.825/315.134/30.704 ms
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar 24 02:07:17 2014">
+ Mar 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=12916#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/112324915573285851727/">lijingyi...@gmail.com</a
+></span>
+ 
+<pre>
+
+C:\Users\Administrator&gt;ping 74.125.228.100
+
+正在 Ping 74.125.228.100 具有 32 字节的数据:
+来自 74.125.228.100 的回复: 字节=32 时间=498ms TTL=40
+请求超时。
+来自 74.125.228.100 的回复: 字节=32 时间=499ms TTL=40
+来自 74.125.228.100 的回复: 字节=32 时间=500ms TTL=40
+
+74.125.228.100 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 3，丢失 = 1 (25% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 498ms，最长 = 500ms，平均 = 499ms
+
+C:\Users\Administrator&gt;
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar 24 02:12:47 2014">
+ Mar 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=12916#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/108337696068416759062/">haoqing_...@yahoo.com</a
+></span>
+ 
+<pre>
+在台北酒店内的PING,这个才应该是正常的。
+
+
+C:\WINDOWS\system32&gt;ping 74.125.128.100
+
+正在 Ping 74.125.128.100 具有 32 字节的数据:
+来自 74.125.128.100 的回复: 字节=32 时间=36ms TTL=48
+来自 74.125.128.100 的回复: 字节=32 时间=35ms TTL=48
+来自 74.125.128.100 的回复: 字节=32 时间=35ms TTL=48
+来自 74.125.128.100 的回复: 字节=32 时间=36ms TTL=48
+
+74.125.128.100 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 35ms，最长 = 36ms，平均 = 35ms
+
+C:\WINDOWS\system32&gt;
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar 24 02:54:58 2014">
+ Mar 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=12916#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/106471652285760119603/">qq347909...@gmail.com</a
+></span>
+ 
+<pre>
+Microsoft Windows [版本 6.3.9600]
+(c) 2013 Microsoft Corporation。保留所有权利。
+
+C:\Windows\system32&gt;^V
+'' 不是内部或外部命令，也不是可运行的程序
+或批处理文件。
+
+C:\Windows\system32&gt;ping 74.125.128.100
+
+正在 Ping 74.125.128.100 具有 32 字节的数据:
+来自 74.125.128.100 的回复: 字节=32 时间=377ms TTL=37
+请求超时。
+来自 74.125.128.100 的回复: 字节=32 时间=377ms TTL=37
+请求超时。
+
+74.125.128.100 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 2，丢失 = 2 (50% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 377ms，最长 = 377ms，平均 = 377ms
+
+C:\Windows\system32&gt;
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar 24 02:58:12 2014">
+ Mar 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=12916#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/115915100277783158364/">y5268...@gmail.com</a
+></span>
+ 
+<pre>
+Pinging 74.125.128.100 with 32 bytes of data:
+Request timed out.
+Request timed out.
+Reply from 74.125.128.100: bytes=32 time=305ms TTL=39
+Reply from 74.125.128.100: bytes=32 time=305ms TTL=39
+Request timed out.
+Reply from 74.125.128.100: bytes=32 time=403ms TTL=39
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Reply from 74.125.128.100: bytes=32 time=305ms TTL=39
+Request timed out.
+Request timed out.
+Reply from 74.125.128.100: bytes=32 time=305ms TTL=39
+Reply from 74.125.128.100: bytes=32 time=306ms TTL=39
+Request timed out.
+Reply from 74.125.128.100: bytes=32 time=305ms TTL=39
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+Ping statistics for 74.125.128.100:
+    Packets: Sent = 23, Received = 7, Lost = 16 (69% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 305ms, Maximum = 403ms, Average = 319ms
+Control-C
+
+上海电信。。。。。。。。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar 24 03:26:00 2014">
+ Mar 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=12916#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/113124231603289201734/">anonymou...@gmail.com</a
+></span>
+ 
+<pre>
+真如1楼所说 好像真崩溃了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar 24 07:02:45 2014">
+ Mar 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=12916#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/106919121292697287538/">kimilon...@gmail.com</a
+></span>
+ 
+<pre>
+如10楼所说：“最近两周有明显感觉访问国外互联网变慢的现象（非goagent代理下），goagent代理下速度也不快。北京联通光纤。”
+我这边也有同样的情况！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar 24 07:24:17 2014">
+ Mar 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=12916#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/sunzhizhongd/">sunzhizhongd</a
+></span>
+ 
+<pre>
+最近这两天我都没办法访问外网了，特别是今天，我以前经常访问的外国网站没有一个打得开。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar 24 07:27:40 2014">
+ Mar 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=12916#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/106919121292697287538/">kimilon...@gmail.com</a
+></span>
+ 
+<pre>
+18楼 同意啊！！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar 24 07:47:14 2014">
+ Mar 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=12916#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/103247081820312205068/">madjx...@gmail.com</a
+></span>
+ 
+<pre>
+17楼，确实如此，能直连的境外网站都非常非常慢。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar 24 08:26:14 2014">
+ Mar 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=12916#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/110571275720332897952/">lxok1...@gmail.com</a
+></span>
+ 
+<pre>
+光是电信吗？其它的isp呢，各位都报下各自isp近期的变化。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar 24 08:56:27 2014">
+ Mar 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=12916#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/111656545147525614861/">pierrec...@gmail.com</a
+></span>
+ 
+<pre>
+C:\WINDOWS\system32&gt;Ping 74.125.128.100
+
+正在 Ping 74.125.128.100 具有 32 字节的数据:
+来自 74.125.128.100 的回复: 字节=32 时间=8ms TTL=47
+来自 74.125.128.100 的回复: 字节=32 时间=9ms TTL=47
+来自 74.125.128.100 的回复: 字节=32 时间=8ms TTL=47
+来自 74.125.128.100 的回复: 字节=32 时间=10ms TTL=47
+
+74.125.128.100 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 8ms，最长 = 10ms，平均 = 8ms
+移动光纤 无变化
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar 24 09:14:45 2014">
+ Mar 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=12916#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/101588950271837250769/">Mr.Zhen...@gmail.com</a
+></span>
+ 
+<pre>
+Microsoft Windows [版本 6.3.9600]
+(c) 2013 Microsoft Corporation。保留所有权利。
+
+C:\Users\Ken&gt;ping 74.125.228.100
+
+正在 Ping 74.125.228.100 具有 32 字节的数据:
+请求超时。
+来自 74.125.228.100 的回复: 字节=32 时间=360ms TTL=46
+来自 74.125.228.100 的回复: 字节=32 时间=359ms TTL=46
+请求超时。
+
+74.125.228.100 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 2，丢失 = 2 (50% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 359ms，最长 = 360ms，平均 = 359ms
+
+北京联通20M光纤
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar 24 10:25:43 2014">
+ Mar 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=12916#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/112048608653567153497/">cantones...@gmail.com</a
+></span>
+ 
+<pre>
+Microsoft Windows XP [版本 5.1.2600]
+(C) 版权所有 1985-2001 Microsoft Corp.
+
+C:\Documents and Settings\BILLGATE&gt;ping 74.125.128.100
+
+Pinging 74.125.128.100 with 32 bytes of data:
+
+Reply from 74.125.128.100: bytes=32 time=350ms TTL=40
+Reply from 74.125.128.100: bytes=32 time=353ms TTL=40
+Reply from 74.125.128.100: bytes=32 time=330ms TTL=40
+Reply from 74.125.128.100: bytes=32 time=326ms TTL=40
+
+Ping statistics for 74.125.128.100:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 326ms, Maximum = 353ms, Average = 339ms
+
+广州电信
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Mar 25 04:21:01 2014">
+ Mar 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=12916#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/115001297445573747653/">douban...@gmail.com</a
+></span>
+ 
+<pre>
+北京联通光纤，今天开始有丢包的问题（以前几天电信丢包到今天开始网通丢包的现象来看，我不觉得是海底光缆故障，我觉得是墙高了）
+
+Ping 已启动…
+
+PING 74.125.128.100 (74.125.128.100): 56 data bytes
+Request timeout for icmp_seq 0
+64 bytes from 74.125.128.100: icmp_seq=1 ttl=36 time=238.070 ms
+Request timeout for icmp_seq 2
+64 bytes from 74.125.128.100: icmp_seq=3 ttl=36 time=288.555 ms
+64 bytes from 74.125.128.100: icmp_seq=4 ttl=36 time=308.120 ms
+64 bytes from 74.125.128.100: icmp_seq=5 ttl=36 time=327.716 ms
+64 bytes from 74.125.128.100: icmp_seq=6 ttl=36 time=248.185 ms
+64 bytes from 74.125.128.100: icmp_seq=7 ttl=36 time=279.325 ms
+64 bytes from 74.125.128.100: icmp_seq=8 ttl=36 time=298.317 ms
+64 bytes from 74.125.128.100: icmp_seq=9 ttl=36 time=317.602 ms
+
+--- 74.125.128.100 ping statistics ---
+10 packets transmitted, 8 packets received, 20.0% packet loss
+round-trip min/avg/max/stddev = 238.070/288.236/327.716/29.829 ms
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc26">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Mar 25 05:38:10 2014">
+ Mar 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c26" href="/p/goagent/issues/detail?id=12916#c26">#26</a>
+ 
+
+ <a class="userlink"
+ href="/u/108429703420228202347/">yaming1...@gmail.com</a
+></span>
+ 
+<pre>
+74.125.128.100 的 Ping 统计信息:
+    数据包: 已发送 = 76，已接收 = 74，丢失 = 2 (2% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 31ms，最长 = 134ms，平均 = 61ms
+
+杭州电信
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr  5 19:00:52 2014">
+ Apr 5, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=12916#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/117457440372328092005/">jiangcai...@gmail.com</a
+></span>
+ 
+<pre>
+地点：天津
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=129160027000&amp;name=%E6%8D%95%E8%8E%B7.PNG&amp;token=ABZ6GAeonBDZ2BPNjPUv2PusESlu2uPE1g%3A1434455090167&amp;id=12916&amp;mod_ts_token=ABZ6GAeMf8bFzYE05fM890Zzye9IIT948w%3A1434455090167">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >捕获.PNG</b>
+ <br>
+ 6.0 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=129160027000&amp;name=%E6%8D%95%E8%8E%B7.PNG&amp;token=ABZ6GAeonBDZ2BPNjPUv2PusESlu2uPE1g%3A1434455090167&amp;id=12916&amp;mod_ts_token=ABZ6GAeMf8bFzYE05fM890Zzye9IIT948w%3A1434455090167&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=129160027000&amp;name=%E6%8D%95%E8%8E%B7.PNG&amp;token=ABZ6GAeonBDZ2BPNjPUv2PusESlu2uPE1g%3A1434455090167&amp;id=12916&amp;mod_ts_token=ABZ6GAeMf8bFzYE05fM890Zzye9IIT948w%3A1434455090167">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=129160027000&amp;name=%E6%8D%95%E8%8E%B7.PNG&amp;token=ABZ6GAeonBDZ2BPNjPUv2PusESlu2uPE1g%3A1434455090167&amp;id=12916&amp;mod_ts_token=ABZ6GAeMf8bFzYE05fM890Zzye9IIT948w%3A1434455090167&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=129160027000&amp;name=%E6%8D%95%E8%8E%B7.PNG&amp;token=ABZ6GAeonBDZ2BPNjPUv2PusESlu2uPE1g%3A1434455090167&amp;id=12916&amp;mod_ts_token=ABZ6GAeMf8bFzYE05fM890Zzye9IIT948w%3A1434455090167&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr  5 19:15:03 2014">
+ Apr 5, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=12916#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/115354468257486784132/">zzq1...@gmail.com</a
+></span>
+ 
+<pre>
+从加拿大ping过来是这样的：
+Pinging 74.125.128.100 with 32 bytes of data:
+Reply from 74.125.128.100: bytes=32 time=223ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=221ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=224ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=229ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=218ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=220ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=220ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=226ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=231ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=216ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=219ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=217ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=228ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=222ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=275ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=217ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=218ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=224ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=223ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=217ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=218ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=215ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=219ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=219ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=220ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=223ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=220ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=225ms TTL=43
+Reply from 74.125.128.100: bytes=32 time=217ms TTL=43
+
+Ping statistics for 74.125.128.100:
+    Packets: Sent = 29, Received = 29, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 215ms, Maximum = 275ms, Average = 222ms
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc29">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr  5 20:10:51 2014">
+ Apr 5, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c29" href="/p/goagent/issues/detail?id=12916#c29">#29</a>
+ 
+
+ <a class="userlink"
+ href="/u/102159436061343758953/">grx...@gmail.com</a
+></span>
+ 
+<pre>
+Microsoft Windows [版本 6.1.7601]
+版权所有 (c) 2009 Microsoft Corporation。保留所有权利。
+
+C:\Users\Administrator&gt;Ping 74.125.128.100
+
+正在 Ping 74.125.128.100 具有 32 字节的数据:
+来自 74.125.128.100 的回复: 字节=32 时间=332ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=330ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=331ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=332ms TTL=36
+
+74.125.128.100 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 330ms，最长 = 332ms，平均 = 331ms
+
+C:\Users\Administrator&gt;^A
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc30">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr  5 21:14:02 2014">
+ Apr 5, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c30" href="/p/goagent/issues/detail?id=12916#c30">#30</a>
+ 
+
+ <a class="userlink"
+ href="/u/115001297445573747653/">douban...@gmail.com</a
+></span>
+ 
+<pre>
+北京联通
+
+Ping 已启动…
+
+PING 74.125.128.100 (74.125.128.100): 56 data bytes
+64 bytes from 74.125.128.100: icmp_seq=0 ttl=36 time=251.252 ms
+64 bytes from 74.125.128.100: icmp_seq=1 ttl=36 time=270.658 ms
+Request timeout for icmp_seq 2
+Request timeout for icmp_seq 3
+64 bytes from 74.125.128.100: icmp_seq=4 ttl=36 time=236.871 ms
+Request timeout for icmp_seq 5
+Request timeout for icmp_seq 6
+64 bytes from 74.125.128.100: icmp_seq=7 ttl=36 time=211.914 ms
+Request timeout for icmp_seq 8
+64 bytes from 74.125.128.100: icmp_seq=9 ttl=36 time=212.287 ms
+
+--- 74.125.128.100 ping statistics ---
+10 packets transmitted, 5 packets received, 50.0% packet loss
+round-trip min/avg/max/stddev = 211.914/236.596/270.658/22.695 ms
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc31">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr  5 21:49:00 2014">
+ Apr 5, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c31" href="/p/goagent/issues/detail?id=12916#c31">#31</a>
+ 
+
+ <a class="userlink"
+ href="/u/109972091782695590208/">leopold....@gmail.com</a
+></span>
+ 
+<pre>
+ 上海电信，Ping正常：
+
+PING 74.125.128.100 (74.125.128.100): 56 data bytes
+64 bytes from 74.125.128.100: icmp_seq=0 ttl=47 time=31.804 ms
+64 bytes from 74.125.128.100: icmp_seq=1 ttl=47 time=31.852 ms
+64 bytes from 74.125.128.100: icmp_seq=2 ttl=47 time=31.790 ms
+64 bytes from 74.125.128.100: icmp_seq=3 ttl=47 time=32.480 ms
+64 bytes from 74.125.128.100: icmp_seq=4 ttl=47 time=127.064 ms
+64 bytes from 74.125.128.100: icmp_seq=5 ttl=47 time=30.738 ms
+64 bytes from 74.125.128.100: icmp_seq=6 ttl=47 time=33.199 ms
+64 bytes from 74.125.128.100: icmp_seq=7 ttl=47 time=32.289 ms
+64 bytes from 74.125.128.100: icmp_seq=8 ttl=47 time=32.901 ms
+^C
+--- 74.125.128.100 ping statistics ---
+9 packets transmitted, 9 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 30.738/42.680/127.064/29.842 ms
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc32">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr  6 03:38:36 2014">
+ Apr 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c32" href="/p/goagent/issues/detail?id=12916#c32">#32</a>
+ 
+
+ <a class="userlink"
+ href="/u/101620825258302159349/">jnrfal...@gmail.com</a
+></span>
+ 
+<pre>
+我还以为只是北京联通的问题...看来也不尽然啊...不过既然有网络正常，那就说明海底光缆应该还好，那是不是还是有几家运营商在搞鬼- -？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc33">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 17 10:21:08 2014">
+ Apr 17, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c33" href="/p/goagent/issues/detail?id=12916#c33">#33</a>
+ 
+
+ <a class="userlink"
+ href="/u/111512587636278381407/">myliyi...@gmail.com</a
+></span>
+ 
+<pre>
+1 2、月份都还好，3月份开始，173和74.125网段 电信丢包严重。。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc34">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 18 19:03:06 2014">
+ Apr 18, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c34" href="/p/goagent/issues/detail?id=12916#c34">#34</a>
+ 
+
+ <a class="userlink"
+ href="/u/101454662931323393217/">ppb...@gmail.com</a
+></span>
+ 
+<pre>
+正在 Ping 74.125.128.100 具有 32 字节的数据:
+来自 74.125.128.100 的回复: 字节=32 时间=37ms TTL=46
+来自 74.125.128.100 的回复: 字节=32 时间=38ms TTL=46
+来自 74.125.128.100 的回复: 字节=32 时间=38ms TTL=46
+来自 74.125.128.100 的回复: 字节=32 时间=41ms TTL=46
+
+74.125.128.100 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 37ms，最长 = 41ms，平均 = 38ms
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc35">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 18 22:00:19 2014">
+ Apr 18, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c35" href="/p/goagent/issues/detail?id=12916#c35">#35</a>
+ 
+
+ <a class="userlink"
+ href="/u/113199933679848292732/">jisu20...@gmail.com</a
+></span>
+ 
+<pre>
+正在 Ping 74.125.128.100 具有 32 字节的数据:
+来自 74.125.128.100 的回复: 字节=32 时间=255ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=270ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=274ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=265ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=266ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=277ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=271ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=269ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=262ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=259ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=268ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=265ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=264ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=269ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=282ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=272ms TTL=36
+
+74.125.128.100 的 Ping 统计信息:
+    数据包: 已发送 = 16，已接收 = 16，丢失 = 0 (0% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 255ms，最长 = 282ms，平均 = 268ms
+
+湖南联通
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc36">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr 19 03:00:29 2014">
+ Apr 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c36" href="/p/goagent/issues/detail?id=12916#c36">#36</a>
+ 
+
+ <a class="userlink"
+ href="/u/108405270768542726416/">8229...@gmail.com</a
+></span>
+ 
+<pre>
+正在 Ping 74.125.128.100 具有 32 字节的数据:
+来自 74.125.128.100 的回复: 字节=32 时间=250ms TTL=37
+来自 74.125.128.100 的回复: 字节=32 时间=254ms TTL=37
+来自 74.125.128.100 的回复: 字节=32 时间=250ms TTL=37
+来自 74.125.128.100 的回复: 字节=32 时间=252ms TTL=37
+来自 74.125.128.100 的回复: 字节=32 时间=254ms TTL=37
+来自 74.125.128.100 的回复: 字节=32 时间=255ms TTL=37
+来自 74.125.128.100 的回复: 字节=32 时间=252ms TTL=37
+来自 74.125.128.100 的回复: 字节=32 时间=251ms TTL=37
+来自 74.125.128.100 的回复: 字节=32 时间=251ms TTL=37
+来自 74.125.128.100 的回复: 字节=32 时间=256ms TTL=37
+来自 74.125.128.100 的回复: 字节=32 时间=254ms TTL=37
+来自 74.125.128.100 的回复: 字节=32 时间=255ms TTL=37
+来自 74.125.128.100 的回复: 字节=32 时间=253ms TTL=37
+请求超时。
+来自 74.125.128.100 的回复: 字节=32 时间=250ms TTL=37
+来自 74.125.128.100 的回复: 字节=32 时间=253ms TTL=37
+来自 74.125.128.100 的回复: 字节=32 时间=253ms TTL=37
+来自 74.125.128.100 的回复: 字节=32 时间=250ms TTL=37
+
+74.125.128.100 的 Ping 统计信息:
+    数据包: 已发送 = 18，已接收 = 17，丢失 = 1 (5% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 250ms，最长 = 256ms，平均 = 252ms
+
+江西联通　10M
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc37">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr 19 04:35:02 2014">
+ Apr 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c37" href="/p/goagent/issues/detail?id=12916#c37">#37</a>
+ 
+
+ <a class="userlink"
+ href="/u/sunzhizhongd/">sunzhizhongd</a
+></span>
+ 
+<pre>
+Microsoft Windows [版本 6.1.7601]
+版权所有 (c) 2009 Microsoft Corporation。保留所有权利。
+
+C:\Users\SunZz&gt;ping 74.125.128.100
+
+正在 Ping 74.125.128.100 具有 32 字节的数据:
+来自 74.125.128.100 的回复: 字节=32 时间=356ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=407ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=346ms TTL=36
+来自 74.125.128.100 的回复: 字节=32 时间=334ms TTL=36
+
+74.125.128.100 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 334ms，最长 = 407ms，平均 = 360ms
+
+青岛电信4M
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12916&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12916"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="12916">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A12916',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 12916,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

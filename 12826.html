@@ -1,0 +1,689 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"token": null, "profileUrl": null, "projectName": "goagent", "projectHomeUrl": "/p/goagent", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "loggedInUserEmail": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "domainName": null, "relativeBaseUrl": ""};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 12826 - 
+ goagent -
+ 
+ 每次用之前都需要重新部署和运行proxy.py吗？ - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12826&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12826" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=12826">12826</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >每次用之前都需要重新部署和运行proxy.py吗？</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 1 person starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A12826">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12826&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12826">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/110634490594155311487/">cherryho...@gmail.com</a
+>,
+ <span class="date" title="Sun Mar 16 04:16:53 2014">Mar 16, 2014</span>
+ 
+ </div>
+<pre>
+系统：OS X 10.9.2
+
+按教程已设置成功，可以上facebook之类的网站了。
+但电脑重启后就需要重新用终端python uploader.zip（需重新输入16位的应用程序专用密码），再python proxy.py才可以。尤其是应用密码很难记住，请问有没有方法可以不需每次都重复所有的步骤？谢谢～
+
+试过goagentx，可以部署成功，但在服务界面启动之后无法浏览相关网站，主窗口日志如下：
+INFO - [Mar 16 19:13:22] resolve common.IPLIST_MAP names=['google_cn', 'google_hk', 'google_ipv6', 'talk.google.com', 'talk.l.google.com', 'talkx.l.google.com'] to iplist
+WARNING - [Mar 16 19:13:22] local need_resolve_hosts=['www.google.com', 'mail.google.com', 'www.google.com.hk', 'www.google.com.tw', 'www.l.google.com'] is too short, try remote_resolve
+INFO - [Mar 16 19:13:22] resolve name=google_hk host to iplist=['173.194.72.105', '173.194.72.104', '173.194.72.106', '74.125.128.18', '74.125.128.103', '74.125.128.105', '74.125.128.104', '74.125.128.106', '74.125.128.147', '173.194.127.244', '173.194.127.242', '173.194.127.243', '173.194.127.240', '173.194.127.241', '173.194.72.18', '173.194.72.19', '74.125.128.83', '173.194.72.17', '74.125.128.94', '74.125.128.99', '173.194.72.94', '74.125.128.19', '74.125.31.94', '74.125.128.17']
+INFO - [Mar 16 19:13:22] resolve name=talk.google.com host to iplist=['74.125.128.125']
+INFO - [Mar 16 19:13:22] resolve name=talk.l.google.com host to iplist=['74.125.128.125']
+INFO - [Mar 16 19:13:23] resolve name=talkx.l.google.com host to iplist=['173.194.72.125']
+INFO - [Mar 16 19:13:23] 127.0.0.1:53258 &quot;GAE GET <a href="http://goagentx.com/update/spdy.xml" rel="nofollow">http://goagentx.com/update/spdy.xml</a> HTTP/1.1&quot; 302 -
+INFO - [Mar 16 19:13:23] 127.0.0.1:53259 &quot;GAE GET <a href="http://goagentx.com/update/shell.xml" rel="nofollow">http://goagentx.com/update/shell.xml</a> HTTP/1.1&quot; 302 -
+INFO - [Mar 16 19:13:23] 127.0.0.1:53249 &quot;GAE GET <a href="http://notify2.dropbox.com:80/subscribe?host_int=1217445033&amp;ns_map=479482050_2753553518786,162812891_22132129289179,554805556_64979314996,525255954_22000092434&amp;user_id=250905271&amp;nid=1394764268402632686&amp;ts=1394968402" rel="nofollow">http://notify2.dropbox.com:80/subscribe?host_int=1217445033&amp;ns_map=479482050_2753553518786,162812891_22132129289179,554805556_64979314996,525255954_22000092434&amp;user_id=250905271&amp;nid=1394764268402632686&amp;ts=1394968402</a> HTTP/1.1&quot; 200 37
+INFO - [Mar 16 19:13:23] 127.0.0.1:53253 &quot;GAE GET <a href="http://notify2.dropbox.com:80/subscribe?host_int=1217445033&amp;ns_map=479482050_2753553518786,162812891_22132129289179,554805556_64979314996,525255954_22000092434&amp;user_id=250905271&amp;nid=1394764268402632686&amp;ts=1394968402" rel="nofollow">http://notify2.dropbox.com:80/subscribe?host_int=1217445033&amp;ns_map=479482050_2753553518786,162812891_22132129289179,554805556_64979314996,525255954_22000092434&amp;user_id=250905271&amp;nid=1394764268402632686&amp;ts=1394968402</a> HTTP/1.1&quot; 200 37
+INFO - [Mar 16 19:13:23] 127.0.0.1:53255 &quot;GAE GET <a href="http://goagentx.com/update/https.xml" rel="nofollow">http://goagentx.com/update/https.xml</a> HTTP/1.1&quot; 302 -
+INFO - [Mar 16 19:13:23] 127.0.0.1:53295 &quot;FWD CONNECT client-lb.dropbox.com:443 HTTP/1.1&quot; - -
+INFO - [Mar 16 19:13:23] 127.0.0.1:53256 &quot;GAE GET <a href="http://goagentx.com/update/shadowsocks.xml" rel="nofollow">http://goagentx.com/update/shadowsocks.xml</a> HTTP/1.1&quot; 302 -
+INFO - [Mar 16 19:13:23] 127.0.0.1:53254 &quot;GAE GET <a href="http://goagentx.com/update/cow.xml" rel="nofollow">http://goagentx.com/update/cow.xml</a> HTTP/1.1&quot; 200 872
+INFO - [Mar 16 19:13:23] 127.0.0.1:53257 &quot;GAE GET <a href="http://goagentx.com/update/3proxy.xml" rel="nofollow">http://goagentx.com/update/3proxy.xml</a> HTTP/1.1&quot; 302 -
+INFO - [Mar 16 19:13:23] 127.0.0.1:53292 &quot;GAE GET <a href="http://goagentx.com/update/stunnel.xml" rel="nofollow">http://goagentx.com/update/stunnel.xml</a> HTTP/1.1&quot; 200 238
+INFO - [Mar 16 19:13:23] 127.0.0.1:53293 &quot;GAE GET <a href="http://goagentx.com/update/ssh.xml" rel="nofollow">http://goagentx.com/update/ssh.xml</a> HTTP/1.1&quot; 302 -
+INFO - [Mar 16 19:13:24] 127.0.0.1:53294 &quot;GAE GET <a href="http://goagentx.com/update/spdy.xml" rel="nofollow">http://goagentx.com/update/spdy.xml</a> HTTP/1.1&quot; 302 -
+INFO - [Mar 16 19:13:24] 127.0.0.1:53303 &quot;GAE GET <a href="http://goagentx.com/update/shadowsocks.xml" rel="nofollow">http://goagentx.com/update/shadowsocks.xml</a> HTTP/1.1&quot; 200 241
+INFO - [Mar 16 19:13:24] 127.0.0.1:53298 &quot;GAE GET <a href="http://goagentx.com/update/shell.xml" rel="nofollow">http://goagentx.com/update/shell.xml</a> HTTP/1.1&quot; 302 -
+INFO - [Mar 16 19:13:24] 127.0.0.1:53313 &quot;GAE GET <a href="http://goagentx.com/update/3proxy.xml" rel="nofollow">http://goagentx.com/update/3proxy.xml</a> HTTP/1.1&quot; 200 239
+INFO - [Mar 16 19:13:24] 127.0.0.1:53308 &quot;GAE GET <a href="http://goagentx.com/update/https.xml" rel="nofollow">http://goagentx.com/update/https.xml</a> HTTP/1.1&quot; 302 -
+INFO - [Mar 16 19:13:24] 127.0.0.1:53318 &quot;GAE GET <a href="http://goagentx.com/update/ssh.xml" rel="nofollow">http://goagentx.com/update/ssh.xml</a> HTTP/1.1&quot; 200 236
+INFO - [Mar 16 19:13:24] 127.0.0.1:53327 &quot;GAE GET <a href="http://goagentx.com/update/spdy.xml" rel="nofollow">http://goagentx.com/update/spdy.xml</a> HTTP/1.1&quot; 200 237
+INFO - [Mar 16 19:13:24] 127.0.0.1:53337 &quot;GAE GET <a href="http://goagentx.com/update/https.xml" rel="nofollow">http://goagentx.com/update/https.xml</a> HTTP/1.1&quot; 200 236
+INFO - [Mar 16 19:13:24] 127.0.0.1:53332 &quot;GAE GET <a href="http://goagentx.com/update/shell.xml" rel="nofollow">http://goagentx.com/update/shell.xml</a> HTTP/1.1&quot; 200 237
+INFO - [Mar 16 19:13:26] 127.0.0.1:53339 &quot;FWD CONNECT calendar.google.com:443 HTTP/1.1&quot; - -
+INFO - [Mar 16 19:13:28] 127.0.0.1:53344 &quot;AGENT CONNECT github.com:443 HTTP/1.1&quot; - -
+ERROR - [Mar 16 19:13:28] ssl.wrap_socket(self.connection=&lt;socket._socketobject object at 0x10cbdbfa0&gt;) failed: [Errno 8] _ssl.c:504: EOF occurred in violation of protocol
+Traceback (most recent call last):
+  File &quot;proxy.py&quot;, line 2359, in do_CONNECT_AGENT
+    ssl_sock = ssl.wrap_socket(self.connection, keyfile=certfile, certfile=certfile, server_side=True)
+  File &quot;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/ssl.py&quot;, line 387, in wrap_socket
+    ciphers=ciphers)
+  File &quot;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/ssl.py&quot;, line 143, in __init__
+    self.do_handshake()
+  File &quot;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/ssl.py&quot;, line 305, in do_handshake
+    self._sslobj.do_handshake()
+SSLError: [Errno 8] _ssl.c:504: EOF occurred in violation of protocol
+
+INFO - [Mar 16 19:13:28] 127.0.0.1:53345 &quot;AGENT CONNECT github.com:443 HTTP/1.1&quot; - -
+ERROR - [Mar 16 19:13:29] ssl.wrap_socket(self.connection=&lt;socket._socketobject object at 0x10cbdbfa0&gt;) failed: [Errno 8] _ssl.c:504: EOF occurred in violation of protocol
+Traceback (most recent call last):
+  File &quot;proxy.py&quot;, line 2359, in do_CONNECT_AGENT
+    ssl_sock = ssl.wrap_socket(self.connection, keyfile=certfile, certfile=certfile, server_side=True)
+  File &quot;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/ssl.py&quot;, line 387, in wrap_socket
+    ciphers=ciphers)
+  File &quot;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/ssl.py&quot;, line 143, in __init__
+    self.do_handshake()
+  File &quot;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/ssl.py&quot;, line 305, in do_handshake
+    self._sslobj.do_handshake()
+SSLError: [Errno 8] _ssl.c:504: EOF occurred in violation of protocol
+
+INFO - [Mar 16 19:13:29] 127.0.0.1:53346 &quot;AGENT CONNECT github.com:443 HTTP/1.1&quot; - -
+ERROR - [Mar 16 19:13:29] ssl.wrap_socket(self.connection=&lt;socket._socketobject object at 0x10cbdbfa0&gt;) failed: [Errno 8] _ssl.c:504: EOF occurred in violation of protocol
+Traceback (most recent call last):
+  File &quot;proxy.py&quot;, line 2359, in do_CONNECT_AGENT
+    ssl_sock = ssl.wrap_socket(self.connection, keyfile=certfile, certfile=certfile, server_side=True)
+  File &quot;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/ssl.py&quot;, line 387, in wrap_socket
+    ciphers=ciphers)
+  File &quot;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/ssl.py&quot;, line 143, in __init__
+    self.do_handshake()
+  File &quot;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/ssl.py&quot;, line 305, in do_handshake
+    self._sslobj.do_handshake()
+SSLError: [Errno 8] _ssl.c:504: EOF occurred in violation of protocol
+
+WARNING - [Mar 16 19:13:30] create_connection to [('173.194.72.104', 443), ('173.194.72.106', 443), ('74.125.128.17', 443), ('74.125.128.99', 443)] return timeout('timed out',), try again.
+INFO - [Mar 16 19:13:31] 127.0.0.1:53351 &quot;FWD CONNECT calendar.google.com:443 HTTP/1.1&quot; - -
+WARNING - [Mar 16 19:13:35] create_connection to [('74.125.128.18', 443), ('74.125.128.106', 443), ('74.125.128.94', 443), ('74.125.128.106', 443)] return timeout('timed out',), try again.
+INFO - [Mar 16 19:13:35] 127.0.0.1:53360 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963253&amp;sdk_version=1.0&amp;begin_session=1&amp;metrics=%7B%22_device%22%3A%22MacBookPro11%2C1%22%2C%22_os%22%3A%22iOS%22%2C%22_os_version%22%3A%2210.9.2%22%2C%22_resolution%22%3A%221280x800%22%2C%22_locale%22%3A%22zh_CN%22%2C%22_app_version%22%3A%221.6%22%7D" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963253&amp;sdk_version=1.0&amp;begin_session=1&amp;metrics=%7B%22_device%22%3A%22MacBookPro11%2C1%22%2C%22_os%22%3A%22iOS%22%2C%22_os_version%22%3A%2210.9.2%22%2C%22_resolution%22%3A%221280x800%22%2C%22_locale%22%3A%22zh_CN%22%2C%22_app_version%22%3A%221.6%22%7D</a> HTTP/1.1&quot; 500 -
+INFO - [Mar 16 19:13:36] 127.0.0.1:53370 &quot;FWD CONNECT calendar.google.com:443 HTTP/1.1&quot; - -
+INFO - [Mar 16 19:13:37] 127.0.0.1:53369 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963283&amp;session_duration=30" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963283&amp;session_duration=30</a> HTTP/1.1&quot; 500 -
+INFO - [Mar 16 19:13:40] 127.0.0.1:53375 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963313&amp;session_duration=30" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963313&amp;session_duration=30</a> HTTP/1.1&quot; 500 -
+INFO - [Mar 16 19:13:42] 127.0.0.1:53380 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963343&amp;session_duration=30" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963343&amp;session_duration=30</a> HTTP/1.1&quot; 500 -
+INFO - [Mar 16 19:13:45] 127.0.0.1:53389 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963373&amp;session_duration=30" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963373&amp;session_duration=30</a> HTTP/1.1&quot; 500 -
+INFO - [Mar 16 19:13:47] 127.0.0.1:53394 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963403&amp;session_duration=30" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963403&amp;session_duration=30</a> HTTP/1.1&quot; 500 -
+INFO - [Mar 16 19:13:50] 127.0.0.1:53395 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963433&amp;session_duration=29" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963433&amp;session_duration=29</a> HTTP/1.1&quot; 500 -
+INFO - [Mar 16 19:13:52] 127.0.0.1:53400 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963463&amp;session_duration=31" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963463&amp;session_duration=31</a> HTTP/1.1&quot; 500 -
+INFO - [Mar 16 19:13:54] 127.0.0.1:53416 &quot;FWD GET <a href="http://www.google-analytics.com/__utm.gif?utmwv=5.3.2&amp;utms=25&amp;utmn=1772321342&amp;utmcs=ISO-8859-1&amp;utmsr=1280x800&amp;utmvp=10x10&amp;utmsc=24-bit&amp;utmul=zh-cn&amp;utmje=1&amp;utmfl=12.0%20r0&amp;utmhid=1423317572&amp;utmr=-&amp;utmp=%25252Fsong%25252F748875%25252FLudovico%252520Einaudi%25252FI%252520Due%252520Fiumi&amp;utmac=UA-6134598-6&amp;utmcc=__utma%3D1.1577357241.1391832879.1394360537.1394963255.6%3B%2B__utmz%3D1.1391832879.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&amp;utmu=qBC~" rel="nofollow">http://www.google-analytics.com/__utm.gif?utmwv=5.3.2&amp;utms=25&amp;utmn=1772321342&amp;utmcs=ISO-8859-1&amp;utmsr=1280x800&amp;utmvp=10x10&amp;utmsc=24-bit&amp;utmul=zh-cn&amp;utmje=1&amp;utmfl=12.0%20r0&amp;utmhid=1423317572&amp;utmr=-&amp;utmp=%25252Fsong%25252F748875%25252FLudovico%252520Einaudi%25252FI%252520Due%252520Fiumi&amp;utmac=UA-6134598-6&amp;utmcc=__utma%3D1.1577357241.1391832879.1394360537.1394963255.6%3B%2B__utmz%3D1.1391832879.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&amp;utmu=qBC~</a> HTTP/1.1&quot; 200 35
+INFO - [Mar 16 19:13:54] 127.0.0.1:53405 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963493&amp;session_duration=30" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963493&amp;session_duration=30</a> HTTP/1.1&quot; 500 -
+INFO - [Mar 16 19:13:55] 127.0.0.1:53410 &quot;GAE GET <a href="http://www.douban.com/j/app/radio/people?type=e&amp;sid=627002&amp;channel=9&amp;app_name=radio_iphone&amp;expire=1407385125&amp;user_id=53647508&amp;client=d%3A2b9c0c55641fa1179b3cf2f83d35a1f4%7Ce%3AiPhone4%2C1%7Cy%3AiPhone%20OS_5.1.1%7Cs%3Amobile%7Cf%3Aradio_iphone_83&amp;token=28c5391787&amp;version=83" rel="nofollow">http://www.douban.com/j/app/radio/people?type=e&amp;sid=627002&amp;channel=9&amp;app_name=radio_iphone&amp;expire=1407385125&amp;user_id=53647508&amp;client=d%3A2b9c0c55641fa1179b3cf2f83d35a1f4%7Ce%3AiPhone4%2C1%7Cy%3AiPhone%20OS_5.1.1%7Cs%3Amobile%7Cf%3Aradio_iphone_83&amp;token=28c5391787&amp;version=83</a> HTTP/1.1&quot; 200 27
+INFO - [Mar 16 19:13:56] 127.0.0.1:53415 &quot;GAE GET <a href="http://img3.douban.com/lpic/s3744584.jpg" rel="nofollow">http://img3.douban.com/lpic/s3744584.jpg</a> HTTP/1.1&quot; 200 29912
+INFO - [Mar 16 19:13:57] 127.0.0.1:53425 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963523&amp;session_duration=30" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963523&amp;session_duration=30</a> HTTP/1.1&quot; 500 -
+INFO - [Mar 16 19:13:59] 127.0.0.1:53430 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963553&amp;session_duration=30" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963553&amp;session_duration=30</a> HTTP/1.1&quot; 500 -
+INFO - [Mar 16 19:14:02] 127.0.0.1:53435 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963583&amp;session_duration=29" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963583&amp;session_duration=29</a> HTTP/1.1&quot; 500 -
+INFO - [Mar 16 19:14:04] 127.0.0.1:53436 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963613&amp;session_duration=30" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963613&amp;session_duration=30</a> HTTP/1.1&quot; 500 -
+INFO - [Mar 16 19:14:07] 127.0.0.1:53441 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963643&amp;session_duration=30" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963643&amp;session_duration=30</a> HTTP/1.1&quot; 500 -
+INFO - [Mar 16 19:14:09] 127.0.0.1:53450 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963673&amp;session_duration=31" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963673&amp;session_duration=31</a> HTTP/1.1&quot; 500 -
+INFO - [Mar 16 19:14:11] 127.0.0.1:53458 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963703&amp;session_duration=30" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963703&amp;session_duration=30</a> HTTP/1.1&quot; 500 -
+INFO - [Mar 16 19:14:14] 127.0.0.1:53465 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963733&amp;session_duration=30" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963733&amp;session_duration=30</a> HTTP/1.1&quot; 500 -
+INFO - [Mar 16 19:14:16] 127.0.0.1:53474 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963763&amp;session_duration=30" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963763&amp;session_duration=30</a> HTTP/1.1&quot; 500 -
+INFO - [Mar 16 19:14:18] 127.0.0.1:53479 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963793&amp;session_duration=29" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963793&amp;session_duration=29</a> HTTP/1.1&quot; 500 -
+INFO - [Mar 16 19:14:21] 127.0.0.1:53486 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963823&amp;session_duration=31" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963823&amp;session_duration=31</a> HTTP/1.1&quot; 500 -
+INFO - [Mar 16 19:14:23] 127.0.0.1:53491 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963853&amp;session_duration=30" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963853&amp;session_duration=30</a> HTTP/1.1&quot; 500 -
+INFO - [Mar 16 19:14:25] 127.0.0.1:53498 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963883&amp;session_duration=29" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963883&amp;session_duration=29</a> HTTP/1.1&quot; 500 -
+INFO - [Mar 16 19:14:28] 127.0.0.1:53503 &quot;GAE GET <a href="http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963913&amp;session_duration=30" rel="nofollow">http://lesslog.ap01.aws.af.cm/i?app_key=e05442daaf47504f5654e4cf1e821bb193383d11&amp;device_id=b8dada8c26837b714e6276606c0b3f2076f19795&amp;timestamp=1394963913&amp;session_duration=30</a> HTTP/1.1&quot; 500 -
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Mar 16 04:29:24 2014">
+ Mar 16, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=12826#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/114609419022738165283/">causla...@gmail.com</a
+></span>
+ 
+<pre>
+用这个不就行了吗，<a href="https://goagentx.googlecode.com/files/GoAgentX-v2.2.9.dmg" rel="nofollow">https://goagentx.googlecode.com/files/GoAgentX-v2.2.9.dmg</a>
+已经和浏览器分离了，只在这里配置就可以了，不过目前我这里看youtube视频特别慢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Mar 16 04:41:51 2014">
+ Mar 16, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=12826#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/110634490594155311487/">cherryho...@gmail.com</a
+></span>
+ 
+<pre>
+下了goagentx，在里面也能部署成功，但启动后就是翻不了呢。。。
+现在用的时候是先在goagentx里部署，再用终端python proxy.py
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12826&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12826"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="12826">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A12826',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 12826,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

@@ -1,0 +1,1672 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"loggedInUserEmail": null, "relativeBaseUrl": "", "projectHomeUrl": "/p/goagent", "projectName": "goagent", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "token": null, "profileUrl": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 20813 - 
+ goagent -
+ 
+ Lantern的隐蔽性还算好 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20813&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20813" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=20813">20813</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >Lantern的隐蔽性还算好</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 3 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A20813">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20813&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20813">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/116562774888767041325/">teno...@gmail.com</a
+>,
+ <span class="date" title="Wed May 13 21:51:26 2015">May 13, 2015</span>
+ 
+ </div>
+<pre>
+
+操作系统版本：win7
+浏览器版本：chrome
+
+1）运行Lantern,利用打开的浏览器访问： 
+<a href="http://www.ip-adress.com/hide_my_ip/" rel="nofollow">http://www.ip-adress.com/hide_my_ip/</a>
+看到IP如下：
+What is my IP address?
+Your IP address is: 10x.71.130.164
+Your IP Address Location: Heiwajima in  ip address flag Japan
+ISP of your IP: Choopa, LLC
+
+而访问：<a href="http://ip-check.info/?lang=en" rel="nofollow">http://ip-check.info/?lang=en</a>
+明白无误地显示了电信IP.
+
+2）运行Lantern,打开自己的浏览器访问上述两个网站。
+使用手动设置 8787端口，以及PAC导入方式，效果都同（1）没有两样。
+
+结论：Lantern访问一般未被屏蔽的网站，本地IP并没有被隐蔽。
+而访问被屏蔽的网站，是利用了HTTP代理的，而且本地IP是隐蔽的。
+
+
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed May 13 22:37:07 2015">
+ May 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=20813#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/107281204857897273852/">Zero.n.L...@gmail.com</a
+></span>
+ 
+<pre>
+Lantern 在启动时会自动从 amz 的云服务获取代理服务器和代理网站的列表.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed May 13 22:45:01 2015">
+ May 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=20813#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/108624022798487360207/">hongwang...@gmail.com</a
+></span>
+ 
+<pre>
+
+亚当·菲斯克(Adam Fisk)是Lantern的主要开发者，这个翻墙工具于2013年问世，主要由美国国务院资助。这款软件能让网络不受审查国家的用户将自己的一部分网络带宽与网络受审查国家（例如伊朗和中国）的用户共享。菲斯克说，这款软件迄今已被安装了13.5万次，每月能让150TB的信息不受限制地传输。
+
+现年39岁的菲斯克也曾是LimeWire的开发者，那是一款曾经流行的软件，它利用对等服务技术让用户共享文件。然而2011年，在对LimeWire为盗版音乐提供便利的指控声中，一名法官对其下了停止使用令。在本次采访中，菲斯克介绍了Lantern如何工作，以及该工具如何应对中国网络监管者的新一轮限制措施。
+
+问: 中国有多少Lantern用户？世界其他地方呢？
+
+答: 总的来说，Lantern的使用率相对较低。在全世界，每周约有1万名活跃用户。在中国，这个数字大约是六千或七千。
+
+问: 中国有哪些人会用Lantern？
+
+答: 我们有意对我们的用户保持无知，但我们知道，像(中国艺术家)艾未未这样的人使用过它，他还在Twitter上发过有关的帖子。Lantern的最终目标是提供免费的、易于使用的服务，提供非常好用的服务，让任何人都能使用它。就我们目前的情况来看，仍是那些知识精英们，那些在互联网上更活跃的人，对外面的工具有更多的了解。
+
+问: 自从你开始提供Lantern以来，中国互联网监管部门采取了哪些措施来加强防火长城？
+
+答: 最大的变化是最近对VPN的屏蔽。在我看来，这种屏蔽非常有意思，在某种意义上，VPN的工作方式可阻是显而易见的，屏蔽的办法也很简单。因此，我认为，VPN没有在更早的时候被屏蔽的原因是，能使用VPN的人只是那些拥有国外信用卡的人。
+
+从技术上讲，屏蔽VPN其实有显而易见的方法。Lantern之所以存在的一个原因是，像VPN这样的东西太容易被屏蔽了。屏蔽VPN对Lantern没有影响。
+
+问: 但是在它们被屏蔽之前，你用了Gmail和Gchat，对吗？
+
+答: 我们没有用Gchat来做隧道发送。用它的更多真正原因，是尽快启动我们的网络。如果你在不受审查的地方有个朋友，你可以通过那个朋友、或者那个朋友的朋友来访问互联网。这是我们用Gchat的真正原因。我们用它做隧道发送，是因为它被阻了。
+
+问: 做隧道发送时，你们通过云端服务或对等服务来实现。有更多像Lantern和GreatFire这样的服务出来，你觉得会不会导致更多屏蔽云服务的企图？
+
+答: 这也许是一个我不能回答的问题。
+
+问: 让我换一种方式来问这个问题。像Lantern这样的附带性自由工具在云服务上运行。这些云服务对中国的企业非常重要，将其关闭会造成经济损失。你认为那些管理防火长城的人意识到这一点了吗？
+
+答: 我敢肯定他们意识到了这一点，这其实反映了全球经济的互连接性。在我看来，最大的危险，无论是对中国、还是对整个互联网来说，是我们已经开始看到的巴尔干化。我脑子里的问题是，这种巴尔干化正在给中国经济带来什么程度的损失。我不知道是否有人研究这个问题。但是，如果有人研究，（会发现）许多不可使用、或有危险成为不可使用的服务，会给创新带来显著的影响。世界上一些最好的技术公司已经受到影响。
+
+问: 你认为互联网巴尔干化的趋势会继续下去吗？还是你认为对经济损失的担忧将占上风，从而会让互联网保持自由呢？
+
+答: 目前在(中国)政府官员与业界人士之间有重叠的利益。但愿全球经济的互连接性足够强大、足够至关重要，让我们得以看到与巴尔干化相反的方向发展。
+
+问: 你目前在做什么？
+
+答: 我们正在努力充实对等服务技术的应用。它依赖于全球互连接性，不是企业之间的，而是人与人之间的。它在用现时生活中的社交网来建立一个有关如何访问开放互联网的信息交换骨干网。
+
+另一个大的重点是速度。此外，我们也在做移动应用。我们将发布一个名为Firetweet的Twitter应用程序，基本上是一个有审查地区的Twitter客户端。你其实不需要知道Lantern在其后端运行，但它能在有审查的地区工作。
+
+问: 有没有审查者能打入你们网络的可能性？
+
+答：我们的确假设，审查者将渗透到对等服务网络中来，而且是作为对等伙伴。所以，我们的重点只是提供接入。我们不做很多防止监控的工作。监控者的确能看到你在访问哪些网站，但由于对通信进行了加密，他们看不到你在那些网站上做什么。
+
+我们更关心的是，审查者能通过渗透来屏蔽Lantern。我们所用的算法让他们很难做到这一点。要想做到的话，他们就需要大规模地渗透Lantern社交网络。
+
+问：你看到提供附带性自由工具的圈子正在逐渐远离云服务、向对等服务转移的趋势了吗？
+
+答: 我没有看到这种情况。就我所知，只有我们在用对等服务工具。对等服务网络的确能运行得很好，但是，让其能始终如一地很好运行是个挑战。这取决于对等伙伴所在的地方。如果我们有来自中国的访问者，我们就需要保证他们能通过在东京的、而不是在冰岛的对等伙伴来访问。
+
+问: 对等服务之外的社区呢？
+
+答：这是一个没有解决的大问题。如果基于云的集中式服务开始遭到越来越多的阻碍，目前还不清楚下一步有什么办法。
+
+<a href="http://cn.nytimes.com/china/20150401/c01censor/" rel="nofollow">http://cn.nytimes.com/china/20150401/c01censor/</a>
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed May 13 22:53:21 2015">
+ May 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=20813#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/114962094044051991724/">Tanghua8...@gmail.com</a
+></span>
+ 
+<pre>
+原来是美国国务院的资助，也就是美国人民的资助，感谢美帝！！！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed May 13 23:29:42 2015">
+ May 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=20813#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/108624022798487360207/">hongwang...@gmail.com</a
+></span>
+ 
+<pre>
+肘子也用了半年多这个利器：<a href="https://twitter.com/fangshimin/status/584220337790787584" rel="nofollow">https://twitter.com/fangshimin/status/584220337790787584</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed May 13 23:47:27 2015">
+ May 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=20813#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/117728682280967799759/">fid...@gmail.com</a
+></span>
+ 
+<pre>
+2楼资料里的一段话-“我们更关心的是，审查者能通过渗透来屏蔽Lantern。我们所用的算法让他们很难做到这一点。要想做到的话，他们就需要大规模地渗透Lantern社交网络。”
+
+这么说很难屏蔽lantern ,哈哈。。。亚当·菲斯克(Adam Fisk)牛B啊，比谷歌的世界级精英还NB啊，大家痛快的用lantern吧。
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed May 13 23:51:32 2015">
+ May 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=20813#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/xyuanmu/">xyuanmu</a
+></span>
+ 
+<pre>
+#2 牛人啊，不过貌似2.0的节点还很少，最多在地图上看到两个亮点，一个在日本，一个在俄罗斯。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed May 13 23:55:03 2015">
+ May 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=20813#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/117158532779626932966/">WisdomB...@gmail.com</a
+></span>
+ 
+<pre>
+工作 与 家里现在都用神灯，感觉还不错。。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 00:39:31 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=20813#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/111445401667509811800/">wsq.wea...@gmail.com</a
+></span>
+ 
+<pre>
+阿拉丁神灯！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 01:14:09 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=20813#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/117347848207208895832/">u78...@gmail.com</a
+></span>
+ 
+<pre>
+灯照亮了黑暗中的中国 难道是星星之X
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 01:44:12 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=20813#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/108624022798487360207/">hongwang...@gmail.com</a
+></span>
+ 
+<pre>
+或许是刚刚开始。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 01:52:39 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=20813#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/108624022798487360207/">hongwang...@gmail.com</a
+></span>
+ 
+<pre>
+Lantern如何工作
+
+Lantern 的主要目的是访问：得到快速可靠的连接，到广阔的因特网。绝大多数翻墙软件需要服务器。在Lantern系统中，每台机器都可以作为服务器，从而比其他工 具提供更多的容量。通过运行Lantern，每个在非封锁区的电脑，都可以变成封锁区用户的代理，使他们可以访问被封锁的网站，诸如 Twitter，Facebook，Youtube，等等。
+Lantern的核心是信任网络。使用者邀请他们的朋友来建立Lantern网络。通过只邀请他们信任的人分享因特网连接，大家共同努力，来增加网络反抗审查者的封锁的能力。你的Lantern朋友越多，因特网的速度和可靠性就越高。
+
+Lantern安全性如何？
+
+Lantern用了很大的精力来确保使用者的安全，不过，有些情况下，我们没法做到。因此，使用者需要知道这样才能安全地使用Lantern。对于位于被封锁区域中的使用者，非常重要的一点是，你只选择你真正信任的Lantern朋友。你访问网络的时候，所有的数据都将通过这些朋友的电脑。如果你添加了你不信任的朋友，有可能他是一个监视你的人。因此，只添加你信任的朋友。此外，Lantern可能通过你发出深达4层以外的朋友的信息，也就是，你的朋友的朋友的朋友的朋友。我们是这样建立起一个连接性好，可大可小的网络，因为，被封锁区的人通常并没有封锁区外的直接朋友。然而，每多一层联系，对朋友的信任度就越少（即，你对朋友的朋友的信任程度小于你对于朋友的信任）。请牢记，Lantern是提供访问的工具，而不是防止监视的工具。
+
+Lantern不是匿名工具。如果你希望你访问的网站没法知道你的IP地址或物理地址（他们通常都会知道，好像给你一个惊喜一样），或者你不希望网络监视者知道你访问了哪些网站，我们推荐你使用 Tor。Tor很棒，我们常常与他们团队交流。再重复一遍，Lantern的目的是访问，Tor的目的是匿名。
+
+保障你的安全最后防线：无论用什么工具（包括Lantern和Tor），你不要在迫害人民的政府管辖下的网站上放置敏感信息，尤其当你居住在那个地区的时候。这是因为像政府这样的全球网络监管者可以找出是你放置了这个信息并找到你。
+
+以上介绍均来自Lantern官方网站。
+<a href="https://www.getlantern.org/#zh_CN" rel="nofollow">https://www.getlantern.org/#zh_CN</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 01:58:49 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=20813#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/113292563919005293118/">xvyongp...@gmail.com</a
+></span>
+ 
+<pre>
+我是来打脸的 <a href="http://ipleak.net/" rel="nofollow">http://ipleak.net/</a> 直接显示你的省份ip和内网ip 呵呵 不谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 01:59:26 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=20813#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/113292563919005293118/">xvyongp...@gmail.com</a
+></span>
+ 
+<pre>
+再来一发 <a href="https://diafygi.github.io/webrtc-ips/" rel="nofollow">https://diafygi.github.io/webrtc-ips/</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 02:06:10 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=20813#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/114255133369633707531/">fh0205z...@gmail.com</a
+></span>
+ 
+<pre>
+WebRTC在chrome浏览器是没法禁掉的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 04:38:25 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=20813#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/117728682280967799759/">fid...@gmail.com</a
+></span>
+ 
+<pre>
+lantern的隐身非常不好。
+在禁用javascript的情况下，用lantern登录ipleak.net直接显示你的真实IP。
+目前比较保险的就是，禁用javascript+只用goagent，登录ipleak.net就彻底隐身了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 05:04:14 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=20813#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/113384776842209274765/">jsnjyc...@gmail.com</a
+></span>
+ 
+<pre>
+速度较慢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 19:30:14 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=20813#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/113292563919005293118/">xvyongp...@gmail.com</a
+></span>
+ 
+<pre>
+#15 没试过你说的方法 不过用lantern 只看不说话比较安全
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 15 02:20:38 2015">
+ May 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=20813#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/116562774888767041325/">teno...@gmail.com</a
+></span>
+ 
+<pre>
+#12   <a href="http://ipleak.net/" rel="nofollow">http://ipleak.net/</a> 这是不屏蔽的网站，本地IP显示有问题吗？
+即便是在境内网站使用tor,也不是没有问题的。 
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 15 02:24:25 2015">
+ May 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=20813#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/113292563919005293118/">xvyongp...@gmail.com</a
+></span>
+ 
+<pre>
+#18 不信你带套上 ipleak.net 
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 15 03:41:00 2015">
+ May 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=20813#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/117728682280967799759/">fid...@gmail.com</a
+></span>
+ 
+<pre>
+#19 请问怎么建立lantern+tor？是下载那个tor浏览器，还是只下载tor呢？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 15 04:01:19 2015">
+ May 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=20813#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/111445401667509811800/">wsq.wea...@gmail.com</a
+></span>
+ 
+<pre>
+查看你的IP：<a href="http://ipleak.net/" rel="nofollow">http://ipleak.net/</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 15 04:05:52 2015">
+ May 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=20813#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/111445401667509811800/">wsq.wea...@gmail.com</a
+></span>
+ 
+<pre>
+lantern非常不错好。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 15 05:31:30 2015">
+ May 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=20813#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/102106608336571773012/">nancheng...@gmail.com</a
+></span>
+ 
+<pre>
+这名字起得不错蓝灯，美国牌民主之灯还是P2P翻墙
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 15 06:58:07 2015">
+ May 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=20813#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/107489931029987600546/">15213598...@gmail.com</a
+></span>
+ 
+<pre>
+#12 好像我只显示内网IP，没有显示省份IP
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 15 07:12:58 2015">
+ May 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=20813#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/107489931029987600546/">15213598...@gmail.com</a
+></span>
+ 
+<pre>
+#12 用了下G现在终于显示省份IP了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20813&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20813"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="20813">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A20813',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 20813,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

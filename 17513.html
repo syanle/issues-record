@@ -1,0 +1,914 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "profileUrl": null, "loggedInUserEmail": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "relativeBaseUrl": "", "projectHomeUrl": "/p/goagent", "token": null, "projectName": "goagent", "domainName": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 17513 - 
+ goagent -
+ 
+ 3.2.0b4错误惊人，我没看这么多不同种类的错误 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17513&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17513" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="closed_colors">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=17513">17513</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >3.2.0b4错误惊人，我没看这么多不同种类的错误</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 1 person starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A17513">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="This report duplicates an existing issue">Duplicate</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ <tr><th align="left" valign="top">Closed:&nbsp;</th>
+ <td align="left" valign="top" width="100%">
+ Sep 2014
+ </td>
+ </tr>
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17513&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17513">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/117453196412475575506/">kaidi1...@gmail.com</a
+>,
+ <span class="date" title="Sat Sep 27 01:02:55 2014">Sep 27, 2014</span>
+ 
+ </div>
+<pre>
+<b>发issue前先在All issues中搜索是否已经有你要提交的问题。</b>
+
+<b>操作系统版本：</b>
+<b>浏览器版本：</b>
+<b>GoAgent 版本：</b>
+<b>GoAgent 日志：</b>
+
+
+WARNING - [Sep 27 15:10:42] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.178', 443), ('203.208.49.179', 443), ('203.208.49.180', 443
+), ('203.208.49.176', 443), ('203.208.49.177', 443), ('203.208.49.180', 443)] re
+turn ['timed out'], try again.
+INFO - [Sep 27 15:10:42] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:42] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.178', 443), ('203.208.49.179', 443), ('203.208.49.180', 443
+), ('203.208.49.176', 443), ('203.208.49.177', 443)] return ['timed out'], try a
+gain.
+ERROR - [Sep 27 15:10:42] create_http_request &quot;GET https://1-ps.googleuserconten
+t.com/h/kaidi1016003.appspot.com/_gh/ps/14118018140960.206893310799.gif&quot; failed:
+timed out
+Traceback (most recent call last):
+  File &quot;C:\Users\Administrator\Desktop\goagent-goagent-6f7e766\local\proxylib.py
+&quot;, line 2007, in create_http_request
+  File &quot;C:\Users\Administrator\Desktop\goagent-goagent-6f7e766\local\proxylib.py
+&quot;, line 1986, in create_ssl_connection
+timeout: timed out
+
+INFO - [Sep 27 15:10:42] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:42] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.178', 443), ('203.208.49.179', 443), ('203.208.49.180', 443
+), ('203.208.49.179', 443), ('203.208.49.180', 443), ('203.208.49.176', 443)] re
+turn ['timed out'], try again.
+INFO - [Sep 27 15:10:42] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:42] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.178', 443), ('203.208.49.179', 443), ('203.208.49.180', 443
+)] return ['timed out'], try again.
+INFO - [Sep 27 15:10:42] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:43] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.178', 443), ('203.208.49.179', 443), ('203.208.49.180', 443
+), ('203.208.49.176', 443), ('203.208.49.177', 443)] return ['timed out'], try a
+gain.
+ERROR - [Sep 27 15:10:43] create_http_request &quot;GET https://1-ps.googleuserconten
+t.com/h/kaidi1016003.appspot.com/_gh/ps/14118018141610.915589184176.gif&quot; failed:
+timed out
+Traceback (most recent call last):
+  File &quot;C:\Users\Administrator\Desktop\goagent-goagent-6f7e766\local\proxylib.py
+&quot;, line 2007, in create_http_request
+  File &quot;C:\Users\Administrator\Desktop\goagent-goagent-6f7e766\local\proxylib.py
+&quot;, line 1986, in create_ssl_connection
+timeout: timed out
+
+INFO - [Sep 27 15:10:43] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:43] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.178', 443), ('203.208.49.179', 443), ('203.208.49.176', 443
+)] return ['timed out'], try again.
+INFO - [Sep 27 15:10:43] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:43] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.178', 443), ('203.208.49.179', 443), ('203.208.49.180', 443
+), ('203.208.49.176', 443), ('203.208.49.179', 443), ('203.208.49.176', 443), ('
+203.208.49.178', 443), ('203.208.49.177', 443), ('203.208.49.180', 443)] return
+['timed out'], try again.
+INFO - [Sep 27 15:10:43] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:44] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.179', 443), ('203.208.49.180', 443), ('203.208.49.176', 443
+)] return ['timed out'], try again.
+INFO - [Sep 27 15:10:44] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:46] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.179', 443), ('203.208.49.180', 443), ('203.208.49.176', 443
+), ('203.208.49.178', 443), ('203.208.49.180', 443), ('203.208.49.179', 443)] re
+turn ['timed out'], try again.
+INFO - [Sep 27 15:10:46] ssl good_ipaddrs=5, bad_ipaddrs=5, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:47] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.179', 443), ('203.208.49.177', 443), ('203.208.49.176', 443
+)] return ['timed out'], try again.
+INFO - [Sep 27 15:10:47] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:47] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.179', 443), ('203.208.49.180', 443), ('203.208.49.179', 443
+), ('203.208.49.176', 443), ('203.208.49.178', 443), ('203.208.49.180', 443)] re
+turn ['timed out'], try again.
+INFO - [Sep 27 15:10:47] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:47] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.176', 443), ('203.208.49.177', 443), ('203.208.49.179', 443
+)] return ['timed out'], try again.
+INFO - [Sep 27 15:10:47] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:47] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.180', 443), ('203.208.49.178', 443), ('203.208.49.179', 443
+), ('203.208.49.176', 443)] return ['timed out'], try again.
+ERROR - [Sep 27 15:10:47] create_http_request &quot;GET https://1-ps.googleuserconten
+t.com/h/kaidi1016003.appspot.com/_gh/ps/14118018159040.660267573285.gif&quot; failed:
+timed out
+Traceback (most recent call last):
+  File &quot;C:\Users\Administrator\Desktop\goagent-goagent-6f7e766\local\proxylib.py
+&quot;, line 2007, in create_http_request
+  File &quot;C:\Users\Administrator\Desktop\goagent-goagent-6f7e766\local\proxylib.py
+&quot;, line 1986, in create_ssl_connection
+timeout: timed out
+
+INFO - [Sep 27 15:10:47] GAE &quot;GET <a href="https://www.facebook.com/ajax/typeahead/search" rel="nofollow">https://www.facebook.com/ajax/typeahead/search</a>
+/bootstrap.php?filter[0]=app&amp;filter[1]=page&amp;filter[2]=group&amp;filter[3]=friendlist
+&amp;viewer=100005235886537&amp;token=v7&amp;lazy=1&amp;path=%2F&amp;request_id=0cf325b7-20d6-477b-a
+c70-6270be5a9eb2&amp;__user=100005235886537&amp;__a=1&amp;__dyn=7n8anEBQ9FoBUSt2u6aAix97xN6y
+UgByV9GiyFqzQC-C26m6oDAQqdBUgDyQqV8KVpoW8w&amp;__req=2&amp;__rev=1433023&quot; appid='kaidi10
+16003' timeout('timed out',), retry...
+INFO - [Sep 27 15:10:47] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:48] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.180', 443), ('203.208.49.178', 443), ('203.208.49.179', 443
+), ('203.208.49.176', 443)] return ['timed out'], try again.
+ERROR - [Sep 27 15:10:48] create_http_request &quot;GET https://1-ps.googleuserconten
+t.com/h/kaidi1016003.appspot.com/_gh/ps/14118018159260.00929609469822.gif&quot; faile
+d:timed out
+Traceback (most recent call last):
+  File &quot;C:\Users\Administrator\Desktop\goagent-goagent-6f7e766\local\proxylib.py
+&quot;, line 2007, in create_http_request
+  File &quot;C:\Users\Administrator\Desktop\goagent-goagent-6f7e766\local\proxylib.py
+&quot;, line 1986, in create_ssl_connection
+timeout: timed out
+
+INFO - [Sep 27 15:10:48] GAE &quot;GET <a href="https://www.facebook.com/ajax/typeahead/search" rel="nofollow">https://www.facebook.com/ajax/typeahead/search</a>
+/bootstrap.php?filter[0]=user&amp;viewer=100005235886537&amp;token=v7&amp;lazy=1&amp;path=%2F&amp;re
+quest_id=1d616a6e-404d-4f25-938b-acc2933b2c2d&amp;__user=100005235886537&amp;__a=1&amp;__dyn
+=7n8anEBQ9FoBUSt2u6aAix97xN6yUgByV9GiyFqzQC-C26m6oDAQqdBUgDyQqV8KVpoW8w&amp;__req=3&amp;
+__rev=1433023&quot; appid='kaidi1016003' timeout('timed out',), retry...
+INFO - [Sep 27 15:10:48] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+INFO - [Sep 27 15:10:49] 127.0.0.1:8726 &quot;GAE GET https://fbexternal-a.akamaihd.n
+et/safe_image.php?d=AQDRXWyYc1qNGjDM&amp;w=470&amp;h=246&amp;url=https%3A%2F%2Ffbcdn-sphotos
+-f-a.akamaihd.net%2Fhphotos-ak-xpa1%2Ft31.0-8%2Fs720x720%2F10679604_101528208888
+97448_3563629943455747361_o.jpg&amp;cfs=1&amp;upscale=1&amp;sx=0&amp;sy=0&amp;sw=720&amp;sh=377 HTTP/1.1
+&quot; 200 20788
+WARNING - [Sep 27 15:10:50] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.177', 443), ('203.208.49.178', 443), ('203.208.49.179', 443
+), ('203.208.49.180', 443), ('203.208.49.178', 443), ('203.208.49.176', 443), ('
+203.208.49.180', 443), ('203.208.49.177', 443), ('203.208.49.179', 443)] return
+['timed out'], try again.
+INFO - [Sep 27 15:10:50] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:51] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.178', 443), ('203.208.49.179', 443), ('203.208.49.177', 443
+), ('203.208.49.178', 443), ('203.208.49.179', 443), ('203.208.49.176', 443)] re
+turn ['timed out'], try again.
+INFO - [Sep 27 15:10:51] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:51] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.178', 443), ('203.208.49.179', 443), ('203.208.49.180', 443
+)] return ['timed out'], try again.
+INFO - [Sep 27 15:10:51] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:51] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.178', 443), ('203.208.49.179', 443), ('203.208.49.180', 443
+), ('203.208.49.176', 443)] return ['timed out'], try again.
+ERROR - [Sep 27 15:10:51] create_http_request &quot;GET https://1-ps.googleuserconten
+t.com/h/kaidi1016003.appspot.com/_gh/ps/14118018140570.757383879191.gif&quot; failed:
+timed out
+Traceback (most recent call last):
+  File &quot;C:\Users\Administrator\Desktop\goagent-goagent-6f7e766\local\proxylib.py
+&quot;, line 2007, in create_http_request
+  File &quot;C:\Users\Administrator\Desktop\goagent-goagent-6f7e766\local\proxylib.py
+&quot;, line 1986, in create_ssl_connection
+timeout: timed out
+
+INFO - [Sep 27 15:10:51] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:51] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.178', 443), ('203.208.49.180', 443), ('203.208.49.176', 443
+)] return ['timed out'], try again.
+INFO - [Sep 27 15:10:52] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:52] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.178', 443), ('203.208.49.179', 443), ('203.208.49.180', 443
+)] return ['timed out'], try again.
+INFO - [Sep 27 15:10:52] ssl good_ipaddrs=6, bad_ipaddrs=4, unknown_ipaddrs=0
+INFO - [Sep 27 15:10:53] 127.0.0.1:8721 &quot;GAE GET <a href="https://fbcdn-sphotos-h-a.akama" rel="nofollow">https://fbcdn-sphotos-h-a.akama</a>
+ihd.net/hphotos-ak-xfp1/v/t1.0-9/s526x395/1795768_10152211390525429_2103948101_n
+.jpg?oh=d2af25aa36fd85a1e0436fbee71bf7c8&amp;oe=54C95C7F&amp;__gda__=1422846255_b3d0c203
+38a7a4ec277dea2fe206de64 HTTP/1.1&quot; 200 22970
+WARNING - [Sep 27 15:10:54] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.176', 443), ('203.208.49.177', 443), ('203.208.49.179', 443
+), ('203.208.49.180', 443)] return ['timed out'], try again.
+ERROR - [Sep 27 15:10:54] create_http_request &quot;GET https://1-ps.googleuserconten
+t.com/h/kaidi1016002.appspot.com/_gh/ps/14118018136320.00175157154133.gif&quot; faile
+d:timed out
+Traceback (most recent call last):
+  File &quot;C:\Users\Administrator\Desktop\goagent-goagent-6f7e766\local\proxylib.py
+&quot;, line 2007, in create_http_request
+  File &quot;C:\Users\Administrator\Desktop\goagent-goagent-6f7e766\local\proxylib.py
+&quot;, line 1986, in create_ssl_connection
+timeout: timed out
+
+INFO - [Sep 27 15:10:54] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:54] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.178', 443), ('203.208.49.179', 443), ('203.208.49.180', 443
+), ('203.208.49.176', 443)] return ['timed out'], try again.
+ERROR - [Sep 27 15:10:54] create_http_request &quot;GET https://1-ps.googleuserconten
+t.com/h/kaidi1016003.appspot.com/_gh/ps/14118018136240.555158999607.gif&quot; failed:
+timed out
+Traceback (most recent call last):
+  File &quot;C:\Users\Administrator\Desktop\goagent-goagent-6f7e766\local\proxylib.py
+&quot;, line 2007, in create_http_request
+  File &quot;C:\Users\Administrator\Desktop\goagent-goagent-6f7e766\local\proxylib.py
+&quot;, line 1986, in create_ssl_connection
+timeout: timed out
+
+INFO - [Sep 27 15:10:54] GAE &quot;GET <a href="https://www.facebook.com/xti.php?xt=7.qid.6063" rel="nofollow">https://www.facebook.com/xti.php?xt=7.qid.6063</a>
+642607742528290%3Amf_story_key.-3590799083690538729%3Aei.AQJQto955Tpcvfbd9n0AESw
+L5ye5iX9dfGKeYOF0ISae9b7JcD8Hc3lldSLfNWwIly9kZyq4RJo-Aoosj9v3FAzAaiSoWVF6vn2ugk5
+HiqeUJ_D7BbxjFOCkZeXhAg6AZQpowBfQ_3dD0LFfo9WfD9ECx7ciLKwSc44AHo24bGRKMuaLVQF0SMY
+sXz3heVzY6mnIgnb-SQUbIUgYWBXjbR_WL44oIUjRilc5mCMtXkvCWq5vRWIqRMTXgyxsv4nwodgIpTQ
+nxPKLHnweyJR-iLyMHGzNJPnn6adbaY7KqRLgFpV97kLEZIY-eJGQyitt5m7AUDuoeWMMtgLaGjBXRFg
+wQrnrEwEPcXXguBCsaB-VY_3ytsJvOLnHNvonvcdpLdhmnXHaik0soz8WQI5Ci_SiZ_6MZxym5DwdFCe
+bTLngPVWYmrxotUCfLWoKx5AfipYmTAYX33eVO3-SgWE-pdS80uRRlIPNprT2WsEXPssHVTDz-3dYicG
+Fdxpl2A30akEZQI1WC8Qoudp6cejU2MwAtx3W_-5N42STBOEnS6HeLUjXuJqlYrMtuiHaPys0_0ty-Kl
+a5un9hcimF3xbKrcuYyTMhDoXP-P36wihRvrYx_HQ8r6b0zetLmwZvFNXBtGH3pbyAxN-KvjEYaG_XxW
+EE7Sg1WKnvJvjjN3oJopep5nkj2iAVael73bx8yAh3mLbPGSqbikEfcu4YKJgqW5iSL249rEmwzoEJPS
+jMXxWLjheqh4ScmgwP44kYEY-oXpQN1fHJHAOB1SfXhfmJrtzuC8WaTsQaVciZrZbef5Rbm9mTohbgh4
+Za8aJSbAOh-tIxY1alnLUfCC07V4LZbVlwGGbiSPSgF3WNsFS8vkqN2ROZRCHxnU-ifRemoRj8qqY9Zh
+0L1lzR8BJ79Y_vyun8oFZkuP2CimnVL44j8ulOoN9dVIsEe1s3POSoxIpeyeA80FckfIwNTyTi6vx8fI
+Qp4r95hO-D2Snqag6Y4GnwSujBV56BFuxv0xboN60eck9FIY9hNbjK5H0hvnH8c9rSfoHDFZrQP5yoDT
+jBUIfp2D_ajeHOtx1cvujL3cIh9dioRRFZpsAX6wqG03tEFo1ClzjY1QGbDLraK3AZSxmp9ZvQIhUvzW
+Rczss3vMRJo53fPrF0rZH0v6NtD_bEe46QJ7oFHoi5-_de70WeYo0uI1C0pNGdIQqR0V8GQxRBl9i7-r
+8nrHbE3HYgS29j57lQisHJwF7qwYjtl67BobfiuBIBoQMODqTXdABYAY8gF7KXQpCkRFXahl8evvb4EJ
+5Om0sgr08-q-PWZXOH7mi-BgnCufR3Jpnd15Jkpnzcf1i4sVapDr61xF8Hsdl2-o9KJ--3qdknlSI2hx
+FtzUpKe_8m0SSCOO3bvFHFvycHyWkDP1ADlsJe-JAwkuEJUSXnLoSkbisqun93GlR6f4QbNbZcPqIGFK
+Y0dCZA65lBblsDxRjFErnjo-S88jzYwKhyg5eN-AqSW-uiIEML0wuzRn4ucV8TAq1_5dh-6eSs2RUT6L
+GLcuVw9M-k3OCgdUkDN17vVnon84dTLBcwktfP_oGofXgKwr9IgFv0Yc0hwQmeqqCGJTdIkDK7MZeBLj
+1OELHYoExdPQU9-A7F3fDprqKguqCorv6WU7lnB003voGdf5bBedvvuPo48EcZidT2gPKIcnA4jzl6O7
+eQQGR8nXS-v8eevC-xtkN-gMPlggwp5rtsBNnVUa1T9JKZLb7yEO1thlXil73lgMC9MrXVYUM-pIedd0
+kKwpJ6RDe2A7e9xbTq_G7PavWcPItAP0u-r_71yVNAOCUK4QCu63MPMJTBF55YgEI2DJY55w32t3s1vK
+go844Mx1t2UkTRXAo-ZEe9J9OR-DNtXJd4xCchQn3BDVM5dUvV2wEiCm2ENR6HnBz2keN7z0vpagq4yR
+fMJfAHikFUQxZ1-w1XF2EB6uA4WYpdgyjZP8Zi8ilWDR1GE5shqHZVs_7f6hCGbAnk6pdDSAtLOslCrk
+ZOBfa0ojGIPPRsjWU4yVU6PJ2vqBjpPFg-XbKCAUeVDbUj5T7tHS1CwKVgDuCpxbAwuE4P8JjaUALRnj
+0MCrObqx4FJH21ThJWwX4c5_f_1odIObLE37aETEuGfv2QrLoQeFVWC8IvbMfNFyk25LKBcHzithnvkH
+RzT2fiU2PnVHixOSCqJ8JO1PHEbOFzNKl-GjEWtOba7Bn0tgsMgDNZfAH9VkzF2onb1ZVlap_fe13ySw
+4xQBN5cDqgXBUGbJvJwizZfm8QVn1Jiifz3pws-Socsy8E-Q847bOhHzs0E0IF-dC-27W8ewY60K0dZr
+ZYy_tVuZ0k0SkeslfNtQ4tLu6-g7JpXR50IKxMpE2ehDhANJO-kPGhuPF1N10MSBsbiRtNFrytToLtSd
+FyhIIPymij2Xgnk735I6soPJEY6BV7latj0TKpuPf6x-dhG6y_GPyanOPgHjM37XDi9jHJ1uuF9upLrE
+mduOjiagIYXzogpPtfbsq0DJxKE9uSvkt8_vGgZtVLbYPb4hmPmoKxU4l4aAUa6ydpY7WWDCSm6oD0Tb
+sJLoErQk8CNpio4WZ_P0c67zIpif-Y39aF18JtF7aWsQ&quot; appid='kaidi1016003' timeout('time
+d out',), retry...
+INFO - [Sep 27 15:10:54] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:55] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.178', 443), ('203.208.49.179', 443), ('203.208.49.180', 443
+)] return ['timed out'], try again.
+INFO - [Sep 27 15:10:55] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:55] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.178', 443), ('203.208.49.179', 443), ('203.208.49.180', 443
+), ('203.208.49.176', 443)] return ['timed out'], try again.
+ERROR - [Sep 27 15:10:55] create_http_request &quot;GET https://1-ps.googleuserconten
+t.com/h/kaidi1016003.appspot.com/_gh/ps/14118018233680.955020328907.gif&quot; failed:
+timed out
+Traceback (most recent call last):
+  File &quot;C:\Users\Administrator\Desktop\goagent-goagent-6f7e766\local\proxylib.py
+&quot;, line 2007, in create_http_request
+  File &quot;C:\Users\Administrator\Desktop\goagent-goagent-6f7e766\local\proxylib.py
+&quot;, line 1986, in create_ssl_connection
+timeout: timed out
+
+INFO - [Sep 27 15:10:55] GAE &quot;POST <a href="https://www.facebook.com/ajax/bz" rel="nofollow">https://www.facebook.com/ajax/bz</a>&quot; appid='kaid
+i1016003' timeout('timed out',), retry...
+INFO - [Sep 27 15:10:55] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:55] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.178', 443), ('203.208.49.176', 443), ('203.208.49.178', 443
+)] return ['timed out'], try again.
+INFO - [Sep 27 15:10:55] ssl good_ipaddrs=5, bad_ipaddrs=5, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:56] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.178', 443), ('203.208.49.179', 443), ('203.208.49.179', 443
+), ('203.208.49.180', 443), ('203.208.49.176', 443), ('203.208.49.178', 443)] re
+turn ['timed out'], try again.
+INFO - [Sep 27 15:10:56] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:56] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.177', 443), ('203.208.49.176', 443), ('203.208.49.179', 443
+), ('203.208.49.178', 443), ('203.208.49.180', 443), ('203.208.49.179', 443)] re
+turn ['timed out', &quot;(-1, 'Unexpected EOF')&quot;], try again.
+INFO - [Sep 27 15:10:56] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:56] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.177', 443), ('203.208.49.176', 443), ('203.208.49.178', 443
+), ('203.208.49.179', 443), ('203.208.49.180', 443), ('203.208.49.178', 443)] re
+turn ['timed out'], try again.
+INFO - [Sep 27 15:10:56] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+WARNING - [Sep 27 15:10:58] create_ssl_connection to '1-ps.googleusercontent.com
+' with [('203.208.49.178', 443), ('203.208.49.179', 443), ('203.208.49.180', 443
+)] return ['timed out'], try again.
+INFO - [Sep 27 15:10:58] ssl good_ipaddrs=4, bad_ipaddrs=6, unknown_ipaddrs=0
+INFO - [Sep 27 15:10:58] 127.0.0.1:8811 &quot;GAE GET <a href="https://www.facebook.com/ai.php" rel="nofollow">https://www.facebook.com/ai.php</a>
+?aed=AQIYb27m40dPUBu8SjuaQGJFCY-xPXtsGGEi74nX-nw3EKOEoUy70ZcJ58FM_CbpbUcj7aR9T5U
+7f_1ya5ZU9SihxfgOHbnfFmq4Tu49tCJReq_f-D6zYriFFZsMU7-FEBDm4vQiyOM5nqyhV6nV36Wl3-2
+5Qy5xrjJNMFZ1Cl4T52DxWTXWVjk_mSQNeQlVL0CEOZkZx3x6DLspzK2ChH81zi50bI2thOjAdfsdBmm
+jHvQ1l1k1VwuiSRgJMBxT9yHXbaGmC-NHlFpb6R82Xhi9Ipv27i38TTd-ufy_BLq5XpwpNDtPBd85Y4e
+9qWWCdY29UCtRjfYFMNt4GT9ZY0AE16oM7g6XJlDB6HFhkKCTfRg2ZjPjlbgFZjAaowE5PC6NjmkNSAa
+yE8aw7jzW8WofZ_sRlnPVOAQmTq0YHai-fEX4rbDqFF8z49RW5YXMxTiuOcveVxKttzh0Cd5cNpAilJT
+ngE6pZsg4ntcMRaq8Yq-Q3pkpCHXpNkLy45kYUmU7cBVkoIrf3_uwRQ4k19v5S9EUellD-70QbC_44wu
+ato8W8CD3f_JYrvEhEYv6ASCa0ILBHJ-Gk5rvNpj3OZsSEMToy8RNaq--54Cpc1mWmcbJ5JHXUWVuhCr
+hK6hiULeXqQItl0beac0NPVEcXGMvGyN-8StJCEkDoA4ufCaIVY3cWMY7IcC1pvpWQqCZwOhmJ5mCI-r
+kIl45T_5GLvMwtZxU-cQx-bWMrnqctPG2nQHhealE7lWiDXxY59_Z3fbTwbUlIgbbojWSUOW5kqVAE3Q
+syS6JmxoBu_nW5Br8hW4FNcDjcxbGH5U0j7gjYDLLoLIOwvqvY9CCA722J8L3-T5Yg6ZA-GbOQxrGxWg
+6uokbhGhJCe4LOZ33LFf1uVyYbOuMP2BYI9X602rj53cNGKmKNJK2KkdlI_xpB77HuTOUy6nE2VZfMJB
+0OReDJK_eZ8AmYSR7ipC5R5OBtGcTMNHrHuh1nN33X4ln5kJwDKA_XlL8VjFFp6ssyvcjKcLLtPAhzQ5
+yPziyk7hKiRGPDFhJlTFFuVDi0JP9M9rUwsql9jl8I4qOSX6omKgcDzpq5SpOSCkjTzRmVEwxT_asknY
+laEi5fPkihKTaPI0AnhhcuHMFz10qHaPfl-folKXDHksHa1yyEcJFnU66onXc8AF0AJ0fTi1Jebhi4fb
+rQNWY2mrLtnFSut9M14APklQLdKj4WUwFiuaGYPmeRw2CPh9_PrLiDoNZ-w6GTGsJMH6mBthHuZHYf8Y
+3yaJz1YTRmQy2Vjo-eMqPhPKxowu5wvvZeDnypkAk2xU0Sn4QrRNA7HwlyXihPmUu0fpK5suoNTZZIjp
+ILIRRZWG7Wg4WO7bfxBaXNK_zVS4IUj7WbGeAhhTeNh4fmxQ2CusmsKytdky3UMojgYvLxIJlWr_7dth
+h48qBLV-nDWsXdhAhliqis18c_rW9sgWLdhuYeLpwLGIs6pdTaplp82rEwWDeiNSiN9nXbal6hHpavXH
+LgOwYm3HhW7qVVQJ9WgEEs6kHlYepswEeF_SWnJ9Q_dD_LPEqG6ZRxGfrQlAxrPdDIQd0UckJeyhkTFK
+nsD5q-YSbCp16iqISXArIEKeWitZ9FC0lzEOJBMix3U0Yiq97oCQ96NQGq7sM4j1uBb63VaDkqJcWMd7
+uzTboQH3PoReasOFSR55by4TQsSgowhpf7sOyC5s_lZJ_aDPKxMNdLHPqnIzdAunystdUj9HFtNhqRKR
+yG1Vq0UyvCd7zYOyom3Ax-mUy0CVqSl7Tn6Fnr0J03RIf3Hw-gRNDYgayXbXpisUfEFn_qrh8aHLeq29
+ebKHXfAK8PvvsRvHo_lCV5S6AfLOZAqQJ_SU2LzY2xZpu5ZLxlqbfDIhl7NEA4LkqMv7Lhbpp2HOSXfo
+cb_0MiJTnpEoQB2cpxLA3lBF5wqqCJM7Uzh9NrafAI7KsCBjSd_57Mf8eZeYcRKzp0k30bIpV5iy6_Xt
+HOeS74xcspNMQkdk0Bwqilnj4lE6B07o26WyUNhZRir-OGLzvfqmVn1zcmqTaG8WYRj153emGbQOvcXv
+fQrCh7r7c1mdNNfv1WqqYYbI3qUX-EJ8A8T6SgwIQIg4UwrqI0vYmqfgika2relKRwugIntKUk91o3gd
+0jOLi7cIbzmpV_Do3MBtQhQnBcm7R1zp8ngIShGEwRcYU7_j1pITrMPPep4CZP1YyOZF39BySjVIrYXx
+mCSJ7-6xJK2DK_HjfHpfUfSpb5AxWw2_XZQXHjpNXQjmH6rsFHX7r0_-hSGNFcqKrHDGsEbAz49sZ0aI
+rB4B5QzexePwbWvomgqo4MiiLdfatQ38jSg HTTP/1.1&quot; 400 3430
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Sep 27 01:08:11 2014">
+ Sep 27, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=17513#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+<i>(No comment was entered for this change.)</i>
+</pre>
+ 
+ 
+ <div class="updates">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ 
+ <b>Status:</b>
+ Duplicate
+ 
+ <br>
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Sep 27 01:08:44 2014">
+ Sep 27, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=17513#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+不要重复发帖。
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17513&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17513"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="17513">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A17513',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 17513,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

@@ -1,0 +1,3400 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ (function(){(function(){function c(a){this.t={};this.tick=function(a,b,c){b=void 0!=c?c:(new Date).getTime();this.t[a]=b;if(void 0==c)try{window.console.timeStamp("CSI/"+a)}catch(d){}};this.tick("start",null,a)}var a;window.performance&&(a=window.performance.timing);var b=a?new c(a.responseStart):new c;window.jstiming={Timer:c,load:b};a&&(b=a.navigationStart,a=a.responseStart,0<b&&a>=b&&(window.jstiming.srt=a-b));try{a=null,window.chrome&&window.chrome.csi&&(a=Math.floor(window.chrome.csi().pageT)),null==a&&
+window.gtbExternal&&(a=window.gtbExternal.pageT()),null==a&&window.external&&(a=window.external.pageT),a&&(window.jstiming.pt=a)}catch(d){}})();})();
+
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"loggedInUserEmail": null, "relativeBaseUrl": "", "projectHomeUrl": "/p/goagent", "projectName": "goagent", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "token": null, "profileUrl": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 20389 - 
+ goagent -
+ 
+ 一种新的找IP方法（附GFW封IP原理推测） - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20389&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20389" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=20389">20389</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >一种新的找IP方法（附GFW封IP原理推测）</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 38 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A20389">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20389&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20389">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/115354468257486784132/">zzq1...@gmail.com</a
+>,
+ <span class="date" title="Fri Apr 24 15:13:22 2015">Apr 24, 2015</span>
+ 
+ </div>
+<pre>
+怎么找IP：
+第一步（Windows需要这步）：去<a href="https://www.isc.org/downloads/" rel="nofollow">https://www.isc.org/downloads/</a> 下载BIND，解压，提取出里面的dig.exe，放入系统根目录（系统盘:\Windows\System32）下（或者放入自建文件夹，修改系统环境PATH变量，在最后加上自己文件夹路径），打开命令提示符（cmd）敲&quot;dig&quot;（无引号）确认一下，出来一堆root-servers.net就对了
+（Mac OS和Linux直接打开终端敲 dig 就好了）
+
+第二步：利用dig中EDNS扩展中的subnet功能（为了解析到距离更近的主机，这里可以模拟DNS查询的来源IP），查Google的四个权威DNS：
+ns1.google.com (216.239.32.10)
+ns2.google.com (216.239.34.10)
+ns3.google.com (216.239.36.10)
+ns4.google.com (216.239.38.10)
+注意不是Google Public DNS (8.8.8.8/8.8.4.4)
+方法：在cmd里输入：
+如果你要IPv4地址（大多数人用IPv4）：
+dig +subnet=X.X.X.X @ns1.google.com www.google.com
+如果你要IPv6地址：
+dig +subnet=2001:db8:1234::1234 @ns1.google.com aaaa www.google.com
+X.X.X.X和那个2001:db8开头的地址改成你想模拟的来源IP
+最后的www.google.com可以改成其他的Google域名
+ns1.google.com可以换成ns2，ns3，ns4，或者干脆用IP地址
+来源IP优先选择亚洲的IP，延时小，速度快
+因为Google的官方IP被封的差不多了，所以要找Google Global Cache IP (GGC IP)
+Google 官方IP列表：<a href="http://bgp.he.net/AS15169#_prefixes" rel="nofollow">http://bgp.he.net/AS15169#_prefixes</a>
+简单说就是IP在以下范围内为Google官方IP：
+64.233.160.0 - 64.233.191.255
+74.125.开头
+173.194.开头
+216.58.192.0 - 216.58.223.255
+216.239.32.0 - 216.239.63.255
+如果不是Google官方IP，那太好了，这些都是GGC IP，开始第三步吧
+
+第三步：把你拿到的GGC IP放入IP扫描工具：(选一个)
+GoGoTester (<a href="https://github.com/azzvx/gogotester" rel="nofollow">https://github.com/azzvx/gogotester</a> )
+CheckGoogleIP (<a href="https://github.com/moonshawdo/checkgoogleip" rel="nofollow">https://github.com/moonshawdo/checkgoogleip</a> )
+GScan (<a href="https://github.com/yinqiwen/gscan" rel="nofollow">https://github.com/yinqiwen/gscan</a> )
+留下能用的
+
+第四步：放入Goagent的IP列表（proxy.ini的google_hk=后面）
+找多一点，放少一点
+
+===================找IP方法就到这里===================
+
+下面是GFW封Google IP方法推测：
+1. GFW的工作人员一定也在扫IP，本人分享过的IP ( <a title="封ip是吧？再分享几段ip，让你一次封个爽"  href="/p/goagent/issues/detail?id=14661">issue 14661</a> ) 中：
+66.185.84.0/24中&quot;可用于GAE的IP&quot;被路由封锁，连ping都ping不通（去<a href="https://cloudmonitor.ca.com/en/ping.php" rel="nofollow">https://cloudmonitor.ca.com/en/ping.php</a> 把66.185.84.20（可用GAE）和66.185.84.27（不可用GAE）填进去对比看）；
+24.156.131.0/24倒是没被路由封锁，但可用GAE的IP封了80和443端口，不可用GAE的IP暂时正常（如果你在墙内，浏览器地址栏输入24.156.131.20和24.156.131.27试试）
+而本人从未分享过的IP：
+24.156.153.0/24
+64.71.249.0/24（难道GFW扫过了AS812的所有IP？因为都不在一个/16段）
+66.185.85.0/24
+命运和66.185.84.0/24一样，路由封锁
+
+2. 为了看看GFW的工作人员会不会误封IP，本人在 <a title="封ip是吧？再分享几段ip，让你一次封个爽"  href="/p/goagent/issues/detail?id=14661">issue 14661</a> 中混入几段IP：
+69.17.141.0/24 （我在AS812中随便找的一段IP）
+65.55.58.0/24 （微软的IP）
+192.30.252.0/24 （GitHub的IP）
+看来某些人提出让GFW误封IP是不太可能的（能把这些IP从IP list里删掉吗？）
+
+3. 看起来GFW已经疯了，注意多备几种翻墙工具，免费的也好，收费的也好，总之要保证能翻出去
+
+最后说一句：以方滨兴为首的GFW工作人员不得好死！把谷歌搜索封了还不够，Gmail都封，害得中国成为谷歌流量中断的3个国家之一 (<a href="https://www.google.com/transparencyreport/traffic/" rel="nofollow">https://www.google.com/transparencyreport/traffic/</a> )，gong匪封网连经济都不管了
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 15:41:21 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=20389#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/117855495887411412744/">nirvana...@gmail.com</a
+></span>
+ 
+<pre>
+google官方的ip段大多被封完了, 我都懒得扫描了, 扫得慢不说(范围太大有186万多), 而且扫出来也是很慢的.
+
+现在只能找找周边国家的了.
+
+<a href="http://www.tcpiputils.com/search?q=google" rel="nofollow">http://www.tcpiputils.com/search?q=google</a>
+(在最下面有全部的ASN)
+
+我觉得gfw的人员肯定有类似于gogo tester的工具, 然后每段时间统计下443端口流量高的ip, 把这些高流量的ip用工具扫描下看看是不是google的服务器, 如果是然后封掉.
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 15:48:22 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=20389#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/117475255809215652671/">yanligan...@gmail.com</a
+></span>
+ 
+<pre>
+GFW 很可能是通过其他软件配合扫描可用ip来封锁可用ip，例如qq,360这等同流合污的流氓软件，我曾经试过只要开qq很多进程就在追踪上网的模式，发现代理控制台有很多qq自动在访问某个地址
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 16:13:01 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=20389#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/115354468257486784132/">zzq1...@gmail.com</a
+></span>
+ 
+<pre>
+To #1：
+与流量应该无关
+刚才看了下AS577 (Bell Canada)，它的GGC IP也被路由封锁
+这些IP从未被公布
+不信的话到<a href="https://cloudmonitor.ca.com/en/ping.php" rel="nofollow">https://cloudmonitor.ca.com/en/ping.php</a> 测一下184.150.183.45和184.150.183.47
+估计GFW对整个IPv4段都扫描了，且封锁了各国(所有?)运营商的，可用于GAE的GGC IP
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 16:28:28 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=20389#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/115446203943576578109/">zhajj...@gmail.com</a
+></span>
+ 
+<pre>
+现在找出来的基本都被封了，只有极少的没封，但速度都不怎样！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 16:49:32 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=20389#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/113384776842209274765/">jsnjyc...@gmail.com</a
+></span>
+ 
+<pre>
+不明觉厉，先收藏
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 17:03:32 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=20389#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/117855495887411412744/">nirvana...@gmail.com</a
+></span>
+ 
+<pre>
+用ping测试不一定准确, 我用tracetcp试了下, 情况是64.230.*.*(加拿大的ip)后才失去响应的184.150.183.45, 只能说明并不是gfw丢的包.
+
+D:\&gt;tracetcp.exe 184.150.183.47 -n -h 3
+
+Tracing route to 184.150.183.47 on port 80
+Over a maximum of 30 hops.
+3       *       *       *       Request timed out.
+4       *       *       *       Request timed out.
+5       62 ms   64 ms   60 ms   202.97.83.169
+6       62 ms   64 ms   64 ms   202.97.33.198
+7       *       *       *       Request timed out.
+8       232 ms  227 ms  228 ms  202.97.50.130
+9       238 ms  243 ms  242 ms  202.97.49.193
+10      *       *       *       Request timed out.
+11      300 ms  301 ms  300 ms  64.230.186.53
+12      323 ms  315 ms  314 ms  64.230.79.95
+13      308 ms  301 ms  297 ms  64.230.79.70
+14      *       *       *       Request timed out.
+15      *       *       *       Request timed out.
+16      Destination Reached in 309 ms. Connection established to 184.150.183.47
+Trace Complete.
+
+
+D:\&gt;tracetcp.exe 184.150.183.45 -n -h 3
+
+Tracing route to 184.150.183.45 on port 80
+Over a maximum of 30 hops.
+3       *       *       *       Request timed out.
+4       *       *       *       Request timed out.
+5       65 ms   64 ms   62 ms   202.97.73.105
+6       62 ms   64 ms   64 ms   202.97.33.198
+7       *       *       *       Request timed out.
+8       231 ms  249 ms  230 ms  202.97.51.134
+9       224 ms  228 ms  256 ms  202.97.49.197
+10      *       *       *       Request timed out.
+11      305 ms  305 ms  343 ms  64.230.186.53
+12      308 ms  301 ms  320 ms  64.230.79.93
+13      300 ms  296 ms  299 ms  64.230.79.70
+14      *       *       *       Request timed out.
+15      *       *       *       Request timed out.
+16      *       *       *       Request timed out.
+17      *       *       *       Request timed out.
+18      *       *       *       Request timed out.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 17:06:42 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=20389#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/117855495887411412744/">nirvana...@gmail.com</a
+></span>
+ 
+<pre>
+如果是gfw丢的话, 应该是这样, 这是电信dns返回的www.google.com.hk的ip
+
+D:\&gt;tracetcp.exe 64.233.187.199 -n -h 3
+
+Tracing route to 64.233.187.199 on port 80
+Over a maximum of 30 hops.
+3       *       *       *       Request timed out.
+4       *       *       *       Request timed out.
+5       64 ms   63 ms   62 ms   202.97.83.181
+6       63 ms   63 ms   63 ms   202.97.33.214
+7       *       *       *       Request timed out.
+8       *       *       *       Request timed out.
+9       *       *       *       Request timed out.
+10      *       *       *       Request timed out.
+11      *       *       *       Request timed out.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 17:09:32 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=20389#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/115354468257486784132/">zzq1...@gmail.com</a
+></span>
+ 
+<pre>
+回 #6：
+这种方法不用VPN，除非Google的4个NS被封
+前阵子，国内ted.com上不了了（DNS不返回A记录），看起来是亚马逊Route53在国内出问题了，幸好Route53支持EDNS，有网友指出设置dig +subnet=&lt;非中国IP&gt; 就好了。我就想了：Google的4个NS也支持EDNS，那是不是可以模拟各国运营商的用户来获得运营商的GGC IP呢？我拿韩国电信试了试，还真可以：
+
+www.google.com.         300     IN      A       59.18.44.25
+www.google.com.         300     IN      A       59.18.44.29
+www.google.com.         300     IN      A       59.18.44.50
+www.google.com.         300     IN      A       59.18.44.40
+www.google.com.         300     IN      A       59.18.44.20
+www.google.com.         300     IN      A       59.18.44.24
+www.google.com.         300     IN      A       59.18.44.45
+www.google.com.         300     IN      A       59.18.44.44
+www.google.com.         300     IN      A       59.18.44.30
+www.google.com.         300     IN      A       59.18.44.39
+www.google.com.         300     IN      A       59.18.44.55
+www.google.com.         300     IN      A       59.18.44.49
+www.google.com.         300     IN      A       59.18.44.35
+www.google.com.         300     IN      A       59.18.44.34
+www.google.com.         300     IN      A       59.18.44.54
+www.google.com.         300     IN      A       59.18.44.59
+
+但是，大多数运营商都没有GGC IP，或默认解析至Google官方IP，所以要慢慢试，每次一个/24段就可以了，不用一个IP一个IP地试
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 17:13:13 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=20389#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/115354468257486784132/">zzq1...@gmail.com</a
+></span>
+ 
+<pre>
+#7:
+你到184.150.183.47不是连接成功了吗？最后一行
+Destination Reached in 309 ms. Connection established to 184.150.183.47
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 17:17:06 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=20389#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/117855495887411412744/">nirvana...@gmail.com</a
+></span>
+ 
+<pre>
+#10
+关键是184.150.183.45不成功啊, 47的是googlevideo的
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 17:17:37 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=20389#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/115354468257486784132/">zzq1...@gmail.com</a
+></span>
+ 
+<pre>
+还是回#7：
+抱歉没看仔细，你说的是184.150.183.45，这可能是因为GFW封了184.150.183.45的SYN-ACK返回包，我tcptrace Google卡在209.85.*.*上
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 17:24:35 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=20389#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/117855495887411412744/">nirvana...@gmail.com</a
+></span>
+ 
+<pre>
+#12
+恩, 估计只有这种可能了, gfw居然还防了一手trace, -_-!!!
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 17:34:15 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=20389#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/117855495887411412744/">nirvana...@gmail.com</a
+></span>
+ 
+<pre>
+我只是觉得如果根据流量封锁的话, 最有效和准确, 而且不用封很多. 
+
+gfw的小伙伴每月分析日志并用excel统计下, 然后在扫扫验证下就可以安心的上报需要封掉的ip了.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 19:33:21 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=20389#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/117922005993909500805/">gxs...@gmail.com</a
+></span>
+ 
+<pre>
+提问，
+封这么多IP没恶果么？以前说不可能甚至不会封vpn,现在看都是臆测。
+如果这么有效以前怎么没想到封？
+封了IP为什么google能上，其他却上不了？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 20:06:55 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=20389#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/115821752033489886588/">QuickBlu...@gmail.com</a
+></span>
+ 
+<pre>
+注意bind 9.10之前默认不支持+subnet功能。debian jessie自带的是9.9.5,bummer.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 20:09:27 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=20389#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/113384776842209274765/">jsnjyc...@gmail.com</a
+></span>
+ 
+<pre>
+请问楼主，2001:db8:1234::1234这个字段可以换成哪些？在哪找？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 20:15:06 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=20389#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/101308065880214122330/">imy...@gmail.com</a
+></span>
+ 
+<pre>
+那个来源ip 填什么？国内的ip 吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 20:41:24 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=20389#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/115354468257486784132/">zzq1...@gmail.com</a
+></span>
+ 
+<pre>
+回#20：
+IPv6地址可以填周边国家的IP
+
+回#21：
+来源IP填周边国家的IP，因为你是在模拟那些ISP的用户查询Google的NS，得到那个ISP的GGC IP
+如果填国内IP，那就和没有+subnet一样，你会被解析到早已被封的谷歌官方IP
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 20:47:09 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=20389#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/113384776842209274765/">jsnjyc...@gmail.com</a
+></span>
+ 
+<pre>
+#22，先感谢下。周边国家的ipv6地址怎么找
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 22:13:51 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=20389#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/109617883016683572628/">paadan...@gmail.com</a
+></span>
+ 
+<pre>
+老板你给的这个网址<a href="https://www.isc.org/downloads/" rel="nofollow">https://www.isc.org/downloads/</a>
+进去后没有下载地址啊
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 22:28:50 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=20389#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/112263683332329807679/">yuehaiyi...@gmail.com</a
+></span>
+ 
+<pre>
+用台湾的IPv4地址扫出来一大堆非官方GCC IP，如
+203.66.124.0/24
+210.61.221.0/24
+210.242.127.0/24
+210.242.128.0/24
+202.39.143.0/24
+61.219.131.0/24
+全部都ping不通。死。
+210.242.128.0/24的IP用了差不多半年，ping&lt;30 ms，YouTube速率高达15Mbps，昨天（24号）被K了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 23:11:29 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=20389#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/113551852661305174635/">wdlt...@gmail.com</a
+></span>
+ 
+<pre>
+EDNS是以前的方法了，现在直接封443和80端口，玩个球。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc29">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 23:45:26 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c29" href="/p/goagent/issues/detail?id=20389#c29">#29</a>
+ 
+
+ <a class="userlink"
+ href="/u/107795591669850984411/">alienwar...@gmail.com</a
+></span>
+ 
+<pre>
+GFW不仅封了IP的80和443端口，还把IP返回的SYN-ACK包也封掉了，制造了一种traceroute时的假象
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc30">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 24 23:57:34 2015">
+ Apr 24, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c30" href="/p/goagent/issues/detail?id=20389#c30">#30</a>
+ 
+
+ <a class="userlink"
+ href="/u/116326853761552387466/">scattere...@gmail.com</a
+></span>
+ 
+<pre>
+#19
+
+# debian jessie
+apt-get install knot-dnsutils
+
+# 以下在vpn环境下运行,防止dns干扰
+# <a href="http://public-dns.tk/" rel="nofollow">http://public-dns.tk/</a>
+# 假定阿富汗
+wget <a href="http://public-dns.tk/nameserver/af.txt" rel="nofollow">http://public-dns.tk/nameserver/af.txt</a>
+while read dns; do dig +client=$dns @$dns www.google.com | grep ^www.google.com | awk '{print $5}'; done &lt; af.txt | tee af.www.google.com
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc31">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr 25 00:18:42 2015">
+ Apr 25, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c31" href="/p/goagent/issues/detail?id=20389#c31">#31</a>
+ 
+
+ <a class="userlink"
+ href="/u/117227265231876718264/">hjbhug...@gmail.com</a
+></span>
+ 
+<pre>
+#22，来源IP优先选择亚洲的IP，有没有方便查询的网
+像台湾，只找到ip范围的，
+<a href="http://rms.twnic.net.tw/twnic/User/Member/Search/main7.jsp?Order=ORG.ID" rel="nofollow">http://rms.twnic.net.tw/twnic/User/Member/Search/main7.jsp?Order=ORG.ID</a>
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc32">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr 25 00:52:30 2015">
+ Apr 25, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c32" href="/p/goagent/issues/detail?id=20389#c32">#32</a>
+ 
+
+ <a class="userlink"
+ href="/u/101632663002601300137/">meiantu...@gmail.com</a
+></span>
+ 
+<pre>
+上一两天我的hosts里的有关google的都阵亡，ip都是各国的。特别是周边国家的ggc，基本全死。不过认真找了下，会有漏网的一两个ip。估计这个是基于ip的封锁。还有一些不是周边国家的，这些ip是自己找从未公开过的，也死了，估计这些是基于流量的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc33">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr 25 01:04:12 2015">
+ Apr 25, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c33" href="/p/goagent/issues/detail?id=20389#c33">#33</a>
+ 
+
+ <a class="userlink"
+ href="/u/104684378815346748249/">Konoe2...@gmail.com</a
+></span>
+ 
+<pre>
+#32 同。。。原来我不知道哪里搞到的日本东京kddi的ggc。。。延时低，速度快，然后就挂了。。。备用的ip全部被封。。。有种是xxx把hosts上传给gfw的感觉，同ip段的gvs全部好好的例如182.248.204.95
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc34">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr 25 03:27:19 2015">
+ Apr 25, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c34" href="/p/goagent/issues/detail?id=20389#c34">#34</a>
+ 
+
+ <a class="userlink"
+ href="/u/115939226528696880527/">nikky201...@gmail.com</a
+></span>
+ 
+<pre>
+找ip需要时间不是变相慢了吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc35">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr 25 04:16:28 2015">
+ Apr 25, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c35" href="/p/goagent/issues/detail?id=20389#c35">#35</a>
+ 
+
+ <a class="userlink"
+ href="/u/115595446369156023789/">chen.vic...@gmail.com</a
+></span>
+ 
+<pre>
+对于新手 觉得很复杂
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc36">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr 25 06:07:05 2015">
+ Apr 25, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c36" href="/p/goagent/issues/detail?id=20389#c36">#36</a>
+ 
+
+ <a class="userlink"
+ href="/u/110967954234516215210/">zgzjtz...@gmail.com</a
+></span>
+ 
+<pre>
+我个去的，我一个文科狗竟然被逼着学这些。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc37">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr 25 11:26:57 2015">
+ Apr 25, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c37" href="/p/goagent/issues/detail?id=20389#c37">#37</a>
+ 
+
+ <a class="userlink"
+ href="/u/113943128607253668076/">yyyaaa2...@hotmail.com</a
+></span>
+ 
+<pre>
+<a href="https://www.isc.org/downloads/" rel="nofollow">https://www.isc.org/downloads/</a>
+这个地方进去后，没看到下载按纽。。。。。。。。。。我找了很久没发现
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc38">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr 25 17:44:44 2015">
+ Apr 25, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c38" href="/p/goagent/issues/detail?id=20389#c38">#38</a>
+ 
+
+ <a class="userlink"
+ href="/u/111693934004260226328/">yscad...@gmail.com</a
+></span>
+ 
+<pre>
+#37 <a href="ftp://ftp.isc.org/isc/bind9/9.10.2/BIND9.10.2.x86.zip" rel="nofollow">ftp://ftp.isc.org/isc/bind9/9.10.2/BIND9.10.2.x86.zip</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc39">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr 25 20:48:48 2015">
+ Apr 25, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c39" href="/p/goagent/issues/detail?id=20389#c39">#39</a>
+ 
+
+ <a class="userlink"
+ href="/u/101632663002601300137/">meiantu...@gmail.com</a
+></span>
+ 
+<pre>
+估计现在周边国家应该是那班狗扫ip扫到可用ggc后封锁，所以有个别ip漏网，大部分死掉。然后远的国家是根据流量，所以一个ip段只有零星几个被封。远的国家还是有很多ip可用，只是速度没那么快
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc42">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr 25 23:14:52 2015">
+ Apr 25, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c42" href="/p/goagent/issues/detail?id=20389#c42">#42</a>
+ 
+
+ <a class="userlink"
+ href="/u/101632663002601300137/">meiantu...@gmail.com</a
+></span>
+ 
+<pre>
+#40如果是数据库，不能解析一段ip中会有一两个ip漏网，而且gvc的ip全活
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc44">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 26 00:25:33 2015">
+ Apr 26, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c44" href="/p/goagent/issues/detail?id=20389#c44">#44</a>
+ 
+
+ <a class="userlink"
+ href="/u/114255133369633707531/">fh0205z...@gmail.com</a
+></span>
+ 
+<pre>
+#43 如果单个ping一下会不会死呢？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc47">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 26 00:35:33 2015">
+ Apr 26, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c47" href="/p/goagent/issues/detail?id=20389#c47">#47</a>
+ 
+
+ <a class="userlink"
+ href="/u/114255133369633707531/">fh0205z...@gmail.com</a
+></span>
+ 
+<pre>
+#45 感谢大神指明方向,速度快的不行。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc49">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 26 00:52:19 2015">
+ Apr 26, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c49" href="/p/goagent/issues/detail?id=20389#c49">#49</a>
+ 
+
+ <a class="userlink"
+ href="/u/114255133369633707531/">fh0205z...@gmail.com</a
+></span>
+ 
+<pre>
+#48 日本的比中500万还难,其他的还好。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc51">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 26 01:12:24 2015">
+ Apr 26, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c51" href="/p/goagent/issues/detail?id=20389#c51">#51</a>
+ 
+
+ <a class="userlink"
+ href="/u/117855495887411412744/">nirvana...@gmail.com</a
+></span>
+ 
+<pre>
+开10线程随机扫, 每3个多小时就能出一个300~400ms的ip
+200ms以下的要看运气.
+
+(还有就是域名为*.orkut.com也可以当ggc用, 只要忽略证书错误就行了, 不过服务器大多在巴西ping 400ms)
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc53">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 26 01:50:38 2015">
+ Apr 26, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c53" href="/p/goagent/issues/detail?id=20389#c53">#53</a>
+ 
+
+ <a class="userlink"
+ href="/u/114255133369633707531/">fh0205z...@gmail.com</a
+></span>
+ 
+<pre>
+#52 看来要提前适应一下口味了，要不大加农炮一发威大家都得饿死。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc58">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 26 03:36:02 2015">
+ Apr 26, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c58" href="/p/goagent/issues/detail?id=20389#c58">#58</a>
+ 
+
+ <a class="userlink"
+ href="/u/117855495887411412744/">nirvana...@gmail.com</a
+></span>
+ 
+<pre>
+#52
+还有就是感觉ping值300ms的网速也不一定差, 比如说:
+66.97.30.18  平均有236kb  Canada
+
+另外感觉*.googlevideo.com有1/5的都可以直连, 大多能全速(500+kb), 比如说:
+<a href="/p/goagent/source/detail?r=3">r3</a>---sn-i3b7rn7r.googlevideo.com 173.194.22.153
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc59">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 26 05:51:20 2015">
+ Apr 26, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c59" href="/p/goagent/issues/detail?id=20389#c59">#59</a>
+ 
+
+ <a class="userlink"
+ href="/u/109504217827601099228/">tec19992...@gmail.com</a
+></span>
+ 
+<pre>
+首先说明一点，封IP应该是有人工干预的
+（发现和查找可能是机器处理，目前不排除GFW已经具备自动监测和封锁的能力）
+
+从各方面来看，封锁原理基本是基于流量分析和检测
+
+参考：<a href="http://www.solidot.org/story?sid=32532" rel="nofollow">http://www.solidot.org/story?sid=32532</a>
+<a href="http://jcjs.siat.ac.cn/ch/reader/create_pdf.aspx?file_no=201205006" rel="nofollow">http://jcjs.siat.ac.cn/ch/reader/create_pdf.aspx?file_no=201205006</a>
+
+
+GFW维护者们也不傻，他们的目的是保证99%的网民看不到墙外的世界，其余1%出去透下气也无所谓
+
+现在有更多的人翻墙出来了，这是上面不能容忍的。。。
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc60">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 26 06:03:34 2015">
+ Apr 26, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c60" href="/p/goagent/issues/detail?id=20389#c60">#60</a>
+ 
+
+ <a class="userlink"
+ href="/u/109504217827601099228/">tec19992...@gmail.com</a
+></span>
+ 
+<pre>
+另外说一下，如果GFW要完全封掉Google，以现有的技术和能力完全不是问题
+
+对于官方IP，可以封掉Google所有AS的IP段
+
+对于GGC，可以对服务器进行探测
+
+但是考虑到多方面原因，没有全封掉就不错了。。。
+
+对于那些到处放IP的，你们看哪个放出来的IP能存活很长一段时间？？？
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc62">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 26 06:16:39 2015">
+ Apr 26, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c62" href="/p/goagent/issues/detail?id=20389#c62">#62</a>
+ 
+
+ <a class="userlink"
+ href="/u/109504217827601099228/">tec19992...@gmail.com</a
+></span>
+ 
+<pre>
+<a href="https://github.com/Playkid/Google-IPs/blob/master/README.md" rel="nofollow">https://github.com/Playkid/Google-IPs/blob/master/README.md</a>
+
+<a href="http://googless.sinaapp.com/keyong.php" rel="nofollow">http://googless.sinaapp.com/keyong.php</a>
+
+你们看这些公开的IP还有几个可用的。。。
+
+且用且珍惜吧
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc67">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 26 06:29:44 2015">
+ Apr 26, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c67" href="/p/goagent/issues/detail?id=20389#c67">#67</a>
+ 
+
+ <a class="userlink"
+ href="/u/112480106992853185997/">24kxuxi...@gmail.com</a
+></span>
+ 
+<pre>
+所以我这种使用原装 Goagent 自带 IP 的是不是没救了？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc69">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 26 06:35:08 2015">
+ Apr 26, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c69" href="/p/goagent/issues/detail?id=20389#c69">#69</a>
+ 
+
+ <a class="userlink"
+ href="/u/109504217827601099228/">tec19992...@gmail.com</a
+></span>
+ 
+<pre>
+#63
+
+所以后来再也没有人敢大范围公开GGC的IP
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc70">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 26 06:39:19 2015">
+ Apr 26, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c70" href="/p/goagent/issues/detail?id=20389#c70">#70</a>
+ 
+
+ <a class="userlink"
+ href="/u/109504217827601099228/">tec19992...@gmail.com</a
+></span>
+ 
+<pre>
+#64
+
+从去年5月到现在差不多一年了，看情况不容乐观。。。
+除非有更好的去中心化方案，否则一旦用户较多，很难躲过流量特征检测
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc72">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 26 06:51:52 2015">
+ Apr 26, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c72" href="/p/goagent/issues/detail?id=20389#c72">#72</a>
+ 
+
+ <a class="userlink"
+ href="/u/109504217827601099228/">tec19992...@gmail.com</a
+></span>
+ 
+<pre>
+#71
+
+据我所知，当年的各种代理也被封的厉害，现在没多少人用，也不怎么盯着封了
+
+没办法，国内用户都喜欢免费的，又不懂技术，或者懒得自己搞
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc76">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 26 23:06:02 2015">
+ Apr 26, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c76" href="/p/goagent/issues/detail?id=20389#c76">#76</a>
+ 
+
+ <a class="userlink"
+ href="/u/101632663002601300137/">meiantu...@gmail.com</a
+></span>
+ 
+<pre>
+从这几天的疯狂封ggc的ip，倒让我觉得gfw没能力封锁所有Google的ip，或者是经济上不可行。封ip最简单是整段ip封锁，但为何还要花那么多时间去扫出ggc的ip，放生gvc的ip呢？难道真是怕杀错才放过？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc77">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 27 00:13:01 2015">
+ Apr 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c77" href="/p/goagent/issues/detail?id=20389#c77">#77</a>
+ 
+
+ <a class="userlink"
+ href="/u/103305313807263005850/">hhpla...@gmail.com</a
+></span>
+ 
+<pre>
+#67
+绝对不能用啊.这根本就是连不上.
+
+现在都是自己扫.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc78">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 27 05:48:02 2015">
+ Apr 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c78" href="/p/goagent/issues/detail?id=20389#c78">#78</a>
+ 
+
+ <a class="userlink"
+ href="/u/107926761653960957832/">xiaoyu0...@gmail.com</a
+></span>
+ 
+<pre>
+dig.exe错误
+无法启动此程序,因为计算机中丢失libisc.dll.尝试重新安装该程序已解决此问题
+请问楼主是怎么会事
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc79">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 27 05:59:31 2015">
+ Apr 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c79" href="/p/goagent/issues/detail?id=20389#c79">#79</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+把bind解压出来的dll文件全部放到system32里面才能用，还要补 VC++ 2012的运行库才行，这个win版的dig实在很坑爹
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc80">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 27 09:11:40 2015">
+ Apr 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c80" href="/p/goagent/issues/detail?id=20389#c80">#80</a>
+ 
+
+ <a class="userlink"
+ href="/u/109504217827601099228/">tec19992...@gmail.com</a
+></span>
+ 
+<pre>
+#76
+
+确实有这种可能，GFW也要受设备和技术的限制，但是目前来看，封个几十万IP段也不是问题
+
+我认为非技术因素的影响可能更大一些
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc81">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 28 05:22:54 2015">
+ Apr 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c81" href="/p/goagent/issues/detail?id=20389#c81">#81</a>
+ 
+
+ <a class="userlink"
+ href="/u/113384776842209274765/">jsnjyc...@gmail.com</a
+></span>
+ 
+<pre>
+mac下无法使用+subnet，如何解决？还有，如何一次扫多个，一次只能扫5个
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc82">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr 29 20:19:58 2015">
+ Apr 29, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c82" href="/p/goagent/issues/detail?id=20389#c82">#82</a>
+ 
+
+ <a class="userlink"
+ href="/u/102274058884559543537/">lycw...@gmail.com</a
+></span>
+ 
+<pre>
+那个bind文件点击下载半天无反应，谁给发个64bit的，谢谢！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc83">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 30 08:03:11 2015">
+ Apr 30, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c83" href="/p/goagent/issues/detail?id=20389#c83">#83</a>
+ 
+
+ <a class="userlink"
+ href="/u/118174347964734370139/">zj985579...@gmail.com</a
+></span>
+ 
+<pre>
+有木有人用这个方法成功的？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc84">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 30 08:30:08 2015">
+ Apr 30, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c84" href="/p/goagent/issues/detail?id=20389#c84">#84</a>
+ 
+
+ <a class="userlink"
+ href="/u/118174347964734370139/">zj985579...@gmail.com</a
+></span>
+ 
+<pre>
+没有看懂在cmd里面找ip的步骤啊，怎么弄的？是输入dig +subnet=216.239.32.10@ns1.google.com www.google.com吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc85">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 30 09:07:07 2015">
+ Apr 30, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c85" href="/p/goagent/issues/detail?id=20389#c85">#85</a>
+ 
+
+ <a class="userlink"
+ href="/u/105652269184344349929/">oooooo...@gmail.com</a
+></span>
+ 
+<pre>
+domainreliability/upload HTTP/1.1&quot; 200 0
+FO - [May 01 00:06:23] 127.0.0.1:56321 &quot;STRIP CONNECT clients2.google.com:443
+TP/1.1&quot; - -
+FO - [May 01 00:06:23] ssl good_ipaddrs=50, bad_ipaddrs=4, unknown_ipaddrs=18
+FO - [May 01 00:06:23] ssl good_ipaddrs=50, bad_ipaddrs=4, unknown_ipaddrs=18
+FO - [May 01 00:06:25] 127.0.0.1:56321 &quot;DIRECT POST <a href="https://clients2.google.co" rel="nofollow">https://clients2.google.co</a>
+domainreliability/upload HTTP/1.1&quot; 200 0
+FO - [May 01 00:06:25] 127.0.0.1:56318 &quot;DIRECT POST <a href="https://clients2.google.co" rel="nofollow">https://clients2.google.co</a>
+domainreliability/upload HTTP/1.1&quot; 200 0
+RNING - [May 01 00:06:26] bad IP: ('64.15.112.186', 443) (timeout('timed out',
+
+RNING - [May 01 00:06:29] bad IP: ('64.15.112.186', 443) (timeout('timed out',
+
+RNING - [May 01 00:06:29] bad IP: ('194.78.99.174', 443) (timeout('timed out',
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc86">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 15 17:11:07 2015">
+ May 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c86" href="/p/goagent/issues/detail?id=20389#c86">#86</a>
+ 
+
+ <a class="userlink"
+ href="/u/xyuanmu/">xyuanmu</a
+></span>
+ 
+<pre>
+提取dig.exe方法：
+复制 dig.exe, dig.html, 以及所有lib开头的dll文件 lib*.dll 到一个目录下。
+
+自己使用的一个简单的批处理，节省大家时间。复制代码到记事本，另存为 check.bat，放到dig目录，双击运行即可。
+
+@echo off &amp; title 使用dig查询谷歌IP
+cd %~dp0
+
+:check
+echo.
+set /p i= 输入模拟ip地址进行测试:
+dig +subnet=%i% @ns1.google.com www.google.com
+call :check
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc87">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 15 17:37:59 2015">
+ May 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c87" href="/p/goagent/issues/detail?id=20389#c87">#87</a>
+ 
+
+ <a class="userlink"
+ href="/u/114984780492130171058/">syhtfb...@gmail.com</a
+></span>
+ 
+<pre>
+路过，膜拜ing
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc88">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 15 17:40:54 2015">
+ May 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c88" href="/p/goagent/issues/detail?id=20389#c88">#88</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+这方法没有用，找出来的IP段一个IP都扫不出来，不如checkgoogleIP精准。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc89">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 01:19:08 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c89" href="/p/goagent/issues/detail?id=20389#c89">#89</a>
+ 
+
+ <a class="userlink"
+ href="/u/115887047243313301552/">Jglimm...@gmail.com</a
+></span>
+ 
+<pre>
+我想问一下有没有人懂找 IP 的原理。 还有 goagent 的原理是什么。
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20389&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20389"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="20389">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A20389',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 20389,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ 
+ <script type="text/javascript">_CS_reportToCsi();</script>
+ 
+ </body>
+</html>
+

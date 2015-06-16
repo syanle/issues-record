@@ -1,0 +1,2669 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"profileUrl": null, "domainName": null, "loggedInUserEmail": null, "token": null, "projectHomeUrl": "/p/goagent", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "relativeBaseUrl": "", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "projectName": "goagent"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 15614 - 
+ goagent -
+ 
+ 论坛打狗必要性之我见 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D15614&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D15614" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="closed_colors">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=15614">15614</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >论坛打狗必要性之我见</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 4 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A15614">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="This report duplicates an existing issue">Duplicate</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ <tr><th align="left" valign="top">Closed:&nbsp;</th>
+ <td align="left" valign="top" width="100%">
+ Sep 2014
+ </td>
+ </tr>
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D15614&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D15614">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/105538851378863214856/">Freedom7...@gmail.com</a
+>,
+ <span class="date" title="Fri Aug  8 02:39:13 2014">Aug 8, 2014</span>
+ 
+ </div>
+<pre>
+五毛狗的目的，其实很简单，就是骗人。骗涉世未深的人，以卑鄙的手段造谣污蔑颠倒黑白或者替共匪涂脂抹粉，为的是阻止更多的人觉醒，以维护延长共匪的非法统治。			
+这里是墙外，能来这里的基本不会太蠢。相对说来这里应该是人最多狗最少的地方，也应该是打狗最容易的地方。			
+打狗并不是目的。			
+当来到这里的每一个人都变成明白人，一看到狗就打，看到就打，大家齐声喊打，狗自然无处立足。			
+到那一天，这里将回归宁静。			
+
+为什么要向广岛长崎投原子弹呢？			
+为什么党卫军被判集体有罪呢？			
+为什么要枪毙齐奥塞斯库夫妇呢？			
+为什么要判萨达姆绞刑呢？			
+为什么要打死卡扎菲呢？			
+为什么要击毙本.拉丹呢？			
+因为：			
+正义和良知，是人世间一切行为的最高准则。			
+对敌人仁慈，就是对朋友犯罪。			
+对齐奥塞斯库萨达姆卡扎菲卡斯特罗金正恩以及其他独裁政权及其走狗爪牙等反人类畜生的仁慈和纵容，就是对你我子孙后代的道德犯罪。						
+你可以幼稚无知，可以麻木不仁，也可以袖手旁观。但我不希望你泯灭天良。即使你不愿出手相助，我希望你最低限度可以保持沉默，而不是冷嘲热讽。						
+						
+以造谣、污蔑、颠倒黑白、搬弄是非等卑鄙手段恶毒攻击民主、人权、自由、平等，发表反人类言论的畜生名单，欢迎各位补充或提供证据链接以便完善						
+						
+ 序号	反人类畜生名单	             证   据	          备   注	2008-8-8 17:24		以畜名首字升序排列
+1	abe...@gmail.com	<a title="中国人！是时候团结起来歼灭共匪了" class=closed_ref href="/p/goagent/issues/detail?id=15211"> issue 15211 </a> #157,32				
+2	chankaan...@gmail.com	<a title="中国人！是时候团结起来歼灭共匪了" class=closed_ref href="/p/goagent/issues/detail?id=15211"> issue 15211 </a> #160				
+3	chikop2...@gmail.com	<a title="想问作者两个高度敏感问题（您不一定回复，如果觉得这个帖子不好，也可以删除）"  href="/p/goagent/issues/detail?id=15523">issue 15523</a> #143				
+4	CHL41...@gmail.com	<a title="中国人！是时候团结起来歼灭共匪了" class=closed_ref href="/p/goagent/issues/detail?id=15211"> issue 15211 </a> #58,80				
+5	dfx...@gmail.com	<a title="中国人！是时候团结起来歼灭共匪了" class=closed_ref href="/p/goagent/issues/detail?id=15211"> issue 15211 </a> #53				
+6	Ebero...@gmail.com	<a title="中国人！是时候团结起来歼灭共匪了" class=closed_ref href="/p/goagent/issues/detail?id=15211"> issue 15211 </a> #165				
+7	gba...@gmail.com	<a title="终于能上了,啐主动援助土共封网技术的美国思科和仿制者方校长再啐下能骂土共但不许揭露中美亲善的凯迪…"  href="/p/goagent/issues/detail?id=14513">issue 14513</a> #14.15.16(17楼有截图作证据固定)				
+8	gl58...@gmail.com	<a title="中国人！是时候团结起来歼灭共匪了" class=closed_ref href="/p/goagent/issues/detail?id=15211"> issue 15211 </a> #32				
+9	hhs...@gmail.com	<a title="中国人！是时候团结起来歼灭共匪了" class=closed_ref href="/p/goagent/issues/detail?id=15211"> issue 15211 </a> #89				
+10	idn.lee@gmail.com	<a title="中国人！是时候团结起来歼灭共匪了" class=closed_ref href="/p/goagent/issues/detail?id=15211"> issue 15211 </a> #149				
+11	iou...@gmail.com	<a title="中国人！是时候团结起来歼灭共匪了" class=closed_ref href="/p/goagent/issues/detail?id=15211"> issue 15211 </a> #151	
+12	jgeorge...@gmail.com	<a title="有些精神病人发起全球监视行动，把他们送回精神病院，你们就不用找什么谷歌的IP了" class=closed_ref href="/p/goagent/issues/detail?id=15613"> issue 15613 </a>	
+13	jlz19821...@gmail.com	<a title="中国人！是时候团结起来歼灭共匪了" class=closed_ref href="/p/goagent/issues/detail?id=15211"> issue 15211 </a> #102	
+14	lunzis...@gmail.com	<a title="中国人！是时候团结起来歼灭共匪了" class=closed_ref href="/p/goagent/issues/detail?id=15211"> issue 15211 </a> #175	
+15	Ocean.M....@gmail.com	<a title="想问作者两个高度敏感问题（您不一定回复，如果觉得这个帖子不好，也可以删除）"  href="/p/goagent/issues/detail?id=15523">issue 15523</a> #31,163	
+16	shenqish...@gmail.com	<a title="中国人！是时候团结起来歼灭共匪了" class=closed_ref href="/p/goagent/issues/detail?id=15211"> issue 15211 </a> #92	
+17	showby...@gmail.com	<a title="中国人！是时候团结起来歼灭共匪了" class=closed_ref href="/p/goagent/issues/detail?id=15211"> issue 15211 </a> #135	
+18	sparrow3...@gmail.com	<a title="中国人！是时候团结起来歼灭共匪了" class=closed_ref href="/p/goagent/issues/detail?id=15211"> issue 15211 </a> #141	wxj8...@sina.com的马甲
+19	warcraft...@gmail.com	<a title="中国人！是时候团结起来歼灭共匪了" class=closed_ref href="/p/goagent/issues/detail?id=15211"> issue 15211 </a> #85,179	<a title="想问作者两个高度敏感问题（您不一定回复，如果觉得这个帖子不好，也可以删除）"  href="/p/goagent/issues/detail?id=15523">issue 15523</a> #157
+20	wcg...@gmail.com	<a title="中国人！是时候团结起来歼灭共匪了" class=closed_ref href="/p/goagent/issues/detail?id=15211"> issue 15211 </a> #55	
+21	whygo...@gmail.com	<a title="中国人！是时候团结起来歼灭共匪了" class=closed_ref href="/p/goagent/issues/detail?id=15211"> issue 15211 </a> #51	
+22	wxj8...@sina.com	<a title="中国人！是时候团结起来歼灭共匪了" class=closed_ref href="/p/goagent/issues/detail?id=15211"> issue 15211 </a> #5,8,10,125	sparrow3...@gmail.com的马甲
+23	xr88...@gmail.com	<a title="中国人！是时候团结起来歼灭共匪了" class=closed_ref href="/p/goagent/issues/detail?id=15211"> issue 15211 </a> #77	
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Aug  8 02:43:34 2014">
+ Aug 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=15614#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/116473722477689224257/">fujinhu...@gmail.com</a
+></span>
+ 
+<pre>
+..................................
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Aug  8 05:17:12 2014">
+ Aug 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=15614#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/114611672392688558537/">jgeorge...@gmail.com</a
+></span>
+ 
+<pre>
+..................................
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Aug  8 06:50:41 2014">
+ Aug 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=15614#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/111417774546691146193/">fgo...@gmail.com</a
+></span>
+ 
+<pre>
+真是醉了，楼主不用上班吗。是小孩子的话就多好好学习，别搞这些没用的，不然奶粉都没钱买。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Aug  8 07:39:53 2014">
+ Aug 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=15614#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/107929732165511245772/">xiaozhou...@gmail.com</a
+></span>
+ 
+<pre>
+ 又抓到一只 fgo...@gmail.com 楼主请收录
+ ps:五毛真是丧心病狂了，连issue区都攻击
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Aug  8 07:59:59 2014">
+ Aug 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=15614#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/111417774546691146193/">fgo...@gmail.com</a
+></span>
+ 
+<pre>
+唉。 要不要我把动态网的新闻往各个平台搬才不是5毛啊。
+TMD 工地都300一天现结了，谁还守在电脑面前发5毛钱一个的帖子啊。！cao
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Aug  8 08:40:31 2014">
+ Aug 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=15614#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/101366244463186929346/">julymec...@gmail.com</a
+></span>
+ 
+<pre>
+呵呵~~
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Aug  8 16:56:07 2014">
+ Aug 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=15614#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/115417077597622599366/">TouchNet...@gmail.com</a
+></span>
+ 
+<pre>
+既然“工地都300一天现结了”，那你还不快去？还跑这里来做五毛，你说你有多贱！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Aug  8 20:23:34 2014">
+ Aug 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=15614#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/111417774546691146193/">fgo...@gmail.com</a
+></span>
+ 
+<pre>
+#7
+是谁派你来的？ 你代表谁在讲话？ 有什么居心？  
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug  9 05:45:48 2014">
+ Aug 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=15614#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/106831554712470051417/">chai...@gmail.com</a
+></span>
+ 
+<pre>
+傻逼轮子，去你妈的
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug  9 06:26:38 2014">
+ Aug 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=15614#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/107929732165511245772/">xiaozhou...@gmail.com</a
+></span>
+ 
+<pre>
+<a title="论坛打狗必要性之我见" class=closed_ref href="/p/goagent/issues/detail?id=15614"> Issue 15614 </a> #11 chai...@gmail.com 建议把五毛名单置顶，以正视听
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug  9 06:29:43 2014">
+ Aug 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=15614#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+支持 #12楼，估计又是#213 wxj8...@sina.com 2B没小鸡8的小阴蛆 Ocean.M....@gmail.com 互相吃屎的傻逼是一个小号
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug  9 06:47:49 2014">
+ Aug 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=15614#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/113701785237663380569/">dongzhao...@gmail.com</a
+></span>
+ 
+<pre>
+自己嫌五毛烦，就不要单这儿加个issue。自己难道就不烦吗？要我说，五毛轮子一块打吧。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug  9 06:50:29 2014">
+ Aug 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=15614#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/jimindex/">jimindex</a
+></span>
+ 
+<pre>
+#5 哪个工地300一天啊？ 别整天跟国内媒体一样粉饰太平瞎掰掰~
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug  9 06:51:18 2014">
+ Aug 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=15614#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/107929732165511245772/">xiaozhou...@gmail.com</a
+></span>
+ 
+<pre>
+#15 别学5m污蔑，至少在最近的issue里，没有出现所谓的轮子。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Aug 10 03:43:47 2014">
+ Aug 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=15614#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/106831554712470051417/">chai...@gmail.com</a
+></span>
+ 
+<pre>
+搞笑，居然把我的ID也加到五毛
+老子当初在推特转发五月茉莉花，被国宝喊去喝茶的时候，你在哪里意淫
+我极其讨厌五毛，但比五毛更讨厌的是轮子
+五毛是和我政治立场相反，但轮子这种反人类的邪教更让人讨厌
+作为一个人，我反对轮子；作为一个中华民族子孙，我反对五毛
+孰重孰轻？
+智商的低下，要远远比政治立场的错误，更无可救药
+我说完了，轮子，滚你妈的！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Aug 10 03:55:32 2014">
+ Aug 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=15614#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+你这么一说我们就信你？就你这素质，你自己是想当国宝把？当我们不知道胡佳这些被国宝盯上的异见人士是什么情况？
+
+你说法轮功反人类有证据吗？这么反人类，怎么共匪国务院出的邪教组织名单里边没有法轮功？
+所以假装异见人士，实质是个五毛，一眼就被看穿。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Aug 10 04:00:36 2014">
+ Aug 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=15614#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/106831554712470051417/">chai...@gmail.com</a
+></span>
+ 
+<pre>
+哈哈哈，暴露出你是轮子的事实了吧。
+只要反对轮子就是五毛？真他妈是强盗逻辑。
+五毛生儿子都没屁眼，轮子连没屁眼的孩子都没有。
+
+我敢骂五毛都他妈生孩子没屁眼，你敢在骂完五毛之余，骂一句轮子生孩子没屁眼么？
+还说你不是轮子？！
+哈哈哈哈哈
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Aug 10 04:05:59 2014">
+ Aug 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=15614#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+少你妈东拉西扯，『你说法轮功反人类有证据吗？这么反人类，怎么共匪国务院出的邪教组织名单里边没有法轮功？』---------回答我这个问题，敢不敢？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Aug 10 05:05:59 2014">
+ Aug 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=15614#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+刚在另外一个帖子建议删掉呢，再复查一次看有没有搞错的，就是要用这个黑名单来警告闹事的五毛。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Aug 10 05:44:28 2014">
+ Aug 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=15614#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/106831554712470051417/">chai...@gmail.com</a
+></span>
+ 
+<pre>
+#23 #26
+两个智商负分的轮子
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc41">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Aug 10 20:28:07 2014">
+ Aug 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c41" href="/p/goagent/issues/detail?id=15614#c41">#41</a>
+ 
+
+ <a class="userlink"
+ href="/u/111445401667509811800/">wsq.wea...@gmail.com</a
+></span>
+ 
+<pre>
+以谎揭谎、以暴易暴、以民煮民、以匪治匪、以王异王 －国人的杯具。 
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc44">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Aug 10 23:15:58 2014">
+ Aug 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c44" href="/p/goagent/issues/detail?id=15614#c44">#44</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+这个贴必须顶，让更多版友知道真相。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc50">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Aug 11 09:08:08 2014">
+ Aug 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c50" href="/p/goagent/issues/detail?id=15614#c50">#50</a>
+ 
+
+ <a class="userlink"
+ href="/u/102377483317495096679/">hifimu...@gmail.com</a
+></span>
+ 
+<pre>
+“你可以幼稚无知，可以麻木不仁，也可以袖手旁观。但我不希望你泯灭天良。即使你不愿出手相助，我希望你最低限度可以保持沉默，而不是冷嘲热讽。						
+						
+以造谣、污蔑、颠倒黑白、搬弄是非等卑鄙手段恶毒攻击民主、人权、自由、平等，发表反人类言论的畜生名单，欢迎各位补充或提供证据链接以便完善”
+
+这两句话就是矛盾的，呵呵……
+既然想要言论“自由”，为什么人家就不能“冷嘲热讽”？
+既然想要“民主”“平等”，为什么非得旁人“保持沉默”？
+
+到头来，你还是挺有控制欲的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc51">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Aug 11 09:09:32 2014">
+ Aug 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c51" href="/p/goagent/issues/detail?id=15614#c51">#51</a>
+ 
+
+ <a class="userlink"
+ href="/u/104557225513688691601/">taolis...@qq.com</a
+></span>
+ 
+<pre>
+几个帖子看下来，可见共匪圈养了不少水军（网络舆情虱），而且它们还分为：装作诋毁共匪的、诋毁诋毁共匪的，以及宣扬种族主义(民族主义)情绪的，宣扬阴谋论的等等。我怀疑其中有几个id是发帖机器人，发表的内容很多都是牛头不对马嘴，甚至还自问自答的，这类似于十几年前那种论坛灌水机器人的玩意，别人都玩腻了，共匪还乐此不疲。正常情况下，反共势力用不着来这里发帖，而五毛水军的到来以及大量的反共言论在此散布，可以肯定是共匪的某种干扰(暗算)手段，就跟干扰数据包的做法类似，目的就是想把 GoAgent 的 Issues 搞烂，想把 GoAgent 拖下水。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc52">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Aug 11 09:20:44 2014">
+ Aug 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c52" href="/p/goagent/issues/detail?id=15614#c52">#52</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+#50 如果有控制欲的话，何必要容忍你麻木不仁和袖手旁观，而且是『希望』你最低限度可以保持沉默，而不是冷嘲热讽。认字要认全，读句要完整。断章取义，甚至故意曲解民主平等只能让亲者痛仇者快。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc55">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Aug 11 09:49:05 2014">
+ Aug 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c55" href="/p/goagent/issues/detail?id=15614#c55">#55</a>
+ 
+
+ <a class="userlink"
+ href="/u/107929732165511245772/">xiaozhou...@gmail.com</a
+></span>
+ 
+<pre>
+畜生眼里的自由是恣意妄为，利用诡辩歪曲自由。自由的范围是以不限制他人的自由权利为最大限度。反观共匪处处限制公民的各项自由，剥夺人类的种种基本权利，这是对人类自由的赤裸裸的侵害。而有些俄毛畜生，为了那几毛卢布，为其专治残暴摇旗呐喊。在这些畜生眼里，贪污是自由，鱼肉百姓是自由，当然为独裁者舔腚更是他理所当然的自由。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc58">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Aug 25 09:11:31 2014">
+ Aug 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c58" href="/p/goagent/issues/detail?id=15614#c58">#58</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+需要繼續把這個帖子頂上來震懾五毛狗嗎？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc59">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Aug 25 19:49:54 2014">
+ Aug 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c59" href="/p/goagent/issues/detail?id=15614#c59">#59</a>
+ 
+
+ <a class="userlink"
+ href="/u/111214636194042519629/">fobf...@gmail.com</a
+></span>
+ 
+<pre>
+轮子都这么昌狂了？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc61">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Aug 25 21:17:34 2014">
+ Aug 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c61" href="/p/goagent/issues/detail?id=15614#c61">#61</a>
+ 
+
+ <a class="userlink"
+ href="/u/103473276612546405783/">shuangzh...@gmail.com</a
+></span>
+ 
+<pre>
+楼上诅咒自己家的不错，赞一个。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc62">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Aug 25 21:20:18 2014">
+ Aug 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c62" href="/p/goagent/issues/detail?id=15614#c62">#62</a>
+ 
+
+ <a class="userlink"
+ href="/u/112314821949140664509/">mooner.n...@gmail.com</a
+></span>
+ 
+<pre>
+#60 忘了再請李洪志大師輪姦自己全家嗎？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc63">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Aug 25 22:50:50 2014">
+ Aug 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c63" href="/p/goagent/issues/detail?id=15614#c63">#63</a>
+ 
+
+ <a class="userlink"
+ href="/u/113437732808483204209/">cx69237...@gmail.com</a
+></span>
+ 
+<pre>
+这里是讨论goagent的地方，在这谈政治的不是5毛就是轮子，lz你认为自己是什么？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc67">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Aug 25 23:57:03 2014">
+ Aug 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c67" href="/p/goagent/issues/detail?id=15614#c67">#67</a>
+ 
+
+ <a class="userlink"
+ href="/u/113437732808483204209/">cx69237...@gmail.com</a
+></span>
+ 
+<pre>
+#66 想打畜生左转动态网大纪元，别污染了这的环境
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc68">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Aug 26 00:05:37 2014">
+ Aug 26, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c68" href="/p/goagent/issues/detail?id=15614#c68">#68</a>
+ 
+
+ <a class="userlink"
+ href="/u/113437732808483204209/">cx69237...@gmail.com</a
+></span>
+ 
+<pre>
+#66
+ps，不合你意的都是5毛都是畜生，你没比共匪好多少。就你还谈正义谈良知？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc71">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Aug 26 00:50:54 2014">
+ Aug 26, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c71" href="/p/goagent/issues/detail?id=15614#c71">#71</a>
+ 
+
+ <a class="userlink"
+ href="/u/113437732808483204209/">cx69237...@gmail.com</a
+></span>
+ 
+<pre>
+#69 #70
+说实在的有些事真不用挑明着说，显得你很弱智
+我也不跟你多扯了，被共匪的仇恨冲昏头的你大概也听不进别人的意见
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc72">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Aug 26 03:13:41 2014">
+ Aug 26, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c72" href="/p/goagent/issues/detail?id=15614#c72">#72</a>
+ 
+
+ <a class="userlink"
+ href="/u/102823244264128653672/">linbin...@gmail.com</a
+></span>
+ 
+<pre>
+#71
+说实在的有些事真不用挑明着说，显得你很弱智
+我也不跟你多扯了，被法轮功的仇恨冲昏头的你大概也听不进别人的意见
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc73">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Aug 26 05:47:32 2014">
+ Aug 26, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c73" href="/p/goagent/issues/detail?id=15614#c73">#73</a>
+ 
+
+ <a class="userlink"
+ href="/u/114178659191836627941/">56731...@qq.com</a
+></span>
+ 
+<pre>
+地摊网的产品不错，就是不能上黄网有点麻烦，呵呵。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc74">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Aug 27 19:10:04 2014">
+ Aug 27, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c74" href="/p/goagent/issues/detail?id=15614#c74">#74</a>
+ 
+
+ <a class="userlink"
+ href="/u/113081921820200895089/">yanjiul...@gmail.com</a
+></span>
+ 
+<pre>
+楼主有点弱智，首先要学会人与人尊重。在谈其它无妨，而且要理性。看了这样的只会觉得是人渣
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc81">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Aug 28 05:40:51 2014">
+ Aug 28, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c81" href="/p/goagent/issues/detail?id=15614#c81">#81</a>
+ 
+
+ <a class="userlink"
+ href="/u/113437732808483204209/">cx69237...@gmail.com</a
+></span>
+ 
+<pre>
+#80
+吾血尚温这说法不合适，明明是血热过头把脑子都烧得神志不清了
+ps：把意思搞清楚之前不要胡乱学别人说话
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc82">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Aug 28 09:25:16 2014">
+ Aug 28, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c82" href="/p/goagent/issues/detail?id=15614#c82">#82</a>
+ 
+
+ <a class="userlink"
+ href="/u/105487649348069893440/">yanggang...@gmail.com</a
+></span>
+ 
+<pre>
+falungong是人，五毛也是人，大家都是人，这是不争的事实，都是爹妈生的。信仰不同很正常，这个世界本来就无终极真理，人的生命也很短暂，请大家不要浪费自己的时间和生命互相谩骂，你想信什么是你自己的事，你什么都不信也是你自己的事。国家的命运不是你我个人能够改变的，他变化的周期比人的生命周期要长， 过好你们自己的日子。你们出来这样乱骂，你们的父母知道么？你们的老婆知道么？你们如此丧心，有什么意义么？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc83">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Aug 28 19:16:51 2014">
+ Aug 28, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c83" href="/p/goagent/issues/detail?id=15614#c83">#83</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+#80 Freedom7兄，小小挫折何必挂怀，这是一场战争，有进有退，有输有赢，继续为理想奋斗吧，你其实并不孤单。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc84">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Aug 28 22:37:43 2014">
+ Aug 28, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c84" href="/p/goagent/issues/detail?id=15614#c84">#84</a>
+ 
+
+ <a class="userlink"
+ href="/u/110202981784339756737/">chum...@gmail.com</a
+></span>
+ 
+<pre>
+十分赞同楼主的见解，对五毛狗不能手软！必须往死里整！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc87">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Aug 31 05:14:41 2014">
+ Aug 31, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c87" href="/p/goagent/issues/detail?id=15614#c87">#87</a>
+ 
+
+ <a class="userlink"
+ href="/u/110898973648042290865/">thx...@gmail.com</a
+></span>
+ 
+<pre>
+m的疯了，一个技术论坛搞些有的没的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc89">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Sep  1 05:04:47 2014">
+ Sep 1, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c89" href="/p/goagent/issues/detail?id=15614#c89">#89</a>
+ 
+
+ <a class="userlink"
+ href="/u/106935734854991061080/">momof...@gmail.com</a
+></span>
+ 
+<pre>
+共产大法好！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc90">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Sep  1 05:41:12 2014">
+ Sep 1, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c90" href="/p/goagent/issues/detail?id=15614#c90">#90</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+gl58392 已经被判定为五毛，此帖它所有回帖都被删除。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc93">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Sep  1 07:54:25 2014">
+ Sep 1, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c93" href="/p/goagent/issues/detail?id=15614#c93">#93</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+#91 #92 不要一味捧我。你的回帖情绪化很强，我不赞成的地方也有很多，我都怀疑你是在捧杀。总之，我觉得这么情绪化的回帖请注意，不要在如此回帖，否则我会怀疑是五毛反串。
+
+无论五毛有没有被赶走，我都希望各位理智回帖。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc94">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Sep  1 07:56:46 2014">
+ Sep 1, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c94" href="/p/goagent/issues/detail?id=15614#c94">#94</a>
+ 
+
+ <a class="userlink"
+ href="/u/102823244264128653672/">linbin...@gmail.com</a
+></span>
+ 
+<pre>
+我还是觉得是有些五毛竞争不过别的地方的五毛（五毛间也有能力区别）。所以才会来goagent这里，因为先前这里环境好，没有或只有少数五毛。
+
+按goagent的影响力来讲，个人觉得派出这些水平低下的五毛便以为能影响到goagent，这也太对不起goagent的影响力了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc95">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Sep  1 08:11:02 2014">
+ Sep 1, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c95" href="/p/goagent/issues/detail?id=15614#c95">#95</a>
+ 
+
+ <a class="userlink"
+ href="/u/117493913949818889429/">jiaxiong...@gmail.com</a
+></span>
+ 
+<pre>
+什么都不说了  楼主傻逼
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc102">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Sep  2 00:55:48 2014">
+ Sep 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c102" href="/p/goagent/issues/detail?id=15614#c102">#102</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+<i>(No comment was entered for this change.)</i>
+</pre>
+ 
+ 
+ <div class="updates">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ 
+ <b>Status:</b>
+ Duplicate
+ 
+ <br>
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D15614&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D15614"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="15614">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A15614',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 15614,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

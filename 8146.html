@@ -1,0 +1,1451 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "profileUrl": null, "loggedInUserEmail": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "relativeBaseUrl": "", "projectHomeUrl": "/p/goagent", "token": null, "projectName": "goagent", "domainName": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 8146 - 
+ goagent -
+ 
+ goAgent 不聽取端口數據 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D8146&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D8146" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=8146">8146</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >goAgent 不聽取端口數據</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 3 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A8146">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D8146&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D8146">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/109327441840966184219/">ryf9...@gmail.com</a
+>,
+ <span class="date" title="Mon Dec 31 21:29:29 2012">Dec 31, 2012</span>
+ 
+ </div>
+<pre>
+半年前申請的appid並且使用沒問題, 期間4個多月沒有使用, 如今回國聽說goAgent需要升級, 於是升級到最新版本v2.1.11並且重新上傳使用server.bat(上傳成功, 雖然期間遇到幾次問題, 後文有描述)並且將proxy.ini裏面的google_cn改為hk, switchySharp升級到最新版本並且導入最新規則, 但是在啟動goagent以及插件以後發現完全沒有任何用(以使用admin權限), 沒有讀取任何數據
+
+如截圖所示, 插件使用autoSwitch Mode訪問youtube顯示沒有任何用, 不能訪問. 再看客戶端完全沒有任何數據的收聽讀取空白一片. 但是插件里的rule裏面的端口符合proxy的端口(127.0.0.1:8087, Pac: 127.0.0.1:8086/proxy.pac)
+
+系統為win8 x64
+host文件使用為 <a href="https://code.google.com/p/huhamhire-hosts/" rel="nofollow">https://code.google.com/p/huhamhire-hosts/</a> 最新版本
+
+P.S.
+沒有申請新的appid, 登陸appengine顯示帳號正常
+goAgent用了最近3個版本, 均無效
+server.bat上傳成功, 但期間多次上傳時遭遇不明問題, 如下3個:
+cannot connect to 127.0.0.1, 
+BadStatusLine,
+invalid EOF
+原因不明, 疑似和網絡環境有關, 多次改host無用, 屢次嘗試后最後成功
+
+
+完全不知為何不能聽取數據, 求解
+
+</pre>
+
+ <div class="attachments">
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=81460000000&amp;name=problem+screenshot.png&amp;token=ABZ6GAeTEqvsxGQ1jjAiqHJpY7uaZwxDTQ%3A1434454025969&amp;id=8146&amp;mod_ts_token=ABZ6GAfZKdIqpiDEQPYbwpQSc9TnGaKCbQ%3A1434454025969">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >problem screenshot.png</b>
+ <br>
+ 43.9 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=81460000000&amp;name=problem+screenshot.png&amp;token=ABZ6GAeTEqvsxGQ1jjAiqHJpY7uaZwxDTQ%3A1434454025969&amp;id=8146&amp;mod_ts_token=ABZ6GAfZKdIqpiDEQPYbwpQSc9TnGaKCbQ%3A1434454025969&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=81460000000&amp;name=problem+screenshot.png&amp;token=ABZ6GAeTEqvsxGQ1jjAiqHJpY7uaZwxDTQ%3A1434454025969&amp;id=8146&amp;mod_ts_token=ABZ6GAfZKdIqpiDEQPYbwpQSc9TnGaKCbQ%3A1434454025969">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=81460000000&amp;name=problem+screenshot.png&amp;token=ABZ6GAeTEqvsxGQ1jjAiqHJpY7uaZwxDTQ%3A1434454025969&amp;id=8146&amp;mod_ts_token=ABZ6GAfZKdIqpiDEQPYbwpQSc9TnGaKCbQ%3A1434454025969&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=81460000000&amp;name=problem+screenshot.png&amp;token=ABZ6GAeTEqvsxGQ1jjAiqHJpY7uaZwxDTQ%3A1434454025969&amp;id=8146&amp;mod_ts_token=ABZ6GAfZKdIqpiDEQPYbwpQSc9TnGaKCbQ%3A1434454025969&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=81460000001&amp;name=problem+screenshot+2.png&amp;token=ABZ6GAfSWRJmG6WLnJ9bt6AkV8FMVOtciw%3A1434454025969&amp;id=8146&amp;mod_ts_token=ABZ6GAcA25p53LWkeFpikd7x3TqMOVbq7w%3A1434454025969">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >problem screenshot 2.png</b>
+ <br>
+ 32.7 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=81460000001&amp;name=problem+screenshot+2.png&amp;token=ABZ6GAfSWRJmG6WLnJ9bt6AkV8FMVOtciw%3A1434454025969&amp;id=8146&amp;mod_ts_token=ABZ6GAcA25p53LWkeFpikd7x3TqMOVbq7w%3A1434454025969&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=81460000001&amp;name=problem+screenshot+2.png&amp;token=ABZ6GAfSWRJmG6WLnJ9bt6AkV8FMVOtciw%3A1434454025969&amp;id=8146&amp;mod_ts_token=ABZ6GAcA25p53LWkeFpikd7x3TqMOVbq7w%3A1434454025969">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=81460000001&amp;name=problem+screenshot+2.png&amp;token=ABZ6GAfSWRJmG6WLnJ9bt6AkV8FMVOtciw%3A1434454025969&amp;id=8146&amp;mod_ts_token=ABZ6GAcA25p53LWkeFpikd7x3TqMOVbq7w%3A1434454025969&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=81460000001&amp;name=problem+screenshot+2.png&amp;token=ABZ6GAfSWRJmG6WLnJ9bt6AkV8FMVOtciw%3A1434454025969&amp;id=8146&amp;mod_ts_token=ABZ6GAcA25p53LWkeFpikd7x3TqMOVbq7w%3A1434454025969&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=81460000002&amp;name=problem+screenshot+3.png&amp;token=ABZ6GAdquKBkDc6yXsOE_VZdZASmGen51w%3A1434454025969&amp;id=8146&amp;mod_ts_token=ABZ6GAdetRzGByJu2FTjLSrxb-NSIA9wdw%3A1434454025969">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >problem screenshot 3.png</b>
+ <br>
+ 33.6 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=81460000002&amp;name=problem+screenshot+3.png&amp;token=ABZ6GAdquKBkDc6yXsOE_VZdZASmGen51w%3A1434454025969&amp;id=8146&amp;mod_ts_token=ABZ6GAdetRzGByJu2FTjLSrxb-NSIA9wdw%3A1434454025969&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=81460000002&amp;name=problem+screenshot+3.png&amp;token=ABZ6GAdquKBkDc6yXsOE_VZdZASmGen51w%3A1434454025969&amp;id=8146&amp;mod_ts_token=ABZ6GAdetRzGByJu2FTjLSrxb-NSIA9wdw%3A1434454025969">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=81460000002&amp;name=problem+screenshot+3.png&amp;token=ABZ6GAdquKBkDc6yXsOE_VZdZASmGen51w%3A1434454025969&amp;id=8146&amp;mod_ts_token=ABZ6GAdetRzGByJu2FTjLSrxb-NSIA9wdw%3A1434454025969&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=81460000002&amp;name=problem+screenshot+3.png&amp;token=ABZ6GAdquKBkDc6yXsOE_VZdZASmGen51w%3A1434454025969&amp;id=8146&amp;mod_ts_token=ABZ6GAdetRzGByJu2FTjLSrxb-NSIA9wdw%3A1434454025969&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Dec 31 22:05:29 2012">
+ Dec 31, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=8146#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/106781204990925295112/">yubinlov...@gmail.com</a
+></span>
+ 
+<pre>
+你的proxy switchsharp使用的是自动切换，而且看你浏览器提示应该是130错误？被你挡住了
+
+那么最有可能是你的自动切换规则中端口设置错误
+当然，也出现过设置完全正确仍然130错误的，那个我也不知道怎么解决
+
+
+google_cn不必更改，不会把一个不能用的给大家
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Dec 31 22:29:01 2012">
+ Dec 31, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=8146#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+一个很偏离正道的方法：
+先把你的appid输入到proxy.ini运行goagent
+然后设置你的环境变量：https_proxy和http_proxy都为127.0.0.1:8087，再上传试试
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  1 01:57:58 2013">
+ Jan 1, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=8146#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/116048493686770224485/">jelly0...@gmail.com</a
+></span>
+ 
+<pre>
+请检查自己的网络环境及设置，我一直使用新版本，功能一切正常，非常好用，感谢作者。。。新年快乐。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  1 02:27:52 2013">
+ Jan 1, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=8146#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/109327441840966184219/">ryf9...@gmail.com</a
+></span>
+ 
+<pre>
+遊覽器提示不是130錯誤而是101
+Error 101 (net::ERR_CONNECTION_RESET): The connection was reset.
+所以我懷疑是有什麽原因導致goAgent根本就沒有聽取數據, 但是我端口設置是正確的
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  1 02:57:08 2013">
+ Jan 1, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=8146#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/106781204990925295112/">yubinlov...@gmail.com</a
+></span>
+ 
+<pre>
+那就是拓展设置问题，根本没有通过goagent代理
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  1 03:11:51 2013">
+ Jan 1, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=8146#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/109327441840966184219/">ryf9...@gmail.com</a
+></span>
+ 
+<pre>
+求拓展正確設置方法
+
+我最終按照2L在IE裏面設置環境變量, 最後用IE成功翻牆with goAgent, 謝謝2L建議
+但是chrome和FF始終不行
+
+chrome我用的Proxy SwitchySharp 1.9.49最新版本導入了最新規則(當然有save), 無用
+FF我用的FoxyProxy Standard 4.1版本, 並且導入證書, 無用
+以上兩者我都按照goAgent說明操縱, 但是沒有效果, 另. chrome我在半年前用一樣的方法調試過, 可用
+
+求解
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  1 06:10:41 2013">
+ Jan 1, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=8146#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+用这个firefox试试
+<a href="https://wwqgtxx-goagent.googlecode.com/files/FirefoxPortable.7z" rel="nofollow">https://wwqgtxx-goagent.googlecode.com/files/FirefoxPortable.7z</a>
+可能语言要自己解决，想自己试试看
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  1 08:12:11 2013">
+ Jan 1, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=8146#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/109327441840966184219/">ryf9...@gmail.com</a
+></span>
+ 
+<pre>
+此FF PORTABLE可用, 謝謝, 是否有這個插件可以直接裝到普通版本的FF上? 看來果然是插件的問題...
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  1 10:25:10 2013">
+ Jan 1, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=8146#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/117452782893511213071/">daxiaop...@gmail.com</a
+></span>
+ 
+<pre>
+此情况我遇到过，而且上报过，未有反馈。我的解决办法是卸载浏览器扩展后，重新安装并导入规则。然后在确保端口设置正确的情况下，运行GOAGENT。最终得以解决的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  1 18:59:03 2013">
+ Jan 1, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=8146#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/109327441840966184219/">ryf9...@gmail.com</a
+></span>
+ 
+<pre>
+問題解決! 最終的確是有插件衝突導致, 我有安裝Unblock Youku 2.6.0.16以在大陸地區之外播放優酷, 應該是此插件導致衝突. 將之disable以後goAgent瞬間活躍! 感謝9L!
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  1 19:01:51 2013">
+ Jan 1, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=8146#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/109327441840966184219/">ryf9...@gmail.com</a
+></span>
+ 
+<pre>
+P.S. 除了用goAgent的時候在這裡post不了會有405 error (Method not allowed), 
+
+The request method GET is inappropriate for the URL /p/goagent/issues/update.do?id=8146. 
+
+用direct connection即可解決, 雖然麻煩一點
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  1 23:02:24 2013">
+ Jan 1, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=8146#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/106781204990925295112/">yubinlov...@gmail.com</a
+></span>
+ 
+<pre>
+The request method GET is inappropriate for the URL /p/goagent/issues/update.do?id=8146.
+为什么是GET？你用的什么浏览器？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  1 23:06:05 2013">
+ Jan 1, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=8146#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+试试公共服务端可用不？
+公共服务端项目地址
+<a href="https://code.google.com/p/wwqgtxx-goagent" rel="nofollow">https://code.google.com/p/wwqgtxx-goagent</a>
+免配置，免上传，内置160个公共服务端，提供配置好的firefox便携版，欢迎大家使用，请觉得好用的多多宣传
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jan  2 06:09:21 2013">
+ Jan 2, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=8146#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/109327441840966184219/">ryf9...@gmail.com</a
+></span>
+ 
+<pre>
+用的是chrome遊覽器最新版本 (Version 23.0.1271.97 m)
+用autoSwitch/goAgent/goAgent PAC模式均會導致此問題, 我也覺得應該不會是GET而是POST, 奇怪
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jan  2 06:10:12 2013">
+ Jan 2, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=8146#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/109327441840966184219/">ryf9...@gmail.com</a
+></span>
+ 
+<pre>
+但是剛才這個POST用switchmode居然又成功了...跟之前一樣莫名其妙, 只能理解成網絡環境問題了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  8 22:19:53 2013">
+ Jan 8, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=8146#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/106781204990925295112/">yubinlov...@gmail.com</a
+></span>
+ 
+<pre>
+对了，你可以把chrome扩展卸载再重装，有时候重装就能解决问题，也许是扩展有bug
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Mar 23 19:39:01 2013">
+ Mar 23, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=8146#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/102553613436934236340/">libaitia...@gmail.com</a
+></span>
+ 
+<pre>
+我的也是客户端没有数据读取，proxy switchsharp插件重装了，无用，求解？
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=81460017000&amp;name=%E6%8D%95%E8%8E%B7.PNG&amp;token=ABZ6GAcIYkMytSMSUgbWwnmn-RsYerei8Q%3A1434454025971&amp;id=8146&amp;mod_ts_token=ABZ6GAcEqXd1NIZJoGZFHGZVga54aaZNIA%3A1434454025971">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >捕获.PNG</b>
+ <br>
+ 45.2 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=81460017000&amp;name=%E6%8D%95%E8%8E%B7.PNG&amp;token=ABZ6GAcIYkMytSMSUgbWwnmn-RsYerei8Q%3A1434454025971&amp;id=8146&amp;mod_ts_token=ABZ6GAcEqXd1NIZJoGZFHGZVga54aaZNIA%3A1434454025971&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=81460017000&amp;name=%E6%8D%95%E8%8E%B7.PNG&amp;token=ABZ6GAcIYkMytSMSUgbWwnmn-RsYerei8Q%3A1434454025971&amp;id=8146&amp;mod_ts_token=ABZ6GAcEqXd1NIZJoGZFHGZVga54aaZNIA%3A1434454025971">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=81460017000&amp;name=%E6%8D%95%E8%8E%B7.PNG&amp;token=ABZ6GAcIYkMytSMSUgbWwnmn-RsYerei8Q%3A1434454025971&amp;id=8146&amp;mod_ts_token=ABZ6GAcEqXd1NIZJoGZFHGZVga54aaZNIA%3A1434454025971&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=81460017000&amp;name=%E6%8D%95%E8%8E%B7.PNG&amp;token=ABZ6GAcIYkMytSMSUgbWwnmn-RsYerei8Q%3A1434454025971&amp;id=8146&amp;mod_ts_token=ABZ6GAcEqXd1NIZJoGZFHGZVga54aaZNIA%3A1434454025971&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D8146&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D8146"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="8146">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A8146',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 8146,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

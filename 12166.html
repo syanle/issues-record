@@ -1,0 +1,1304 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"token": null, "profileUrl": null, "projectName": "goagent", "projectHomeUrl": "/p/goagent", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "loggedInUserEmail": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "domainName": null, "relativeBaseUrl": ""};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 12166 - 
+ goagent -
+ 
+ 新版本，读取pac错误 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12166&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12166" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=12166">12166</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >新版本，读取pac错误</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 3 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A12166">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12166&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12166">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/103026120095439959482/">panwei...@gmail.com</a
+>,
+ <span class="date" title="Wed Jan  1 16:10:52 2014">Jan 1, 2014</span>
+ 
+ </div>
+<pre>
+<b>发issue前先在All issues中搜索是否已经有你要提交的问题。</b>
+
+<b>1.问题描述</b>
+<b>2.系统信息及依赖情况</b>
+<b>3.goagent日志</b>
+
+
+新版（3.1.2-42,3.1.2-48)在一台ubuntu计算机上执行，提供其他计算机工作。chrome未见太多异常（youtube慢的原因，一般不清楚）。但是之前版本（3.1.2-21）正常读取pac的firefox却提示不能读取pac文件，提示如图：
+
+</pre>
+
+ <div class="attachments">
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=121660000000&amp;name=QQ%E5%9B%BE%E7%89%8720140102081002.jpg&amp;token=ABZ6GAeie19PSh-AwKYQYDJKnfbkBPqZ6g%3A1434454844686&amp;id=12166&amp;mod_ts_token=ABZ6GAfybHsYvz9mFjtfhFpk9WQWiVv7jw%3A1434454844686">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >QQ图片20140102081002.jpg</b>
+ <br>
+ 10.4 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=121660000000&amp;name=QQ%E5%9B%BE%E7%89%8720140102081002.jpg&amp;token=ABZ6GAeie19PSh-AwKYQYDJKnfbkBPqZ6g%3A1434454844686&amp;id=12166&amp;mod_ts_token=ABZ6GAfybHsYvz9mFjtfhFpk9WQWiVv7jw%3A1434454844686&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=121660000000&amp;name=QQ%E5%9B%BE%E7%89%8720140102081002.jpg&amp;token=ABZ6GAeie19PSh-AwKYQYDJKnfbkBPqZ6g%3A1434454844686&amp;id=12166&amp;mod_ts_token=ABZ6GAfybHsYvz9mFjtfhFpk9WQWiVv7jw%3A1434454844686">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=121660000000&amp;name=QQ%E5%9B%BE%E7%89%8720140102081002.jpg&amp;token=ABZ6GAeie19PSh-AwKYQYDJKnfbkBPqZ6g%3A1434454844686&amp;id=12166&amp;mod_ts_token=ABZ6GAfybHsYvz9mFjtfhFpk9WQWiVv7jw%3A1434454844686&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=121660000000&amp;name=QQ%E5%9B%BE%E7%89%8720140102081002.jpg&amp;token=ABZ6GAeie19PSh-AwKYQYDJKnfbkBPqZ6g%3A1434454844686&amp;id=12166&amp;mod_ts_token=ABZ6GAfybHsYvz9mFjtfhFpk9WQWiVv7jw%3A1434454844686&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jan  1 20:16:43 2014">
+ Jan 1, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=12166#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/107983591903866396786/">bianyir...@gmail.com</a
+></span>
+ 
+<pre>
+同样firefox+FoxyProxy
+使用正常
+是否扩展设置问题
+可以参考
+<a href="https://code.google.com/p/goagent/wiki/InstallGuide" rel="nofollow">https://code.google.com/p/goagent/wiki/InstallGuide</a>
+从新设置排查，希望能帮到您
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jan  1 23:10:42 2014">
+ Jan 1, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=12166#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/103026120095439959482/">panwei...@gmail.com</a
+></span>
+ 
+<pre>
+firefox客户端配置没有修改。只是更换了ubuntu下的goagent版本（3.1.2-21版正常读取），如图：
+
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=121660002000&amp;name=QQ%E5%9B%BE%E7%89%8720140102151015.jpg&amp;token=ABZ6GAeQ6FJZ7_ki4IIPzyMePn24urPblQ%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAfARlZ3fW3AcAOYXGG04kbISWK9dA%3A1434454844687">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >QQ图片20140102151015.jpg</b>
+ <br>
+ 7.5 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=121660002000&amp;name=QQ%E5%9B%BE%E7%89%8720140102151015.jpg&amp;token=ABZ6GAeQ6FJZ7_ki4IIPzyMePn24urPblQ%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAfARlZ3fW3AcAOYXGG04kbISWK9dA%3A1434454844687&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=121660002000&amp;name=QQ%E5%9B%BE%E7%89%8720140102151015.jpg&amp;token=ABZ6GAeQ6FJZ7_ki4IIPzyMePn24urPblQ%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAfARlZ3fW3AcAOYXGG04kbISWK9dA%3A1434454844687">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=121660002000&amp;name=QQ%E5%9B%BE%E7%89%8720140102151015.jpg&amp;token=ABZ6GAeQ6FJZ7_ki4IIPzyMePn24urPblQ%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAfARlZ3fW3AcAOYXGG04kbISWK9dA%3A1434454844687&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=121660002000&amp;name=QQ%E5%9B%BE%E7%89%8720140102151015.jpg&amp;token=ABZ6GAeQ6FJZ7_ki4IIPzyMePn24urPblQ%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAfARlZ3fW3AcAOYXGG04kbISWK9dA%3A1434454844687&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jan  1 23:15:54 2014">
+ Jan 1, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=12166#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/103026120095439959482/">panwei...@gmail.com</a
+></span>
+ 
+<pre>
+怀疑8086端口服务有改变。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jan  1 23:25:07 2014">
+ Jan 1, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=12166#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/103026120095439959482/">panwei...@gmail.com</a
+></span>
+ 
+<pre>
+错误提示如图：
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=121660004000&amp;name=QQ%E5%9B%BE%E7%89%8720140102152012.jpg&amp;token=ABZ6GAcELTCqkTN0H4nkgT95D_ye_aWNtg%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAeqStn58zsverBZCh1Y5lWWO9cedQ%3A1434454844687">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >QQ图片20140102152012.jpg</b>
+ <br>
+ 150 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=121660004000&amp;name=QQ%E5%9B%BE%E7%89%8720140102152012.jpg&amp;token=ABZ6GAcELTCqkTN0H4nkgT95D_ye_aWNtg%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAeqStn58zsverBZCh1Y5lWWO9cedQ%3A1434454844687&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=121660004000&amp;name=QQ%E5%9B%BE%E7%89%8720140102152012.jpg&amp;token=ABZ6GAcELTCqkTN0H4nkgT95D_ye_aWNtg%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAeqStn58zsverBZCh1Y5lWWO9cedQ%3A1434454844687">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=121660004000&amp;name=QQ%E5%9B%BE%E7%89%8720140102152012.jpg&amp;token=ABZ6GAcELTCqkTN0H4nkgT95D_ye_aWNtg%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAeqStn58zsverBZCh1Y5lWWO9cedQ%3A1434454844687&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=121660004000&amp;name=QQ%E5%9B%BE%E7%89%8720140102152012.jpg&amp;token=ABZ6GAcELTCqkTN0H4nkgT95D_ye_aWNtg%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAeqStn58zsverBZCh1Y5lWWO9cedQ%3A1434454844687&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=121660004001&amp;name=QQ%E5%9B%BE%E7%89%8720140102152052.jpg&amp;token=ABZ6GAfp7l2jqoibwI-zgfJl76Qk8i87gg%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAfYtnnbCNI6PgiWJOD0y9mDB7ZOTw%3A1434454844687">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >QQ图片20140102152052.jpg</b>
+ <br>
+ 89.5 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=121660004001&amp;name=QQ%E5%9B%BE%E7%89%8720140102152052.jpg&amp;token=ABZ6GAfp7l2jqoibwI-zgfJl76Qk8i87gg%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAfYtnnbCNI6PgiWJOD0y9mDB7ZOTw%3A1434454844687&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=121660004001&amp;name=QQ%E5%9B%BE%E7%89%8720140102152052.jpg&amp;token=ABZ6GAfp7l2jqoibwI-zgfJl76Qk8i87gg%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAfYtnnbCNI6PgiWJOD0y9mDB7ZOTw%3A1434454844687">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=121660004001&amp;name=QQ%E5%9B%BE%E7%89%8720140102152052.jpg&amp;token=ABZ6GAfp7l2jqoibwI-zgfJl76Qk8i87gg%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAfYtnnbCNI6PgiWJOD0y9mDB7ZOTw%3A1434454844687&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=121660004001&amp;name=QQ%E5%9B%BE%E7%89%8720140102152052.jpg&amp;token=ABZ6GAfp7l2jqoibwI-zgfJl76Qk8i87gg%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAfYtnnbCNI6PgiWJOD0y9mDB7ZOTw%3A1434454844687&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=121660004002&amp;name=QQ%E5%9B%BE%E7%89%8720140102152232.jpg&amp;token=ABZ6GAetjLHpndtZBrNgk_04cSzukVaRpA%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAdLbUbmU32jIkLXOWvzwUvvoJRW-Q%3A1434454844687">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >QQ图片20140102152232.jpg</b>
+ <br>
+ 106 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=121660004002&amp;name=QQ%E5%9B%BE%E7%89%8720140102152232.jpg&amp;token=ABZ6GAetjLHpndtZBrNgk_04cSzukVaRpA%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAdLbUbmU32jIkLXOWvzwUvvoJRW-Q%3A1434454844687&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=121660004002&amp;name=QQ%E5%9B%BE%E7%89%8720140102152232.jpg&amp;token=ABZ6GAetjLHpndtZBrNgk_04cSzukVaRpA%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAdLbUbmU32jIkLXOWvzwUvvoJRW-Q%3A1434454844687">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=121660004002&amp;name=QQ%E5%9B%BE%E7%89%8720140102152232.jpg&amp;token=ABZ6GAetjLHpndtZBrNgk_04cSzukVaRpA%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAdLbUbmU32jIkLXOWvzwUvvoJRW-Q%3A1434454844687&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=121660004002&amp;name=QQ%E5%9B%BE%E7%89%8720140102152232.jpg&amp;token=ABZ6GAetjLHpndtZBrNgk_04cSzukVaRpA%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAdLbUbmU32jIkLXOWvzwUvvoJRW-Q%3A1434454844687&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=121660004003&amp;name=QQ%E5%9B%BE%E7%89%8720140102152330.jpg&amp;token=ABZ6GAdGsTk_jipfuZjIlZxBV5occJodqA%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAdSDsVLQPXJp6w64qSZwKFdPZ94ZQ%3A1434454844687">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >QQ图片20140102152330.jpg</b>
+ <br>
+ 101 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=121660004003&amp;name=QQ%E5%9B%BE%E7%89%8720140102152330.jpg&amp;token=ABZ6GAdGsTk_jipfuZjIlZxBV5occJodqA%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAdSDsVLQPXJp6w64qSZwKFdPZ94ZQ%3A1434454844687&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=121660004003&amp;name=QQ%E5%9B%BE%E7%89%8720140102152330.jpg&amp;token=ABZ6GAdGsTk_jipfuZjIlZxBV5occJodqA%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAdSDsVLQPXJp6w64qSZwKFdPZ94ZQ%3A1434454844687">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=121660004003&amp;name=QQ%E5%9B%BE%E7%89%8720140102152330.jpg&amp;token=ABZ6GAdGsTk_jipfuZjIlZxBV5occJodqA%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAdSDsVLQPXJp6w64qSZwKFdPZ94ZQ%3A1434454844687&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=121660004003&amp;name=QQ%E5%9B%BE%E7%89%8720140102152330.jpg&amp;token=ABZ6GAdGsTk_jipfuZjIlZxBV5occJodqA%3A1434454844687&amp;id=12166&amp;mod_ts_token=ABZ6GAdSDsVLQPXJp6w64qSZwKFdPZ94ZQ%3A1434454844687&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jan  2 02:37:19 2014">
+ Jan 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=12166#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/118353281848330031155/">Sea...@gmail.com</a
+></span>
+ 
+<pre>
+似乎除了127.0.0.1这个地址，用其它地址访问都会出错。
+3.1.2-47就是这样了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jan  2 03:14:02 2014">
+ Jan 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=12166#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+为什么是chrome.pac？
+不应该是proxy.pac么？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jan  2 04:28:07 2014">
+ Jan 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=12166#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/106781204990925295112/">yubinlov...@gmail.com</a
+></span>
+ 
+<pre>
+因为在这个端口做了一个所谓的智能代理，跟原来的稍有不同
+只有指定的地址能正常访问到，默认的是 '127.0.0.1',本地监听地址 , 'localhost'
+
+如需要使用其他地址的话，要自己加一下
+localhosts = ('127.0.0.1', ProxyUtil.get_listen_ip(), 'localhost', 'ubpan')
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jan  2 06:19:49 2014">
+ Jan 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=12166#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+已经修复。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jan  2 18:41:07 2014">
+ Jan 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=12166#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/103026120095439959482/">panwei...@gmail.com</a
+></span>
+ 
+<pre>
+localhosts = ('127.0.0.1', ProxyUtil.get_listen_ip(), 'loca.....
+这句话在那个配置文件里面修改啊？
+
+
+---------------
+因为自定义ip用的是CHROME.pac
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jan  2 19:08:26 2014">
+ Jan 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=12166#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/111089010859055861035/">ericcl...@gmail.com</a
+></span>
+ 
+<pre>
+这是在proxy.py里面的，作者说修复了，直接下载新版覆盖一下就好了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jan  3 00:49:47 2014">
+ Jan 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=12166#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/103026120095439959482/">panwei...@gmail.com</a
+></span>
+ 
+<pre>
+测试3.1.2-50版，似乎没改变！
+我再去试试看。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jan  3 00:52:44 2014">
+ Jan 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=12166#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/103026120095439959482/">panwei...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢十楼，加入后对了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12166&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12166"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="12166">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A12166',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 12166,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

@@ -1,0 +1,541 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"token": null, "profileUrl": null, "projectName": "goagent", "projectHomeUrl": "/p/goagent", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "loggedInUserEmail": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "domainName": null, "relativeBaseUrl": ""};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 8148 - 
+ goagent -
+ 
+ socket failed with timeout  (@Linux system) - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D8148&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D8148" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=8148">8148</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >socket failed with timeout  (@Linux system)</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 1 person starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A8148">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D8148&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D8148">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/111583160529058559000/">ben...@bensontech.net</a
+>,
+ <span class="date" title="Mon Dec 31 23:03:56 2012">Dec 31, 2012</span>
+ 
+ </div>
+<pre>
+部份使用https網站經常無法連接(尤其是設定proxy.ini使用google_cn時)
+錯誤訊息如下
+------------------------------------------------------
+GoAgent Version    : 2.1.11 (python/2.7.3 gevent/1.0b4 pyopenssl/0.12)
+Listen Address     : 127.0.0.1:8087
+GAE Mode           : https
+GAE Profile        : google_hk
+GAE APPID          : xxxxxx
+Pac Server         : http://127.0.0.1:8086/proxy.pac
+------------------------------------------------------
+INFO - [Jan 01 14:41:51] resolve common.GOOGLE_HOSTS domain=('www.google.com', 'www.l.google.com', 'mail.google.com', 'mail.l.google.com') to iplist
+INFO - [Jan 01 14:41:52] resolve common.GOOGLE_HOSTS domain to iplist=('74.125.135.83', '173.194.72.105', '173.194.72.104', '173.194.72.106', '173.194.72.103', '74.125.128.83', '173.194.72.147', '74.125.31.147', '74.125.235.85', '74.125.235.86', '74.125.31.103', '74.125.31.106', '74.125.31.105', '74.125.31.104', '74.125.227.21', '74.125.227.22', '74.125.235.22', '74.125.235.21', '173.194.72.83', '173.194.72.18', '173.194.72.19', '74.125.135.18', '74.125.135.19', '74.125.135.17', '173.194.72.17', '74.125.31.99', '74.125.128.18', '74.125.128.19', '74.125.235.213', '74.125.235.214', '173.194.72.99', '74.125.128.17')
+INFO - [Jan 01 14:41:52] 127.0.0.1:35149 &quot;FWD CONNECT ssl.gstatic.com:443 HTTP/1.1&quot; - -
+INFO - [Jan 01 14:41:52] 127.0.0.1:35166 &quot;FWD GET <a href="http://www.google-analytics.com/__utm.gif?utmwv=5.3.8&amp;utms=34&amp;utmn=326787391&amp;utmhn=mgijmajocgfcbeboacabfgobmjgjcoja&amp;utmcs=UTF-8&amp;utmsr=1024x600&amp;utmsc=24-bit&amp;utmul=zh-tw&amp;utmje=1&amp;utmfl=11.5%20r31&amp;utmhid=111554439&amp;utmr=-&amp;utmp=%2Fbackground.html&amp;utmac=UA-23514435-1&amp;utmcc=__utma%3D78228616.91712564.1355511973.1357009915.1357016478.44%3B%2B__utmz%3D78228616.1355511973.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&amp;utmu=q~" rel="nofollow">http://www.google-analytics.com/__utm.gif?utmwv=5.3.8&amp;utms=34&amp;utmn=326787391&amp;utmhn=mgijmajocgfcbeboacabfgobmjgjcoja&amp;utmcs=UTF-8&amp;utmsr=1024x600&amp;utmsc=24-bit&amp;utmul=zh-tw&amp;utmje=1&amp;utmfl=11.5%20r31&amp;utmhid=111554439&amp;utmr=-&amp;utmp=%2Fbackground.html&amp;utmac=UA-23514435-1&amp;utmcc=__utma%3D78228616.91712564.1355511973.1357009915.1357016478.44%3B%2B__utmz%3D78228616.1355511973.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&amp;utmu=q~</a> HTTP/1.1&quot; 200 35
+WARNING - [Jan 01 14:41:58] Http.create_connection return None, reset timeout for ['173.194.72.147', '173.194.72.104', '74.125.135.18', '74.125.31.147']
+ERROR - [Jan 01 14:41:58] http.create_connection((host='ssl.gstatic.com', port=443), 6) timeout
+INFO - [Jan 01 14:43:19] 127.0.0.1:35674 &quot;GAE GET <a href="https://www.facebook.com/plugins/like.php?api_key&amp;locale=zh_TW&amp;sdk=joey&amp;channel_url=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D18%23cb%3Df381c306b8%26origin%3Dhttp%253A%252F%252Fwww.yes123.com.tw%252Ff1ee7d846c%26domain%3Dwww.yes123.com.tw%26relation%3Dparent.parent&amp;href=http%3A%2F%2Fwww.facebook.com%2Fyes123.tw&amp;node_type=link&amp;width=90&amp;font=arial&amp;layout=button_count&amp;colorscheme=light&amp;show_faces=false&amp;send=false&amp;extended_social_context=false" rel="nofollow">https://www.facebook.com/plugins/like.php?api_key&amp;locale=zh_TW&amp;sdk=joey&amp;channel_url=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D18%23cb%3Df381c306b8%26origin%3Dhttp%253A%252F%252Fwww.yes123.com.tw%252Ff1ee7d846c%26domain%3Dwww.yes123.com.tw%26relation%3Dparent.parent&amp;href=http%3A%2F%2Fwww.facebook.com%2Fyes123.tw&amp;node_type=link&amp;width=90&amp;font=arial&amp;layout=button_count&amp;colorscheme=light&amp;show_faces=false&amp;send=false&amp;extended_social_context=false</a> HTTP/1.1&quot; 200 8069
+INFO - [Jan 01 14:43:19] 127.0.0.1:35675 &quot;GAE GET <a href="https://www.facebook.com/plugins/like.php?api_key&amp;locale=zh_TW&amp;sdk=joey&amp;channel_url=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D18%23cb%3Df1cd364e24%26origin%3Dhttp%253A%252F%252Fwww.yes123.com.tw%252Ff1ee7d846c%26domain%3Dwww.yes123.com.tw%26relation%3Dparent.parent&amp;href=http%3A%2F%2Fwww.yes123.com.tw%2Fadmin%2Fjob_refer_comp_job_detail2.asp%3Fp_id%3D20090516210025_28817692%26job_id%3D20120711232524_14354959&amp;node_type=link&amp;width=130&amp;font=arial&amp;layout=button_count&amp;colorscheme=light&amp;action=recommend&amp;show_faces=false&amp;send=false&amp;extended_social_context=false" rel="nofollow">https://www.facebook.com/plugins/like.php?api_key&amp;locale=zh_TW&amp;sdk=joey&amp;channel_url=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D18%23cb%3Df1cd364e24%26origin%3Dhttp%253A%252F%252Fwww.yes123.com.tw%252Ff1ee7d846c%26domain%3Dwww.yes123.com.tw%26relation%3Dparent.parent&amp;href=http%3A%2F%2Fwww.yes123.com.tw%2Fadmin%2Fjob_refer_comp_job_detail2.asp%3Fp_id%3D20090516210025_28817692%26job_id%3D20120711232524_14354959&amp;node_type=link&amp;width=130&amp;font=arial&amp;layout=button_count&amp;colorscheme=light&amp;action=recommend&amp;show_faces=false&amp;send=false&amp;extended_social_context=false</a> HTTP/1.1&quot; 200 8155
+INFO - [Jan 01 14:43:21] 127.0.0.1:35692 &quot;GAE GET <a href="https://fbstatic-a.akamaihd.net/rsrc.php/v2/y1/r/rgOZFG5cE8c.js" rel="nofollow">https://fbstatic-a.akamaihd.net/rsrc.php/v2/y1/r/rgOZFG5cE8c.js</a> HTTP/1.1&quot; 200 36073
+WARNING - [Jan 01 14:43:21] Http.create_connection return None, reset timeout for ['173.194.72.99', '173.194.72.105', '74.125.31.103', '74.125.235.21']
+ERROR - [Jan 01 14:43:21] http.create_connection((host='clients2.google.com', port=443), 6) timeout
+
+Traceback (most recent call last):
+  File &quot;/usr/lib/python2.7/site-packages/gevent-1.0b4-py2.7-linux-i686.egg/gevent/greenlet.py&quot;, line 328, in run
+    result = self._run(*self.args, **self.kwargs)
+  File &quot;/home/DrBenson/goagent/local/proxy.py&quot;, line 1253, in gaeproxy_handler
+    data = response.read(8192)
+  File &quot;/usr/lib/python2.7/httplib.py&quot;, line 561, in read
+    s = self.fp.read(amt)
+  File &quot;/usr/lib/python2.7/socket.py&quot;, line 380, in read
+    data = self._sock.recv(left)
+  File &quot;/usr/lib/python2.7/site-packages/gevent-1.0b4-py2.7-linux-i686.egg/gevent/socket.py&quot;, line 395, in recv
+    self._wait(self._read_event)
+  File &quot;/usr/lib/python2.7/site-packages/gevent-1.0b4-py2.7-linux-i686.egg/gevent/socket.py&quot;, line 298, in _wait
+    self.hub.wait(watcher)
+  File &quot;/usr/lib/python2.7/site-packages/gevent-1.0b4-py2.7-linux-i686.egg/gevent/hub.py&quot;, line 379, in wait
+    result = waiter.get()
+  File &quot;/usr/lib/python2.7/site-packages/gevent-1.0b4-py2.7-linux-i686.egg/gevent/hub.py&quot;, line 611, in get
+    return self.hub.switch()
+  File &quot;/usr/lib/python2.7/site-packages/gevent-1.0b4-py2.7-linux-i686.egg/gevent/hub.py&quot;, line 367, in switch
+    return greenlet.switch(self)
+timeout: timed out
+&lt;Greenlet at 0xb670639cL: gaeproxy_handler(&lt;socket at 0xb673406cL fileno=[Errno 9] Bad file d, ('127.0.0.1', 35827))&gt; failed with timeout
+
+</pre>
+
+</div>
+
+ 
+
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D8148&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D8148"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="8148">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A8148',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 8148,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

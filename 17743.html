@@ -1,0 +1,2322 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ (function(){(function(){function c(a){this.t={};this.tick=function(a,b,c){b=void 0!=c?c:(new Date).getTime();this.t[a]=b;if(void 0==c)try{window.console.timeStamp("CSI/"+a)}catch(d){}};this.tick("start",null,a)}var a;window.performance&&(a=window.performance.timing);var b=a?new c(a.responseStart):new c;window.jstiming={Timer:c,load:b};a&&(b=a.navigationStart,a=a.responseStart,0<b&&a>=b&&(window.jstiming.srt=a-b));try{a=null,window.chrome&&window.chrome.csi&&(a=Math.floor(window.chrome.csi().pageT)),null==a&&
+window.gtbExternal&&(a=window.gtbExternal.pageT()),null==a&&window.external&&(a=window.external.pageT),a&&(window.jstiming.pt=a)}catch(d){}})();})();
+
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "profileUrl": null, "loggedInUserEmail": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "relativeBaseUrl": "", "projectHomeUrl": "/p/goagent", "token": null, "projectName": "goagent", "domainName": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 17743 - 
+ goagent -
+ 
+ GoAgent 3.2.0 经常卡住 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17743&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17743" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=17743">17743</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >GoAgent 3.2.0 经常卡住</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 13 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A17743">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17743&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17743">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/110942998944443615037/">GuoDong...@gmail.com</a
+>,
+ <span class="date" title="Fri Oct  3 10:46:05 2014">Oct 3, 2014</span>
+ 
+ </div>
+<pre>
+刚打开时，一切都正常，过一小会之后，便会卡住，浏览器会长时间加载，然后提示无法获取内容
+
+FO - [Oct  4 01:43:29] 127.0.0.1:53168 &quot;DIRECT GET <a href="https://www.google.com/complete/search?client=chrome-omni&amp;gs_ri=chrome-ext&amp;xssi=t&amp;q=youtube.com&amp;oit=3&amp;cp=5&amp;pgcl=7&amp;sugkey=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw" rel="nofollow">https://www.google.com/complete/search?client=chrome-omni&amp;gs_ri=chrome-ext&amp;xssi=t&amp;q=youtube.com&amp;oit=3&amp;cp=5&amp;pgcl=7&amp;sugkey=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw</a> HTTP/1.1&quot; 200 -
+INFO - [Oct  4 01:43:30] ssl good_ipaddrs=32, bad_ipaddrs=248, unknown_ipaddrs=10
+INFO - [Oct  4 01:44:43] extend_iplist finished, added 17
+INFO - [Oct  4 01:44:43] extend_iplist start for hosts=['www.google.com', 'mail.google.com', 'www.google.com.hk', 'www.google.com.tw', 'www2.l.google.com', 'www3.l.google.com', 'www4.l.google.com', 'www5.l.google.com', 'www6.l.google.com', 'www.l.google.com', 'mail.l.google.com', 'googleapis.l.google.com', 'googlecode.l.googleusercontent.com', 'maps.l.google.com', 'code.l.google.com', 'cert-test.sandbox.google.com']
+127.0.0.1 - - [04/Oct/2014 01:44:43] Request timed out: timeout('timed out',)
+INFO - [Oct  4 01:44:43] ssl good_ipaddrs=21, bad_ipaddrs=285, unknown_ipaddrs=14
+127.0.0.1 - - [04/Oct/2014 01:44:43] Request timed out: timeout('timed out',)
+127.0.0.1 - - [04/Oct/2014 01:44:43] Request timed out: timeout('timed out',)
+127.0.0.1 - - [04/Oct/2014 01:44:43] Request timed out: timeout('timed out',)
+127.0.0.1 - - [04/Oct/2014 01:44:43] Request timed out: timeout('timed out',)
+127.0.0.1 - - [04/Oct/2014 01:44:43] Request timed out: timeout('timed out',)
+WARNING - [Oct  4 01:44:43] create_ssl_connection to '****.appspot.com' with [('173.194.127.174', 443), ('173.194.127.166', 443), ('74.125.31.99', 443), ('173.194.79.90', 443), ('74.125.201.83', 443), ('173.194.68.90', 443), ('74.125.26.90', 443), ('173.194.127.32', 443), ('173.194.127.134', 443), ('173.194.72.90', 443), ('74.125.31.113', 443), ('173.194.127.168', 443), ('74.125.203.103', 443), ('173.194.72.138', 443), ('173.194.127.116', 443), ('173.194.127.198', 443), ('173.194.127.200', 443), ('173.194.127.51', 443), ('173.194.117.22', 443), ('173.194.127.206', 443), ('74.125.235.214', 443)] return ['[Errno 8] _ssl.c:504: EOF occurred in violation of protocol', 'timed out'], try again.
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct  4 21:01:43 2014">
+ Oct 4, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=17743#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/100652591887973777682/">cyxji...@gmail.com</a
+></span>
+ 
+<pre>
+我也有遇到这样的情况，但是仅仅是在Mac里。我是运行python proxy.py 来执行代理的。可是经常会出现GoAgent 不工作，冻结的情况。即便是打开个新的连接，依旧不能在command窗口里看到对应的fetch信息。每次都需要reload下GoAgent，在Win上面用的似乎没什么问题。PS，win上面用的是GoAgent UV。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct  4 21:41:13 2014">
+ Oct 4, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=17743#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/117922513899239408322/">kinting0...@gmail.com</a
+></span>
+ 
+<pre>
+同遇到楼主一样的情况，常常要改用另一个appid,再重开gae, gae &amp; gae-uv都一样
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct  4 21:43:19 2014">
+ Oct 4, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=17743#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/100839855486614287631/">glen...@gmail.com</a
+></span>
+ 
+<pre>
+和一楼同样情况，在 mac os  10.9.5 上遇到一样问题，server 端重新上传了好几次还是没帮助，换回 3.1.20 旧版本一切正常。配置除了换上自己  ID 外没做任何修改。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct  5 01:22:32 2014">
+ Oct 5, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=17743#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/110942998944443615037/">GuoDong...@gmail.com</a
+></span>
+ 
+<pre>
+对，我也是OSX 10.9下
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct  6 21:42:02 2014">
+ Oct 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=17743#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/102735011071359586306/">dusheng...@gmail.com</a
+></span>
+ 
+<pre>
+在raspberry pi 跑，电脑是mba，3.20 也是各种reqyest timed out
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct  6 22:33:36 2014">
+ Oct 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=17743#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/109780272238898659702/">yeon....@gmail.com</a
+></span>
+ 
+<pre>
+如果你是用的是MAC系统，建议使用3.1.18版本，我的原来跟你的一样的故障，后来换了这个版本，问题解决。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct  7 02:12:19 2014">
+ Oct 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=17743#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/100623003003084836330/">kiratec...@gmail.com</a
+></span>
+ 
+<pre>
+同样情况，使用最新版本，然后重新上传，在MAVERICKS和UBUNTU里面都卡住不能用，也不是断开，老版本没有这个情况，64位系统
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct  7 03:28:11 2014">
+ Oct 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=17743#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/102193460221435833590/">liumuqi...@gmail.com</a
+></span>
+ 
+<pre>
+我用mac  也是遇到同样的问题
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct  7 03:44:51 2014">
+ Oct 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=17743#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/101796284750459655967/">xie.k...@gmail.com</a
+></span>
+ 
+<pre>
+os x 10.9.5 使用3.20，目前也是在mac下出现一会儿能打开twitter，一会儿打不开twitter，目前还未测试windows下情况
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct  7 03:46:56 2014">
+ Oct 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=17743#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/113550274966910333235/">she...@gmail.com</a
+></span>
+ 
+<pre>
+有同样的问题，我还在想怎么没人提，想发帖了。win8 64
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Oct  8 22:38:24 2014">
+ Oct 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=17743#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/106265782337129738093/">Asuka.Sm...@gmail.com</a
+></span>
+ 
+<pre>
+3.1.25跟3.2.0同样遇到timed out的情况，不过3.1.25只是时不时出现，3.2.0有时出现后就会卡死
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Oct  8 23:07:47 2014">
+ Oct 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=17743#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/115524164494137056328/">leiming1...@gmail.com</a
+></span>
+ 
+<pre>
+从昨天晚上开始，不管是以前一直很好用的3.1.19还是新下载的3.2.0，都出现了goodip很快用完的情况（广东地区，电信和广电网络）。用go go test新扫描出来的ip地址（40个）也一样，可能不到一分钟就变成了badip。（我的系统是win7 64位的）。不知道广东其他地区的人有没有遇到这个情况。看样子GFW这几天有点疯狂了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Oct  8 23:14:44 2014">
+ Oct 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=17743#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/103709969980564297536/">xavierzh...@gmail.com</a
+></span>
+ 
+<pre>
+卡死是因为CPU 100%了，Linux和OSX下都有这样的问题，估计Windows也难逃
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 00:12:09 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=17743#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/116847175621860423818/">shen...@gmail.com</a
+></span>
+ 
+<pre>
+windows下我是没卡过 但是linux下我碰到过好几次 倒也不是cpu100% 大概也就持续的cpu25%左右（估计是占了1个核心） 一定要kill掉重新开，不然要卡好久。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 00:15:03 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=17743#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/106032429993029901152/">cainia...@hotmail.com</a
+></span>
+ 
+<pre>
+iplist别太长，越长越容易断。
+留几个ping低好用的就行了
+例如<a title="刚刚发现一批可用于GAE代理的国内IP，联通延时12ms"  href="/p/goagent/issues/detail?id=15990">Issue 15990</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 00:49:39 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=17743#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/110223246636257306062/">playne...@gmail.com</a
+></span>
+ 
+<pre>
+建议使用goagent的时候关闭国内的杀毒软件或者是安全卫士之类的软件。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 00:51:40 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=17743#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/112816515252225238275/">hoh...@gmail.com</a
+></span>
+ 
+<pre>
+经常的打不开网站。 
+WIN7, 
+CHROME
+3.2.0
+及时更新呀。。。！！！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 06:57:10 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=17743#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/100623003003084836330/">kiratec...@gmail.com</a
+></span>
+ 
+<pre>
+一样问题，Linux 64位 最新内核版本 几个版本都试了 刚开始可以 2-3秒就卡住
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 07:01:53 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=17743#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/100623003003084836330/">kiratec...@gmail.com</a
+></span>
+ 
+<pre>
+I see errors like this below. Should run it as root user?
+cp: cannot create regular file ‘/usr/local/share/ca-certificates/CA.crt’: Permission denied
+WARNING - [Oct  9 21:59:33] install root certificate failed, Please run as administrator/root/sudo
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  9 07:16:35 2014">
+ Oct 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=17743#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/100623003003084836330/">kiratec...@gmail.com</a
+></span>
+ 
+<pre>
+当python proxy.py cpu占用率达到25%时就卡了 调低window到4都没有好转 proxy.py代码是不是要优化了？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Oct 10 01:31:39 2014">
+ Oct 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=17743#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/108472836327384791339/">sjwbac...@gmail.com</a
+></span>
+ 
+<pre>
+遇到同样的问题，64位win7
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Oct 10 16:46:38 2014">
+ Oct 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=17743#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/109210316835892298789/">lihaos...@gmail.com</a
+></span>
+ 
+<pre>
+我mac上遇到这个问题。原因是CPU 99%
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Oct 10 18:53:37 2014">
+ Oct 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=17743#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/116433698188458856966/">mask...@gmail.com</a
+></span>
+ 
+<pre>
+下载今天的新版goa,依然卡，现象是观看youtube视频卡住，使用代理的下载任务也停住，速度0字节。这时把youtube页面刷新，0字节的下载任务就开始正常下载了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct 13 23:46:25 2014">
+ Oct 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=17743#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/114117824710654078321/">dzm1...@gmail.com</a
+></span>
+ 
+<pre>
+同样的情况 
+
+fedora20 x64
+3.2版本
+
+debug突然不滚动了，网页处于正在载入状态，等很久debug才滚动出一大堆信息来，网页载入。
+如果这个时候把goagent重新载入，网页很快就能显示出来，奇怪。。。
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc26">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct 14 19:58:47 2014">
+ Oct 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c26" href="/p/goagent/issues/detail?id=17743#c26">#26</a>
+ 
+
+ <a class="userlink"
+ href="/u/101779049038766396539/">fishscal...@gmail.com</a
+></span>
+ 
+<pre>
+同样的情况，我的iplist倒确实是挺长的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct 14 20:25:52 2014">
+ Oct 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=17743#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/101779049038766396539/">fishscal...@gmail.com</a
+></span>
+ 
+<pre>
+确实把iplist变短之后就好用了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Oct 15 00:40:19 2014">
+ Oct 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=17743#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/111598809873339876340/">zh.cn...@gmail.com</a
+></span>
+ 
+<pre>
+我刚才遇到过了，CPU占用率很高，goa失效。原因是我注释掉了我的iplist，我的iplist只有4个IP。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc29">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Oct 15 01:47:54 2014">
+ Oct 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c29" href="/p/goagent/issues/detail?id=17743#c29">#29</a>
+ 
+
+ <a class="userlink"
+ href="/u/107504182642440095606/">howu6...@gmail.com</a
+></span>
+ 
+<pre>
+跟#1的描述相同，我是通过shell脚本启动，2&gt;&amp;1&gt;到特定log里tail监控，停顿的时候可以看到goagent完全不做代理，没有fetch信息，必须要kill掉现有进程然后重启start才可以。我每次都是在youtube的时候发现有这个问题，chrome在多个tab使用，关掉一个tab代理流量停止，之后就完全不proxy了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc30">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Oct 15 01:49:55 2014">
+ Oct 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c30" href="/p/goagent/issues/detail?id=17743#c30">#30</a>
+ 
+
+ <a class="userlink"
+ href="/u/107504182642440095606/">howu6...@gmail.com</a
+></span>
+ 
+<pre>
+回#6的答复：不用3.1.18，3.1.25都没有停止代理的问题
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc31">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Oct 17 04:53:39 2014">
+ Oct 17, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c31" href="/p/goagent/issues/detail?id=17743#c31">#31</a>
+ 
+
+ <a class="userlink"
+ href="/u/101779049038766396539/">fishscal...@gmail.com</a
+></span>
+ 
+<pre>
+我同时在windows和ubuntu 12.04下试过，windows下可以，ubuntu下就需要把ip list删得只剩下10个ip左右，情况才会好转，但是时间长了之后又会出现too many open files的问题。求大神解决啊！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc32">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Nov 13 03:00:44 2014">
+ Nov 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c32" href="/p/goagent/issues/detail?id=17743#c32">#32</a>
+ 
+
+ <a class="userlink"
+ href="/u/114650594143549056803/">flo...@gmail.com</a
+></span>
+ 
+<pre>
+WARNING - [Nov 13 18:53:35] create_ssl_connection to 'mail.google.com' with [('6
+4.233.186.18', 443), ('64.233.186.83', 443), ('64.233.186.17', 443), ('64.233.18
+6.19', 443), ('173.194.38.31', 443), ('173.194.38.18', 443), ('74.125.235.228',
+443), ('74.125.235.227', 443), ('173.194.72.18', 443), ('74.125.24.83', 443), ('
+74.125.235.228', 443), ('74.125.24.19', 443), ('173.194.38.31', 443), ('74.125.2
+4.18', 443), ('64.233.186.17', 443), ('173.194.72.199', 443), ('74.125.138.17',
+443), ('74.125.136.17', 443)] return ['timed out'], try again.
+
+还是经常卡住，试过各种方法……
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc33">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Nov 13 03:52:22 2014">
+ Nov 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c33" href="/p/goagent/issues/detail?id=17743#c33">#33</a>
+ 
+
+ <a class="userlink"
+ href="/u/112314821949140664509/">mooner.n...@gmail.com</a
+></span>
+ 
+<pre>
+可以试试这个办法，就是把proxy.py和proxylib.py文件里的timeout改成8，我改了之后好很多了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc34">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Nov 13 04:06:41 2014">
+ Nov 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c34" href="/p/goagent/issues/detail?id=17743#c34">#34</a>
+ 
+
+ <a class="userlink"
+ href="/u/114650594143549056803/">flo...@gmail.com</a
+></span>
+ 
+<pre>
+我试了把window值改小后，好了很多。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc35">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Nov 13 04:15:43 2014">
+ Nov 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c35" href="/p/goagent/issues/detail?id=17743#c35">#35</a>
+ 
+
+ <a class="userlink"
+ href="/u/114650594143549056803/">flo...@gmail.com</a
+></span>
+ 
+<pre>
+#33 好多个timeout，请问是改哪一个？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc36">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Nov 13 04:20:52 2014">
+ Nov 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c36" href="/p/goagent/issues/detail?id=17743#c36">#36</a>
+ 
+
+ <a class="userlink"
+ href="/u/114650594143549056803/">flo...@gmail.com</a
+></span>
+ 
+<pre>
+方法总结：
+1. 改小window值
+2. withgae = ad.doubleclick.net
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc37">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Nov 13 04:33:50 2014">
+ Nov 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c37" href="/p/goagent/issues/detail?id=17743#c37">#37</a>
+ 
+
+ <a class="userlink"
+ href="/u/112314821949140664509/">mooner.n...@gmail.com</a
+></span>
+ 
+<pre>
+#35 就改和gae相关的啊，proxy.py改gae那个connect_timeout，我改成8；proxylib.py你用notepad++找第一个connect_timeout改成8就可以了。
+再把window 改成1，除非你的ip有问题，基本不会再出timeout问题了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc38">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Nov 13 04:49:27 2014">
+ Nov 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c38" href="/p/goagent/issues/detail?id=17743#c38">#38</a>
+ 
+
+ <a class="userlink"
+ href="/u/112314821949140664509/">mooner.n...@gmail.com</a
+></span>
+ 
+<pre>
+另外提醒大家不要再用gogotester找ip了，一是找不到，二是你用找到的ip再填入gogotester验证反而会毁掉这些ip的。反正我这边是这样的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc40">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Nov 13 04:52:56 2014">
+ Nov 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c40" href="/p/goagent/issues/detail?id=17743#c40">#40</a>
+ 
+
+ <a class="userlink"
+ href="/u/114650594143549056803/">flo...@gmail.com</a
+></span>
+ 
+<pre>
+情况好多了，但不知这是什么错误？
+WARNING - [Nov 13 20:50:14] handle dns query=;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, stat
+us: NOERROR, id: 32102 
+;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 0
+;; QUESTION SECTION:
+;client-lb.dropbox.com.         IN      A socket: gaierror(11004, 'getaddrinfo f
+ailed')
+
+PS:我个人早已不用gogotester找ip了，效果我试过也不好，至于毁掉IP的可能性还是挺高。
+这边铁通的网络“治安”手段齐全呀
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc41">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Nov 19 05:18:44 2014">
+ Nov 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c41" href="/p/goagent/issues/detail?id=17743#c41">#41</a>
+ 
+
+ <a class="userlink"
+ href="/u/104889739876467061665/">Frank345...@gmail.com</a
+></span>
+ 
+<pre>
+我也是遇到这个问题，ubuntu 14.04LTS 64位，使用3.2.1和3.2.2都会出现这样的问题，经常debug窗口卡住，网页一直在加载打不开。。。求解决啊
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc42">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Nov 19 05:39:49 2014">
+ Nov 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c42" href="/p/goagent/issues/detail?id=17743#c42">#42</a>
+ 
+
+ <a class="userlink"
+ href="/u/107742826439977711980/">nighteb...@gmail.com</a
+></span>
+ 
+<pre>
+同样的问题， linux centos 6.4  bit64 位系统。 
+
+主要是看视频时， proxy.py 的cpu占用率到50% 左右， proxy就挂了。 
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc43">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Nov 21 05:36:15 2014">
+ Nov 21, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c43" href="/p/goagent/issues/detail?id=17743#c43">#43</a>
+ 
+
+ <a class="userlink"
+ href="/u/114650594143549056803/">flo...@gmail.com</a
+></span>
+ 
+<pre>
+#42
+
+参考#36，37
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17743&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17743"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="17743">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A17743',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 17743,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ 
+ <script type="text/javascript">_CS_reportToCsi();</script>
+ 
+ </body>
+</html>
+

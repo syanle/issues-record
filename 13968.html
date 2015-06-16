@@ -1,0 +1,5868 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"loggedInUserEmail": null, "projectHomeUrl": "/p/goagent", "relativeBaseUrl": "", "profileUrl": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "token": null, "projectName": "goagent", "domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 13968 - 
+ goagent -
+ 
+ 共享自架的goagent paas - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13968&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13968" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=13968">13968</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >共享自架的goagent paas</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 8 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A13968">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13968&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13968">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/115505225560669680890/">lingd...@gmail.com</a
+>,
+ <span class="date" title="Mon Jun  2 05:44:01 2014">Jun 2, 2014</span>
+ 
+ </div>
+<pre>
+目前由于google ip受到不同程度干扰，导致红字黄字一堆，issue里给的解决方案都是改iplist里面的ip，但是不同的ISP对google ip的干扰都不一样，改了不一定就有用。
+
+所以在六/4将近的特殊时期，我决定把我自己部署在openshift 的goagent paas（PHP) 提供给大家用下，我还绑了域名使用了cloudflare CDN。想尝试下的可以留邮箱，我把fetchserver和password发给你。
+
+适合以下：电信或移动/铁通用户，且ISP对google ip的干扰严重。
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 05:53:47 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=13968#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/110862195638307801914/">life...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢了，lifengs@gmail.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 06:04:25 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=13968#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/113825243405420218980/">Galactic...@gmail.com</a
+></span>
+ 
+<pre>
+573010000@qq.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 06:09:12 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=13968#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/104656097151477364130/">lee790...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢 jk18li@hotmail.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 06:23:19 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=13968#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/5237501/">5237501</a
+></span>
+ 
+<pre>
+5237501#gmail.com
+
+好人谢谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 06:28:30 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=13968#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/115505225560669680890/">lingd...@gmail.com</a
+></span>
+ 
+<pre>
+上面都发了，能不能用反馈下，所用的ISP也反馈下
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 06:28:53 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=13968#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/105434490189003610331/">Yan...@gmail.com</a
+></span>
+ 
+<pre>
+av@ccav1.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 06:50:16 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=13968#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/113685061889813248909/">ladder...@gmail.com</a
+></span>
+ 
+<pre>
+感谢，ladderhzy@gmail.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 06:53:40 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=13968#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/105469265133850195255/">hermitcr...@gmail.com</a
+></span>
+ 
+<pre>
+非常需要,hermitcranecn@gmail.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 06:55:53 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=13968#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/113002604802939691007/">dabo...@gmail.com</a
+></span>
+ 
+<pre>
+dabolao@gmail.com
+请问要如何使用，新手，当然不方便的我也可以自行研究
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 06:59:50 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=13968#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/114902295707394912258/">gyk66...@gmail.com</a
+></span>
+ 
+<pre>
+目测应该是非常时期做的干扰。过了就正常了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 07:07:53 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=13968#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/115505225560669680890/">lingd...@gmail.com</a
+></span>
+ 
+<pre>
+上面的都发了，下面的明天再说
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 07:07:55 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=13968#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/109298573626465180366/">1990...@gmail.com</a
+></span>
+ 
+<pre>
+这才是解决问题的态度。
+IP地址吵来吵去有用吗
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 07:11:42 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=13968#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/116618672001855734442/">valer...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢，请发xokoy@163.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 07:37:04 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=13968#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/114413673571045178525/">Sab...@gmail.com</a
+></span>
+ 
+<pre>
+kurosawarin@sina.com
+
+多謝你！只需要修改[iplist] 就可以了是嗎？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 07:38:55 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=13968#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/107827889665608780957/">muyin...@gmail.com</a
+></span>
+ 
+<pre>
+muyinshi@gmail.com,感谢,电信表示一直上不去
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 07:39:33 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=13968#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/106952739064401516314/">1161573...@qq.com</a
+></span>
+ 
+<pre>
+1161573136@qq.com
+谢谢了啊
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 08:12:08 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=13968#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/101570214065277869190/">zhengzhe...@gmail.com</a
+></span>
+ 
+<pre>
+想试试，2032064361@qq.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 08:14:09 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=13968#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/112508351716785846225/">miaohaca...@gmail.com</a
+></span>
+ 
+<pre>
+359726345@qq.com   一直都报错显示443 不知道怎么办 ~谢谢楼主~
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 08:52:05 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=13968#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/112945242606733023851/">DevilKi...@gmail.com</a
+></span>
+ 
+<pre>
+devilkirin#gmail.com 苦恼了好久了。。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 08:56:15 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=13968#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/100243420682279293644/">sippp...@gmail.com</a
+></span>
+ 
+<pre>
+sipppuop@gmail.com  谢谢了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 09:28:27 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=13968#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/100211106433049108040/">igonej...@gmail.com</a
+></span>
+ 
+<pre>
+Openshit已经会识别goagent然后发邮件通知你要删除了，我以前就部署过一个。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 09:52:43 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=13968#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/110862195638307801914/">life...@gmail.com</a
+></span>
+ 
+<pre>
+twitter能打开，能正常使用。Facebook能打开，但里面的收件箱，无法打开。Google+能打开，但无法加载第二页，环聊无法连接。成都电信。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 14:43:46 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=13968#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/117495264544962917555/">yangyun0...@gmail.com</a
+></span>
+ 
+<pre>
+yangyun0309@gmail.com，谢谢
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 15:19:09 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=13968#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/112643806221920757744/">8678836...@gmail.com</a
+></span>
+ 
+<pre>
+867883690c@gmail.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc26">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 17:16:58 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c26" href="/p/goagent/issues/detail?id=13968#c26">#26</a>
+ 
+
+ <a class="userlink"
+ href="/u/115086124549795978412/">dlyan...@gmail.com</a
+></span>
+ 
+<pre>
+dlyangb1@gmaila.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 17:18:18 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=13968#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/wswg2009314/">wswg2009314</a
+></span>
+ 
+<pre>
+wswg2009314@163.com   谢谢
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 17:36:43 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=13968#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/104454674491710713535/">DEUS....@gmail.com</a
+></span>
+ 
+<pre>
+AIRX@163.COM 谢谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc29">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 18:19:34 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c29" href="/p/goagent/issues/detail?id=13968#c29">#29</a>
+ 
+
+ <a class="userlink"
+ href="/u/100911576621496752142/">CHN.Wu.X...@gmail.com</a
+></span>
+ 
+<pre>
+chn.wu.xiao@gmail.com 谢谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc30">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 18:20:11 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c30" href="/p/goagent/issues/detail?id=13968#c30">#30</a>
+ 
+
+ <a class="userlink"
+ href="/u/111311765699765982887/">imsw...@gmail.com</a
+></span>
+ 
+<pre>
+imswing@gmail.com想试试，谢谢楼主。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc31">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 18:23:54 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c31" href="/p/goagent/issues/detail?id=13968#c31">#31</a>
+ 
+
+ <a class="userlink"
+ href="/u/100512749786411173196/">hongl...@gmail.com</a
+></span>
+ 
+<pre>
+hongland@gmail.com 以前没试过PAAS，谢谢楼主
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc32">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 19:40:48 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c32" href="/p/goagent/issues/detail?id=13968#c32">#32</a>
+ 
+
+ <a class="userlink"
+ href="/u/100128298594899550734/">a85...@gmail.com</a
+></span>
+ 
+<pre>
+a85446@gmail.com tks
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc33">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 19:51:57 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c33" href="/p/goagent/issues/detail?id=13968#c33">#33</a>
+ 
+
+ <a class="userlink"
+ href="/u/113255518702899104215/">gjh...@gmail.com</a
+></span>
+ 
+<pre>
+gjh945@163.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc34">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 19:52:28 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c34" href="/p/goagent/issues/detail?id=13968#c34">#34</a>
+ 
+
+ <a class="userlink"
+ href="/u/5237501/">5237501</a
+></span>
+ 
+<pre>
+测试可用 
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc35">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 20:02:56 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c35" href="/p/goagent/issues/detail?id=13968#c35">#35</a>
+ 
+
+ <a class="userlink"
+ href="/u/108685579633960180009/">dgarchde...@gmail.com</a
+></span>
+ 
+<pre>
+dgarchdevil@gmail.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc36">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 20:18:32 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c36" href="/p/goagent/issues/detail?id=13968#c36">#36</a>
+ 
+
+ <a class="userlink"
+ href="/u/nottm33/">nottm33</a
+></span>
+ 
+<pre>
+nottm33@gmail.com
+
+求发送，现在试了各种方法，都上不了Gmail，红黄字一堆，客户邮件没法回复
+非常感谢！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc37">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 20:22:21 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c37" href="/p/goagent/issues/detail?id=13968#c37">#37</a>
+ 
+
+ <a class="userlink"
+ href="/u/101193754527638252907/">LuckyBo...@gmail.com</a
+></span>
+ 
+<pre>
+luckyboyzb@gmail.com thx
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc38">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 20:23:12 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c38" href="/p/goagent/issues/detail?id=13968#c38">#38</a>
+ 
+
+ <a class="userlink"
+ href="/u/107578791880765420109/">voy...@gmail.com</a
+></span>
+ 
+<pre>
+voyahc@qq.com 多谢了啊。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc39">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 20:37:17 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c39" href="/p/goagent/issues/detail?id=13968#c39">#39</a>
+ 
+
+ <a class="userlink"
+ href="/u/103051764162079746527/">skyfire...@gmail.com</a
+></span>
+ 
+<pre>
+------skyfire000@hotmail.com-------thx
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc40">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 21:05:45 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c40" href="/p/goagent/issues/detail?id=13968#c40">#40</a>
+ 
+
+ <a class="userlink"
+ href="/u/108843267332919070546/">huanghon...@gmail.com</a
+></span>
+ 
+<pre>
+huanghongk9@gmail.com 楼主忙得过来吗？3ks
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc41">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 21:12:41 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c41" href="/p/goagent/issues/detail?id=13968#c41">#41</a>
+ 
+
+ <a class="userlink"
+ href="/u/109179302784297971144/">fanmli...@gmail.com</a
+></span>
+ 
+<pre>
+fanmli123@gmail.com  谢谢 
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc42">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 22:16:35 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c42" href="/p/goagent/issues/detail?id=13968#c42">#42</a>
+ 
+
+ <a class="userlink"
+ href="/u/111708127287422701897/">luminxua...@gmail.com</a
+></span>
+ 
+<pre>
+cuiart@126.com 谢谢！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc43">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 22:22:59 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c43" href="/p/goagent/issues/detail?id=13968#c43">#43</a>
+ 
+
+ <a class="userlink"
+ href="/u/116212108595355324556/">killboy...@gmail.com</a
+></span>
+ 
+<pre>
+killboy180@gmail.com 谢谢，我也在openshift 上做了一个，公钥生成并上传了，但不知道怎么登陆上去，能说下吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc44">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 22:24:07 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c44" href="/p/goagent/issues/detail?id=13968#c44">#44</a>
+ 
+
+ <a class="userlink"
+ href="/u/114792880409765930433/">homomi...@gmail.com</a
+></span>
+ 
+<pre>
+homomimo8@gmail.com 感谢好人
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc45">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 22:48:34 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c45" href="/p/goagent/issues/detail?id=13968#c45">#45</a>
+ 
+
+ <a class="userlink"
+ href="/u/115505225560669680890/">lingd...@gmail.com</a
+></span>
+ 
+<pre>
+#32以上都发了，能不能用反馈下，用的ISP也反馈下，下面的晚上再说
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc46">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 22:54:16 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c46" href="/p/goagent/issues/detail?id=13968#c46">#46</a>
+ 
+
+ <a class="userlink"
+ href="/u/107879880697501680326/">woshijin...@gmail.com</a
+></span>
+ 
+<pre>
+1337440021@qq.com thank you so much 
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc47">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 22:55:46 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c47" href="/p/goagent/issues/detail?id=13968#c47">#47</a>
+ 
+
+ <a class="userlink"
+ href="/u/104416959477728016019/">zyuan....@gmail.com</a
+></span>
+ 
+<pre>
+moxazyuan@outlook.com 谢谢！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc48">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 22:57:48 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c48" href="/p/goagent/issues/detail?id=13968#c48">#48</a>
+ 
+
+ <a class="userlink"
+ href="/u/113064926753535832325/">chentao1...@gmail.com</a
+></span>
+ 
+<pre>
+chentao1006@gmail.com
+谢谢！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc49">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 22:58:29 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c49" href="/p/goagent/issues/detail?id=13968#c49">#49</a>
+ 
+
+ <a class="userlink"
+ href="/u/105752417879847947216/">zzh...@gmail.com</a
+></span>
+ 
+<pre>
+zzhzjg@gmail.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc51">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 23:07:05 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c51" href="/p/goagent/issues/detail?id=13968#c51">#51</a>
+ 
+
+ <a class="userlink"
+ href="/u/104024268003553297103/">sa...@sanyi-tech.com</a
+></span>
+ 
+<pre>
+13009809@qq.com
+谢谢！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc52">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 23:10:12 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c52" href="/p/goagent/issues/detail?id=13968#c52">#52</a>
+ 
+
+ <a class="userlink"
+ href="/u/115505225560669680890/">lingd...@gmail.com</a
+></span>
+ 
+<pre>
+数据传输：
+用户访问网站时（浏览器打开A网站），浏览器请求给代理服务器（goagent本地端）------cloudflare服务器（位于美国）（cloudflare CDN）----------- openshift服务器（位于美国）（goagent server端部署在上面）------------目标服务器（就是你访问的A网站的服务器）
+
+部分地区联通访问有问题（就是dns解析不正常），可以尝试换用114dns。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc53">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 23:12:10 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c53" href="/p/goagent/issues/detail?id=13968#c53">#53</a>
+ 
+
+ <a class="userlink"
+ href="/u/118418411022556200119/">rubberxi...@gmail.com</a
+></span>
+ 
+<pre>
+276430748@qq.com 一定反馈测试结果。电信。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc54">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 23:14:09 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c54" href="/p/goagent/issues/detail?id=13968#c54">#54</a>
+ 
+
+ <a class="userlink"
+ href="/u/112503175846962126293/">zyi20...@gmail.com</a
+></span>
+ 
+<pre>
+zyi20041@gmail.com   谢谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc55">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  2 23:34:43 2014">
+ Jun 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c55" href="/p/goagent/issues/detail?id=13968#c55">#55</a>
+ 
+
+ <a class="userlink"
+ href="/u/111951979165638754865/">smpa...@gmail.com</a
+></span>
+ 
+<pre>
+好人一生平安
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc56">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 00:09:39 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c56" href="/p/goagent/issues/detail?id=13968#c56">#56</a>
+ 
+
+ <a class="userlink"
+ href="/u/104537664017694183492/">chenxinx...@gmail.com</a
+></span>
+ 
+<pre>
+stoneson@yeah.net
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc57">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 00:45:03 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c57" href="/p/goagent/issues/detail?id=13968#c57">#57</a>
+ 
+
+ <a class="userlink"
+ href="/u/117872116929061691996/">wai...@gmail.com</a
+></span>
+ 
+<pre>
+waipan@gmail.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc58">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 00:45:03 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c58" href="/p/goagent/issues/detail?id=13968#c58">#58</a>
+ 
+
+ <a class="userlink"
+ href="/u/106854464817353452333/">swq2...@gmail.com</a
+></span>
+ 
+<pre>
+carn2727@163.com
+谢谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc60">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 01:03:17 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c60" href="/p/goagent/issues/detail?id=13968#c60">#60</a>
+ 
+
+ <a class="userlink"
+ href="/u/113202124764599067477/">Wlin1...@gmail.com</a
+></span>
+ 
+<pre>
+Wlin1978@gmail.com   谢谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc61">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 01:03:27 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c61" href="/p/goagent/issues/detail?id=13968#c61">#61</a>
+ 
+
+ <a class="userlink"
+ href="/u/111131148195462879166/">bingqi...@gmail.com</a
+></span>
+ 
+<pre>
+在openshift部署过  没几天就给管理员删了  大流量就不用说了    行不通
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc62">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 01:07:35 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c62" href="/p/goagent/issues/detail?id=13968#c62">#62</a>
+ 
+
+ <a class="userlink"
+ href="/u/108244793506082698316/">twb1...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢,电信宽带.干扰十分严重.twb1892@gmail.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc63">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 01:09:00 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c63" href="/p/goagent/issues/detail?id=13968#c63">#63</a>
+ 
+
+ <a class="userlink"
+ href="/u/106459057516144214761/">d.machi...@gmail.com</a
+></span>
+ 
+<pre>
+d.machilda@gmail.com
+谢谢，电信用户，几乎绝望
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc64">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 01:12:20 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c64" href="/p/goagent/issues/detail?id=13968#c64">#64</a>
+ 
+
+ <a class="userlink"
+ href="/u/114278083692135148268/">o...@5imobi.com</a
+></span>
+ 
+<pre>
+own.crazy@gmail.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc65">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 01:13:13 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c65" href="/p/goagent/issues/detail?id=13968#c65">#65</a>
+ 
+
+ <a class="userlink"
+ href="/u/117689987163330559064/">wallsbre...@gmail.com</a
+></span>
+ 
+<pre>
+y2j@qq.com  谢谢!!!
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc66">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 01:17:54 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c66" href="/p/goagent/issues/detail?id=13968#c66">#66</a>
+ 
+
+ <a class="userlink"
+ href="/u/113369163623143038643/">fmi...@gmail.com</a
+></span>
+ 
+<pre>
+fangyong@me.com 谢谢！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc67">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 05:26:30 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c67" href="/p/goagent/issues/detail?id=13968#c67">#67</a>
+ 
+
+ <a class="userlink"
+ href="/u/115505225560669680890/">lingd...@gmail.com</a
+></span>
+ 
+<pre>
+#62以上都发了，能不能用反馈下，用的ISP也反馈下，下面的不再发了。这个就临时用下的，在cloudflare 处对流量控制设置过了，不会给openshift带来大流量的
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc69">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 05:33:41 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c69" href="/p/goagent/issues/detail?id=13968#c69">#69</a>
+ 
+
+ <a class="userlink"
+ href="/u/102094978939185074034/">xmbuild...@gmail.com</a
+></span>
+ 
+<pre>
+xmbuilding@gmail.com 谢谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc70">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 15:30:51 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c70" href="/p/goagent/issues/detail?id=13968#c70">#70</a>
+ 
+
+ <a class="userlink"
+ href="/u/114792880409765930433/">homomi...@gmail.com</a
+></span>
+ 
+<pre>
+谷歌邮箱无法打开邮件 其他网站都OK 我用的是广东电信
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc71">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 17:44:32 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c71" href="/p/goagent/issues/detail?id=13968#c71">#71</a>
+ 
+
+ <a class="userlink"
+ href="/u/114627270179654124660/">unti...@gmail.com</a
+></span>
+ 
+<pre>
+untimex@gmail.com 好人一生平安
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc72">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 17:56:25 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c72" href="/p/goagent/issues/detail?id=13968#c72">#72</a>
+ 
+
+ <a class="userlink"
+ href="/u/115044620098679897768/">liu7...@gmail.com</a
+></span>
+ 
+<pre>
+liu7390@gmail.com 非常感谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc73">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 18:09:30 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c73" href="/p/goagent/issues/detail?id=13968#c73">#73</a>
+ 
+
+ <a class="userlink"
+ href="/u/104976709471906591089/">BillBob....@gmail.com</a
+></span>
+ 
+<pre>
+billbob.dong@gmail.com 谢谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc74">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 21:03:29 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c74" href="/p/goagent/issues/detail?id=13968#c74">#74</a>
+ 
+
+ <a class="userlink"
+ href="/u/112616262066224413387/">b...@nj1188.com</a
+></span>
+ 
+<pre>
+9337592@qq.com   非常感谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc76">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun  4 04:17:55 2014">
+ Jun 4, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c76" href="/p/goagent/issues/detail?id=13968#c76">#76</a>
+ 
+
+ <a class="userlink"
+ href="/u/112611436254196830208/">fengdexi...@gmail.com</a
+></span>
+ 
+<pre>
+电信,这几天GOAGENT用不了啊,难受,我的邮箱woni0512@gmail.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc77">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun  4 04:42:19 2014">
+ Jun 4, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c77" href="/p/goagent/issues/detail?id=13968#c77">#77</a>
+ 
+
+ <a class="userlink"
+ href="/u/111582508412498045451/">xyq100...@gmail.com</a
+></span>
+ 
+<pre>
+楼主好人呐 xyq100251@qq.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc78">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun  4 05:15:17 2014">
+ Jun 4, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c78" href="/p/goagent/issues/detail?id=13968#c78">#78</a>
+ 
+
+ <a class="userlink"
+ href="/u/112038270880998809902/">oshim...@gmail.com</a
+></span>
+ 
+<pre>
+yuexiasifu@sina.com,电信宽带，一大堆黄字，重要的邮箱都用的gmail，上不去简直作死，谢谢楼主
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc79">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun  4 05:49:46 2014">
+ Jun 4, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c79" href="/p/goagent/issues/detail?id=13968#c79">#79</a>
+ 
+
+ <a class="userlink"
+ href="/u/117282187847314922091/">ariose...@gmail.com</a
+></span>
+ 
+<pre>
+arioseins@gmail.com
+lz好人
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc81">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun  4 05:57:37 2014">
+ Jun 4, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c81" href="/p/goagent/issues/detail?id=13968#c81">#81</a>
+ 
+
+ <a class="userlink"
+ href="/u/116121101112792813050/">zhangy...@gmail.com</a
+></span>
+ 
+<pre>
+zhangy041@gmail.com   非常感谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc82">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun  4 08:10:56 2014">
+ Jun 4, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c82" href="/p/goagent/issues/detail?id=13968#c82">#82</a>
+ 
+
+ <a class="userlink"
+ href="/u/103116328884248603652/">jay52881...@gmail.com</a
+></span>
+ 
+<pre>
+jayjayjay@yeah.net 今天一直上不去，楼主发个，多谢了！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc83">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun  4 08:25:14 2014">
+ Jun 4, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c83" href="/p/goagent/issues/detail?id=13968#c83">#83</a>
+ 
+
+ <a class="userlink"
+ href="/u/113715542482041792667/">lafrenz...@gmail.com</a
+></span>
+ 
+<pre>
+amu93@126.com 非常感谢！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc84">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun  4 08:34:26 2014">
+ Jun 4, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c84" href="/p/goagent/issues/detail?id=13968#c84">#84</a>
+ 
+
+ <a class="userlink"
+ href="/u/104656097151477364130/">lee790...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢 jk18li@hotmail.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc85">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun  4 20:56:26 2014">
+ Jun 4, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c85" href="/p/goagent/issues/detail?id=13968#c85">#85</a>
+ 
+
+ <a class="userlink"
+ href="/u/104621705411158854878/">qqo...@gmail.com</a
+></span>
+ 
+<pre>
+qqoicq@gmail.com 谢谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc86">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun  4 23:54:46 2014">
+ Jun 4, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c86" href="/p/goagent/issues/detail?id=13968#c86">#86</a>
+ 
+
+ <a class="userlink"
+ href="/u/imzhoutao/">imzhoutao</a
+></span>
+ 
+<pre>
+imzhoutao@gmail.com 谢谢哦。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc87">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun  5 01:05:35 2014">
+ Jun 5, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c87" href="/p/goagent/issues/detail?id=13968#c87">#87</a>
+ 
+
+ <a class="userlink"
+ href="/u/110059341412847766099/">G.E7e...@gmail.com</a
+></span>
+ 
+<pre>
+fileschina@gmail.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc88">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun  5 03:50:41 2014">
+ Jun 5, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c88" href="/p/goagent/issues/detail?id=13968#c88">#88</a>
+ 
+
+ <a class="userlink"
+ href="/u/115505225560669680890/">lingd...@gmail.com</a
+></span>
+ 
+<pre>
+#33----#62  我发的好像阵亡了，等下会补发
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc89">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun  5 04:20:45 2014">
+ Jun 5, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c89" href="/p/goagent/issues/detail?id=13968#c89">#89</a>
+ 
+
+ <a class="userlink"
+ href="/u/118328483259133528262/">liupengf...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢。liupengfei71365@gmail.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc90">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun  5 04:41:55 2014">
+ Jun 5, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c90" href="/p/goagent/issues/detail?id=13968#c90">#90</a>
+ 
+
+ <a class="userlink"
+ href="/u/106195852196256024035/">chengkun...@gmail.com</a
+></span>
+ 
+<pre>
+chengkunquan1234@gmail.com 联通光线
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc91">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun  5 06:38:22 2014">
+ Jun 5, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c91" href="/p/goagent/issues/detail?id=13968#c91">#91</a>
+ 
+
+ <a class="userlink"
+ href="/u/115505225560669680890/">lingd...@gmail.com</a
+></span>
+ 
+<pre>
+#33----#62 会重新发一次，不再放在openshift了，不要再留邮箱了，实在忙不过来
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc92">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun  5 06:40:30 2014">
+ Jun 5, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c92" href="/p/goagent/issues/detail?id=13968#c92">#92</a>
+ 
+
+ <a class="userlink"
+ href="/u/115012493950087773737/">yunlong0...@gmail.com</a
+></span>
+ 
+<pre>
+843586719@qq.com 我是技术小白 很想学习一下怎么用 不过先谢过大神了！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc93">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun  6 21:58:52 2014">
+ Jun 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c93" href="/p/goagent/issues/detail?id=13968#c93">#93</a>
+ 
+
+ <a class="userlink"
+ href="/u/103459721245463436579/">lv19780...@gmail.com</a
+></span>
+ 
+<pre>
+lv19780301@gmail.com 谢谢大神。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc94">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 08:31:33 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c94" href="/p/goagent/issues/detail?id=13968#c94">#94</a>
+ 
+
+ <a class="userlink"
+ href="/u/101772259427073291047/">pci...@gmail.com</a
+></span>
+ 
+<pre>
+pcitme@gmail.com 多谢撸主
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc95">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 08:39:16 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c95" href="/p/goagent/issues/detail?id=13968#c95">#95</a>
+ 
+
+ <a class="userlink"
+ href="/u/110937202109260787858/">xr88...@gmail.com</a
+></span>
+ 
+<pre>
+xr888wb@gmail.com多谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc96">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 08:41:18 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c96" href="/p/goagent/issues/detail?id=13968#c96">#96</a>
+ 
+
+ <a class="userlink"
+ href="/u/117039625086609703777/">mike0514...@gmail.com</a
+></span>
+ 
+<pre>
+mike05140217@gmail.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc97">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 10:03:01 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c97" href="/p/goagent/issues/detail?id=13968#c97">#97</a>
+ 
+
+ <a class="userlink"
+ href="/u/111418881525652612103/">m99...@gmail.com</a
+></span>
+ 
+<pre>
+m99330@163.com 电信宽带，gmail完全死了，谢谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc98">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 12:16:02 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c98" href="/p/goagent/issues/detail?id=13968#c98">#98</a>
+ 
+
+ <a class="userlink"
+ href="/u/100482210066554357728/">ktnet...@gmail.com</a
+></span>
+ 
+<pre>
+ktnetbar@gmail.com 谢谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc99">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 13:49:02 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c99" href="/p/goagent/issues/detail?id=13968#c99">#99</a>
+ 
+
+ <a class="userlink"
+ href="/u/116215893660376913858/">frankwd...@gmail.com</a
+></span>
+ 
+<pre>
+frankwdy11@gmail.com thanks
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc100">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 14:48:43 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c100" href="/p/goagent/issues/detail?id=13968#c100">#100</a>
+ 
+
+ <a class="userlink"
+ href="/u/100232100374446498454/">zhengzho...@gmail.com</a
+></span>
+ 
+<pre>
+zhengzhou518@gmail.com   thx
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc101">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 16:21:36 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c101" href="/p/goagent/issues/detail?id=13968#c101">#101</a>
+ 
+
+ <a class="userlink"
+ href="/u/104727263787934293141/">ya5329...@gmail.com</a
+></span>
+ 
+<pre>
+ya5329674@gmail.com   谢谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc102">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 17:54:09 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c102" href="/p/goagent/issues/detail?id=13968#c102">#102</a>
+ 
+
+ <a class="userlink"
+ href="/u/103459721245463436579/">lv19780...@gmail.com</a
+></span>
+ 
+<pre>
+lv19780301@gmail.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc103">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 21:39:37 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c103" href="/p/goagent/issues/detail?id=13968#c103">#103</a>
+ 
+
+ <a class="userlink"
+ href="/u/113002942086027509246/">fiture...@gmail.com</a
+></span>
+ 
+<pre>
+我也是自己架设的，但是还有一些小问题，页面正常显示而且没有什么资源没有加载完。chrome一直转圈~
+
+设置了usehost=0
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc104">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 22:02:55 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c104" href="/p/goagent/issues/detail?id=13968#c104">#104</a>
+ 
+
+ <a class="userlink"
+ href="/u/106569263520271832782/">tineyb...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢楼主,tineyball@gmail.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc105">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 22:08:38 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c105" href="/p/goagent/issues/detail?id=13968#c105">#105</a>
+ 
+
+ <a class="userlink"
+ href="/u/113577078554760595532/">LuckyWo...@gmail.com</a
+></span>
+ 
+<pre>
+luckywoody@gmail.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc106">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 22:20:43 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c106" href="/p/goagent/issues/detail?id=13968#c106">#106</a>
+ 
+
+ <a class="userlink"
+ href="/u/102194770305129273858/">conan...@gmail.com</a
+></span>
+ 
+<pre>
+conanlcg@163.com 谢谢楼主
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc107">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 22:20:52 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c107" href="/p/goagent/issues/detail?id=13968#c107">#107</a>
+ 
+
+ <a class="userlink"
+ href="/u/116817953311333214881/">oke...@gmail.com</a
+></span>
+ 
+<pre>
+2401687104@qq.com
+谢谢了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc108">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 22:40:28 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c108" href="/p/goagent/issues/detail?id=13968#c108">#108</a>
+ 
+
+ <a class="userlink"
+ href="/u/116901054371711350315/">huaishen...@gmail.com</a
+></span>
+ 
+<pre>
+huaishenglong@gmail.com!thank you!
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc109">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun 16 04:06:14 2014">
+ Jun 16, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c109" href="/p/goagent/issues/detail?id=13968#c109">#109</a>
+ 
+
+ <a class="userlink"
+ href="/u/116429278341066409272/">du2...@gmail.com</a
+></span>
+ 
+<pre>
+能教一下方法吗 听说是php文件夹下的东西 可具体就不知道了
+前几天我在openshift上搭了ssh备用 可部署别的就没这么简单 比如rhc总是安不上 cmd运行gem install rhc总提示下载失败 您知道解决方法吗
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc110">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun 16 04:13:38 2014">
+ Jun 16, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c110" href="/p/goagent/issues/detail?id=13968#c110">#110</a>
+ 
+
+ <a class="userlink"
+ href="/u/115816134684858139007/">xiaozi0...@hotmail.com</a
+></span>
+ 
+<pre>
+xiaozi0624@163.com谢谢啊 
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc111">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun 16 04:19:21 2014">
+ Jun 16, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c111" href="/p/goagent/issues/detail?id=13968#c111">#111</a>
+ 
+
+ <a class="userlink"
+ href="/u/106781204990925295112/">yubinlov...@gmail.com</a
+></span>
+ 
+<pre>
+gem也是被墙的，但是国内有gem镜像，搜索一下就能知道地址和使用方法了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc112">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun 18 22:13:49 2014">
+ Jun 18, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c112" href="/p/goagent/issues/detail?id=13968#c112">#112</a>
+ 
+
+ <a class="userlink"
+ href="/u/103169815189959357008/">houshuh...@gmail.com</a
+></span>
+ 
+<pre>
+houshuheng@gmail.com
+广东移动的用户表示很需要 红字黄字一大堆啊
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc113">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun 18 22:50:51 2014">
+ Jun 18, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c113" href="/p/goagent/issues/detail?id=13968#c113">#113</a>
+ 
+
+ <a class="userlink"
+ href="/u/109852595165841091201/">BANLETA3...@gmail.com</a
+></span>
+ 
+<pre>
+banleta320320@gmail.com
+-。-
+THX
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc114">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun 18 23:34:19 2014">
+ Jun 18, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c114" href="/p/goagent/issues/detail?id=13968#c114">#114</a>
+ 
+
+ <a class="userlink"
+ href="/u/109712933290844094472/">Lille.al...@gmail.com</a
+></span>
+ 
+<pre>
+lille.alice@gmail.com
+谢谢谢谢~
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc115">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun 18 23:58:03 2014">
+ Jun 18, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c115" href="/p/goagent/issues/detail?id=13968#c115">#115</a>
+ 
+
+ <a class="userlink"
+ href="/u/114619920886587590317/">forkik...@gmail.com</a
+></span>
+ 
+<pre>
+fornaraku@gmail.com
+时不时下美剧种子看，就是zf老是信号干扰，试试lz的，校园移动网
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc116">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 02:13:18 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c116" href="/p/goagent/issues/detail?id=13968#c116">#116</a>
+ 
+
+ <a class="userlink"
+ href="/u/114144797469372533296/">chenjing...@gmail.com</a
+></span>
+ 
+<pre>
+楼主推荐几个好用的免费空间吧我会部署但是找不到好用的空间
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc117">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 02:35:01 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c117" href="/p/goagent/issues/detail?id=13968#c117">#117</a>
+ 
+
+ <a class="userlink"
+ href="/u/104199275140773919325/">flamelig...@jiasu.do</a
+></span>
+ 
+<pre>
+谢谢了，flamelightx@jiasu.do
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc118">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 02:54:04 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c118" href="/p/goagent/issues/detail?id=13968#c118">#118</a>
+ 
+
+ <a class="userlink"
+ href="/u/104502301168422094787/">lixiaodo...@gmail.com</a
+></span>
+ 
+<pre>
+我的邮箱是     lixiaodongsql@gmail.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc119">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 02:55:49 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c119" href="/p/goagent/issues/detail?id=13968#c119">#119</a>
+ 
+
+ <a class="userlink"
+ href="/u/106115817414015638537/">moonsha...@gmail.com</a
+></span>
+ 
+<pre>
+#109,直接上openshift申请个php，然后用git上传php文件就可以了吧。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc120">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 04:17:34 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c120" href="/p/goagent/issues/detail?id=13968#c120">#120</a>
+ 
+
+ <a class="userlink"
+ href="/u/104656097151477364130/">lee790...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢jk18li@hotmail.com 新手能不能把方法也一起发邮件。谢谢。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc121">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 04:27:48 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c121" href="/p/goagent/issues/detail?id=13968#c121">#121</a>
+ 
+
+ <a class="userlink"
+ href="/u/108293471166431897341/">extendv...@gmail.com</a
+></span>
+ 
+<pre>
+extendveiw@gmail.com如果有教程发来，那就更好了，谢谢!
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc122">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 05:27:42 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c122" href="/p/goagent/issues/detail?id=13968#c122">#122</a>
+ 
+
+ <a class="userlink"
+ href="/u/108988345263337111682/">terrycha...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢楼主 terrychan.love@gmail.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc123">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 10:07:53 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c123" href="/p/goagent/issues/detail?id=13968#c123">#123</a>
+ 
+
+ <a class="userlink"
+ href="/u/114902295707394912258/">gyk66...@gmail.com</a
+></span>
+ 
+<pre>
+gykcn@foxmail.com，谢谢。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc124">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun 20 00:28:41 2014">
+ Jun 20, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c124" href="/p/goagent/issues/detail?id=13968#c124">#124</a>
+ 
+
+ <a class="userlink"
+ href="/u/107541034639458509974/">zzyyi6...@gmail.com</a
+></span>
+ 
+<pre>
+zzyyi6688@gmail.com   非常谢谢楼主啊啊啊
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc125">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun 20 00:55:38 2014">
+ Jun 20, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c125" href="/p/goagent/issues/detail?id=13968#c125">#125</a>
+ 
+
+ <a class="userlink"
+ href="/u/106984295809560133359/">XiaoSaZ...@gmail.com</a
+></span>
+ 
+<pre>
+276430748@qq.com 一定反馈测试结果,联通
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc126">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun 20 00:56:54 2014">
+ Jun 20, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c126" href="/p/goagent/issues/detail?id=13968#c126">#126</a>
+ 
+
+ <a class="userlink"
+ href="/u/106984295809560133359/">XiaoSaZ...@gmail.com</a
+></span>
+ 
+<pre>
+xiaosazhai@gmail.com 一定反馈测试结果,联通,thanks very much!
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc127">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Aug  7 19:25:55 2014">
+ Aug 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c127" href="/p/goagent/issues/detail?id=13968#c127">#127</a>
+ 
+
+ <a class="userlink"
+ href="/u/116462493668250302489/">q25...@gmail.com</a
+></span>
+ 
+<pre>
+858500363@qq.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc128">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Aug  7 19:26:30 2014">
+ Aug 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c128" href="/p/goagent/issues/detail?id=13968#c128">#128</a>
+ 
+
+ <a class="userlink"
+ href="/u/116462493668250302489/">q25...@gmail.com</a
+></span>
+ 
+<pre>
+还没部署成功过,还请楼主指教.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc129">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Aug  7 19:55:42 2014">
+ Aug 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c129" href="/p/goagent/issues/detail?id=13968#c129">#129</a>
+ 
+
+ <a class="userlink"
+ href="/u/105711242527228469056/">myfriend...@gmail.com</a
+></span>
+ 
+<pre>
+iii80@vip.qq.com  谢谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc130">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Aug  7 20:06:13 2014">
+ Aug 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c130" href="/p/goagent/issues/detail?id=13968#c130">#130</a>
+ 
+
+ <a class="userlink"
+ href="/u/110991541014932180868/">chinafre...@gmail.com</a
+></span>
+ 
+<pre>
+chinafreeren@gmail.com，谢谢。
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13968&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13968"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="13968">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A13968',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 13968,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

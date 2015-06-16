@@ -1,0 +1,951 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "relativeBaseUrl": "", "loggedInUserEmail": null, "projectName": "goagent", "projectHomeUrl": "/p/goagent", "token": null, "profileUrl": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 20014 - 
+ goagent -
+ 
+ 今天開始使用到一半goagent就會無反應 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20014&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20014" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=20014">20014</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >今天開始使用到一半goagent就會無反應</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 2 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A20014">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20014&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20014">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/116740686982355496636/">handman...@gmail.com</a
+>,
+ <span class="date" title="Wed Mar 25 09:05:34 2015">Mar 25, 2015</span>
+ 
+ </div>
+<pre>
+<b>发issue前先在All issues中搜索是否已经有你要提交的问题。</b>
+
+操作系统版本：WIN7
+浏览器版本：CHROME(64BIT)
+GoAgent 版本：3.2.3
+<b>GoAgent 日志：</b>
+3075_n.jpg?oh=474193a4c502b37829d5504d6217b05a&amp;oe=55793B5D&amp;__gda__=1437398762_48
+0a7c83d7f3cb736ad4492d9ef7ac9a HTTP/1.1&quot; 200 1168
+INFO - [Mar 25 23:56:55] 127.0.0.1:62539 &quot;GAE GET <a href="https://fbcdn-profile-a.akamai" rel="nofollow">https://fbcdn-profile-a.akamai</a>
+hd.net/hprofile-ak-xft1/v/t1.0-1/p32x32/1513744_10204992528988796_67167323255475
+41387_n.jpg?oh=805ee558e04db8f7ca6bb9ff8f747020&amp;oe=55B96874&amp;__gda__=1433465347_5
+b1d887018762fffb79effc5638d20d2 HTTP/1.1&quot; 200 1151
+INFO - [Mar 25 23:56:55] 127.0.0.1:62551 &quot;STRIP CONNECT www.google.com.tw:443 HT
+TP/1.1&quot; - -
+INFO - [Mar 25 23:56:55] 127.0.0.1:62545 &quot;GAE GET https://0-edge-chat.facebook.c
+om/ping?partition=-2&amp;cb=8dft&amp;sticky_token=284&amp;sticky_pool=frc3c04_chat-proxy&amp;rea
+son=error&amp;uid=730693478&amp;viewer_uid=730693478&amp;wtc=992%2C296%2C0.619%2C992%2C72 HT
+TP/1.1&quot; 200 43
+INFO - [Mar 25 23:56:55] ssl good_ipaddrs=18, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:56:55] 127.0.0.1:62520 &quot;GAE GET <a href="https://scontent-ord.xx.fbcdn" rel="nofollow">https://scontent-ord.xx.fbcdn</a>.
+net/hphotos-xfa1/v/t1.0-9/s526x395/10926365_872521692790023_8060275305199166841_
+n.jpg?oh=8c591ff343d7fcf5e0bd40b1117ed896&amp;oe=55A7634B HTTP/1.1&quot; 200 36676
+INFO - [Mar 25 23:56:56] 127.0.0.1:62551 &quot;GAE GET <a href="https://www.google.com.tw/sear" rel="nofollow">https://www.google.com.tw/sear</a>
+ch?q=%E5%A6%82%E4%BD%95%E8%B2%A0%E5%88%B6goagent%E7%9A%84%E5%AD%97 HTTP/1.1&quot; 200
+ 25136
+INFO - [Mar 25 23:56:56] 127.0.0.1:62474 &quot;GAE GET <a href="https://www.facebook.com/ajax/" rel="nofollow">https://www.facebook.com/ajax/</a>
+presence/reconnect.php?__user=730693478&amp;__a=1&amp;__dyn=7nm8RW8BgCBymfDgDxyIGzGpUW9J
+6yUgByVbGAEGmEVFLFwxBxC9V8CdwwyQq68K5Uc-dw_UkUyHjAGqcHg&amp;__req=w&amp;__rev=1658546&amp;fb
+_dtsg=AQEyj_XAnyCq HTTP/1.1&quot; 200 1000
+INFO - [Mar 25 23:56:56] ssl good_ipaddrs=19, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:56:56] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:56:56] 127.0.0.1:62566 &quot;STRIP CONNECT plus.google.com:443 HTTP
+/1.1&quot; - -
+INFO - [Mar 25 23:56:56] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:56:57] 127.0.0.1:62474 &quot;GAE POST <a href="https://www.facebook.com/ajax" rel="nofollow">https://www.facebook.com/ajax</a>
+/chat/buddy_list.php HTTP/1.1&quot; 200 3128
+INFO - [Mar 25 23:56:57] 127.0.0.1:62551 &quot;GAE GET <a href="https://www.google.com.tw/gen_" rel="nofollow">https://www.google.com.tw/gen_</a>
+204?v=3&amp;s=web&amp;imc=5&amp;imn=5&amp;imp=0&amp;ei=wdoSVbzRIsmfyAS6lIKACQ&amp;e=3300107,3300133,3300
+137,3300164,3310699,3311901,3312179,3700289,3700362,4011559,4020347,4023709,4024
+600,4026474,4028932,4029050,4029141,4029417,4029419,4029515,4029815,4030036,4030
+109,4030366,4030415,4031242,4031296,4031390,4031391,4031576,4031580,4031608,4031
+622,4031627,4031716,4031775,4031804,4031809,8300096,8500394,8501183,8501294,8501
+313,8501351,10200083,10200682&amp;atyp=csi&amp;adh=&amp;xjs=init.71.9.sb.63.c.6.jsa.2.bbd.0.
+cdos.0&amp;action=&amp;srt=1468&amp;rt=xjsls.189,prt.190,ol.208,iml.190,xjses.361,xjsee.499,
+xjs.516,wsrt.1446,cst.15,dnst.0,rqst.1252,rspt.104,sslt.10,rqstt.209,unt.189,cst
+t.194,dit.1637 HTTP/1.1&quot; 204 0
+INFO - [Mar 25 23:56:57] 127.0.0.1:62566 &quot;DIRECT POST <a href="https://plus.google.com/u/" rel="nofollow">https://plus.google.com/u/</a>
+0/_/n/gcosuc?origin=https%3A%2F%2Fwww.google.com.tw HTTP/1.1&quot; 200 -
+INFO - [Mar 25 23:56:59] 127.0.0.1:62551 &quot;GAE GET <a href="https://www.google.com.tw/sear" rel="nofollow">https://www.google.com.tw/sear</a>
+ch?newwindow=1&amp;q=%E5%A6%82%E4%BD%95%E8%A4%87%E8%A3%BDgoagent%E7%9A%84%E5%AD%97&amp;s
+pell=1&amp;sa=X&amp;ei=wdoSVbzRIsmfyAS6lIKACQ&amp;ved=0CBoQvwUoAA&amp;biw=1366&amp;bih=643 HTTP/1.1&quot;
+ 200 25119
+INFO - [Mar 25 23:56:59] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:56:59] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:00] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:00] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:00] 127.0.0.1:62551 &quot;GAE GET <a href="https://www.google.com.tw/gen_" rel="nofollow">https://www.google.com.tw/gen_</a>
+204?v=3&amp;s=web&amp;imc=5&amp;imn=5&amp;imp=0&amp;ei=xdoSVZwqjrPIBL7egkA&amp;e=3300107,3300133,3300137
+,3300164,3310699,3311901,3312179,3700289,3700362,4011559,4020347,4023709,4024600
+,4026474,4028932,4029050,4029141,4029417,4029419,4029515,4029815,4030036,4030109
+,4030366,4030415,4031242,4031296,4031390,4031391,4031576,4031580,4031608,4031622
+,4031627,4031716,4031775,4031804,4031809,8300096,8500394,8501183,8501294,8501313
+,8501351,10200083,10200682&amp;atyp=csi&amp;adh=&amp;xjs=init.50.9.sb.46.c.2.cr.1.jsa.1.bbd.
+0&amp;action=&amp;srt=683&amp;rt=xjsls.113,prt.114,ol.123,iml.114,xjses.216,xjsee.316,xjs.34
+9,wsrt.682,cst.0,dnst.0,rqst.691,rspt.97,rqstt.13,unt.7,cstt.7,dit.797 HTTP/1.1&quot;
+ 204 0
+INFO - [Mar 25 23:57:00] 127.0.0.1:62566 &quot;DIRECT POST <a href="https://plus.google.com/u/" rel="nofollow">https://plus.google.com/u/</a>
+0/_/n/gcosuc?origin=https%3A%2F%2Fwww.google.com.tw HTTP/1.1&quot; 200 -
+INFO - [Mar 25 23:57:00] 127.0.0.1:62474 &quot;GAE POST <a href="https://www.facebook.com/ajax" rel="nofollow">https://www.facebook.com/ajax</a>
+/mercury/thread_sync.php HTTP/1.1&quot; 200 108
+INFO - [Mar 25 23:57:02] 127.0.0.1:62545 &quot;GAE GET https://0-edge-chat.facebook.c
+om/pull?channel=p_730693478&amp;seq=0&amp;partition=-2&amp;clientid=3a7d5ff5&amp;cb=88sw&amp;idle=99
+9&amp;cap=8&amp;wtc=998%2C296%2C0.619%2C998%2C76&amp;msgs_recv=60&amp;uid=730693478&amp;viewer_uid=7
+30693478&amp;sticky_token=284&amp;sticky_pool=frc3c04_chat-proxy&amp;traceid=JRmYd HTTP/1.1&quot;
+ 200 36
+INFO - [Mar 25 23:57:02] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:02] 127.0.0.1:62474 &quot;GAE POST <a href="https://www.facebook.com/ajax" rel="nofollow">https://www.facebook.com/ajax</a>
+/mercury/thread_sync.php HTTP/1.1&quot; 200 108
+INFO - [Mar 25 23:57:03] 127.0.0.1:62473 &quot;GAE GET <a href="https://www.facebook.com/notif" rel="nofollow">https://www.facebook.com/notif</a>
+ications/sync/?lastSync=1427298392&amp;__user=730693478&amp;__a=1&amp;__dyn=7nm8RW8BgCBymfDg
+DxyIGzGpUW9J6yUgByVbGAEGmEVFLFwxBxC9V8CdwwyQq68K5Uc-dw_UkUyHjAGqcHg&amp;__req=10&amp;__r
+ev=1658546 HTTP/1.1&quot; 200 1049
+INFO - [Mar 25 23:57:05] 127.0.0.1:62482 &quot;GAE GET https://1-edge-chat.facebook.c
+om/pull?channel=p_730693478&amp;seq=5&amp;partition=-2&amp;clientid=1106dbd7&amp;cb=gtc9&amp;idle=16
+&amp;cap=8&amp;msgs_recv=5&amp;uid=730693478&amp;viewer_uid=730693478&amp;sticky_token=284&amp;sticky_po
+ol=frc3c04_chat-proxy&amp;state=active HTTP/1.1&quot; 200 548
+INFO - [Mar 25 23:57:06] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:06] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:06] 127.0.0.1:62600 &quot;STRIP CONNECT code.google.com:443 HTTP
+/1.1&quot; - -
+INFO - [Mar 25 23:57:06] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:07] 127.0.0.1:62473 &quot;GAE POST <a href="https://www.facebook.com/ajax" rel="nofollow">https://www.facebook.com/ajax</a>
+/chat/buddy_list.php HTTP/1.1&quot; 200 3156
+INFO - [Mar 25 23:57:07] 127.0.0.1:62474 &quot;GAE GET <a href="https://www.facebook.com/chat/" rel="nofollow">https://www.facebook.com/chat/</a>
+user_info/?__user=730693478&amp;__a=1&amp;__dyn=7nm8RW8BgCBymfDgDxyIGzGpUW9J6yUgByVbGAEG
+mEVFLFwxBxvyui9zo88J6xybxu3fzof-5e8GQVaCzaQ&amp;__req=m&amp;__rev=1658546&amp;ids[0]=1404591
+583 HTTP/1.1&quot; 200 450
+INFO - [Mar 25 23:57:07] 127.0.0.1:62600 &quot;DIRECT GET <a href="https://code.google.com/p/g" rel="nofollow">https://code.google.com/p/g</a>
+oagent/issues/detail?id=19733 HTTP/1.1&quot; 200 -
+INFO - [Mar 25 23:57:07] 127.0.0.1:62605 &quot;STRIP CONNECT ssl.google-analytics.com
+:443 HTTP/1.1&quot; - -
+INFO - [Mar 25 23:57:07] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:07] 127.0.0.1:62539 &quot;GAE GET <a href="https://fbcdn-profile-a.akamai" rel="nofollow">https://fbcdn-profile-a.akamai</a>
+hd.net/hprofile-ak-xpa1/v/t1.0-1/p32x32/10984618_10203682172640560_2222685597110
+586866_n.jpg?oh=47f327cc0296beb599da3f76ddc85278&amp;oe=5576AED8&amp;__gda__=1434151525_
+9d6bcada4918d2d0995ce1989c928d96 HTTP/1.1&quot; 200 915
+INFO - [Mar 25 23:57:08] 127.0.0.1:62605 &quot;DIRECT GET https://ssl.google-analytic
+s.com/__utm.gif?utmwv=5.6.3&amp;utms=16&amp;utmn=1561497776&amp;utmhn=code.google.com&amp;utmcs=
+UTF-8&amp;utmsr=1366x768&amp;utmvp=1349x643&amp;utmsc=24-bit&amp;utmul=zh-tw&amp;utmje=1&amp;utmfl=17.0%
+20r0&amp;utmdt=Issue%2019733%20-%20goagent%20-%20%E5%A6%82%E4%BD%95%E6%8A%8Agoagent%
+E8%BE%93%E5%87%BA%E7%9A%84%E6%97%A5%E5%BF%97%E5%A4%8D%E5%88%B6%E4%B8%8B%E6%9D%A5
+%EF%BC%9F%20-%20https%3A%2F%2Fgithub.com%2Fgoagent%2Fgoagent%20-%20Google%20Proj
+ect%20Hosting&amp;utmhid=73335611&amp;utmr=https%3A%2F%2Fwww.google.com.tw%2F&amp;utmp=%2Fp%
+2Fgoagent%2Fissues%2Fdetail%3Fid%3D19733&amp;utmht=1427299027487&amp;utmac=UA-18071-1&amp;ut
+mcc=__utma%3D247248150.2018911321.1426568363.1427287231.1427297933.9%3B%2B__utmz
+%3D247248150.1426808856.3.2.utmcsr%3Dgoogle%7Cutmccn%3D(organic)%7Cutmcmd%3Dorga
+nic%7Cutmctr%3D(not%2520provided)%3B&amp;utmjid=&amp;utmu=qAAgAAAAAAAAAAAAAAAAAAQE~ HTTP
+/1.1&quot; 200 35
+INFO - [Mar 25 23:57:08] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:08] 127.0.0.1:62610 &quot;STRIP CONNECT code.google.com:443 HTTP
+/1.1&quot; - -
+INFO - [Mar 25 23:57:08] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:08] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:08] 127.0.0.1:62610 &quot;DIRECT POST <a href="https://code.google.com/ho" rel="nofollow">https://code.google.com/ho</a>
+sting/multilogin HTTP/1.1&quot; 200 -
+INFO - [Mar 25 23:57:09] 127.0.0.1:62600 &quot;DIRECT POST <a href="https://code.google.com/ho" rel="nofollow">https://code.google.com/ho</a>
+sting/projects HTTP/1.1&quot; 200 -
+INFO - [Mar 25 23:57:09] 127.0.0.1:62545 &quot;GAE GET https://0-edge-chat.facebook.c
+om/pull?channel=p_730693478&amp;seq=0&amp;partition=-2&amp;clientid=3a7d5ff5&amp;cb=44cl&amp;idle=10
+07&amp;cap=8&amp;wtc=1006%2C298%2C0.619%2C1006%2C84&amp;msgs_recv=60&amp;uid=730693478&amp;viewer_ui
+d=730693478&amp;sticky_token=284&amp;sticky_pool=frc3c04_chat-proxy&amp;traceid=JRmYd HTTP/1
+.1&quot; 200 540
+INFO - [Mar 25 23:57:09] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:09] 127.0.0.1:62600 &quot;DIRECT POST <a href="https://code.google.com/ap" rel="nofollow">https://code.google.com/ap</a>
+is/ajax/playground/get_projects HTTP/1.1&quot; 301 247
+INFO - [Mar 25 23:57:21] extend_iplist start for hosts=[]
+INFO - [Mar 25 23:57:21] extend_iplist finished, added 20
+INFO - [Mar 25 23:57:24] 127.0.0.1:62545 &quot;GAE GET https://0-edge-chat.facebook.c
+om/pull?channel=p_730693478&amp;seq=1&amp;partition=-2&amp;clientid=3a7d5ff5&amp;cb=iutb&amp;idle=10
+08&amp;cap=8&amp;wtc=1007%2C299%2C0.591%2C1007%2C85&amp;msgs_recv=61&amp;uid=730693478&amp;viewer_ui
+d=730693478&amp;sticky_token=284&amp;sticky_pool=frc3c04_chat-proxy&amp;traceid=JRmYd HTTP/1
+.1&quot; 200 219
+INFO - [Mar 25 23:57:24] 127.0.0.1:62482 &quot;GAE GET https://1-edge-chat.facebook.c
+om/pull?channel=p_730693478&amp;seq=6&amp;partition=-2&amp;clientid=1106dbd7&amp;cb=bwrq&amp;idle=29
+&amp;cap=8&amp;msgs_recv=6&amp;uid=730693478&amp;viewer_uid=730693478&amp;sticky_token=284&amp;sticky_po
+ol=frc3c04_chat-proxy&amp;traceid=K-9u3&amp;state=active HTTP/1.1&quot; 200 220
+INFO - [Mar 25 23:57:24] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:24] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:25] 127.0.0.1:62482 &quot;GAE GET https://1-edge-chat.facebook.c
+om/pull?channel=p_730693478&amp;seq=7&amp;partition=-2&amp;clientid=1106dbd7&amp;cb=m3ml&amp;idle=47
+&amp;cap=8&amp;msgs_recv=7&amp;uid=730693478&amp;viewer_uid=730693478&amp;sticky_token=284&amp;sticky_po
+ol=frc3c04_chat-proxy&amp;traceid=gytjd&amp;state=active HTTP/1.1&quot; 200 369
+INFO - [Mar 25 23:57:25] 127.0.0.1:62545 &quot;GAE GET https://0-edge-chat.facebook.c
+om/pull?channel=p_730693478&amp;seq=2&amp;partition=-2&amp;clientid=3a7d5ff5&amp;cb=gw59&amp;idle=10
+23&amp;cap=8&amp;wtc=1022%2C314%2C0.565%2C1022%2C100&amp;msgs_recv=62&amp;uid=730693478&amp;viewer_u
+id=730693478&amp;sticky_token=284&amp;sticky_pool=frc3c04_chat-proxy&amp;traceid=0wLQl HTTP/
+1.1&quot; 200 365
+INFO - [Mar 25 23:57:25] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:25] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:32] 127.0.0.1:62545 &quot;GAE GET https://0-edge-chat.facebook.c
+om/pull?channel=p_730693478&amp;seq=3&amp;partition=-2&amp;clientid=3a7d5ff5&amp;cb=3s3x&amp;idle=10
+24&amp;cap=8&amp;wtc=1024%2C315%2C0.542%2C1024%2C102&amp;msgs_recv=63&amp;uid=730693478&amp;viewer_u
+id=730693478&amp;sticky_token=284&amp;sticky_pool=frc3c04_chat-proxy&amp;traceid=0765o HTTP/
+1.1&quot; 200 468
+INFO - [Mar 25 23:57:32] 127.0.0.1:62482 &quot;GAE GET https://1-edge-chat.facebook.c
+om/pull?channel=p_730693478&amp;seq=8&amp;partition=-2&amp;clientid=1106dbd7&amp;cb=mcgd&amp;idle=49
+&amp;cap=8&amp;msgs_recv=8&amp;uid=730693478&amp;viewer_uid=730693478&amp;sticky_token=284&amp;sticky_po
+ol=frc3c04_chat-proxy&amp;traceid=Q75LJ&amp;state=active HTTP/1.1&quot; 200 470
+INFO - [Mar 25 23:57:32] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:32] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:35] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:36] 127.0.0.1:62474 &quot;GAE POST <a href="https://www.facebook.com/ajax" rel="nofollow">https://www.facebook.com/ajax</a>
+/bz HTTP/1.1&quot; 200 93
+INFO - [Mar 25 23:57:39] 127.0.0.1:62473 &quot;GAE GET <a href="https://www.facebook.com/ajax/" rel="nofollow">https://www.facebook.com/ajax/</a>
+home/generic.php?ajaxpipe=1&amp;ajaxpipe_token=AXjC6v-GXUOYs9JQ&amp;sidecol=true&amp;path=%2
+F&amp;sk=nf&amp;key=nf&amp;ref=tn_tnmn&amp;endpoint=%2Fajax%2Fhome%2Fgeneric.php&amp;__user=73069347
+8&amp;__a=1&amp;__dyn=7nm8RW8BgCBymfDgDxyIGzGpUW9J6yUgByVbGAEGmEVFLFwxBxvyui9zo88J6xybxu
+3fzof-5e8GQVaCzaQ&amp;__req=jsonp_3&amp;__rev=1658546&amp;__adt=3 HTTP/1.1&quot; 200 66767
+INFO - [Mar 25 23:57:40] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:40] 127.0.0.1:62545 &quot;GAE GET https://0-edge-chat.facebook.c
+om/pull?channel=p_730693478&amp;seq=4&amp;partition=-2&amp;clientid=3a7d5ff5&amp;cb=1wxs&amp;idle=10
+30&amp;cap=8&amp;wtc=1030%2C322%2C0.520%2C1030%2C108&amp;msgs_recv=64&amp;uid=730693478&amp;viewer_u
+id=730693478&amp;sticky_token=284&amp;sticky_pool=frc3c04_chat-proxy&amp;traceid=oO18O HTTP/
+1.1&quot; 200 368
+INFO - [Mar 25 23:57:40] 127.0.0.1:62482 &quot;GAE GET https://1-edge-chat.facebook.c
+om/pull?channel=p_730693478&amp;seq=9&amp;partition=-2&amp;clientid=1106dbd7&amp;cb=il1t&amp;idle=55
+&amp;cap=8&amp;msgs_recv=9&amp;uid=730693478&amp;viewer_uid=730693478&amp;sticky_token=284&amp;sticky_po
+ol=frc3c04_chat-proxy&amp;traceid=VgETq&amp;state=active HTTP/1.1&quot; 200 363
+INFO - [Mar 25 23:57:40] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:40] 127.0.0.1:62473 &quot;GAE GET <a href="https://www.facebook.com/ai.ph" rel="nofollow">https://www.facebook.com/ai.ph</a>
+p?ego=AT65xV_DA4Mapps0Hw6vfl8IW1ehEvGY2mZj9t8Ww5JH2aeyF5I_TmyPSsCjKprCcsAwiHeFrS
+StZ0DTAOEd7cVg58vtvf1b9zIOnPD3sg9uGaHYdDVW-tL2xf3FlR-FcULelZRWshBIND317IFV23liBq
+rtDTwP3RpL2-Sw_HezMYbibAeRRFwCILNFhxVPWFF7JZ-DftvEpHhnGejLBA-_I3iiU1R4A6CSmk56U2
+3qyGPqaU7Lh_uI4x5KuaFo3F3j5gEq5zrgFP_PdbGvjDURPqR4e5CwwRgj0XYHFu2b4HjIMeeBs6VZ7f
+M HTTP/1.1&quot; 200 197
+INFO - [Mar 25 23:57:40] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:40] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:40] 127.0.0.1:62674 &quot;STRIP CONNECT fbcdn-video-m-a.akamaihd
+.net:443 HTTP/1.1&quot; - -
+INFO - [Mar 25 23:57:40] autorange range='bytes=0-1572863' match url='https://fb
+cdn-video-m-a.akamaihd.net/hvideo-ak-xaf1/v/t43.1792-2/11043932_1015321138796479
+7_636841172_n.mp4?efg=eyJxZSI6ImZiY2RuX3ZpZGVvX3JhdGVsaW1pdF9yb2xsb3V0Mix2X3JvbG
+xvdXQifQ%3D%3D&amp;oh=48320ed7d21c747f6c5e8af2d93ee92b&amp;oe=5512F933&amp;__gda__=142730742
+7_05114afeaba2dd6412ce22644e6dbe97'
+INFO - [Mar 25 23:57:40] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:41] 127.0.0.1:62679 &quot;STRIP CONNECT fbcdn-video-m-a.akamaihd
+.net:443 HTTP/1.1&quot; - -
+INFO - [Mar 25 23:57:41] autorange range='bytes=0-1572863' match url='https://fb
+cdn-video-m-a.akamaihd.net/hvideo-ak-xaf1/v/t43.1792-2/11043932_1015321138796479
+7_636841172_n.mp4?efg=eyJxZSI6ImZiY2RuX3ZpZGVvX3JhdGVsaW1pdF9yb2xsb3V0Mix2X3JvbG
+xvdXQifQ%3D%3D&amp;oh=48320ed7d21c747f6c5e8af2d93ee92b&amp;oe=5512F933&amp;__gda__=142730742
+7_05114afeaba2dd6412ce22644e6dbe97'
+INFO - [Mar 25 23:57:41] 127.0.0.1:62539 &quot;GAE GET <a href="https://fbcdn-profile-a.akamai" rel="nofollow">https://fbcdn-profile-a.akamai</a>
+hd.net/hprofile-ak-xaf1/v/t1.0-1/p32x32/11069641_358044144406058_581126907140791
+7171_n.jpg?oh=e3fa6e27b840848bbbd4e81490c21972&amp;oe=5579A308&amp;__gda__=1437180351_6c
+599914bd9dc0527594b6c9a11d7f4c HTTP/1.1&quot; 200 1106
+INFO - [Mar 25 23:57:41] 127.0.0.1:62474 &quot;GAE GET <a href="https://www.facebook.com/ai.ph" rel="nofollow">https://www.facebook.com/ai.ph</a>
+p?aed=AQIYyaL8s1F-Bp9Rj8feq1zvL5b0Rbwv-5QsUD1DqzkDTMZYpt_pNZeAXmgtA6arEznnxjqwgN
+e3EobKjFc4s4fxujLCkDRquWQJRrMrcv3DPpe9160BveY5xClDs9wuOczxoJl0xVPynPj4xmw4Z6EisH
+YxOuBnncZ3KfsVmUFsBldjFpVu0d6p_00DrmcnKCfpXj2Cx-P9rvV8w5U2StI9eoDD78vNtX8ohuEfaP
+KRYAZSutHCUo5cswUwnqEVv-cEJFVSITRSi4uq7nFn_syP4_-bLzYPvzAsCjBydPbb0CVkXRcJ3I4bdk
+V693tFAG9MnKTeN_f4GSUue-NoBFSjaZdHCi76FKNXHYxgdm-uFoD9UGxvMGgrNbkyQNmtANrAN_u2hM
+v2EGCjbMwODInlb5eB2I_m7pbNG4StDCKHKgvW2McyUSpL_EjrlyVT5-NJCJtRVKuO_Q6qJIyn6V2PEk
+dZOilX5pD4K6aVPeRdLUnsg8LO1g1g2E2zOG6xTPm4yqMmKssooLSvxJiVBsdB7KJOqUY6DLaDY6mq-s
+jbS5T77hLhtBXp7ZVRDdUNtaY6cnzNEzyvjawZQnTd04Zcu0lUxqMm7JloN5l35sCJUIqdQansyB5JOf
+dWiOnsGS3JdtqzV5HrG69-Nr8rc21jEDYrVUZsAOZu4rjgtHg9qluRdMaDt6WESwparH5OwDv4L6uWLW
+jkKBqSxX5PcQbZ2vTHY4hbYMXAuc34Y1dnUtjPpYetQQKvVk5H-XLc1BSrBZ0ia8mdKSvNvadGC-CxP_
+jYF6f3FvpAUzYlRDF9vQ17byT1KEGDwOyuZPKn0vXO939fAkzxl_3LoXpzya-6yrItX_njg1EW0SA8BE
+x1fftKGFCkeGJBAzjpW7NQTe8EMuVciBpdf3G2a8bIRjHjKqmxg1KLk4PFeCFUpmxizM_zV9QbJlNpux
+EcQH5DAbVsjyHCYqJjqeV7hkkdERe8Rnolt_zj7rb2xtN9iyvXM-nEGorEMWTDVPb-fqA5YrzBdnXMah
+MqB4656DHUSMVvsxT-1G47-FzHoi3BIXH27P70-qg3N-JWUmBoBDMX7jgTXPDWoTT5d4AT3z_UXDY0bH
+0t0r-QxHIKzvGyzQ_c82rnzEdQLMtTnH2Gs78IiC01z3XRKsppwtwvgJFhOf3E7k8TUu4H8Gdcixs1f1
+4_4ajhIUte4KDxOeYqfo4l1YSrgAFPCX0XRt6mRQlcDEj91ECqXnbJoYcvBkEtCaGlj6AkU3NHxZUIf3
+86Aujqd8FuewyU0FwJEHUs3UhpL1Qw807xPW4JMbUtkYHrc4tbfxmghCvVNgDrkU9KMv0ej3TLUZO9Yd
+QbbrtxKm-2ENGw9I2h9B0YrnTomfjVl_mzDVcjJsr-E3u9SdPX6WNrOFs6RUuCHaK4hfQoCc-8rrULMp
+ghmEHzdkb2jcH2Xpk9AKqkGaVVviFnP0EXXYwwXt22AmltYqej8Wf8QoY0o3yu3q-qQqnG-7Nj_jgNVS
+dq3y-CefnHMz7hcDgMjE7khsPSt5QxyaHNLGwRqW7jwHBhKMpYCHmX7eyHRvJLyxdPPzrL8qFU084RyQ
+rvDhBOWlvz1KC24wpFtknKFVTfY1XfGID5RZORGOEem0NFnaHksX0IBdWImEzRmXEsJ-EQ8AOdPKOzTF
+A6WxwipDomBmbe86nS5ABWau7Rjw4N6eHJvljB0TEGX96Xy_CZOcenvfOOhUdHL1CwXQCQCkK7JmQCGD
+KARQZh8xGiNSKVPjfx5c1EcSlPXg44C9B9VWh1D78gUt-e5qMN4MCtl5sdV_lCwaxlpBlDyY3ZedmZp_
+lZUpXBsDXKv3eGqt7LViQP6h3MrdR1jodvIusmoJ-ccYqLAWE0mh2R-IkwHWYXIzlDkVjNI1qOZnbsx3
+wPtxURmRknXtkOtNX5fqnumoPzu_cUPSNUWV6nkKZTJ-6qU7Akuvz4DHL3mPyxIYDu8vw5-xwJLGDNtr
+_JR3eXU-CvOQ8hRRz-kCMrNSIlWqt4tX6wkED-Z_TOzy5bR1WDWYMmD0QTWFhhJPqTRAw8Mp8nBngzuZ
+FjUbZvb0q7jZHMzDXoAI1MVL2sCslLjTqG54ZaZIyzniTAu7RE_CQASzNdfnMoaPIKk7_fETfWMmWBHC
+-Feu5FXQGwsOiZ-6rnXB2YasSBBGGXXjXvOp04SNZPPMPjEYk0e4olHvZKPNnamWVtMFpaiHeo2NiuMa
+qMhie1zsuiqmMoE-gYtD2v00HZP2yVkqmnZbidaxC9xd61qFfjzCrAXNXXUWJFH3HaB1drdI00ASy6x5
+j-GJ2tWjLJMHcxi_Pg3_dyQji2PgT2zaT4ixSNtVHc7fT3NyIMs2vlucjw5BWY6F8efcCH-CvT3OI2Kv
+mhlWygBeKcNHruBQE71-LvG_EswO144GlYQZSS3I768jeIqCqMoNT-P8wXjWJ-CQDPcqzVS4sfdit0q8
+q2jLjia09Y52mTjIiChtIJwMyawbmAodap3I0ABWX7B3UCvvQkVZehYG3MayqL6086cTB4Xqiz4yP_9i
+ah0qmK4qFHCvZm3uzKl7CFgm7YEUwfeO61rxz0vulcfHX5t5_1Z4D_o5v0qarpEeh01A88Io7PwJgBTi
+x7b8O4uRq2p7EPPhe0eIxYjdxzS-23mAC2MlE2ASyZkV0V3NopGUGLJX0QUUlt0VxgzTfFDrlQ7enkEA
+qua-EOT8lq5fg6z3OSp--U7vtl_uHlsLuPBVViasVPsSZupdgs5RaW3aHxgeKCTRrEOlUFmDM_1XmG4y
+4Hp8tsCuPZcKIrpBkHjbLI6fPP4m0ux2R-VcejP_jg6glehHgmOMp25VaVqiTHblKjdb8wRCbqJh-OXX
+xtZ2AkI2ZeoY9sKODoA0Tg-_mmWVJfZXeqKRUO-agI4gw1CFajFfkbfixtIUKG5Y5sSv38ckPNdNrjAA
+jtSDUd_hXHEIHO&amp;ego=AT7iGwr7IlwDu20cP_CQdsULLOW8G6ip9dYjSrmgQT61XMDorMibqfiZhVgKC
+Cj-M6HIqvrUAJ-lLHjEuTS_2FCSuqwoG5FJgohwe-8fAAOxgcWRIkdhWyd7U6183hlc2JdYMeq0lvu4j
+GkoFF8AOKvdK0zSiDqQMw-ri1sB4b7wNCNsN2JGENJs-f3nt6nBdm3ed4--jydWqRLjLh3BV7u-O0Lfp
+lqEWINZlGZRxXZjrZA6KxVQWtB__QozwWfeVol7k92_ATADNqZaWj0BodK_KOVvWA23ObObDDbyXRn__
+P3NtiNLo1EJr6k HTTP/1.1&quot; 400 4368
+INFO - [Mar 25 23:57:42] 127.0.0.1:62674 &quot;GAE GET <a href="https://fbcdn-video-m-a.akamai" rel="nofollow">https://fbcdn-video-m-a.akamai</a>
+hd.net/hvideo-ak-xaf1/v/t43.1792-2/11043932_10153211387964797_636841172_n.mp4?ef
+g=eyJxZSI6ImZiY2RuX3ZpZGVvX3JhdGVsaW1pdF9yb2xsb3V0Mix2X3JvbGxvdXQifQ%3D%3D&amp;oh=48
+320ed7d21c747f6c5e8af2d93ee92b&amp;oe=5512F933&amp;__gda__=1427307427_05114afeaba2dd6412
+ce22644e6dbe97 HTTP/1.1&quot; 206 1572864
+INFO - [Mar 25 23:57:42] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; RangeFetch started('https://fbcdn-video
+-m-a.akamaihd.net/hvideo-ak-xaf1/v/t43.1792-2/11043932_10153211387964797_6368411
+72_n.mp4?efg=eyJxZSI6ImZiY2RuX3ZpZGVvX3JhdGVsaW1pdF9yb2xsb3V0Mix2X3JvbGxvdXQifQ%
+3D%3D&amp;oh=48320ed7d21c747f6c5e8af2d93ee92b&amp;oe=5512F933&amp;__gda__=1427307427_05114af
+eaba2dd6412ce22644e6dbe97') 0-1572863
+INFO - [Mar 25 23:57:42] 127.0.0.1:62679 &quot;GAE GET <a href="https://fbcdn-video-m-a.akamai" rel="nofollow">https://fbcdn-video-m-a.akamai</a>
+hd.net/hvideo-ak-xaf1/v/t43.1792-2/11043932_10153211387964797_636841172_n.mp4?ef
+g=eyJxZSI6ImZiY2RuX3ZpZGVvX3JhdGVsaW1pdF9yb2xsb3V0Mix2X3JvbGxvdXQifQ%3D%3D&amp;oh=48
+320ed7d21c747f6c5e8af2d93ee92b&amp;oe=5512F933&amp;__gda__=1427307427_05114afeaba2dd6412
+ce22644e6dbe97 HTTP/1.1&quot; 206 1572864
+INFO - [Mar 25 23:57:42] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; RangeFetch started('https://fbcdn-video
+-m-a.akamaihd.net/hvideo-ak-xaf1/v/t43.1792-2/11043932_10153211387964797_6368411
+72_n.mp4?efg=eyJxZSI6ImZiY2RuX3ZpZGVvX3JhdGVsaW1pdF9yb2xsb3V0Mix2X3JvbGxvdXQifQ%
+3D%3D&amp;oh=48320ed7d21c747f6c5e8af2d93ee92b&amp;oe=5512F933&amp;__gda__=1427307427_05114af
+eaba2dd6412ce22644e6dbe97') 0-1572863
+INFO - [Mar 25 23:57:42] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 46616368] 1572864 bytes 0-15728
+63/13163882
+INFO - [Mar 25 23:57:45] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:45] 127.0.0.1:62473 &quot;GAE POST <a href="https://www.facebook.com/ajax" rel="nofollow">https://www.facebook.com/ajax</a>
+/bz HTTP/1.1&quot; 200 93
+INFO - [Mar 25 23:57:46] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 46612928] 1572864 bytes 1572864
+-3145727/13163882
+INFO - [Mar 25 23:57:48] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 46614928] 1572864 bytes 3145728
+-4718591/13163882
+INFO - [Mar 25 23:57:49] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; Successfully reached 1572863 bytes.
+INFO - [Mar 25 23:57:49] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:50] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 46616368] 1572864 bytes 4718592
+-6291455/13163882
+WARNING - [Mar 25 23:57:50] RangeFetch &quot;GET <a href="https://fbcdn-video-m-a.akamaihd.net" rel="nofollow">https://fbcdn-video-m-a.akamaihd.net</a>
+/hvideo-ak-xaf1/v/t43.1792-2/11043932_10153211387964797_636841172_n.mp4?efg=eyJx
+ZSI6ImZiY2RuX3ZpZGVvX3JhdGVsaW1pdF9yb2xsb3V0Mix2X3JvbGxvdXQifQ%3D%3D&amp;oh=48320ed7
+d21c747f6c5e8af2d93ee92b&amp;oe=5512F933&amp;__gda__=1427307427_05114afeaba2dd6412ce2264
+4e6dbe97&quot; retry 3260416-4718591
+INFO - [Mar 25 23:57:50] ssl good_ipaddrs=20, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar 25 23:57:51] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; Successfully reached 3145727 bytes.
+INFO - [Mar 25 23:57:51] extend_iplist start for hosts=[]
+INFO - [Mar 25 23:57:51] extend_iplist finished, added 20
+INFO - [Mar 25 23:57:51] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 46614928] 1458176 bytes 3260416
+-4718591/13163882
+INFO - [Mar 25 23:57:51] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 46612928] 1572864 bytes 6291456
+-7864319/13163882
+
+今天開始突然都會這樣...求救...
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Mar 25 09:25:27 2015">
+ Mar 25, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=20014#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/116740686982355496636/">handman...@gmail.com</a
+></span>
+ 
+<pre>
+然後剛啟動程式還會跑出ERROR
+ERROR - [Mar 26 00:22:21] ssl.wrap_socket(connection=&lt;socket at 0x2de88f0 fileno
+=880 sock=127.0.0.1:8087 peer=127.0.0.1:50613&gt;) failed: [('SSL routines', 'SSL_B
+YTES_TO_CIPHER_LIST', 'inappropriate fallback')]
+Traceback (most recent call last):
+  File &quot;C:\Users\handman\Desktop\goagent-goagent-5ea98a9\local\proxylib.py&quot;, lin
+e 1001, in handle
+  File &quot;C:\Users\handman\Desktop\goagent-goagent-5ea98a9\local\proxylib.py&quot;, lin
+e 1067, in do_ssl_handshake
+  File &quot;C:\Users\handman\Desktop\goagent-goagent-5ea98a9\local\proxylib.py&quot;, lin
+e 438, in do_handshake
+  File &quot;C:\Users\handman\Desktop\goagent-goagent-5ea98a9\local\proxylib.py&quot;, lin
+e 420, in __iowait
+Error: [('SSL routines', 'SSL_BYTES_TO_CIPHER_LIST', 'inappropriate fallback')]
+
+然後剛剛發向好像是只要開著FB一陣子後GAE就會完全不動了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Mar 26 20:29:19 2015">
+ Mar 26, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=20014#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/108505865770536606609/">chiehj...@gmail.com</a
+></span>
+ 
+<pre>
+IP被封了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Mar 27 08:41:11 2015">
+ Mar 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=20014#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/116740686982355496636/">handman...@gmail.com</a
+></span>
+ 
+<pre>
+我重新載入又可以用了~但是只能一下子...
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20014&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20014"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="20014">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A20014',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 20014,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

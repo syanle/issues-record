@@ -1,0 +1,711 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"loggedInUserEmail": null, "projectHomeUrl": "/p/goagent", "relativeBaseUrl": "", "profileUrl": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "token": null, "projectName": "goagent", "domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 3058 - 
+ goagent -
+ 
+ 1.8.0版 youtube 500 Internal Server Error - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D3058&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D3058" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="closed_colors">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=3058">3058</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >1.8.0版 youtube 500 Internal Server Error</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 1 person starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A3058">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="The requested non-coding task was completed">Done</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ <tr><th align="left" valign="top">Closed:&nbsp;</th>
+ <td align="left" valign="top" width="100%">
+ Dec 2012
+ </td>
+ </tr>
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D3058&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D3058">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/106698041365983659914/">lukongzh...@gmail.com</a
+>,
+ <span class="date" title="Sat Apr  7 01:19:34 2012">Apr 7, 2012</span>
+ 
+ </div>
+<pre>
+
+500 Internal Server Error
+
+Sorry, something went wrong.
+
+A team of highly trained monkeys has been dispatched to deal with this situation.
+
+If you see them, show them this information:
+g4v-Z77ZCspbo9l0om6wgn34uTfMcYSwQhUdS00CzVLQfHRXxGz37DFHKp-u
+AME7Ii1VVZ9IhF3Lxdkm2JvoCtxAdFUjNPtb6zz9r5d3soHwIAuQphr14lmF
+Ny3aNEv54jGRM_m7d0q2_57twtNwILrzDQyyM5hV4p8aoDN8jnOLHs76jxNk
+YgSoBXncpUXWN1kc26hQcG7OGQ1L-FMoRROy3wWAQIdXto7928CvtuRwIVqM
+Xvi1o0yxRvGdbXhy4xP1nf9QaYCw5rQBhvJJxY9rC6KmI5eBBZJXsRaXhpjh
+ptWMhYSGPT8rQ3Z8wFAwjuiSbetklX7TgWyR10T0yD5JikmVI41EUTUHmO-c
+ArnpuWaIx8Mp7GUvY2gPTtGr6KLpcusI8ZecQRh0UXiyHQf0iLWy1IjCIJG1
+KjBJvh-DQe_3nLT4wnRnz23_x47z74pixVki_Wg12uhgjVtCESXbV1BESU5T
+b37dMO_uFz93SivIb-GYdQAQHtxSc4Z-fzApbkU0zK9eOEjFneEF0DqsPes6
+9K6R-terQdtSjCj49mC0sGc924FCY7sPnGPw85IOIsU_dWxe_nTS44Ap9He3
+YRg2oeK26YsZn6400v7iPR-RyTFg4AYZ4-oDtqOjK4NRkmXl5TOOTO-_-vfW
+MR364SjW5gJ5FEHTb58ip8J-ZBDnfIBcKNmaV-Ke2mfysJQcX8XR40BX9VgP
+i-omyWtr9lpSu04Evy_8pxT4ywzQh3VtJkG55xrFskRzocrfhaplb2CJerVt
+uddx4tSPA2uZtBc3XdyAXE0juH8-xcqI4gO_dwz0oJET6nZUeZbCqVU7D-mK
+1ZoEX0zzAlIMVHIaaLRTVO3QUiJHaO_LhupDG2UDnZjvLFRNNvRkKmm-mkkC
+0Rv2ZlBhbwu7HGt9VJGQSlfvC-u_Qir9QeAZrGyIO9-g6hTQwmy0DwmEy9gS
+cRG5NO-YtNo9872UQTa7xm2g33wpcfc5B6zo4lkcM_v3F11dtXgW234yiwTS
+3KArssy3yXVhsb73aQOsCpJDkkcyWg0nN8BMBGLNaXNZy0-bwFIlgXfKR9dY
+Aa4tbFoSzyhRsm3-6CZpwmRuK6f40t5iVJ3dGvnHrF1qlez6m9J0M0GG11qv
+U26R8Jfp5IklYeZBUwhDZ-PBBCuN7VgzRd4coQCpY480c1xv90Eb2PXQXHeS
+-4zkjWKp96uiO5DHCt7bYHRdQnaJNiypjbxkfZLXQ3Wofp9jWPYVOxoWY_Z6
+RRNJRQxlAvzXMR0ZM5mBNIWlWdvRPnbzlmE78Tjg8Y_En7a0sLZ9uWdI3aAX
+LzvPxNvRuKPdeYjSXfk4toikQAsasuGg2D99sl6G1-aCcJkmz54kc1ttfAoj
+31FLD9W1BTxIgUPT_e14otogySIursof_zzrZBfktPut7BhWZ8VPGEmoQ4d5
+1LHEqgvL1CBW4L2xLhKRwRO1m1gFNCs00x4nKy3dPruvZ6dvxoCFaLGZsJIx
+-0JK50EIUWKJ6EIzMRTyFNBgNCZEHzZa-8JiMIRD_LfjgFimjf-gjSA_-t83
+urPt3AlUFlu9p_k7TN4iji01QzPr0NdyyFuhERenQnWqHgY1YYXSMMenbrdm
+w05EJ6WfzvYzEFNOFVlCoIatDqniM5bZu1Vez_QOyePeKy5YawhfUGxreLzM
+NvFG0UsPh35qvTGoRjm40iGBgqRkZwT4K17l5MCBh0hanPcrX-ouHaAp1JRs
+SpdF8VvxvqjNm5xltRICJf3rdUJpJIpwVcrIE3FTYJW_cIiN4_qw8yFZyR-6
+S4ufz5UEW0IeBFBxM9T4AJky8MQlQY_9i3aslwU5LH5cRdrg3S4PeC98m9WA
+4wYTZNPee-Y52djiO2FfCLDlJDT8_x10VyTK1-_D94mM8RO3TiQiGEyKbDmu
+4xdcrVzobGOmPfyVbkwsasY1WO3MFJ9fEzOdaenm_CiJBXuDBViRv7PveY1x
+7_rcy24JSoSfXqcN6M-FXyTVGGuzYtEKc4orjEbpgj7viFdhsSPojCcpcXut
+OkgmyV3JsfEBEWMDZHwzRG4wbVnu3pjOc_mcVSogTVjbRpZDQWu68eknRdeW
+oKgNs0c-GYT-nzDlPIRwCXxLZjjHtTNSQZ4XByC1wpWD7i9Vp67jz6Bn2xaL
+SviXx3juLddNg-KVKRSmVjE_tegXiwu_Y9NV-ss3p2p6vjsB-ok_mz5b36bl
+0LCW3kRszy88CBJ9zhOhI2KEaAw8w7p7sZGuNA7GeHKiEznBaN_GI77KNOMA
+rYXaKj4SC6su9ELMkyD496HRZsesEbnpobPBKlFrVwlg9s152sqJhTEd3dMB
+fE_6mIhHCKBiuj3KlkSjIN_eizM4128Gq8DmMaNpNJ29jQdZA-hrWwVggvgd
+coIIzbzm7Lbx_MY9lRsHdBFetMh8krfX_FpBKXYjBqB4pOzlvaqqk6nI7mam
+Wx4Jm0i-qiog6LYn3ccF-E5kcylQl8FZ_srIcdsfNXwGRb0BAgxa8N9yb8Tw
+ecoVsS41RTbfjacNdvlQ0j76EprfZw4cnbc_S4sEQwk4oh6T8oSJT7jkdlX0
+JQxEQfuoXu6aR0PX23WtBARmnIiSnrjE7ZUB2Ti-5n186dYK_5TfDPl3qCZQ
+zmCTzD-uD-5CRIRvqNplT6rxlfgrYMI3VO-dKWbodJFkhx0w291NlgGzfyvb
+7wTN5t5PdXGVmuD2wpA9Wv-G5kBLMMsKUNzOY0wSCynW0W7JJJMyzNZtEuu8
+q455sZTSOSSw6kRwBx4evox79UuH57XjUresDJfNTcgfXInBdYa-YCRPyfA9
+oHTVxCi-2asWo-mKsmoHq7t3O0LUdgUrygEZzVb5xV_ZwM1HWriLhC7qiSs3
+iQkjOk_bEY0v8PYkiAAPb430PSjriPXJ5Mz2_fuC_71cmNIRSwp7_LxsLhKc
+bAUdylmsNiUMqMxELYXSoXJufXXiHGIBevslPRENcBGjkU_V6oxlX_wEteA6
+bQ19OXLGX2orIjWWiMXCyDLL7dojJOrzs1ZNZ6I4fbinsHfmfUC7DzWmTsxn
+YApy8KJCAaiDw_8E7UaSBR9NZBHumm6PeYKQ7XkyM74vzDaYvIeQ8pKI23X8
+QIXRhKNZCOpaSCNTmwpHkrq8oaEcMH5aLKUm4MMQqYqT_9btb82MK7EfeM8h
+Y7TA7wKqqw==
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr  7 04:27:59 2012">
+ Apr 7, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=3058#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/106781204990925295112/">yubinlov...@gmail.com</a
+></span>
+ 
+<pre>
+网站的问题吧，goagent才不会输出这样的错误信息
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr  7 09:39:10 2012">
+ Apr 7, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=3058#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/116831085035957277606/">thome...@gmail.com</a
+></span>
+ 
+<pre>
+嘿 请留意猴子出没的时候把这份报告交给它们
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Dec 15 18:11:46 2012">
+ Dec 15, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=3058#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+<i>(No comment was entered for this change.)</i>
+</pre>
+ 
+ 
+ <div class="updates">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ 
+ <b>Status:</b>
+ Done
+ 
+ <br>
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D3058&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D3058"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="3058">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A3058',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 3058,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

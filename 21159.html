@@ -1,0 +1,1303 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"relativeBaseUrl": "", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "projectName": "goagent", "loggedInUserEmail": null, "token": null, "projectHomeUrl": "/p/goagent", "profileUrl": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 21159 - 
+ goagent -
+ 
+ 在vps上用apache2不熟goagent的php代理（包括index.py的python代理） - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21159&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21159" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=21159">21159</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >在vps上用apache2不熟goagent的php代理（包括index.py的python代理）</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 6 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A21159">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21159&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21159">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/103874366506621497987/">yqh1...@gmail.com</a
+>,
+ <span class="date" title="Thu May 28 01:59:25 2015">May 28, 2015</span>
+ 
+ </div>
+<pre>
+goagent server的php服务自带四个文件，分别是index.php,index.py,index.js,relay.php。分别为php代理，python代理，nodejs脚本代理，php中继代理。它们用来自己在vps服务器上部署代理给goagent客户端用。
+其中比较好用的是index.php和index.py
+
+以下以centos为例，debian的方法类似。
+1.php代理（index.php)
+php代理部署最简单，稍微检索下就能出来一堆文章,如果想直接看index.py的部署直接跳到 2.
+可以检索到很多种apache+php的组合:最简单的（mod_php5，直接处理php），mod_fcgid + php5-cgi，mod_proxy_fcgi + mod_proxy + php-fpm；
+从这里可以找到多种php安装方法，同时也有安装wsgi的方法
+<a href="https://www.linode.com/docs/websites/apache" rel="nofollow">https://www.linode.com/docs/websites/apache</a>
+
+选用最简单的mod_php，只要yum install httpd24 php56即可,注意centos6默认php是5.2，apache为2.2，我都换成高版本
+
+然后在你的虚拟主机配置文件加上+ExecCGI即可
+-----------------------------
+# for php
+    &lt;Directory &quot;/var/www/html&quot;&gt;
+        Options +ExecCGI
+        Require all granted
+    &lt;/Directory&gt;
+------------------------------
+
+服务器设置好apache2和php启用后，需要增大php上传限制：
+编辑 /etc/php.ini （debian下是 /etc/php5/xxx/php.ini) 修改以下值
+-----------------------------------------------------------
+session.gc_maxlifetime 10800
+max_input_time         10800
+max_execution_time     10800
+upload_max_filesize    110M
+post_max_size          120M
+-----------------------------------------------------------
+
+默认设置下，www主页的主目录在/var/www/html
+为php代理增加密码，修改goagent的index.php，修改第二项$__password__ = '你的密码';
+然后把goagent的index.php放到/var/www/html/proxy/下
+然后修改本地goagent的proxy.ini中[php]段改变如下值，我一般习惯于在proxy.user.ini里修改
+--------------
+enable = 1
+password = your passwd
+fetchserver = <a href="http://xx.xx.xx.xx/proxy/index.php" rel="nofollow">http://xx.xx.xx.xx/proxy/index.php</a>
+--------------
+再浏览器里设置代理：127.0.0.1：8088即可
+
+2.python （index.py，默认情况下性能更好，但看youtube耗内存也不小）
+利用apache的python模块wsgi，lighttpd不支持。
+centos6默认用python2.6，先用update-alternatives --config python来改变默认python的版本为2.7
+
+安装wsgi模块
+yum install mod24_wsgi-python27 (debian: apt-get install libapache2-mod-wsgi)
+同样在你的apache虚拟主机配置文件加上以下设置：如/etc/httpd/conf.d/VirtualHost0.conf
+----------------------
+# for python
+&lt;IfModule mod_wsgi.c&gt;
+WSGIScriptAlias /proxy/ /web/www/html/proxy/
+&lt;Directory &quot;/www/html/proxy&quot;&gt;
+Options +ExecCGI
+AddHandler wsgi-script .py
+Require all granted
+&lt;/Directory&gt;
+&lt;/IfModule&gt;
+----------------------
+or
+在 .htaccess 中， 添加：
+&lt;Files index.py&gt;
+    SetHandler wsgi-script
+    Options ExecCGI FollowSymLinks
+&lt;/Files&gt;
+
+最后，同上述上传index.php一样，增加密码后上传index.py到/var/www/html/proxy/下，
+并且赋予可执行权限：chmod +x /var/www/html/proxy/indexl.py
+
+然后修改本地goagent的proxy.ini中[php]段改变如下值
+--------------
+enable = 1
+password = your passwd
+fetchserver = <a href="http://xx.xx.xx.xx/proxy/index.py" rel="nofollow">http://xx.xx.xx.xx/proxy/index.py</a>
+--------------
+再浏览器里设置代理：127.0.0.1：8088即可
+
+3.index.js
+这是nodejs脚本，从<a href="https://nodejs.org/download/下载node的二进制程序即可node" rel="nofollow">https://nodejs.org/download/下载node的二进制程序即可node</a> index.js运行。运行后会自动监听8080端口。
+我猜应该是在apache里用反向代理方式提供操作。因为nodejs耗内存也不小，就懒得去试验了。
+
+4.relay.php 是中继代理，即在国外不熟php代理后，在国内的vps里用relay.php连接国外代理做中继。
+方法略。
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 28 02:02:20 2015">
+ May 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=21159#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/103874366506621497987/">yqh1...@gmail.com</a
+></span>
+ 
+<pre>
+靠。题目写两错别字。部署。。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 28 02:04:34 2015">
+ May 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=21159#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/114033169287966003070/">redfrog...@gmail.com</a
+></span>
+ 
+<pre>
+无所谓，哈哈，终于来了，感谢楼主，一会儿回去就试试。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 28 02:14:41 2015">
+ May 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=21159#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+这也太折腾了，最简单的方法是一键安装lnmp,再新建一个PHP文件就搞定了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 28 02:18:12 2015">
+ May 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=21159#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/103874366506621497987/">yqh1...@gmail.com</a
+></span>
+ 
+<pre>
+#3 主要是想在lighttpd部署index.py python代理。php代理部署确实很方便，但python的很少有人提到。php代理还要修改php的上传限制。否则不如index.py效果好。我主要用在仅仅开放80端口的场合。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 28 02:22:24 2015">
+ May 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=21159#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/118082579307465790879/">noreply....@gmail.com</a
+></span>
+ 
+<pre>
+楼主大大的总结非常棒，友情补充：玩云的小伙伴还可以顺便把Glype Proxy也部署了，以备应急。
+
+Glype部署相当便利，下载解压，扔到目录，开箱即用（最新版本v1.4.13）
+【注】在C9上部署可能会遇到Glype的版权限制，使用一下方法去掉：
+
+1. 删除/includes/init.php的“function render($b)……return $b;}”；
+2. 删除index.php的“# Start the output buffer ob_start('render');”（v1.4.10新增）。
+
+Glype下载地址：<a href="https://www.glype.com/download.php" rel="nofollow">https://www.glype.com/download.php</a>
+
+
+Glype 效果图：
+<a href="https://geekpics.net/ye21" rel="nofollow">https://geekpics.net/ye21</a>
+<a href="https://geekpics.net/ye2V" rel="nofollow">https://geekpics.net/ye2V</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 28 03:32:33 2015">
+ May 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=21159#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/114033169287966003070/">redfrog...@gmail.com</a
+></span>
+ 
+<pre>
+Glype和GOA的PHP，哪个速度更快？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 28 05:52:42 2015">
+ May 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=21159#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/118082579307465790879/">noreply....@gmail.com</a
+></span>
+ 
+<pre>
+#6 两种不同的模式，Glype不需要客户端，属于急救药（不要纠结速度）
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 28 06:36:36 2015">
+ May 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=21159#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/114033169287966003070/">redfrog...@gmail.com</a
+></span>
+ 
+<pre>
+php还是满，我还是部署到heroku加个cdn吧。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 28 07:29:31 2015">
+ May 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=21159#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/108063289147214719846/">zhangj...@gmail.com</a
+></span>
+ 
+<pre>
+#5 多谢分享。以前下过glype，但是一看到那些个命令啊什么的心里就发怵。现在是战胜归来的时刻了。现在就搞。
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 28 07:40:58 2015">
+ May 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=21159#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/108063289147214719846/">zhangj...@gmail.com</a
+></span>
+ 
+<pre>
+#5 有两个问题请教：
+
+function render($b) {/*Removal or alteration of this function is prohibited. Glype vigorously protects and defends its rights.*/
+
+这一部分代码的功能应该是知识产权保护。请问如果不删除能否正常使用，还有就是如何合法地使用这个工具？是要买他们的相关联产品还是怎么着？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 28 08:10:38 2015">
+ May 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=21159#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/107892137552823167163/">rph...@gmail.com</a
+></span>
+ 
+<pre>
+vps还是用shadowsocks吧，php模式普遍速度都慢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 28 08:29:46 2015">
+ May 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=21159#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/103874366506621497987/">yqh1...@gmail.com</a
+></span>
+ 
+<pre>
+#11 ss肯定首选。不过goagent的php代理在某些场合非常有用。比如有些地方只开放了80，443端口网页浏览权限，这时用它就很方便。而且vps不需要单独占用80端口，有web就可以。还有一种场合是防火墙只nat转发内部服务器的web ，外部不能直接访问内部（没有其他端口），用此php代理有效解决问题。还是很赞的。希望能持续改进。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 28 10:50:07 2015">
+ May 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=21159#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/105724805268215631170/">uuu...@gmail.com</a
+></span>
+ 
+<pre>
+试过好几次都没成功，一直返回500 error。只有在c9上成功过
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 28 10:58:53 2015">
+ May 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=21159#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/102015101309058584015/">christon...@gmail.com</a
+></span>
+ 
+<pre>
+#13 
+貌似c9就是整个apache2的吧。。怎么部署另外两个代理，js和py的代理。。。求教
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 28 11:15:19 2015">
+ May 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=21159#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/103874366506621497987/">yqh1...@gmail.com</a
+></span>
+ 
+<pre>
+#13 能把具体错误说下吗？ 事实上要检测是否部署成功，可以直接用浏览器访问你的py,php文件。
+比如 <a href="http://xx.xx.xx.xx/xx.php" rel="nofollow">http://xx.xx.xx.xx/xx.php</a> 正常的话跳转到一个其他页面，不正常就会显示文档内容或者无权访问之类。
+
+#14 第二部分讲了py的代理，性能比php更好，限制也少。
+2.python （index.py，默认情况下性能更好，但看youtube耗内存也不小）
+
+js不建议，太耗内存了。部署也简单，
+下载node的服务端，然后运行 node index.js ，会告诉你在端口8080监听。
+在apache2上启用proxy模块，设置反向代理。就一句话：
+---------------------------------------------
+ProxyPass /nodejs/ http://127.0.0.1:9001/
+--------------------------------------------
+然后你访问 <a href="http://xx.xx.xx.xx/nodejs/" rel="nofollow">http://xx.xx.xx.xx/nodejs/</a> 注意最后的斜杠，就会跳转到google页面。说明部署成功。
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 28 17:01:13 2015">
+ May 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=21159#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/103874366506621497987/">yqh1...@gmail.com</a
+></span>
+ 
+<pre>
+看了下 index.py的代码，尼玛，原来本身就是一个http代理服务器，可以直接运行，加端口参数就行。比如
+python index.py 8080
+就是一个http代理服务端，然后用gogent客户端接收既可。或者中间用ngnix反向代理一下 。好东西。没有说明文档真是绕弯弯
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21159&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21159"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="21159">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A21159',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 21159,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

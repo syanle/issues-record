@@ -1,0 +1,1215 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"assetHostPath": "https://ssl.gstatic.com/codesite/ph", "domainName": null, "profileUrl": null, "token": null, "relativeBaseUrl": "", "loggedInUserEmail": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "projectHomeUrl": "/p/goagent", "projectName": "goagent"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 3473 - 
+ goagent -
+ 
+ Connection reset by peer - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D3473&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D3473" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="closed_colors">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=3473">3473</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >Connection reset by peer</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 1 person starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A3473">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="The requested non-coding task was completed">Done</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ <tr><th align="left" valign="top">Closed:&nbsp;</th>
+ <td align="left" valign="top" width="100%">
+ Dec 2012
+ </td>
+ </tr>
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D3473&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D3473">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/105697162492638515584/">contropi...@gmail.com</a
+>,
+ <span class="date" title="Thu Apr 26 19:16:06 2012">Apr 26, 2012</span>
+ 
+ </div>
+<pre>
+
+    1、在<a href="https://appengine.google.com/" rel="nofollow">https://appengine.google.com/</a> 申请google app engine的appid
+
+    2、下载goagent稳定版 <a href="https://code.google.com/p/goagent/" rel="nofollow">https://code.google.com/p/goagent/</a>   解压得到goagent
+
+    下载google agent goagent 的linux版本
+
+    <a href="http://googleappengine.googlecode.com/files/google_appengine_1.6.2.zip" rel="nofollow">http://googleappengine.googlecode.com/files/google_appengine_1.6.2.zip</a>
+
+    解压得到google_appengine，将goagent复制到google_appengine中
+
+3、修改 /google_appengine/goagent/local/proxy.ini 
+
+    将appid改为申请的appid
+
+     修改/google_appengine/goagent/server/python/app.yaml
+
+     将application改为申请的appid
+
+4、在google_appengine目录下执行sudo python appcfg.py update goagent/server/python 进行上传
+
+     会提示输入gmail账户和密码
+
+5、下载Proxy SwitchySharp应用备份文件&quot;2011_11_SwitchyOptions.bak，
+
+    <a href="http://goagent.googlecode.com/files/SwitchyOptions.bak" rel="nofollow">http://goagent.googlecode.com/files/SwitchyOptions.bak</a>
+
+    设置chrome浏览器或firefox浏览器。
+
+    浏览器设置详见：
+
+    chrome浏览器：<a href="http://www.i7086.com/gugelanqichromeshezhigoagentyingyongtuwenjiaocheng" rel="nofollow">http://www.i7086.com/gugelanqichromeshezhigoagentyingyongtuwenjiaocheng</a>
+
+    firefox浏览器：<a href="http://www.i7086.com/gugeyingyonggoagentrangninziyoufangwenwangluotuwenjiaocheng" rel="nofollow">http://www.i7086.com/gugeyingyonggoagentrangninziyoufangwenwangluotuwenjiaocheng</a>
+
+6、在/google_appengine/goagent/local 目录下执行 python proxy,py 
+
+    OK！可以上youtube了.
+
+我按照上面的说法去做,
+
+cd  /home/name/google_appengine
+~/google_appengine$ python appcfg.py update goagent/server/python/
+Application: xxxxxx; version: 1
+Host: appengine.google.com
+
+Starting update of app: xxxxxx, version: 1
+Getting current resource limits.
+Email:我输入了
+Password for : 密码也输入了
+Scanning files on local disk.
+Cloning 2 application files.
+Compilation starting.
+Compilation completed.
+Starting deployment.
+Checking if deployment succeeded.
+Will check again in 1 seconds.
+Checking if deployment succeeded.
+Will check again in 2 seconds.
+Checking if deployment succeeded.
+Will check again in 4 seconds.
+Checking if deployment succeeded.
+Will check again in 8 seconds.
+Checking if deployment succeeded.
+Will check again in 16 seconds.
+Checking if deployment succeeded.
+Deployment successful.
+Checking if updated app version is serving.
+Will check again in 1 seconds.
+Checking if updated app version is serving.
+Will check again in 1 seconds.
+Checking if updated app version is serving.
+Will check again in 1 seconds.
+Checking if updated app version is serving.
+Will check again in 1 seconds.
+Checking if updated app version is serving.
+Will check again in 1 seconds.
+Checking if updated app version is serving.
+Will check again in 1 seconds.
+Checking if updated app version is serving.
+Will check again in 1 seconds.
+Checking if updated app version is serving.
+Will check again in 1 seconds.
+Checking if updated app version is serving.
+Will check again in 1 seconds.
+Checking if updated app version is serving.
+Will check again in 1 seconds.
+Checking if updated app version is serving.
+Will check again in 1 seconds.
+Checking if updated app version is serving.
+Will check again in 1 seconds.
+Checking if updated app version is serving.
+2012-04-27 06:08:27,845 ERROR appcfg.py:2220 An unexpected error occurred. Aborting. 
+Traceback (most recent call last):
+  File &quot;/home/pengtao/google_appengine/google/appengine/tools/appcfg.py&quot;, line 2206, in DoUpload
+    app_summary = self.Commit()
+  File &quot;/home/pengtao/google_appengine/google/appengine/tools/appcfg.py&quot;, line 2000, in Commit
+    lambda: (self.IsServing(), None), PrintRetryMessage, 1, 1, 1, 60)
+  File &quot;/home/pengtao/google_appengine/google/appengine/tools/appcfg.py&quot;, line 445, in RetryWithBackoff
+    done, opaque_value = callable_func()
+  File &quot;/home/pengtao/google_appengine/google/appengine/tools/appcfg.py&quot;, line 2000, in &lt;lambda&gt;
+    lambda: (self.IsServing(), None), PrintRetryMessage, 1, 1, 1, 60)
+  File &quot;/home/pengtao/google_appengine/google/appengine/tools/appcfg.py&quot;, line 2088, in IsServing
+    result = self.Send('/api/appversion/isserving')
+  File &quot;/home/pengtao/google_appengine/google/appengine/tools/appcfg.py&quot;, line 1780, in Send
+    return self.rpcserver.Send(url, payload=payload, **self.params)
+  File &quot;/home/pengtao/google_appengine/google/appengine/tools/appengine_rpc.py&quot;, line 366, in Send
+    f = self.opener.open(req)
+  File &quot;/usr/lib/python2.7/urllib2.py&quot;, line 391, in open
+    response = self._open(req, data)
+  File &quot;/usr/lib/python2.7/urllib2.py&quot;, line 409, in _open
+    '_open', req)
+  File &quot;/usr/lib/python2.7/urllib2.py&quot;, line 369, in _call_chain
+    result = func(*args)
+  File &quot;/usr/lib/python2.7/urllib2.py&quot;, line 1193, in https_open
+    return self.do_open(httplib.HTTPSConnection, req)
+  File &quot;/home/pengtao/google_appengine/lib/fancy_urllib/fancy_urllib/__init__.py&quot;, line 367, in do_open
+    raise url_error
+URLError: &lt;urlopen error [Errno 104] Connection reset by peer&gt;
+Rolling back the update.
+
+出现这个的故障,请问,如何解决?
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 26 20:34:03 2012">
+ Apr 26, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=3473#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/106781204990925295112/">yubinlov...@gmail.com</a
+></span>
+ 
+<pre>
+浏览器和插件分别是什么？可能是插件的问题
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 27 22:05:02 2012">
+ Apr 27, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=3473#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/105697162492638515584/">contropi...@gmail.com</a
+></span>
+ 
+<pre>
+浏览器是火狐,插件是autoproxy
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May  1 02:52:01 2012">
+ May 1, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=3473#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/marslo.vida/">marslo.vida</a
+></span>
+ 
+<pre>
+我之前也出现了你的问题，一抹一样的，但是后来我重新试了一次，就成功。。。
+
+marslo@MJ:~/Tools/Softwares/Proxy/google_appengine$ sudo python appcfg.py update goagent/server/python/
+[sudo] password for marslo: 
+Application: woainvzu; version: 1
+Host: appengine.google.com
+
+Starting update of app: woainvzu, version: 1
+Getting current resource limits.
+Email: marslo.vida@gmail.com
+Password for marslo.vida@gmail.com: 
+Scanning files on local disk.
+Cloning 2 application files.
+Compilation starting.
+Compilation completed.
+Starting deployment.
+Checking if deployment succeeded.
+Will check again in 1 seconds.
+Checking if deployment succeeded.
+Will check again in 2 seconds.
+Checking if deployment succeeded.
+Deployment successful.
+Checking if updated app version is serving.
+Will check again in 1 seconds.
+Checking if updated app version is serving.
+Will check again in 1 seconds.
+Checking if updated app version is serving.
+Completed update of app: woainvzu, version: 1
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May  1 03:38:06 2012">
+ May 1, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=3473#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/marslo.vida/">marslo.vida</a
+></span>
+ 
+<pre>
+不过需要注意的是，在验证密码的时候，如果自己的帐号设置的是二次验证（大概是这么叫的），输入的就不能是自己邮箱的密码，而是类似于app password的一种随机生成的密码
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 18 22:00:11 2012">
+ May 18, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=3473#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/marslo.vida/">marslo.vida</a
+></span>
+ 
+<pre>
+我昨天重装了。。结果又出现了这个问题。。。而且是update了好多次都不行。。
+后来我的解决方法：
+1. 重新生成一次二次验证的密码
+2. 将goagent/server/python/app.yaml中的version设为2，即：version: 2
+3. 修改本机的DNS为8.8.8.8
+
+使用google_appengine的目的是防止goagent在上传的时候撞墙。。但是最近似乎使用了google_appengine还是要撞墙，所以在上传的时候出现问题，所以需要将DNS设为8.8.8.8，这是google的服务器ip还是什么东西来着。。
+
+然后上传就完美成功了！！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Aug 31 01:33:34 2012">
+ Aug 31, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=3473#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/111207424531829555557/">jietouwu...@gmail.com</a
+></span>
+ 
+<pre>
+:~/google_appengine$ sudo python appcfg.py update goagent/server/python
+04:31 PM Host: appengine.google.com
+04:31 PM Application: jietouwuzhe; version: 1
+04:31 PM 
+Starting update of app: jietouwuzhe, version: 1
+04:31 PM Getting current resource limits.
+Email: ********@gmail.com
+Password for ********@gmail.com: 
+2012-08-31 16:32:18,277 ERROR appcfg.py:2163 An error occurred processing file '': &lt;urlopen error [Errno 104] Connection reset by peer&gt;. Aborting. 
+Traceback (most recent call last):
+  File &quot;appcfg.py&quot;, line 133, in &lt;module&gt;
+    run_file(__file__, globals())
+  File &quot;appcfg.py&quot;, line 129, in run_file
+    execfile(script_path, globals_)
+  File &quot;/home/b-boy/google_appengine/google/appengine/tools/appcfg.py&quot;, line 4085, in &lt;module&gt;
+    main(sys.argv)
+  File &quot;/home/b-boy/google_appengine/google/appengine/tools/appcfg.py&quot;, line 4076, in main
+    result = AppCfgApp(argv).Run()
+  File &quot;/home/b-boy/google_appengine/google/appengine/tools/appcfg.py&quot;, line 2546, in Run
+    self.action(self)
+  File &quot;/home/b-boy/google_appengine/google/appengine/tools/appcfg.py&quot;, line 3832, in __call__
+    return method()
+  File &quot;/home/b-boy/google_appengine/google/appengine/tools/appcfg.py&quot;, line 2993, in Update
+    self.UpdateVersion(rpcserver, self.basepath, appyaml)
+  File &quot;/home/b-boy/google_appengine/google/appengine/tools/appcfg.py&quot;, line 2976, in UpdateVersion
+    lambda path: self.opener(os.path.join(basepath, path), 'rb'))
+  File &quot;/home/b-boy/google_appengine/google/appengine/tools/appcfg.py&quot;, line 2133, in DoUpload
+    resource_limits = GetResourceLimits(self.rpcserver, self.config)
+  File &quot;/home/b-boy/google_appengine/google/appengine/tools/appcfg.py&quot;, line 357, in GetResourceLimits
+    resource_limits.update(GetRemoteResourceLimits(rpcserver, config))
+  File &quot;/home/b-boy/google_appengine/google/appengine/tools/appcfg.py&quot;, line 328, in GetRemoteResourceLimits
+    version=config.version)
+  File &quot;/home/b-boy/google_appengine/google/appengine/tools/appengine_rpc.py&quot;, line 377, in Send
+    f = self.opener.open(req)
+  File &quot;/usr/lib/python2.7/urllib2.py&quot;, line 400, in open
+    response = self._open(req, data)
+  File &quot;/usr/lib/python2.7/urllib2.py&quot;, line 418, in _open
+    '_open', req)
+  File &quot;/usr/lib/python2.7/urllib2.py&quot;, line 378, in _call_chain
+    result = func(*args)
+  File &quot;/usr/lib/python2.7/urllib2.py&quot;, line 1215, in https_open
+    return self.do_open(httplib.HTTPSConnection, req)
+  File &quot;/home/b-boy/google_appengine/lib/fancy_urllib/fancy_urllib/__init__.py&quot;, line 367, in do_open
+    raise url_error
+urllib2.URLError: &lt;urlopen error [Errno 104] Connection reset by peer&gt;
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Aug 31 01:34:26 2012">
+ Aug 31, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=3473#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/111207424531829555557/">jietouwu...@gmail.com</a
+></span>
+ 
+<pre>
+我的是什么错误阿，我试了好多次，请lz帮忙阿 
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Aug 31 01:34:47 2012">
+ Aug 31, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=3473#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/111207424531829555557/">jietouwu...@gmail.com</a
+></span>
+ 
+<pre>
+非常感谢阿
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Sep  2 00:51:31 2012">
+ Sep 2, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=3473#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/106499874237496702084/">cxgwx2...@gmail.com</a
+></span>
+ 
+<pre>
+请问，我出现了如 comment 6 那样一模一样的问题，请问这个是什么原因？？？感激不尽
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Dec 15 18:12:11 2012">
+ Dec 15, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=3473#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+<i>(No comment was entered for this change.)</i>
+</pre>
+ 
+ 
+ <div class="updates">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ 
+ <b>Status:</b>
+ httpscode.google.compwwqgtxx-goagentwikiFAQ
+ 
+ <br>
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Dec 15 18:12:29 2012">
+ Dec 15, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=3473#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+<i>(No comment was entered for this change.)</i>
+</pre>
+ 
+ 
+ <div class="updates">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ 
+ <b>Status:</b>
+ Done
+ 
+ <br>
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D3473&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D3473"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="3473">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A3473',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 3473,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

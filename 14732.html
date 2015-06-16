@@ -1,0 +1,1428 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"relativeBaseUrl": "", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "projectName": "goagent", "loggedInUserEmail": null, "token": null, "projectHomeUrl": "/p/goagent", "profileUrl": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 14732 - 
+ goagent -
+ 
+ Found more GGC IPs - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14732&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14732" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=14732">14732</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >Found more GGC IPs</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 4 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A14732">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14732&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14732">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/101309562631439113700/">westmin...@gmail.com</a
+>,
+ <span class="date" title="Mon Jun 16 00:38:52 2014">Jun 16, 2014</span>
+ 
+ </div>
+<pre>
+for study, be happy. ^_^
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun 16 00:40:19 2014">
+ Jun 16, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=14732#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/101309562631439113700/">westmin...@gmail.com</a
+></span>
+ 
+<pre>
+google IP address range
+
+inetnum:        213.252.15.0 - 213.252.15.31
+netname:        TFT-GOOGLE-NET4
+descr:          TOMORROW FOCUS Technologies GmbH
+descr:          TOMORROW FOCUS, Server Farm, Google Server
+country:        DE
+status:         ASSIGNED PA
+mnt-by:         CU-MNT
+mnt-lower:      MORE-MNT
+source:         RIPE
+mnt-by:         MORE-MNT
+--
+--
+
+inetnum:        213.31.219.80 - 213.31.219.87
+netname:        EU-BT-INFONET-GOOGLE-UK-LTD
+descr:          GOOGLE UK LTD
+descr:          NORWAY
+country:        NO
+status:         ASSIGNED PA
+mnt-by:         EQIP-MNT
+source:         RIPE
+--
+
+inetnum:        195.229.194.88 - 195.229.194.95
+netname:        GOOGLEINTERNETSERVICES-EMIRNET
+descr:          Google Internet Services LLC
+descr:          P.O.Box 40736, Dubai, UAE
+country:        AE
+status:         ASSIGNED PA
+mnt-by:         ETISALAT-MNT
+mnt-lower:      ETISALAT-MNT
+mnt-routes:     ETISALAT-MNT
+source:         RIPE
+--
+
+inetnum:        195.205.170.64 - 195.205.170.79
+netname:        GOOGLE-POLAND
+descr:          GOOGLE POLAND SP. Z O.O. W ORGANIZACJI
+descr:          ul. Ofiar Oswiecimskich 38/40
+descr:          50-069 Wroclaw
+country:        PL
+status:         ASSIGNED PA
+mnt-by:         TPNET
+source:         RIPE
+--
+
+inetnum:        212.162.51.64 - 212.162.51.127
+netname:        GOOGLE-CZ
+descr:          GOOGLE PRAGUE LAN
+country:        DE
+status:         ASSIGNED PA
+mnt-by:         LEVEL3-MNT
+mnt-lower:      LEVEL3-MNT
+mnt-routes:     LEVEL3-MNT
+notify:         ripehostmaster@eu.level3.net
+source:         RIPE
+--
+netname:        PIONIER-GGC-1-26
+descr:          Poznan Supercomputing and Networking Center
+descr:          Poland
+descr:          PIONIER Google Global Cache
+country:        PL
+status:         ASSIGNED PA
+source:         RIPE
+--
+
+inetnum:        83.141.89.124 - 83.141.89.127
+netname:        GOOGLELINK-NET
+descr:          Google Link, IBB
+country:        IE
+status:         ASSIGNED PA
+mnt-by:         IBIS-MNT
+source:         RIPE
+--
+
+inetnum:        195.244.106.0 - 195.244.106.255
+netname:        GOOGLE-LUEBECK-NET1
+descr:          Google Germany GmbH
+descr:          Maria-Goeppert-Str. 3
+descr:          23562 Luebeck
+country:        DE
+status:         ASSIGNED PA
+mnt-by:         CITYLINE-MNT
+source:         RIPE
+--
+
+inetnum:        217.33.127.208 - 217.33.127.223
+netname:        GOOGLE-LTD
+descr:          FTIP002816883 Google Ltd
+country:        GB
+status:         ASSIGNED PA
+mnt-by:         BTNET-MNT
+mnt-lower:      BTNET-MNT
+mnt-routes:     BTNET-MNT
+source:         RIPE
+--
+
+inetnum:        89.96.249.160 - 89.96.249.175
+netname:        FASTWEB-GOOGLE
+descr:          GOOGLE public subnet
+country:        IT
+status:         ASSIGNED PA
+mnt-by:         FASTWEB-MNT
+source:         RIPE
+--
+
+inetnum:        89.207.224.0 - 89.207.231.255
+netname:        IE-GOOGLE-20060712
+descr:          Google Ireland Limited
+country:        IE
+org:            ORG-GIL4-RIPE
+status:         ALLOCATED PA
+mnt-by:         RIPE-NCC-HM-MNT
+mnt-lower:      MNT-GOOG-PROD
+mnt-routes:     MNT-GOOG-PROD
+mnt-domains:    MNT-GOOG-PROD
+notify:         ripe-contact@google.com
+source:         RIPE
+--
+
+inetnum:        217.28.250.44 - 217.28.250.47
+netname:        LINX-FRA-GOOGLE
+descr:          Google peering
+country:        DE
+status:         ASSIGNED PA
+notify:         ripe@data.ee
+mnt-by:         AS3327-MNT
+source:         RIPE
+--
+netname:        SOVINTEL-MSK-Google-Ireland-NET
+descr:          121099 Russia, Moscow
+descr:          Smolenskaya, 3, CRC-985148
+descr:          Google LLC, <a href="http://www.google.com" rel="nofollow">http://www.google.com</a>
+country:        RU
+status:         ASSIGNED PA
+mnt-by:         SOVINTEL-MNT
+notify:         ncc@sovintel.ru
+source:         RIPE
+--
+
+inetnum:        217.149.45.16 - 217.149.45.31
+netname:        isplk-google-3
+descr:          Google Inc.
+country:        NL
+status:         ASSIGNED PA
+mnt-by:         SPRINTLINK-MNT
+source:         RIPE
+--
+
+inetnum:        193.142.125.0 - 193.142.125.255
+netname:        GOOGLE-CORP
+descr:          Google Zurich
+country:        CH
+org:            ORG-GSG10-RIPE
+status:         ASSIGNED PI
+mnt-by:         RIPE-NCC-END-MNT
+mnt-lower:      RIPE-NCC-END-MNT
+mnt-by:         MNT-GOOG-CORP
+mnt-routes:     MNT-GOOG-CORP
+mnt-domains:    MNT-GOOG-CORP
+source:         RIPE
+--
+
+inetnum:        194.110.194.0 - 194.110.194.255
+netname:        GOOGLE-CORP
+descr:          Google Ireland Limited
+country:        IL
+org:            ORG-GIL4-RIPE
+status:         ASSIGNED PI
+mnt-by:         RIPE-NCC-END-MNT
+mnt-lower:      RIPE-NCC-END-MNT
+mnt-by:         MNT-GOOG-CORP
+mnt-routes:     MNT-GOOG-CORP
+mnt-domains:    MNT-GOOG-CORP
+source:         RIPE
+--
+
+inetnum:        193.200.222.0 - 193.200.222.255
+netname:        GOOGLE-CORP
+descr:          Google Paris
+country:        FR
+org:            ORG-GSG10-RIPE
+status:         ASSIGNED PI
+mnt-by:         RIPE-NCC-END-MNT
+mnt-lower:      RIPE-NCC-END-MNT
+mnt-by:         MNT-GOOG-CORP
+mnt-routes:     MNT-GOOG-CORP
+mnt-domains:    MNT-GOOG-CORP
+source:         RIPE
+--
+
+inetnum:        83.220.157.100 - 83.220.157.103
+netname:        DE-GOOGLE
+descr:          Google Inc.
+descr:          Customer Transfer Network
+country:        DE
+status:         ASSIGNED PA
+notify:         hostmaster@mesh.eu
+mnt-by:         MESH
+mnt-by:         MESH
+mnt-lower:      MESH
+mnt-routes:     MESH
+source:         RIPE
+--
+
+inetnum:        193.186.4.0 - 193.186.4.255
+netname:        GOOGLE-CORP
+descr:          Google Ireland Limited
+country:        PL
+org:            ORG-GIL4-RIPE
+status:         ASSIGNED PI
+mnt-by:         RIPE-NCC-END-MNT
+mnt-lower:      RIPE-NCC-END-MNT
+mnt-by:         MNT-GOOG-CORP
+mnt-routes:     MNT-GOOG-CORP
+mnt-domains:    MNT-GOOG-CORP
+source:         RIPE
+--
+
+inetnum:        80.227.152.32 - 80.227.152.39
+netname:        GoogleFZ-NET
+descr:          Google FZ LLC
+country:        AE
+status:         Assigned PA
+mnt-by:         DIC-MNT
+mnt-lower:      DIC-MNT
+mnt-routes:     DIC-MNT
+notify:         notify@du.ae
+--
+
+inetnum:        212.181.117.144 - 212.181.117.159
+netname:        SE-GOOGLESWEDEN
+descr:          Google Sweden AB
+org:            ORG-GSA16-RIPE
+country:        SE
+status:         ASSIGNED PA
+notify:         mntripe@telia.net
+mnt-by:         TELIANET-LIR
+source:         RIPE
+--
+
+inetnum:        78.8.8.176 - 78.8.8.191
+netname:        GOOGLE-DIALOG-NETWORK
+descr:          Google Poland
+descr:          Rynek Glowny 12-13
+descr:          Krakow
+country:        PL
+status:         ASSIGNED PA
+mnt-by:         NETIA-MNT
+source:         RIPE
+--
+
+inetnum:        217.28.253.32 - 217.28.253.33
+netname:        LINX-STO-GOOGLE
+descr:          Google peering
+country:        SE
+status:         ASSIGNED PA
+notify:         ripe@data.ee
+mnt-by:         AS3327-MNT
+source:         RIPE
+--
+
+inetnum:        195.100.224.112 - 195.100.224.127
+netname:        Google
+descr:          Google DK
+country:        DK
+status:         ASSIGNED PA
+mnt-by:         CIP-MNT
+source:         RIPE
+--
+
+inetnum:        213.187.184.68 - 213.187.184.71
+netname:        NGT-96120-20080513-NO-1
+descr:          Google Norway AS
+country:        NO
+status:         ASSIGNED PA
+notify:         hostmaster@nextgentel.com
+mnt-by:         NO-NEXTGENTEL-MNT
+source:         RIPE
+--
+
+inetnum:        77.109.131.208 - 77.109.131.223
+netname:        GOOGLE-CH-NET
+descr:          Google Inc.
+country:        CH
+status:         Assigned PA
+mnt-by:         MNT-INIT7-NOC
+source:         RIPE
+--
+
+inetnum:        84.233.219.144 - 84.233.219.159
+netname:        GOOGLE-NETS
+descr:          Google Czech Republic
+country:        CZ
+status:         ASSIGNED PA
+mnt-by:         INTEROUTE-MNTNR
+mnt-lower:      INTEROUTE-MNTNR
+source:         RIPE
+--
+
+inetnum:        93.94.217.0 - 93.94.217.31
+netname:        AM-ADC-GOOGLEGLOBALCACHE
+descr:          GOOGLE GLOBAL CACHE
+country:        AM
+status:         ASSIGNED PA
+mnt-by:         AMADC-MNT
+source:         RIPE
+--
+
+inetnum:        93.94.218.0 - 93.94.218.31
+netname:        AM-ADC-GOOGLEGLOBALCACHE2
+descr:          GOOGLE GLOBAL CACHE
+country:        AM
+status:         ASSIGNED PA
+mnt-by:         AMADC-MNT
+source:         RIPE
+--
+
+inetnum:        195.244.120.144 - 195.244.120.159
+netname:        GOOGLE-TRANSIT-NET1
+descr:          Google Germany GmbH
+descr:          Maria-Goeppert-Str. 3
+descr:          23562 Luebeck
+country:        DE
+status:         ASSIGNED PA
+mnt-by:         CITYLINE-MNT
+source:         RIPE
+--
+
+inetnum:        81.93.175.232 - 81.93.175.239
+netname:        NO-LAANEKASSEN-NET
+descr:          LK Google GSA
+country:        NO
+status:         ASSIGNED PA
+mnt-by:         BASEFARM-MNT
+source:         RIPE
+--
+
+inetnum:        80.239.168.192 - 80.239.168.255
+netname:        GOOGLE
+descr:          Google Inc.
+org:            ORG-GI16-RIPE
+country:        FR
+status:         ASSIGNED PA
+notify:         mntripe@telia.net
+mnt-by:         TELIANET-LIR
+source:         RIPE
+--
+
+inetnum:        217.30.152.192 - 217.30.152.223
+netname:        GGC-DIALOG-NETWORK
+descr:          Google Global Cache Services - Dialog Telecom
+descr:          pl. Jana Pawla II 1
+descr:          50 - 136 Wroclaw
+country:        PL
+status:         ASSIGNED PA
+mnt-by:         NETIA-MNT
+source:         RIPE
+--
+
+inetnum:        194.78.20.16 - 194.78.20.31
+netname:        SKY-7404728
+descr:          Google Belgium
+country:        BE
+status:         ASSIGNED PA
+mnt-by:         SKYNETBE-MNT
+mnt-by:         SKYNETBE-ROBOT-MNT
+source:         RIPE
+--
+
+inetnum:        85.182.250.0 - 85.182.250.63
+netname:        GOOGLE-INC-NET
+descr:          Google Inc.
+descr:          D-22175 Hamburg
+country:        DE
+status:         ASSIGNED PA
+mnt-by:         HANSENET-NOC
+source:         RIPE
+--
+
+inetnum:        85.182.250.64 - 85.182.250.127
+netname:        GOOGLE-INC-NET
+descr:          Google Inc.
+descr:          D-12103 Berlin
+country:        DE
+status:         ASSIGNED PA
+mnt-by:         HANSENET-NOC
+source:         RIPE
+--
+
+inetnum:        62.20.124.48 - 62.20.124.63
+netname:        SE-GOOGLESWEDEN
+descr:          Google Sweden AB
+org:            ORG-GSA29-RIPE
+country:        SE
+status:         ASSIGNED PA
+notify:         mntripe@telia.net
+mnt-by:         TELIANET-LIR
+source:         RIPE
+--
+inetnum:        212.154.168.224 - 212.154.168.255
+netname:        KOBACKBONE
+descr:          JSC Kazakhtelecom, Kazakhstan Online Backbone
+descr:          Project Google Inc
+descr:          Astana
+country:        KZ
+status:         ASSIGNED PA
+mnt-by:         KNIC-MNT
+source:         RIPE
+--
+
+inetnum:        217.193.96.38 - 217.193.96.38
+netname:        IPP-L-CUST-LINKS
+descr:          Google Switzerland GmbH Zuerich
+descr:          8002 Zuerich
+country:        CH
+status:         ASSIGNED PA
+mnt-by:         CH-UNISOURCE-MNT
+source:         RIPE
+--
+
+inetnum:        195.65.133.128 - 195.65.133.135
+netname:        GOOGLEZUERICH-NET
+descr:          Google Switzerland GmbH Zuerich
+descr:          8002 Zuerich
+country:        CH
+status:         ASSIGNED PA
+mnt-by:         CH-UNISOURCE-MNT
+source:         RIPE
+--
+
+inetnum:        92.45.86.16 - 92.45.86.31
+netname:        Google
+descr:          Google Advertising and Marketing Ltd Sti
+country:        TR
+status:         ASSIGNED PA
+notify:         ipadm@tellcom.com.tr
+mnt-by:         MNT-TELLCOM
+source:         RIPE
+--
+
+inetnum:        194.78.99.0 - 194.78.99.255
+netname:        GoogleCluster
+descr:          Google Video Cache
+country:        BE
+status:         ASSIGNED PA
+mnt-by:         SKYNETBE-MNT
+mnt-by:         SKYNETBE-ROBOT-MNT
+source:         RIPE
+--
+
+inetnum:        85.182.250.128 - 85.182.250.191
+netname:        GOOGLE-INC-NET
+descr:          Google Inc.
+descr:          D-40599 Duesseldorf
+country:        DE
+status:         ASSIGNED PA
+mnt-by:         HANSENET-NOC
+source:         RIPE
+--
+
+inetnum:        77.40.222.224 - 77.40.222.231
+netname:        GOOGLENORWAY-NET
+descr:          Google Norway AS
+country:        NO
+status:         ASSIGNED PA
+mnt-by:         POWERTECH-MNT
+notify:         ripe-notify@powertech.no
+source:         RIPE
+--
+country:        CH
+--
+
+inetnum:        213.186.229.0 - 213.186.229.63
+netname:        GOOGLE-100915
+descr:          Google Inc.
+country:        FI
+status:         ASSIGNED PA
+mnt-by:         FI2G-MNT
+source:         RIPE
+--
+
+inetnum:        193.92.133.0 - 193.92.133.63
+netname:        GOOGLE-SERVERS
+descr:          GOOGLE COLLOCATION SERVERS
+country:        GR
+status:         ASSIGNED PA
+mnt-by:         FORTHNETGR-MNT
+source:         RIPE
+--
+
+inetnum:        94.40.70.0 - 94.40.70.63
+netname:        PL-GOOGLE
+descr:          Google Krakow
+descr:          Global Cache
+country:        PL
+status:         ASSIGNED PA
+mnt-by:         TKTELEKOM-MNT
+mnt-lower:      TKTELEKOM-MNT
+mnt-routes:     TKTELEKOM-MNT
+notify:         registry@tktelekom.pl
+source:         RIPE
+--
+
+inetnum:        193.120.166.64 - 193.120.166.127
+netname:        Google
+descr:          Google NOC
+descr:          1600 Amphitheatre Parkway
+descr:          Mountain View
+descr:          CA 94043
+country:        US
+status:         ASSIGNED PA
+mnt-by:         IEUNET-NOC
+source:         RIPE
+--
+
+inetnum:        194.100.132.128 - 194.100.132.143
+netname:        GOOGLE-FI
+descr:          Google Ireland Limited
+country:        FI
+status:         ASSIGNED PA
+notify:         hostmaster@tdc.fi
+mnt-by:         AS3246-MNT
+source:         RIPE
+--
+
+inetnum:        94.200.103.64 - 94.200.103.71
+netname:        Google-NET
+descr:          Google Fz LLC
+country:        AE
+status:         Assigned PA
+mnt-by:         DIC-MNT
+mnt-lower:      DIC-MNT
+mnt-routes:     DIC-MNT
+notify:         notify@du.ae
+--
+
+inetnum:        195.141.3.24 - 195.141.3.27
+netname:        GOOGLE-NET
+descr:          Google Inc
+descr:          Sagereistrasse 29
+descr:          8152 Glattbrugg
+country:        CH
+descr:          SID6618
+status:         ASSIGNED PA
+notify:         ip-reg@sunrise.net
+mnt-by:         AS6730-MNT
+source:         RIPE
+--
+
+inetnum:        80.231.69.0 - 80.231.69.63
+netname:        Google-TATAC
+descr:          Google Inc
+country:        FR
+status:         ASSIGNED PA
+mnt-by:         AS8297-MNT
+source:         RIPE
+--
+inetnum:        83.100.221.224 - 83.100.221.255
+netname:        KAROOGOOGLECACHE-KCOM
+country:        GB
+descr:          Karoo Google Cache(Clancy #75)
+status:         ASSIGNED PA
+notify:         ripe@as12390.net
+mnt-by:         KINGSTON-MNT
+source:         RIPE
+--
+
+inetnum:        213.240.44.0 - 213.240.44.31
+netname:        YUNET-GOOGLE-NET
+descr:          Google Global Cache
+country:        CS
+status:         ASSIGNED PA
+notify:         noc@EUnet.rs
+mnt-by:         AS8771-MNT
+source:         RIPE
+--
+
+inetnum:        86.127.118.128 - 86.127.118.191
+netname:        RO-RDS-GOOGLE-CACHE
+descr:          Google Cache
+descr:          RCS &amp; RDS Business
+country:        RO
+status:         ASSIGNED PA
+notify:         notify-ripe@rcs-rds.ro
+mnt-by:         AS8708-MNT
+mnt-lower:      AS8708-MNT
+source:         RIPE
+--
+
+inetnum:        87.244.198.160 - 87.244.198.191
+netname:        GGC_Energotel
+descr:          Google Global Cache
+descr:          Bratislava, Culenova
+country:        SK
+mnt-by:         ENGT-MNT
+source:         RIPE
+status:         ASSIGNED PA
+--
+
+inetnum:        93.183.211.192 - 93.183.211.255
+netname:        GGC-DATAGROUP
+descr:          Google Global Cache, Kiev, Smolenskaya 31/33 str.
+descr:          Datagroup DC
+country:        UA
+status:         ASSIGNED PA
+mnt-by:         DATACOM-NOC
+source:         RIPE
+--
+
+inetnum:        84.235.77.0 - 84.235.77.255
+netname:        STC-GOOGLE-caches
+descr:          Assigned  for GOOGLE caches Riydh IGW &amp; Jedah IGW
+country:        SA
+status:         ASSIGNED PA
+mnt-by:         SAUDINET-STC
+source:         RIPE
+--
+
+inetnum:        195.76.16.136 - 195.76.16.143
+netname:        GOOGLE
+descr:          GOOGLE SPAIN
+descr:          Internet Public Addresses
+descr:          FGG648001 133639
+country:        es
+status:         ASSIGNED PA
+mnt-by:         MAINT-AS3352
+source:         RIPE
+--
+
+inetnum:        195.81.83.176 - 195.81.83.191
+netname:        GOOGLE-NETS
+descr:          Google Germany GmbH
+country:        DE
+status:         ASSIGNED PA
+mnt-by:         INTEROUTE-MNTNR
+mnt-lower:      INTEROUTE-MNTNR
+source:         RIPE
+--
+
+inetnum:        80.80.3.176 - 80.80.3.191
+netname:        NET-DK-GOOGLE-DENMARK-APS
+descr:          GOOGLE DENMARK APS
+country:        DK
+status:         ASSIGNED PA
+mnt-by:         COLT-DK-MNT
+source:         RIPE
+--
+
+inetnum:        195.81.83.192 - 195.81.83.207
+netname:        GOOGLE-GERMANY-NETS
+descr:          Google Germany GmbH
+country:        DE
+status:         ASSIGNED PA
+mnt-by:         INTEROUTE-MNTNR
+mnt-lower:      INTEROUTE-MNTNR
+source:         RIPE
+--
+
+inetnum:        178.60.128.1 - 178.60.128.63
+netname:        GOOGLE_CACHE-NET
+descr:          Cache Google A Coruna
+descr:          Spain
+country:        ES
+status:         ASSIGNED PA
+mnt-by:         GGC-NET-MNT
+mnt-lower:      GGC-NET-MNT
+source:         RIPE
+--
+
+inetnum:        62.116.207.0 - 62.116.207.63
+netname:        GOOGLE-GGC-NET-1
+descr:          Google Global Cache
+country:        DK
+status:         ASSIGNED PA
+mnt-by:         nia-mnt
+source:         RIPE
+--
+
+inetnum:        88.159.13.192 - 88.159.13.255
+netname:        EDUTEL-GGC
+descr:          Google Global Cache
+country:        NL
+status:         ASSIGNED PA
+mnt-irt:        IRT-Edutel-CSIRT
+mnt-by:         MNT-EDUTEL
+source:         RIPE
+--
+
+inetnum:        81.175.29.128 - 81.175.29.191
+netname:        HT-NO-GOOGLE-CACHE
+descr:          Used for local Google Cache servers
+country:        NO
+status:         ASSIGNED PA
+mnt-by:         AS41572-MNT
+mnt-lower:      AS41572-MNT
+mnt-routes:     AS41572-MNT
+source:         RIPE
+--
+netname:        PIONIER-STREAMING
+descr:          Poznan Supercomputing and Networking Center
+descr:          Poland
+descr:          PIONIER Google Global Cache
+country:        PL
+status:         ASSIGNED PA
+source:         RIPE
+--
+
+inetnum:        80.228.65.128 - 80.228.65.191
+netname:        EWETEL-GGC-OL-NET
+descr:          Google Ireland Limited
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun 16 01:37:37 2014">
+ Jun 16, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=14732#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/arbiterazzvx/">arbiterazzvx</a
+></span>
+ 
+<pre>
+This is usefull, thx for sharing.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun 16 01:53:50 2014">
+ Jun 16, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=14732#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/108100429981789607740/">wangshu...@gmail.com</a
+></span>
+ 
+<pre>
+找找巴西应应景
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun 16 04:03:06 2014">
+ Jun 16, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=14732#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/116429278341066409272/">du2...@gmail.com</a
+></span>
+ 
+<pre>
+能教一下找ip的方法吗 前一阵从一个帖子学的方法找的太有限 估计快不行了 教我方法就行 谢谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun 16 07:50:42 2014">
+ Jun 16, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=14732#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/117811983486560328512/">hurui200...@126.com</a
+></span>
+ 
+<pre>
+em.... Where are you from?
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14732&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14732"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="14732">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A14732',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 14732,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

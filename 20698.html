@@ -1,0 +1,5210 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"token": null, "projectHomeUrl": "/p/goagent", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "projectName": "goagent", "profileUrl": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "domainName": null, "loggedInUserEmail": null, "relativeBaseUrl": ""};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 20698 - 
+ goagent -
+ 
+ 發覺goagent的vps模式要比SS穩定高速啊，只是有些bug，作者還在繼續開發嗎？ - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20698&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20698" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=20698">20698</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >發覺goagent的vps模式要比SS穩定高速啊，只是有些bug，作者還在繼續開發嗎？</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 14 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A20698">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20698&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20698">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/116712699198129694091/">tx9...@gmail.com</a
+>,
+ <span class="date" title="Mon May 11 09:47:35 2015">May 11, 2015</span>
+ 
+ </div>
+<pre>
+項目主頁上連關於goagent的vps模式（以下簡稱GV）的說明都沒有，大概還處於測試階段？
+vps模式跟普通代理軟件差不多，不需要偽造證書就能正常訪問https，在同一架vps上同時安裝了GV和SS，SS看youtube經常突然中斷，換成GV就穩定很多，速度也更快，懷疑SS流量被惡意干擾。
+但是訪問某些網站時會出錯。
+例如這個：
+<a href="http://www.mm-cg.com/" rel="nofollow">http://www.mm-cg.com/</a>
+<a href="http://18h.mm-cg.com/" rel="nofollow">http://18h.mm-cg.com/</a>
+<a href="http://18av.mm-cg.com" rel="nofollow">http://18av.mm-cg.com</a>
+<a href="http://18av.mm-cg.com/CG/" rel="nofollow">http://18av.mm-cg.com/CG/</a>
+用GV上上面4個網址，只能看到同一個網頁，即當我訪問後三個網頁時，這個網站都給我返回跟<a href="http://www.mm-cg.com/一樣的內容。" rel="nofollow">http://www.mm-cg.com/一樣的內容。</a>
+但換成SS，就沒問題，4個網址的內容是不一樣的。
+可能這個網站故意屏蔽了某些地區的用戶，如果是這樣，GV目前的匿名效果可能不如SS。
+如果能繼續開發完善，GV其實是挺有潛力的
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 11 09:50:56 2015">
+ May 11, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=20698#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/113292563919005293118/">xvyongp...@gmail.com</a
+></span>
+ 
+<pre>
+骚年少撸点炮 多来点教程 呵呵
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 11 09:54:31 2015">
+ May 11, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ <span class="role_label">Project Member</span>
+ <a name="c2" href="/p/goagent/issues/detail?id=20698#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/101972151761602739800/">phu...@hotmail.com</a
+></span>
+ 
+<pre>
+和ss的socks5变种不同，vps版本是http变种，在干扰愈加激烈的现状下，类http协议应有很好的干扰恢复能力。
+
+目前的vps版本比较buggy，因为我家用的使移动宽带，所以gae一直可用，哪天gae不能用了，我会完善vps版本的。
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 11 09:59:54 2015">
+ May 11, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=20698#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/106088583427384130526/">jasonli...@gmail.com</a
+></span>
+ 
+<pre>
+#2 呀哈, 帮主终于出关了.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 11 10:29:18 2015">
+ May 11, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=20698#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/104143686415401696591/">11y...@gmail.com</a
+></span>
+ 
+<pre>
+终于见到久违的帮主了，好激动呀，还以为被请去喝咖啡了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 11 10:43:24 2015">
+ May 11, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=20698#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/113292563919005293118/">xvyongp...@gmail.com</a
+></span>
+ 
+<pre>
+#2 哈哈 大半夜现身吓死人···
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 11 11:07:58 2015">
+ May 11, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=20698#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/110571275720332897952/">lxok1...@gmail.com</a
+></span>
+ 
+<pre>
+#2  帮主，快想想办法，力挽危局啊。从goagent上线沿用至今，尽请恢复旧日荣光。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 11 17:52:23 2015">
+ May 11, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=20698#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/110158684434685666353/">cym.zh...@gmail.com</a
+></span>
+ 
+<pre>
+感谢phuslu
+
+gae还是能用，油管视频只能低画质了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 11 19:01:15 2015">
+ May 11, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=20698#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/114033169287966003070/">redfrog...@gmail.com</a
+></span>
+ 
+<pre>
+神人总是夜半现身。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 11 22:41:51 2015">
+ May 11, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=20698#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/109038849026544077877/">fang7357...@gmail.com</a
+></span>
+ 
+<pre>
+终于出现了  
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 11 23:51:12 2015">
+ May 11, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=20698#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/101994464459370655569/">Kishen...@gmail.com</a
+></span>
+ 
+<pre>
+帮主是逼我们换移动啊
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 12 00:16:59 2015">
+ May 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=20698#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+安装pycrypto，编译错误！
+
+[root@vultr openssl-1.0.2a]# easy_install pycrypto
+Searching for pycrypto
+Reading <a href="https://pypi.python.org/simple/pycrypto/" rel="nofollow">https://pypi.python.org/simple/pycrypto/</a>
+Best match: pycrypto 2.6.1
+Downloading <a href="https://pypi.python.org/packages/source/p/pycrypto/pycrypto-2.6.1.tar.gz#md5=55a61a054aa66812daf5161a0d5d7eda" rel="nofollow">https://pypi.python.org/packages/source/p/pycrypto/pycrypto-2.6.1.tar.gz#md5=55a61a054aa66812daf5161a0d5d7eda</a>
+Processing pycrypto-2.6.1.tar.gz
+Writing /tmp/easy_install-sT8NCL/pycrypto-2.6.1/setup.cfg
+Running pycrypto-2.6.1/setup.py -q bdist_egg --dist-dir /tmp/easy_install-sT8NCL/pycrypto-2.6.1/egg-dist-tmp-4XoRwZ
+src/_fastmath.c:31:20: fatal error: Python.h: No such file or directory
+ #include &quot;Python.h&quot;
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 12 00:55:16 2015">
+ May 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=20698#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+我是CentOS ,Yum install 在线安装的，系统自行下载自行安装自行编译。
+Leno看来你真的是linux菜鸟。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 12 01:49:35 2015">
+ May 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=20698#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+#15 主要是搞不定Python在Linux下的openssl运行库啊，一安装就尼玛报错，这个不搞好，goagent在vps服务端是跑不起来的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 12 02:04:36 2015">
+ May 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=20698#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/107561325102444823673/">huangkan...@gmail.com</a
+></span>
+ 
+<pre>
+膜拜
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 12 04:36:20 2015">
+ May 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=20698#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+Goagent终于配好了：
+
+root@vultr:/opt/goagent/log# more goagentvps.log 
+INFO - [Feb 25 10:41:18] autfile '/opt/goagent/vps/goagentvps.conf' not exists, create it
+INFO - [Feb 25 10:41:18] add username='????????' password='123456' to '/opt/goagent/vps/goagentvps.conf'
+INFO - [Feb 25 10:41:18] authfile '/opt/goagent/vps/goagentvps.conf' was created
+INFO - [Feb 25 10:42:34] tcp good_ipaddrs=0, bad_ipaddrs=0, unknown_ipaddrs=0
+
+$ sudo yum install gcc libffi-devel python-devel openssl-devel
+pip install pyOpenSSL
+INFO - [May 12 19:11:45] autfile '/opt/goagent/vps/goagentvps.conf' not exists, create it
+INFO - [May 12 19:11:45] add username='keruma' password='123456' to '/opt/goagent/vps/goagentvps.conf'
+INFO - [May 12 19:11:45] authfile '/opt/goagent/vps/goagentvps.conf' was created
+
+[root@vultr log]# netstat -alepn|grep python
+tcp        0      0 0.0.0.0:8008            0.0.0.0:*               LISTEN      99         12772      666/python
+tcp        0      0 0.0.0.0:443             0.0.0.0:*               LISTEN      0    
+
+<a href="https://i.imgur.com/xwPOQyP.jpg" rel="nofollow">https://i.imgur.com/xwPOQyP.jpg</a>
+
+
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 12 04:38:15 2015">
+ May 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=20698#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+补充一下是Goagent终于在VPS上部署好了，速度有待测试
+
+关键点是要装好python的ssl模块，解决ssl报错的关键办法：
+
+sudo yum install gcc libffi-devel python-devel openssl-devel
+pip install pyOpenSSL
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 12 05:42:38 2015">
+ May 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=20698#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+Goagent在搬瓦工和Vultr上都部署好了：
+
+INFO - [May 12 08:39:59] tcp good_ipaddrs=62, bad_ipaddrs=0, unknown_ipaddrs=38
+INFO - [May 12 08:39:59] tcp good_ipaddrs=62, bad_ipaddrs=0, unknown_ipaddrs=38
+INFO - [May 12 08:39:59] 60.191.30.18:35933 &quot;DIRECT GET <a href="http://pubads.g.doubleclick.net/activity;dc_iu=/5965368/DFPAudiencePixel;ord=1759963307995.349;dc_seg=68889370?" rel="nofollow">http://pubads.g.doubleclick.net/activity;dc_iu=/5965368/DFPAudiencePixel;ord=1759963307995.349;dc_seg=68889370?</a> HTTP/1.1&quot; 200 42
+INFO - [May 12 08:39:59] 60.191.30.18:40820 &quot;DIRECT GET <a href="http://pubads.g.doubleclick.net/activity;dc_iu=/5965368/DFPAudiencePixel;ord=5288725472055.376;dc_seg=68891290?" rel="nofollow">http://pubads.g.doubleclick.net/activity;dc_iu=/5965368/DFPAudiencePixel;ord=5288725472055.376;dc_seg=68891290?</a> HTTP/1.1&quot; 200 42
+INFO - [May 12 08:39:59] 60.191.30.18:40816 &quot;DIRECT GET <a href="http://pubads.g.doubleclick.net/gampad/ads?gdfp_req=1&amp;correlator=1280531123666944&amp;output=json_html&amp;callback=callbackProxy&amp;impl=fif&amp;eid=108809030%2C108809034%2C108809045&amp;sc=0&amp;sfv=1-0-2&amp;iu=%2F5965368%2FNTDtv_cn_gw_roadblock_336x280&amp;sz=300x250%7C336x280%7C600x400&amp;cookie=ID%3D88d8e644acc726e2%3AT%3D1423447407%3AS%3DALNI_MY4RqDUJVj3f6ydUEmqO5glhPh_1g&amp;lmt=1431434398&amp;dt=1431434398036&amp;cc=100&amp;frm=20&amp;biw=1073&amp;bih=596&amp;oid=3&amp;adx=0&amp;ady=0&amp;adk=2847030974&amp;gut=v2&amp;ifi=7&amp;u_tz=480&amp;u_his=1&amp;u_java=true&amp;u_h=768&amp;u_w=1366&amp;u_ah=720&amp;u_aw=1366&amp;u_cd=24&amp;u_nplug=20&amp;u_nmime=30&amp;u_sd=1&amp;flash=17.0.0&amp;url=http%3A%2F%2Fcn.ntdtv.com%2Fxtr%2Fgb%2F2015%2F05%2F11%2Fa1196358.html&amp;ref=http%3A%2F%2Fcn.ntdtv.com%2Fxtr%2Fgb%2Fprog829.html%2F%25E4%25B8%25AD%25E5%259B%25BD%25E7%25A6%2581%25E9%2597%25BB.html&amp;vrg=60&amp;vrp=60&amp;ga_vid=524540306.1430794852&amp;ga_sid=1431434389&amp;ga_hid=1914754058" rel="nofollow">http://pubads.g.doubleclick.net/gampad/ads?gdfp_req=1&amp;correlator=1280531123666944&amp;output=json_html&amp;callback=callbackProxy&amp;impl=fif&amp;eid=108809030%2C108809034%2C108809045&amp;sc=0&amp;sfv=1-0-2&amp;iu=%2F5965368%2FNTDtv_cn_gw_roadblock_336x280&amp;sz=300x250%7C336x280%7C600x400&amp;cookie=ID%3D88d8e644acc726e2%3AT%3D1423447407%3AS%3DALNI_MY4RqDUJVj3f6ydUEmqO5glhPh_1g&amp;lmt=1431434398&amp;dt=1431434398036&amp;cc=100&amp;frm=20&amp;biw=1073&amp;bih=596&amp;oid=3&amp;adx=0&amp;ady=0&amp;adk=2847030974&amp;gut=v2&amp;ifi=7&amp;u_tz=480&amp;u_his=1&amp;u_java=true&amp;u_h=768&amp;u_w=1366&amp;u_ah=720&amp;u_aw=1366&amp;u_cd=24&amp;u_nplug=20&amp;u_nmime=30&amp;u_sd=1&amp;flash=17.0.0&amp;url=http%3A%2F%2Fcn.ntdtv.com%2Fxtr%2Fgb%2F2015%2F05%2F11%2Fa1196358.html&amp;ref=http%3A%2F%2Fcn.ntdtv.com%2Fxtr%2Fgb%2Fprog829.html%2F%25E4%25B8%25AD%25E5%259B%25BD%25E7%25A6%2581%25E9%2597%25BB.html&amp;vrg=60&amp;vrp=60&amp;ga_vid=524540306.1430794852&amp;ga_sid=1431434389&amp;ga_hid=1914754058</a> HTTP/1.1&quot; 200 211
+INFO - [May 12 08:39:59] 60.191.30.18:14943 &quot;CONNECT cm.g.doubleclick.net:443 HTTP/1.1&quot; - -
+INFO - [May 12 08:39:59] tcp good_ipaddrs=62, bad_ipaddrs=0, unknown_ipaddrs=38
+
+现在想切哪个就切哪个，太爽了！
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 12 05:49:24 2015">
+ May 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ <span class="role_label">Project Member</span>
+ <a name="c22" href="/p/goagent/issues/detail?id=20698#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/101972151761602739800/">phu...@hotmail.com</a
+></span>
+ 
+<pre>
+再次建议大家先别折腾了，vps 非常 buggy, 远未可用。
+再等等吧，等我搞好了，会正式宣布的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 12 05:53:40 2015">
+ May 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ <span class="role_label">Project Member</span>
+ <a name="c23" href="/p/goagent/issues/detail?id=20698#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/101972151761602739800/">phu...@hotmail.com</a
+></span>
+ 
+<pre>
+我的意思是，vps 完成以后会有它的独特的优势。
+现在还是不可用的状态，免得用了大家失望。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 12 06:39:10 2015">
+ May 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=20698#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/114033169287966003070/">redfrog...@gmail.com</a
+></span>
+ 
+<pre>
+#22 #23老大再次神秘现身，让他们折腾吧，report bug就好了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 12 06:44:47 2015">
+ May 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=20698#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/106088583427384130526/">jasonli...@gmail.com</a
+></span>
+ 
+<pre>
+#22 好罢,我们等太空狗版本
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc26">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 12 06:53:43 2015">
+ May 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c26" href="/p/goagent/issues/detail?id=20698#c26">#26</a>
+ 
+
+ <a class="userlink"
+ href="/u/113292563919005293118/">xvyongp...@gmail.com</a
+></span>
+ 
+<pre>
+#23 就等phu老大的好消息啦！！！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 12 07:09:32 2015">
+ May 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=20698#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+这个goagent的vps版本默认用ssh 22端口连接，不开启22端口是绝对无法上传成功的，这在搬瓦工上部署是有点难度的。
+
+另外SSL模块错误也是一个硬伤，这个问题会搞死一大批使用者。
+
+DNS解析的错误暂时没有发现，发不了我用dnsforwarder.
+但是有个bug很搞人，就是莫名其妙的goagentvps会突然断线，切换到shadowsocks就是好的，证明还是goagentvps的问题，非要强制stop,然后再start才能搞好
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 12 07:13:05 2015">
+ May 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=20698#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/110158684434685666353/">cym.zh...@gmail.com</a
+></span>
+ 
+<pre>
+坐等vps神器
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc29">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 12 07:14:31 2015">
+ May 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c29" href="/p/goagent/issues/detail?id=20698#c29">#29</a>
+ 
+
+ <a class="userlink"
+ href="/u/114033169287966003070/">redfrog...@gmail.com</a
+></span>
+ 
+<pre>
+难怪老大说还不行，看了#27的bug report，终于了然
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc30">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 12 07:22:50 2015">
+ May 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c30" href="/p/goagent/issues/detail?id=20698#c30">#30</a>
+ 
+
+ <a class="userlink"
+ href="/u/116712699198129694091/">tx9...@gmail.com</a
+></span>
+ 
+<pre>
+#27
+端口号在uploadvps.py里改，把“22”改成你的端口
+我的goagent vps倒是挺稳定的，不过我用ubuntu
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc31">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed May 13 04:03:37 2015">
+ May 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c31" href="/p/goagent/issues/detail?id=20698#c31">#31</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+#20
+你好！我想在搬瓦工上安装VPS版GoAgent，我是参考这里的方法安装的：<a href="http://www.cnblogs.com/r0n9/p/4447136.html" rel="nofollow">http://www.cnblogs.com/r0n9/p/4447136.html</a>
+
+根据你提示的语句，我已经事先安装好python的ssl模块，然后参考上面提到的方法安装，一直都很顺利，直到这一步&quot;tail -n 10 /opt/goagent/log/goagentvps.log&quot;，我未能得到正确的信息，而是提示&quot;No such file or directory&quot;。于是无法继续正确安装下去。
+
+请问怎么办？（使用搬瓦工默认的系统Centos 6 x86）
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc32">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed May 13 19:43:13 2015">
+ May 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c32" href="/p/goagent/issues/detail?id=20698#c32">#32</a>
+ 
+
+ <a class="userlink"
+ href="/u/116403131830663013319/">haike28...@gmail.com</a
+></span>
+ 
+<pre>
+膜拜
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc33">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed May 13 20:13:38 2015">
+ May 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c33" href="/p/goagent/issues/detail?id=20698#c33">#33</a>
+ 
+
+ <a class="userlink"
+ href="/u/101994464459370655569/">Kishen...@gmail.com</a
+></span>
+ 
+<pre>
+谁能写个完整的部署教程，让我等菜鸟也尝尝鲜！！！！！谢谢楼主了先！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc34">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed May 13 20:14:09 2015">
+ May 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c34" href="/p/goagent/issues/detail?id=20698#c34">#34</a>
+ 
+
+ <a class="userlink"
+ href="/u/101994464459370655569/">Kishen...@gmail.com</a
+></span>
+ 
+<pre>
+网上的教程全部不能用
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc35">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed May 13 20:21:50 2015">
+ May 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c35" href="/p/goagent/issues/detail?id=20698#c35">#35</a>
+ 
+
+ <a class="userlink"
+ href="/u/107964894877919619769/">luon...@gmail.com</a
+></span>
+ 
+<pre>
+帮主，帮主，你老人家还好吗。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc36">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed May 13 20:41:18 2015">
+ May 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c36" href="/p/goagent/issues/detail?id=20698#c36">#36</a>
+ 
+
+ <a class="userlink"
+ href="/u/117128376233044172244/">pcwl...@gmail.com</a
+></span>
+ 
+<pre>
+#21 求教程。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc37">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed May 13 22:18:17 2015">
+ May 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c37" href="/p/goagent/issues/detail?id=20698#c37">#37</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+#31 vi /opt/goagent/log/goagentvps.log
+看看里面有没有报错信息
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc38">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed May 13 22:19:24 2015">
+ May 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c38" href="/p/goagent/issues/detail?id=20698#c38">#38</a>
+ 
+
+ <a class="userlink"
+ href="/u/101994464459370655569/">Kishen...@gmail.com</a
+></span>
+ 
+<pre>
+#37 大神，求教程！！！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc39">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 00:43:09 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c39" href="/p/goagent/issues/detail?id=20698#c39">#39</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+#37
+你好！输入该语句后“vi /opt/goagent/log/goagentvps.log”，得到以下信息，请问该如何操作？我不懂Linux，只会按教程一步一步操作。
+
+E325: ATTENTION
+Found a swap file by the name &quot;/opt/goagent/log/.goagentvps.log.swp&quot;
+          owned by: root   dated: Thu May 14 03:23:19 2015
+         file name: /opt/goagent/log/goagentvps.log
+          modified: YES
+         user name: root   host name: localhost.localdomain
+        process ID: 664
+While opening file &quot;/opt/goagent/log/goagentvps.log&quot;
+             dated: Thu May 14 03:40:50 2015
+      NEWER than swap file!
+
+(1) Another program may be editing the same file.
+    If this is the case, be careful not to end up with two
+    different instances of the same file when making changes.
+    Quit, or continue with caution.
+
+(2) An edit session for this file crashed.
+    If this is the case, use &quot;:recover&quot; or &quot;vim -r /opt/goagent/log/goagentvps.l
+og&quot;
+    to recover the changes (see &quot;:help recovery&quot;).
+    If you did this already, delete the swap file &quot;/opt/goagent/log/.goagentvps.
+log.swp&quot;
+    to avoid this message.
+-- More --
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc40">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 00:51:23 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c40" href="/p/goagent/issues/detail?id=20698#c40">#40</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+按G(大写的)，把光标移到文件末尾，把日志的内容贴出来（至少有十行）
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc41">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 00:53:10 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c41" href="/p/goagent/issues/detail?id=20698#c41">#41</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+我根据日志的内容，判断一下是否正常，你这样子好像是临时文件还在，无法打开log日志
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc42">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 00:56:21 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c42" href="/p/goagent/issues/detail?id=20698#c42">#42</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+运行命令：q!， 先退出来
+然后运行：rm -i /opt/goagent/log/*.swp
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc43">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 01:01:34 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c43" href="/p/goagent/issues/detail?id=20698#c43">#43</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+#38
+安装教程就这两个：
+
+www.cnblogs.com/r0n9/p/4447136.html
+<a href="http://mcns.blog.chinaunix.net/uid-20069582-id-4844871.html" rel="nofollow">http://mcns.blog.chinaunix.net/uid-20069582-id-4844871.html</a>
+
+关键命令：
+
+sudo yum install gcc libffi-devel python-devel openssl-devel python-pip
+easy_install dnslib
+
+easy_install pycrypto
+easy_install gevent
+easy_install pyOpenSSL==0.13
+
+我说的是CentOS, ubuntu 把yum install 改成apt-get install.
+
+我这人很懒，不喜欢萝莉啰嗦写太多，有问题再来问我
+
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc44">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 01:33:07 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c44" href="/p/goagent/issues/detail?id=20698#c44">#44</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+#40
+按大写G后，只显示多了一行信息，如下：
+
+[root@localhost vps]# vi /opt/goagent/log/goagentvps.log
+Found a swap file by the name &quot;/opt/goagent/log/.goagentvps.log.swp&quot;
+          owned by: root   dated: Thu May 14 03:23:19 2015
+         file name: /opt/goagent/log/goagentvps.log
+          modified: YES
+         user name: root   host name: localhost.localdomain
+        process ID: 664
+While opening file &quot;/opt/goagent/log/goagentvps.log&quot;
+             dated: Thu May 14 04:24:01 2015
+      NEWER than swap file!
+
+(1) Another program may be editing the same file.
+    If this is the case, be careful not to end up with two
+    different instances of the same file when making changes.
+    Quit, or continue with caution.
+
+(2) An edit session for this file crashed.
+    If this is the case, use &quot;:recover&quot; or &quot;vim -r /opt/goagent/log/goagentvps.l
+og&quot;
+    to recover the changes (see &quot;:help recovery&quot;).
+    If you did this already, delete the swap file &quot;/opt/goagent/log/.goagentvps.
+log.swp&quot;
+    to avoid this message.
+&quot;/opt/goagent/log/goagentvps.log&quot; 60L, 3059C
+Press ENTER or type command to continue
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc45">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 01:34:07 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c45" href="/p/goagent/issues/detail?id=20698#c45">#45</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+#42
+操作以下
+运行命令：q!， 先退出来
+然后运行：rm -i /opt/goagent/log/*.swp
+
+得到：
+[root@localhost vps]# rm -i /opt/goagent/log/*.swp
+rm: cannot remove `/opt/goagent/log/*.swp': No such file or directory
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc46">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 01:41:04 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c46" href="/p/goagent/issues/detail?id=20698#c46">#46</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+那就再运行一次： vi /opt/goagent/log/goagentvps.log
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc47">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 01:44:25 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c47" href="/p/goagent/issues/detail?id=20698#c47">#47</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+#46
+不行呀，再运行一次，就再出现一次同样的错误信息，囧。。
+谢谢大神关注！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc48">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 01:47:27 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c48" href="/p/goagent/issues/detail?id=20698#c48">#48</a>
+ 
+
+ <a class="userlink"
+ href="/u/107572522493129727808/">jiangb.c...@gmail.com</a
+></span>
+ 
+<pre>
+膜拜大神！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc49">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 02:21:43 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c49" href="/p/goagent/issues/detail?id=20698#c49">#49</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+#47你这种情况应该是tail在跟vi同时打开文件发生的冲突，你试试下面的命令:
+ps -aux|grep tail
+找到tail的进程pid
+然后运行命令 kill tail的pid
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc50">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 02:24:21 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c50" href="/p/goagent/issues/detail?id=20698#c50">#50</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+如果实在不行，先看看到底有没有日志文件：
+cd /opt/goagent/log
+ls -a
+看下这个目录下到底有哪些文件
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc51">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 02:37:14 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c51" href="/p/goagent/issues/detail?id=20698#c51">#51</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+似乎找不到tail的pid，照做了，信息如下。。
+
+[root@localhost log]# ps -aux|grep tail
+Warning: bad syntax, perhaps a bogus '-'? See /usr/share/doc/procps-3.2.8/FAQ
+root       885  0.0  0.1   2280   556 pts/1    S+   05:36   0:00 grep tail
+[root@localhost log]# cd /opt/goagent/log
+[root@localhost log]# ls -a
+.                    goagentvps-0-stderr---supervisor-xyKJra.log
+..                   goagentvps.log
+.goagentvps.log.swo  supervisord-goagentvps.log
+.goagentvps.log.swp
+[root@localhost log]#
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc52">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 03:57:18 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c52" href="/p/goagent/issues/detail?id=20698#c52">#52</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+cd /opt/goagent/log
+vi -r goagentvps.log
+sudo rm goagentvps.log.swo
+sudo rm goagentvps.log.swp
+vi goagentvps.log
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc53">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 21:23:51 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c53" href="/p/goagent/issues/detail?id=20698#c53">#53</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+#52
+
+你好！我试了你的方法还是不行。我甚至删除了整个opt下的goagent目录（rm -rf），重新上传再操作一遍。但是到了“tail -n 10 /opt/goagent/log/goagentvps.log”这一步仍然失败。
+
+目前我在BandWagon后台的/opt/goagent/log下面看见，只有三个文件goagentvps-0-stderr---supervisor-3I6hEj.log，goagentvps.log，supervisord-goagentvps.log。
+
+[root@localhost vps]# tail -n 10 /opt/goagent/log/goagentvps.log
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+
+
+我已经照足教程操作了，还是失败，囧。。。期待大神出一个完整的！(如果很忙就算了，非常感谢您的回复。唉。。。太折腾了。)
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc55">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 22:04:56 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c55" href="/p/goagent/issues/detail?id=20698#c55">#55</a>
+ 
+
+ <a class="userlink"
+ href="/u/106310193510396836732/">philip.t...@gmail.com</a
+></span>
+ 
+<pre>
+对linux不够熟悉，对命令行没有贴心感受，玩这些就是找虐嘛。：）
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc56">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 22:06:26 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c56" href="/p/goagent/issues/detail?id=20698#c56">#56</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+#54
+
+你用的是Vultr，我用的是BandWagon的CentOS 6（已经部署好了SS，想再加个VPS版GoAgent），不知道是否会有所不同？
+
+BTW，我刚放弃用Vultr，觉得速度也不是很稳定。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc57">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 22:07:01 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c57" href="/p/goagent/issues/detail?id=20698#c57">#57</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+我试了一下我自己的，没有问题啊：
+
+[root@vultr ~]# tail -n 10 /opt/goagent/log/goagentvps.log
+
+INFO - [May 14 19:07:09] 114.111.167.16:33124 &quot;CONNECT developers.google.com:443 HTTP/1.1&quot; - -
+INFO - [May 14 19:07:09] tcp good_ipaddrs=17, bad_ipaddrs=0, unknown_ipaddrs=18
+INFO - [May 14 19:07:10] 114.111.167.16:25997 &quot;CONNECT developers.google.com:443 HTTP/1.1&quot; - -
+INFO - [May 14 19:42:14] 198.20.69.74:51379 &quot;MOCK GET http://x.x.x.x/ HTTP/1.1&quot; 403 0
+INFO - [May 14 19:42:17] 198.20.69.74:53271 &quot;MOCK GET http://x.x.x.x/robots.txt HTTP/1.1&quot; 403 0
+198.20.69.74 - - [14/May/2015 19:42:23] code 400, message Bad request syntax ('quit')
+INFO - [May 15 05:39:40] 221.0.21.244:35377 &quot;MOCK POST http://localhost/vpnsvc/connect.cgi HTTP/1.1&quot; 403 0
+INFO - [May 15 09:22:44] 184.105.139.68:51071 &quot;MOCK GET http://x.x.x.x/ HTTP/1.1&quot; 403 0
+INFO - [May 15 09:29:00] 184.105.139.68:49376 &quot;MOCK GET http://x.x.x.x/ HTTP/1.1&quot; 403 0
+INFO - [May 15 10:37:20] 89.248.171.138:41474 &quot;MOCK GET http://x.x.x.x//cgi-bin/webcm?getpage=../html/menus/menu2.html&amp;var:lang=%26%20allcfgconv%20-C%20voip%20-c%20-o%20-%20../../../../../var/tmp/voip.cfg%20%26 HTTP/1.1&quot; 403 0
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc58">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 22:08:21 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c58" href="/p/goagent/issues/detail?id=20698#c58">#58</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+跟VPS没有关系，你把你操作的详细步骤全部列出来，我看看就知道了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc59">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 14 22:09:25 2015">
+ May 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c59" href="/p/goagent/issues/detail?id=20698#c59">#59</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+我搬瓦工也部署成功了，跟是不是Vultr没有关系
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc60">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 15 00:07:02 2015">
+ May 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c60" href="/p/goagent/issues/detail?id=20698#c60">#60</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+#58
+
+我是按照这个教程操作的：<a href="http://www.cnblogs.com/r0n9/p/4447136.html" rel="nofollow">http://www.cnblogs.com/r0n9/p/4447136.html</a> ，以下是我的操作步骤：
+
+修改uploadvps.py里的22端口为ssh新端口（第2次尝试，是用putty来修改ssh端口：vi  /etc/ssh/sshd_config）
+
+执行上传脚本 uploadvps.bat，上传成功（第1次和第2次的两种方法的上传都是成功的）
+putty进入到VPS server
+
+sudo yum install gcc libffi-devel python-devel openssl-devel（第1次尝试没做，第2次尝试加做了）
+pip install pyOpenSSL（第1次尝试没做，第2次尝试加做了）
+
+easy_install dnslib
+easy_install pycrypto
+easy_install gevent
+easy_install pyOpenSSL==0.13
+cd /opt/goagent/vps
+vi goagentvps.sh
+:set ff
+:set ff=unix
+:wq
+cd /opt/goagent/vps
+./goagentvps.sh start
+tail -n 10 /opt/goagent/log/goagentvps.log（到这一步出错！）
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc61">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 15 00:11:51 2015">
+ May 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c61" href="/p/goagent/issues/detail?id=20698#c61">#61</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+这是我在搬瓦工上用tail命令返回的结果：
+
+[root@default ~]# tail -n 10 /opt/goagent/log/goagentvps.log
+INFO - [May 12 19:56:54] tcp good_ipaddrs=48, bad_ipaddrs=0, unknown_ipaddrs=169
+INFO - [May 12 19:56:56] 27.17.16.146:18186 &quot;CONNECT <a href="/p/goagent/source/detail?r=5">r5</a>---sn-q4f7sn7z.googlevideo.com:443 HTTP/1.1&quot; - -
+INFO - [May 12 19:56:56] tcp good_ipaddrs=48, bad_ipaddrs=0, unknown_ipaddrs=169
+INFO - [May 12 19:57:03] 27.17.16.146:55084 &quot;CONNECT <a href="/p/goagent/source/detail?r=4">r4</a>---sn-25ge7n7l.googlevideo.com:443 HTTP/1.1&quot; - -
+INFO - [May 12 19:57:03] tcp good_ipaddrs=49, bad_ipaddrs=0, unknown_ipaddrs=169
+INFO - [May 13 03:08:48] 216.218.206.68:58235 &quot;MOCK GET http://104.160.38.4/ HTTP/1.1&quot; 403 0
+INFO - [May 13 03:13:39] 216.218.206.68:53364 &quot;MOCK GET http://104.160.38.4/ HTTP/1.1&quot; 403 0
+INFO - [May 13 22:30:37] 74.82.47.3:39155 &quot;MOCK GET http://104.160.38.4/ HTTP/1.1&quot; 403 0
+INFO - [May 13 22:34:28] 74.82.47.3:33780 &quot;MOCK GET http://104.160.38.4/ HTTP/1.1&quot; 403 0
+INFO - [May 14 17:32:45] 124.90.50.222:11467 &quot;MOCK POST http://localhost/vpnsvc/connect.cgi HTTP/1.1&quot; 403 0
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc62">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 15 00:18:24 2015">
+ May 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c62" href="/p/goagent/issues/detail?id=20698#c62">#62</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+我用BandWagon系统自带的一键部署做了SS，不知道这里会不会有影响。SS倒用得很好。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc63">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 15 00:31:31 2015">
+ May 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c63" href="/p/goagent/issues/detail?id=20698#c63">#63</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+应该没有关系吧，我的虽然不是一键部署的，但是SS+GOA相安无事，跟这个没有关系
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc64">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 15 01:27:38 2015">
+ May 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c64" href="/p/goagent/issues/detail?id=20698#c64">#64</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+cd /opt/goagent/vps
+./goagentvps.sh stop
+cd /opt/goagent/
+rm -rf *.*
+
+然后重新上传uploadvps.bat，成功后，严格按照我下面的步骤执行：
+
+sudo yum install gcc libffi-devel python-devel openssl-devel python-pip
+easy_install dnslib
+easy_install pycrypto
+easy_install gevent
+easy_install pyOpenSSL==0.13
+cd /opt/goagent/vps
+./goagentvps.sh start
+tail -n 10 /opt/goagent/log/goagentvps.log
+
+中间不要用vi修改goagentvps.sh文件，切记！
+
+你再试一次
+
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc65">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 15 01:42:05 2015">
+ May 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c65" href="/p/goagent/issues/detail?id=20698#c65">#65</a>
+ 
+
+ <a class="userlink"
+ href="/u/107819954296193569595/">iharryb...@gmail.com</a
+></span>
+ 
+<pre>
+期待phu帮主尽快完成VPS模块，现在好IP真的很难扫到了……
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc66">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 15 01:43:25 2015">
+ May 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c66" href="/p/goagent/issues/detail?id=20698#c66">#66</a>
+ 
+
+ <a class="userlink"
+ href="/u/113292563919005293118/">xvyongp...@gmail.com</a
+></span>
+ 
+<pre>
+#65  70个拿去  173.194.218.17|173.194.218.18|173.194.218.19|173.194.218.31|173.194.218.81|173.194.218.82|173.194.218.83|173.194.218.84|173.194.218.85|173.194.218.86|173.194.218.87|173.194.218.90|173.194.218.91|173.194.218.93|173.194.218.94|173.194.218.95|173.194.218.96|173.194.218.98|173.194.218.99|173.194.218.100|173.194.218.101|173.194.218.102|173.194.218.103|173.194.218.104|173.194.218.106|173.194.218.112|173.194.218.113|173.194.218.114|173.194.218.115|173.194.218.116|173.194.218.117|173.194.218.118|173.194.218.120|173.194.218.123|173.194.218.124|173.194.218.132|173.194.218.133|173.194.218.136|173.194.218.137|173.194.218.138|173.194.218.141|173.194.218.142|173.194.218.143|173.194.218.144|173.194.218.145|173.194.218.146|173.194.218.147|173.194.218.148|173.194.218.149|173.194.218.152|173.194.218.154|173.194.218.155|173.194.218.157|173.194.218.164|173.194.218.165|173.194.218.166|173.194.218.167|173.194.218.176|173.194.218.189|173.194.218.190|173.194.218.191|173.194.218.193|173.194.218.194|173.194.218.195|173.194.218.196|173.194.218.197|173.194.218.198|173.194.218.199|173.194.218.200|173.194.218.201
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc67">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 15 03:01:54 2015">
+ May 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c67" href="/p/goagent/issues/detail?id=20698#c67">#67</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+#64
+
+这次是严格按照你的步骤进行的，可惜依然失败。感激大神锲而不舍地辅导，非常感谢！
+
+[root@localhost ~]# cd /opt/goagent/vps
+[root@localhost vps]# ./goagentvps.sh stop
+Stopping python goagentvps: goagentvps.
+[root@localhost vps]# cd /opt/goagent/
+[root@localhost goagent]# rm -rf *.*
+[root@localhost goagent]# sudo yum install gcc libffi-devel python-devel openssl-devel python-pip
+Loaded plugins: fastestmirror
+Setting up Install Process
+Loading mirror speeds from cached hostfile
+ * base: mirrors.easynews.com
+ * extras: mirrors.usc.edu
+ * updates: mirror.san.fastserv.com
+base                                                     | 3.7 kB     00:00
+extras                                                   | 3.4 kB     00:00
+updates                                                  | 3.4 kB     00:00
+updates/primary_db                                       | 3.1 MB     00:00
+vz-base                                                  |  951 B     00:00
+vz-updates                                               |  951 B     00:00
+Package gcc-4.4.7-11.el6.i686 already installed and latest version
+Package libffi-devel-3.0.5-3.2.el6.i686 already installed and latest version
+Package python-devel-2.6.6-52.el6.i686 already installed and latest version
+Package openssl-devel-1.0.1e-30.el6.8.i686 already installed and latest version
+No package python-pip available.
+Nothing to do
+[root@localhost goagent]# easy_install dnslib
+Searching for dnslib
+Best match: dnslib 0.9.4
+Processing dnslib-0.9.4-py2.6.egg
+dnslib 0.9.4 is already the active version in easy-install.pth
+
+Using /usr/lib/python2.6/site-packages/dnslib-0.9.4-py2.6.egg
+Processing dependencies for dnslib
+Finished processing dependencies for dnslib
+[root@localhost goagent]# easy_install pycrypto
+Searching for pycrypto
+Best match: pycrypto 2.6.1
+Processing pycrypto-2.6.1-py2.6-linux-i686.egg
+pycrypto 2.6.1 is already the active version in easy-install.pth
+
+Using /usr/lib/python2.6/site-packages/pycrypto-2.6.1-py2.6-linux-i686.egg
+Processing dependencies for pycrypto
+Finished processing dependencies for pycrypto
+[root@localhost goagent]# easy_install gevent
+Searching for gevent
+Best match: gevent 1.0.1
+Processing gevent-1.0.1-py2.6-linux-i686.egg
+gevent 1.0.1 is already the active version in easy-install.pth
+
+Using /usr/lib/python2.6/site-packages/gevent-1.0.1-py2.6-linux-i686.egg
+Processing dependencies for gevent
+Finished processing dependencies for gevent
+[root@localhost goagent]# easy_install pyOpenSSL==0.13
+Searching for pyOpenSSL==0.13
+Best match: pyOpenSSL 0.13
+Processing pyOpenSSL-0.13-py2.6-linux-i686.egg
+pyOpenSSL 0.13 is already the active version in easy-install.pth
+
+Using /usr/lib/python2.6/site-packages/pyOpenSSL-0.13-py2.6-linux-i686.egg
+Processing dependencies for pyOpenSSL==0.13
+Finished processing dependencies for pyOpenSSL==0.13
+[root@localhost goagent]# cd /opt/goagent/vps
+[root@localhost vps]# ./goagentvps.sh start
+Starting python goagentvps: goagentvps.
+sudo tail -F /opt/goagentvps/log/*.log to view logs
+[root@localhost vps]# tail -n 10 /opt/goagent/log/goagentvps.log
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+[root@localhost vps]#
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc68">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 15 03:47:51 2015">
+ May 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c68" href="/p/goagent/issues/detail?id=20698#c68">#68</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+我知道原因了！是你的Python没有装好！
+运行python -V，查看Python的版本，再告诉我
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc69">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 01:44:27 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c69" href="/p/goagent/issues/detail?id=20698#c69">#69</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+#68
+你好！
+
+[root@localhost ~]# python -V
+Python 2.6.6
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc70">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 02:15:12 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c70" href="/p/goagent/issues/detail?id=20698#c70">#70</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+继续输入下面的命令： whereis python2.7
+看返回什么结果
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc71">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 02:30:33 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c71" href="/p/goagent/issues/detail?id=20698#c71">#71</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+[root@localhost ~]# whereis python2.7
+python2: /usr/bin/python2.6-config /usr/bin/python2.6 /usr/bin/python2 /usr/lib/python2.6 /usr/include/python2.6
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc72">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 02:43:00 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c72" href="/p/goagent/issues/detail?id=20698#c72">#72</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+这说明Python2.7确实没有装好，而GOA的VPS要调用Python2.7，所以才会出错。
+
+运行下面的命令：
+
+wget <a href="https://www.python.org/ftp/python/2.7.8/Python-2.7.8.tgz" rel="nofollow">https://www.python.org/ftp/python/2.7.8/Python-2.7.8.tgz</a>
+tar xf Python-2.7.8.tgz
+cd Python-2.7.8
+./configure --prefix=/usr/local
+make &amp;&amp; make install
+python -V
+
+再看看你的python版本变成了多少？
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc73">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 05:32:43 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c73" href="/p/goagent/issues/detail?id=20698#c73">#73</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+#72
+
+[root@localhost vps]# python -V
+Python 2.7.8
+
+然后我私自按#64的下半部分做了一次，还是不行，请指教。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc74">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 05:40:18 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c74" href="/p/goagent/issues/detail?id=20698#c74">#74</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+输入下面的命令： whereis python2.7
+看返回什么结果
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc75">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 05:42:57 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c75" href="/p/goagent/issues/detail?id=20698#c75">#75</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+[root@localhost vps]# whereis python2.7
+python2: /usr/bin/python2.6-config /usr/bin/python2.6 /usr/bin/python2 /usr/lib/python2.6 /usr/local/bin/python2.7 /usr/local/bin/python2 /usr/local/bin/python2.7-config /usr/local/lib/python2.7 /usr/include/python2.6
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc76">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 05:45:00 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c76" href="/p/goagent/issues/detail?id=20698#c76">#76</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+输入下面的命令： which python2.7
+看返回什么结果
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc77">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 05:46:19 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c77" href="/p/goagent/issues/detail?id=20698#c77">#77</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+[root@localhost vps]# which python2.7
+/usr/local/bin/python2.7
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc78">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 05:51:18 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c78" href="/p/goagent/issues/detail?id=20698#c78">#78</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+ln -s /usr/local/bin/python2.7  /usr/bin/python
+cp /usr/local/bin/python2.7 /usr/bin/python2.7
+cd /opt/goagent/vps
+./goagentvps.sh stop
+./goagentvps.sh start
+tail -n 10 /opt/goagent/log/goagentvps.log
+
+再试试
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc79">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 05:54:39 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c79" href="/p/goagent/issues/detail?id=20698#c79">#79</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+[root@localhost vps]# ln -s /usr/local/bin/python2.7  /usr/bin/python
+ln: creating symbolic link `/usr/bin/python': File exists
+[root@localhost vps]# cp /usr/local/bin/python2.7 /usr/bin/python2.7
+[root@localhost vps]# cd /opt/goagent/vps
+[root@localhost vps]# ./goagentvps.sh stop
+Stopping python goagentvps: goagentvps.
+[root@localhost vps]# ./goagentvps.sh start
+Starting python goagentvps: /usr/local/bin/python: No module named pkg_resources
+[root@localhost vps]# tail -n 10 /opt/goagent/log/goagentvps.log
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+[root@localhost vps]#
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc80">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 05:58:50 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c80" href="/p/goagent/issues/detail?id=20698#c80">#80</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+sudo cp /usr/local/bin/python2.7 /usr/bin/python
+./goagentvps.sh stop
+./goagentvps.sh start
+tail -n 10 /opt/goagent/log/goagentvps.log
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc81">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 06:00:40 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c81" href="/p/goagent/issues/detail?id=20698#c81">#81</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+第一句就出错了
+
+[root@localhost vps]# sudo cp /usr/local/bin/python2.7 /usr/bin/python
+cp: cannot create regular file `/usr/bin/python': Text file busy
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc82">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 06:05:14 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c82" href="/p/goagent/issues/detail?id=20698#c82">#82</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+sudo rm -f /usr/bin/python
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc83">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 06:08:52 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c83" href="/p/goagent/issues/detail?id=20698#c83">#83</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+[root@localhost vps]# sudo rm -f /usr/bin/python
+[root@localhost vps]# sudo cp /usr/local/bin/python2.7 /usr/bin/python
+[root@localhost vps]# ./goagentvps.sh stop
+Stopping python goagentvps: goagentvps.
+[root@localhost vps]# ./goagentvps.sh start
+Starting python goagentvps: /usr/local/bin/python: No module named pkg_resources
+[root@localhost vps]# tail -n 10 /opt/goagent/log/goagentvps.log
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+[root@localhost vps]#
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc84">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 06:13:34 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c84" href="/p/goagent/issues/detail?id=20698#c84">#84</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+sudo cp /usr/local/bin/python2.7 /usr/local/bin/python
+./goagentvps.sh stop
+./goagentvps.sh start
+tail -n 10 /opt/goagent/log/goagentvps.log
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc85">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 06:15:39 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c85" href="/p/goagent/issues/detail?id=20698#c85">#85</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+[root@localhost vps]# sudo cp /usr/local/bin/python2.7 /usr/local/bin/python
+cp: `/usr/local/bin/python2.7' and `/usr/local/bin/python' are the same file
+[root@localhost vps]# ./goagentvps.sh stop
+Stopping python goagentvps: goagentvps.
+[root@localhost vps]# ./goagentvps.sh start
+Starting python goagentvps: /usr/local/bin/python: No module named pkg_resources
+[root@localhost vps]# tail -n 10 /opt/goagent/log/goagentvps.log
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+[root@localhost vps]#
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc86">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 06:20:14 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c86" href="/p/goagent/issues/detail?id=20698#c86">#86</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+兄弟，你这情况太奇怪了，我暂时也没辙了，容我好好想想，有主意了再联系你
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc87">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 06:24:41 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c87" href="/p/goagent/issues/detail?id=20698#c87">#87</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+你最后再试次：
+sudo rm -f /usr/bin/python
+ln -s /usr/local/bin/python2.7  /usr/bin/python
+ln -s /usr/local/bin/python2.7  /usr/bin/python2.7
+cd /opt/goagent/vps
+./goagentvps.sh stop
+./goagentvps.sh start
+tail -n 10 /opt/goagent/log/goagentvps.log
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc88">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 06:25:46 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c88" href="/p/goagent/issues/detail?id=20698#c88">#88</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+无论如何，非常感激你花了这么多时间帮我找问题，无言感激！handshake
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc89">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 06:28:09 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c89" href="/p/goagent/issues/detail?id=20698#c89">#89</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+[root@localhost ~]# sudo rm -f /usr/bin/python
+[root@localhost ~]# ln -s /usr/local/bin/python2.7  /usr/bin/python
+[root@localhost ~]# ln -s /usr/local/bin/python2.7  /usr/bin/python2.7
+ln: creating symbolic link `/usr/bin/python2.7': File exists
+[root@localhost ~]# cd /opt/goagent/vps
+[root@localhost vps]# ./goagentvps.sh stop
+Stopping python goagentvps: goagentvps.
+[root@localhost vps]# ./goagentvps.sh start
+Starting python goagentvps: /usr/local/bin/python: No module named pkg_resources
+[root@localhost vps]# tail -n 10 /opt/goagent/log/goagentvps.log
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+[root@localhost vps]#
+
+再次感谢你！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc90">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 06:32:45 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c90" href="/p/goagent/issues/detail?id=20698#c90">#90</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+ln -s /usr/local/bin/python2.7  /usr/local/bin/python
+./goagentvps.sh stop
+./goagentvps.sh start
+tail -n 10 /opt/goagent/log/goagentvps.log
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc91">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 16 06:36:21 2015">
+ May 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c91" href="/p/goagent/issues/detail?id=20698#c91">#91</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+[root@localhost vps]# ln -s /usr/local/bin/python2.7  /usr/local/bin/python
+ln: creating symbolic link `/usr/local/bin/python': File exists
+[root@localhost vps]# ./goagentvps.sh stop
+Stopping python goagentvps: goagentvps.
+[root@localhost vps]# ./goagentvps.sh start
+Starting python goagentvps: /usr/local/bin/python: No module named pkg_resources
+[root@localhost vps]# tail -n 10 /opt/goagent/log/goagentvps.log
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+/usr/bin/env: python2.7: No such file or directory
+[root@localhost vps]#
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc92">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May 17 10:32:33 2015">
+ May 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c92" href="/p/goagent/issues/detail?id=20698#c92">#92</a>
+ 
+
+ <a class="userlink"
+ href="/u/106078553642909343984/">Zuya...@gmail.com</a
+></span>
+ 
+<pre>
+参考kingtope和sz.b两位的经验，在搬瓦工VPS上成功部署了goagent。
+
+需要说明的是，搬瓦工用Debian 7.0安装VPS。默认CentOS虽然可以一键部署Shadowsocks，但是python是2.6.6，在以后部署goagent时会出错，这也是kingtope和sz.b两位讨论了很久的一件事。我一开始也是用CentOS的，还尝试升级python到2.7版本，但是yum又不能用了，出了一些错误，实在没有精力去分析，更何况是对于一个只用过windows系统的人来说（所有的unix命令我都是google的，从来没学过）。期间还尝试过Ubuntu12，在部署SS时出错了，最后用Debian部署SS成功（光部署SS也花了好长时间，不懂代码只能照葫芦画瓢），然后再部署goagent也成功了。教程参考的也是这个
+
+<a href="http://mcns.blog.chinaunix.net/uid-20069582-id-4844871.html" rel="nofollow">http://mcns.blog.chinaunix.net/uid-20069582-id-4844871.html</a>
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc93">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May 17 10:35:29 2015">
+ May 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c93" href="/p/goagent/issues/detail?id=20698#c93">#93</a>
+ 
+
+ <a class="userlink"
+ href="/u/106078553642909343984/">Zuya...@gmail.com</a
+></span>
+ 
+<pre>
+把过程稍微总结了一下，供需要的同学参考。如有不对还望指点，我对这些命令一点都不熟悉，都是google来的。
+
+OS：Debian 7.0。选择正确的OS是前提。
+VPS：自购搬瓦工
+说明：CentOS 6.x默认Python版本为2.6，部署goagent到vps需要2.7版的python。尝试在CentOS 6.0上升级Python版本到2.7，以失败告终，yum在Python2.7下不能使用。换Ubuntu12.04 x86，需要自己先部署Shadowsocks（CentOS不用自己部署SS，搬瓦工有一键部署，这也是我首先尝试在CentOS下部署Goagent的原因，很不幸这个选择最终没有成功）。在部署SS的过程中遇到麻烦，尝试几次后转用Debian 7.0。
+
+I. Install new OS之后首先做一些准备工作。
+
+1. 修改VPS的ssh端口为22。
+搬瓦工的ssh端口是随机给的，而goagentvps上传使用的端口默认为22，所以需要手动修改VPS的ssh端口。可以直接在搬瓦工的控制面板里面的File Manager里面，在/etc/ssh/sshd_config中修改最后一行Port为22，保存，然后重启ssh服务（控制面板里的Root shell - basic应该就可以实现）
+
+sudo service ssh restart
+
+2. 把VPS的root密码改成自定义的。搬瓦工会给一个随机的密码，此密码很难记住，对后面使用putty登录很不友好，建议修改成自己能记住的。当然你也可以不改。修改root密码需要首先用搬瓦工给的随机密码登录putty，然后用以下命令修改：
+
+sudo passwd root
+
+重复键入两次新的密码后就修改成功了。
+
+1、2两步之后登录putty就可以用22端口和自定义密码了。
+
+
+II. 用Debian 7.0系统部署SS。几个命令如下：
+
+1. 安装python-pip、python-m2crypto、supervisor以及shadowsocks
+apt-get update
+apt-get install python-pip python-m2crypto supervisor
+pip install shadowsocks
+
+2. 创建并编辑/etc/shadowsocks.json
+第一步安装完shadowsocks并不会在/etc目录下自动生成shadowsocks.json文件，这个文件需要自己创建并写入参数。具体在putty客户端下操作：
+
+vi /etc/shadowsocks.json
+
+然后输入以下内容：
+{
+&quot;server&quot;:&quot;VPS服务器地址&quot;,
+&quot;server_port&quot;:任意填,
+&quot;local_port&quot;:1080,
+&quot;password&quot;:&quot;密码&quot;,
+&quot;timeout&quot;:600,
+&quot;method&quot;:&quot;密码类型：rc4-md5等&quot;
+&quot;fast_open&quot;: false,
+&quot;workers&quot;: 1
+}
+
+3. 启动shadowsocks服务
+
+ssserver -c /etc/shadowsocks.json
+
+此时可以在PC上打开SS客户端，填入第二步的信息，确定后就可以利用SS翻墙了。但是此时必须保持putty窗口开着，一旦关闭就终止SS服务了。因此需要配置SS在后台运行，以及开机（Debian系统启动）时自动启动SS服务。
+
+4. 创建并编辑/etc/supervisor/conf.d/shadowsocks.conf
+同上，/etc/supervisor/conf.d/shadowsocks.conf需要自己手动创建。也是在putty中操作：
+
+vi /etc/supervisor/conf.d/shadowsocks.conf
+
+然后输入以下内容：
+
+[program:shadowsocks]
+command=ssserver -c /etc/shadowsocks.json
+autorestart=true
+user=nobody
+
+如果第2步的local_port &lt; 1024，把上面的 user=nobody 改成 user=root
+
+5. 编辑/etc/default/supervisor文件，在最后加入下面的一行内容： 
+
+vi /etc/default/supervisor
+
+ulimit -n 51200
+
+以上所有涉及vi的操作最后都要保存并退出。命令为：先按ESC退出Insert状态，然后输入&quot;:w&quot;，表示写入文件，再输入&quot;:q&quot;，退出编辑模式。
+
+6. 启动supervisor服务，监控shadowsocks服务
+
+service supervisor start
+supervisorctl reload
+
+此时SS服务就应该在后台运行了。用以下命令可以实现相关功能：
+
+upervisorctl tail -f shadowsocks stderr   //查看shadowsocks日志
+supervisorctl restart shadowsocks        //重启shadowsocks进程
+supervisorctl start shadowsocks        //启动shadowsocks进程
+supervisorctl stop shadowsocks        //停止shadowsocks进程
+
+
+III. 部署Goagent到VPS。
+
+1. 首先去goagent/server目录上传goagentvps。双击goagentvps.bat
+host输入第II/2步里面的VPS服务器地址
+username输入root
+password输入第I/2步自定义密码，如果没有改的话就输入原始密码。
+
+2. 安装python的一些模块。
+
+apt-get install python-pkg-resources python-gevent python-openssl python-dns python-dev
+easy_install dnslib
+easy_install pycrypto
+
+3. 启动goagentvps服务
+
+cd /opt/goagent/vps
+./goagentvps.sh start
+
+4. 判断是否真的启动成功
+
+tail -n 10 /opt/goagent/log/goagentvps.log
+
+INFO - [Apr 21 23:49:03] autfile '/opt/goagent/vps/goagentvps.conf' not exists, create it
+INFO - [Apr 21 23:49:03] add username='xxxxxx' password='123456' to '/opt/goagent/vps/goagentvps.conf'
+INFO - [Apr 21 23:49:03] authfile '/opt/goagent/vps/goagentvps.conf' was created
+
+说明启动成功。再看看监听端口情况。
+
+netstat -alepn|grep python
+
+tcp        0      0 0.0.0.0:443                 0.0.0.0:*                   LISTEN      0
+
+5. 修改或添加账号密码
+
+cd /opt/goagent/vps
+vi goagentvps.conf
+
+newname:newpassword
+
+6. 修改goagent/local下的proxy.ini文件
+[vps]
+enable = 1
+listen = 127.0.0.1:8088
+fetchserver = https://newname:newpassword@VPS服务器地址/
+
+7. 启动local下的可执行文件goagent.exe即可。SwitchyOmega设置代理服务器为127.0.0.1:8088
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc95">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May 17 18:09:43 2015">
+ May 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c95" href="/p/goagent/issues/detail?id=20698#c95">#95</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+这里真是各路英雄汇集的地方，感谢#90 #93 #94，回头有时间一一试试，再来报告。
+
+非常感谢！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc96">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May 17 18:19:45 2015">
+ May 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c96" href="/p/goagent/issues/detail?id=20698#c96">#96</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+#95 我是CentOS 7的，所以没有遇到python的问题(它自带的python就是2.7的)，你试试CentOS 7,应该就能搞好
+Cent OS 7 要把自带的 firewalld防火墙关掉，否则shadowsock用不了。
+
+systemctl stop firewalld
+systemctl disable  firewalld
+yum install iptables-services
+iptables -F
+systemctl start iptables
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc97">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May 17 18:39:37 2015">
+ May 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c97" href="/p/goagent/issues/detail?id=20698#c97">#97</a>
+ 
+
+ <a class="userlink"
+ href="/u/111792219014310235880/">sz.b...@gmail.com</a
+></span>
+ 
+<pre>
+#96 
+
+CentOS 7可否一键部署SS？如果必须手动布置，请问有没教程链接可以参考？谢谢！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc98">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 23 02:15:56 2015">
+ May 23, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c98" href="/p/goagent/issues/detail?id=20698#c98">#98</a>
+ 
+
+ <a class="userlink"
+ href="/u/117101700420784823475/">81538...@qq.com</a
+></span>
+ 
+<pre>
+#93 II. 用Debian 7.0系统部署SS。几个命令如下：
+
+1. 安装python-pip、python-m2crypto、supervisor以及shadowsocks
+apt-get update
+apt-get install python-pip python-m2crypto supervisor
+pip install shadowsocks
+
+这一步我不是太明白 ，这是什么意思， python-pip、python-m2crypto、supervisor以及shadowsocks
+apt-get update  这是几个软件？  要下载安装？ 还是在搬瓦工的界面操作？麻烦您回一下我，谢谢。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc99">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 23 02:21:31 2015">
+ May 23, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c99" href="/p/goagent/issues/detail?id=20698#c99">#99</a>
+ 
+
+ <a class="userlink"
+ href="/u/106078553642909343984/">Zuya...@gmail.com</a
+></span>
+ 
+<pre>
+#98
+
+我是在putty里面操作的，搬瓦工那个网页控制面板用得比较累。输入以下几句就行了，每次输完回车。
+apt-get update
+apt-get install python-pip python-m2crypto supervisor
+pip install shadowsocks
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc100">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 23 02:31:28 2015">
+ May 23, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c100" href="/p/goagent/issues/detail?id=20698#c100">#100</a>
+ 
+
+ <a class="userlink"
+ href="/u/117101700420784823475/">81538...@qq.com</a
+></span>
+ 
+<pre>
+好，我大概明白了，打开putty  然后输入root  再输入搬瓦工地址和密码，  然后下面root 里面输入apt-get update 回车，再输入apt-get install python-pip python-m2crypto supervisor再回车三行都这样操作，就可以了是吧？ 谢谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20698&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20698"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="20698">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A20698',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 20698,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

@@ -1,0 +1,2019 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"relativeBaseUrl": "", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "projectName": "goagent", "loggedInUserEmail": null, "token": null, "projectHomeUrl": "/p/goagent", "profileUrl": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 14288 - 
+ goagent -
+ 
+ Google Drive 不能使用的可尝试设置fakehttps - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14288&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14288" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=14288">14288</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >Google Drive 不能使用的可尝试设置fakehttps</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 24 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A14288">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14288&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14288">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/106108450002869445010/">SiuFe...@gmail.com</a
+>,
+ <span class="date" title="Sun Jun  8 20:07:01 2014">Jun 8, 2014</span>
+ 
+ </div>
+<pre>
+升级到最新版后（目前版本：v3.1.17-5），如果google drive （指win客户端）不能使用，并且客户端出现红字错误：accounts.google.com:443 tlsv1 alert unkown ca的话，可以尝试更改proxy.ini设置
+[ipv4/http]
+fakehttps = .google.com.hk|.googleapis.com|.googleusercontent.com|.youtube.com
+nofakehttps = scholar.google.com|scholar.google.com.hk|.google.com
+
+主要改动是将.google.com从fakehttps移到nofakehttps，改动后Google drive连接非常顺畅。
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun 17 04:21:38 2014">
+ Jun 17, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=14288#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/113082884092451441931/">zfyw...@gmail.com</a
+></span>
+ 
+<pre>
+桌面版Drive如何受益于此改动？
+
+切换成127.0.0.1:8087吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Aug 19 18:02:12 2014">
+ Aug 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=14288#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/115543412529070395914/">mylu...@gmail.com</a
+></span>
+ 
+<pre>
+非常感谢，困然我一年多的Google Drive不能同步问题解决了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Aug 20 01:32:26 2014">
+ Aug 20, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=14288#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/106294405917917257919/">i...@yinx.in</a
+></span>
+ 
+<pre>
+3.1.22里我试了下没用
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Aug 21 01:41:17 2014">
+ Aug 21, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=14288#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/106108450002869445010/">SiuFe...@gmail.com</a
+></span>
+ 
+<pre>
+3.1.18后的配置文件有修改，目前对应最新版（3.1.22）的设置是：
+
+[profile/ipv4]
+.google.com = google_hk,forcehttps,nofakehttps
+
+请记得在ie里面设置自动代理，google drive 客户端里面设置了 自动检测代理
+另外，新版本的pagespeed 选项不支持16k以上文件上传，使用google drive 等需要同步的软件要关闭pagespeed选项（我是把obfuscate也关闭了）
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Aug 21 23:05:17 2014">
+ Aug 21, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=14288#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/104717575576969312473/">menxiaoy...@gmail.com</a
+></span>
+ 
+<pre>
+按照4楼的修改后 google drive没问题了，但是google +的图片全部裂了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 23 07:50:02 2014">
+ Aug 23, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=14288#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/116317342706797474297/">Fakeface...@gmail.com</a
+></span>
+ 
+<pre>
+按照#1修改过后google drive确实可连接，但是连接断的非常频繁，客户端显示
+error ssl.weap_socket&lt;self.conection=&lt;socket at 0*255fc10 flineno=1660 sock=127.0.0.1:8087 peer=127.0.0.1:54208&gt;&gt; failed: [errno 1] _ssl.c:507: error:14094418:ssl routines:ssl3_read_bytes:tlsv1 alert unknown ca
+的红字错误，请问何解？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 23 09:06:58 2014">
+ Aug 23, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=14288#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/105173582285188867615/">tank5510...@gmail.com</a
+></span>
+ 
+<pre>
+按照#4的修改 我的Google Drive 客户端还是没能用啊！Goagent 一片红字啊！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Aug 24 19:10:05 2014">
+ Aug 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=14288#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/106108450002869445010/">SiuFe...@gmail.com</a
+></span>
+ 
+<pre>
+#6、#7
+我在不同的机子上面，一台要设置
+[gae]
+sslversion = SSLv23
+
+另一台要设置为
+sslversion = TLSv1
+才可，两台的google drive client版本不一，
+仅供参考，请试试看
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Aug 27 21:52:18 2014">
+ Aug 27, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=14288#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/114285146976475216258/">fenggui...@gmail.com</a
+></span>
+ 
+<pre>
+#8 
+这个情况与你pc的设置有关，internet选项-高级中 使用TSL1.0勾选则可用
+[gae]
+sslversion = TLSv1
+
+若勾选为ssl2.0，ssl3.0则须用 
+[gae]
+sslversion = SSLv23
+
+楼主说的这个问题我认为同上。
+主要改动是将.google.com从fakehttps移到nofakehttps，改动后Google drive连接非常顺畅。不太明白其理。
+以上纯小白见解往更正。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Sep 10 03:54:42 2014">
+ Sep 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=14288#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/101074023016329979196/">larocco....@gmail.com</a
+></span>
+ 
+<pre>
+3.1.22 GOAGENT
+最新的Drive客户端
+根据GOAGENT窗口提示，googledrive.com发生tlsv1未知证书情况
+于是加入如下第二条解决
+
+[profile/ipv4]
+.google.com = google_hk,forcehttps,nofakehttps
+googledrive.com = google_hk,forcehttps,nofakehttps
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Sep 10 07:53:11 2014">
+ Sep 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=14288#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/105173582285188867615/">tank5510...@gmail.com</a
+></span>
+ 
+<pre>
+#4、#8、#10
+非常感谢，终于解决困扰已久的问题了，之前一直是修改host找的那些IP不是很稳定，经常会断掉！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Sep 16 18:32:00 2014">
+ Sep 16, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=14288#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/107314304366117550796/">kangtian...@gmail.com</a
+></span>
+ 
+<pre>
+goagent 3.1.24
+Error: [('SSL routines', 'SSL3_READ_BYTES', 'tlsv1 alert unknown ca')]
+怎么搞
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Sep 16 22:44:07 2014">
+ Sep 16, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=14288#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/106108450002869445010/">SiuFe...@gmail.com</a
+></span>
+ 
+<pre>
+最近google drive 又不能使用了。
+经过反复测试检查，3.1.23后proxy.ini 里面 [profile/ipv4] 变成了[profile]，
+而我一直延用旧的proxy.user.ini，修改后与proxy.ini 保持一致后问题解决。
+
+目前的配置
+在[profile] 最后增加
+
+accounts.google.com = google_hk,forcehttps,nofakehttps
+clients3.google.com = google_hk,forcehttps,nofakehttps
+drive.google.com = google_hk,forcehttps,nofakehttps
+upload.drive.google.com = google_hk,forcehttps,nofakehttps
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Sep 23 04:32:16 2014">
+ Sep 23, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=14288#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/111521404527701342272/">kgri...@gmail.com</a
+></span>
+ 
+<pre>
+#13的方案解决了我的问题，谢谢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Sep 23 04:57:37 2014">
+ Sep 23, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=14288#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/111521404527701342272/">kgri...@gmail.com</a
+></span>
+ 
+<pre>
+补充：在goagent3.2.0的proxy.user.ini中额外做了个配置：
+
+[gae]
+keepalive = 1
+obfuscate = 1
+[dns]
+enable = 1
+
+感觉好像更流畅了，原因我不懂，呵呵。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Sep 24 18:03:10 2014">
+ Sep 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=14288#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/108625931056320805851/">z.jonath...@gmail.com</a
+></span>
+ 
+<pre>
+综合整理下各位大师的方法：
+
+====proxy.ini中====
+
+[profile/ipv4]字段做如下添加：
+accounts.google.com = google_hk,forcehttps,nofakehttps
+clients3.google.com = google_hk,forcehttps,nofakehttps
+drive.google.com = google_hk,forcehttps,nofakehttps
+upload.drive.google.com = google_hk,forcehttps,nofakehttps
+.google.com = google_hk,forcehttps,nofakehttps
+googledrive.com = google_hk,forcehttps,nofakehttps
+
+[gae]字段修改
+sslversion = SSLv23
+
+=====打开IE-Internet Explorer设置-高级-安全====
+勾上SSL2.0，SSL3.0
+去除TLS1.0，TLS1.1，TLS1.2
+
+至此困扰多年的问题问题完美解决。
+
+测试环境：Win7+IE8+GAE3.1.22+GDrive1.17.7290.4094
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Sep 24 19:07:00 2014">
+ Sep 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=14288#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/113547791505623930439/">m785887...@gmail.com</a
+></span>
+ 
+<pre>
+#15 + #13 ，解决问题了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Sep 24 20:31:10 2014">
+ Sep 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=14288#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/104776446780206133224/">erdon...@gmail.com</a
+></span>
+ 
+<pre>
+按照楼上方法调整的,google drive依然显示无法连接.
+
+环境:win7 chrome+switchysharp gae3.2测试版
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Sep 25 03:10:36 2014">
+ Sep 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=14288#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/111521404527701342272/">kgri...@gmail.com</a
+></span>
+ 
+<pre>
+#18  测试环境：win7+goagent3.2.0
+一、在proxy.user.ini中添加：
+[profile] 
+accounts.google.com = google_hk,forcehttps,nofakehttps
+clients3.google.com = google_hk,forcehttps,nofakehttps
+drive.google.com = google_hk,forcehttps,nofakehttps
+upload.drive.google.com = google_hk,forcehttps,nofakehttps
+
+[gae]
+keepalive = 1
+obfuscate = 1
+
+[dns]
+enable = 1
+二、修改driver客户端“偏好设置-高级”为：自动检测代理设置
+三、设置ie代理：勾选  127.0.01&quot;8087
+
+稳定、流畅
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Sep 25 22:33:08 2014">
+ Sep 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=14288#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/104776446780206133224/">erdon...@gmail.com</a
+></span>
+ 
+<pre>
+#19:谢谢! 标准正解,终于解决.
+
+原来的设置没有第三部,所以一直不行.
+google drive的&quot;自动检测代理设置&quot;带来麻烦,应该改成手动设置代理.
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct 13 18:37:20 2014">
+ Oct 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=14288#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/104717575576969312473/">menxiaoy...@gmail.com</a
+></span>
+ 
+<pre>
+好像最新的版本，这个设置又不管用了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct 21 08:44:54 2014">
+ Oct 21, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=14288#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/110446224587372164392/">ung...@gmail.com</a
+></span>
+ 
+<pre>
+win7+goagent3.2.0
+按照13的设置，客户端可以登录了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct 28 23:49:11 2014">
+ Oct 28, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=14288#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/104717575576969312473/">menxiaoy...@gmail.com</a
+></span>
+ 
+<pre>
+win7+ 3.21 按13楼的办法又不行了。不懂
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov  3 17:21:17 2014">
+ Nov 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=14288#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/104717575576969312473/">menxiaoy...@gmail.com</a
+></span>
+ 
+<pre>
+3.21好几天没能用google drive了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Dec  5 18:11:04 2014">
+ Dec 5, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=14288#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/112689714039328931981/">yupen...@gmail.com</a
+></span>
+ 
+<pre>
+我按#19 的方式弄了，google drive倒是可以用了，但是印象笔记不能同步……
+真要命~~~~
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc26">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Dec 24 17:21:46 2014">
+ Dec 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c26" href="/p/goagent/issues/detail?id=14288#c26">#26</a>
+ 
+
+ <a class="userlink"
+ href="/u/114484444314233342184/">okgoo...@gmail.com</a
+></span>
+ 
+<pre>
+测试环境：win7+goagent3.2.3
+一、在proxy.user.ini中添加：
+[profile] 
+accounts.google.com = google_hk,forcehttps,nofakehttps
+clients3.google.com = google_hk,forcehttps,nofakehttps
+drive.google.com = google_hk,forcehttps,nofakehttps
+upload.drive.google.com = google_hk,forcehttps,nofakehttps
+.google.com = google_hk,forcehttps,nofakehttps
+googledrive.com = google_hk,forcehttps,nofakehttps
+
+[gae]
+keepalive = 1
+obfuscate = 1
+
+[dns]
+enable = 1
+二、修改driver客户端“偏好设置-高级”为：自动检测代理设置
+三、设置ie代理：勾选  127.0.01&quot;8087
+
+稳定、流畅
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Dec 24 17:39:10 2014">
+ Dec 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=14288#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/114484444314233342184/">okgoo...@gmail.com</a
+></span>
+ 
+<pre>
+如果使用中还存在问题，加装DNScrypt以解决dns污染
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jan  3 19:08:02 2015">
+ Jan 3, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=14288#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/112765745139260163043/">changjia...@gmail.com</a
+></span>
+ 
+<pre>
+我这样设置了，客户端小三角颜色鲜艳，上传文件秒传。
+但是发现本地计算机上的文件能同步到云端，云端的文件却不能同步到本地。
+我是需要几个设备和客户端相互同步的，这比较痛苦。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc29">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jan  4 16:56:25 2015">
+ Jan 4, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c29" href="/p/goagent/issues/detail?id=14288#c29">#29</a>
+ 
+
+ <a class="userlink"
+ href="/u/112765745139260163043/">changjia...@gmail.com</a
+></span>
+ 
+<pre>
+[gae]
+window = 1
+
+增加上面内容，已经解决。还有没有更好方法？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc30">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan 27 22:33:07 2015">
+ Jan 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c30" href="/p/goagent/issues/detail?id=14288#c30">#30</a>
+ 
+
+ <a class="userlink"
+ href="/u/114652730398079363053/">kick.you...@gmail.com</a
+></span>
+ 
+<pre>
+成功解决drive客户端无法连接的问题，，谢谢各位了。。
+但是感觉速度也不是很快。。我的问题是一开始上传视频到youtube上面，
+但是发现上传不了，一直卡在0上面，后面看其他方法说是可以用drive 和google+做中介来
+上传。。
+
+有谁能提供下proxy init的配置文件吗？要是能直接上传youtube上面就好了。我在看youtube的时候
+速度很快的。。~~
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc31">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Mar 19 01:09:14 2015">
+ Mar 19, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c31" href="/p/goagent/issues/detail?id=14288#c31">#31</a>
+ 
+
+ <a class="userlink"
+ href="/u/117939652836020894520/">handl...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢各位大神帮我解决了这个问题！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc32">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 11 06:47:40 2015">
+ Jun 11 (4 days ago)
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c32" href="/p/goagent/issues/detail?id=14288#c32">#32</a>
+ 
+
+ <a class="userlink"
+ href="/u/112753533170691477455/">hero...@gmail.com</a
+></span>
+ 
+<pre>
+有哪位能整理一份详细的更改方案
+我的电脑是XP的 麻烦大神做个总结吧！GAE是最新的！
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14288&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14288"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="14288">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A14288',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 14288,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

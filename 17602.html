@@ -1,0 +1,2514 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"domainName": null, "projectHomeUrl": "/p/goagent", "relativeBaseUrl": "", "loggedInUserEmail": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "projectName": "goagent", "profileUrl": null, "token": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 17602 - 
+ goagent -
+ 
+ 一张图告诉你 Tor 的现状 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17602&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17602" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=17602">17602</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >一张图告诉你 Tor 的现状</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 12 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A17602">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17602&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17602">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/101309562631439113700/">westmin...@gmail.com</a
+>,
+ <span class="date" title="Mon Sep 29 15:35:29 2014">Sep 29, 2014</span>
+ 
+ </div>
+<pre>
+上图，不解释，图后重点：作为前置代理的 shadowsocks 部署在 heroku 上
+<a href="http://i.imgur.com/yLOQ2qG.png" rel="nofollow">http://i.imgur.com/yLOQ2qG.png</a>
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Oct  1 09:34:08 2014">
+ Oct 1, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=17602#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/110330972716879447422/">bob.yang...@gmail.com</a
+></span>
+ 
+<pre>
+贴图挺漂亮，但TOR这东西你怎么弄也是泪。。。同时小心heroku帐号，我做过反向就给封了，PAAS／C4好像监控不严格，我还有时用用。PHP想都不要想！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  2 20:10:30 2014">
+ Oct 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=17602#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/105792157268945396102/">atm1...@gmail.com</a
+></span>
+ 
+<pre>
+#3 这个上面的网桥 怎么用啊 - -
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  2 23:46:40 2014">
+ Oct 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=17602#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/108624022798487360207/">hongwang...@gmail.com</a
+></span>
+ 
+<pre>
+#3 
+谢谢，可是瑞典隐私基金会的IP没有看到呵。随便添加了一个，显示0出口！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct  2 23:50:26 2014">
+ Oct 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=17602#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/108624022798487360207/">hongwang...@gmail.com</a
+></span>
+ 
+<pre>
+StrictNodes 1
+ExitNodes 104.131.34.172:443
+语句是否正确？运行没有问题，显示0出口。节点问题？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Oct  3 01:13:45 2014">
+ Oct 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=17602#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/108624022798487360207/">hongwang...@gmail.com</a
+></span>
+ 
+<pre>
+#7 谢谢提出节点的问题，过去没有去注意。
+添加的语句应该已经搞定：
+ExitNodes Simple1,Simple2
+StrictNodes 1
+Simple为节点IP地址，用英文逗号隔开，不要人为换行。尝试了两个带宽在48087KB/s左右的节点。
+运行Expert Bundle,连接速度快了不少，比较稳定。但看视频不怎么样，还需要努力寻找。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Oct  3 06:16:15 2014">
+ Oct 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=17602#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/108624022798487360207/">hongwang...@gmail.com</a
+></span>
+ 
+<pre>
+有得便有失呵！网桥不一样。我用的是长效网桥，已经一年多了，估计一直可以用下去的。视频就拜托gae了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Oct  3 09:16:33 2014">
+ Oct 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=17602#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/105964125588279945280/">ahx...@gmail.com</a
+></span>
+ 
+<pre>
+真他乃匿名神器。
+
+配合 Tor Browser ，禁用 Flash，俺的电脑在
+
+<a href="http://ip-check.info/?lang=en" rel="nofollow">http://ip-check.info/?lang=en</a>
+
+上测试到了有我以来最极致的匿名。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Oct  3 21:34:34 2014">
+ Oct 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=17602#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/108624022798487360207/">hongwang...@gmail.com</a
+></span>
+ 
+<pre>
+这个测试有些不稳定。
+You are using Tor, but your browser profile differs from the recommended
+我的profile 可能有些不一样。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct  4 05:33:04 2014">
+ Oct 4, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=17602#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/105964125588279945280/">ahx...@gmail.com</a
+></span>
+ 
+<pre>
+#17 意思是你的浏览器某些设置不太安全，会暴露你的隐私。
+
+点开下面的“START TEST!...”会告诉你哪些不够安全。
+
+首当其冲的就 Adobe Flash ，启用后会暴露你的真实公网 IP ，
+
+无论是多少层代理都没用。所以要做到匿名，开启 Tor 后还要禁用 Flash，Java 等插件。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct  4 05:37:13 2014">
+ Oct 4, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=17602#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/105964125588279945280/">ahx...@gmail.com</a
+></span>
+ 
+<pre>
+浏览器 JonDoFox 和 Tor Browser 都各项设置都不错，推荐 Tor 代理上网用它们。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct  4 14:08:24 2014">
+ Oct 4, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=17602#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/102585249794651828908/">yewo...@gmail.com</a
+></span>
+ 
+<pre>
+&quot;文本处理高手应该很容易搞出来IP+端口:）
+最新网桥节点列表：<a href="https://collector.torproject.org/recent/bridge-descriptors/server-descriptors/" rel="nofollow">https://collector.torproject.org/recent/bridge-descriptors/server-descriptors/</a>&quot;
+
+非常好奇，怎么从descriptor搞出来网桥的IP:port呢？
+
+#7
+根据我的理解，网桥是非公开的relay，<a href="https://cy-int.com/tors" rel="nofollow">https://cy-int.com/tors</a> 列出的只是relay。
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct  4 20:42:46 2014">
+ Oct 4, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=17602#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/102585249794651828908/">yewo...@gmail.com</a
+></span>
+ 
+<pre>
+#23
+notice file应该会显示网桥类型，类似with transport 'obfs3'之类的信息。不知你是否有留意？
+
+get bridges收到的是普通网桥，基本不能用。即使当时可以用，也会很快被封，因为gfw的DPI。大陆得用transport网桥，发邮件用命令get transport obfs3或get transport oft，bridges@tpo自动回复里好像有说明。
+
+bridge已经从obfs2进化到obfs4了，还有oft、scramblesuit和meek之类。感觉很多人对Tor的认知还停留在的2年前。不过，meek网桥和lantern的domain fronting算是偷师goagent。可以说goagent开发人员还是很强大的啦～
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct  4 20:59:13 2014">
+ Oct 4, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=17602#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/108624022798487360207/">hongwang...@gmail.com</a
+></span>
+ 
+<pre>
+关闭 Flash，Java插件之后测试，果然有效！
+You are using Tor, but your browser profile differs from the recommended
+`Tor Browser Bundle` default profile.
+profile不同，或许是没有使用Tor Browser Bundle的缘故。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc30">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct  4 23:40:05 2014">
+ Oct 4, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c30" href="/p/goagent/issues/detail?id=17602#c30">#30</a>
+ 
+
+ <a class="userlink"
+ href="/u/111436539008431228967/">chen1258...@gmail.com</a
+></span>
+ 
+<pre>
+楼主你好  我是在Mac 下用TorBrowser 请问你这个网桥怎么找 用什么格式加在配置里面啊
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc31">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct  5 00:10:00 2014">
+ Oct 5, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c31" href="/p/goagent/issues/detail?id=17602#c31">#31</a>
+ 
+
+ <a class="userlink"
+ href="/u/102585249794651828908/">yewo...@gmail.com</a
+></span>
+ 
+<pre>
+#29
+谢谢！
+
+之前我问：“notice file应该会显示网桥类型，类似with transport 'obfs3'之类的信息。不知你是否有留意？”
+
+我想，是我搞错了：bridge ip:port表示普通网桥，貌似不会显示这类信息。可以在ip:port前加obfs2/obfs3/oft试试。要是找出来200+个非普通网桥，不管是否可用，都算一个很NB的发现了。(可惜Tor没有悬赏捉bug:P)
+
+貌似有你博客链接的评论不见了。要是我说了什么让你觉得冒犯的话，非常抱歉。如果评论可以点赞，我会点N+1次。
+
+
+
+
+
+
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc32">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct  5 00:30:40 2014">
+ Oct 5, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c32" href="/p/goagent/issues/detail?id=17602#c32">#32</a>
+ 
+
+ <a class="userlink"
+ href="/u/101665086685433056636/">rock1782...@gmail.com</a
+></span>
+ 
+<pre>
+Bridge 10.208.71.235:443
+Bridge 93.174.90.30:9001
+Bridge 62.210.136.51:9001
+Bridge 62.210.82.44:21
+Bridge 37.130.227.133:443
+Bridge 197.231.221.211:8080
+Bridge 94.242.246.24:8080
+Bridge 146.0.42.110:25
+Bridge 194.150.168.95:443
+Bridge 95.211.140.221:443
+Bridge 188.138.9.208:993
+Bridge 94.242.246.23:9001
+Bridge 77.247.181.164:22
+Bridge 195.154.194.211:22
+Bridge 62.210.82.177:443
+Bridge 37.221.161.234:9001
+Bridge 171.25.193.20:443
+Bridge 188.138.9.208:995
+Bridge 77.247.181.162:443
+Bridge 77.247.181.162:22
+Bridge 96.47.226.20:443
+Bridge 193.11.164.243:9001
+Bridge 195.154.251.21:9001
+Bridge 188.138.17.248:443
+Bridge 37.221.162.226:9001
+Bridge 62.210.84.4:443
+Bridge 195.169.125.226:9001
+Bridge 109.105.109.162:60784
+Bridge 77.247.181.165:110
+Bridge 192.42.116.161:9001
+Bridge 62.210.84.20:443
+Bridge 146.0.32.144:9001
+Bridge 146.0.42.110:22
+Bridge 178.217.184.32:443
+Bridge 212.83.158.20:443
+Bridge 204.8.156.142:443
+Bridge 77.247.181.163:443
+Bridge 37.221.161.235:8080
+Bridge 77.247.181.165:443
+Bridge 86.59.119.82:443
+Bridge 212.129.42.9:443
+Bridge 212.83.158.5:443
+Bridge 89.207.128.241:443
+Bridge 145.220.0.15:9001
+Bridge 81.7.14.246:443
+Bridge 77.247.181.163:22
+Bridge 96.47.226.22:443
+Bridge 188.138.1.229:443
+Bridge 216.66.85.146:443
+Bridge 188.138.9.49:443
+Bridge 62.210.74.143:20
+Bridge 188.165.240.102:59001
+Bridge 62.210.74.137:20
+Bridge 77.109.141.138:443
+Bridge 171.25.193.131:443
+Bridge 195.191.233.222:443
+Bridge 85.25.211.111:9001
+Bridge 77.247.181.164:443
+Bridge 195.191.233.221:443
+Bridge 62.210.207.46:443
+Bridge 212.83.175.206:9001
+Bridge 195.154.194.211:443
+Bridge 217.115.50.229:9001
+Bridge 188.138.9.49:9001
+Bridge 86.59.119.83:443
+Bridge 85.25.43.84:443
+Bridge 212.83.154.33:8443
+Bridge 212.83.154.33:443
+Bridge 77.109.141.139:443
+Bridge 188.138.1.229:9001
+Bridge 84.245.33.8:9001
+Bridge 192.42.116.16:443
+Bridge 95.211.169.35:443
+Bridge 148.251.84.200:9001
+Bridge 195.154.226.66:19001
+Bridge 77.95.224.187:443
+Bridge 85.25.43.45:443
+Bridge 193.11.114.43:9001
+Bridge 91.221.53.250:443
+Bridge 62.210.137.230:8443
+Bridge 62.210.137.230:443
+Bridge 192.150.94.49:9001
+Bridge 5.34.183.205:443
+Bridge 62.210.74.186:20
+Bridge 128.204.203.103:443
+Bridge 148.251.84.200:9223
+Bridge 37.128.208.30:443
+Bridge 176.31.122.216:9001
+Bridge 89.207.132.76:443
+Bridge 176.10.100.228:993
+Bridge 178.33.35.151:80
+Bridge 37.220.35.61:443
+Bridge 89.163.224.15:9001
+Bridge 188.165.145.157:443
+Bridge 37.148.163.38:443
+Bridge 62.220.148.85:443
+Bridge 176.9.232.121:443
+Bridge 77.109.141.140:443
+Bridge 37.187.30.78:9001
+Bridge 46.228.199.19:443
+Bridge 94.126.178.1:9001
+Bridge 134.119.3.164:9001
+Bridge 81.89.96.88:443
+Bridge 176.10.100.229:995
+Bridge 93.180.157.154:9001
+Bridge 46.20.47.57:443
+Bridge 194.68.223.36:9001
+Bridge 193.11.114.45:9002
+Bridge 146.255.57.46:9001
+Bridge 217.12.199.190:443
+Bridge 37.114.52.7:9001
+Bridge 5.79.68.161:9001
+Bridge 185.13.39.135:443
+Bridge 209.51.191.190:443
+Bridge 212.38.181.30:9001
+Bridge 62.220.148.94:443
+Bridge 46.182.106.190:143
+Bridge 62.220.148.96:443
+Bridge 85.226.89.241:443
+Bridge 77.95.231.11:443
+Bridge 81.89.96.89:443
+Bridge 5.104.224.246:443
+Bridge 37.200.98.5:443
+Bridge 176.10.100.227:666
+Bridge 5.79.68.161:9002
+Bridge 88.198.100.232:443
+Bridge 62.220.148.87:443
+Bridge 178.78.229.73:9001
+Bridge 78.192.241.75:9001
+Bridge 5.135.59.74:80
+Bridge 93.180.156.84:9001
+Bridge 91.121.82.25:443
+Bridge 185.15.244.124:443
+Bridge 89.16.176.158:9001
+Bridge 87.72.85.217:19001
+Bridge 85.10.237.104:9001
+Bridge 85.25.103.48:443
+Bridge 37.200.99.251:9001
+Bridge 142.4.213.25:443
+Bridge 5.9.26.219:8888
+Bridge 178.62.3.36:9001
+Bridge 5.9.48.5:9031
+Bridge 94.23.105.25:9001
+Bridge 95.211.216.101:9001
+Bridge 95.130.15.97:443
+Bridge 178.32.219.197:9001
+Bridge 92.60.5.238:443
+Bridge 178.254.42.203:9001
+Bridge 37.148.163.38:22
+Bridge 176.10.100.230:1723
+Bridge 91.205.172.16:443
+Bridge 95.130.15.251:443
+Bridge 217.12.204.104:443
+Bridge 85.25.149.191:7777
+Bridge 62.236.108.73:443
+Bridge 148.251.69.61:9001
+Bridge 79.160.162.106:9001
+Bridge 134.119.9.35:443
+Bridge 176.10.100.228:991
+Bridge 5.249.144.33:9001
+Bridge 103.3.188.169:443
+Bridge 46.165.223.217:9001
+Bridge 212.129.41.86:9001
+Bridge 188.95.247.140:443
+Bridge 92.222.172.41:443
+Bridge 78.108.63.46:443
+Bridge 176.10.100.226:443
+Bridge 37.59.74.229:9001
+Bridge 92.222.172.229:9001
+Bridge 5.9.26.219:8889
+Bridge 89.163.224.15:9002
+Bridge 46.23.70.195:443
+Bridge 176.10.100.226:22
+Bridge 95.143.193.145:8008
+Bridge 5.104.224.246:22
+Bridge 95.211.184.150:443
+Bridge 31.31.79.101:443
+Bridge 91.219.237.117:443
+Bridge 83.149.127.140:443
+Bridge 178.77.122.89:9001
+Bridge 95.211.186.68:9001
+Bridge 62.210.37.82:443
+Bridge 81.7.7.119:443
+Bridge 46.165.223.227:443
+Bridge 92.222.28.243:9001
+Bridge 91.109.244.104:443
+Bridge 85.17.123.108:9001
+Bridge 188.226.146.88:17000
+Bridge 85.25.9.11:7777
+Bridge 176.10.100.227:989
+Bridge 217.160.23.208:443
+Bridge 188.40.51.232:443
+Bridge 46.23.85.31:443
+Bridge 46.246.46.27:9001
+Bridge 46.165.223.214:443
+Bridge 95.215.1.93:54230
+Bridge 46.252.26.124:9001
+Bridge 96.44.189.101:443
+Bridge 62.217.124.253:443
+Bridge 82.165.197.129:9001
+Bridge 144.76.14.145:443
+Bridge 79.134.234.200:9001
+Bridge 78.142.142.246:443
+Bridge 95.211.225.167:443
+Bridge 212.129.16.61:9031
+Bridge 212.7.194.71:9001
+Bridge 188.165.241.216:59001
+Bridge 89.207.132.76:22
+Bridge 94.23.30.53:443
+Bridge 46.165.249.228:110
+Bridge 128.52.128.105:443
+Bridge 85.17.122.80:443
+Bridge 5.199.142.230:443
+Bridge 62.112.195.56:9001
+Bridge 212.83.148.205:9001
+Bridge 77.95.231.11:22
+Bridge 94.23.172.36:443
+Bridge 212.21.66.6:443
+Bridge 31.204.150.106:9001
+Bridge 185.17.184.228:9001
+Bridge 46.165.197.96:443
+Bridge 95.130.15.252:443
+Bridge 37.59.112.74:443
+Bridge 92.222.123.152:443
+Bridge 78.108.63.44:443
+Bridge 37.143.86.26:443
+Bridge 46.28.110.129:443
+Bridge 31.31.76.64:9001
+Bridge 217.79.181.50:21
+Bridge 5.79.68.137:443
+Bridge 128.204.203.103:22
+Bridge 144.76.126.179:443
+Bridge 5.9.140.195:32476
+Bridge 176.9.143.144:9001
+Bridge 193.25.173.21:9001
+Bridge 109.163.234.2:443
+Bridge 188.138.121.118:9001
+Bridge 46.165.250.235:443
+Bridge 95.130.15.253:443
+Bridge 195.154.140.234:443
+Bridge 95.211.205.151:443
+Bridge 85.25.103.48:8080
+Bridge 109.163.234.9:443
+Bridge 212.83.176.125:9001
+Bridge 37.187.239.191:9001
+Bridge 176.31.190.252:9035
+Bridge 91.219.237.229:443
+Bridge 144.76.41.195:443
+Bridge 31.31.78.141:9001
+Bridge 81.173.240.81:110
+Bridge 185.14.28.154:443
+Bridge 82.94.251.204:443
+Bridge 92.222.123.154:443
+Bridge 95.128.43.164:443
+Bridge 92.222.9.53:443
+Bridge 171.25.193.235:11443
+Bridge 188.40.32.154:443
+Bridge 148.251.237.79:9001
+Bridge 91.194.90.103:443
+Bridge 92.51.245.119:9001
+Bridge 195.154.15.188:443
+Bridge 62.210.206.25:5900
+Bridge 5.9.151.241:4223
+Bridge 94.242.251.112:9001
+Bridge 85.25.95.19:7777
+Bridge 178.62.154.95:9001
+Bridge 5.254.104.62:9001
+Bridge 37.0.123.152:443
+Bridge 107.150.53.178:21
+Bridge 81.169.210.11:9001
+Bridge 46.165.221.166:443
+Bridge 35.0.127.52:9001
+Bridge 87.106.249.118:443
+Bridge 92.222.123.153:443
+Bridge 95.130.15.96:443
+Bridge 5.9.156.17:443
+Bridge 5.79.86.168:9001
+Bridge 176.10.100.230:4321
+Bridge 92.222.123.155:443
+Bridge 95.211.27.132:9001
+Bridge 188.165.3.63:9205
+Bridge 46.28.68.158:443
+Bridge 178.254.35.61:9001
+Bridge 193.14.159.204:7012
+Bridge 178.63.46.97:9123
+Bridge 198.27.66.53:443
+Bridge 62.210.206.25:21
+Bridge 213.65.194.177:443
+Bridge 178.254.44.234:9001
+Bridge 95.211.60.34:9001
+Bridge 88.198.54.212:22
+Bridge 108.61.199.19:9001
+Bridge 35.0.127.52:9002
+Bridge 146.185.172.244:9001
+Bridge 92.222.252.76:443
+Bridge 94.198.98.71:443
+Bridge 178.62.27.9:9001
+Bridge 91.219.237.218:443
+Bridge 162.213.34.137:9001
+Bridge 37.59.162.218:6001
+Bridge 128.204.207.215:9001
+Bridge 74.120.13.132:443
+Bridge 212.129.4.84:9999
+Bridge 77.68.138.48:443
+Bridge 37.187.103.91:9001
+Bridge 185.16.172.155:9001
+Bridge 178.162.193.213:443
+Bridge 38.229.70.52:443
+Bridge 37.157.195.143:9001
+Bridge 5.9.191.52:443
+Bridge 195.154.97.246:9001
+Bridge 185.36.100.145:443
+Bridge 139.18.25.35:9001
+Bridge 77.207.111.206:9001
+Bridge 5.39.82.192:9001
+Bridge 176.10.100.229:53
+Bridge 92.222.39.183:443
+Bridge 62.220.148.97:443
+Bridge 129.123.7.6:443
+Bridge 178.20.55.18:443
+Bridge 192.87.28.28:9001
+Bridge 62.182.61.153:443
+Bridge 37.59.61.192:5555
+Bridge 37.187.7.74:443
+Bridge 188.165.5.48:443
+Bridge 5.196.1.143:81
+Bridge 178.254.44.234:443
+Bridge 94.242.243.162:9001
+Bridge 78.72.179.147:9001
+Bridge 195.154.106.50:9001
+Bridge 38.229.70.61:443
+Bridge 88.198.9.16:443
+Bridge 195.154.12.66:9001
+Bridge 85.214.62.48:443
+Bridge 38.229.70.54:443
+Bridge 88.198.100.230:443
+Bridge 31.204.150.138:9001
+Bridge 109.163.234.7:443
+Bridge 95.130.11.147:443
+Bridge 46.4.39.235:443
+Bridge 94.242.255.236:8080
+Bridge 178.63.80.36:443
+Bridge 96.44.189.100:443
+Bridge 85.17.190.82:9001
+Bridge 148.251.20.49:59001
+Bridge 195.154.166.113:9008
+Bridge 37.187.66.117:9001
+Bridge 178.20.55.16:443
+Bridge 194.150.168.79:11111
+Bridge 109.163.234.8:443
+Bridge 62.210.240.136:9001
+Bridge 160.97.47.30:443
+Bridge 37.187.198.53:9001
+Bridge 193.219.36.207:9001
+Bridge 193.6.222.110:80
+Bridge 193.24.209.148:443
+Bridge 213.61.149.126:5901
+Bridge 79.134.235.5:9001
+Bridge 95.130.9.190:3306
+Bridge 92.222.136.151:9001
+Bridge 5.135.143.84:9001
+Bridge 96.44.189.102:443
+Bridge 88.198.51.82:443
+Bridge 188.165.1.111:443
+Bridge 198.50.191.95:443
+Bridge 176.58.115.23:443
+Bridge 89.163.224.10:9001
+Bridge 178.162.194.82:9001
+Bridge 217.114.218.18:9001
+Bridge 5.199.130.188:443
+Bridge 18.187.1.68:19090
+Bridge 148.251.125.211:443
+Bridge 148.251.40.50:110
+Bridge 90.228.202.159:6881
+Bridge 37.187.103.156:9001
+Bridge 195.154.91.139:9001
+Bridge 85.10.207.242:9001
+Bridge 50.7.141.18:9001
+Bridge 185.21.100.50:9001
+Bridge 5.9.158.68:9001
+Bridge 62.210.208.228:9001
+Bridge 38.229.70.53:443
+Bridge 85.17.190.83:9002
+Bridge 91.227.249.44:9002
+Bridge 94.23.25.78:54008
+Bridge 158.181.51.38:9001
+Bridge 109.163.234.5:443
+Bridge 176.31.152.159:10050
+Bridge 195.154.117.163:56876
+Bridge 46.4.60.106:443
+Bridge 78.46.112.219:443
+Bridge 89.163.224.187:443
+Bridge 142.4.213.18:9001
+Bridge 195.154.180.22:9001
+Bridge 213.61.149.125:443
+Bridge 134.102.200.101:9001
+Bridge 31.172.30.4:443
+Bridge 91.121.76.207:9001
+Bridge 217.14.208.233:9001
+Bridge 109.74.151.149:443
+Bridge 195.154.121.198:443
+Bridge 85.25.95.149:9001
+Bridge 81.7.10.29:8443
+Bridge 80.237.226.73:9001
+Bridge 128.117.43.92:9001
+Bridge 142.4.32.196:9001
+Bridge 83.177.174.194:9001
+Bridge 31.172.31.207:443
+Bridge 82.118.19.134:9001
+Bridge 198.50.156.78:9001
+Bridge 5.9.51.174:443
+Bridge 5.79.78.97:9001
+Bridge 94.23.254.34:9001
+Bridge 193.11.164.242:9001
+Bridge 78.46.60.30:9001
+Bridge 94.242.255.236:9001
+Bridge 195.154.166.113:9007
+Bridge 94.198.98.35:443
+Bridge 94.23.105.27:9001
+Bridge 5.39.89.124:9001
+Bridge 94.198.98.40:443
+Bridge 188.40.37.200:443
+Bridge 137.117.214.22:3306
+Bridge 37.187.102.108:443
+Bridge 18.181.5.37:9052
+Bridge 129.123.7.6:9001
+Bridge 148.251.69.102:9011
+Bridge 212.129.50.246:9001
+Bridge 185.14.185.240:443
+Bridge 212.232.24.57:45292
+Bridge 178.32.181.109:443
+Bridge 5.254.114.221:8443
+Bridge 192.81.220.91:9001
+Bridge 176.9.85.123:443
+Bridge 85.25.208.201:9001
+Bridge 92.222.136.144:9001
+Bridge 5.135.181.75:443
+Bridge 38.229.79.2:443
+Bridge 81.7.13.84:443
+Bridge 81.17.30.48:443
+Bridge 82.165.137.178:950
+Bridge 131.188.40.188:80
+Bridge 213.167.104.142:9002
+Bridge 37.187.18.109:59001
+Bridge 204.9.55.71:443
+Bridge 130.185.133.70:443
+Bridge 192.151.154.142:8008
+Bridge 31.31.75.84:9001
+Bridge 192.87.28.82:9001
+Bridge 5.199.142.236:9001
+Bridge 78.47.188.4:143
+Bridge 195.228.45.176:9001
+Bridge 195.154.128.58:443
+Bridge 198.96.155.3:5001
+Bridge 5.135.152.178:9001
+Bridge 213.167.104.143:9004
+Bridge 209.222.8.196:443
+Bridge 80.241.217.180:80
+Bridge 195.154.109.157:23425
+Bridge 185.8.238.20:9001
+Bridge 5.196.46.248:443
+Bridge 185.8.238.22:9001
+Bridge 195.154.110.76:9666
+Bridge 176.9.30.131:9001
+Bridge 5.39.80.236:443
+Bridge 85.10.202.87:9001
+Bridge 5.199.142.195:9001
+Bridge 78.47.40.27:31337
+Bridge 178.63.97.34:9001
+Bridge 109.163.234.4:443
+Bridge 212.107.149.145:9001
+Bridge 94.242.243.66:9001
+Bridge 92.222.4.178:443
+Bridge 193.228.143.17:80
+Bridge 38.229.70.51:443
+Bridge 85.25.133.7:9001
+Bridge 198.50.152.17:443
+Bridge 92.222.19.133:443
+Bridge 95.211.168.238:443
+Bridge 188.241.140.119:9001
+Bridge 85.10.203.23:443
+Bridge 144.76.110.103:444
+Bridge 212.83.176.122:9001
+Bridge 178.162.194.30:9001
+Bridge 46.4.77.77:9001
+Bridge 85.214.49.207:9001
+Bridge 37.187.5.109:9001
+Bridge 204.85.191.30:9001
+Bridge 81.7.10.155:443
+Bridge 5.103.105.40:9001
+Bridge 78.46.113.110:9101
+Bridge 94.254.63.25:989
+Bridge 46.4.46.66:9001
+Bridge 193.138.216.101:9001
+Bridge 5.39.80.135:443
+Bridge 83.212.120.215:443
+Bridge 91.219.237.244:443
+Bridge 95.211.98.159:443
+Bridge 91.213.8.236:443
+Bridge 80.241.218.154:443
+Bridge 94.198.98.130:9001
+Bridge 91.230.202.55:443
+Bridge 185.8.236.100:9001
+Bridge 188.138.88.168:9001
+Bridge 23.95.48.93:9001
+Bridge 37.187.130.68:59001
+Bridge 129.123.7.8:443
+Bridge 188.138.112.226:9001
+Bridge 46.149.17.195:443
+Bridge 95.174.227.177:9001
+Bridge 193.164.131.13:9001
+Bridge 213.185.88.234:443
+Bridge 195.154.109.221:443
+Bridge 198.50.146.40:443
+Bridge 95.211.98.189:443
+Bridge 185.8.238.91:9001
+Bridge 144.76.182.202:9001
+Bridge 128.6.224.107:9001
+Bridge 188.165.213.156:52743
+Bridge 5.39.79.50:443
+Bridge 94.198.98.110:9001
+Bridge 188.226.192.48:9001
+Bridge 62.210.82.169:443
+Bridge 178.62.217.134:9001
+Bridge 37.187.107.91:9001
+Bridge 193.28.228.70:443
+Bridge 46.36.37.27:443
+Bridge 37.187.0.126:9666
+Bridge 91.213.8.84:443
+Bridge 77.109.139.87:9001
+Bridge 77.244.254.230:443
+Bridge 195.154.128.151:443
+Bridge 195.154.82.88:443
+Bridge 37.235.48.247:7654
+Bridge 178.62.241.30:9055
+Bridge 83.212.96.170:993
+Bridge 91.250.242.103:443
+Bridge 78.47.150.61:443
+Bridge 5.39.90.191:21
+Bridge 195.35.109.61:443
+Bridge 92.222.23.217:80
+Bridge 212.83.170.252:443
+Bridge 91.230.204.198:9031
+Bridge 91.121.113.70:9001
+Bridge 5.35.254.62:9001
+Bridge 178.32.220.12:443
+Bridge 37.187.109.58:443
+Bridge 144.76.110.103:443
+Bridge 149.255.96.182:9001
+Bridge 31.172.30.1:443
+Bridge 82.118.16.215:9001
+Bridge 195.154.97.10:9001
+Bridge 37.59.36.99:9001
+Bridge 72.52.91.30:5901
+Bridge 91.230.202.99:443
+Bridge 192.95.25.203:443
+Bridge 78.47.18.110:80
+Bridge 37.187.23.232:80
+Bridge 213.167.104.142:9001
+Bridge 18.238.2.85:443
+Bridge 81.7.10.29:443
+Bridge 77.109.138.44:443
+Bridge 94.242.252.41:9001
+Bridge 195.250.163.177:444
+Bridge 212.117.180.107:443
+Bridge 149.154.159.87:443
+Bridge 31.172.30.2:443
+Bridge 91.250.242.10:443
+Bridge 195.154.5.205:9000
+Bridge 144.76.8.73:443
+Bridge 185.8.238.140:443
+Bridge 129.123.7.39:9001
+Bridge 198.245.60.40:23468
+Bridge 195.154.14.40:9001
+Bridge 212.83.162.152:9001
+Bridge 213.167.104.143:9003
+Bridge 91.121.120.27:28645
+Bridge 85.159.209.128:443
+Bridge 64.62.249.222:443
+Bridge 94.228.222.192:9001
+Bridge 95.130.11.214:443
+Bridge 5.9.89.189:100
+Bridge 128.173.55.78:9001
+Bridge 77.109.139.28:443
+Bridge 176.9.38.198:9001
+Bridge 194.109.192.234:9001
+Bridge 94.142.245.231:443
+Bridge 87.118.114.134:443
+Bridge 134.255.239.61:443
+Bridge 93.186.200.213:443
+Bridge 37.153.241.86:443
+Bridge 5.135.163.182:8042
+Bridge 79.120.81.183:9090
+Bridge 93.184.66.227:443
+Bridge 87.233.219.58:9001
+Bridge 92.222.19.111:9001
+Bridge 209.159.142.235:443
+Bridge 209.159.138.18:443
+Bridge 216.230.230.247:443
+Bridge 198.144.155.88:443
+Bridge 74.91.27.142:443
+Bridge 5.9.150.40:9001
+Bridge 195.110.6.31:443
+Bridge 81.169.153.167:9001
+Bridge 89.187.142.208:443
+Bridge 217.12.204.147:9001
+Bridge 77.244.254.228:443
+Bridge 91.121.106.178:443
+Bridge 64.113.32.29:9001
+Bridge 199.87.154.255:9001
+Bridge 195.154.121.234:8080
+Bridge 178.79.173.147:9001
+Bridge 91.233.116.68:443
+Bridge 5.34.183.96:9001
+Bridge 91.121.85.130:47168
+Bridge 195.251.252.226:80
+Bridge 198.180.150.9:9001
+Bridge 37.187.22.131:143
+Bridge 78.47.61.94:443
+Bridge 37.187.17.95:443
+Bridge 195.154.105.57:9001
+Bridge 80.112.153.33:9001
+Bridge 146.185.141.44:9001
+Bridge 85.10.219.167:9001
+Bridge 64.113.44.206:9001
+Bridge 83.253.187.218:11311
+Bridge 188.165.252.146:37212
+Bridge 37.187.96.78:9001
+Bridge 198.50.149.160:443
+Bridge 88.198.130.212:9001
+Bridge 31.3.214.197:9001
+Bridge 77.244.254.227:443
+Bridge 195.154.8.224:7342
+Bridge 87.106.58.58:9001
+Bridge 195.154.119.20:443
+Bridge 212.129.50.100:9001
+Bridge 68.169.152.84:443
+Bridge 129.123.7.8:9001
+Bridge 37.187.103.213:9001
+Bridge 5.39.80.135:9001
+Bridge 62.220.135.129:443
+Bridge 185.57.82.25:9001
+Bridge 213.73.81.210:9001
+Bridge 82.116.120.3:443
+Bridge 144.76.53.125:9001
+Bridge 69.197.175.35:443
+Bridge 109.233.127.233:443
+Bridge 76.72.169.90:443
+Bridge 176.28.53.39:9001
+Bridge 162.247.72.217:443
+Bridge 146.185.165.184:9001
+Bridge 83.240.61.144:9001
+Bridge 185.8.238.139:443
+Bridge 80.12.94.184:443
+Bridge 37.187.102.186:9001
+Bridge 83.212.83.76:8998
+Bridge 83.212.104.145:80
+Bridge 109.239.60.53:9001
+Bridge 91.213.8.235:9001
+Bridge 176.58.102.70:9001
+Bridge 74.91.27.141:443
+Bridge 37.59.46.159:9001
+Bridge 31.31.76.44:9001
+Bridge 80.216.123.252:9001
+Bridge 37.134.2.162:9001
+Bridge 107.150.35.54:443
+Bridge 173.255.229.194:9001
+Bridge 37.221.162.226:9002
+Bridge 91.121.76.204:9001
+Bridge 144.76.50.37:443
+Bridge 209.159.138.19:3389
+Bridge 94.23.20.28:2342
+Bridge 128.52.160.20:443
+Bridge 104.131.55.141:9001
+Bridge 46.183.219.155:443
+Bridge 91.219.237.110:443
+Bridge 66.248.204.71:443
+Bridge 178.32.181.108:443
+Bridge 178.63.0.161:9002
+Bridge 91.185.200.221:143
+Bridge 85.214.251.25:9001
+Bridge 82.94.204.170:80
+Bridge 5.9.70.47:9001
+Bridge 31.31.76.61:9001
+Bridge 195.154.123.82:9001
+Bridge 85.25.130.154:9001
+Bridge 178.238.225.9:443
+Bridge 89.46.101.181:443
+Bridge 88.198.23.179:8080
+Bridge 96.232.96.5:9001
+Bridge 107.182.131.136:443
+Bridge 91.230.204.162:34578
+Bridge 94.100.18.162:443
+Bridge 178.32.181.97:443
+Bridge 162.218.67.147:443
+Bridge 146.185.180.64:9001
+Bridge 46.183.218.141:443
+Bridge 185.34.33.2:31415
+Bridge 5.9.21.19:9001
+Bridge 88.208.205.138:443
+Bridge 192.34.63.137:443
+Bridge 37.153.53.133:443
+Bridge 85.214.71.72:443
+Bridge 77.244.254.229:443
+Bridge 213.73.112.135:9001
+Bridge 77.109.138.43:443
+Bridge 216.218.134.12:9040
+Bridge 77.95.229.11:443
+Bridge 195.154.123.119:9001
+Bridge 37.59.96.191:443
+Bridge 83.212.99.123:9001
+Bridge 193.11.166.194:9000
+Bridge 176.10.107.180:9001
+Bridge 5.9.110.236:9001
+Bridge 81.7.16.59:443
+Bridge 69.197.175.36:443
+Bridge 31.31.75.181:9001
+Bridge 85.93.202.99:19001
+Bridge 83.212.99.68:443
+Bridge 212.48.84.53:9001
+Bridge 188.120.253.39:9001
+Bridge 37.187.180.4:2342
+Bridge 185.8.238.17:9001
+Bridge 188.214.26.32:9001
+Bridge 78.156.117.236:8443
+Bridge 91.237.88.107:8080
+Bridge 171.25.193.77:443
+Bridge 199.195.254.95:9001
+Bridge 162.247.73.206:443
+Bridge 166.70.207.2:9001
+Bridge 108.59.2.208:9001
+Bridge 149.9.0.27:9001
+Bridge 192.99.15.122:9001
+Bridge 85.159.113.228:9001
+Bridge 5.9.16.42:9001
+Bridge 5.39.80.28:9001
+Bridge 79.140.64.5:4433
+Bridge 147.102.216.242:8995
+Bridge 176.9.103.20:27443
+Bridge 188.230.172.56:8181
+Bridge 37.187.23.146:9001
+Bridge 188.165.193.94:9001
+Bridge 192.99.43.206:443
+Bridge 93.115.241.2:9001
+Bridge 178.32.181.104:443
+Bridge 86.59.113.107:443
+Bridge 77.109.139.26:443
+Bridge 91.213.8.235:443
+Bridge 5.9.158.75:443
+Bridge 77.109.139.27:443
+Bridge 100.33.8.35:443
+Bridge 37.59.14.201:9001
+Bridge 5.199.172.33:443
+Bridge 95.142.161.63:443
+Bridge 37.187.23.135:9001
+Bridge 81.218.109.195:443
+Bridge 46.38.241.96:9001
+Bridge 217.79.178.60:443
+Bridge 161.53.160.104:9090
+Bridge 194.104.0.100:9001
+Bridge 37.59.111.192:21
+Bridge 195.154.70.130:9001
+Bridge 149.9.0.60:9001
+Bridge 151.236.14.149:443
+Bridge 149.210.135.201:31337
+Bridge 88.198.175.218:9001
+Bridge 144.76.109.178:9081
+Bridge 198.50.146.252:9001
+Bridge 188.241.141.21:443
+Bridge 185.14.28.186:443
+Bridge 95.169.186.212:443
+Bridge 213.141.136.24:9001
+Bridge 193.164.133.53:9001
+Bridge 31.31.76.76:9001
+Bridge 188.226.227.150:9001
+Bridge 62.210.182.239:9022
+Bridge 178.254.26.244:9001
+Bridge 212.129.52.49:9666
+Bridge 46.38.62.30:443
+Bridge 85.25.203.42:443
+Bridge 195.154.109.44:80
+Bridge 176.9.120.154:443
+Bridge 95.130.11.5:9001
+Bridge 144.76.2.231:9001
+Bridge 87.106.140.24:80
+Bridge 37.59.60.131:9001
+Bridge 31.31.76.50:9001
+Bridge 46.183.219.156:443
+Bridge 162.218.68.130:9001
+Bridge 83.212.113.133:9001
+Bridge 162.245.217.208:443
+Bridge 94.23.37.153:9001
+Bridge 185.8.239.44:9001
+Bridge 109.247.77.146:9001
+Bridge 31.172.30.3:443
+Bridge 148.251.128.156:9001
+Bridge 81.166.64.55:9002
+Bridge 68.64.161.238:443
+Bridge 185.8.238.59:9001
+Bridge 94.23.25.129:9001
+Bridge 128.204.29.174:9001
+Bridge 144.76.163.93:9001
+Bridge 46.28.111.62:9001
+Bridge 37.59.38.110:9001
+Bridge 162.247.72.212:443
+Bridge 85.10.203.197:9384
+Bridge 62.210.74.55:9001
+Bridge 78.46.81.45:443
+Bridge 91.121.82.16:9003
+Bridge 173.242.121.199:443
+Bridge 188.64.45.105:9001
+Bridge 46.28.111.19:9001
+Bridge 77.109.138.42:443
+Bridge 66.230.230.230:443
+Bridge 178.32.181.99:443
+Bridge 64.22.71.226:9001
+Bridge 128.8.126.92:9001
+Bridge 83.212.84.223:8998
+Bridge 78.46.51.124:443
+Bridge 80.90.43.129:52103
+Bridge 217.12.199.209:9001
+Bridge 89.40.71.149:8080
+Bridge 176.31.28.63:443
+Bridge 185.8.237.30:9001
+Bridge 78.46.93.178:54321
+为啥都不能用？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc35">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct  6 18:05:10 2014">
+ Oct 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c35" href="/p/goagent/issues/detail?id=17602#c35">#35</a>
+ 
+
+ <a class="userlink"
+ href="/u/111436539008431228967/">chen1258...@gmail.com</a
+></span>
+ 
+<pre>
+哪位大神教我OS X下怎么搞阿  跪求(´･Д･)」
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc36">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct  7 01:57:00 2014">
+ Oct 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c36" href="/p/goagent/issues/detail?id=17602#c36">#36</a>
+ 
+
+ <a class="userlink"
+ href="/u/102585249794651828908/">yewo...@gmail.com</a
+></span>
+ 
+<pre>
+#34
+“不要使用网桥, TOR手册里都提醒了的”
+
+有说为什么吗？麻烦给个链接，谢谢。用网桥连接时，它就是入口节点（entry node）。觉得网桥和其他节点没本质区别嘛，当然，网桥不是公开的（published）。
+
+关于vpn+tor的优劣，请参阅Tor维基：<a href="https://trac.torproject.org/projects/tor/wiki/doc/TorPlusVPN" rel="nofollow">https://trac.torproject.org/projects/tor/wiki/doc/TorPlusVPN</a>:
+
+&quot;You can very well decrease your anonymity by using VPN/SSH in addition to Tor. (Proxies are covered in an extra chapter below.) If you know what you are doing you can increase anonymity, security and privacy. &quot;
+
+秘密越多人知道，越不是秘密，除非你能信任ta。
+
+#35 应该支持osx，去官网看看。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc37">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct  7 03:25:46 2014">
+ Oct 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c37" href="/p/goagent/issues/detail?id=17602#c37">#37</a>
+ 
+
+ <a class="userlink"
+ href="/u/116326853761552387466/">scattere...@gmail.com</a
+></span>
+ 
+<pre>
+#33 的做法若只是用tor来翻墙，可以借鉴，若依赖tor的匿名性，则不可取。
+
+#34 应该是记错了。
+参见 <a href="https://www.torproject.org/download/download.html#warning" rel="nofollow">https://www.torproject.org/download/download.html#warning</a> 
+f. Use bridges and/or find company
+
+#36 如果强调匿名性， 在中国大陆 vpn+tor(tor over proxy) 是必须的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc39">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct  7 05:47:15 2014">
+ Oct 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c39" href="/p/goagent/issues/detail?id=17602#c39">#39</a>
+ 
+
+ <a class="userlink"
+ href="/u/102585249794651828908/">yewo...@gmail.com</a
+></span>
+ 
+<pre>
+#37 
+
+“#36 如果强调匿名性， 在中国大陆 vpn+tor(tor over proxy) 是必须的。”
+能否说明一下：为什么是“必须的”？
+
+TorPlusVPN链接中有关于tor over proxy说明：<a href="https://trac.torproject.org/projects/tor/wiki/doc/TorPlusVPN#you-X-Tor" rel="nofollow">https://trac.torproject.org/projects/tor/wiki/doc/TorPlusVPN#you-X-Tor</a>
+还有，关于vpn fingerprinting的内容：<a href="https://trac.torproject.org/projects/tor/wiki/doc/TorPlusVPN#VPNSSHFingerprinting" rel="nofollow">https://trac.torproject.org/projects/tor/wiki/doc/TorPlusVPN#VPNSSHFingerprinting</a>
+
+多加一层不一定更安全，关键还是“能否或值得信任”。
+
+“#33 的做法若只是用tor来翻墙，可以借鉴，若依赖tor的匿名性，则不可取。”
+同意。不过，既然用expert bundle，明显知道自己在做什么。
+
+对于把网桥公开到网上，不管是否可用（或是否真的是网桥），真的不理解：这样做其实不是在帮用户！特别是#32，但愿只是有意识的刷屏。
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc41">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct  7 07:18:32 2014">
+ Oct 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c41" href="/p/goagent/issues/detail?id=17602#c41">#41</a>
+ 
+
+ <a class="userlink"
+ href="/u/102585249794651828908/">yewo...@gmail.com</a
+></span>
+ 
+<pre>
+#38
+“不用代理不能连接TOR是囧朝现状”
+
+关于这点，我来补充：通常，建议直接用Tor浏览器，那其他程序怎么办？
+
+比如，我就是想用chrome连接tor网络访问twitter？dropbox桌面版连不上或者thunderbird收不了gmail，怎么连接tor网络突破封锁？
+
+dropbox/thunderbird程序自身支持代理，可以直接设置sock5代理，ip地址：127.0.0.1，端口：9150。然后运行tor浏览器，连接tor网络后，dropbox/thunderbird就可以正常使用了。
+
+（不知道“不用代理不能连接tor”是否有这层含义。如果是，那对所有用户都一样，并非只是囧朝。我想我大概明白你在说什么，怕有人不仔细看上下文，会有误解。并非针对个人，希望透过讨论切磋，一起涨姿势啦。）
+
+
+关于Tor和gfw，刚看到Tor博客有更新：<a href="https://blog.torproject.org/blog/closer-look-great-firewall-china" rel="nofollow">https://blog.torproject.org/blog/closer-look-great-firewall-china</a>
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc43">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Oct  8 01:38:24 2014">
+ Oct 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c43" href="/p/goagent/issues/detail?id=17602#c43">#43</a>
+ 
+
+ <a class="userlink"
+ href="/u/108624022798487360207/">hongwang...@gmail.com</a
+></span>
+ 
+<pre>
+无界+tor 应该是首选！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc44">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Oct  8 02:34:25 2014">
+ Oct 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c44" href="/p/goagent/issues/detail?id=17602#c44">#44</a>
+ 
+
+ <a class="userlink"
+ href="/u/109144034748708273505/">nsfz...@gmail.com</a
+></span>
+ 
+<pre>
+也说几句。无界目前非常不错，作为tor的前置代理很好。请在tor网站下载专家版Expert Bundle 运行一次，退出后在C盘的D and Setting 中找到tor的torrc目录（要打开隐藏文件）。在尾部下端添加语句保存即可。使用时先运行无界，再运行tor
+AvoidDiskWrites 1
+SocksListenAddress 127.0.0.1
+ControlPort 9151
+SocksPort 9150
+HashedControlPassword 16:872860B76453A77D60CA2BB8C1A7042072093276A3D701AD684053EC4C
+HTTPSProxy 127.0.0.1:9666
+## 如果不指定出口节点 ExcludeNodes这句一定要，反之可以不要。使用指定节点连接会快些。
+ExcludeNodes {cn},{hk},{mo},{sg},{th},{pk},{by},{ru},{ir},{vn},{ph},{my},{cu}
+## 搜索二个带宽大的出口节点地址写在下面，英文逗号隔开。 
+ExitNodes a.b.c.d,e.f.g.h
+StrictNodes 1
+
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc46">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct 11 01:02:54 2014">
+ Oct 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c46" href="/p/goagent/issues/detail?id=17602#c46">#46</a>
+ 
+
+ <a class="userlink"
+ href="/u/105964125588279945280/">ahx...@gmail.com</a
+></span>
+ 
+<pre>
+《“丝绸之路”被查抄，比特币不再是法外之地》
+
+<a href="http://www.guokr.com/article/437485/" rel="nofollow">http://www.guokr.com/article/437485/</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc48">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Oct 31 09:08:37 2014">
+ Oct 31, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c48" href="/p/goagent/issues/detail?id=17602#c48">#48</a>
+ 
+
+ <a class="userlink"
+ href="/u/102585249794651828908/">yewo...@gmail.com</a
+></span>
+ 
+<pre>
+#46 你可能需要这个 obfsproxy <a href="https://www.torproject.org/projects/obfsproxy.html.en" rel="nofollow">https://www.torproject.org/projects/obfsproxy.html.en</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17602&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D17602"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="17602">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A17602',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 17602,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

@@ -1,0 +1,1589 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"loggedInUserEmail": null, "profileUrl": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "token": null, "projectHomeUrl": "/p/goagent", "projectName": "goagent", "relativeBaseUrl": "", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "domainName": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 1488 - 
+ goagent -
+ 
+ goagent经常自动退出 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D1488&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D1488" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="closed_colors">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=1488">1488</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >goagent经常自动退出</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 4 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A1488">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="The requested non-coding task was completed">Done</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ <tr><th align="left" valign="top">Closed:&nbsp;</th>
+ <td align="left" valign="top" width="100%">
+ Dec 2012
+ </td>
+ </tr>
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D1488&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D1488">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/111025517880937615786/">bjy...@gmail.com</a
+>,
+ <span class="date" title="Fri Nov 11 02:14:39 2011">Nov 11, 2011</span>
+ 
+ </div>
+<pre>
+首先说一下运行环境，在安装openwrt的路由器上运行，
+其它软件：python/2.6.4 pyopenssl/0.10
+在出现这个提示后：python: md_rand.c: 316: ssleay_rand_add: Assertion `md_c[1] == md_count[1]' failed
+goagent就退出了。希望能够解决这个问题，谢谢！
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Nov 11 02:33:30 2011">
+ Nov 11, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=1488#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/111025517880937615786/">bjy...@gmail.com</a
+></span>
+ 
+<pre>
+另外经常有这样的错误提示，但不一定会导致goagen退出，而且也没影响正常网页浏览，我是在goagent中设置了代理的
+ERROR - - [03/Jan/1970 08:47:55] do_CONNECT_Thunnel socket.error: [Errno 8] _ssl.c:480: EOF occurred in violation of protocol
+Traceback (most recent call last):
+  File &quot;/root/local/proxy.py&quot;, line 685, in do_CONNECT_Thunnel
+    self.connection = ssl.wrap_socket(self.connection, keyFile, crtFile, True)
+  File &quot;/usr/lib/python2.6/ssl.py&quot;, line 350, in wrap_socket
+    suppress_ragged_eofs=suppress_ragged_eofs)
+  File &quot;/usr/lib/python2.6/ssl.py&quot;, line 118, in __init__
+    self.do_handshake()
+  File &quot;/usr/lib/python2.6/ssl.py&quot;, line 293, in do_handshake
+    self._sslobj.do_handshake()
+SSLError: [Errno 8] _ssl.c:480: EOF occurred in violation of protocol
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Nov 11 18:56:07 2011">
+ Nov 11, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=1488#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/HewigOvens/">HewigOvens</a
+></span>
+ 
+<pre>
+在openwrt上导入GoAgent的证书试试；不知道你的路由器内存多大，GoAgent大概会使用15M的内存
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Nov 11 23:02:53 2011">
+ Nov 11, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=1488#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/111025517880937615786/">bjy...@gmail.com</a
+></span>
+ 
+<pre>
+在openwrt上如何导入GoAgent的证书?
+我路由器的内容64M，应该可以勉强运行goagent
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Nov 12 03:30:01 2011">
+ Nov 12, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=1488#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/HewigOvens/">HewigOvens</a
+></span>
+ 
+<pre>
+看下是否有certutil命令？试试这个<a href="http://blog.avirtualhome.com/2010/02/02/adding-ssl-certificates-to-google-chrome-linux-ubuntu/" rel="nofollow">http://blog.avirtualhome.com/2010/02/02/adding-ssl-certificates-to-google-chrome-linux-ubuntu/</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Dec 28 06:55:31 2011">
+ Dec 28, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=1488#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/103746284957809860995/">mql...@gmail.com</a
+></span>
+ 
+<pre>
+32M内存的路由器就能流畅运行了。
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Dec 28 07:06:14 2011">
+ Dec 28, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=1488#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/103746284957809860995/">mql...@gmail.com</a
+></span>
+ 
+<pre>
+你的python装全了吗？
+我把pyopenssl和python-openssl都安装了
+平时自动退出的几率很小
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan 10 16:25:46 2012">
+ Jan 10, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=1488#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/111025517880937615786/">bjy...@gmail.com</a
+></span>
+ 
+<pre>
+这些软件我都已经安装了，但还是经常性退出。
+其实除上google相关的网站之外的网站是很少自动退出的，但只要一上google的网站就频繁退出，不知道是不是跟google+有关系。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jan 20 11:31:55 2012">
+ Jan 20, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=1488#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/114619867092516753647/">mynew...@gmail.com</a
+></span>
+ 
+<pre>
+tomato如何配置，总是报错。
+Traceback (most recent call last): 
+  File &quot;/tmp/mnt/sda1/opt/local/proxy.py&quot;, line 126, in &lt;module&gt; 
+    common = Common() 
+  File &quot;/tmp/mnt/sda1/opt/local/proxy.py&quot;, line 35, in __init__ 
+    self.LISTEN_PORT          = self.CONFIG.getint('listen', 'port') 
+  File &quot;/opt/lib/python2.6/ConfigParser.py&quot;, line 340, in getint 
+    return self._get(section, int, option) 
+  File &quot;/opt/lib/python2.6/ConfigParser.py&quot;, line 337, in _get 
+    return conv(self.get(section, option)) 
+  File &quot;/opt/lib/python2.6/ConfigParser.py&quot;, line 541, in get 
+    raise NoOptionError(option, section) 
+ConfigParser.NoOptionError: No option 'port' in section: 'listen' 
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jan 20 15:41:47 2012">
+ Jan 20, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=1488#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/103746284957809860995/">mql...@gmail.com</a
+></span>
+ 
+<pre>
+我感觉是你的proxy.ini文件没设置好或者proxy.ini版本和proxy.py版本不匹配
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jan 20 16:55:19 2012">
+ Jan 20, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=1488#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/114619867092516753647/">mynew...@gmail.com</a
+></span>
+ 
+<pre>
+[listen]
+ip = 127.0.0.1
+port = 8087
+visible = 0 
+
+listen设置可能有问题，应该如何设置？用的tomato
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jan 20 17:19:29 2012">
+ Jan 20, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=1488#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/103746284957809860995/">mql...@gmail.com</a
+></span>
+ 
+<pre>
+ip = 0.0.0.0
+
+区域要用cn
+选hk同样在OpenWrt上无法运行GoAgent
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jan 20 18:27:26 2012">
+ Jan 20, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=1488#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/114619867092516753647/">mynew...@gmail.com</a
+></span>
+ 
+<pre>
+改成0.0.0.0 port 和visible呢？
+不写就会报错。
+Traceback (most recent call last): 
+  File &quot;/tmp/mnt/sda1/opt/local/proxy.py&quot;, line 126, in &lt;module&gt; 
+    common = Common() 
+  File &quot;/tmp/mnt/sda1/opt/local/proxy.py&quot;, line 35, in __init__ 
+    self.LISTEN_PORT          = self.CONFIG.getint('listen', 'port') 
+  File &quot;/opt/lib/python2.6/ConfigParser.py&quot;, line 340, in getint 
+    return self._get(section, int, option) 
+  File &quot;/opt/lib/python2.6/ConfigParser.py&quot;, line 337, in _get 
+    return conv(self.get(section, option)) 
+  File &quot;/opt/lib/python2.6/ConfigParser.py&quot;, line 541, in get 
+    raise NoOptionError(option, section) 
+ConfigParser.NoOptionError: No option 'port' in section: 'listen' 
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jan 20 19:14:28 2012">
+ Jan 20, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=1488#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/103746284957809860995/">mql...@gmail.com</a
+></span>
+ 
+<pre>
+[listen]里仅改ip 即可
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jan 20 21:03:03 2012">
+ Jan 20, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=1488#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/114619867092516753647/">mynew...@gmail.com</a
+></span>
+ 
+<pre>
+GoAgent Version : 1.7.9 dev (python/2.6.7 pyopenssl/0.10) 
+Listen Address  : 0.0.0.0:8087 
+GAE Mode        : http 
+GAE Area        : cn 
+GAE APPID       : findmemy001 
+------------------------------------------------------ 
+Traceback (most recent call last): 
+  File &quot;/tmp/mnt/sda1/opt/local/proxy.py&quot;, line 952, in &lt;module&gt; 
+    main() 
+  File &quot;/tmp/mnt/sda1/opt/local/proxy.py&quot;, line 947, in main 
+    httpd = LocalProxyServer((common.LISTEN_IP, common.LISTEN_PORT), LocalProxyHandler) 
+  File &quot;/opt/lib/python2.6/SocketServer.py&quot;, line 402, in __init__ 
+    self.server_bind() 
+  File &quot;/opt/lib/python2.6/BaseHTTPServer.py&quot;, line 108, in server_bind 
+    SocketServer.TCPServer.server_bind(self) 
+  File &quot;/opt/lib/python2.6/SocketServer.py&quot;, line 413, in server_bind 
+    self.socket.bind(self.server_address) 
+  File &quot;&lt;string&gt;&quot;, line 1, in bind 
+socket.error: [Errno 125] Address already in use 
+
+这就是编译的最后结果，不知道哪儿出了错。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jan 28 01:03:24 2012">
+ Jan 28, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=1488#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/105446664255130678253/">yujiachr...@gmail.com</a
+></span>
+ 
+<pre>
+我碰到和楼上一样的问题。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan 31 13:39:24 2012">
+ Jan 31, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=1488#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/112216221961728357238/">shundego...@gmail.com</a
+></span>
+ 
+<pre>
+现在问题都解决了吗？？？请写写心得。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan 31 18:34:07 2012">
+ Jan 31, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=1488#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/114619867092516753647/">mynew...@gmail.com</a
+></span>
+ 
+<pre>
+错误依旧，谁来救救我，哎。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan 31 19:46:31 2012">
+ Jan 31, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=1488#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/103746284957809860995/">mql...@gmail.com</a
+></span>
+ 
+<pre>
+Comment 14 by mynew...@gmail.com, Jan 20, 2012
+
+
+改端口
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Feb  1 16:39:54 2012">
+ Feb 1, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=1488#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/114619867092516753647/">mynew...@gmail.com</a
+></span>
+ 
+<pre>
+搞好了，实际上是已经在运行了。由于是用路由器里的实用命令运行的，第一次运行后没有提示。后改用putty，就清楚多了。其实具体tomato配置，这里有详细文章，上一次没注意到。 <a href="https://groups.google.com/forum/#!topic/goagent-dev/zBK9F8gifsc" rel="nofollow">https://groups.google.com/forum/#!topic/goagent-dev/zBK9F8gifsc</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Feb  4 18:17:04 2012">
+ Feb 4, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=1488#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/114619867092516753647/">mynew...@gmail.com</a
+></span>
+ 
+<pre>
+全搞好了，呵呵，tomato系统路由器上配置goagent。可惜是ios设备，如iphone和apple tv 只能浏览网页，不能看视频。这个有没有人测试过？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Feb  4 22:24:50 2012">
+ Feb 4, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=1488#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/103746284957809860995/">mql...@gmail.com</a
+></span>
+ 
+<pre>
+Comment 20 by mynew...@gmail.com, Today (4 hours ago)
+这个情况的话, 客户端用比较旧版本的GoAgent就可以解决, 我用的是1.6.8
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Aug  2 11:29:34 2012">
+ Aug 2, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=1488#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/arcpp.zju@gmail.com/">arcpp.zju@gmail.com</a
+></span>
+ 
+<pre>
+应该是 libopenssl 的线程安全问题，见 <a title="在OpenWRT路由里面运行一段时间后自动退出了" class=closed_ref href="/p/goagent/issues/detail?id=2781"> Issue 2781 </a>，已向 OpenWRT 官方提交 bug 及 patch
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Dec 14 03:18:45 2012">
+ Dec 14, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=1488#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+<i>(No comment was entered for this change.)</i>
+</pre>
+ 
+ 
+ <div class="updates">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ 
+ <b>Status:</b>
+ Done
+ 
+ <br>
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D1488&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D1488"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="1488">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A1488',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 1488,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

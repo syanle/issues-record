@@ -1,0 +1,988 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"assetHostPath": "https://ssl.gstatic.com/codesite/ph", "domainName": null, "token": null, "profileUrl": null, "loggedInUserEmail": null, "relativeBaseUrl": "", "projectHomeUrl": "/p/goagent", "projectName": "goagent", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 5006 - 
+ goagent -
+ 
+ 最新版错误一大堆 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D5006&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D5006" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="closed_colors">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=5006">5006</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >最新版错误一大堆</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 1 person starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A5006">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="The requested non-coding task was completed">Done</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ <tr><th align="left" valign="top">Closed:&nbsp;</th>
+ <td align="left" valign="top" width="100%">
+ Dec 2012
+ </td>
+ </tr>
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D5006&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D5006">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/117564569483673494205/">tangx...@gmail.com</a
+>,
+ <span class="date" title="Wed Sep 12 23:19:38 2012">Sep 12, 2012</span>
+ 
+ </div>
+<pre>
+
+INFO - - [Sep 13 11:17:52] MultiplexConnection CONNECT port=443 OK 10 times, swi
+tch new timeout=15
+127.0.0.1:59601 - - [Sep 13 11:18:52] &quot;GET <a href="http://m.hi.baidu.com/i/msg/listen?r=" rel="nofollow">http://m.hi.baidu.com/i/msg/listen?r=</a>
+0.7316410699859262 HTTP/1.0&quot; 500 -
+127.0.0.1:59611 - - [Sep 13 11:20:02] &quot;GET <a href="http://m.hi.baidu.com/i/msg/listen?r=" rel="nofollow">http://m.hi.baidu.com/i/msg/listen?r=</a>
+0.9898128067143261 HTTP/1.0&quot; 500 -
+127.0.0.1:59669 - - [Sep 13 11:20:16] &quot;POST <a href="http://ap.ff.avast.com/P/QTFFQzUwNzA" rel="nofollow">http://ap.ff.avast.com/P/QTFFQzUwNzA</a>
+tM0ZFQS0xMDY5LUEyREQtQzdFQTJCMzAzMENE HTTP/1.0&quot; 200 -
+127.0.0.1:59698 - - [Sep 13 11:20:54] &quot;GET <a href="http://www.google.com.hk/webhp?rlz=1C" rel="nofollow">http://www.google.com.hk/webhp?rlz=1C</a>
+1CHMO_zh-cnCN496CN496&amp;sourceid=chrome-instant&amp;ie=UTF-8&amp;ion=1 HTTP/1.0&quot; - -
+127.0.0.1:59698 - - [Sep 13 11:20:54] &quot;GET <a href="http://www.google.com.hk/webhp?rlz=1C" rel="nofollow">http://www.google.com.hk/webhp?rlz=1C</a>
+1CHMO_zh-cnCN496CN496&amp;sourceid=chrome-instant&amp;ie=UTF-8&amp;ion=1 HTTP/1.0&quot; 200 -
+127.0.0.1:59712 - - [Sep 13 11:21:00] &quot;GET <a href="http://www.google.com.hk/webhp?rlz=1C" rel="nofollow">http://www.google.com.hk/webhp?rlz=1C</a>
+1CHMO_zh-cnCN496CN496&amp;sourceid=chrome-instant&amp;ie=UTF-8&amp;ion=1 HTTP/1.0&quot; - -
+127.0.0.1:59712 - - [Sep 13 11:21:00] &quot;GET <a href="http://www.google.com.hk/webhp?rlz=1C" rel="nofollow">http://www.google.com.hk/webhp?rlz=1C</a>
+1CHMO_zh-cnCN496CN496&amp;sourceid=chrome-instant&amp;ie=UTF-8&amp;ion=1 HTTP/1.0&quot; 200 -
+127.0.0.1:59714 - - [Sep 13 11:21:01] &quot;GET <a href="http://www.google.com.hk/complete/sea" rel="nofollow">http://www.google.com.hk/complete/sea</a>
+rch?sugexp=chrome,mod=13&amp;client=chrome&amp;hl=zh-CN&amp;q=1 HTTP/1.0&quot; - -
+127.0.0.1:59714 - - [Sep 13 11:21:01] &quot;GET <a href="http://www.google.com.hk/complete/sea" rel="nofollow">http://www.google.com.hk/complete/sea</a>
+rch?sugexp=chrome,mod=13&amp;client=chrome&amp;hl=zh-CN&amp;q=1 HTTP/1.0&quot; 200 -
+ERROR - - [Sep 13 11:21:01] GAEProxyHandler.do_GET Error
+Traceback (most recent call last):
+  File &quot;D:\Lib\Soft\goagent\v2.0.5\local\proxy.py&quot;, line 911, in do_METHOD_Direc
+t
+  File &quot;BaseHTTPServer.pyo&quot;, line 390, in send_header
+  File &quot;socket.pyo&quot;, line 318, in write
+  File &quot;socket.pyo&quot;, line 297, in flush
+error: [Errno 10053]
+----------------------------------------
+Exception happened during processing of request from ('127.0.0.1', 59714)
+Traceback (most recent call last):
+  File &quot;SocketServer.pyo&quot;, line 560, in process_request_thread
+  File &quot;SocketServer.pyo&quot;, line 322, in finish_request
+  File &quot;SocketServer.pyo&quot;, line 618, in __init__
+  File &quot;SocketServer.pyo&quot;, line 661, in finish
+  File &quot;socket.pyo&quot;, line 297, in flush
+error: [Errno 10053]
+----------------------------------------
+127.0.0.1:59716 - - [Sep 13 11:21:02] &quot;GET <a href="http://www.google.com.hk/complete/sea" rel="nofollow">http://www.google.com.hk/complete/sea</a>
+rch?sugexp=chrome,mod=13&amp;client=chrome&amp;hl=zh-CN&amp;q=192. HTTP/1.0&quot; - -
+127.0.0.1:59716 - - [Sep 13 11:21:02] &quot;GET <a href="http://www.google.com.hk/complete/sea" rel="nofollow">http://www.google.com.hk/complete/sea</a>
+rch?sugexp=chrome,mod=13&amp;client=chrome&amp;hl=zh-CN&amp;q=192. HTTP/1.0&quot; 200 -
+ERROR - - [Sep 13 11:21:02] GAEProxyHandler.do_GET Error
+Traceback (most recent call last):
+  File &quot;D:\Lib\Soft\goagent\v2.0.5\local\proxy.py&quot;, line 911, in do_METHOD_Direc
+t
+  File &quot;BaseHTTPServer.pyo&quot;, line 390, in send_header
+  File &quot;socket.pyo&quot;, line 318, in write
+  File &quot;socket.pyo&quot;, line 297, in flush
+error: [Errno 10053]
+----------------------------------------
+Exception happened during processing of request from ('127.0.0.1', 59716)
+Traceback (most recent call last):
+ 1 File &quot;SocketServer.pyo&quot;, line 560, in process_request_thread
+27.0.0.1:59737 - - [Sep 13 11:21:02] &quot;GET <a href="http://www.google.com.hk/complete/sear" rel="nofollow">http://www.google.com.hk/complete/sear</a>
+ch?sugexp=chrome,mod=13&amp;client=chrome&amp;hl=zh-CN&amp;q=192.1 HTTP/1.0&quot; - -
+  File &quot;SocketServer.pyo&quot;, line 322, in finish_request
+  File &quot;SocketServer.pyo&quot;, line 618, in __init__
+  File &quot;SocketServer.pyo&quot;, line 661, in finish
+  File &quot;socket.pyo&quot;, line 297, in flush
+error: [Errno 10053]
+----------------------------------------
+127.0.0.1:59738 - - [Sep 13 11:21:02] &quot;GET <a href="http://www.google.com.hk/complete/sea" rel="nofollow">http://www.google.com.hk/complete/sea</a>
+rch?sugexp=chrome,mod=13&amp;client=chrome&amp;hl=zh-CN&amp;q=192.168 HTTP/1.0&quot; - -
+127.0.0.1:59785 - - [Sep 13 11:21:03] &quot;GET <a href="http://www.google.com.hk/gen_204?atyp" rel="nofollow">http://www.google.com.hk/gen_204?atyp</a>
+=i&amp;ct=wta&amp;cad=cf&amp;ei=GVFRUMHmFtGZiQfb2IC4Dg&amp;zx=1347506462955 HTTP/1.0&quot; - -
+127.0.0.1:59738 - - [Sep 13 11:21:03] &quot;GET <a href="http://www.google.com.hk/complete/sea" rel="nofollow">http://www.google.com.hk/complete/sea</a>
+rch?sugexp=chrome,mod=13&amp;client=chrome&amp;hl=zh-CN&amp;q=192.168 HTTP/1.0&quot; 200 -
+ERROR - - [Sep 13 11:21:03] GAEProxyHandler.do_GET Error
+Traceback (most recent call last):
+  File &quot;D:\Lib\Soft\goagent\v2.0.5\local\proxy.py&quot;, line 911, in do_METHOD_Direc
+t
+  File &quot;BaseHTTPServer.pyo&quot;, line 390, in send_header
+  File &quot;socket.pyo&quot;, line 318, in write
+  File &quot;socket.pyo&quot;, line 297, in flush
+error: [Errno 10053]
+----------------------------------------
+Exception happened during processing of request from ('127.0.0.1', 59738)
+Traceback (most recent call last):
+  File &quot;SocketServer.pyo&quot;, line 560, in process_request_thread
+  File &quot;SocketServer.pyo&quot;, line 322, in finish_request
+  File &quot;SocketServer.pyo&quot;, line 618, in __init__
+  File &quot;SocketServer.pyo&quot;, line 661, in finish
+  File &quot;socket.pyo&quot;, line 297, in flush
+error: [Errno 10053]
+----------------------------------------
+127.0.0.1:59785 - - [Sep 13 11:21:03] &quot;GET <a href="http://www.google.com.hk/gen_204?atyp" rel="nofollow">http://www.google.com.hk/gen_204?atyp</a>
+=i&amp;ct=wta&amp;cad=cf&amp;ei=GVFRUMHmFtGZiQfb2IC4Dg&amp;zx=1347506462955 HTTP/1.0&quot; 204 -
+ERROR - - [Sep 13 11:21:03] GAEProxyHandler.do_GET Error
+Traceback (most recent call last):
+  File &quot;D:\Lib\Soft\goagent\v2.0.5\local\proxy.py&quot;, line 911, in do_METHOD_Direc
+t
+  File &quot;BaseHTTPServer.pyo&quot;, line 390, in send_header
+  File &quot;socket.pyo&quot;, line 318, in write
+  File &quot;socket.pyo&quot;, line 297, in flush
+error: [Errno 10053]
+----------------------------------------
+Exception happened during processing of request from ('127.0.0.1', 59785)
+Traceback (most recent call last):
+  File &quot;SocketServer.pyo&quot;, line 560, in process_request_thread
+  File &quot;SocketServer.pyo&quot;, line 322, in finish_request
+  File &quot;SocketServer.pyo&quot;, line 618, in __init__
+  File &quot;SocketServer.pyo&quot;, line 661, in finish
+  File &quot;socket.pyo&quot;, line 297, in flush
+error: [Errno 10053]
+----------------------------------------
+127.0.0.1:59796 - - [Sep 13 11:21:03] &quot;GET <a href="http://www.google.com.hk/complete/sea" rel="nofollow">http://www.google.com.hk/complete/sea</a>
+rch?sugexp=chrome,mod=13&amp;client=chrome&amp;hl=zh-CN&amp;q=192.168.1 HTTP/1.0&quot; - -
+INFO - - [Sep 13 11:21:03] MultiplexConnection CONNECT port=80 OK 10 times, swit
+ch new window=14
+INFO - - [Sep 13 11:21:03] MultiplexConnection CONNECT port=80 OK 10 times, swit
+ch new timeout=14
+127.0.0.1:59796 - - [Sep 13 11:21:03] &quot;GET <a href="http://www.google.com.hk/complete/sea" rel="nofollow">http://www.google.com.hk/complete/sea</a>
+rch?sugexp=chrome,mod=13&amp;client=chrome&amp;hl=zh-CN&amp;q=192.168.1 HTTP/1.0&quot; 200 -
+ERROR - - [Sep 13 11:21:03] GAEProxyHandler.do_GET Error
+Traceback (most recent call last):
+  File &quot;D:\Lib\Soft\goagent\v2.0.5\local\proxy.py&quot;, line 911, in do_METHOD_Direc
+t
+  File &quot;BaseHTTPServer.pyo&quot;, line 390, in send_header
+  File &quot;socket.pyo&quot;, line 318, in write
+  File &quot;socket.pyo&quot;, line 297, in flush
+error: [Errno 10053]
+----------------------------------------
+Exception happened during processing of request from ('127.0.0.1', 59796)
+Traceback (most recent call last):
+  File &quot;SocketServer.pyo&quot;, line 560, in process_request_thread
+  File &quot;SocketServer.pyo&quot;, line 322, in finish_request
+  File &quot;SocketServer.pyo&quot;, line 618, in __init__
+  File &quot;SocketServer.pyo&quot;, line 661, in finish
+  File &quot;socket.pyo&quot;, line 297, in flush
+error: [Errno 10053]
+----------------------------------------
+127.0.0.1:59807 - - [Sep 13 11:21:03] &quot;GET <a href="http://www.google.com.hk/complete/sea" rel="nofollow">http://www.google.com.hk/complete/sea</a>
+rch?sugexp=chrome,mod=13&amp;client=chrome&amp;hl=zh-CN&amp;q=192.168.1. HTTP/1.0&quot; - -
+127.0.0.1:59807 - - [Sep 13 11:21:03] &quot;GET <a href="http://www.google.com.hk/complete/sea" rel="nofollow">http://www.google.com.hk/complete/sea</a>
+rch?sugexp=chrome,mod=13&amp;client=chrome&amp;hl=zh-CN&amp;q=192.168.1. HTTP/1.0&quot; 200 -
+127.0.0.1:59737 - - [Sep 13 11:21:03] &quot;GET <a href="http://www.google.com.hk/complete/sea" rel="nofollow">http://www.google.com.hk/complete/sea</a>
+rch?sugexp=chrome,mod=13&amp;client=chrome&amp;hl=zh-CN&amp;q=192.1 HTTP/1.0&quot; 200 -
+ERROR - - [Sep 13 11:21:03] GAEProxyHandler.do_GET Error
+Traceback (most recent call last):
+  File &quot;D:\Lib\Soft\goagent\v2.0.5\local\proxy.py&quot;, line 911, in do_METHOD_Direc
+t
+  File &quot;BaseHTTPServer.pyo&quot;, line 390, in send_header
+  File &quot;socket.pyo&quot;, line 318, in write
+  File &quot;socket.pyo&quot;, line 297, in flush
+error: [Errno 10053]
+----------------------------------------
+Exception happened during processing of request from ('127.0.0.1', 59737)
+Traceback (most recent call last):
+  File &quot;SocketServer.pyo&quot;, line 560, in process_request_thread
+  File &quot;SocketServer.pyo&quot;, line 322, in finish_request
+  File &quot;SocketServer.pyo&quot;, line 618, in __init__
+  File &quot;SocketServer.pyo&quot;, line 661, in finish
+  File &quot;socket.pyo&quot;, line 297, in flush
+error: [Errno 10053]
+----------------------------------------
+127.0.0.1:59818 - - [Sep 13 11:21:05] &quot;CONNECT clients4.google.com:443 HTTP/1.1&quot;
+ 200 -
+127.0.0.1:59828 - - [Sep 13 11:21:07] &quot;GET <a href="http://www.google.com.hk/complete/sea" rel="nofollow">http://www.google.com.hk/complete/sea</a>
+rch?sugexp=chrome,mod=13&amp;client=chrome&amp;hl=zh-CN&amp;q=192.168.1.1 HTTP/1.0&quot; - -
+127.0.0.1:59828 - - [Sep 13 11:21:07] &quot;GET <a href="http://www.google.com.hk/complete/sea" rel="nofollow">http://www.google.com.hk/complete/sea</a>
+rch?sugexp=chrome,mod=13&amp;client=chrome&amp;hl=zh-CN&amp;q=192.168.1.1 HTTP/1.0&quot; 200 -
+ERROR - - [Sep 13 11:21:07] GAEProxyHandler.do_GET Error
+Traceback (most recent call last):
+  File &quot;D:\Lib\Soft\goagent\v2.0.5\local\proxy.py&quot;, line 911, in do_METHOD_Direc
+t
+  File &quot;BaseHTTPServer.pyo&quot;, line 390, in send_header
+  File &quot;socket.pyo&quot;, line 318, in write
+  File &quot;socket.pyo&quot;, line 297, in flush
+error: [Errno 10053]
+----------------------------------------
+Exception happened during processing of request from ('127.0.0.1', 59828)
+Traceback (most recent call last):
+  File &quot;SocketServer.pyo&quot;, line 560, in process_request_thread
+  File &quot;SocketServer.pyo&quot;, line 322, in finish_request
+  File &quot;SocketServer.pyo&quot;, line 618, in __init__
+  File &quot;SocketServer.pyo&quot;, line 661, in finish
+  File &quot;socket.pyo&quot;, line 297, in flush
+error: [Errno 10053]
+----------------------------------------
+127.0.0.1:59839 - - [Sep 13 11:21:07] &quot;GET <a href="http://www.google.com.hk/complete/sea" rel="nofollow">http://www.google.com.hk/complete/sea</a>
+rch?sugexp=chrome,mod=13&amp;client=chrome&amp;hl=zh-CN&amp;q=192.168.1.10 HTTP/1.0&quot; - -
+127.0.0.1:59839 - - [Sep 13 11:21:08] &quot;GET <a href="http://www.google.com.hk/complete/sea" rel="nofollow">http://www.google.com.hk/complete/sea</a>
+rch?sugexp=chrome,mod=13&amp;client=chrome&amp;hl=zh-CN&amp;q=192.168.1.10 HTTP/1.0&quot; 200 -
+127.0.0.1:59850 - - [Sep 13 11:21:11] &quot;GET http://192.168.1.10/ HTTP/1.0&quot; 500 -
+127.0.0.1:59862 - - [Sep 13 11:21:12] &quot;GET <a href="http://l.ghostery.com/api/page/?d=192" rel="nofollow">http://l.ghostery.com/api/page/?d=192</a>
+.168.1.10%2F&amp;l=2854&amp;s=0&amp;ua=chrome HTTP/1.0&quot; 204 -
+127.0.0.1:59684 - - [Sep 13 11:21:12] &quot;GET <a href="http://m.hi.baidu.com/i/msg/listen?r=" rel="nofollow">http://m.hi.baidu.com/i/msg/listen?r=</a>
+0.6420198564883322 HTTP/1.0&quot; 500 -
+----------------------------------------
+Exception happened during processing of request from ('127.0.0.1', 58033)
+Traceback (most recent call last):
+  File &quot;SocketServer.pyo&quot;, line 560, in process_request_thread
+  File &quot;SocketServer.pyo&quot;, line 322, in finish_request
+  File &quot;SocketServer.pyo&quot;, line 617, in __init__
+  File &quot;BaseHTTPServer.pyo&quot;, line 329, in handle
+  File &quot;BaseHTTPServer.pyo&quot;, line 323, in handle_one_request
+  File &quot;D:\Lib\Soft\goagent\v2.0.5\local\proxy.py&quot;, line 890, in do_METHOD
+  File &quot;D:\Lib\Soft\goagent\v2.0.5\local\proxy.py&quot;, line 1000, in do_METHOD_Tunn
+el
+  File &quot;urllib2.pyo&quot;, line 126, in urlopen
+  File &quot;urllib2.pyo&quot;, line 394, in open
+  File &quot;urllib2.pyo&quot;, line 412, in _open
+  File &quot;urllib2.pyo&quot;, line 372, in _call_chain
+  File &quot;urllib2.pyo&quot;, line 1207, in https_open
+  File &quot;urllib2.pyo&quot;, line 1174, in do_open
+URLError: &lt;urlopen error [Errno 10054] &gt;
+----------------------------------------
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Sep 13 01:48:18 2012">
+ Sep 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=5006#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/111061531999578549997/">cassiush...@gmail.com</a
+></span>
+ 
+<pre>
+同样是频繁报10053的错误。。和visible = 1有关么？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Sep 13 07:57:53 2012">
+ Sep 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=5006#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/106781204990925295112/">yubinlov...@gmail.com</a
+></span>
+ 
+<pre>
+visible = 1只是在goagent启动后是否自动最小化到托盘的设置，1就是不自动最小化，改成0就会在启动后自动最小化到托盘中
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Sep 13 10:41:44 2012">
+ Sep 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=5006#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/107752000113961387790/">panyuf...@gmail.com</a
+></span>
+ 
+<pre>
+我也遇到同样的问题，不是10053就是10054，到底怎么回事？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Sep 24 04:52:41 2012">
+ Sep 24, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=5006#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/112834898011849611963/">xfang...@gmail.com</a
+></span>
+ 
+<pre>
+error: [Errno 10053]
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Oct 24 05:32:31 2012">
+ Oct 24, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=5006#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/101764981270728768116/">mami...@gmail.com</a
+></span>
+ 
+<pre>
+解决了么，我也出现同样的错误。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Dec 15 18:15:05 2012">
+ Dec 15, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=5006#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+<i>(No comment was entered for this change.)</i>
+</pre>
+ 
+ 
+ <div class="updates">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ 
+ <b>Status:</b>
+ Done
+ 
+ <br>
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D5006&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D5006"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="5006">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A5006',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 5006,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

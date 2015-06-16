@@ -1,0 +1,896 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"loggedInUserEmail": null, "relativeBaseUrl": "", "projectHomeUrl": "/p/goagent", "projectName": "goagent", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "token": null, "profileUrl": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 19161 - 
+ goagent -
+ 
+ 3.2.3版本youtube播放EVEO的問題~~ - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19161&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19161" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=19161">19161</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >3.2.3版本youtube播放EVEO的問題~~</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 2 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A19161">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19161&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19161">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/100840480321662853802/">heiheiy...@gmail.com</a
+>,
+ <span class="date" title="Wed Dec 24 06:12:53 2014">Dec 24, 2014</span>
+ 
+ </div>
+<pre>
+3.2.3版本無法應用以前的解決方法 ~不少的 VEVO 視頻不能播放~
+還是老問題：上传者已禁止在您的国家/地区播放此视频。
+
+
+
+
+
+
+
+求大神指教！！！
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Dec 24 09:35:33 2014">
+ Dec 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=19161#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/tkisme2013/">tkisme2013</a
+></span>
+ 
+<pre>
+<a href="http://www.faith.ga/" rel="nofollow">http://www.faith.ga/</a>
+请小心使用ｐａａｓ
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Feb 21 01:58:34 2015">
+ Feb 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=19161#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/114829410167686603229/">shushula...@gmail.com</a
+></span>
+ 
+<pre>
+3.2.3版本好多都不能播
+INFO - [Feb 21 17:58:48] dnslib_resolve_over_tcp remote host='mail.google.com' f
+ailed: [Errno 11004] getaddrinfo 'mail.google.com' from ['199.91.73.222'] failed
+
+WARNING - [Feb 21 17:58:48] dnslib_resolve_over_tcp 'www2.l.google.com' with ['1
+99.91.73.222'] return error(10061, '\xd3\xc9\xd3\xda\xc4\xbf\xb1\xea\xbc\xc6\xcb
+\xe3\xbb\xfa\xbb\xfd\xbc\xab\xbe\xdc\xbe\xf8\xa3\xac\xce\xde\xb7\xa8\xc1\xac\xbd
+\xd3\xa1\xa3')
+INFO - [Feb 21 17:58:48] dnslib_resolve_over_tcp remote host='www2.l.google.com'
+ failed: [Errno 11004] getaddrinfo 'www2.l.google.com' from ['199.91.73.222'] fa
+iled
+INFO - [Feb 21 17:58:49] ssl good_ipaddrs=34, bad_ipaddrs=408, unknown_ipaddrs=3
+
+INFO - [Feb 21 17:58:49] 127.0.0.1:62782 &quot;GAE GET <a href="https://s.youtube.com/api/stat" rel="nofollow">https://s.youtube.com/api/stat</a>
+s/watchtime?ns=yt&amp;el=detailpage&amp;cpn=GuwD2OHRTWaN9tfF&amp;docid=VVguodKhhlE&amp;ver=2&amp;ref
+errer=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D45NbpkDpTTI&amp;cmt=110.321&amp;plid=A
+AUPliOiGsM84UQF&amp;ei=kFXoVPOHLcXiqAOCloFI&amp;fmt=244&amp;fs=0&amp;rt=112.002&amp;of=UuWvAxnA2CGDU
+cU0t_VFzg&amp;euri&amp;lact=113148&amp;cl=86681273&amp;state=playing&amp;vm=CAI&amp;c=WEB&amp;cver=html5&amp;cpl
+ayer=UNIPLAYER&amp;cbr=Chrome&amp;cbrver=39.0.2171.95&amp;cos=Windows&amp;cosver=6.1&amp;hl=zh_CN&amp;cr
+=US&amp;uga=m31&amp;len=289.692&amp;rtn=152&amp;feature=relmfu&amp;afmt=140&amp;idpj=-6&amp;ldpj=0&amp;rti=112&amp;s
+t=70.321&amp;et=110.321&amp;cc=.en HTTP/1.1&quot; 204 0
+WARNING - [Feb 21 17:58:50] dnslib_resolve_over_tcp 'googleapis.l.google.com' wi
+th ['199.91.73.222'] return error(10061, '\xd3\xc9\xd3\xda\xc4\xbf\xb1\xea\xbc\x
+c6\xcb\xe3\xbb\xfa\xbb\xfd\xbc\xab\xbe\xdc\xbe\xf8\xa3\xac\xce\xde\xb7\xa8\xc1\x
+ac\xbd\xd3\xa1\xa3')
+INFO - [Feb 21 17:58:50] dnslib_resolve_over_tcp remote host='googleapis.l.googl
+e.com' failed: [Errno 11004] getaddrinfo 'googleapis.l.google.com' from ['199.91
+.73.222'] failed
+INFO - [Feb 21 17:58:53] ssl good_ipaddrs=36, bad_ipaddrs=408, unknown_ipaddrs=1
+
+INFO - [Feb 21 17:58:53] 127.0.0.1:52257 &quot;STRIP CONNECT i.ytimg.com:443 HTTP/1.1
+&quot; - -
+INFO - [Feb 21 17:58:53] 127.0.0.1:52258 &quot;STRIP CONNECT i.ytimg.com:443 HTTP/1.1
+&quot; - -
+INFO - [Feb 21 17:58:53] ssl good_ipaddrs=36, bad_ipaddrs=408, unknown_ipaddrs=1
+
+INFO - [Feb 21 17:58:53] ssl good_ipaddrs=36, bad_ipaddrs=408, unknown_ipaddrs=1
+
+INFO - [Feb 21 17:58:53] 127.0.0.1:50957 &quot;GAE GET <a href="https://i.ytimg.com/vi_webp/cq" rel="nofollow">https://i.ytimg.com/vi_webp/cq</a>
+p0km5VRj4/default.webp HTTP/1.1&quot; 200 2696
+INFO - [Feb 21 17:58:54] 127.0.0.1:50620 &quot;GAE GET <a href="https://i.ytimg.com/vi_webp/M9" rel="nofollow">https://i.ytimg.com/vi_webp/M9</a>
+BW0RcIGGQ/default.webp HTTP/1.1&quot; 200 3146
+INFO - [Feb 21 17:58:54] 127.0.0.1:52257 &quot;GAE GET <a href="https://i.ytimg.com/vi_webp/I6" rel="nofollow">https://i.ytimg.com/vi_webp/I6</a>
+T7sh7T2lU/default.webp HTTP/1.1&quot; 200 3714
+INFO - [Feb 21 17:58:54] 127.0.0.1:52258 &quot;GAE GET <a href="https://i.ytimg.com/vi_webp/Qy" rel="nofollow">https://i.ytimg.com/vi_webp/Qy</a>
+J8rulYHpU/default.webp HTTP/1.1&quot; 200 3404
+INFO - [Feb 21 17:59:02] extend_iplist finished, added 114
+INFO - [Feb 21 17:59:07] ssl good_ipaddrs=33, bad_ipaddrs=408, unknown_ipaddrs=4
+
+INFO - [Feb 21 17:59:07] 127.0.0.1:62782 &quot;GAE GET <a href="https://s.youtube.com/api/stat" rel="nofollow">https://s.youtube.com/api/stat</a>
+s/qoe?event=streamingstats&amp;fmt=244&amp;afmt=140&amp;cpn=GuwD2OHRTWaN9tfF&amp;ei=kFXoVPOHLcXi
+qAOCloFI&amp;el=detailpage&amp;docid=VVguodKhhlE&amp;ns=yt&amp;fexp=3300119%2C3300119%2C3300134%
+2C3300134%2C3300137%2C3300137%2C3300164%2C3300164%2C3310366%2C3310366%2C3310701%
+2C3310701%2C905660%2C907263%2C916640%2C916723%2C927622%2C931366%2C938689%2C94062
+10%2C943917%2C947225%2C948124%2C952302%2C952605%2C952612%2C952901%2C955301%2C957
+201%2C959701%2C961401&amp;cl=86681273&amp;html5=1&amp;c=WEB&amp;cver=html5&amp;cplayer=UNIPLAYER&amp;cbr
+=Chrome&amp;cbrver=39.0.2171.95&amp;cos=Windows&amp;cosver=6.1&amp;vps=130.015:PL&amp;bwe=130.015:41
+9416&amp;bh=130.015:161.341&amp;cmt=130.015:128.341 HTTP/1.1&quot; 204 0
+INFO - [Feb 21 17:59:29] ssl good_ipaddrs=32, bad_ipaddrs=414, unknown_ipaddrs=5
+
+INFO - [Feb 21 17:59:29] 127.0.0.1:62782 &quot;GAE GET <a href="https://s.youtube.com/api/stat" rel="nofollow">https://s.youtube.com/api/stat</a>
+s/watchtime?ns=yt&amp;el=detailpage&amp;cpn=GuwD2OHRTWaN9tfF&amp;docid=VVguodKhhlE&amp;ver=2&amp;ref
+errer=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D45NbpkDpTTI&amp;cmt=150.321&amp;plid=A
+AUPliOiGsM84UQF&amp;ei=kFXoVPOHLcXiqAOCloFI&amp;fmt=244&amp;fs=0&amp;rt=152.002&amp;of=UuWvAxnA2CGDU
+cU0t_VFzg&amp;euri&amp;lact=153149&amp;cl=86681273&amp;state=playing&amp;vm=CAI&amp;c=WEB&amp;cver=html5&amp;cpl
+ayer=UNIPLAYER&amp;cbr=Chrome&amp;cbrver=39.0.2171.95&amp;cos=Windows&amp;cosver=6.1&amp;hl=zh_CN&amp;cr
+=US&amp;uga=m31&amp;len=289.692&amp;rtn=192&amp;feature=relmfu&amp;afmt=140&amp;idpj=-6&amp;ldpj=0&amp;rti=152&amp;s
+t=110.321&amp;et=150.321&amp;cc=.en HTTP/1.1&quot; 204 0
+INFO - [Feb 21 17:59:37] ssl good_ipaddrs=33, bad_ipaddrs=420, unknown_ipaddrs=4
+
+INFO - [Feb 21 17:59:37] 127.0.0.1:62782 &quot;GAE GET <a href="https://s.youtube.com/api/stat" rel="nofollow">https://s.youtube.com/api/stat</a>
+s/qoe?event=streamingstats&amp;fmt=244&amp;afmt=140&amp;cpn=GuwD2OHRTWaN9tfF&amp;ei=kFXoVPOHLcXi
+qAOCloFI&amp;el=detailpage&amp;docid=VVguodKhhlE&amp;ns=yt&amp;fexp=3300119%2C3300119%2C3300134%
+2C3300134%2C3300137%2C3300137%2C3300164%2C3300164%2C3310366%2C3310366%2C3310701%
+2C3310701%2C905660%2C907263%2C916640%2C916723%2C927622%2C931366%2C938689%2C94062
+10%2C943917%2C947225%2C948124%2C952302%2C952605%2C952612%2C952901%2C955301%2C957
+201%2C959701%2C961401&amp;cl=86681273&amp;html5=1&amp;c=WEB&amp;cver=html5&amp;cplayer=UNIPLAYER&amp;cbr
+=Chrome&amp;cbrver=39.0.2171.95&amp;cos=Windows&amp;cosver=6.1&amp;vps=160.018:PL&amp;bwe=160.018:41
+9416&amp;bh=160.018:131.461&amp;cmt=160.018:158.341 HTTP/1.1&quot; 204 0
+INFO - [Feb 21 17:59:40] 127.0.0.1:52348 &quot;STRIP CONNECT plus.google.com:443 HTTP
+/1.1&quot; - -
+INFO - [Feb 21 17:59:41] 127.0.0.1:52348 &quot;DIRECT POST <a href="https://plus.google.com/u/" rel="nofollow">https://plus.google.com/u/</a>
+0/_/n/bg/fetchcount?orig=https%3A%2F%2Fwww.google.com&amp;soc-app=162&amp;cid=0&amp;soc-plat
+form=1&amp;ozv=es_oz_20150219.16_p1&amp;f.sid=1407297090&amp;_reqid=362356&amp;rt=j HTTP/1.1&quot; 20
+0 -
+INFO - [Feb 21 17:59:54] ssl good_ipaddrs=21, bad_ipaddrs=382, unknown_ipaddrs=5
+8
+INFO - [Feb 21 17:59:55] 127.0.0.1:52258 &quot;GAE GET <a href="https://i.ytimg.com/sb/VVguodK" rel="nofollow">https://i.ytimg.com/sb/VVguodK</a>
+hhlE/storyboard3_L1/M1.jpg?sigh=jKOIeh3qtcxBSvz9tJfkkq6ltaY HTTP/1.1&quot; 200 49592
+INFO - [Feb 21 17:59:55] 127.0.0.1:52363 &quot;STRIP CONNECT apis.google.com:443 HTTP
+/1.1&quot; - -
+INFO - [Feb 21 17:59:55] 127.0.0.1:52364 &quot;STRIP CONNECT apis.google.com:443 HTTP
+/1.1&quot; - -
+INFO - [Feb 21 17:59:55] 127.0.0.1:52365 &quot;STRIP CONNECT apis.google.com:443 HTTP
+/1.1&quot; - -
+INFO - [Feb 21 17:59:55] 127.0.0.1:52366 &quot;STRIP CONNECT apis.google.com:443 HTTP
+/1.1&quot; - -
+INFO - [Feb 21 17:59:55] 127.0.0.1:52367 &quot;STRIP CONNECT gp3.googleusercontent.co
+m:443 HTTP/1.1&quot; - -
+INFO - [Feb 21 17:59:56] 127.0.0.1:52363 &quot;DIRECT GET <a href="https://apis.google.com/u/0" rel="nofollow">https://apis.google.com/u/0</a>
+/_/hovercard/internalcard?p=36&amp;hl=zh_CN&amp;p=36&amp;ytid=UCp0hYYBW6IMayGgR-WeoCvQ&amp;hl=zh
+_CN&amp;src=youtube.watch&amp;origin=https%3A%2F%2Fwww.youtube.com&amp;usegapi=1&amp;jsh=m%3B%2F
+_%2Fscs%2Fabc-static%2F_%2Fjs%2Fk%3Dgapi.gapi.en.ehmAeuu_4hE.O%2Fm%3D__features_
+_%2Fam%3DAAI%2Frt%3Dj%2Fd%3D1%2Frs%3DAItRSTNcM--L6Y_snQHC2igwllAwLSbYBg HTTP/1.1
+&quot; 200 -
+INFO - [Feb 21 17:59:56] 127.0.0.1:52368 &quot;STRIP CONNECT accounts.google.com:443
+HTTP/1.1&quot; - -
+INFO - [Feb 21 17:59:56] ssl good_ipaddrs=21, bad_ipaddrs=382, unknown_ipaddrs=5
+8
+INFO - [Feb 21 17:59:56] 127.0.0.1:52369 &quot;STRIP CONNECT gg.google.com:443 HTTP/1
+.1&quot; - -
+INFO - [Feb 21 17:59:56] 127.0.0.1:52370 &quot;STRIP CONNECT gg.google.com:443 HTTP/1
+.1&quot; - -
+INFO - [Feb 21 17:59:56] 127.0.0.1:52371 &quot;STRIP CONNECT gg.google.com:443 HTTP/1
+.1&quot; - -
+INFO - [Feb 21 17:59:56] 127.0.0.1:52372 &quot;STRIP CONNECT s.ytimg.com:443 HTTP/1.1
+&quot; - -
+INFO - [Feb 21 17:59:56] 127.0.0.1:52373 &quot;STRIP CONNECT s.ytimg.com:443 HTTP/1.1
+&quot; - -
+INFO - [Feb 21 17:59:56] 127.0.0.1:52385 &quot;STRIP CONNECT yt3.ggpht.com:443 HTTP/1
+.1&quot; - -
+INFO - [Feb 21 17:59:56] ssl good_ipaddrs=21, bad_ipaddrs=382, unknown_ipaddrs=5
+8
+INFO - [Feb 21 17:59:56] 127.0.0.1:52385 &quot;DIRECT GET <a href="https://yt3.ggpht.com/-jmHY" rel="nofollow">https://yt3.ggpht.com/-jmHY</a>
+eQT4_cs/VCyelM4Od5I/AAAAAAAAAVo/oq5WSjDEeuM/w640-fcrop64=1,32b75a57cd48a5a8-nd/s
+12-cover-image.jpg HTTP/1.1&quot; 200 38207
+INFO - [Feb 21 17:59:57] 127.0.0.1:62760 &quot;GAE GET <a href="https://www.youtube.com/subscr" rel="nofollow">https://www.youtube.com/subscr</a>
+ibe_embed?usegapi=1&amp;card=1&amp;channelid=UCp0hYYBW6IMayGgR-WeoCvQ&amp;origin=https%3A%2F
+%2Fapis.google.com&amp;gsrc=3p&amp;jsh=m%3B%2F_%2Fscs%2Fabc-static%2F_%2Fjs%2Fk%3Dgapi.g
+api.en.ehmAeuu_4hE.O%2Fm%3D__features__%2Fam%3DAAI%2Frt%3Dj%2Fd%3D1%2Frs%3DAItRS
+TNcM--L6Y_snQHC2igwllAwLSbYBg HTTP/1.1&quot; 200 1264
+INFO - [Feb 21 17:59:59] 127.0.0.1:62760 &quot;GAE GET <a href="https://www.youtube.com/set_aw" rel="nofollow">https://www.youtube.com/set_aw</a>
+esome?el=detailpage&amp;c=WEB&amp;cver=html5&amp;cplayer=UNIPLAYER&amp;cbr=Chrome&amp;cbrver=39.0.21
+71.95&amp;cos=Windows&amp;cosver=6.1&amp;html5=1&amp;video_id=VVguodKhhlE&amp;eurl&amp;feature=relmfu&amp;w=
+0.6214230488056365&amp;l=289.69154&amp;plid=AAUPliOiGsM84UQF&amp;ei=kFXoVPOHLcXiqAOCloFI&amp;tpm
+t=180.021&amp;cpn=GuwD2OHRTWaN9tfF&amp;referrer=https%3A%2F%2Fwww.youtube.com%2Fwatch%3F
+v%3D45NbpkDpTTI HTTP/1.1&quot; 204 0
+INFO - [Feb 21 18:00:07] ssl good_ipaddrs=21, bad_ipaddrs=397, unknown_ipaddrs=4
+5
+INFO - [Feb 21 18:00:07] 127.0.0.1:62782 &quot;GAE GET <a href="https://s.youtube.com/api/stat" rel="nofollow">https://s.youtube.com/api/stat</a>
+s/qoe?event=streamingstats&amp;fmt=244&amp;afmt=140&amp;cpn=GuwD2OHRTWaN9tfF&amp;ei=kFXoVPOHLcXi
+qAOCloFI&amp;el=detailpage&amp;docid=VVguodKhhlE&amp;ns=yt&amp;fexp=3300119%2C3300119%2C3300134%
+2C3300134%2C3300137%2C3300137%2C3300164%2C3300164%2C3310366%2C3310366%2C3310701%
+2C3310701%2C905660%2C907263%2C916640%2C916723%2C927622%2C931366%2C938689%2C94062
+10%2C943917%2C947225%2C948124%2C952302%2C952605%2C952612%2C952901%2C955301%2C957
+201%2C959701%2C961401&amp;cl=86681273&amp;html5=1&amp;c=WEB&amp;cver=html5&amp;cplayer=UNIPLAYER&amp;cbr
+=Chrome&amp;cbrver=39.0.2171.95&amp;cos=Windows&amp;cosver=6.1&amp;vps=190.019:PL&amp;bwe=190.019:41
+9416&amp;bh=190.019:101.321&amp;cmt=190.019:188.341 HTTP/1.1&quot; 204 0
+INFO - [Feb 21 18:00:09] 127.0.0.1:62782 &quot;GAE GET <a href="https://s.youtube.com/api/stat" rel="nofollow">https://s.youtube.com/api/stat</a>
+s/watchtime?ns=yt&amp;el=detailpage&amp;cpn=GuwD2OHRTWaN9tfF&amp;docid=VVguodKhhlE&amp;ver=2&amp;ref
+errer=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D45NbpkDpTTI&amp;cmt=190.321&amp;plid=A
+AUPliOiGsM84UQF&amp;ei=kFXoVPOHLcXiqAOCloFI&amp;fmt=244&amp;fs=0&amp;rt=192.001&amp;of=UuWvAxnA2CGDU
+cU0t_VFzg&amp;euri&amp;lact=193149&amp;cl=86681273&amp;state=playing&amp;vm=CAI&amp;c=WEB&amp;cver=html5&amp;cpl
+ayer=UNIPLAYER&amp;cbr=Chrome&amp;cbrver=39.0.2171.95&amp;cos=Windows&amp;cosver=6.1&amp;hl=zh_CN&amp;cr
+=US&amp;uga=m31&amp;len=289.692&amp;rtn=232&amp;feature=relmfu&amp;afmt=140&amp;idpj=-6&amp;ldpj=0&amp;rti=192&amp;s
+t=150.321&amp;et=190.321&amp;cc=.en HTTP/1.1&quot; 204 0
+INFO - [Feb 21 18:00:30] ssl good_ipaddrs=21, bad_ipaddrs=403, unknown_ipaddrs=4
+0
+INFO - [Feb 21 18:00:32] 127.0.0.1:62760 &quot;GAE GET <a href="https://www.youtube.com/?spf=n" rel="nofollow">https://www.youtube.com/?spf=n</a>
+avigate HTTP/1.1&quot; 200 69798
+INFO - [Feb 21 18:00:32] ssl good_ipaddrs=22, bad_ipaddrs=403, unknown_ipaddrs=4
+0
+INFO - [Feb 21 18:00:32] ssl good_ipaddrs=22, bad_ipaddrs=403, unknown_ipaddrs=4
+0
+INFO - [Feb 21 18:00:32] ssl good_ipaddrs=22, bad_ipaddrs=403, unknown_ipaddrs=4
+0
+INFO - [Feb 21 18:00:32] ssl good_ipaddrs=22, bad_ipaddrs=403, unknown_ipaddrs=4
+0
+INFO - [Feb 21 18:00:32] ssl good_ipaddrs=22, bad_ipaddrs=403, unknown_ipaddrs=4
+0
+INFO - [Feb 21 18:00:32] 127.0.0.1:52517 &quot;STRIP CONNECT i.ytimg.com:443 HTTP/1.1
+&quot; - -
+INFO - [Feb 21 18:00:32] 127.0.0.1:52518 &quot;STRIP CONNECT i.ytimg.com:443 HTTP/1.1
+&quot; - -
+INFO - [Feb 21 18:00:32] ssl good_ipaddrs=22, bad_ipaddrs=403, unknown_ipaddrs=4
+0
+INFO - [Feb 21 18:00:32] ssl good_ipaddrs=22, bad_ipaddrs=403, unknown_ipaddrs=4
+0
+INFO - [Feb 21 18:00:32] 127.0.0.1:52519 &quot;STRIP CONNECT i.ytimg.com:443 HTTP/1.1
+&quot; - -
+INFO - [Feb 21 18:00:32] 127.0.0.1:52520 &quot;STRIP CONNECT gg.google.com:443 HTTP/1
+.1&quot; - -
+INFO - [Feb 21 18:00:32] ssl good_ipaddrs=22, bad_ipaddrs=403, unknown_ipaddrs=4
+0
+INFO - [Feb 21 18:00:32] ssl good_ipaddrs=22, bad_ipaddrs=403, unknown_ipaddrs=4
+0
+INFO - [Feb 21 18:00:32] 127.0.0.1:52258 &quot;GAE GET <a href="https://i.ytimg.com/vi_webp/VV" rel="nofollow">https://i.ytimg.com/vi_webp/VV</a>
+guodKhhlE/mqdefault.webp HTTP/1.1&quot; 200 16924
+INFO - [Feb 21 18:00:32] 127.0.0.1:52647 &quot;STRIP CONNECT ad.doubleclick.net:443 H
+TTP/1.1&quot; - -
+INFO - [Feb 21 18:00:32] 127.0.0.1:52648 &quot;STRIP CONNECT ad.doubleclick.net:443 H
+TTP/1.1&quot; - -
+INFO - [Feb 21 18:00:32] 127.0.0.1:52649 &quot;STRIP CONNECT clients1.google.com:443
+HTTP/1.1&quot; - -
+INFO - [Feb 21 18:00:32] ssl good_ipaddrs=22, bad_ipaddrs=403, unknown_ipaddrs=4
+0
+INFO - [Feb 21 18:00:32] 127.0.0.1:52385 &quot;DIRECT GET <a href="https://yt3.ggpht.com/-hI_B" rel="nofollow">https://yt3.ggpht.com/-hI_B</a>
+55kfWg4/AAAAAAAAAAI/AAAAAAAAAAA/YLLvtATyko8/s88-c-k-no/photo.jpg HTTP/1.1&quot; 200 4
+833
+INFO - [Feb 21 18:00:32] ssl good_ipaddrs=22, bad_ipaddrs=403, unknown_ipaddrs=4
+0
+INFO - [Feb 21 18:00:32] ssl good_ipaddrs=22, bad_ipaddrs=403, unknown_ipaddrs=4
+0
+INFO - [Feb 21 18:00:33] 127.0.0.1:52520 &quot;DIRECT GET <a href="https://gg.google.com/csi?v" rel="nofollow">https://gg.google.com/csi?v</a>
+=2&amp;s=youtube&amp;action=gli&amp;yt_nav=4&amp;yt_sts=ne&amp;yt_lt=warm&amp;yt_pft=0&amp;yt_hrd=6&amp;ei=Z1boV
+MrMHsqMqwOP-4CwCA&amp;yt_li=1&amp;yt_spf=1&amp;yt_ref=watch&amp;e=3300119,3300119,3300134,330013
+4,3300137,3300137,3300164,3300164,3310366,3310366,3310701,3310701,905660,907263,
+916640,916723,927622,931366,938689,9406210,943917,947225,948124,952302,952605,95
+2612,952901,955301,957201,959701,961401&amp;srt=1553&amp;rt=1pb.0,l2s.0,je.282,jl.284,nd
+.285,ol.285,aft.285&amp;it=st.648,req.1552 HTTP/1.1&quot; 204 0
+INFO - [Feb 21 18:00:33] 127.0.0.1:52647 &quot;GAE GET <a href="https://ad.doubleclick.net/N40" rel="nofollow">https://ad.doubleclick.net/N40</a>
+61/adi/com.ythome/_default;sz=970x250;tile=1;ssl=1;dc_yt=1;k18=1;k21=1;kage=31;k
+ar=4;kauth=1;kbsg=HPUS150221;kga=1002;kgender=m;kgg=1;klg=zh-cn;kmyd=ad_creative
+_1;ytexp=931366,916723,961401,905660,916640,938689,9406210;ord=9948587552644312?
+ HTTP/1.1&quot; 200 2528
+INFO - [Feb 21 18:00:33] 127.0.0.1:52693 &quot;STRIP CONNECT pubads.g.doubleclick.net
+:443 HTTP/1.1&quot; - -
+INFO - [Feb 21 18:00:33] 127.0.0.1:52694 &quot;STRIP CONNECT accounts.google.com:443
+HTTP/1.1&quot; - -
+INFO - [Feb 21 18:00:33] 127.0.0.1:52695 &quot;STRIP CONNECT gg.google.com:443 HTTP/1
+.1&quot; - -
+INFO - [Feb 21 18:00:33] ssl good_ipaddrs=22, bad_ipaddrs=403, unknown_ipaddrs=4
+0
+INFO - [Feb 21 18:00:33] 127.0.0.1:52696 &quot;STRIP CONNECT gg.google.com:443 HTTP/1
+.1&quot; - -
+INFO - [Feb 21 18:00:33] 127.0.0.1:52697 &quot;STRIP CONNECT s.ytimg.com:443 HTTP/1.1
+&quot; - -
+INFO - [Feb 21 18:00:33] 127.0.0.1:62760 &quot;GAE GET <a href="https://www.youtube.com/gen_20" rel="nofollow">https://www.youtube.com/gen_20</a>
+4?a=guide-toggled&amp;module-id=guide-main&amp;expanded=true&amp;auto=false&amp;page-class=%20%2
+0home%20%20%20%20%20branded-page-v2-masthead-ad-header%20masthead-ad-expanded&amp;no
+tification=false HTTP/1.1&quot; 204 0
+INFO - [Feb 21 18:00:33] 127.0.0.1:50620 &quot;GAE GET <a href="https://i.ytimg.com/vi/EgT_us6" rel="nofollow">https://i.ytimg.com/vi/EgT_us6</a>
+AsDg/mqdefault.jpg HTTP/1.1&quot; 200 10898
+INFO - [Feb 21 18:00:33] 127.0.0.1:52649 &quot;DIRECT GET <a href="https://clients1.google.com" rel="nofollow">https://clients1.google.com</a>
+/generate_204 HTTP/1.1&quot; 204 0
+INFO - [Feb 21 18:00:33] 127.0.0.1:62782 &quot;GAE GET <a href="https://s.youtube.com/api/stat" rel="nofollow">https://s.youtube.com/api/stat</a>
+s/watchtime?ns=yt&amp;el=detailpage&amp;cpn=GuwD2OHRTWaN9tfF&amp;docid=VVguodKhhlE&amp;ver=2&amp;ref
+errer=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D45NbpkDpTTI&amp;cmt=213.661&amp;plid=A
+AUPliOiGsM84UQF&amp;ei=kFXoVPOHLcXiqAOCloFI&amp;fmt=244&amp;fs=0&amp;rt=215.341&amp;of=UuWvAxnA2CGDU
+cU0t_VFzg&amp;euri&amp;lact=1735&amp;cl=86681273&amp;state=paused&amp;vm=CAI&amp;c=WEB&amp;cver=html5&amp;cplaye
+r=UNIPLAYER&amp;cbr=Chrome&amp;cbrver=39.0.2171.95&amp;cos=Windows&amp;cosver=6.1&amp;final=1&amp;hl=zh_
+CN&amp;cr=US&amp;uga=m31&amp;len=289.692&amp;feature=relmfu&amp;afmt=140&amp;idpj=-6&amp;ldpj=0&amp;st=190.321&amp;e
+t=213.661&amp;cc=.en HTTP/1.1&quot; 204 0
+INFO - [Feb 21 18:00:33] 127.0.0.1:52257 &quot;GAE GET <a href="https://i.ytimg.com/vi/n-D1EB7" rel="nofollow">https://i.ytimg.com/vi/n-D1EB7</a>
+4Ckg/mqdefault.jpg HTTP/1.1&quot; 200 10343
+INFO - [Feb 21 18:00:33] 127.0.0.1:52517 &quot;GAE GET <a href="https://i.ytimg.com/vi/M8uPvX2" rel="nofollow">https://i.ytimg.com/vi/M8uPvX2</a>
+te0I/mqdefault.jpg HTTP/1.1&quot; 200 9315
+INFO - [Feb 21 18:00:33] 127.0.0.1:52519 &quot;GAE GET <a href="https://i.ytimg.com/vi/a_YR4dK" rel="nofollow">https://i.ytimg.com/vi/a_YR4dK</a>
+Argo/mqdefault.jpg HTTP/1.1&quot; 200 15421
+INFO - [Feb 21 18:00:33] 127.0.0.1:52518 &quot;GAE GET <a href="https://i.ytimg.com/vi/ItO-ZHN" rel="nofollow">https://i.ytimg.com/vi/ItO-ZHN</a>
+f0Xo/mqdefault.jpg HTTP/1.1&quot; 200 15947
+INFO - [Feb 21 18:00:33] 127.0.0.1:50202 &quot;GAE GET <a href="https://s.youtube.com/api/stat" rel="nofollow">https://s.youtube.com/api/stat</a>
+s/qoe?event=streamingstats&amp;fmt=244&amp;afmt=140&amp;cpn=GuwD2OHRTWaN9tfF&amp;ei=kFXoVPOHLcXi
+qAOCloFI&amp;el=detailpage&amp;docid=VVguodKhhlE&amp;ns=yt&amp;fexp=3300119%2C3300119%2C3300134%
+2C3300134%2C3300137%2C3300137%2C3300164%2C3300164%2C3310366%2C3310366%2C3310701%
+2C3310701%2C905660%2C907263%2C916640%2C916723%2C927622%2C931366%2C938689%2C94062
+10%2C943917%2C947225%2C948124%2C952302%2C952605%2C952612%2C952901%2C955301%2C957
+201%2C959701%2C961401&amp;cl=86681273&amp;html5=1&amp;c=WEB&amp;cver=html5&amp;cplayer=UNIPLAYER&amp;cbr
+=Chrome&amp;cbrver=39.0.2171.95&amp;cos=Windows&amp;cosver=6.1&amp;vps=215.344:N&amp;bwe=215.344:419
+416&amp;bh=215.344:76.181&amp;cmt=215.344:213.661 HTTP/1.1&quot; 204 0
+INFO - [Feb 21 18:00:33] 127.0.0.1:50620 &quot;GAE GET <a href="https://i.ytimg.com/vi/ILTZ8qZ" rel="nofollow">https://i.ytimg.com/vi/ILTZ8qZ</a>
+bNK0/mqdefault.jpg HTTP/1.1&quot; 200 12585
+INFO - [Feb 21 18:00:33] 127.0.0.1:52648 &quot;GAE GET <a href="https://ad.doubleclick.net/N67" rel="nofollow">https://ad.doubleclick.net/N67</a>
+62/adi/mkt.ythome_1x1/;sz=1x1;tile=3;ssl=1;dc_yt=1;k18=1;k21=1;kage=31;kar=4;kau
+th=1;kga=1002;kgender=m;kgg=1;klg=zh-cn;kmyd=ad_creative_3;ytexp=931366,916723,9
+61401,905660,916640,938689,9406210;ord=2569981799460947? HTTP/1.1&quot; 200 37
+INFO - [Feb 21 18:00:33] 127.0.0.1:52258 &quot;GAE GET <a href="https://i.ytimg.com/vi/8c2ahBl" rel="nofollow">https://i.ytimg.com/vi/8c2ahBl</a>
+TPz0/mqdefault.jpg HTTP/1.1&quot; 200 12009
+INFO - [Feb 21 18:00:33] 127.0.0.1:52712 &quot;STRIP CONNECT clients6.google.com:443
+HTTP/1.1&quot; - -
+INFO - [Feb 21 18:00:33] 127.0.0.1:50374 &quot;GAE GET <a href="https://www.youtube.com/ad_fra" rel="nofollow">https://www.youtube.com/ad_fra</a>
+me?id=ad_creative_1 HTTP/1.1&quot; 200 412
+INFO - [Feb 21 18:00:33] 127.0.0.1:52712 &quot;DIRECT POST <a href="https://clients6.google.co" rel="nofollow">https://clients6.google.co</a>
+m/youtubei/v1/log_interaction?alt=json&amp;key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qc
+W8 HTTP/1.1&quot; 200 -
+INFO - [Feb 21 18:00:33] 127.0.0.1:52693 &quot;GAE GET https://pubads.g.doubleclick.n
+et/pagead/adview?ai=BEa77aVboVLadD5HYpgPj5YHQA4W13oEHAAAAEAEgADgAWLW8vPdnggEXY2E
+tcHViLTI2MTQ2NjYyNjE1Nzk3NDGyAQ93d3cueW91dHViZS5jb226AQlnZnBfaW1hZ2XIAQnaARhodHR
+wczovL3d3dy55b3V0dWJlLmNvbS_AAgLgAgDqAhg0MDYxL2NvbS55dGhvbWUvX2RlZmF1bHT4Av7RHpA
+D0AWYA6QDqAMB0ASQTuAEAaAGINgHAA&amp;sigh=S2Rkl7VXlpc&amp;vis=1 HTTP/1.1&quot; 200 0
+INFO - [Feb 21 18:00:40] 127.0.0.1:52715 &quot;STRIP CONNECT clients4.google.com:443
+HTTP/1.1&quot; - -
+INFO - [Feb 21 18:00:40] ssl good_ipaddrs=25, bad_ipaddrs=437, unknown_ipaddrs=1
+1
+INFO - [Feb 21 18:00:41] 127.0.0.1:52715 &quot;DIRECT POST <a href="https://clients4.google.co" rel="nofollow">https://clients4.google.co</a>
+m/chrome-sync/command/?client=Google+Chrome&amp;client_id=tYlMWTjc%2B214NO0s54EJ1w%3
+D%3D HTTP/1.1&quot; 200 10902
+INFO - [Feb 21 18:00:41] 127.0.0.1:52715 &quot;DIRECT POST <a href="https://clients4.google.co" rel="nofollow">https://clients4.google.co</a>
+m/chrome-sync/command/?client=Google+Chrome&amp;client_id=tYlMWTjc%2B214NO0s54EJ1w%3
+D%3D HTTP/1.1&quot; 200 472
+INFO - [Feb 21 18:00:42] ssl good_ipaddrs=25, bad_ipaddrs=430, unknown_ipaddrs=1
+8
+INFO - [Feb 21 18:00:43] 127.0.0.1:50374 &quot;GAE GET <a href="https://www.youtube.com/watch?" rel="nofollow">https://www.youtube.com/watch?</a>
+v=b0kl0pr0k24&amp;spf=navigate HTTP/1.1&quot; 200 23800
+INFO - [Feb 21 18:00:43] ssl good_ipaddrs=25, bad_ipaddrs=424, unknown_ipaddrs=2
+4
+INFO - [Feb 21 18:00:44] 127.0.0.1:52258 &quot;GAE GET <a href="https://i.ytimg.com/vi/F2i0Bc3" rel="nofollow">https://i.ytimg.com/vi/F2i0Bc3</a>
+f7jk/default.jpg HTTP/1.1&quot; 200 4858
+INFO - [Feb 21 18:00:44] 127.0.0.1:52649 &quot;DIRECT GET <a href="https://clients1.google.com" rel="nofollow">https://clients1.google.com</a>
+/generate_204 HTTP/1.1&quot; 204 0
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19161&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19161"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="19161">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A19161',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 19161,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

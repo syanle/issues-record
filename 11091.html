@@ -1,0 +1,1290 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "profileUrl": null, "loggedInUserEmail": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "relativeBaseUrl": "", "projectHomeUrl": "/p/goagent", "token": null, "projectName": "goagent", "domainName": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 11091 - 
+ goagent -
+ 
+ GoAgent 3.0.6 已发现的安全漏洞（缺陷） - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D11091&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D11091" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=11091">11091</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >GoAgent 3.0.6 已发现的安全漏洞（缺陷）</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 24 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A11091">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D11091&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D11091">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/112124889685824528954/">moop.ti...@gmail.com</a
+>,
+ <span class="date" title="Wed Nov  6 12:27:59 2013">Nov 6, 2013</span>
+ 
+ </div>
+<pre>
+GoAgent 3.0.6 已发现的安全漏洞（缺陷）
+
+【摘要】
+1. &quot;local/goagent.exe&quot; 与 &quot;server/python/wsgi.py&quot; 之间，存在中间人攻击漏洞，即使您设置了 HTTPS 连接。
+    利用此漏洞，攻击者可以完全监视、控制透过代理所浏览的网页内容。
+
+2. 加密算法 rc4 在使用上存在明显的安全缺陷，当满足适当条件时，存在重放攻击漏洞。
+    利用此漏洞，攻击者可以完全监视透过代理所浏览的网页内容。
+
+3. 将众所周知的 &quot;local/CA.crt&quot; 导入受信任的根证书颁发机构（等同于把自家的钥匙挂在大门上），存在 HTTPS 的中间人攻击漏洞。
+    利用此漏洞，攻击者可以监视、控制未透过代理的 HTTPS 网页内容。（比如， ICBC 电子银行登陆信息）
+
+【用户影响】
+1.个人隐私暴露，比如您今天上了26次 youporn～
+2.敏感信息泄露，例如 youtube、facebook、twitter 等网站的帐号密码，不论您是否用 HTTPS 方式登陆。
+3.计算机被入侵，有可能～
+4.其他，大家都知道的～
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Nov  6 14:03:57 2013">
+ Nov 6, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=11091#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+不要无病呻吟了，我来替作者解答一下你
+
+1，中间人攻击问题，你可以在proxy.ini中将validate = 0设置为validate = 1 即可避免中间人攻击
+
+2，rc4是国际公认的安全算法，而且goagent的使用方式十分合理，是你详细说出破解方法。不要说暴力破解，你有这个能力么？
+
+3，CA.crt问题，你可以把这个文件删除，然后goagent会为你生成一个独一无二的新CA.crt。
+
+所以你列举的问题都不是问题，请不要再无病呻吟了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Nov  6 20:53:22 2013">
+ Nov 6, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=11091#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/112124889685824528954/">moop.ti...@gmail.com</a
+></span>
+ 
+<pre>
+GoAgent 3.0.6 已发现的安全漏洞（缺陷）- 问题解答
+
+为了满足 “wwqgtxx@gmail.com” 童鞋的好奇心，友情解答 TA 的问题，漏洞说明见 <a href="http://better-goagent.blogspot.com/。" rel="nofollow">http://better-goagent.blogspot.com/。</a>
+
+该童鞋针对漏洞说明，提出以下“见解”：
+『
+不要无病呻吟了，我来替作者解答一下你
+1，中间人攻击问题，你可以在proxy.ini中将validate = 0设置为validate = 1 即可避免中间人攻击
+2，rc4是国际公认的安全算法，而且goagent的使用方式十分合理，是你详细说出破解方法。不要说暴力破解，你有这个能力么？
+3，CA.crt问题，你可以把这个文件删除，然后goagent会为你生成一个独一无二的新CA.crt。
+所以你列举的问题都不是问题，请不要再无病呻吟了
+』
+
+考虑到该童鞋的理解能力，简单解释一下 ～
+1. &quot;validate = 1&quot; 同样不能幸免于中间人攻击。攻击例子：拥有 Equifax Secure CA签发 的证书（CN=www.googlenotajoke.com）。
+2. 使用 RC4 算法的缺陷见 <a href="https://www.dlitz.net/software/pycrypto/api/current/Crypto.Cipher.ARC4-module.html，或者" rel="nofollow">https://www.dlitz.net/software/pycrypto/api/current/Crypto.Cipher.ARC4-module.html，或者</a> google &quot;attack rc4&quot;。攻击例子：《GoAgent 3.0.6 CR4 安全漏洞 攻击示例》，见 <a href="http://better-goagent.blogspot.com/。" rel="nofollow">http://better-goagent.blogspot.com/。</a>
+3. 这个等于说 &quot;只要你把漏洞告诉我，我就能填补它&quot; ～
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Nov  7 02:02:13 2013">
+ Nov 7, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=11091#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+看了你的文章，你混淆了rc4加密与xor加密的概念吧……
+你的所谓攻击忽略了一个最重要的问题，就是你必须能获得rc4密钥，众所周知，你不可能通过逆向运算获得密钥，所以也不可能通过你所谓的方式获得并修改回传的数据内容，因为没有密钥几乎不可能解密rc4数据，你倒是给一个好办法？
+所周你的所谓攻击方式还是无法实现
+欢迎继续挑刺，我们来好好辩论一下
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  9 22:00:51 2014">
+ Jun 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=11091#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/100615590375588187372/">chw...@gmail.com</a
+></span>
+ 
+<pre>
+1楼什么态度，人家好心提交个问题，你解决不了就算了，还说无病呻吟，什么玩意儿，“CA.crt问题，你可以把这个文件删除”，这不是p话吗，请你把我电脑上的也删除吧，纯属装逼，好像很懂似的，其实就知道点皮毛，夸夸其谈而已。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  9 22:06:06 2014">
+ Jun 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=11091#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/106831554712470051417/">chai...@gmail.com</a
+></span>
+ 
+<pre>
+1楼好像是wallproxy的作者吧
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  9 22:29:48 2014">
+ Jun 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=11091#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/117085474544752166889/">cxj...@gmail.com</a
+></span>
+ 
+<pre>
+4#看了5#的话，感觉自己被打脸了~~~~
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun 10 05:45:34 2014">
+ Jun 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=11091#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/100615590375588187372/">chw...@gmail.com</a
+></span>
+ 
+<pre>
+ls两位逗比呢，激动个什么劲儿啊，眼瞎了吗，人家第一句明明说“不要无病呻吟了，我来替作者解答一下你“，看清楚再发帖行不？这货跟goagent一点关系都没有，开发的是wallproxy
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun 10 06:34:46 2014">
+ Jun 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=11091#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/110880798327028124453/">wlqc...@gmail.com</a
+></span>
+ 
+<pre>
+主楼反馈出错误有什么问题吗？
+1楼所解答的更不存在什么问题。整篇帖子没有什么大不了的事，也犯得着去攻击吗？
+难怪中国人喜欢窝里斗呢。。多大的事啊，也要斗一下。
+
+
+4楼的小朋友，肝火盛不好。特别你看了我的这评论后。
+
+哦，我不擅长与人之间互相斡旋。也不喜与人争斗。当然，我也并没有人和任何争斗，不过，你要理解成在与你争斗，那是你的理解。不干涉
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun 10 08:09:11 2014">
+ Jun 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=11091#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/117670419473098769796/">wxuj...@gmail.com</a
+></span>
+ 
+<pre>
+大家其实都是为了goagent变得更好而在这讨论，这很好，但是就不要在讨论的结尾加上类似（无病呻吟，纯属装逼，夸夸其谈，p话，逗比，眼瞎）等无用的形容词了嘛！！！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun 11 17:16:31 2014">
+ Jun 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=11091#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/100060897141194780675/">haiyuan....@gmail.com</a
+></span>
+ 
+<pre>
+翻墙软件Goagent的安全风险
+<a href="http://www.chinagfw.org/2014/06/goagent.html" rel="nofollow">http://www.chinagfw.org/2014/06/goagent.html</a>
+大家有空可以看看与解决
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun 13 09:14:19 2014">
+ Jun 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=11091#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/101466984628112281776/">zhry8888...@gmail.com</a
+></span>
+ 
+<pre>
+要是一楼这么简单的解决方法那在说明里给出来啊，很多人根本不知道要把validate设成1，也不知道删除ca.crt让程序在自动生成一个啊，这不就是漏洞吗。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 00:43:47 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=11091#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/anrihun/">anrihun</a
+></span>
+ 
+<pre>
+楼主消失了么？】
+这种技术问题就是要越辩越明的呀
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 02:11:10 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=11091#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/105121709349802928154/">lilyd...@gmail.com</a
+></span>
+ 
+<pre>
+1. 设置 validate 只能保证客户端到 GAE 服务器之间没有问题。已经有证据表明 GAE 服务器在 UrlFetch 时并不会验证对方服务器证书的有效性（php.net 被入侵、证书被吊销的时候，GoAgent 仍能正常访问）。虽然这个很难被利用
+2. 前些天 ClouldFlare 博客多次发文尽量避免使用 rc4，不过好像确实没有明显的问题
+3. 刚刚检查了一下，Arch Linux 的 goagent 软件包没有附带 CA.crt 文件，磁盘上的该文件是在本地新生成的
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar 23 00:33:39 2015">
+ Mar 23, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=11091#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/115638360768309329504/">SheYong...@gmail.com</a
+></span>
+ 
+<pre>
+大家都很牛逼
+我来学习来了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar 23 01:05:46 2015">
+ Mar 23, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=11091#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/100015965012718812890/">democra...@gmail.com</a
+></span>
+ 
+<pre>
+华山论剑，不是华山骂架。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed May  6 23:01:36 2015">
+ May 6, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=11091#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/107489931029987600546/">15213598...@gmail.com</a
+></span>
+ 
+<pre>
+我按一楼说的做，14楼说的刚刚检查了一下，Arch Linux 的 goagent 软件包没有附带 CA.crt 文件，磁盘上的该文件是在本地新生成的，以前是自带的CA.crt 文件，现在已经发现漏洞，填补漏洞了，一楼说的1，中间人攻击问题，你可以在proxy.ini中将validate = 0设置为validate = 1 即可避免中间人攻击，那goagent 软件包做的时候为什么不改为1呢，反正这些说法宁可信其有效果，还有我用单独浏览器导入证书使用行不，行，我用火狐浏览器单独导入到火狐浏览器中，翻一翻用火狐，平常用别的浏览器。反正网银不登录火狐浏览器。对了还要告诫使用如天行海购浏览器之类的童鞋，CA.crt 文件还是以前公用的CA.crt 文件自动导入系统的证书，不过使用那些浏览器的童鞋应该看不到这个帖子吧。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun 10 15:52:45 2015">
+ Jun 10 (5 days ago)
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=11091#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/102300648489126678681/">linhaico...@gmail.com</a
+></span>
+ 
+<pre>
+额。。有得必有失
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D11091&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D11091"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="11091">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A11091',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 11091,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

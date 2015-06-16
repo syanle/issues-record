@@ -1,0 +1,754 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "profileUrl": null, "loggedInUserEmail": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "relativeBaseUrl": "", "projectHomeUrl": "/p/goagent", "token": null, "projectName": "goagent", "domainName": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 19621 - 
+ goagent -
+ 
+ Goagent自定义IP的原理，方法，和技巧 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19621&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19621" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=19621">19621</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >Goagent自定义IP的原理，方法，和技巧</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 9 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A19621">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19621&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19621">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/liangsong999/">liangsong999</a
+>,
+ <span class="date" title="Sun Jan 25 04:55:02 2015">Jan 25, 2015</span>
+ 
+ </div>
+<pre>
+
+欢迎大家提出建议和评价，
+有道云笔记链接：
+<a href="http://note.youdao.com/share/?id=5aa29dd6694b7e36e5339952c3a1e80d&amp;type=note" rel="nofollow">http://note.youdao.com/share/?id=5aa29dd6694b7e36e5339952c3a1e80d&amp;type=note</a>
+
+-------------------------------------------------------------------------------
+【网络原理】
+我们平时使用互联网的时候，不同的主机之间，是使用IP地址进行通信的。打个比方，你要写信给别人，你必须要知道对方的地址才行。IP地址的作用就和我们写信的通信地址有点类似，因此，我们如果需要和其它主机通信，就需要有2个IP地址：自己PC的IP地址，对方主机的IP地址。
+在你启动上网服务的时候，宽带供应商会给你分配一个Internet上的IP地址，如果你需要去163的主页看新闻，那么，你需要知道163的IP地址。但是，众多的IP地址，我们并不能都记住它们，因此，我们使用英文字母来表示其它主机，将这些英文字母称为域名。www.163.com就是一个完整的域名例子。有了域名，我们如何和对方主机通信呢？前面提到过，互联网上进行通信，我们得要有对方主机的IP地址才行。域名服务器(DNS)帮我们解决了这个问题，域名服务器可以告诉我们，一个域名它的IP地址是什么，然后，我们在通过这个IP地址和对方主机进行通信。当然，这一切，对于用户来说，都是透明的，我们只要连上了互联网（ISP分给你一个Internet上的IP），打开浏览器，输入网址www.163.com，（操作系统去DNS服务器查询www.163.com的IP地址，然后和这个IP地址的80端口进行通信，开始进行http通信服务。）
+
+一个正常的通信服务
+
+PC通过ISP获得Internet服务-----&gt;PC请求浏览www.google.com-----&gt;PC向ISP的DNS服务器询问www.google.com的IP地址
+----&gt;DNS返回www.google.com的IP地址是173.194.72.99-----&gt;PC和173.194.72.99进行通信，浏览器实现对页面www.google.com的浏览
+【GFW原理】
+【屏蔽对方主机IP】GFW如何让你没法和使用浏览器浏览www.google.com呢？很简单，GFW只要将173.194.72.99这个IP地址对你进行屏蔽，你就没法访问www.google.com了。但是，google是一个超级公司，并非只有一个IP地址，而且，Google还在不断购买新的IP地址，因此，在我有限的网络知识看来，GFW实际上并不能实现完全对www.google.com的屏蔽。
+
+【DNS服务器返回虚假的IP】GFW可以和你的ISP供应商达成协议，每当用户使用ISP的DNS服务器查询www.google.com的时候，返回一个并不是google的IP。因为你得到的是错误的IP地址，所以，没法实现和www.google.com的正常通信。GFW的这种方法被大家叫作“DNS污染”。我不清楚那些ISP的DNS服务器是使用&quot;DNS污染&quot;策略的，我使用的是电信的宽带接入服务，我通过电信的DNS服务器查询google域名的时候，返回的是google的IP（当然，这些IP是被屏蔽掉了的）。你可以使用公共DNS来解决DNS污染的问题，国内的知名DNS有114公共DNS（114.114.114.114），阿里巴巴公共DNS(223.5.5.5)，国际的知名公共DNS有google公共DNS(8.8.8.8)。
+
+【Goagent原理】
+
+【Goagent默认配置原理】
+使用PC设置的DNS服务器（？可能是这样,或者使用知名的公共DNS）----&gt;查询各种google的域名（www.google.com, mail.google.com,等等）----&gt;鉴别返回的IP哪些是未被屏蔽的IP
+-----&gt;使用可访问的IP作为GAE服务器的地址(yourappid.appspot.com)-----&gt;和yourappid.appspot.com进行通信服务（实现GAE代理）
+
+注：Google App Engine是Google旗下的服务，对使用其它域名返回的IP来指向appspot.com服务这种做法，不要感到惊奇。
+
+【自定义GAE IP的原理】
+从上面我们可以看到，默认配置最关键的地方就是，我们要能够从DNS那里，获得可用的GAE的IP地址。因为ISP的DNS地址是公开的，公共的DNS地址也是公开的，GFW只要将这些DNS服务器查询返回的Google的IP地址全部屏蔽，Goagent的使用就会出问题。
+
+我们前文提到过，Google是一个超级公司，它有许多的IP，因此，各个DNS服务器查询返回的IP，只是它所有IP的很小很小的一部分。我们只要找到那些没有被GFW屏蔽的IP，用这些IP地址作为GAE服务器的地址，这就是所谓的自定义GAE IP。
+
+【如何自定义GAE IP】
+如果我们一直一个可用的GoogleIP地址是A.B.C.D，该如何使用这个IP作为GAE服务器的地址？
+自定义IP需要修改proxy.ini文件（或者新建proxy.user.ini）
+
+第一步：在[iplist]字段内，添加
+#用字符串google_gae代表A.B.C.D
+google_gae = A.B.C.D 
+
+第二步：在[profile]字段内，修改gae服务的配置
+#gae的服务域名是appspot.com, crlf是换行符的意思，添加了crlf，goagent才能正常工作
+.appspot.com = google_gae,crlf
+【如何查找可用的GAE IP】
+互联网上有各种程序可以查找可用的GAE IP。恕我不能全面考察，我是使用Gogotester这个程序进行GAE IP的查找。
+
+目前，Gogotester的最新版本是2.3.9，我这里简单介绍下其使用方法。
+
+打开Gogotester2.3.9后，我们首先要修改的是【连接超时】这个选项，就是你需要得到延迟为多少以内的IP。视每个人的网络不同，我推荐合理的设置是300（即查找延迟300ms以内的IP）。如果你认为你的网络是非常好的话，目前又是在非高峰时段上网（比如，不是周末和节假日，不是晚上，更不是两者的合一），那么，你可以把延迟设的更小（150是一个合理的下限）。
+
+然后，点随机测试，程序提示我们需要获取的IP数量。对于个人使用，我认为一个稳定的IP就够了，但是，为了测试稳妥起见，选5个还是比较不错的。注意，这里获取的IP数量，并非越多越好，因为你需要的越多，Gogotester所需要扫描的IP也越多。在我看来，如果你只是个人使用，使用1个GAE的IP和使用100个GAE的IP没什么区别。接下来你可以去做其它事了，gogotester获取到5个IP后，会有声音提示。接下来，我们就可以按延迟大小，端口速度，选择我们理想的IP作为GAE的IP了。
+
+注：Gogotester使用A字符来标示出GAE的可用IP，你在最后挑选GAE可用IP的时候，应该注意这一点。
+【我的配置示例】
+我是使用proxy.user.ini进行的配置，这样的好处是，我可以暂时忽略新版本的proxy.ini配置。使用proxy.user.ini配置，只需要在Goagent的local文件夹内，新建一个名为proxy.user.ini的文本文件即可，你把你对Goagent的配置写在这里就行了。
+
+在这里，我隐去了自己的appid和GAE IP，用*来代替了它们
+---------------------start--------------------------------
+[listen]
+debuginfo = 1
+[gae]
+appid = **********|*********|**********|************|********
+regions = CN,China
+[iplist]
+google_gae = ********|********|**********
+[profile]
+.appspot.com = google_gae,crlf
+.google.com = google_gae
+.google.com.hk = google_gae
+.gstatic.com = google_gae
+.ggpht.com = google_gae
+.googleapi.com = google_gae
+.googleusercontent.com = google_gae
+.google-analytics.com = google_gae
+[autorange]
+threads = 6
+[pac]
+enable = 0
+admode = 0
+----------------------end----------------------------
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jan 25 05:06:24 2015">
+ Jan 25, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=19621#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/liangsong999/">liangsong999</a
+></span>
+ 
+<pre>
+#1
+我这里没改啊，只是新建了一个google_gae,然后让所有的Google服务指向google_gae.
+当然，我实际使用时，是把proxy.ini的iplist和profile全部注释，然后自己自己定义proxy.user.ini。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jan 25 07:12:49 2015">
+ Jan 25, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=19621#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/liangsong999/">liangsong999</a
+></span>
+ 
+<pre>
+#4
+是修改google_hk,还是自己定义，我觉得是每个人对与设置的理解。关于regions，我之前试过，小写的cn没法用，最后才发现只能大写CN，至于最新版是否支持大小写转换，我没有关注。关于China，我是根据之前issues有人贴过使用什么工具查询IP区域的，我看那里的区域代码有的IP并不是CN，而是China，所以就又加上了China。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan 27 04:50:27 2015">
+ Jan 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=19621#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/102013212251338154536/">vvkk2...@gmail.com</a
+></span>
+ 
+<pre>
+试试看看
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan 27 04:51:25 2015">
+ Jan 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=19621#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/102013212251338154536/">vvkk2...@gmail.com</a
+></span>
+ 
+<pre>
+不错  试试看看
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19621&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19621"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="19621">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A19621',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 19621,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

@@ -1,0 +1,2717 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"loggedInUserEmail": null, "projectHomeUrl": "/p/goagent", "relativeBaseUrl": "", "profileUrl": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "token": null, "projectName": "goagent", "domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 16304 - 
+ goagent -
+ 
+ 浅谈辨别是否为五毛言论的方法 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D16304&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D16304" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=16304">16304</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >浅谈辨别是否为五毛言论的方法</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 2 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A16304">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D16304&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D16304">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/109772715956749602638/">nakitaka...@gmail.com</a
+>,
+ <span class="date" title="Fri Aug 29 10:20:46 2014">Aug 29, 2014</span>
+ 
+ </div>
+<pre>
+浅谈辨别是否为五毛言论的方法(适用於GoAgent论坛，判断经验来源於主要百度贴吧等)：
+
+首先明确一点，笼统地讲，五毛是为共产党服务的，目的就是要达到共产党所要达到的目的。
+
+五毛说话的内容中多数都包含有粗口，说话低俗，说话中带有众多色情词汇、骂人语句，简单概括就是没有素质。
+
+五毛的话题的内容包含有：
+政治谎言，利用色情话题编造的谎言故事，恐怖暴力色情话题，故意引起吵架，挑拨是非。
+喜欢把共产党下的中国的真实黑暗面代入到其他国家里面，在某些方面。。。
+
+五毛言论的目的：
+散布虚假消息，恐吓，
+
+关於法轮功的话题，很简单，笼统地讲，因为法轮功在中国这里是被共产党镇压的，五毛是为共产党服务的，
+所以说法轮功是邪教、说法轮功怎麽怎麽不好的等众多话题全部都是五毛的言论(不排除有不明真相群众)。
+
+另外，不是五毛的人上来GoAgent这里的目的只有一个，那就是翻墙技术，
+而不是为了谈论政治话题，
+什麽翻墙软件安全好用就宣传什麽很正常，
+那些故意提及法轮功的话题的，或者话里带话说不用自由门什麽什麽的，
+即可判断为五毛。
+
+以上有待补充。
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Aug 29 17:42:52 2014">
+ Aug 29, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=16304#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/112233205738313692959/">mydoog...@gmail.com</a
+></span>
+ 
+<pre>
+能翻墙出来的五毛都是带任务的。五毛来了，意味着goagent的价值被中国官方认可，是好事。如果连五毛都不来，就说明这里对中共无关轻重，所以我们要欢迎五毛经常来看看。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Aug 29 23:43:20 2014">
+ Aug 29, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=16304#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/114615836449975601985/">jab.1...@gmail.com</a
+></span>
+ 
+<pre>
+对轮子，我就说一句，不要翻出来之后被二次洗脑，带着怀疑去看任何东西。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 01:18:03 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=16304#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/100347370329251419400/">234chenc...@gmail.com</a
+></span>
+ 
+<pre>
+依据 LZ 的经验，#2 就是一只杂交的五毛狗。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 01:28:53 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=16304#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+<a title="我觉得应该在 google+ 上专门开一个社群讨论政治，这里只讨论技术。" class=closed_ref href="/p/goagent/issues/detail?id=16451"> Issue 16451 </a> has been merged into this issue.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 01:29:08 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=16304#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+<a title="我是来支持作者的" class=closed_ref href="/p/goagent/issues/detail?id=16449"> Issue 16449 </a> has been merged into this issue.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 01:29:19 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=16304#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/106170620538274054500/">ren1...@gmail.com</a
+></span>
+ 
+<pre>
+是什麼樣的人會翻出來說我黨好？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 06:10:37 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=16304#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/118151213964428623999/">grey1982...@gmail.com</a
+></span>
+ 
+<pre>
+我对政治没有兴趣，所以没有什么反和不反的，因为就算要反，也是自己说给自己听，意义不大，老百姓手里没有枪，统统都是百搭，巴基斯坦不会救中国人，其他国家就更不要奢望了！对圈圈，我更没有兴趣，因为我是一个基督信徒，对其他的宗教没有特别的兴趣，自然也不会去反。只是看不惯一些人在技术区里面讨论那些有的没有的东西，难道一个软件真的就可以扯出这么多议题？？？我想说的，那些反党的，很正常，世界上没有一个政党是没有反对者的；对于圈圈，我只能说“愿老李与你同在！”一边自己玩自己去！政治是一个很危险的东西，因为世界上比混蛋更混蛋的就是政客，我们只是一介草民，我们就本着自己的信念，努力的生活，用功的工作，好好的赚钱，养活一家人，没事的时候上网看看这个世界，毕竟我们比起很多网民来说能浏览到更多的资源，学到更多东西，调整好自己的世界观，看淡那些所谓的“五毛”“轮子”什么的种种被操纵者，总有一天，这个社会会慢慢改变，年轻人会慢慢起来，中国会越来越西化，西方也越来越了解中国，“民主”会真正的实现的！（你们认为我是什么称号？肯定不会是五毛，也不会是轮子，你们看着取吧，哈哈）
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 06:34:36 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=16304#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/112613874980348162074/">nishimur...@gmail.com</a
+></span>
+ 
+<pre>
+#7 當然是五毛了……包括自乾五。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 06:59:17 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=16304#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/114359524613463280883/">yules...@gmail.com</a
+></span>
+ 
+<pre>
+随便给人扣帽子的都是什么心态。五毛党、美分党，说白了，都是一路货色，喷来喷去有什么意思。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 07:03:28 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=16304#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+现在论坛处于和五毛的战争状态，任何有五毛倾向和自干五的倾向的言论都可能被删除。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 07:11:58 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=16304#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/107929732165511245772/">xiaozhou...@gmail.com</a
+></span>
+ 
+<pre>
+#10 grey1982...@gmail.com 还有脸自称基督徒，你家教皇在中南海吧？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 07:15:02 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=16304#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/118151213964428623999/">grey1982...@gmail.com</a
+></span>
+ 
+<pre>
+哈哈哈，基督徒没有教皇的，朋友！我看了楼上的发言，只要不反党就是五毛？不反轮子就是轮子吧？那我反党好了，哈哈，免得在翻墙圈成异类！我反党了！打倒GCD！！！反对轮子！！！！！！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 07:16:04 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=16304#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/118151213964428623999/">grey1982...@gmail.com</a
+></span>
+ 
+<pre>
+支持老大删贴！！！删了，删了！！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 07:20:19 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=16304#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/109700506104043355655/">rulairuf...@gmail.com</a
+></span>
+ 
+<pre>
+反对五毛，反对轮子
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 07:21:58 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=16304#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+#16 别激动，#15 只是他个人观点，我不删除 #15 并不是我认同他的观点。只是我不认为他的这个发帖没有五毛倾向。
+
+曾经有“轮子”来捣乱，我已经赶走了。但是五毛没被赶走，反而越发猖獗了。
+并且它们还会假扮各色角色，比如 #15，你能确定他不是五毛反串的? 因为 #15 是一个新 ID, 所以需要观察，到底是一个像你我一样的义愤的普通人，还是真的是反串。
+
+而你 #16, 我觉得你并不是五毛。就这样的。
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 07:54:20 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=16304#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/118151213964428623999/">grey1982...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢老大信任....祝GOA越做越好！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 08:17:24 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=16304#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/107929732165511245772/">xiaozhou...@gmail.com</a
+></span>
+ 
+<pre>
+#19 老大，我并不是新id 我所不能容忍的是像#16那样自称是基督教徒，却没有半点宽容之精神，对一个被专制政权所打压的团体痛恨到上纲上线的程度，让人对他的身份不得不起疑。在王八国这样一个宗教自由受到严格限制的地方，任何宗教都有成为所谓”邪教“的可能，骗财骗色的和尚不在少数，难道那些人就比轮子要高尚很多，为什么不去抓他们而对轮子却要不分青红皂白的痛下狠手呢？其中缘由我想大家也明白。所以一切“邪教”根源就是共匪，或者它本身就是邪教。
+“那些反党的，很正常，世界上没有一个政党是没有反对者的” “政治是一个很危险的东西，因为世界上比混蛋更混蛋的就是政客” 能用这种腔调的人，即使你不是5毛，至少你和5毛的舆论导向不谋而合。前一句是句废话，表面上看起来没什么问题，但其实其用意是要把共匪把其他多党制国家的政党等同起来，但是哪有一个民主国家敢把爱党写进法律里面？哪有一个政党敢要求爱他比爱自己老母更甚的。第二句话更是扯淡，说的好像世界上多数国家的政客和在王八国的锤镰帮一样可以凌驾于法律之上，干净一切坏事。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 08:18:18 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=16304#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/102823244264128653672/">linbin...@gmail.com</a
+></span>
+ 
+<pre>
+轮子应该不会装成普通人来捣乱吧，会吗？
+
+想来接触网络这么久，看过这类帖子的次数少之又少。印象中他们只会发那些自己被害的东西，或宣传一下大法。直接是标明自己身份的。
+
+一直认为五毛动不动就扣轮子只是为了自己被发现是五毛以后，能够有一个反击，以此扰乱视线。因为轮子没有那么多财力去搞发帖之类的事，论财力远比不上五毛的主子，在发帖这方面与五毛的主子斗的话，在量上质上也应该斗不过，毕竟信教不能当饭吃，五毛却是以此为业。
+
+
+
+
+另外，突然看见论坛里标出这句“please do not post &quot;+1 Me too!&quot;.”，笑了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 08:19:57 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=16304#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/115172939816726034272/">wangmeng...@gmail.com</a
+></span>
+ 
+<pre>
+大家可以看看编程随想的这篇博文：<a href="http://program-think.blogspot.com/2011/03/logical-fallacies.html" rel="nofollow">http://program-think.blogspot.com/2011/03/logical-fallacies.html</a> ， 对辨别五毛有一定的用处。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 08:24:27 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=16304#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+#24 说得在理，经常给他人贴标签，不断煽动对某类人，某个族群，某种信仰的人的仇恨的，八九不离十就是五毛，现在五毛经过培训，很会伪装成普通网友，博取你信任的。最近习特勒的宣传战术怎么说的-----要五毛学习孙悟空钻进铁扇公主的肚子里闹事。大家不得不明察。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc30">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 10:10:09 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c30" href="/p/goagent/issues/detail?id=16304#c30">#30</a>
+ 
+
+ <a class="userlink"
+ href="/u/102517458541432477010/">tianrun...@gmail.com</a
+></span>
+ 
+<pre>
+@Phus.lu 可以向livid讨教一下，如何维护技术论坛。
+真心不希望你因为陷入讨论区的口水战中而变的心力憔悴，乃至放弃对这个项目的维护。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc31">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 10:14:38 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c31" href="/p/goagent/issues/detail?id=16304#c31">#31</a>
+ 
+
+ <a class="userlink"
+ href="/u/118151213964428623999/">grey1982...@gmail.com</a
+></span>
+ 
+<pre>
+#24 可以问问你多大了吗？如果你现在不过10多20几岁的话，我充分的理解你的立场，我曾经也愤过的，当你有一天也到我的岁数，30多岁，结婚生子，每天为了那么一点能养家的收入而卖命，慢慢的你就会明白很多道理了，我们的社会是病态的，因为共党不会搞政治，可以说是我见过除了台湾政党外最笨的政党，因为党内很少有学“政治”的人，甚至没有一个出生在真正的政治世家，所以社会一团乱，人民的人性正在被共党的党性替换，造成了好多社会奇怪的现象。我们经常说国外当官的是为人民，其实你们错了，国外真正搞政治的人都明白一个道理“钱在一百年后可能就没有了，但是权利确实像磐石一般的！”所以国外很少有巨额的贪污什么的案件发生，但是小额的还是有的，只要是当官的，为的就是特权，我们老百姓不过就是这些政客的棋子，给他们提供他们需要的权利和所谓的“尊贵”身份。我说了，我只是一介草民，一点权利也没有，也不会去当任何政党和宗教组织的走狗，包括你认为我信仰的所谓“基督教”，我把信仰和宗教分得很开，可能和你见过或者接触过的信徒不太一样，但是这里是一个软件的技术论坛，我就不细说里面的区别了，我只是和你在分享我自己的一点看法，政治只是游戏，我们作为老百姓能做的就是配合游戏规则，如果你手里有强有力的武器，有强有力的治国智慧，你可以站出来推翻现在的游戏主，成为新的权利贵族，我一定站在你背后支持你！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc33">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 10:23:11 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c33" href="/p/goagent/issues/detail?id=16304#c33">#33</a>
+ 
+
+ <a class="userlink"
+ href="/u/118151213964428623999/">grey1982...@gmail.com</a
+></span>
+ 
+<pre>
+呃，实在弄不懂了....一个软件论坛非要搞得乌烟瘴气！干脆一点，给一个建议，除了软件反馈以外的话题我认为都没有存在的必要性，也就是我们常说的禁止灌水，任何社会，政治，宗教议题都PASS掉，这样的话，这里的清净了！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc36">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 11:57:14 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c36" href="/p/goagent/issues/detail?id=16304#c36">#36</a>
+ 
+
+ <a class="userlink"
+ href="/u/107929732165511245772/">xiaozhou...@gmail.com</a
+></span>
+ 
+<pre>
+“愤”？请你在我发言中指出我“愤”之处。
+通篇你的逻辑就是阴谋论：全世界的政治都有不可告人的目的，共产党再坏也不过是全世界的共性罢了。这和“命苦不能怨政府，点背不能怪社会”的论调系出同“门”，至于哪个门，你我都清楚。
+
+“我见过除了台湾政党外最笨的政党” - 麻烦请您老给出示一下”台湾政党最笨”的证据，民选的政府再“笨”，也是公民的选择，既是民心所向，那么何“笨”之有呢？
+
+&quot;我们经常说国外当官的是为人民，其实你们错了，国外真正搞政治的人都明白...&quot; - 貌似标榜自己为人民服务的不是洋人官员，而是某国宇宙真理党。
+
+“钱在一百年后可能就没有了，但是权利确实像磐石一般的！” - 貌似权利在现代少数几个国家除外的大部分国家大多数情况下都不能实现世袭，因为都要过选民这关。当然我这样说，你可能又会说我偏激。
+
+“只要是当官的，为的就是特权，我们老百姓不过就是这些政客的棋子” - 首先，不明白你的特权指的是什么，倘若你所说的”特权”倘若是国家宪法赋予的，是光明正大的自己为官须履行的职能，那有何不可？假如你说的特权指的是凌驾于法律之上的权利，比如强拆，抢占个人财产（以上本人都亲身经历过），那么也请你证明所有的国家的官员都有该项权利。
+
+“也不会去当任何政党和宗教组织的走狗，包括你认为我信仰的所谓“基督教”，我把信仰和宗教分得很开” - 能把自己信仰宗教的行为说成是走狗行为，真的可以算得上古今奇谈，还有能“信仰和宗教分得很开”这种说法犹如“我没有双腿但我还能直立行走”一样可笑。
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc37">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 12:05:51 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c37" href="/p/goagent/issues/detail?id=16304#c37">#37</a>
+ 
+
+ <a class="userlink"
+ href="/u/103194869847066819449/">peterrm2...@gmail.com</a
+></span>
+ 
+<pre>
+#19
+就目前的情况，我建议你在任何地方都不要公开表达自己的政治倾向。如果你还在大陆的话恐怕会很危险。国安的那群哥们（没错我认识不少，我发这话的确可以认为是通敌了）想抓个人还不容易么。还有就是干脆把政治议题全清了吧，你自己看得累不累啊。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc38">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 12:24:36 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c38" href="/p/goagent/issues/detail?id=16304#c38">#38</a>
+ 
+
+ <a class="userlink"
+ href="/u/105707438618167678537/">jacker.j...@gmail.com</a
+></span>
+ 
+<pre>
+噢，轮子又在宣传自己的正确性了吗？
+
+因为轮子认为自己是正确的，轮子被共产党镇压，所以轮子认为共产党是邪恶的
+
+哈哈哈，打架输了就乖乖磕头，还充什么胖子啊，真逗
+
+你们不是要练功吗？肚子里的大法轮啊，快转起来
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc40">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 17:17:23 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c40" href="/p/goagent/issues/detail?id=16304#c40">#40</a>
+ 
+
+ <a class="userlink"
+ href="/u/linyile/">linyile</a
+></span>
+ 
+<pre>
+怎么不删了？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc42">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 18:19:27 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c42" href="/p/goagent/issues/detail?id=16304#c42">#42</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+力挺#36的兄弟，说得好。没有信仰的就不要说自己是教徒，你不过是利用宗教搞点钱吧？
+
+现在的五毛自干五果然招数迭出啊，欺骗+威吓，什么狗屁“任何地方都不要公开表达自己的政治倾向”，这是在墙外，任何人都不该自我审查从而放弃唤醒自己的勇气和良知，放弃对专制的恐惧才能开启宪政的大门。国安那么牛逼，袭击温州华数的黑客正在笑看国安的乱抓胡骗。坦克吓不倒港人，国安还能吓到墙外的自由民？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc43">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 18:22:51 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c43" href="/p/goagent/issues/detail?id=16304#c43">#43</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+Freedom7兄#38的证据有几份了？两次就直接上榜了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc47">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 18:52:36 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c47" href="/p/goagent/issues/detail?id=16304#c47">#47</a>
+ 
+
+ <a class="userlink"
+ href="/u/118151213964428623999/">grey1982...@gmail.com</a
+></span>
+ 
+<pre>
+算了，我还是保持沉默，当一个看客，软件有问题的时候我发发BUG就行了......
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc48">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 19:33:12 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c48" href="/p/goagent/issues/detail?id=16304#c48">#48</a>
+ 
+
+ <a class="userlink"
+ href="/u/107553314052315201468/">woodybue...@gmail.com</a
+></span>
+ 
+<pre>
+2楼说的在理，关于某轮，不要翻出来之后被二次洗脑，带着怀疑去看任何东西。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc49">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 20:13:12 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c49" href="/p/goagent/issues/detail?id=16304#c49">#49</a>
+ 
+
+ <a class="userlink"
+ href="/u/118244571885368345250/">Jopark0...@gmail.com</a
+></span>
+ 
+<pre>
+怀疑个P，只要跟goagent无关的，全删了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc50">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 21:36:11 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c50" href="/p/goagent/issues/detail?id=16304#c50">#50</a>
+ 
+
+ <a class="userlink"
+ href="/u/110158684434685666353/">cym.zh...@gmail.com</a
+></span>
+ 
+<pre>
+phus.lu应该禁止这类口水战
+
+来说是非者都是是非人
+
+五毛害人利己，好歹也挣点钱，轮子是害人害己，杀无赦
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc51">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 22:09:08 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c51" href="/p/goagent/issues/detail?id=16304#c51">#51</a>
+ 
+
+ <a class="userlink"
+ href="/u/115336261682180552475/">simao...@gmail.com</a
+></span>
+ 
+<pre>
+给我说啊··用不着分什么五毛/轮子/美分啥的本来就是个技术圈···扯那些对吾等屁民无用的政治顶个蛋用···只要有政治倾向直接干翻完事··宁错杀不放过
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc52">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 22:25:05 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c52" href="/p/goagent/issues/detail?id=16304#c52">#52</a>
+ 
+
+ <a class="userlink"
+ href="/u/102982587190787460829/">wmlga...@gmail.com</a
+></span>
+ 
+<pre>
+非常非常同意 #30 #33 #49 #51
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc53">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Aug 30 22:54:48 2014">
+ Aug 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c53" href="/p/goagent/issues/detail?id=16304#c53">#53</a>
+ 
+
+ <a class="userlink"
+ href="/u/115256320215392872574/">deo7...@gmail.com</a
+></span>
+ 
+<pre>
+希望这里能纯粹点，翻墙主要是为了找资料什么的，而不是被“言论自由”。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc55">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Aug 31 04:55:51 2014">
+ Aug 31, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c55" href="/p/goagent/issues/detail?id=16304#c55">#55</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+#54 satxuxiaofei 很明显是一个专门来顶贴的下作五毛，他的帖子除了需要示众，其他我会尽量删除。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc56">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Aug 31 05:10:56 2014">
+ Aug 31, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c56" href="/p/goagent/issues/detail?id=16304#c56">#56</a>
+ 
+
+ <a class="userlink"
+ href="/u/115228727607736107101/">sthinkw...@gmail.com</a
+></span>
+ 
+<pre>
+对政治已经没兴趣了，翻出来主要看看体育，游戏，音乐方面的东西。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc57">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Aug 31 06:34:56 2014">
+ Aug 31, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c57" href="/p/goagent/issues/detail?id=16304#c57">#57</a>
+ 
+
+ <a class="userlink"
+ href="/u/105487649348069893440/">yanggang...@gmail.com</a
+></span>
+ 
+<pre>
+你们出来这样乱骂，你们的父母知道么？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc58">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Aug 31 17:59:47 2014">
+ Aug 31, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c58" href="/p/goagent/issues/detail?id=16304#c58">#58</a>
+ 
+
+ <a class="userlink"
+ href="/u/115453730489795016991/">Jyl9...@gmail.com</a
+></span>
+ 
+<pre>
+lz说的也太低端了吧 这样就是五毛？ 
+这样是低端喷子吧
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc61">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Aug 31 20:03:02 2014">
+ Aug 31, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c61" href="/p/goagent/issues/detail?id=16304#c61">#61</a>
+ 
+
+ <a class="userlink"
+ href="/u/114391797494657993131/">jhuzb...@gmail.com</a
+></span>
+ 
+<pre>
+其实吧，楼主也不应该谈论这个话题的 沉重。我讨厌五毛，也对法轮功无好感。只要大部分人都不说了，不回复讨论争论了，他们也跳不起来，自己就走了。这么讨论，反而那些人都跳出来了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc62">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Aug 31 20:09:39 2014">
+ Aug 31, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c62" href="/p/goagent/issues/detail?id=16304#c62">#62</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+#60 我觉得phus.lu自己做也未尝不可，现在把讨论集中在一两个帖子里，也是一种解决方法。
+
+#61 坏人作恶就是因为好人不出声，你任由五毛乱来局面更加不可收拾，phus.lu也是忍无可忍才出手吧。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc63">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Aug 31 20:18:30 2014">
+ Aug 31, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c63" href="/p/goagent/issues/detail?id=16304#c63">#63</a>
+ 
+
+ <a class="userlink"
+ href="/u/114391797494657993131/">jhuzb...@gmail.com</a
+></span>
+ 
+<pre>
+#62 你没懂我的意思 前段时间不是招募删帖员吗 删除帖子就交给他们了，我们来找技术的就只需要不理会他们就行了，你搭话正中了他们的奸计，他们要的就是这种效果。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc64">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Aug 31 20:24:30 2014">
+ Aug 31, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c64" href="/p/goagent/issues/detail?id=16304#c64">#64</a>
+ 
+
+ <a class="userlink"
+ href="/u/102982587190787460829/">wmlga...@gmail.com</a
+></span>
+ 
+<pre>
+同意楼上，而且确定五毛的删ID
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc65">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Aug 31 20:46:00 2014">
+ Aug 31, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c65" href="/p/goagent/issues/detail?id=16304#c65">#65</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+#63 你没明白我说那句话的意思，你不搭话，五毛更嚣张，多个id来顶贴，让好多人还以为这儿已经沦陷为五毛大本营，再造谣说phus.lu被收买了，goagent的公信力就没有了，这才会上了五毛的恶当。五毛早就已经进化了，现在意识形态斗争非常激烈，任何手段都会用上，别太天真了。一定要出声，一定要反击。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc67">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Aug 31 21:12:06 2014">
+ Aug 31, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c67" href="/p/goagent/issues/detail?id=16304#c67">#67</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+#66 不要着急，phus.lu有自己的处理方法，这是Lu老大的地盘，你得尊重主人的意愿嘛。他需要版友帮助的时候肯定会说的。现在他还应付得来的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc71">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Sep  2 01:37:55 2014">
+ Sep 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c71" href="/p/goagent/issues/detail?id=16304#c71">#71</a>
+ 
+
+ <a class="userlink"
+ href="/u/118412744131500470516/">shenliuy...@gmail.com</a
+></span>
+ 
+<pre>
+俺不喜欢　中共，　　妈蛋的　　谷歌搜索都不让用了，　　让我怎么写程序啊。～！～！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc72">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Sep  2 01:46:18 2014">
+ Sep 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c72" href="/p/goagent/issues/detail?id=16304#c72">#72</a>
+ 
+
+ <a class="userlink"
+ href="/u/113320628234963501671/">silverwa...@gmail.com</a
+></span>
+ 
+<pre>
+你这是不是闲的蛋疼啊，楼主?本身我这人保持了中立的，对你们双方都尊重，因为你们处在哪个位置，怎么说都是有道理的。可是，你一再的触碰挑胁普通人的底线，这样真是让人反感。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc74">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Sep  2 03:13:03 2014">
+ Sep 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c74" href="/p/goagent/issues/detail?id=16304#c74">#74</a>
+ 
+
+ <a class="userlink"
+ href="/u/115877854619350947017/">1101f...@gmail.com</a
+></span>
+ 
+<pre>
+技术论坛也能出现各种5毛党，现在直接赏一块。呵呵呵
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc75">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Sep  2 21:06:48 2014">
+ Sep 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c75" href="/p/goagent/issues/detail?id=16304#c75">#75</a>
+ 
+
+ <a class="userlink"
+ href="/u/105318936522545596699/">sysse...@gmail.com</a
+></span>
+ 
+<pre>
+世界不是非黑即白，谎言的另一面也可能是谎言。
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D16304&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D16304"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="16304">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A16304',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 16304,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

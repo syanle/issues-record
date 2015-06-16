@@ -1,0 +1,1433 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"relativeBaseUrl": "", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "projectName": "goagent", "loggedInUserEmail": null, "token": null, "projectHomeUrl": "/p/goagent", "profileUrl": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 21298 - 
+ goagent -
+ 
+ Issue 21260 已找到证书为 *.googlevideo.com 等的 IP 地址 &amp; 默认 HTTPS 模式在 Windows 下可用的方法 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21298&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21298" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=21298">21298</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >Issue 21260 已找到证书为 *.googlevideo.com 等的 IP 地址 &amp; 默认 HTTPS 模式在 Windows 下可用的方法</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 9 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A21298">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21298&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21298">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/111811022902337508517/">warmingf...@gmail.com</a
+>,
+ <span class="date" title="Fri Jun  5 18:31:25 2015">Jun 5, 2015</span>
+ 
+ </div>
+<pre>
+<a href="https://code.google.com/p/goagent/issues/detail?can=2&amp;start=0&amp;num=100&amp;q=&amp;colspec=ID%20Opened%20Reporter%20Modified%20Summary%20Stars&amp;groupby=&amp;sort=&amp;id=21260" rel="nofollow">https://code.google.com/p/goagent/issues/detail?can=2&amp;start=0&amp;num=100&amp;q=&amp;colspec=ID%20Opened%20Reporter%20Modified%20Summary%20Stars&amp;groupby=&amp;sort=&amp;id=21260</a>
+
+143 楼， <a href="https://code.google.com/p/goagent/issues/detail?can=2&amp;start=0&amp;num=100&amp;q=&amp;colspec=ID%20Opened%20Reporter%20Modified%20Summary%20Stars&amp;groupby=&amp;sort=&amp;id=21260#c143" rel="nofollow">https://code.google.com/p/goagent/issues/detail?can=2&amp;start=0&amp;num=100&amp;q=&amp;colspec=ID%20Opened%20Reporter%20Modified%20Summary%20Stars&amp;groupby=&amp;sort=&amp;id=21260#c143</a>
+
+提供了办法，替换 proxylib.py 就行。
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun  5 19:33:48 2015">
+ Jun 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=21298#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/105103954198592007698/">ddddabo...@gmail.com</a
+></span>
+ 
+<pre>
+那请问如何得到*.googlevideo.com的IP呢？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun  5 19:35:55 2015">
+ Jun 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=21298#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/100969792028133114345/">dqf...@gmail.com</a
+></span>
+ 
+<pre>
+#1
+之前公布的GGC（非官方）里面，一抓一大把
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun  5 19:39:44 2015">
+ Jun 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=21298#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/109415165027505570053/">jfc8...@gmail.com</a
+></span>
+ 
+<pre>
+测试有效 GFW又要忙了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun  5 19:42:58 2015">
+ Jun 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=21298#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/106664483198578668721/">feng7943...@gmail.com</a
+></span>
+ 
+<pre>
+youtube 怎么打开
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun  5 19:44:03 2015">
+ Jun 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=21298#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/105103954198592007698/">ddddabo...@gmail.com</a
+></span>
+ 
+<pre>
+#2 能不能麻烦你详细的讲一下。。在哪个帖子里（或者使用什么关键词搜索）可以找到这些非官方IP，同时用什么工具去测试是否有效 
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun  5 19:54:04 2015">
+ Jun 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=21298#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+1.179.248-255.0-255
+103.246.187.0-255
+103.25.178.4-59
+106.162.192.148-187
+106.162.198.84-123
+106.162.216.20-123
+107.167.160-191.0-255
+107.178.192-255.0-255
+107.188.128-255.0-255
+108.170.192-255.0-255
+108.177.0-127.0-255
+108.59.80-95.0-255
+109.232.83.64-127
+111.168.255.20-187
+111.92.162.4-59
+113.197.105-106.0-255
+118.174.24-27.0-255
+12.216.80.0-255
+121.78.74.68-123
+123.205.250-251.68-190
+130.211.0-255.0-255
+142.250-251.0-255.0-255
+146.148.0-127.0-255
+149.126.86.1-59
+149.3.177.0-255
+162.216.148-151.0-255
+162.222.176-183.0-255
+163.28.116.1-59
+163.28.83.143-187
+172.217.0-255.0-255
+172.253.0-255.0-255
+173.194.0-255.0-255
+173.255.112-127.0-255
+178.45.251.4-123
+178.60.128.1-63
+185.25.28-29.0-255
+192.119.16-31.0-255
+192.158.28-31.0-255
+192.178-179.0-255.0-255
+192.200.224-255.0-255
+193.120.166.64-127
+193.134.255.0-255
+193.142.125.0-255
+193.186.4.0-255
+193.192.226.128-191
+193.192.250.128-191
+193.200.222.0-255
+193.247.193.0-255
+193.90.147.0-123
+193.92.133.0-63
+194.100.132.128-143
+194.110.194.0-255
+194.78.20.16-31
+194.78.99.0-255
+195.100.224.112-127
+195.141.3.24-27
+195.205.170.64-79
+195.229.194.88-95
+195.244.106.0-255
+195.244.120.144-159
+195.249.20.192-255
+195.65.133.128-135
+195.76.16.136-143
+195.81.83.176-207
+196.3.58-59.0-255
+197.199.253-254.1-59
+197.84.128.0-63
+199.192.112-115.0-255
+199.223.232-239.0-255
+202.39.143.1-123
+203.116.165.129-255
+203.117.34-37.132-187
+203.165.13-14.210-251
+203.211.0.4-59
+203.66.124.129-251
+207.223.160-175.0-255
+208.117.224-255.0-255
+208.65.152-155.0-255
+209.85.128-255.0-255
+210.139.253.20-251
+210.153.73.20-123
+210.242.125.20-59
+210.61.221.65-187
+212.154.168.224-255
+212.162.51.64-127
+212.181.117.144-159
+212.188.10.0-255
+212.188.15.0-255
+212.188.7.0-255
+213.186.229.0-63
+213.187.184.68-71
+213.240.44.0-31
+213.252.15.0-31
+213.31.219.80-87
+216.21.160-175.0-255
+216.239.32-63.0-255
+216.58.192-223.0-255
+217.149.45.16-31
+217.163.7.0-255
+217.193.96.38
+217.28.250.44-47
+217.28.253.32-33
+217.30.152.192-223
+217.33.127.208-223
+218.176.242.4-251
+218.189.25.129-187
+218.253.0.76-187
+23.228.128-191.0-255
+23.236.48-63.0-255
+23.251.128-159.0-255
+23.255.128-255.0-255
+24.156.131.0-255
+31.209.137.0-255
+31.7.160.192-255
+37.228.69.0-63
+41.206.96.1-251
+41.84.159.12-30
+60.199.175.1-187
+61.219.131.65-251
+62.0.54.64-127
+62.1.38.64-191
+62.116.207.0-63
+62.197.198.193-251
+62.20.124.48-63
+62.201.216.196-251
+63.243.168.0-255
+64.15.112-127.0-255
+64.233.160-191.0-255
+64.9.224-255.0-255
+66.102.0-15.0-255
+66.185.84.0-255
+66.249.64-95.0-255
+69.17.141.0-255
+70.32.128-159.0-255
+72.14.192-255.0-255
+74.125.0-255.0-255
+77.109.131.208-223
+77.40.222.224-231
+77.42.248-255.0-255
+77.66.9.64-123
+78.8.8.176-191
+8.15.202.0-255
+8.22.56.0-255
+8.34.208-223.0-255
+8.35.192-207.0-255
+8.6.48-55.0-255
+8.8.4.0-255
+8.8.8.0-255
+80.227.152.32-39
+80.228.65.128-191
+80.231.69.0-63
+80.239.168.192-255
+80.80.3.176-191
+81.175.29.128-191
+81.93.175.232-239
+82.135.118.0-63
+83.100.221.224-255
+83.141.89.124-127
+83.145.196.128-191
+83.220.157.100-103
+83.94.121.128-255
+84.233.219.144-159
+84.235.77.1-251
+85.182.250.0-191
+86.127.118.128-191
+87.244.198.160-191
+88.159.13.192-255
+89.207.224-231.0-255
+89.96.249.160-175
+92.45.86.16-31
+93.123.23.1-59
+93.183.211.192-255
+93.94.217-218.0-31
+94.200.103.64-71
+94.40.70.0-63
+95.143.84.128-191
+61.19.1-2.0-127
+61.19.8.0-127
+113.21.24.0-127
+118.143.88.16-123
+202.86.162.20-187
+139.175.107.20-187
+223.26.69.16-59
+220.255.5-6.20-251
+202.65.246.84-123
+103.1.139.148-251
+116.92.194.148-187
+58.145.238.20-59
+41.201.128.20-59
+41.201.164.20-59
+222.255.120.15-59
+119.81.145.120-127
+119.81.142.202
+23.239.5.106
+74.207.242.141
+91.213.30.143-187
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun  5 20:12:12 2015">
+ Jun 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=21298#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/117773213853714812775/">amtp...@gmail.com</a
+></span>
+ 
+<pre>
+死掉ip通过这个方法基本全活.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun  5 20:13:11 2015">
+ Jun 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=21298#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/107892137552823167163/">rph...@gmail.com</a
+></span>
+ 
+<pre>
+火钳刘明！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun  5 20:49:12 2015">
+ Jun 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=21298#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/111811022902337508517/">warmingf...@gmail.com</a
+></span>
+ 
+<pre>
+IP 地址可由 checkgoogleip <a href="https://github.com/moonshawdo/checkgoogleip" rel="nofollow">https://github.com/moonshawdo/checkgoogleip</a> 扫描某一地区 IP 段获得，扫描结果中凡是带 google, doubleclick 等的都是可用的，包括 *.googlevideo.com 。﻿这里提供了各国家与地区的 IP 段 <a href="http://ipblock.chacuo.net/" rel="nofollow">http://ipblock.chacuo.net/</a> 。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun  5 20:53:21 2015">
+ Jun 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=21298#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/105103954198592007698/">ddddabo...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢楼上几位
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun  5 21:32:12 2015">
+ Jun 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=21298#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/100089282296374089558/">aire...@gmail.com</a
+></span>
+ 
+<pre>
+版主貌似也更新了proxylib.py,大家可以去github看看
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun  6 00:11:38 2015">
+ Jun 6, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=21298#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/101308065880214122330/">imy...@gmail.com</a
+></span>
+ 
+<pre>
+#我只想弱弱的问一句，扫出来的ip怎样从文件里分离出来。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun  6 01:59:54 2015">
+ Jun 6, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=21298#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/111811022902337508517/">warmingf...@gmail.com</a
+></span>
+ 
+<pre>
+#14 有一种方法： 全选复制 -&gt; GoGoTester 内右键导入剪切板 IP -&gt; 右键导出 IP 到剪切板。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun  6 02:47:16 2015">
+ Jun 6, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=21298#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/114758792883684418527/">yycan...@gmail.com</a
+></span>
+ 
+<pre>
+扫描结果中凡是带 google, doubleclick--------------为什么我的gogotest没有这类字样
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun  6 02:50:27 2015">
+ Jun 6, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=21298#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/111811022902337508517/">warmingf...@gmail.com</a
+></span>
+ 
+<pre>
+#16 IP 地址可由 checkgoogleip <a href="https://github.com/moonshawdo/checkgoogleip" rel="nofollow">https://github.com/moonshawdo/checkgoogleip</a> 扫描某一地区 IP 段获得，扫描结果中凡是带 google, doubleclick 等的都是可用的，包括 *.googlevideo.com 。﻿这里提供了各国家与地区的 IP 段 <a href="http://ipblock.chacuo.net/" rel="nofollow">http://ipblock.chacuo.net/</a> 。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun  6 06:06:30 2015">
+ Jun 6, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=21298#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/100232100374446498454/">zhengzho...@gmail.com</a
+></span>
+ 
+<pre>
+最新版goa 打开谷歌等网站都秒开  但是打开youtube出现
+Error: Not Found
+The requested URL /_gh/ was not found on this server.
+怎么解决
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun  6 06:10:30 2015">
+ Jun 6, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=21298#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/117158790449271841902/">5linh...@gmail.com</a
+></span>
+ 
+<pre>
+#18
+服务端没更新成最新版的，重新上传一次服务端
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21298&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21298"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="21298">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A21298',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 21298,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

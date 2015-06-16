@@ -1,0 +1,766 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"assetHostPath": "https://ssl.gstatic.com/codesite/ph", "loggedInUserEmail": null, "profileUrl": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "projectHomeUrl": "/p/goagent", "relativeBaseUrl": "", "token": null, "projectName": "goagent", "domainName": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 19866 - 
+ goagent -
+ 
+ GoAgent 版本：3.2.3 WIN7正常，MAC错误dnslib_resolve_over_tcp超时错误 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19866&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19866" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=19866">19866</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >GoAgent 版本：3.2.3 WIN7正常，MAC错误dnslib_resolve_over_tcp超时错误</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 2 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A19866">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19866&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19866">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/117501269680672543978/">hbklo...@gmail.com</a
+>,
+ <span class="date" title="Mon Mar  2 21:39:31 2015">Mar 2, 2015</span>
+ 
+ </div>
+<pre>
+按<a href="https://code.google.com/p/goagent/issues/detail?id=19213第50楼方法，升级python/gevent/pyopenssl,全都做完了，装了DNSCrypt-OSXClient，使用默认设置，依然无法翻墙，求大师解救！命都搭上了。" rel="nofollow">https://code.google.com/p/goagent/issues/detail?id=19213第50楼方法，升级python/gevent/pyopenssl,全都做完了，装了DNSCrypt-OSXClient，使用默认设置，依然无法翻墙，求大师解救！命都搭上了。</a>
+
+操作系统版本：OSX 10.9.5
+浏览器版本：CHROME  40.0.2214.115 (64-bit)
+GoAgent 版本：3.2.3
+<b>GoAgent 日志：</b>
+
+michealhedeMac:local jordanmicheal$ python proxy.py
+------------------------------------------------------
+GoAgent Version    : 3.2.3 (python/2.7.9 gevent/1.0.1 pyopenssl/0.14)
+Listen Address     : 127.0.0.1:8087
+GAE Mode           : https (TLSv1)
+GAE APPID          : agent-a-003
+Pac Server         : http://192.168.164.128:8086/proxy.pac
+Pac File           : file:///Volumes/DATA/chromewall/goagent/local/proxy.pac
+------------------------------------------------------
+SecCertificateAddToKeychain: write permissions error
+WARNING - [Mar  2 21:03:05] install root certificate failed, Please run as administrator/root/sudo
+INFO - [Mar  2 21:03:28] resolve common.IPLIST_ALIAS names=['google_cn', 'google_hk', 'google_talk'] to iplist
+INFO - [Mar  2 21:03:29] resolve name=google_cn host to iplist=['203.208.49.178', '203.208.49.179', '203.208.49.180', '203.208.49.176', '203.208.49.177']
+INFO - [Mar  2 21:03:31] resolve name=google_hk host to iplist=['173.194.127.238', '173.194.127.233', '173.194.127.232', '173.194.127.231', '173.194.127.230', '216.58.209.165', '173.194.127.83', '216.58.209.101', '173.194.127.81', '173.194.127.80', '173.194.127.84', '216.58.217.5', '74.125.24.18', '74.125.24.19', '74.125.24.17', '64.233.186.18', '173.194.127.20', '173.194.127.23', '173.194.127.24', '64.233.186.83', '173.194.72.83', '173.194.127.228', '173.194.127.229', '216.58.217.37', '74.125.203.82', '173.194.127.224', '173.194.127.225', '173.194.127.226', '173.194.127.227', '173.194.72.18', '173.194.72.19', '216.58.209.133', '64.233.186.17', '173.194.72.17', '216.58.218.165', '216.58.209.197', '173.194.127.18', '173.194.127.19', '173.194.127.82', '173.194.127.15', '173.194.127.16', '173.194.127.17', '173.194.127.31', '74.125.24.83', '64.233.186.19', '216.58.218.197']
+INFO - [Mar  2 21:03:34] resolve name=google_talk host to iplist=['74.125.204.125']
+INFO - [Mar  2 21:03:35] 127.0.0.1:49253 &quot;STRIP CONNECT www.google.com:443 HTTP/1.1&quot; - -
+INFO - [Mar  2 21:03:35] 127.0.0.1:49254 &quot;STRIP CONNECT www.google.com:443 HTTP/1.1&quot; - -
+INFO - [Mar  2 21:03:35] 127.0.0.1:49255 &quot;STRIP CONNECT www.google.com:443 HTTP/1.1&quot; - -
+INFO - [Mar  2 21:03:35] 127.0.0.1:49256 &quot;STRIP CONNECT www.google.com:443 HTTP/1.1&quot; - -
+INFO - [Mar  2 21:03:35] 127.0.0.1:49257 &quot;STRIP CONNECT www.google.com:443 HTTP/1.1&quot; - -
+INFO - [Mar  2 21:03:35] 127.0.0.1:49258 &quot;STRIP CONNECT www.google.com:443 HTTP/1.1&quot; - -
+INFO - [Mar  2 21:03:35] 127.0.0.1:49259 &quot;MOCK GET <a href="http://www.google.com/complete/search?client=chrome-omni&amp;gs_ri=chrome-ext&amp;xssi=t&amp;q=www.goo&amp;oit=1&amp;cp=7&amp;pgcl=7&amp;sugkey=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw" rel="nofollow">http://www.google.com/complete/search?client=chrome-omni&amp;gs_ri=chrome-ext&amp;xssi=t&amp;q=www.goo&amp;oit=1&amp;cp=7&amp;pgcl=7&amp;sugkey=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw</a> HTTP/1.1&quot; 301 0
+INFO - [Mar  2 21:03:35] 127.0.0.1:49260 &quot;MOCK GET <a href="http://www.google.com/complete/search?client=chrome-omni&amp;gs_ri=chrome-ext&amp;xssi=t&amp;q=www.goog&amp;oit=3&amp;cp=8&amp;pgcl=7&amp;sugkey=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw" rel="nofollow">http://www.google.com/complete/search?client=chrome-omni&amp;gs_ri=chrome-ext&amp;xssi=t&amp;q=www.goog&amp;oit=3&amp;cp=8&amp;pgcl=7&amp;sugkey=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw</a> HTTP/1.1&quot; 301 0
+INFO - [Mar  2 21:03:35] 127.0.0.1:49261 &quot;MOCK GET <a href="http://www.google.com/complete/search?client=chrome-omni&amp;gs_ri=chrome-ext&amp;xssi=t&amp;q=www.googl&amp;oit=1&amp;cp=9&amp;pgcl=7&amp;sugkey=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw" rel="nofollow">http://www.google.com/complete/search?client=chrome-omni&amp;gs_ri=chrome-ext&amp;xssi=t&amp;q=www.googl&amp;oit=1&amp;cp=9&amp;pgcl=7&amp;sugkey=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw</a> HTTP/1.1&quot; 301 0
+INFO - [Mar  2 21:03:35] 127.0.0.1:49262 &quot;MOCK GET <a href="http://www.google.com/complete/search?client=chrome-omni&amp;gs_ri=chrome-ext&amp;xssi=t&amp;q=www.google&amp;oit=3&amp;cp=10&amp;pgcl=7&amp;sugkey=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw" rel="nofollow">http://www.google.com/complete/search?client=chrome-omni&amp;gs_ri=chrome-ext&amp;xssi=t&amp;q=www.google&amp;oit=3&amp;cp=10&amp;pgcl=7&amp;sugkey=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw</a> HTTP/1.1&quot; 301 0
+INFO - [Mar  2 21:03:35] 127.0.0.1:49263 &quot;MOCK GET <a href="http://www.google.com/complete/search?client=chrome-omni&amp;gs_ri=chrome-ext&amp;xssi=t&amp;q=www.google.&amp;oit=3&amp;cp=11&amp;pgcl=7&amp;sugkey=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw" rel="nofollow">http://www.google.com/complete/search?client=chrome-omni&amp;gs_ri=chrome-ext&amp;xssi=t&amp;q=www.google.&amp;oit=3&amp;cp=11&amp;pgcl=7&amp;sugkey=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw</a> HTTP/1.1&quot; 301 0
+INFO - [Mar  2 21:03:35] 127.0.0.1:49264 &quot;MOCK GET <a href="http://www.google.com/complete/search?client=chrome-omni&amp;gs_ri=chrome-ext&amp;xssi=t&amp;q=www.google.c&amp;oit=1&amp;cp=12&amp;pgcl=7&amp;sugkey=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw" rel="nofollow">http://www.google.com/complete/search?client=chrome-omni&amp;gs_ri=chrome-ext&amp;xssi=t&amp;q=www.google.c&amp;oit=1&amp;cp=12&amp;pgcl=7&amp;sugkey=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw</a> HTTP/1.1&quot; 301 0
+INFO - [Mar  2 21:03:35] 127.0.0.1:49265 &quot;MOCK GET <a href="http://www.google.com/complete/search?client=chrome-omni&amp;gs_ri=chrome-ext&amp;xssi=t&amp;q=www.google.co&amp;oit=3&amp;cp=13&amp;pgcl=7&amp;sugkey=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw" rel="nofollow">http://www.google.com/complete/search?client=chrome-omni&amp;gs_ri=chrome-ext&amp;xssi=t&amp;q=www.google.co&amp;oit=3&amp;cp=13&amp;pgcl=7&amp;sugkey=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw</a> HTTP/1.1&quot; 301 0
+INFO - [Mar  2 21:03:35] 127.0.0.1:49266 &quot;MOCK GET <a href="http://www.google.com/complete/search?client=chrome-omni&amp;gs_ri=chrome-ext&amp;xssi=t&amp;q=www.google.com&amp;oit=3&amp;cp=14&amp;pgcl=7&amp;sugkey=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw" rel="nofollow">http://www.google.com/complete/search?client=chrome-omni&amp;gs_ri=chrome-ext&amp;xssi=t&amp;q=www.google.com&amp;oit=3&amp;cp=14&amp;pgcl=7&amp;sugkey=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw</a> HTTP/1.1&quot; 301 0
+INFO - [Mar  2 21:03:36] ssl good_ipaddrs=0, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Mar  2 21:04:17] extend_iplist start for hosts=['www.google.com', 'mail.google.com', 'www.google.com.hk', 'www.google.com.tw', 'www.l.google.com', 'www2.l.google.com', 'www3.l.google.com', 'www4.l.google.com', 'www5.l.google.com', 'mail.l.google.com', 'googleapis.l.google.com', 'googlecode.l.googleusercontent.com', 'maps.l.google.com', 'code.l.google.com', 'cert-test.sandbox.google.com']
+INFO - [Mar  2 21:04:27] 127.0.0.1:49326 &quot;STRIP CONNECT clients2.google.com:443 HTTP/1.1&quot; - -
+WARNING - [Mar  2 21:04:27] create_ssl_connection to 'www.google.com' with [('64.233.186.83', 443), ('173.194.127.84', 443), ('74.125.24.18', 443), ('173.194.127.226', 443), ('216.58.209.165', 443), ('173.194.127.230', 443), ('173.194.127.24', 443), ('173.194.127.17', 443), ('64.233.186.19', 443), ('74.125.24.17', 443), ('173.194.127.224', 443), ('173.194.127.31', 443), ('173.194.127.228', 443), ('64.233.186.18', 443), ('74.125.24.18', 443), ('173.194.127.83', 443), ('74.125.24.83', 443), ('173.194.127.230', 443), ('216.58.209.165', 443), ('173.194.127.229', 443), ('74.125.24.19', 443)] return ['EOF occurred in violation of protocol (_ssl.c:581)', 'timed out', &quot;('The handshake operation timed out',)&quot;], try again.
+INFO - [Mar  2 21:04:27] ssl good_ipaddrs=0, bad_ipaddrs=18, unknown_ipaddrs=0
+INFO - [Mar  2 21:04:27] 127.0.0.1:49357 &quot;MOCK GET <a href="http://www.gstatic.com/generate_204" rel="nofollow">http://www.gstatic.com/generate_204</a> HTTP/1.1&quot; 301 0
+INFO - [Mar  2 21:04:27] 127.0.0.1:49417 &quot;STRIP CONNECT www.gstatic.com:443 HTTP/1.1&quot; - -
+INFO - [Mar  2 21:04:27] 127.0.0.1:49418 &quot;STRIP CONNECT www.gstatic.com:443 HTTP/1.1&quot; - -
+INFO - [Mar  2 21:04:27] 127.0.0.1:49419 &quot;STRIP CONNECT www.gstatic.com:443 HTTP/1.1&quot; - -
+INFO - [Mar  2 21:04:27] ssl good_ipaddrs=0, bad_ipaddrs=18, unknown_ipaddrs=0
+INFO - [Mar  2 21:04:38] dnslib_resolve_over_udp remote host='www3.l.google.com' failed: [Errno 11004] getaddrinfo &lt;DNS Header: id=0x9044 type=QUERY opcode=QUERY flags=RD rcode='NOERROR' q=1 a=0 ns=0 ar=0&gt;
+&lt;DNS Question: 'www3.l.google.com.' qtype=A qclass=IN&gt; from ['199.91.73.222'] failed
+INFO - [Mar  2 21:04:38] extend_iplist start for hosts=['www.google.com', 'mail.google.com', 'www.google.com.hk', 'www.google.com.tw', 'www.l.google.com', 'www2.l.google.com', 'www3.l.google.com', 'www4.l.google.com', 'www5.l.google.com', 'mail.l.google.com', 'googleapis.l.google.com', 'googlecode.l.googleusercontent.com', 'maps.l.google.com', 'code.l.google.com', 'cert-test.sandbox.google.com']
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_udp remote host='maps.l.google.com' failed: [Errno 11004] getaddrinfo &lt;DNS Header: id=0xfc52 type=QUERY opcode=QUERY flags=RD rcode='NOERROR' q=1 a=0 ns=0 ar=0&gt;
+&lt;DNS Question: 'maps.l.google.com.' qtype=A qclass=IN&gt; from ['199.91.73.222'] failed
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_udp remote host='www4.l.google.com' failed: [Errno 11004] getaddrinfo &lt;DNS Header: id=0x5c4d type=QUERY opcode=QUERY flags=RD rcode='NOERROR' q=1 a=0 ns=0 ar=0&gt;
+&lt;DNS Question: 'www4.l.google.com.' qtype=A qclass=IN&gt; from ['199.91.73.222'] failed
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_udp remote host='mail.google.com' failed: [Errno 11004] getaddrinfo &lt;DNS Header: id=0x4ab type=QUERY opcode=QUERY flags=RD rcode='NOERROR' q=1 a=0 ns=0 ar=0&gt;
+&lt;DNS Question: 'mail.google.com.' qtype=A qclass=IN&gt; from ['199.91.73.222'] failed
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_udp remote host='mail.l.google.com' failed: [Errno 11004] getaddrinfo &lt;DNS Header: id=0x4dfc type=QUERY opcode=QUERY flags=RD rcode='NOERROR' q=1 a=0 ns=0 ar=0&gt;
+&lt;DNS Question: 'mail.l.google.com.' qtype=A qclass=IN&gt; from ['199.91.73.222'] failed
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_udp remote host='www.l.google.com' failed: [Errno 11004] getaddrinfo &lt;DNS Header: id=0x145f type=QUERY opcode=QUERY flags=RD rcode='NOERROR' q=1 a=0 ns=0 ar=0&gt;
+&lt;DNS Question: 'www.l.google.com.' qtype=A qclass=IN&gt; from ['199.91.73.222'] failed
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_udp remote host='maps.l.google.com' failed: [Errno 11004] getaddrinfo &lt;DNS Header: id=0x48f type=QUERY opcode=QUERY flags=RD rcode='NOERROR' q=1 a=0 ns=0 ar=0&gt;
+&lt;DNS Question: 'maps.l.google.com.' qtype=A qclass=IN&gt; from ['168.95.1.1'] failed
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_udp remote host='code.l.google.com' failed: [Errno 11004] getaddrinfo &lt;DNS Header: id=0x6988 type=QUERY opcode=QUERY flags=RD rcode='NOERROR' q=1 a=0 ns=0 ar=0&gt;
+&lt;DNS Question: 'code.l.google.com.' qtype=A qclass=IN&gt; from ['199.91.73.222'] failed
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_udp remote host='googlecode.l.googleusercontent.com' failed: [Errno 11004] getaddrinfo &lt;DNS Header: id=0x6256 type=QUERY opcode=QUERY flags=RD rcode='NOERROR' q=1 a=0 ns=0 ar=0&gt;
+&lt;DNS Question: 'googlecode.l.googleusercontent.com.' qtype=A qclass=IN&gt; from ['199.91.73.222'] failed
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_udp remote host='googleapis.l.google.com' failed: [Errno 11004] getaddrinfo &lt;DNS Header: id=0x5600 type=QUERY opcode=QUERY flags=RD rcode='NOERROR' q=1 a=0 ns=0 ar=0&gt;
+&lt;DNS Question: 'googleapis.l.google.com.' qtype=A qclass=IN&gt; from ['199.91.73.222'] failed
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_udp remote host='www2.l.google.com' failed: [Errno 11004] getaddrinfo &lt;DNS Header: id=0x20ec type=QUERY opcode=QUERY flags=RD rcode='NOERROR' q=1 a=0 ns=0 ar=0&gt;
+&lt;DNS Question: 'www2.l.google.com.' qtype=A qclass=IN&gt; from ['199.91.73.222'] failed
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_udp remote host='www5.l.google.com' failed: [Errno 11004] getaddrinfo &lt;DNS Header: id=0xd2bf type=QUERY opcode=QUERY flags=RD rcode='NOERROR' q=1 a=0 ns=0 ar=0&gt;
+&lt;DNS Question: 'www5.l.google.com.' qtype=A qclass=IN&gt; from ['199.91.73.222'] failed
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_udp remote host='www2.l.google.com' failed: [Errno 11004] getaddrinfo &lt;DNS Header: id=0xccbd type=QUERY opcode=QUERY flags=RD rcode='NOERROR' q=1 a=0 ns=0 ar=0&gt;
+&lt;DNS Question: 'www2.l.google.com.' qtype=A qclass=IN&gt; from ['178.79.131.110'] failed
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_udp remote host='googleapis.l.google.com' failed: [Errno 11004] getaddrinfo &lt;DNS Header: id=0x1f81 type=QUERY opcode=QUERY flags=RD rcode='NOERROR' q=1 a=0 ns=0 ar=0&gt;
+&lt;DNS Question: 'googleapis.l.google.com.' qtype=A qclass=IN&gt; from ['127.0.0.54'] failed
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_udp remote host='cert-test.sandbox.google.com' failed: [Errno 11004] getaddrinfo &lt;DNS Header: id=0x56c9 type=QUERY opcode=QUERY flags=RD rcode='NOERROR' q=1 a=0 ns=0 ar=0&gt;
+&lt;DNS Question: 'Cert-Test.Sandbox.Google.Com.' qtype=A qclass=IN&gt; from ['8.8.8.8'] failed
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_udp remote host='googleapis.l.google.com' failed: [Errno 11004] getaddrinfo &lt;DNS Header: id=0xf9cc type=QUERY opcode=QUERY flags=RD rcode='NOERROR' q=1 a=0 ns=0 ar=0&gt;
+&lt;DNS Question: 'googleapis.l.google.com.' qtype=A qclass=IN&gt; from ['168.95.1.1'] failed
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_udp remote host='www.google.com' failed: [Errno 11004] getaddrinfo &lt;DNS Header: id=0xd2bb type=QUERY opcode=QUERY flags=RD rcode='NOERROR' q=1 a=0 ns=0 ar=0&gt;
+&lt;DNS Question: 'www.google.com.' qtype=A qclass=IN&gt; from ['168.95.192.1'] failed
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_udp remote host='googlecode.l.googleusercontent.com' failed: [Errno 11004] getaddrinfo &lt;DNS Header: id=0x115a type=QUERY opcode=QUERY flags=RD rcode='NOERROR' q=1 a=0 ns=0 ar=0&gt;
+&lt;DNS Question: 'googlecode.l.googleusercontent.com.' qtype=A qclass=IN&gt; from ['178.79.131.110'] failed
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_udp remote host='www.google.com' failed: [Errno 11004] getaddrinfo &lt;DNS Header: id=0x1b61 type=QUERY opcode=QUERY flags=RD rcode='NOERROR' q=1 a=0 ns=0 ar=0&gt;
+&lt;DNS Question: 'www.google.com.' qtype=A qclass=IN&gt; from ['199.91.73.222'] failed
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_udp remote host='www.google.com.hk' failed: [Errno 11004] getaddrinfo &lt;DNS Header: id=0x4556 type=QUERY opcode=QUERY flags=RD rcode='NOERROR' q=1 a=0 ns=0 ar=0&gt;
+&lt;DNS Question: 'www.google.com.hk.' qtype=A qclass=IN&gt; from ['199.91.73.222'] failed
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_udp remote host='www.google.com.tw' failed: [Errno 11004] getaddrinfo &lt;DNS Header: id=0x8881 type=QUERY opcode=QUERY flags=RD rcode='NOERROR' q=1 a=0 ns=0 ar=0&gt;
+&lt;DNS Question: 'www.google.com.tw.' qtype=A qclass=IN&gt; from ['199.91.73.222'] failed
+WARNING - [Mar  2 21:06:21] create_ssl_connection to 'www.google.com' with [('173.194.127.233', 443), ('173.194.72.83', 443), ('173.194.127.23', 443), ('173.194.72.19', 443), ('216.58.218.197', 443), ('173.194.127.80', 443), ('173.194.127.231', 443), ('216.58.209.133', 443), ('64.233.186.19', 443), ('216.58.209.165', 443), ('64.233.186.18', 443), ('173.194.127.84', 443), ('74.125.24.18', 443), ('173.194.127.226', 443), ('173.194.127.230', 443), ('173.194.127.24', 443), ('216.58.209.165', 443), ('173.194.72.19', 443), ('173.194.127.233', 443), ('74.125.24.19', 443), ('173.194.127.17', 443), ('173.194.127.231', 443), ('173.194.127.31', 443), ('74.125.24.83', 443)] return ['EOF occurred in violation of protocol (_ssl.c:581)', 'timed out'], try again.
+INFO - [Mar  2 21:06:21] ssl good_ipaddrs=0, bad_ipaddrs=33, unknown_ipaddrs=0
+WARNING - [Mar  2 21:06:21] create_ssl_connection to 'www.gstatic.com' with [('173.194.127.81', 443), ('173.194.72.83', 443), ('216.58.209.133', 443), ('173.194.127.82', 443), ('173.194.127.18', 443), ('216.58.217.37', 443), ('173.194.127.231', 443), ('64.233.186.19', 443), ('216.58.209.165', 443), ('64.233.186.18', 443), ('173.194.127.84', 443), ('74.125.24.18', 443), ('173.194.127.226', 443), ('173.194.127.230', 443), ('173.194.127.18', 443), ('64.233.186.19', 443), ('216.58.209.101', 443), ('173.194.72.18', 443), ('64.233.186.83', 443), ('74.125.24.19', 443), ('173.194.127.238', 443)] return ['EOF occurred in violation of protocol (_ssl.c:581)', 'timed out'], try again.
+INFO - [Mar  2 21:06:21] ssl good_ipaddrs=0, bad_ipaddrs=33, unknown_ipaddrs=0
+WARNING - [Mar  2 21:06:21] dnslib_resolve_over_tcp 'www.google.com.tw' with ['208.67.220.220'] return gaierror(11004, &quot;getaddrinfo &lt;DNSLabel: 'www.google.com.tw.'&gt; from '208.67.220.220' failed&quot;)
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_tcp remote host='www.google.com.tw' failed: [Errno 11004] getaddrinfo 'www.google.com.tw' from ['208.67.220.220'] failed
+WARNING - [Mar  2 21:06:21] dnslib_resolve_over_tcp 'code.l.google.com' with ['223.5.5.5'] return gaierror(11004, &quot;getaddrinfo &lt;DNSLabel: 'code.l.google.com.'&gt; from '223.5.5.5' failed&quot;)
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_tcp remote host='code.l.google.com' failed: [Errno 11004] getaddrinfo 'code.l.google.com' from ['223.5.5.5'] failed
+WARNING - [Mar  2 21:06:21] dnslib_resolve_over_tcp 'www2.l.google.com' with ['168.95.192.1'] return gaierror(11004, &quot;getaddrinfo &lt;DNSLabel: 'www2.l.google.com.'&gt; from '168.95.192.1' failed&quot;)
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_tcp remote host='www2.l.google.com' failed: [Errno 11004] getaddrinfo 'www2.l.google.com' from ['168.95.192.1'] failed
+WARNING - [Mar  2 21:06:21] dnslib_resolve_over_tcp 'www.google.com' with ['168.95.1.1'] return gaierror(11004, &quot;getaddrinfo &lt;DNSLabel: 'www.google.com.'&gt; from '168.95.1.1' failed&quot;)
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_tcp remote host='www.google.com' failed: [Errno 11004] getaddrinfo 'www.google.com' from ['168.95.1.1'] failed
+WARNING - [Mar  2 21:06:21] dnslib_resolve_over_tcp 'www2.l.google.com' with ['8.8.8.8'] return gaierror(11004, &quot;getaddrinfo &lt;DNSLabel: 'www2.l.google.com.'&gt; from '8.8.8.8' failed&quot;)
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_tcp remote host='www2.l.google.com' failed: [Errno 11004] getaddrinfo 'www2.l.google.com' from ['8.8.8.8'] failed
+WARNING - [Mar  2 21:06:21] dnslib_resolve_over_tcp 'maps.l.google.com' with ['223.6.6.6'] return gaierror(11004, &quot;getaddrinfo &lt;DNSLabel: 'maps.l.google.com.'&gt; from '223.6.6.6' failed&quot;)
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_tcp remote host='maps.l.google.com' failed: [Errno 11004] getaddrinfo 'maps.l.google.com' from ['223.6.6.6'] failed
+WARNING - [Mar  2 21:06:21] dnslib_resolve_over_tcp 'www4.l.google.com' with ['223.5.5.5'] return gaierror(11004, &quot;getaddrinfo &lt;DNSLabel: 'www4.l.google.com.'&gt; from '223.5.5.5' failed&quot;)
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_tcp remote host='www4.l.google.com' failed: [Errno 11004] getaddrinfo 'www4.l.google.com' from ['223.5.5.5'] failed
+WARNING - [Mar  2 21:06:21] dnslib_resolve_over_tcp 'www3.l.google.com' with ['168.95.1.1'] return gaierror(11004, &quot;getaddrinfo &lt;DNSLabel: 'www3.l.google.com.'&gt; from '168.95.1.1' failed&quot;)
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_tcp remote host='www3.l.google.com' failed: [Errno 11004] getaddrinfo 'www3.l.google.com' from ['168.95.1.1'] failed
+WARNING - [Mar  2 21:06:21] dnslib_resolve_over_tcp 'mail.google.com' with ['208.67.220.220'] return gaierror(11004, &quot;getaddrinfo &lt;DNSLabel: 'mail.google.com.'&gt; from '208.67.220.220' failed&quot;)
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_tcp remote host='mail.google.com' failed: [Errno 11004] getaddrinfo 'mail.google.com' from ['208.67.220.220'] failed
+WARNING - [Mar  2 21:06:21] dnslib_resolve_over_tcp 'mail.l.google.com' with ['8.8.4.4'] return gaierror(11004, &quot;getaddrinfo &lt;DNSLabel: 'mail.l.google.com.'&gt; from '8.8.4.4' failed&quot;)
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_tcp remote host='mail.l.google.com' failed: [Errno 11004] getaddrinfo 'mail.l.google.com' from ['8.8.4.4'] failed
+WARNING - [Mar  2 21:06:21] dnslib_resolve_over_tcp 'www.google.com' with ['8.8.8.8'] return gaierror(11004, &quot;getaddrinfo &lt;DNSLabel: 'www.google.com.'&gt; from '8.8.8.8' failed&quot;)
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_tcp remote host='www.google.com' failed: [Errno 11004] getaddrinfo 'www.google.com' from ['8.8.8.8'] failed
+WARNING - [Mar  2 21:06:21] dnslib_resolve_over_tcp 'www.google.com' with ['223.5.5.5'] return timeout('timed out',)
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_tcp remote host='www.google.com' failed: [Errno 11004] getaddrinfo 'www.google.com' from ['223.5.5.5'] failed
+WARNING - [Mar  2 21:06:21] dnslib_resolve_over_tcp 'www.google.com.tw' with ['209.244.0.3'] return timeout('timed out',)
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_tcp remote host='www.google.com.tw' failed: [Errno 11004] getaddrinfo 'www.google.com.tw' from ['209.244.0.3'] failed
+WARNING - [Mar  2 21:06:21] dnslib_resolve_over_tcp 'www.l.google.com' with ['223.5.5.5'] return timeout('timed out',)
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_tcp remote host='www.l.google.com' failed: [Errno 11004] getaddrinfo 'www.l.google.com' from ['223.5.5.5'] failed
+WARNING - [Mar  2 21:06:21] dnslib_resolve_over_tcp 'www3.l.google.com' with ['223.5.5.5'] return timeout('timed out',)
+INFO - [Mar  2 21:06:21] dnslib_resolve_over_tcp remote host='www3.l.google.com' failed: [Errno 11004] getaddrinfo 'www3.l.google.com' from ['223.5.5.5'] failed
+WARNING - [Mar  2 21:06:21] dnslib_resolve_over_tcp 'maps.l.google.com' with ['223.5.5.5'] return timeout('timed out',)
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar  2 21:41:25 2015">
+ Mar 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=19866#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/117501269680672543978/">hbklo...@gmail.com</a
+></span>
+ 
+<pre>
+续写日志：
+INFO - [Mar  2 21:38:19] dnslib_resolve_over_tcp remote host='mail.l.google.com' failed: [Errno 11004] getaddrinfo 'mail.l.google.com' from ['178.79.131.110'] failed
+Traceback (most recent call last):
+  File &quot;/Library/Python/2.7/site-packages/gevent/greenlet.py&quot;, line 327, in run
+    result = self._run(*self.args, **self.kwargs)
+  File &quot;/Volumes/DATA/chromewall/goagent/local/proxylib.py&quot;, line 694, in do_resolve
+    record = dnslib.DNSRecord.parse(reply_data)
+  File &quot;./packages.egg/noarch/dnslib/dns.py&quot;, line 109, in parse
+    ar.append(RR.parse(buffer))
+  File &quot;./packages.egg/noarch/dnslib/dns.py&quot;, line 758, in parse
+    buffer.offset,e))
+DNSError: Error unpacking RR [offset=49]: Invalid pointer in DNSLabel [offset=49,pointer=7418,length=222]
+&lt;Greenlet at 0x101d04c30: do_resolve('www.google.com.hk', '192.168.164.2', 4, &lt;Queue.Queue instance at 0x1020e48c0&gt;)&gt; failed with DNSError
+
+WARNING - [Mar  2 21:39:21] bad IP: ('74.125.11.9', 443) (SSLEOFError(8, u'EOF occurred in violation of protocol (_ssl.c:581)'))
+WARNING - [Mar  2 21:40:22] bad IP: ('74.125.11.9', 443) (SSLEOFError(8, u'EOF occurred in violation of protocol (_ssl.c:581)'))
+WARNING - [Mar  2 21:41:23] bad IP: ('74.125.11.9', 443) (SSLEOFError(8, u'EOF occurred in violation of protocol (_ssl.c:581)'))
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar  2 21:45:42 2015">
+ Mar 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=19866#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/117501269680672543978/">hbklo...@gmail.com</a
+></span>
+ 
+<pre>
+INFO - [Mar  2 21:44:42] ssl good_ipaddrs=0, bad_ipaddrs=118, unknown_ipaddrs=79
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun 15 20:24:11 2015">
+ Today (9 hours ago)
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=19866#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/110831909654709713686/">fangpeng...@gmail.com</a
+></span>
+ 
+<pre>
+python 2.7.9 应该修改了ssl相关的东西。你还是安装python 2.7.8吧。 这个能用，我的mac上就用的2.7.8
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19866&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19866"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="19866">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A19866',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 19866,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

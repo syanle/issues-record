@@ -1,0 +1,3013 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ (function(){(function(){function c(a){this.t={};this.tick=function(a,b,c){b=void 0!=c?c:(new Date).getTime();this.t[a]=b;if(void 0==c)try{window.console.timeStamp("CSI/"+a)}catch(d){}};this.tick("start",null,a)}var a;window.performance&&(a=window.performance.timing);var b=a?new c(a.responseStart):new c;window.jstiming={Timer:c,load:b};a&&(b=a.navigationStart,a=a.responseStart,0<b&&a>=b&&(window.jstiming.srt=a-b));try{a=null,window.chrome&&window.chrome.csi&&(a=Math.floor(window.chrome.csi().pageT)),null==a&&
+window.gtbExternal&&(a=window.gtbExternal.pageT()),null==a&&window.external&&(a=window.external.pageT),a&&(window.jstiming.pt=a)}catch(d){}})();})();
+
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "relativeBaseUrl": "", "loggedInUserEmail": null, "projectName": "goagent", "projectHomeUrl": "/p/goagent", "token": null, "profileUrl": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 20453 - 
+ goagent -
+ 
+ 发现一个比搬瓦工更划算的VPS，附ShadowSocks在Debian / Ubuntu VPS的安装方法 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20453&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20453" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=20453">20453</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >发现一个比搬瓦工更划算的VPS，附ShadowSocks在Debian / Ubuntu VPS的安装方法</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 11 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A20453">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20453&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20453">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+>,
+ <span class="date" title="Mon Apr 27 06:26:23 2015">Apr 27, 2015</span>
+ 
+ </div>
+<pre>
+本人在已购买搬瓦工18.99美元的VPS的前提下，不小心发现了下面这个VPS，还是很给力的，至少对于程序员的我来说，还是很划算的，虽然大多数小伙伴如果只是拿来翻~@!@!墙用，可能有点大材小用，不过如果你是程序员，我强力推荐！是真的四核，我现在写程序都直接在上面测试了，同时拿来科学上网！廉价VPS里有多核CPU的配置不多哦，要珍惜～
+
+购买的时候请使用这个链接注册用户并购买：<a href="https://www.alpharacks.com/myrack/aff.php?aff=096" rel="nofollow">https://www.alpharacks.com/myrack/aff.php?aff=096</a>
+
+1、AlphaRacks.com（俗称“阿尔发”）
+==============================================
+
+费用（年付） 	  配置 	   购买链接
+
+12 $   2核CPU、768MB内存、40GB硬盘、2000GB流量/月、端口1000Mbps、1 独立IP
+<a href="https://www.alpharacks.com/myrack/cart.php?a=confproduct&amp;aff=096&amp;i=0" rel="nofollow">https://www.alpharacks.com/myrack/cart.php?a=confproduct&amp;aff=096&amp;i=0</a>
+
+18 $   4核CPU、1024MB内存、60GB硬盘、3000GB流量/月、端口1000Mbps、1独立IP
+<a href="https://www.alpharacks.com/myrack/cart.php?a=confproduct&amp;aff=096&amp;i=1" rel="nofollow">https://www.alpharacks.com/myrack/cart.php?a=confproduct&amp;aff=096&amp;i=1</a>
+
+IP地址：198.55.111.5
+
+
+2、BandwagonHost.com（俗称“搬瓦工”）
+==============================================
+
+费用（年付） 	  配置 	   购买链接
+
+3.99 $ 	单核、64M内存、100GB流量/月、1.5GB HDD硬
+<a href="https://bandwagonhost.com/aff.php?aff=2927&amp;pid=19" rel="nofollow">https://bandwagonhost.com/aff.php?aff=2927&amp;pid=19</a>
+
+4.99 $ 	单核、96M内存、200GB流量/月、2GB HDD硬盘
+<a href="https://bandwagonhost.com/aff.php?aff=2927&amp;pid=20" rel="nofollow">https://bandwagonhost.com/aff.php?aff=2927&amp;pid=20</a>
+
+5.99 $ 	单核、128M内存、300GB流量/月、3GB HDD硬盘
+<a href="https://bandwagonhost.com/aff.php?aff=2927&amp;pid=21" rel="nofollow">https://bandwagonhost.com/aff.php?aff=2927&amp;pid=21</a>
+
+9.99 $ 	单核、512M内存、500GB流量/月、5GB SSD硬盘、1 独立IP
+<a href="https://bandwagonhost.com/aff.php?aff=2927&amp;pid=22" rel="nofollow">https://bandwagonhost.com/aff.php?aff=2927&amp;pid=22</a>
+
+11.99 $  单核、512M内存、1000GB流量/月、10GB SSD硬盘、1 独立IP
+<a href="https://bandwagonhost.com/aff.php?aff=2927&amp;pid=27" rel="nofollow">https://bandwagonhost.com/aff.php?aff=2927&amp;pid=27</a>
+
+18.99 $  单核、1024M内存、2000GB流量/月、20GB SSD硬盘、1 独立IP
+<a href="https://bandwagonhost.com/aff.php?aff=2927&amp;pid=28" rel="nofollow">https://bandwagonhost.com/aff.php?aff=2927&amp;pid=28</a>
+
+数据中心IP测试：
+
+洛杉矶：104.194.78.3 / 凤凰城：198.35.46.2 / 佛罗里达：74.121.150.3
+
+============================================================
+附：ShadowSocks 在 Debian/Ubuntu VPS 里的安装方法
+(本人整理，现在在VPS里安装ShadowSocks不超过2分钟即可搞定，强力推荐)
+
+<a href="http://yunfast.com/html/shadowsocks.html" rel="nofollow">http://yunfast.com/html/shadowsocks.html</a>
+
+本来还想写下关于ShadowSocks客户端的使用的，请先看文章后面推荐的第一篇文章，精力有限，有空我再整理出来，还有 SSH 或 PuTTY 连接VPS的介绍文章，由于我也是刚接触，虽然已经会用了，有时间再整理出来跟大家分享。
+
+至于我的 ShadowSocks 我就不分享了，反正搬瓦工和AlphaRacks.com上面我都装了，实在想使用的朋友可以私密我，或者在这里留言。前面或者附文里有搬瓦工和AlphaRacks.com的测试IP地址，可以自己试试。
+
+想要测试下载速度的可以自己到首页试试（千万不要滥下哦，否则我会关掉这个页面的）：
+
+<a href="http://yunfast.com/" rel="nofollow">http://yunfast.com/</a>
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 27 06:31:12 2015">
+ Apr 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=20453#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+笔误,是试用.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 27 07:32:15 2015">
+ Apr 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=20453#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+如果 AlphaRacks.com（俗称“阿尔发”）的链接显示不正确的话, 可以试试下面这个:
+(我发现有时候会显示所有的产品列表)
+
+12 $   2核CPU、768MB内存、40GB硬盘、2000GB流量/月、端口1000Mbps、1 独立IP
+<a href="https://www.alpharacks.com/myrack/cart.php?a=confproduct&amp;i=0" rel="nofollow">https://www.alpharacks.com/myrack/cart.php?a=confproduct&amp;i=0</a>
+
+18 $   4核CPU、1024MB内存、60GB硬盘、3000GB流量/月、端口1000Mbps、1独立IP
+<a href="https://www.alpharacks.com/myrack/cart.php?a=confproduct&amp;i=1" rel="nofollow">https://www.alpharacks.com/myrack/cart.php?a=confproduct&amp;i=1</a>
+
+atff的参数是我自己加的, 可能是无用的.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 27 07:35:27 2015">
+ Apr 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=20453#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+还有一点要注意, AlphaRacks.com 的操作系统必须在你购买的时候就选正确, 一旦选了, 后台可能无法更换别的OS, 也许可以, 但可能要联系客服, 比较麻烦, 这个是跟搬瓦工有区别的, 搬瓦工随时都可以自己切换, 切记.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 27 18:24:36 2015">
+ Apr 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=20453#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+比较推荐购买搬瓦工的9.99美元的那款, 11.99, 18.99美元的都不能自由切换机房, 而低于或等于9.99美元的都可以自由切换, 另外, 只有9.99, 11.99, 18.99美元的才有独立ip, 所以综合考虑, 不推荐购买内存太小的, 至少256MB或256MB以上, 不过如果想尝试一下, 也未尝不可. 支付的话, 可以先注册一个PayPal, PayPal支持银联卡付款, 如果不会操作的话, 请先百度或Google.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 27 18:47:21 2015">
+ Apr 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=20453#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/109633180941756257112/">g.tonyc...@gmail.com</a
+></span>
+ 
+<pre>
+g.tonycody@gmail.com 求联系！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 27 19:18:01 2015">
+ Apr 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=20453#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+测试服务器信息已发送到你的gmail邮箱, 请查收.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 27 19:22:15 2015">
+ Apr 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=20453#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/110747678775354942884/">alvinlee...@gmail.com</a
+></span>
+ 
+<pre>
+alvinleelwz#gmail.com 求阿尔法测试信息~
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 27 19:26:49 2015">
+ Apr 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=20453#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/100279504164328588585/">feng0ch...@gmail.com</a
+></span>
+ 
+<pre>
+感谢，保存备用。已购搬瓦工5.99刀那款，就是晚上经常手机连不上，其他还好
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 27 19:34:11 2015">
+ Apr 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=20453#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+@7楼:
+已发送到你的gmail, 好像阿尔法的有点异常, 不过两个我都发了, 你可以试试. (看来公开还是有风险的...., 我把下载的内容先关掉再说....)
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 27 20:09:57 2015">
+ Apr 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=20453#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+阿尔法的重启了一下, 恢复正常了.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 27 20:15:51 2015">
+ Apr 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=20453#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+@12楼:
+速度是差不多的, 各有千秋, 好也好不到哪去, 关键是4核的而已, 这个是优势, 邮件已发.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 27 20:18:34 2015">
+ Apr 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=20453#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+阿尔法的重启一下后, 速度飞快, 不过高峰期都差不多的.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 27 20:30:26 2015">
+ Apr 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=20453#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/114033169287966003070/">redfrog...@gmail.com</a
+></span>
+ 
+<pre>
+感谢楼主，晚高峰来测试，现在测试没什么意义。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 27 20:51:33 2015">
+ Apr 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=20453#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+楼上的, 你很聪明哦, 还会删comment, 我说怎么没看到你前面的发言...
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 27 22:35:01 2015">
+ Apr 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=20453#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/109187213000209224529/">darkred...@gmail.com</a
+></span>
+ 
+<pre>
+#4 搬瓦工全部方案都有独立ip的，3.99包年的照样有
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 27 23:28:05 2015">
+ Apr 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=20453#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+撸主没搞清楚吧，阿尔法的SWAP虚拟内存怎么能够算作物理内存？物理内存根本就没有你宣称的那么多
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 27 23:49:36 2015">
+ Apr 27, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=20453#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+@18楼:
+swap是swap, 物理内存是物理内存, 是分开的, 阿尔法也并没有把两者合并起来, 只是给的swap大一点而已, swap是在硬盘上的, 阿尔法的是HDD硬盘, 自然愿意给大一点给你, 搬瓦工高级一点的都是SSD的硬盘.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 28 09:40:00 2015">
+ Apr 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=20453#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+明天换密码~~~
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 28 10:51:29 2015">
+ Apr 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=20453#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/115939226528696880527/">nikky201...@gmail.com</a
+></span>
+ 
+<pre>
+日本不是有个免费的VPN么？速度超快啊
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 28 11:14:56 2015">
+ Apr 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=20453#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+免费? 收费的我倒是知道...
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 28 12:02:53 2015">
+ Apr 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=20453#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/115939226528696880527/">nikky201...@gmail.com</a
+></span>
+ 
+<pre>
+完全免费的啊，速度比goa快多了！
+<a href="http://www.vpngate.net/en/download.aspx" rel="nofollow">http://www.vpngate.net/en/download.aspx</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 28 12:07:07 2015">
+ Apr 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=20453#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/115939226528696880527/">nikky201...@gmail.com</a
+></span>
+ 
+<pre>
+win7、win8先管理员运行安装！安装后桌面图标属性、兼容性、点选以管理员运行。打开之后双击VPN gate中继服务器，随便进一个，以后记得刷新列表
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 28 12:10:09 2015">
+ Apr 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=20453#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/115939226528696880527/">nikky201...@gmail.com</a
+></span>
+ 
+<pre>
+他们也有用户论坛不过是中、英、日等语共用的
+<a href="http://forum.vpngate.net/viewforum.php?f=11&amp;sid=326b2fdf66bcfd1b3a9f992e339a1c98" rel="nofollow">http://forum.vpngate.net/viewforum.php?f=11&amp;sid=326b2fdf66bcfd1b3a9f992e339a1c98</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc26">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 28 20:55:26 2015">
+ Apr 28, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c26" href="/p/goagent/issues/detail?id=20453#c26">#26</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+感谢提供，不过好像vpn没那么稳定，受干扰的可能性比较大，不过好在是免费的，怕不稳定的话，还是自己架vps安心一点，shadowsocks用得蛮爽的，灵活又安全。（相对比较稳定）
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 30 04:39:33 2015">
+ Apr 30, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=20453#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+有没有人要试用的?
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc29">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 30 04:58:18 2015">
+ Apr 30, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c29" href="/p/goagent/issues/detail?id=20453#c29">#29</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+发你的email出来, 我把地址给你, 然后你再把你回复的内容删掉.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc30">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 30 11:15:09 2015">
+ Apr 30, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c30" href="/p/goagent/issues/detail?id=20453#c30">#30</a>
+ 
+
+ <a class="userlink"
+ href="/u/104976709471906591089/">BillBob....@gmail.com</a
+></span>
+ 
+<pre>
+billbob.dong@gmail.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc31">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 30 11:36:17 2015">
+ Apr 30, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c31" href="/p/goagent/issues/detail?id=20453#c31">#31</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+@30楼
+
+Email已回复, 你可以把留言删除了.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc33">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 30 12:29:54 2015">
+ Apr 30, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c33" href="/p/goagent/issues/detail?id=20453#c33">#33</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+已发送，请查收，顺便记得删除你的留言，暴露email不太好。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc34">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 30 12:57:56 2015">
+ Apr 30, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c34" href="/p/goagent/issues/detail?id=20453#c34">#34</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+修正一下，阿尔法的两个地址应该是这样比较正确一点，1楼的链接有时候会跳转到不正确的页面上。
+
+12 $   2核CPU、768MB内存、40GB硬盘、2000GB流量/月、端口1000Mbps、1 独立IP
+<a href="https://www.alpharacks.com/myrack/aff.php?aff=096&amp;pid=75" rel="nofollow">https://www.alpharacks.com/myrack/aff.php?aff=096&amp;pid=75</a>
+
+18 $   4核CPU、1024MB内存、60GB硬盘、3000GB流量/月、端口1000Mbps、1独立IP
+<a href="https://www.alpharacks.com/myrack/aff.php?aff=096&amp;pid=76" rel="nofollow">https://www.alpharacks.com/myrack/aff.php?aff=096&amp;pid=76</a>
+
+楼主买的就是四核这款，还是很给力的，如果你不是想玩服务器的话，就随意了，如果你说我是土豪，我不会玩，我也要四核的，那么这个很值得你拥有，宿主的服务器是24核的CPU，可以说基本上CPU是用不完的，网络带宽倒是可能不够用。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc35">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 30 12:59:59 2015">
+ Apr 30, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c35" href="/p/goagent/issues/detail?id=20453#c35">#35</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+阿尔法也是可以自己更换OS操作系统的，只不过默认的后台管理里面没有，你付款后，留意他发给你的E-mail，里面有具体的管理页面，里面可以更换操作系统，如果你不喜欢默认安装的喜欢的话。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc37">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 30 19:41:02 2015">
+ Apr 30, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c37" href="/p/goagent/issues/detail?id=20453#c37">#37</a>
+ 
+
+ <a class="userlink"
+ href="/u/117351052346044382546/">xdm1...@gmail.com</a
+></span>
+ 
+<pre>
+@35楼
+你是说这个
+<a href="https://vpscp.alpharacks.com:5656/" rel="nofollow">https://vpscp.alpharacks.com:5656/</a>
+管理页面可以重装系统吗？我没找到啊。而且现在打不开，客服说在维护。装系统的功能在什么地方？求指点！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc38">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 30 20:13:26 2015">
+ Apr 30, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c38" href="/p/goagent/issues/detail?id=20453#c38">#38</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+嗯, 是这个, 试了一下, 现在还真的进不去, 进去以后, 很容易找到的, 确切一点说是更换OS, 因为换了以后你之前的 VPS 数据将会被删除. 现在进不去我也不方便告诉你, 反正应该很容易找到的.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc39">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 30 20:21:17 2015">
+ Apr 30, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c39" href="/p/goagent/issues/detail?id=20453#c39">#39</a>
+ 
+
+ <a class="userlink"
+ href="/u/117351052346044382546/">xdm1...@gmail.com</a
+></span>
+ 
+<pre>
+@35楼
+那等打得开了我再找找。还有个问题是，Ubuntu下我用useradd -m XXX创建的用户，登陆之后，提示符那一行竟然只有一个“$”，用户名都没显示。手动输入命令没问题，但是粘贴、方向键、删除等操作就显示一些字母、^和[等的组合，很不正常。不知道这是什么问题呢？原谅我Linux学得不多。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc40">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 30 23:39:34 2015">
+ Apr 30, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c40" href="/p/goagent/issues/detail?id=20453#c40">#40</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+其实我也没在终端上添加过用户, 本地的Linux都是用的图形界面, 其实你就用默认的root账号登录就可以了, 密码改一下就可以了, 至于你说的现象, 我也没遇到过, 不过Linux有些时候(前面的命令还没执行完全之前, 或非正常执行的话, 会出现你说的情况), 但一直都是这样就有问题了, 那你现在 /home 目录下面有你新建的用户名的文件夹吗? 例如: /home/new_username, 其实就用root就可以了, 除非你是多人使用的, 不得不分开.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc41">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 30 23:51:16 2015">
+ Apr 30, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c41" href="/p/goagent/issues/detail?id=20453#c41">#41</a>
+ 
+
+ <a class="userlink"
+ href="/u/117351052346044382546/">xdm1...@gmail.com</a
+></span>
+ 
+<pre>
+我只是希望越安全越好，毕竟经常看到有人说自己的SS不能用了。
+home下面有新用户名的目录，但是之前没有，创建的时候加上“-m”才有的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc42">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May  1 00:04:03 2015">
+ May 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c42" href="/p/goagent/issues/detail?id=20453#c42">#42</a>
+ 
+
+ <a class="userlink"
+ href="/u/103558287134590292748/">cautious...@gmail.com</a
+></span>
+ 
+<pre>
+搬瓦工的速度太慢了，尤其是电信网络
+不过搬瓦工的一键SS确实很方便，新手也不怕
+楼主介绍的能够一键SS吗
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc43">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May  1 00:28:14 2015">
+ May 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c43" href="/p/goagent/issues/detail?id=20453#c43">#43</a>
+ 
+
+ <a class="userlink"
+ href="/u/117351052346044382546/">xdm1...@gmail.com</a
+></span>
+ 
+<pre>
+不能，但是也不难
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc44">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May  1 03:54:04 2015">
+ May 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c44" href="/p/goagent/issues/detail?id=20453#c44">#44</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+@42楼
+
+有必要一键吗, 自己也弄不过两分钟的事情....
+就想自己弄VPS一样, 我们要把主动权握在自己手上.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc45">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May  1 05:29:02 2015">
+ May 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c45" href="/p/goagent/issues/detail?id=20453#c45">#45</a>
+ 
+
+ <a class="userlink"
+ href="/u/103558287134590292748/">cautious...@gmail.com</a
+></span>
+ 
+<pre>
+楼上的朋友
+自己搞SS难度高不高？比搞gae复杂许多吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc46">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May  1 06:06:26 2015">
+ May 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c46" href="/p/goagent/issues/detail?id=20453#c46">#46</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+简单得一比, 如果你选的是Ubuntu系统, 装一个SS就是两三分钟的事情, 如果是CentOS也是类似的, 把apt-get命令换成yum就可以了. 如果是Windows下登录VPS, 你只需要搜索引擎搜索一下 &quot;PuTTY 登录&quot;, 就可以了, 能登录VPS以后, 就是按照教程敲命令就好了.
+
+可能比较麻烦的是使用PayPal支付的问题, 有信用卡比较方便一点, 没信用卡开了银联估计也简单.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc47">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May  1 07:20:39 2015">
+ May 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c47" href="/p/goagent/issues/detail?id=20453#c47">#47</a>
+ 
+
+ <a class="userlink"
+ href="/u/101508781600430255624/">aotia...@gmail.com</a
+></span>
+ 
+<pre>
+我是偶然到这里的,这个是拿来干什么的?
+翻墙?
+看着感觉可以发布网站的样子
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc48">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May  1 22:44:29 2015">
+ May 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c48" href="/p/goagent/issues/detail?id=20453#c48">#48</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+测试的朋友请注意, 密码已更换, 建议还是自己装一个.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc49">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May  2 04:08:01 2015">
+ May 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c49" href="/p/goagent/issues/detail?id=20453#c49">#49</a>
+ 
+
+ <a class="userlink"
+ href="/u/107412119390452586134/">gre...@gmail.com</a
+></span>
+ 
+<pre>
+我其实就是想知道速度怎么样，快不快
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc50">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May  2 05:48:35 2015">
+ May 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c50" href="/p/goagent/issues/detail?id=20453#c50">#50</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+一般般吧，有时候很快，有时候一般，相对来说就是比较安心，不用担心IP不能用。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc51">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May  2 06:03:58 2015">
+ May 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c51" href="/p/goagent/issues/detail?id=20453#c51">#51</a>
+ 
+
+ <a class="userlink"
+ href="/u/107121900814243594035/">MarkHun...@gmail.com</a
+></span>
+ 
+<pre>
+为什么我在bandwagonhost上面找不到这么便谊的套餐？18.99美元一年的？到底是怎么找出来的？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc52">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May  2 07:42:58 2015">
+ May 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c52" href="/p/goagent/issues/detail?id=20453#c52">#52</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+嗯, 搬瓦工主页直接找是找不到的, 这个是推荐的才有, 或者说是隐藏版, 其实他是有的, 只是不显示在官网的主页上而已. 可能还是想赚大钱吧, 比较美国本地人不太会买这种便宜的VPS, 人傻钱多.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc53">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May  2 07:43:23 2015">
+ May 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c53" href="/p/goagent/issues/detail?id=20453#c53">#53</a>
+ 
+
+ <a class="userlink"
+ href="/u/104712518108400189361/">woks...@gmail.com</a
+></span>
+ 
+<pre>
+毕竟美国本地人不太会买这种便宜的VPS
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc54">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May  2 21:50:14 2015">
+ May 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c54" href="/p/goagent/issues/detail?id=20453#c54">#54</a>
+ 
+
+ <a class="userlink"
+ href="/u/117351052346044382546/">xdm1...@gmail.com</a
+></span>
+ 
+<pre>
+登录之后，依次点：Services - Order New Services，就可以看到了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc55">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May  2 22:49:43 2015">
+ May 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c55" href="/p/goagent/issues/detail?id=20453#c55">#55</a>
+ 
+
+ <a class="userlink"
+ href="/u/105406260789901238319/">qi531040...@gmail.com</a
+></span>
+ 
+<pre>
+vps用处挺多的，可以做ss也可以做vpn，做网站也可以，无聊的我还搭了一个Teamspeak的服务器。。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc56">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May  3 01:26:08 2015">
+ May 3, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c56" href="/p/goagent/issues/detail?id=20453#c56">#56</a>
+ 
+
+ <a class="userlink"
+ href="/u/107121900814243594035/">MarkHun...@gmail.com</a
+></span>
+ 
+<pre>
+我找到了，在addon那里面
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc57">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May  3 01:27:58 2015">
+ May 3, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c57" href="/p/goagent/issues/detail?id=20453#c57">#57</a>
+ 
+
+ <a class="userlink"
+ href="/u/107121900814243594035/">MarkHun...@gmail.com</a
+></span>
+ 
+<pre>
+TNND，真逼的我要弄个VPS了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc58">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May  3 02:27:58 2015">
+ May 3, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c58" href="/p/goagent/issues/detail?id=20453#c58">#58</a>
+ 
+
+ <a class="userlink"
+ href="/u/108045202181175569809/">tianguor...@gmail.com</a
+></span>
+ 
+<pre>
+速度和板瓦工比起来是快还是慢？ 这个比较关心啊
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc59">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May  3 07:08:26 2015">
+ May 3, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c59" href="/p/goagent/issues/detail?id=20453#c59">#59</a>
+ 
+
+ <a class="userlink"
+ href="/u/113292563919005293118/">xvyongp...@gmail.com</a
+></span>
+ 
+<pre>
+#55 做vpn是花样作死 很多科技博客已经证实 除非你有防gfw干扰能力
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc60">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May 10 02:53:45 2015">
+ May 10, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c60" href="/p/goagent/issues/detail?id=20453#c60">#60</a>
+ 
+
+ <a class="userlink"
+ href="/u/113363873369341448969/">duan...@gmail.com</a
+></span>
+ 
+<pre>
+我也买了alpharacks $18.99的那个，还买了一个vultr.com的$5一月的，速度基本差不多。
+
+alpharacks 服务器ping值170多，shadowsocks大部分时间比goagent快，从VPS上的sftp下载文件到家里速度可达到1MBps, 500kBps可算平均速度。上传到VPS较慢，原因应该是家里带宽上传的限制。
+
+vultr.com的现在基本没用，准备回头取消了，因为alpharacks这个确实很好，客服也非常快，周末也能在几分钟内回信。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc61">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 22 21:58:56 2015">
+ May 22, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c61" href="/p/goagent/issues/detail?id=20453#c61">#61</a>
+ 
+
+ <a class="userlink"
+ href="/u/116779286922713287507/">ot9...@gmail.com</a
+></span>
+ 
+<pre>
+不要买,这家就是个随时跑路的货.实际给的ip网络跟主页那个测试ip质量差距非常远.测试了1天申请退款就在那里支支吾吾的,这退款条款就跟没有一样,我操他妈的
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20453&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20453"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="20453">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A20453',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 20453,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ 
+ <script type="text/javascript">_CS_reportToCsi();</script>
+ 
+ </body>
+</html>
+

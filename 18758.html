@@ -1,0 +1,805 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"token": null, "profileUrl": null, "domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "projectHomeUrl": "/p/goagent", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "loggedInUserEmail": null, "projectName": "goagent", "relativeBaseUrl": ""};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 18758 - 
+ goagent -
+ 
+ 3.2.23版本bug - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18758&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18758" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=18758">18758</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >3.2.23版本bug</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 1 person starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A18758">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18758&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18758">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/115760827463100753397/">mei81447...@gmail.com</a
+>,
+ <span class="date" title="Sun Nov 23 03:58:55 2014">Nov 23, 2014</span>
+ 
+ </div>
+<pre>
+<b>发issue前先在All issues中搜索是否已经有你要提交的问题。</b>
+
+操作系统版本：win7
+浏览器版本：firefox33.0
+GoAgent 版本：3.2.23
+GoAgent 日志：GAE APPID          : 25个appid
+Pac Server         : http://13.8.1.237:8086/proxy.pac
+Pac File           : file://F:\goagent-goagent-v3.2.3-0-g8464327\goagent-goagent
+-8464327\local\proxy.pac
+------------------------------------------------------
+INFO - [Nov 23 19:51:12] resolve common.IPLIST_MAP names=['google_cn', 'google_h
+k', 'google_talk', 'google_ipv6'] to iplist
+INFO - [Nov 23 19:51:13] resolve name=google_talk host to iplist=['2404:6800:400
+8:c00::7d']
+WARNING - [Nov 23 19:51:16] google_cn resolved too short iplist=[], switch to go
+ogle_hk
+INFO - [Nov 23 19:51:16] Found [autorange]endswith match url='<a href="/p/goagent/source/detail?r=3">r3</a>---sn-q4f7dnsz.g
+ooglevideo.com:443'
+INFO - [Nov 23 19:51:16] 127.0.0.1:58066 &quot;STRIP CONNECT <a href="/p/goagent/source/detail?r=3">r3</a>---sn-q4f7dnsz.googlev
+ideo.com:443 HTTP/1.1&quot; - -
+INFO - [Nov 23 19:51:16] Found [autorange]endswith match url='<a href="/p/goagent/source/detail?r=3">r3</a>---sn-q4f7dnsz.g
+ooglevideo.com:443'
+INFO - [Nov 23 19:51:16] 127.0.0.1:58067 &quot;STRIP CONNECT <a href="/p/goagent/source/detail?r=3">r3</a>---sn-q4f7dnsz.googlev
+ideo.com:443 HTTP/1.1&quot; - -
+INFO - [Nov 23 19:51:16] Found [autorange]endswith match url='<a href="/p/goagent/source/detail?r=3">r3</a>---sn-q4f7dnsz.g
+ooglevideo.com:443'
+INFO - [Nov 23 19:51:16] 127.0.0.1:58068 &quot;STRIP CONNECT <a href="/p/goagent/source/detail?r=3">r3</a>---sn-q4f7dnsz.googlev
+ideo.com:443 HTTP/1.1&quot; - -
+INFO - [Nov 23 19:51:16] Found [autorange]endswith match url='<a href="/p/goagent/source/detail?r=3">r3</a>---sn-q4f7dnsz.g
+ooglevideo.com:443'
+INFO - [Nov 23 19:51:16] 127.0.0.1:58069 &quot;STRIP CONNECT <a href="/p/goagent/source/detail?r=3">r3</a>---sn-q4f7dnsz.googlev
+ideo.com:443 HTTP/1.1&quot; - -
+INFO - [Nov 23 19:51:16] Found [autorange]endswith match url='<a href="/p/goagent/source/detail?r=3">r3</a>---sn-q4f7dnsz.g
+ooglevideo.com:443'
+INFO - [Nov 23 19:51:16] 127.0.0.1:58071 &quot;STRIP CONNECT <a href="/p/goagent/source/detail?r=3">r3</a>---sn-q4f7dnsz.googlev
+ideo.com:443 HTTP/1.1&quot; - -
+INFO - [Nov 23 19:51:16] Found [autorange]endswith match url='<a href="/p/goagent/source/detail?r=3">r3</a>---sn-q4f7dnsz.g
+ooglevideo.com:443'
+INFO - [Nov 23 19:51:16] 127.0.0.1:58070 &quot;STRIP CONNECT <a href="/p/goagent/source/detail?r=3">r3</a>---sn-q4f7dnsz.googlev
+ideo.com:443 HTTP/1.1&quot; - -
+INFO - [Nov 23 19:51:16] Found [autorange]endswith match url='<a href="/p/goagent/source/detail?r=3">r3</a>---sn-q4f7dnsz.g
+ooglevideo.com:443'
+INFO - [Nov 23 19:51:16] 127.0.0.1:58072 &quot;STRIP CONNECT <a href="/p/goagent/source/detail?r=3">r3</a>---sn-q4f7dnsz.googlev
+ideo.com:443 HTTP/1.1&quot; - -
+INFO - [Nov 23 19:51:16] Found [autorange]endswith match url='<a href="/p/goagent/source/detail?r=3">r3</a>---sn-q4f7dnsz.g
+ooglevideo.com:443'
+INFO - [Nov 23 19:51:16] 127.0.0.1:58073 &quot;STRIP CONNECT <a href="/p/goagent/source/detail?r=3">r3</a>---sn-q4f7dnsz.googlev
+ideo.com:443 HTTP/1.1&quot; - -
+INFO - [Nov 23 19:51:16] autorange range='bytes=2228347791-2230444942' match url
+='<a href="https://r3---sn-q4f7dnsz.googlevideo.com/videoplayback?mime=video/mp4&amp;itag=299" rel="nofollow">https://r3---sn-q4f7dnsz.googlevideo.com/videoplayback?mime=video/mp4&amp;itag=299</a>
+&amp;source=youtube&amp;sparams=clen,dur,gir,id,ip,ipbits,itag,keepalive,lmt,mime,mm,ms,
+mv,requiressl,source,upn,expire&amp;gir=yes&amp;signature=1947D830E6FEA14A012B2BA741B41D
+261C3F8383.<a href="/p/goagent/source/detail?r=EDBE642BE245A6D500801A44566D7C63C79C933F">EDBE642BE245A6D500801A44566D7C63C79C933F</a>&amp;requiressl=yes&amp;sver=3&amp;id=o-A
+C-rUUacnWE3g5i36WdNW_7vPooiY4y2bRedLudEeiEg&amp;clen=5716788501&amp;keepalive=yes&amp;ipbits
+=0&amp;ip=107.178.200.216&amp;mm=31&amp;expire=1416761970&amp;upn=W89kMAIo428&amp;fexp=907259,927622
+,927882,932404,943909,947209,947215,948124,951911,952302,952605,952901,953912,95
+7103,957105,957201&amp;ms=au&amp;mt=1416740337&amp;mv=u&amp;dur=11936.707&amp;lmt=1416684915925392&amp;k
+ey=yt5&amp;ratebypass=yes&amp;title=%E5%B0%8F%E6%99%BA%E4%B8%89%E5%B0%8F%E6%97%B6%E7%9B%
+B4%E6%92%AD%E5%AE%9E%E5%8A%9B%E5%86%B2%E5%87%BB%E9%92%BB%E4%B8%80%EF%BC%81(%E8%B
+6%85%E9%95%BF%E7%89%88)%2011.20%E7%9B%B4%E6%92%AD%E5%BD%95%E5%83%8F%20-%20S4%E8%
+8B%B1%E9%9B%84%E8%81%AF%E7%9B%9F'
+INFO - [Nov 23 19:51:16] ssl good_ipaddrs=0, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Nov 23 19:51:16] autorange range='bytes=797504602-799601753' match url='
+<a href="https://r3---sn-q4f7dnsz.googlevideo.com/videoplayback?mime=video/mp4&amp;itag=299&amp;s" rel="nofollow">https://r3---sn-q4f7dnsz.googlevideo.com/videoplayback?mime=video/mp4&amp;itag=299&amp;s</a>
+ource=youtube&amp;sparams=clen,dur,gir,id,ip,ipbits,itag,keepalive,lmt,mime,mm,ms,mv
+,requiressl,source,upn,expire&amp;gir=yes&amp;signature=1947D830E6FEA14A012B2BA741B41D26
+1C3F8383.<a href="/p/goagent/source/detail?r=EDBE642BE245A6D500801A44566D7C63C79C933F">EDBE642BE245A6D500801A44566D7C63C79C933F</a>&amp;requiressl=yes&amp;sver=3&amp;id=o-AC-
+rUUacnWE3g5i36WdNW_7vPooiY4y2bRedLudEeiEg&amp;clen=5716788501&amp;keepalive=yes&amp;ipbits=0
+&amp;ip=107.178.200.216&amp;mm=31&amp;expire=1416761970&amp;upn=W89kMAIo428&amp;fexp=907259,927622,9
+27882,932404,943909,947209,947215,948124,951911,952302,952605,952901,953912,9571
+03,957105,957201&amp;ms=au&amp;mt=1416740337&amp;mv=u&amp;dur=11936.707&amp;lmt=1416684915925392&amp;key
+=yt5&amp;ratebypass=yes&amp;title=%E5%B0%8F%E6%99%BA%E4%B8%89%E5%B0%8F%E6%97%B6%E7%9B%B4
+%E6%92%AD%E5%AE%9E%E5%8A%9B%E5%86%B2%E5%87%BB%E9%92%BB%E4%B8%80%EF%BC%81(%E8%B6%
+85%E9%95%BF%E7%89%88)%2011.20%E7%9B%B4%E6%92%AD%E5%BD%95%E5%83%8F%20-%20S4%E8%8B
+%B1%E9%9B%84%E8%81%AF%E7%9B%9F'
+INFO - [Nov 23 19:51:16] ssl good_ipaddrs=0, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Nov 23 19:51:16] autorange range='bytes=82961729-85058880' match url='ht
+tps://<a href="/p/goagent/source/detail?r=3">r3</a>---sn-q4f7dnsz.googlevideo.com/videoplayback?mime=video/mp4&amp;itag=299&amp;sou
+rce=youtube&amp;sparams=clen,dur,gir,id,ip,ipbits,itag,keepalive,lmt,mime,mm,ms,mv,r
+equiressl,source,upn,expire&amp;gir=yes&amp;signature=1947D830E6FEA14A012B2BA741B41D261C
+3F8383.<a href="/p/goagent/source/detail?r=EDBE642BE245A6D500801A44566D7C63C79C933F">EDBE642BE245A6D500801A44566D7C63C79C933F</a>&amp;requiressl=yes&amp;sver=3&amp;id=o-AC-rU
+UacnWE3g5i36WdNW_7vPooiY4y2bRedLudEeiEg&amp;clen=5716788501&amp;keepalive=yes&amp;ipbits=0&amp;i
+p=107.178.200.216&amp;mm=31&amp;expire=1416761970&amp;upn=W89kMAIo428&amp;fexp=907259,927622,927
+882,932404,943909,947209,947215,948124,951911,952302,952605,952901,953912,957103
+,957105,957201&amp;ms=au&amp;mt=1416740337&amp;mv=u&amp;dur=11936.707&amp;lmt=1416684915925392&amp;key=y
+t5&amp;ratebypass=yes&amp;title=%E5%B0%8F%E6%99%BA%E4%B8%89%E5%B0%8F%E6%97%B6%E7%9B%B4%E
+6%92%AD%E5%AE%9E%E5%8A%9B%E5%86%B2%E5%87%BB%E9%92%BB%E4%B8%80%EF%BC%81(%E8%B6%85
+%E9%95%BF%E7%89%88)%2011.20%E7%9B%B4%E6%92%AD%E5%BD%95%E5%83%8F%20-%20S4%E8%8B%B
+1%E9%9B%84%E8%81%AF%E7%9B%9F'
+INFO - [Nov 23 19:51:16] ssl good_ipaddrs=0, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Nov 23 19:51:16] autorange range='bytes=3658454277-3660551428' match url
+='<a href="https://r3---sn-q4f7dnsz.googlevideo.com/videoplayback?mime=video/mp4&amp;itag=299" rel="nofollow">https://r3---sn-q4f7dnsz.googlevideo.com/videoplayback?mime=video/mp4&amp;itag=299</a>
+&amp;source=youtube&amp;sparams=clen,dur,gir,id,ip,ipbits,itag,keepalive,lmt,mime,mm,ms,
+mv,requiressl,source,upn,expire&amp;gir=yes&amp;signature=1947D830E6FEA14A012B2BA741B41D
+261C3F8383.<a href="/p/goagent/source/detail?r=EDBE642BE245A6D500801A44566D7C63C79C933F">EDBE642BE245A6D500801A44566D7C63C79C933F</a>&amp;requiressl=yes&amp;sver=3&amp;id=o-A
+C-rUUacnWE3g5i36WdNW_7vPooiY4y2bRedLudEeiEg&amp;clen=5716788501&amp;keepalive=yes&amp;ipbits
+=0&amp;ip=107.178.200.216&amp;mm=31&amp;expire=1416761970&amp;upn=W89kMAIo428&amp;fexp=907259,927622
+,927882,932404,943909,947209,947215,948124,951911,952302,952605,952901,953912,95
+7103,957105,957201&amp;ms=au&amp;mt=1416740337&amp;mv=u&amp;dur=11936.707&amp;lmt=1416684915925392&amp;k
+ey=yt5&amp;ratebypass=yes&amp;title=%E5%B0%8F%E6%99%BA%E4%B8%89%E5%B0%8F%E6%97%B6%E7%9B%
+B4%E6%92%AD%E5%AE%9E%E5%8A%9B%E5%86%B2%E5%87%BB%E9%92%BB%E4%B8%80%EF%BC%81(%E8%B
+6%85%E9%95%BF%E7%89%88)%2011.20%E7%9B%B4%E6%92%AD%E5%BD%95%E5%83%8F%20-%20S4%E8%
+8B%B1%E9%9B%84%E8%81%AF%E7%9B%9F'
+INFO - [Nov 23 19:51:16] ssl good_ipaddrs=0, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Nov 23 19:51:16] autorange range='bytes=4370735904-4372833055' match url
+='<a href="https://r3---sn-q4f7dnsz.googlevideo.com/videoplayback?mime=video/mp4&amp;itag=299" rel="nofollow">https://r3---sn-q4f7dnsz.googlevideo.com/videoplayback?mime=video/mp4&amp;itag=299</a>
+&amp;source=youtube&amp;sparams=clen,dur,gir,id,ip,ipbits,itag,keepalive,lmt,mime,mm,ms,
+mv,requiressl,source,upn,expire&amp;gir=yes&amp;signature=1947D830E6FEA14A012B2BA741B41D
+261C3F8383.<a href="/p/goagent/source/detail?r=EDBE642BE245A6D500801A44566D7C63C79C933F">EDBE642BE245A6D500801A44566D7C63C79C933F</a>&amp;requiressl=yes&amp;sver=3&amp;id=o-A
+C-rUUacnWE3g5i36WdNW_7vPooiY4y2bRedLudEeiEg&amp;clen=5716788501&amp;keepalive=yes&amp;ipbits
+=0&amp;ip=107.178.200.216&amp;mm=31&amp;expire=1416761970&amp;upn=W89kMAIo428&amp;fexp=907259,927622
+,927882,932404,943909,947209,947215,948124,951911,952302,952605,952901,953912,95
+7103,957105,957201&amp;ms=au&amp;mt=1416740337&amp;mv=u&amp;dur=11936.707&amp;lmt=1416684915925392&amp;k
+ey=yt5&amp;ratebypass=yes&amp;title=%E5%B0%8F%E6%99%BA%E4%B8%89%E5%B0%8F%E6%97%B6%E7%9B%
+B4%E6%92%AD%E5%AE%9E%E5%8A%9B%E5%86%B2%E5%87%BB%E9%92%BB%E4%B8%80%EF%BC%81(%E8%B
+6%85%E9%95%BF%E7%89%88)%2011.20%E7%9B%B4%E6%92%AD%E5%BD%95%E5%83%8F%20-%20S4%E8%
+8B%B1%E9%9B%84%E8%81%AF%E7%9B%9F'
+INFO - [Nov 23 19:51:16] ssl good_ipaddrs=0, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Nov 23 19:51:16] autorange range='bytes=2945762027-2947859178' match url
+='<a href="https://r3---sn-q4f7dnsz.googlevideo.com/videoplayback?mime=video/mp4&amp;itag=299" rel="nofollow">https://r3---sn-q4f7dnsz.googlevideo.com/videoplayback?mime=video/mp4&amp;itag=299</a>
+&amp;source=youtube&amp;sparams=clen,dur,gir,id,ip,ipbits,itag,keepalive,lmt,mime,mm,ms,
+mv,requiressl,source,upn,expire&amp;gir=yes&amp;signature=1947D830E6FEA14A012B2BA741B41D
+261C3F8383.<a href="/p/goagent/source/detail?r=EDBE642BE245A6D500801A44566D7C63C79C933F">EDBE642BE245A6D500801A44566D7C63C79C933F</a>&amp;requiressl=yes&amp;sver=3&amp;id=o-A
+C-rUUacnWE3g5i36WdNW_7vPooiY4y2bRedLudEeiEg&amp;clen=5716788501&amp;keepalive=yes&amp;ipbits
+=0&amp;ip=107.178.200.216&amp;mm=31&amp;expire=1416761970&amp;upn=W89kMAIo428&amp;fexp=907259,927622
+,927882,932404,943909,947209,947215,948124,951911,952302,952605,952901,953912,95
+7103,957105,957201&amp;ms=au&amp;mt=1416740337&amp;mv=u&amp;dur=11936.707&amp;lmt=1416684915925392&amp;k
+ey=yt5&amp;ratebypass=yes&amp;title=%E5%B0%8F%E6%99%BA%E4%B8%89%E5%B0%8F%E6%97%B6%E7%9B%
+B4%E6%92%AD%E5%AE%9E%E5%8A%9B%E5%86%B2%E5%87%BB%E9%92%BB%E4%B8%80%EF%BC%81(%E8%B
+6%85%E9%95%BF%E7%89%88)%2011.20%E7%9B%B4%E6%92%AD%E5%BD%95%E5%83%8F%20-%20S4%E8%
+8B%B1%E9%9B%84%E8%81%AF%E7%9B%9F'
+INFO - [Nov 23 19:51:16] ssl good_ipaddrs=0, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Nov 23 19:51:16] autorange range='bytes=5086515834-5088612985' match url
+='<a href="https://r3---sn-q4f7dnsz.googlevideo.com/videoplayback?mime=video/mp4&amp;itag=299" rel="nofollow">https://r3---sn-q4f7dnsz.googlevideo.com/videoplayback?mime=video/mp4&amp;itag=299</a>
+&amp;source=youtube&amp;sparams=clen,dur,gir,id,ip,ipbits,itag,keepalive,lmt,mime,mm,ms,
+mv,requiressl,source,upn,expire&amp;gir=yes&amp;signature=1947D830E6FEA14A012B2BA741B41D
+261C3F8383.<a href="/p/goagent/source/detail?r=EDBE642BE245A6D500801A44566D7C63C79C933F">EDBE642BE245A6D500801A44566D7C63C79C933F</a>&amp;requiressl=yes&amp;sver=3&amp;id=o-A
+C-rUUacnWE3g5i36WdNW_7vPooiY4y2bRedLudEeiEg&amp;clen=5716788501&amp;keepalive=yes&amp;ipbits
+=0&amp;ip=107.178.200.216&amp;mm=31&amp;expire=1416761970&amp;upn=W89kMAIo428&amp;fexp=907259,927622
+,927882,932404,943909,947209,947215,948124,951911,952302,952605,952901,953912,95
+7103,957105,957201&amp;ms=au&amp;mt=1416740337&amp;mv=u&amp;dur=11936.707&amp;lmt=1416684915925392&amp;k
+ey=yt5&amp;ratebypass=yes&amp;title=%E5%B0%8F%E6%99%BA%E4%B8%89%E5%B0%8F%E6%97%B6%E7%9B%
+B4%E6%92%AD%E5%AE%9E%E5%8A%9B%E5%86%B2%E5%87%BB%E9%92%BB%E4%B8%80%EF%BC%81(%E8%B
+6%85%E9%95%BF%E7%89%88)%2011.20%E7%9B%B4%E6%92%AD%E5%BD%95%E5%83%8F%20-%20S4%E8%
+8B%B1%E9%9B%84%E8%81%AF%E7%9B%9F'
+INFO - [Nov 23 19:51:16] ssl good_ipaddrs=0, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Nov 23 19:51:16] autorange range='bytes=1513940341-1516037492' match url
+='<a href="https://r3---sn-q4f7dnsz.googlevideo.com/videoplayback?mime=video/mp4&amp;itag=299" rel="nofollow">https://r3---sn-q4f7dnsz.googlevideo.com/videoplayback?mime=video/mp4&amp;itag=299</a>
+&amp;source=youtube&amp;sparams=clen,dur,gir,id,ip,ipbits,itag,keepalive,lmt,mime,mm,ms,
+mv,requiressl,source,upn,expire&amp;gir=yes&amp;signature=1947D830E6FEA14A012B2BA741B41D
+261C3F8383.<a href="/p/goagent/source/detail?r=EDBE642BE245A6D500801A44566D7C63C79C933F">EDBE642BE245A6D500801A44566D7C63C79C933F</a>&amp;requiressl=yes&amp;sver=3&amp;id=o-A
+C-rUUacnWE3g5i36WdNW_7vPooiY4y2bRedLudEeiEg&amp;clen=5716788501&amp;keepalive=yes&amp;ipbits
+=0&amp;ip=107.178.200.216&amp;mm=31&amp;expire=1416761970&amp;upn=W89kMAIo428&amp;fexp=907259,927622
+,927882,932404,943909,947209,947215,948124,951911,952302,952605,952901,953912,95
+7103,957105,957201&amp;ms=au&amp;mt=1416740337&amp;mv=u&amp;dur=11936.707&amp;lmt=1416684915925392&amp;k
+ey=yt5&amp;ratebypass=yes&amp;title=%E5%B0%8F%E6%99%BA%E4%B8%89%E5%B0%8F%E6%97%B6%E7%9B%
+B4%E6%92%AD%E5%AE%9E%E5%8A%9B%E5%86%B2%E5%87%BB%E9%92%BB%E4%B8%80%EF%BC%81(%E8%B
+6%85%E9%95%BF%E7%89%88)%2011.20%E7%9B%B4%E6%92%AD%E5%BD%95%E5%83%8F%20-%20S4%E8%
+8B%B1%E9%9B%84%E8%81%AF%E7%9B%9F'
+INFO - [Nov 23 19:51:16] ssl good_ipaddrs=0, bad_ipaddrs=0, unknown_ipaddrs=0
+INFO - [Nov 23 19:51:18] 127.0.0.1:58073 &quot;GAE GET <a href="https://r3---sn-q4f7dnsz.googl" rel="nofollow">https://r3---sn-q4f7dnsz.googl</a>
+evideo.com/videoplayback?mime=video/mp4&amp;itag=299&amp;source=youtube&amp;sparams=clen,dur
+,gir,id,ip,ipbits,itag,keepalive,lmt,mime,mm,ms,mv,requiressl,source,upn,expire&amp;
+gir=yes&amp;signature=<a href="/p/goagent/source/detail?r=1947D830E6FEA14A012B2BA741B41D261C3F8383">1947D830E6FEA14A012B2BA741B41D261C3F8383</a>.EDBE642BE245A6D500801
+A44566D7C63C79C933F&amp;requiressl=yes&amp;sver=3&amp;id=o-AC-rUUacnWE3g5i36WdNW_7vPooiY4y2b
+RedLudEeiEg&amp;clen=5716788501&amp;keepalive=yes&amp;ipbits=0&amp;ip=107.178.200.216&amp;mm=31&amp;expi
+re=1416761970&amp;upn=W89kMAIo428&amp;fexp=907259,927622,927882,932404,943909,947209,947
+215,948124,951911,952302,952605,952901,953912,957103,957105,957201&amp;ms=au&amp;mt=1416
+740337&amp;mv=u&amp;dur=11936.707&amp;lmt=1416684915925392&amp;key=yt5&amp;ratebypass=yes&amp;title=%E5%
+B0%8F%E6%99%BA%E4%B8%89%E5%B0%8F%E6%97%B6%E7%9B%B4%E6%92%AD%E5%AE%9E%E5%8A%9B%E5
+%86%B2%E5%87%BB%E9%92%BB%E4%B8%80%EF%BC%81(%E8%B6%85%E9%95%BF%E7%89%88)%2011.20%
+E7%9B%B4%E6%92%AD%E5%BD%95%E5%83%8F%20-%20S4%E8%8B%B1%E9%9B%84%E8%81%AF%E7%9B%9F
+ HTTP/1.1&quot; 206 2097152
+INFO - [Nov 23 19:51:18] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; RangeFetch started('https://<a href="/p/goagent/source/detail?r=3">r3</a>---sn-q4f
+7dnsz.googlevideo.com/videoplayback?mime=video/mp4&amp;itag=299&amp;source=youtube&amp;spara
+ms=clen,dur,gir,id,ip,ipbits,itag,keepalive,lmt,mime,mm,ms,mv,requiressl,source,
+upn,expire&amp;gir=yes&amp;signature=<a href="/p/goagent/source/detail?r=1947D830E6FEA14A012B2BA741B41D261C3F8383">1947D830E6FEA14A012B2BA741B41D261C3F8383</a>.EDBE642BE2
+45A6D500801A44566D7C63C79C933F&amp;requiressl=yes&amp;sver=3&amp;id=o-AC-rUUacnWE3g5i36WdNW_
+7vPooiY4y2bRedLudEeiEg&amp;clen=5716788501&amp;keepalive=yes&amp;ipbits=0&amp;ip=107.178.200.216
+&amp;mm=31&amp;expire=1416761970&amp;upn=W89kMAIo428&amp;fexp=907259,927622,927882,932404,943909
+,947209,947215,948124,951911,952302,952605,952901,953912,957103,957105,957201&amp;ms
+=au&amp;mt=1416740337&amp;mv=u&amp;dur=11936.707&amp;lmt=1416684915925392&amp;key=yt5&amp;ratebypass=yes
+&amp;title=%E5%B0%8F%E6%99%BA%E4%B8%89%E5%B0%8F%E6%97%B6%E7%9B%B4%E6%92%AD%E5%AE%9E%
+E5%8A%9B%E5%86%B2%E5%87%BB%E9%92%BB%E4%B8%80%EF%BC%81(%E8%B6%85%E9%95%BF%E7%89%8
+8)%2011.20%E7%9B%B4%E6%92%AD%E5%BD%95%E5%83%8F%20-%20S4%E8%8B%B1%E9%9B%84%E8%81%
+AF%E7%9B%9F') 5086515834-5088612985
+INFO - [Nov 23 19:51:18] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 45430784] 2097152 bytes 5086515
+834-5088612985/5716788501
+INFO - [Nov 23 19:51:18] 127.0.0.1:58071 &quot;GAE GET <a href="https://r3---sn-q4f7dnsz.googl" rel="nofollow">https://r3---sn-q4f7dnsz.googl</a>
+evideo.com/videoplayback?mime=video/mp4&amp;itag=299&amp;source=youtube&amp;sparams=clen,dur
+,gir,id,ip,ipbits,itag,keepalive,lmt,mime,mm,ms,mv,requiressl,source,upn,expire&amp;
+gir=yes&amp;signature=<a href="/p/goagent/source/detail?r=1947D830E6FEA14A012B2BA741B41D261C3F8383">1947D830E6FEA14A012B2BA741B41D261C3F8383</a>.EDBE642BE245A6D500801
+A44566D7C63C79C933F&amp;requiressl=yes&amp;sver=3&amp;id=o-AC-rUUacnWE3g5i36WdNW_7vPooiY4y2b
+RedLudEeiEg&amp;clen=5716788501&amp;keepalive=yes&amp;ipbits=0&amp;ip=107.178.200.216&amp;mm=31&amp;expi
+re=1416761970&amp;upn=W89kMAIo428&amp;fexp=907259,927622,927882,932404,943909,947209,947
+215,948124,951911,952302,952605,952901,953912,957103,957105,957201&amp;ms=au&amp;mt=1416
+740337&amp;mv=u&amp;dur=11936.707&amp;lmt=1416684915925392&amp;key=yt5&amp;ratebypass=yes&amp;title=%E5%
+B0%8F%E6%99%BA%E4%B8%89%E5%B0%8F%E6%97%B6%E7%9B%B4%E6%92%AD%E5%AE%9E%E5%8A%9B%E5
+%86%B2%E5%87%BB%E9%92%BB%E4%B8%80%EF%BC%81(%E8%B6%85%E9%95%BF%E7%89%88)%2011.20%
+E7%9B%B4%E6%92%AD%E5%BD%95%E5%83%8F%20-%20S4%E8%8B%B1%E9%9B%84%E8%81%AF%E7%9B%9F
+ HTTP/1.1&quot; 206 2097152
+INFO - [Nov 23 19:51:18] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; RangeFetch started('https://<a href="/p/goagent/source/detail?r=3">r3</a>---sn-q4f
+7dnsz.googlevideo.com/videoplayback?mime=video/mp4&amp;itag=299&amp;source=youtube&amp;spara
+ms=clen,dur,gir,id,ip,ipbits,itag,keepalive,lmt,mime,mm,ms,mv,requiressl,source,
+upn,expire&amp;gir=yes&amp;signature=<a href="/p/goagent/source/detail?r=1947D830E6FEA14A012B2BA741B41D261C3F8383">1947D830E6FEA14A012B2BA741B41D261C3F8383</a>.EDBE642BE2
+45A6D500801A44566D7C63C79C933F&amp;requiressl=yes&amp;sver=3&amp;id=o-AC-rUUacnWE3g5i36WdNW_
+7vPooiY4y2bRedLudEeiEg&amp;clen=5716788501&amp;keepalive=yes&amp;ipbits=0&amp;ip=107.178.200.216
+&amp;mm=31&amp;expire=1416761970&amp;upn=W89kMAIo428&amp;fexp=907259,927622,927882,932404,943909
+,947209,947215,948124,951911,952302,952605,952901,953912,957103,957105,957201&amp;ms
+=au&amp;mt=1416740337&amp;mv=u&amp;dur=11936.707&amp;lmt=1416684915925392&amp;key=yt5&amp;ratebypass=yes
+&amp;title=%E5%B0%8F%E6%99%BA%E4%B8%89%E5%B0%8F%E6%97%B6%E7%9B%B4%E6%92%AD%E5%AE%9E%
+E5%8A%9B%E5%86%B2%E5%87%BB%E9%92%BB%E4%B8%80%EF%BC%81(%E8%B6%85%E9%95%BF%E7%89%8
+8)%2011.20%E7%9B%B4%E6%92%AD%E5%BD%95%E5%83%8F%20-%20S4%E8%8B%B1%E9%9B%84%E8%81%
+AF%E7%9B%9F') 3658454277-3660551428
+INFO - [Nov 23 19:51:18] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 45430384] 2097152 bytes 3658454
+277-3660551428/5716788501
+INFO - [Nov 23 19:51:19] 127.0.0.1:58067 &quot;GAE GET <a href="https://r3---sn-q4f7dnsz.googl" rel="nofollow">https://r3---sn-q4f7dnsz.googl</a>
+evideo.com/videoplayback?mime=video/mp4&amp;itag=299&amp;source=youtube&amp;sparams=clen,dur
+,gir,id,ip,ipbits,itag,keepalive,lmt,mime,mm,ms,mv,requiressl,source,upn,expire&amp;
+gir=yes&amp;signature=<a href="/p/goagent/source/detail?r=1947D830E6FEA14A012B2BA741B41D261C3F8383">1947D830E6FEA14A012B2BA741B41D261C3F8383</a>.EDBE642BE245A6D500801
+A44566D7C63C79C933F&amp;requiressl=yes&amp;sver=3&amp;id=o-AC-rUUacnWE3g5i36WdNW_7vPooiY4y2b
+RedLudEeiEg&amp;clen=5716788501&amp;keepalive=yes&amp;ipbits=0&amp;ip=107.178.200.216&amp;mm=31&amp;expi
+re=1416761970&amp;upn=W89kMAIo428&amp;fexp=907259,927622,927882,932404,943909,947209,947
+215,948124,951911,952302,952605,952901,953912,957103,957105,957201&amp;ms=au&amp;mt=1416
+740337&amp;mv=u&amp;dur=11936.707&amp;lmt=1416684915925392&amp;key=yt5&amp;ratebypass=yes&amp;title=%E5%
+B0%8F%E6%99%BA%E4%B8%89%E5%B0%8F%E6%97%B6%E7%9B%B4%E6%92%AD%E5%AE%9E%E5%8A%9B%E5
+%86%B2%E5%87%BB%E9%92%BB%E4%B8%80%EF%BC%81(%E8%B6%85%E9%95%BF%E7%89%88)%2011.20%
+E7%9B%B4%E6%92%AD%E5%BD%95%E5%83%8F%20-%20S4%E8%8B%B1%E9%9B%84%E8%81%AF%E7%9B%9F
+ HTTP/1.1&quot; 206 2097152
+INFO - [Nov 23 19:51:19] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; RangeFetch started('https://<a href="/p/goagent/source/detail?r=3">r3</a>---sn-q4f
+7dnsz.googlevideo.com/videoplayback?mime=video/mp4&amp;itag=299&amp;source=youtube&amp;spara
+ms=clen,dur,gir,id,ip,ipbits,itag,keepalive,lmt,mime,mm,ms,mv,requiressl,source,
+upn,expire&amp;gir=yes&amp;signature=<a href="/p/goagent/source/detail?r=1947D830E6FEA14A012B2BA741B41D261C3F8383">1947D830E6FEA14A012B2BA741B41D261C3F8383</a>.EDBE642BE2
+45A6D500801A44566D7C63C79C933F&amp;requiressl=yes&amp;sver=3&amp;id=o-AC-rUUacnWE3g5i36WdNW_
+7vPooiY4y2bRedLudEeiEg&amp;clen=5716788501&amp;keepalive=yes&amp;ipbits=0&amp;ip=107.178.200.216
+&amp;mm=31&amp;expire=1416761970&amp;upn=W89kMAIo428&amp;fexp=907259,927622,927882,932404,943909
+,947209,947215,948124,951911,952302,952605,952901,953912,957103,957105,957201&amp;ms
+=au&amp;mt=1416740337&amp;mv=u&amp;dur=11936.707&amp;lmt=1416684915925392&amp;key=yt5&amp;ratebypass=yes
+&amp;title=%E5%B0%8F%E6%99%BA%E4%B8%89%E5%B0%8F%E6%97%B6%E7%9B%B4%E6%92%AD%E5%AE%9E%
+E5%8A%9B%E5%86%B2%E5%87%BB%E9%92%BB%E4%B8%80%EF%BC%81(%E8%B6%85%E9%95%BF%E7%89%8
+8)%2011.20%E7%9B%B4%E6%92%AD%E5%BD%95%E5%83%8F%20-%20S4%E8%8B%B1%E9%9B%84%E8%81%
+AF%E7%9B%9F') 1513940341-1516037492
+INFO - [Nov 23 19:51:19] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 45429904] 2097152 bytes 1513940
+341-1516037492/5716788501
+INFO - [Nov 23 19:51:19] 127.0.0.1:58072 &quot;GAE GET <a href="https://r3---sn-q4f7dnsz.googl" rel="nofollow">https://r3---sn-q4f7dnsz.googl</a>
+evideo.com/videoplayback?mime=video/mp4&amp;itag=299&amp;source=youtube&amp;sparams=clen,dur
+,gir,id,ip,ipbits,itag,keepalive,lmt,mime,mm,ms,mv,requiressl,source,upn,expire&amp;
+gir=yes&amp;signature=<a href="/p/goagent/source/detail?r=1947D830E6FEA14A012B2BA741B41D261C3F8383">1947D830E6FEA14A012B2BA741B41D261C3F8383</a>.EDBE642BE245A6D500801
+A44566D7C63C79C933F&amp;requiressl=yes&amp;sver=3&amp;id=o-AC-rUUacnWE3g5i36WdNW_7vPooiY4y2b
+RedLudEeiEg&amp;clen=5716788501&amp;keepalive=yes&amp;ipbits=0&amp;ip=107.178.200.216&amp;mm=31&amp;expi
+re=1416761970&amp;upn=W89kMAIo428&amp;fexp=907259,927622,927882,932404,943909,947209,947
+215,948124,951911,952302,952605,952901,953912,957103,957105,957201&amp;ms=au&amp;mt=1416
+740337&amp;mv=u&amp;dur=11936.707&amp;lmt=1416684915925392&amp;key=yt5&amp;ratebypass=yes&amp;title=%E5%
+B0%8F%E6%99%BA%E4%B8%89%E5%B0%8F%E6%97%B6%E7%9B%B4%E6%92%AD%E5%AE%9E%E5%8A%9B%E5
+%86%B2%E5%87%BB%E9%92%BB%E4%B8%80%EF%BC%81(%E8%B6%85%E9%95%BF%E7%89%88)%2011.20%
+E7%9B%B4%E6%92%AD%E5%BD%95%E5%83%8F%20-%20S4%E8%8B%B1%E9%9B%84%E8%81%AF%E7%9B%9F
+ HTTP/1.1&quot; 206 2097152
+INFO - [Nov 23 19:51:19] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; RangeFetch started('https://<a href="/p/goagent/source/detail?r=3">r3</a>---sn-q4f
+7dnsz.googlevideo.com/videoplayback?mime=video/mp4&amp;itag=299&amp;source=youtube&amp;spara
+ms=clen,dur,gir,id,ip,ipbits,itag,keepalive,lmt,mime,mm,ms,mv,requiressl,source,
+upn,expire&amp;gir=yes&amp;signature=<a href="/p/goagent/source/detail?r=1947D830E6FEA14A012B2BA741B41D261C3F8383">1947D830E6FEA14A012B2BA741B41D261C3F8383</a>.EDBE642BE2
+45A6D500801A44566D7C63C79C933F&amp;requiressl=yes&amp;sver=3&amp;id=o-AC-rUUacnWE3g5i36WdNW_
+7vPooiY4y2bRedLudEeiEg&amp;clen=5716788501&amp;keepalive=yes&amp;ipbits=0&amp;ip=107.178.200.216
+&amp;mm=31&amp;expire=1416761970&amp;upn=W89kMAIo428&amp;fexp=907259,927622,927882,932404,943909
+,947209,947215,948124,951911,952302,952605,952901,953912,957103,957105,957201&amp;ms
+=au&amp;mt=1416740337&amp;mv=u&amp;dur=11936.707&amp;lmt=1416684915925392&amp;key=yt5&amp;ratebypass=yes
+&amp;title=%E5%B0%8F%E6%99%BA%E4%B8%89%E5%B0%8F%E6%97%B6%E7%9B%B4%E6%92%AD%E5%AE%9E%
+E5%8A%9B%E5%86%B2%E5%87%BB%E9%92%BB%E4%B8%80%EF%BC%81(%E8%B6%85%E9%95%BF%E7%89%8
+8)%2011.20%E7%9B%B4%E6%92%AD%E5%BD%95%E5%83%8F%20-%20S4%E8%8B%B1%E9%9B%84%E8%81%
+AF%E7%9B%9F') 2945762027-2947859178
+INFO - [Nov 23 19:51:19] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 45432624] 2097152 bytes 2945762
+027-2947859178/5716788501
+INFO - [Nov 23 19:51:19] 127.0.0.1:58066 &quot;GAE GET <a href="https://r3---sn-q4f7dnsz.googl" rel="nofollow">https://r3---sn-q4f7dnsz.googl</a>
+evideo.com/videoplayback?mime=video/mp4&amp;itag=299&amp;source=youtube&amp;sparams=clen,dur
+,gir,id,ip,ipbits,itag,keepalive,lmt,mime,mm,ms,mv,requiressl,source,upn,expire&amp;
+gir=yes&amp;signature=<a href="/p/goagent/source/detail?r=1947D830E6FEA14A012B2BA741B41D261C3F8383">1947D830E6FEA14A012B2BA741B41D261C3F8383</a>.EDBE642BE245A6D500801
+A44566D7C63C79C933F&amp;requiressl=yes&amp;sver=3&amp;id=o-AC-rUUacnWE3g5i36WdNW_7vPooiY4y2b
+RedLudEeiEg&amp;clen=5716788501&amp;keepalive=yes&amp;ipbits=0&amp;ip=107.178.200.216&amp;mm=31&amp;expi
+re=1416761970&amp;upn=W89kMAIo428&amp;fexp=907259,927622,927882,932404,943909,947209,947
+215,948124,951911,952302,952605,952901,953912,957103,957105,957201&amp;ms=au&amp;mt=1416
+740337&amp;mv=u&amp;dur=11936.707&amp;lmt=1416684915925392&amp;key=yt5&amp;ratebypass=yes&amp;title=%E5%
+B0%8F%E6%99%BA%E4%B8%89%E5%B0%8F%E6%97%B6%E7%9B%B4%E6%92%AD%E5%AE%9E%E5%8A%9B%E5
+%86%B2%E5%87%BB%E9%92%BB%E4%B8%80%EF%BC%81(%E8%B6%85%E9%95%BF%E7%89%88)%2011.20%
+E7%9B%B4%E6%92%AD%E5%BD%95%E5%83%8F%20-%20S4%E8%8B%B1%E9%9B%84%E8%81%AF%E7%9B%9F
+ HTTP/1.1&quot; 206 2097152
+INFO - [Nov 23 19:51:19] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; RangeFetch started('https://<a href="/p/goagent/source/detail?r=3">r3</a>---sn-q4f
+7dnsz.googlevideo.com/videoplayback?mime=video/mp4&amp;itag=299&amp;source=youtube&amp;spara
+ms=clen,dur,gir,id,ip,ipbits,itag,keepalive,lmt,mime,mm,ms,mv,requiressl,source,
+upn,expire&amp;gir=yes&amp;signature=<a href="/p/goagent/source/detail?r=1947D830E6FEA14A012B2BA741B41D261C3F8383">1947D830E6FEA14A012B2BA741B41D261C3F8383</a>.EDBE642BE2
+45A6D500801A44566D7C63C79C933F&amp;requiressl=yes&amp;sver=3&amp;id=o-AC-rUUacnWE3g5i36WdNW_
+7vPooiY4y2bRedLudEeiEg&amp;clen=5716788501&amp;keepalive=yes&amp;ipbits=0&amp;ip=107.178.200.216
+&amp;mm=31&amp;expire=1416761970&amp;upn=W89kMAIo428&amp;fexp=907259,927622,927882,932404,943909
+,947209,947215,948124,951911,952302,952605,952901,953912,957103,957105,957201&amp;ms
+=au&amp;mt=1416740337&amp;mv=u&amp;dur=11936.707&amp;lmt=1416684915925392&amp;key=yt5&amp;ratebypass=yes
+&amp;title=%E5%B0%8F%E6%99%BA%E4%B8%89%E5%B0%8F%E6%97%B6%E7%9B%B4%E6%92%AD%E5%AE%9E%
+E5%8A%9B%E5%86%B2%E5%87%BB%E9%92%BB%E4%B8%80%EF%BC%81(%E8%B6%85%E9%95%BF%E7%89%8
+8)%2011.20%E7%9B%B4%E6%92%AD%E5%BD%95%E5%83%8F%20-%20S4%E8%8B%B1%E9%9B%84%E8%81%
+AF%E7%9B%9F') 2228347791-2230444942
+INFO - [Nov 23 19:51:19] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 40919408] 2097152 bytes 2228347
+791-2230444942/5716788501
+
+
+<b>注意:请尽量填写以上信息，否则可能难以得到帮助</b>
+每次用idm代理下载，都会卡在
+INFO - [Nov 23 19:51:19] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 40919408] 2097152 bytes 2228347
+这一行
+3.1.18正常，3.2的每个版本都不行，不能升级很蛋疼
+
+</pre>
+
+</div>
+
+ 
+
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18758&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18758"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="18758">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A18758',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 18758,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

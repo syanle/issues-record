@@ -1,0 +1,1195 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"loggedInUserEmail": null, "relativeBaseUrl": "", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "projectName": "goagent", "domainName": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "projectHomeUrl": "/p/goagent", "token": null, "profileUrl": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 20310 - 
+ goagent -
+ 
+ 真的情况不妙，是不是App Engine要关了？ - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20310&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20310" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=20310">20310</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >真的情况不妙，是不是App Engine要关了？</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 2 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A20310">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20310&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20310">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/107566294692097220799/">wangshua...@gmail.com</a
+>,
+ <span class="date" title="Mon Apr 20 19:56:07 2015">Apr 20, 2015</span>
+ 
+ </div>
+<pre>
+Dear App Engine Developer, 
+
+You are receiving this email because you are listed as an owner of a Google App Engine application that is configured to use the deprecated service Master/Slave Datastore, which will soon be shut down. Don’t worry though, this email gives clear instructions for what you need to do. Even if your application does not store data in Master/Slave Datastore, it is still configured to use Master/Slave Datastore, so please keep reading. 
+
+When we launched App Engine, Master/Slave Datastore was the only database service that applications could use to store data. Master/Slave Datastore had issues scaling with the size and complexity of applications running on App Engine, so we launched its successor, High Replication Datastore (HRD), in 2011. Since that launch HRD has proven to scale without issues. 
+
+One of our core goals with Google Cloud Platform is to provide customers with the best technologies to build their business, so when we saw that HRD was a more robust technology, we decided to make HRD the default database service. On April 4 2012 we announced the deprecation of Master/Slave Datastore -- our signal that three years from that date we would formally shut down the service. 
+
+That three years is upon us and, as mentioned above, one or more applications that you own (listed below) are running on Master/Slave Datastore. If you don’t take any action these applications will be shutdown on July 6, 2015 and will no longer serve traffic (users will see HTTP 404 responses). 
+
+To ensure that these applications continue to operate, you’ll need to follow these few steps for each application:
+Log into the App Engine Admin Console
+Create a new HRD application
+Use the HRD Migration Utility (linked below) to migrate any Master/Slave data to the new HRD application
+
+Step (3) is covered in greater detail in the Migrating to High Replication Datastore documentation. 
+
+An important note: You need to follow the above steps even if your application does not store any data because your application is configured to use the Master/Slave Datastore. For example, even if it’s a static HTML website. When we shut down the Master/Slave Datastore these applications will be also shut down if they are not migrated. 
+
+For applications on the Java 6 runtime: Java 6 apps must be upgraded to Java 7 prior to the migration to HRD. 
+To determine whether your app is a Java 6 app:
+Visit the App Engine Admin console, and select your application.
+In the left navigation pane, click Versions to display the versions page.
+At the top of this form, click Try the new Versions page.
+The Java runtime used by your app will be listed under RUNTIME.
+
+To upgrade:
+Update your development environment to use the latest App Engine Java SDK.
+Redeploy your app to production App Engine.
+Test it for correct behavior. There are a small number of potential compatibility issues between Java 6 and Java 7.
+
+Below is the list of applications that you are an owner of that are running on Master/Slave Datastore: 
+9xxxxx
+9xxxxx
+
+9xxxxx
+
+
+
+After the decommission, we will be providing a grace period of one month during which users can re-enable their applications in order to migrate to HRD. Throughout that month, re-enabled applications will be periodically disabled according to the following schedule: 
+
+On July 6, 2015, Master/Slave applications will be disabled at 12:00pm Pacific time. You will be able to re-enable these applications and you will be able to migrate to HRD. 
+
+On July 13, 2015, Master/Slave applications that were re-enabled will be disabled at 12:00pm Pacific time. You will be able to re-enable these applications and you will be able to migrate to HRD. 
+
+On July 20, 2015, Master/Slave applications that were re-enabled will be disabled at 12:00pm Pacific time. You will be able to re-enable these applications and you will be able to migrate to HRD. 
+
+Starting July 27, 2015, Master/Slave applications that were re-enabled will be disabled daily at 12:00pm Pacific time. You will be able to re-enable these applications and you will be able to migrate to HRD, however they’ll be disabled every business day at this time. 
+
+On August 3, 2015, you will no longer be able to re-enable your application, however you will still be able to migrate to HRD. 
+
+On August 10, 2015, your Master/Slave application will be permanently shut down and will no longer be accessible. 
+
+This means that after August 10, 2015 these applications will stop servicing requests and you will no longer have programmatic access to your data. If you no longer need your Master/Slave applications and associated data, no action is required. However, if you do need any of these applications we encourage you to migrate them to HRD immediately. 
+
+For more information please visit: Master-Slave Datastore Service Turndown.
+If you have any questions about the Master/Slave Datastore decommission, you can reach us via the Master/Slave Datastore deprecation support form. 
+
+Regards, 
+
+The Google Cloud Platform Team 
+
+---- © 2015 Google Inc. 1600 Amphitheatre Parkway, Mountain View, CA 94043 
+
+You have received this mandatory email service announcement to update you about important changes to Google Cloud Platform or your account.
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 20 19:56:54 2015">
+ Apr 20, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=20310#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/107566294692097220799/">wangshua...@gmail.com</a
+></span>
+ 
+<pre>
+亲爱的App Engine开发，
+您收到这封电子邮件，因为你被列为一个谷歌App Engine应用程序配置为使用过时的服务主从数据库所有者，这将很快被关闭。不过别担心，这封邮件给你需要做什么明确的指示。即使你的应用程序不在主/从数据存储中存储数据，它仍然是配置为使用主/从数据存储，所以请继续阅读。
+当我们推出的App Engine，主从数据库，应用程序可以使用存储数据的数据库服务。主/从数据存储中有问题的大小和应用程序引擎运行的应用程序的复杂性，所以我们推出了其继任者，高复制数据存储（HRD），2011。自开展人力资源开发已被证明的规模没有问题。
+我们的一个核心目标与谷歌的云平台，为客户提供最好的技术来建立自己的业务，所以当我们看到，人力资源开发是一个更强大的技术，我们决定把人力资源开发的默认数据库服务。在四月四日，我们宣布弃用2012主从数据库——我们的信号，三年从那日起，我们将正式关闭服务。
+三年是在我们身上，正如上面提到的，一个或多个应用程序，你自己的（下面）是运行在主/从数据存储。如果你不采取任何行动，这些应用程序将被关闭在2015年7月6日将不再担任交通（用户看到HTTP 404响应）。
+为了保证这些应用程序继续运行，你需要按照这几个步骤为每个应用程序：
+登录到管理控制台应用程序引擎
+创建一个新的人力资源开发中的应用
+用人力资源开发的迁移工具（下面链接）迁移任何主/从数据到新的人力资源开发中的应用
+步骤（3）细节迁移到高复制数据存储文件。
+重要提示：你需要按照上面的步骤，即使你的应用程序不存储任何数据，因为你的应用程序配置为使用主/从数据存储。例如，即使它是一个静态的HTML网站。当我们关闭了主/从数据存储这些应用程序也将被关闭，如果他们不迁移。
+在Java 6运行应用程序：Java 6应用程序必须在迁移之前HRD升级到Java 7。
+确定你的应用程序是一个Java应用程序6：
+访问应用程序引擎管理控制台，并选择您的应用程序。
+在左边的导航窗格中，单击要显示的页面版本版本。
+在本表格的顶部，点击试试新版本的页面。
+由应用程序使用Java运行时将被列在运行时。
+升级：
+更新您的开发环境下使用最新的App Engine Java SDK。
+重新部署你的应用到生产应用程序引擎。
+测试它的正确的行为。有一小部分潜在的兼容性问题的Java 6和Java 7之间。
+下面是应用程序的列表，你是一个老板，运行在主/从数据存储：
+9xxxxx
+退役后，我们将提供一个宽限期一个月期间，用户可以重新启用应用程序为了迁移到人力资源开发。整个月，重新启用应用程序将定期禁用按以下时间表：
+2015年7月6日，主/从应用程序将被禁用在下午12:00太平洋时间。你将能够重新启用这些应用程序，你将能够迁移到人力资源开发。
+2015年7月13日，主/从应用程序被重新启用将禁用在下午12:00太平洋时间。你将能够重新启用这些应用程序，你将能够迁移到人力资源开发。
+2015年7月20日，主/从应用程序被重新启用将禁用在下午12:00太平洋时间。你将能够重新启用这些应用程序，你将能够迁移到人力资源开发。
+2015年7月27日起，主/从应用程序被重新启用将被禁用，每天中午12:00太平洋时间。你将能够重新启用这些应用程序，你将能够迁移到人力资源部，但是他们会每天在这个时候被禁用。
+在2015年8月3日，你将不再能够重新启用您的应用程序，但是你仍然可以迁移到人力资源开发。
+2015年8月10日，你的主/从应用程序将被永久关闭，将无法访问。
+这意味着在2015年8月10日这些应用程序将停止服务的请求，你将不再有你的数据的程序访问。如果你不再需要你的主/从应用程序和相关的数据，无需行动。然而，如果你需要任何这些应用，我们鼓励您迁移到人力资源部立即。
+更多信息请访问：主从数据库服务低落。
+如果你有关于主/从datastore退役的任何问题，你可以达到我们通过主/从datastore折旧支持形式。
+问候，
+谷歌的云平台团队
+----©2015谷歌公司1600剧场路，山景，CA 94043
+您收到这封电子邮件服务通告，更新你对重要的变化对谷歌的云平台或您的帐户。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 20 20:15:33 2015">
+ Apr 20, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=20310#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/114033169287966003070/">redfrog...@gmail.com</a
+></span>
+ 
+<pre>
+你的英文也太不靠谱了吧，多少年了，你的appid都不从maser/slave模式转换到hdr模式，这下人家要关闭了，你就坐那儿等着看404吧。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 20 20:23:31 2015">
+ Apr 20, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=20310#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/107566294692097220799/">wangshua...@gmail.com</a
+></span>
+ 
+<pre>
+哈哈回楼上，就是不靠谱啊。怎么转换的？请教
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 20 20:31:10 2015">
+ Apr 20, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=20310#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/113384776842209274765/">jsnjyc...@gmail.com</a
+></span>
+ 
+<pre>
+到底什么情况
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 20 20:32:11 2015">
+ Apr 20, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=20310#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/105261040527187516524/">kang36...@gmail.com</a
+></span>
+ 
+<pre>
+不需要担心，只是数据存储要换，这个邮件明显是群发的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 20 21:01:51 2015">
+ Apr 20, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=20310#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/114033169287966003070/">redfrog...@gmail.com</a
+></span>
+ 
+<pre>
+我记得当年是先要删掉appid，然后转换存储格式，然后等个几天，Google会彻底删掉，然后重建appid，上传server，搞定。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 26 02:42:03 2015">
+ May 26, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=20310#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/116510648247102881784/">vip...@gmail.com</a
+></span>
+ 
+<pre>
+到底怎么回事啊  是只换数据存储方式就行了吗
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 26 05:15:01 2015">
+ May 26, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=20310#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/107489931029987600546/">15213598...@gmail.com</a
+></span>
+ 
+<pre>
+亲爱的谷歌云平台的客户，
+
+我们已经做了一些改动在线谷歌云平台许可协议 ，并纳入了许可协议的下列文件：
+
+    谷歌云平台服务的具体条款
+    谷歌云平台服务摘要
+    服务级别协议（SLA）
+    谷歌云平台服务除弃用政策
+    技术支持服务指南谷歌云平台服务
+    云平台的数据处理和安全条款
+
+谷歌云平台服务条款
+
+我们更新了谷歌云平台许可协议 ，除其他事项：
+
+    简化和澄清某些条款，如覆盖你的权利，以使用谷歌云平台服务和谷歌的使用权，你这些服务提供数据
+    更新的赔偿规定
+    添加数据处理和安全条款
+    允许收费，选择当地货币进行
+    添加谷歌云DNS服务级别协议
+
+谷歌云平台服务的具体条款
+
+我们更新了服务条款具体为，除其他外：
+
+    使数据位置更规定明确和统一的
+    添加数据位置的规定，谷歌计算引擎
+    添加一定排除从数据位置规定
+    澄清某些预测API义务
+    包括适用于使用第三方软件结合谷歌计算引擎条款
+    包括适用于使用谷歌云安全扫描方面
+    添加的语言阐明使用持续使用折扣定价
+    添加对限制使用谷歌云平台服务，提供网络传输或卖出带宽
+
+谷歌云平台服务摘要
+
+我们更新了服务总结为：
+
+    谷歌添加集装箱引擎和谷歌云监控的说明
+    新增管理虚拟机和云谷歌端点描述的谷歌应用程序引擎服务描述
+    谷歌添加DNS云的描述到谷歌计算引擎服务描述
+    加入谷歌的云安全扫描，谷歌API的基因组学和谷歌云的Pub / Sub如新“其他谷歌云平台服务”的说明
+
+服务级别协议
+
+我们更新了以下服务水平协议（SLA）来澄清，他们并不适用于指定的“阿尔法”和“贝塔”的特点。
+
+    谷歌应用程序引擎
+    谷歌云SQL
+    谷歌云存储
+    谷歌API预测
+    谷歌BigQuery中
+    谷歌计算引擎 
+
+我们还更新了谷歌计算引擎SLA ，除其他事情：
+
+    谷歌添加计算引擎服务负荷涵盖了SLA平衡
+
+    添加的永久磁盘访问实例定义停机损失。 
+
+谷歌云平台服务除弃用政策
+
+我们已经做了澄清，从我们排除在弃用政策服务型，特征和功能标记为“阿尔法”和“贝塔”。我们还添加了谷歌BigQuery中，以服务受弃用政策的列表。
+技术支持服务指南谷歌云平台
+
+我们更新了技术支持服务准则 ，规定，虽然谷歌没有义务提供技术支持服务，为α或β版本，功能或服务的功能，我们会考虑在逐案在这些发展阶段的请求-case基础。我们还缩短了白金P1的目标初始响应时间。
+云平台的数据处理和安全条款
+
+我们更新了数据处理和安全条款阐明子处理器和第三方供应商的定义。
+更改摘要
+
+您可以查看一个总结的主要变化在谷歌云平台许可协议，以及查看以前版本的谷歌云平台许可协议，为未来30天。
+
+此外，您可以查看一个总结的主要变化的具体服务条款，服务总结，服务水平协议，服务下弃用政策和技术支持服务指南。您还可以查看以前版本的服务特别条款 在接下来的30天。
+
+真诚的，
+
+--The谷歌云平台团队
+
+2015年©谷歌公司1600百汇剧场，山景，CA 94043
+
+你收到这封电子邮件服务通告通知您有重大变更，谷歌云平台或您的帐户。 
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 26 05:15:36 2015">
+ May 26, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=20310#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/107489931029987600546/">15213598...@gmail.com</a
+></span>
+ 
+<pre>
+这是谷歌邮箱自动翻译的
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 26 05:17:06 2015">
+ May 26, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=20310#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/107489931029987600546/">15213598...@gmail.com</a
+></span>
+ 
+<pre>
+你说的那个邮件没有收到
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 26 07:42:34 2015">
+ May 26, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=20310#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/102890827001853669868/">lsq...@gmail.com</a
+></span>
+ 
+<pre>
+我也收到了。。  
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 26 07:48:09 2015">
+ May 26, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=20310#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/102890827001853669868/">lsq...@gmail.com</a
+></span>
+ 
+<pre>
+收到的内容不一样。好像是说什么协议改变了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20310&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20310"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="20310">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A20310',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 20310,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

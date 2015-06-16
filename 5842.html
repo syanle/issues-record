@@ -1,0 +1,982 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"loggedInUserEmail": null, "relativeBaseUrl": "", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "projectName": "goagent", "domainName": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "projectHomeUrl": "/p/goagent", "token": null, "profileUrl": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 5842 - 
+ goagent -
+ 
+ 已不能使用 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D5842&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D5842" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="closed_colors">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=5842">5842</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >已不能使用</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 2 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A5842">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="The requested non-coding task was completed">Done</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ <tr><th align="left" valign="top">Closed:&nbsp;</th>
+ <td align="left" valign="top" width="100%">
+ Dec 2012
+ </td>
+ </tr>
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D5842&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D5842">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/103183076101743260453/">sw5201...@gmail.com</a
+>,
+ <span class="date" title="Mon Oct 22 22:39:45 2012">Oct 22, 2012</span>
+ 
+ </div>
+<pre>
+
+------------------------------------------------------
+GoAgent Version    : 2.0.14 (python/2.7.3 gevent/1.0b4 pyopenssl/0.13)
+Listen Address     : 127.0.0.1:8087
+GAE Mode           : http
+GAE Profile        : google_cn
+GAE APPID          : goagent-hemingway
+Pac Server         : http://127.0.0.1:8086/proxy.pac
+------------------------------------------------------
+INFO - [Oct 23 13:36:05] resolve common.GOOGLE_HOSTS domian=('203.208.46.1', '20
+3.208.46.2', '203.208.46.3', '203.208.46.4', '203.208.46.5', '203.208.46.6', '20
+3.208.46.7', '203.208.46.8') to iplist
+INFO - [Oct 23 13:36:05] resolve common.GOOGLE_HOSTS domian to iplist=('203.208.
+46.1', '203.208.46.2', '203.208.46.3', '203.208.46.4', '203.208.46.5', '203.208.
+46.6', '203.208.46.7', '203.208.46.8')
+INFO - [Oct 23 13:36:13] 127.0.0.1:61438 &quot;GET <a href="http://www.google-analytics.com/__" rel="nofollow">http://www.google-analytics.com/__</a>
+utm.gif?utmwv=5.3.6&amp;utms=11&amp;utmn=1192927730&amp;utmhn=news.mingpao.com&amp;utmcs=Big5&amp;ut
+msr=1440x900&amp;utmvp=1423x778&amp;utmsc=24-bit&amp;utmul=zh-cn&amp;utmje=1&amp;utmfl=11.4%20r402&amp;u
+tmdt=%E6%98%8E%E5%A0%B1%E6%96%B0%E8%81%9E%E7%B6%B2-%E4%B8%AD%E5%9C%8B-20121023&amp;u
+tmhid=409721047&amp;utmr=http%3A%2F%2Fwww.mingpaonews.com%2F&amp;utmp=%2F20121023%2Fcain
+dex.htm&amp;utmac=UA-4717822-6&amp;utmcc=__utma%3D227445506.1108053850.1350967735.135096
+7735.1350967735.1%3B%2B__utmz%3D227445506.1350967735.1.1.utmcsr%3Dmingpaonews.co
+m%7Cutmccn%3D(referral)%7Cutmcmd%3Dreferral%7Cutmcct%3D%2F%3B&amp;utmu=D~ HTTP/1.1&quot;
+- -
+ERROR - [Oct 23 13:36:20] Http.create_connection to (['203.208.46.1', '203.208.4
+6.4', '203.208.46.6'], 80) failed, switch window=5
+ERROR - [Oct 23 13:36:28] Http.create_connection to (['203.208.46.2', '203.208.4
+6.3', '203.208.46.5'], 80) failed, switch window=8
+ERROR - [Oct 23 13:36:33] Http.create_connection to (['203.208.46.2', '203.208.4
+6.8', '203.208.46.3'], 80) failed, switch window=8
+Traceback (most recent call last):
+  File &quot;gevent\greenlet.pyo&quot;, line 328, in run
+  File &quot;D:\Tools\goagent-goagent-35fc288\local\proxy.py&quot;, line 981, in gaeproxy_
+handler
+TypeError: 'NoneType' object is not iterable
+&lt;Greenlet at 0x2868c60: gaeproxy_handler(&lt;socket at 0x287f550 fileno=[Errno 9] B
+ad file des, ('127.0.0.1', 61443))&gt; failed with TypeError
+
+ERROR - [Oct 23 13:36:39] Http.create_connection to (['203.208.46.2', '203.208.4
+6.7', '203.208.46.8', '203.208.46.4', '203.208.46.6'], 80) failed, switch window
+=8
+Traceback (most recent call last):
+  File &quot;gevent\greenlet.pyo&quot;, line 328, in run
+  File &quot;D:\Tools\goagent-goagent-35fc288\local\proxy.py&quot;, line 981, in gaeproxy_
+handler
+TypeError: 'NoneType' object is not iterable
+&lt;Greenlet at 0x2868a80: gaeproxy_handler(&lt;socket at 0x287ab70 fileno=[Errno 9] B
+ad file des, ('127.0.0.1', 61427))&gt; failed with TypeError
+
+ERROR - [Oct 23 13:36:42] Http.create_connection to (['203.208.46.3', '203.208.4
+6.8', '203.208.46.5', '203.208.46.1', '203.208.46.4'], 80) failed, switch window
+=8
+INFO - [Oct 23 13:36:46] 127.0.0.1:61423 &quot;GET <a href="http://news.mingpao.com/cfm/Keywor" rel="nofollow">http://news.mingpao.com/cfm/Keywor</a>
+ds2.cfm?code=739&amp;txt=event_0738.txt HTTP/1.1&quot; 200 -
+ERROR - [Oct 23 13:36:50] Http.create_connection to (set(['203.208.46.8', '203.2
+08.46.1', '203.208.46.3', '203.208.46.2', '203.208.46.5', '203.208.46.4', '203.2
+08.46.7', '203.208.46.6']), 80) failed, switch window=8
+ERROR - [Oct 23 13:36:57] Http.create_connection to (set(['203.208.46.8', '203.2
+08.46.1', '203.208.46.3', '203.208.46.2', '203.208.46.5', '203.208.46.4', '203.2
+08.46.7', '203.208.46.6']), 80) failed, switch window=8
+Traceback (most recent call last):
+  File &quot;gevent\greenlet.pyo&quot;, line 328, in run
+  File &quot;D:\Tools\goagent-goagent-35fc288\local\proxy.py&quot;, line 981, in gaeproxy_
+handler
+TypeError: 'NoneType' object is not iterable
+&lt;Greenlet at 0x2868990: gaeproxy_handler(&lt;socket at 0x287a510 fileno=[Errno 9] B
+ad file des, ('127.0.0.1', 61410))&gt; failed with TypeError
+
+ERROR - [Oct 23 13:37:05] Http.create_connection to (set(['203.208.46.8', '203.2
+08.46.1', '203.208.46.3', '203.208.46.2', '203.208.46.5', '203.208.46.4', '203.2
+08.46.7', '203.208.46.6']), 80) failed, switch window=8
+INFO - [Oct 23 13:37:15] 127.0.0.1:61602 &quot;GET <a href="http://www.gstatic.com/codesite/ph" rel="nofollow">http://www.gstatic.com/codesite/ph</a>
+/17790938420062995905/js/kibbles.js HTTP/1.1&quot; 200 -
+Traceback (most recent call last):
+  File &quot;gevent\greenlet.pyo&quot;, line 328, in run
+  File &quot;D:\Tools\goagent-goagent-35fc288\local\proxy.py&quot;, line 981, in gaeproxy_
+handler
+TypeError: 'NoneType' object is not iterable
+&lt;Greenlet at 0x2868c60: gaeproxy_handler(&lt;socket at 0x287aff0 fileno=[Errno 9] B
+ad file des, ('127.0.0.1', 61489))&gt; failed with TypeError
+
+INFO - [Oct 23 13:37:21] 127.0.0.1:61603 &quot;GET <a href="http://www.gstatic.com/codesite/ph" rel="nofollow">http://www.gstatic.com/codesite/ph</a>
+/17790938420062995905/js/kibbles.js HTTP/1.1&quot; 200 -
+Traceback (most recent call last):
+  File &quot;gevent\greenlet.pyo&quot;, line 328, in run
+  File &quot;D:\Tools\goagent-goagent-35fc288\local\proxy.py&quot;, line 981, in gaeproxy_
+handler
+TypeError: 'NoneType' object is not iterable
+&lt;Greenlet at 0x2868990: gaeproxy_handler(&lt;socket at 0x287a690 fileno=[Errno 9] B
+ad file des, ('127.0.0.1', 61570))&gt; failed with TypeError
+
+INFO - [Oct 23 13:37:27] 127.0.0.1:61679 &quot;GET <a href="http://news.mingpao.com/20121023/c" rel="nofollow">http://news.mingpao.com/20121023/c</a>
+aa2.htm HTTP/1.1&quot; 200 -
+INFO - [Oct 23 13:37:30] Http.create_connection to (set(['203.208.46.8', '203.20
+8.46.1', '203.208.46.3', '203.208.46.2', '203.208.46.5', '203.208.46.4', '203.20
+8.46.7', '203.208.46.6']), 80) successed, switch window=7
+INFO - [Oct 23 13:37:33] 127.0.0.1:61699 &quot;GET <a href="http://news.mingpao.com/css/keywor" rel="nofollow">http://news.mingpao.com/css/keywor</a>
+ds.css HTTP/1.1&quot; 304 -
+Traceback (most recent call last):
+  File &quot;gevent\greenlet.pyo&quot;, line 328, in run
+  File &quot;D:\Tools\goagent-goagent-35fc288\local\proxy.py&quot;, line 981, in gaeproxy_
+handler
+TypeError: 'NoneType' object is not iterable
+&lt;Greenlet at 0x28689e0: gaeproxy_handler(&lt;socket at 0x287f530 fileno=[Errno 9] B
+ad file des, ('127.0.0.1', 61701))&gt; failed with TypeError
+
+ERROR - [Oct 23 13:37:42] Http.create_connection to (set(['203.208.46.8', '203.2
+08.46.1', '203.208.46.3', '203.208.46.2', '203.208.46.5', '203.208.46.4', '203.2
+08.46.7', '203.208.46.6']), 80) failed, switch window=8
+INFO - [Oct 23 13:37:43] 127.0.0.1:61803 &quot;GET <a href="http://news.mingpao.com/js/Keyword" rel="nofollow">http://news.mingpao.com/js/Keyword</a>
+s2/mouseover_all.js HTTP/1.1&quot; 200 -
+INFO - [Oct 23 13:37:44] 127.0.0.1:61695 &quot;GET <a href="http://news.mingpao.com/css/topmen" rel="nofollow">http://news.mingpao.com/css/topmen</a>
+u.css HTTP/1.1&quot; 200 -
+INFO - [Oct 23 13:37:50] 127.0.0.1:61859 &quot;GET <a href="http://news.mingpao.com/js/WebNews" rel="nofollow">http://news.mingpao.com/js/WebNews</a>
+2/ContentHotLabel1.js HTTP/1.1&quot; 200 -
+Traceback (most recent call last):
+  File &quot;gevent\greenlet.pyo&quot;, line 328, in run
+  File &quot;D:\Tools\goagent-goagent-35fc288\local\proxy.py&quot;, line 981, in gaeproxy_
+handler
+TypeError: 'NoneType' object is not iterable
+&lt;Greenlet at 0x2868d00: gaeproxy_handler(&lt;socket at 0x287fc50 fileno=[Errno 9] B
+ad file des, ('127.0.0.1', 61707))&gt; failed with TypeError
+
+INFO - [Oct 23 13:37:50] 127.0.0.1:61703 &quot;GET <a href="http://news.mingpao.com/js/generic" rel="nofollow">http://news.mingpao.com/js/generic</a>
+.js HTTP/1.1&quot; 304 -
+INFO - [Oct 23 13:37:52] 127.0.0.1:61868 &quot;GET <a href="http://news.mingpao.com/js/WebNews" rel="nofollow">http://news.mingpao.com/js/WebNews</a>
+2/ContentLeft.js HTTP/1.1&quot; 200 -
+INFO - [Oct 23 13:37:54] 127.0.0.1:61829 &quot;GET <a href="http://news.mingpao.com/js/AdvertM" rel="nofollow">http://news.mingpao.com/js/AdvertM</a>
+SIG.js HTTP/1.1&quot; 304 -
+INFO - [Oct 23 13:37:56] 127.0.0.1:61908 &quot;GET <a href="http://news.mingpao.com/js/Keyword" rel="nofollow">http://news.mingpao.com/js/Keyword</a>
+s21.js HTTP/1.1&quot; 304 -
+INFO - [Oct 23 13:38:02] 127.0.0.1:61955 &quot;GET <a href="http://news.mingpao.com/js/TopMenu" rel="nofollow">http://news.mingpao.com/js/TopMenu</a>
+/TopLogo.js HTTP/1.1&quot; 200 -
+INFO - [Oct 23 13:38:03] Http.create_connection to (set(['203.208.46.8', '203.20
+8.46.1', '203.208.46.3', '203.208.46.2', '203.208.46.5', '203.208.46.4', '203.20
+8.46.7', '203.208.46.6']), 80) successed, switch window=7
+INFO - [Oct 23 13:38:04] 127.0.0.1:61899 &quot;GET <a href="http://news.mingpao.com/js/Advert2" rel="nofollow">http://news.mingpao.com/js/Advert2</a>
+DFP.js HTTP/1.1&quot; 200 -
+Traceback (most recent call last):
+  File &quot;gevent\greenlet.pyo&quot;, line 328, in run
+  File &quot;D:\Tools\goagent-goagent-35fc288\local\proxy.py&quot;, line 981, in gaeproxy_
+handler
+TypeError: 'NoneType' object is not iterable
+&lt;Greenlet at 0x2868d00: gaeproxy_handler(&lt;socket at 0x287f370 fileno=[Errno 9] B
+ad file des, ('127.0.0.1', 61975))&gt; failed with TypeError
+
+INFO - [Oct 23 13:38:11] 127.0.0.1:61696 &quot;GET <a href="http://news.mingpao.com/css/style" rel="nofollow">http://news.mingpao.com/css/style</a>.
+css HTTP/1.1&quot; 304 -
+Traceback (most recent call last):
+  File &quot;gevent\greenlet.pyo&quot;, line 328, in run
+  File &quot;D:\Tools\goagent-goagent-35fc288\local\proxy.py&quot;, line 981, in gaeproxy_
+handler
+TypeError: 'NoneType' object is not iterable
+&lt;Greenlet at 0x2868da0: gaeproxy_handler(&lt;socket at 0x287f610 fileno=[Errno 9] B
+ad file des, ('127.0.0.1', 61705))&gt; failed with TypeError
+
+INFO - [Oct 23 13:38:19] 127.0.0.1:61935 &quot;GET <a href="http://news.mingpao.com/js/TopMenu" rel="nofollow">http://news.mingpao.com/js/TopMenu</a>
+/TopSearchBox.js HTTP/1.1&quot; 304 -
+ERROR - [Oct 23 13:38:21] Http.create_connection to (['203.208.46.6', '203.208.4
+6.3', '203.208.46.5', '203.208.46.8', '203.208.46.1', '203.208.46.2', '203.208.4
+6.4'], 80) failed, switch window=8
+ERROR - [Oct 23 13:38:22] Http.create_connection to (['203.208.46.8', '203.208.4
+6.6', '203.208.46.3', '203.208.46.1', '203.208.46.2', '203.208.46.4', '203.208.4
+6.5'], 80) failed, switch window=8
+Traceback (most recent call last):
+  File &quot;gevent\greenlet.pyo&quot;, line 328, in run
+  File &quot;D:\Tools\goagent-goagent-35fc288\local\proxy.py&quot;, line 981, in gaeproxy_
+handler
+TypeError: 'NoneType' object is not iterable
+&lt;Greenlet at 0x2868a80: gaeproxy_handler(&lt;socket at 0x287aff0 fileno=[Errno 9] B
+ad file des, ('127.0.0.1', 61984))&gt; failed with TypeError
+
+ERROR - [Oct 23 13:38:24] Http.create_connection to (['203.208.46.1', '203.208.4
+6.7', '203.208.46.4', '203.208.46.3', '203.208.46.5', '203.208.46.8', '203.208.4
+6.2'], 80) failed, switch window=8
+ERROR - [Oct 23 13:38:26] Http.create_connection to (['203.208.46.7', '203.208.4
+6.5', '203.208.46.4', '203.208.46.3', '203.208.46.8', '203.208.46.6', '203.208.4
+6.1'], 80) failed, switch window=8
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct 22 22:49:03 2012">
+ Oct 22, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=5842#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/100517077018152218799/">liom...@gmail.com</a
+></span>
+ 
+<pre>
+我也不能用了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct 22 22:55:01 2012">
+ Oct 22, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=5842#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/106343360446709173024/">ratstar...@gmail.com</a
+></span>
+ 
+<pre>
+你和我于敖的问题很相似，都是在proxy.py 981行报的错。NoneType object is not iterable.
+没办法先用老版本中。PY程序实在看不明白。哎
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct 22 23:23:27 2012">
+ Oct 22, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=5842#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/101341747181270840133/">jque...@gmail.com</a
+></span>
+ 
+<pre>
+我从昨天开始也不能用了。。。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct 23 00:25:52 2012">
+ Oct 23, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=5842#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/106781204990925295112/">yubinlov...@gmail.com</a
+></span>
+ 
+<pre>
+方法1.下载官方修复版
+<a href="http://goo.gl/O5vWe" rel="nofollow">http://goo.gl/O5vWe</a>
+以下方法只能正常使用，不一定能upload
+方法2，自己修改ini文件
+[gae]
+appid = goagent
+password =
+path = /fetch.py
+profile = google_cn
+改成
+[gae]
+appid = goagent
+password =
+path = /fetch.py
+profile = google_hk
+方法3
+修改ini文件
+[google_cn]
+mode = http
+hosts = 203.208.46.1|203.208.46.2|203.208.46.3|203.208.46.4|203.208.46.5|203.208.46.6|203.208.46.7|203.208.46.8
+改成
+[google_cn]
+mode = http
+hosts = 203.208.47.1|203.208.47.2|203.208.47.3|203.208.47.4|203.208.47.5|203.208.47.6|203.208.47.7|203.208.47.8
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct 23 02:25:31 2012">
+ Oct 23, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=5842#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/100517077018152218799/">liom...@gmail.com</a
+></span>
+ 
+<pre>
+從新上傳就可以了
+我刚上傳完
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Dec 15 18:15:54 2012">
+ Dec 15, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=5842#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+<i>(No comment was entered for this change.)</i>
+</pre>
+ 
+ 
+ <div class="updates">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ 
+ <b>Status:</b>
+ Done
+ 
+ <br>
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D5842&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D5842"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="5842">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A5842',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 5842,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

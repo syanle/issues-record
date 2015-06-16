@@ -1,0 +1,4550 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"loggedInUserEmail": null, "relativeBaseUrl": "", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "projectName": "goagent", "domainName": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "projectHomeUrl": "/p/goagent", "token": null, "profileUrl": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 20131 - 
+ goagent -
+ 
+ XX-Net，让goagent布置一劳永逸，后台全自动描述可用IP并按速度排序，免除找IP的麻烦。 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20131&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20131" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=20131">20131</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >XX-Net，让goagent布置一劳永逸，后台全自动描述可用IP并按速度排序，免除找IP的麻烦。</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 23 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A20131">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20131&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20131">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/111489475185947239458/">gzk...@163.com</a
+>,
+ <span class="date" title="Sun Apr  5 19:16:56 2015">Apr 5, 2015</span>
+ 
+ </div>
+<pre>
+前段时间封锁gmail的同时，GFW又加大了封锁IP，使得大家经常要每天不停地扫可用的IP，而且扫出来的说不定过一天就挂了。后来也是在这个论坛里，有热心网友开发的基于goagent的XX-Net,终于让我摆脱了扫IP的麻烦。当然如果有扫描强迫症的大家自然可以用gogotest慢慢扫。
+
+项目地址：<a href="https://github.com/XX-net/XX-Net" rel="nofollow">https://github.com/XX-net/XX-Net</a>
+作用：让后台自动扫描可用IP，并按速度快慢排序后应用到IP配置列表，实现最大速度（都是后台自动完成，不在前台显现）。
+使用方法：见项目介绍，部署GAE服务端。
+使用体会：从这个项目初期开始看youtube会卡，现在是流畅到无语。而且有个特点，就是越用越快，因为他们实实在后台扫描可用IP，有快的IP自动切换到该IP。
+个人评价：真正意义上的让goagent焕发第二春的神器。
+
+独乐乐不如众乐乐，好东西不敢独享，希望大家也能像我一样从此摆脱扫IP的麻烦。
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr  5 23:35:15 2015">
+ Apr 5, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=20131#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/118216694576523109839/">weiya.le...@gmail.com</a
+></span>
+ 
+<pre>
+怎么用
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 10 01:33:30 2015">
+ Apr 10, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=20131#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/109326407449404721573/">love...@qq.com</a
+></span>
+ 
+<pre>
+好用，成功复活，谢谢！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 10 02:14:52 2015">
+ Apr 10, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=20131#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/100979027919247896219/">paulul...@gmail.com</a
+></span>
+ 
+<pre>
+前来支持。前几天在这里看到有人推荐，去试了试，真心速度快啊。因为是基于goagent，也不会让人有对新的配置什么的很陌生抵抗的情绪，而且配置起来甚至更发便。目前更新到1.8.2版本了，强力推荐，至少可以点进那个项目地址看看。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 10 03:40:57 2015">
+ Apr 10, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=20131#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/114640031972483977113/">stevneki...@gmail.com</a
+></span>
+ 
+<pre>
+提示证书错误 怎么回事
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 10 04:22:45 2015">
+ Apr 10, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=20131#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/116692899014910717943/">dengzhih...@gmail.com</a
+></span>
+ 
+<pre>
+速度是块 但是感觉ip有点问题 怪怪的
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 10 04:30:33 2015">
+ Apr 10, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=20131#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/107696288815104262854/">jyuan...@gmail.com</a
+></span>
+ 
+<pre>
+一直没搞明白这玩意儿究竟怎么用，一点击就启动IE，问题是启动IE后半天也加载不出任何内容来
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 10 04:37:16 2015">
+ Apr 10, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=20131#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/105773754172221224141/">gcy954...@gmail.com</a
+></span>
+ 
+<pre>
+證書的不知道是不是有問題？我的鎖型圖標沒顯示鎖 只顯示一般沒有加密的網頁 但上面也是加密了的？你們也是這樣嗎？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 10 07:47:11 2015">
+ Apr 10, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=20131#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/110870187471965512698/">xxnet....@gmail.com</a
+></span>
+ 
+<pre>
+#6 
+  请先打开CMD命令行窗口，
+切换到XX-Net的目录
+然后在CMD中执行start.bat
+看看出现什么问题
+
+参考这：
+<a href="https://code.google.com/p/goagent/issues/detail?id=20169" rel="nofollow">https://code.google.com/p/goagent/issues/detail?id=20169</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 10 07:49:04 2015">
+ Apr 10, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=20131#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/110870187471965512698/">xxnet....@gmail.com</a
+></span>
+ 
+<pre>
+#7
+  证书的没有出现锁头的现象我也见过。
+  还没有发现规律是什么，但是你右键对应的位置，还是能够打开证书的信息的。
+
+  XX-Net启动后，会自动导入证书，但Chrome需要重启，才能生效
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 10 09:06:10 2015">
+ Apr 10, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=20131#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/111986337520276975417/">lungcho...@gmail.com</a
+></span>
+ 
+<pre>
+有必要更新版本吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 10 22:43:30 2015">
+ Apr 10, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=20131#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/105119477659469993325/">330...@gmail.com</a
+></span>
+ 
+<pre>
+已用XX-NET使得goagent焕发了第二春（懒得手动去扫IP及各种折腾了），话说，这两个项目可以合作整在一起也。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr 11 03:47:08 2015">
+ Apr 11, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=20131#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/104651317305939684141/">yintam...@gmail.com</a
+></span>
+ 
+<pre>
+不会用不知道怎么用,我没有IE浏览器
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr 11 21:57:30 2015">
+ Apr 11, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=20131#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/103048730716204785300/">zhaoyido...@gmail.com</a
+></span>
+ 
+<pre>
+确实可以用
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr 11 22:17:09 2015">
+ Apr 11, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=20131#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/114346676772565663242/">kimfang....@gmail.com</a
+></span>
+ 
+<pre>
+楼主，用了XX-net,上什么网站速度都很快，
+可有个问题想问下，
+为什么上gmail,发送不了附件？？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr 11 22:36:30 2015">
+ Apr 11, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=20131#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/102983285939913321940/">leopardr...@gmail.com</a
+></span>
+ 
+<pre>
+#14 我也发不了附件，怎么回事？？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr 11 22:40:35 2015">
+ Apr 11, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=20131#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/114346676772565663242/">kimfang....@gmail.com</a
+></span>
+ 
+<pre>
+我刚捣鼓了一个早上，还是没搞定，
+不知道是啥原因， 附不了附件，发不了附件。
+
+其他的真是没得说，上facebook, youtube什么的，都超快！
+但是gmail发不了附件，基本上也是半废了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr 11 23:22:38 2015">
+ Apr 11, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=20131#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/111867122052592893253/">l7930...@gmail.com</a
+></span>
+ 
+<pre>
+我已经给这么屌的制作者拜服了，简直从各个方面革命性的优化了Goagent的使用
+
+很好用，对比近日糟糕的网络情况体验已经很棒了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 12 07:38:19 2015">
+ Apr 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=20131#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/100243958361339467112/">wusuowei...@gmail.com</a
+></span>
+ 
+<pre>
+太感谢了，差点就买vpn了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 12 07:54:02 2015">
+ Apr 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=20131#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/104841872661673108274/">lapc...@gmail.com</a
+></span>
+ 
+<pre>
+能教下具体使用方法么
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 12 08:40:29 2015">
+ Apr 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=20131#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/110890890613389082938/">Tee.11...@gmail.com</a
+></span>
+ 
+<pre>
+我的Goagent还是复活了～将新扫描的IP添加到proxy就好了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 12 19:17:23 2015">
+ Apr 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=20131#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/110870187471965512698/">xxnet....@gmail.com</a
+></span>
+ 
+<pre>
+gmail无法发附件的问题，我研究下，谢谢反馈
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 12 19:47:04 2015">
+ Apr 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=20131#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/116431552229679272717/">Design...@gmail.com</a
+></span>
+ 
+<pre>
+今天goagent挂了，本来需要openvpn。现在xx解决问题了。2015-04-13 
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 12 20:19:40 2015">
+ Apr 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=20131#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/105464615794475027668/">yjd...@gmail.com</a
+></span>
+ 
+<pre>
+前天也是这里看的。现在在用。
+就是个别论坛有cookie丢的问题。老是提示重新登入。
+其实最早期goagent也有这个问题的。后来就没了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc26">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 12 20:36:10 2015">
+ Apr 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c26" href="/p/goagent/issues/detail?id=20131#c26">#26</a>
+ 
+
+ <a class="userlink"
+ href="/u/113320442021899094987/">rirea...@gmail.com</a
+></span>
+ 
+<pre>
+昨天用了gogotest已经感觉复活了，刚刚用了xx，超强啊，哇哈哈
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 12 21:35:07 2015">
+ Apr 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=20131#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/108634209903474051831/">northent...@gmail.com</a
+></span>
+ 
+<pre>
+非常感谢，现在又能正常使用了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 12 22:01:06 2015">
+ Apr 12, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=20131#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/113736144786061129121/">nttao...@gmail.com</a
+></span>
+ 
+<pre>
+太感谢了。超牛的作品！现在速度飞快
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc29">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 13 01:08:46 2015">
+ Apr 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c29" href="/p/goagent/issues/detail?id=20131#c29">#29</a>
+ 
+
+ <a class="userlink"
+ href="/u/115873735076323347581/">zif...@gmail.com</a
+></span>
+ 
+<pre>
+在此请问楼主 
+以前部署过了 goagent3.2.3 的是否在 XX-Net-1.8.4 可以不用部署了呀，就是不用重新上传 那25个ID了？？？
+谢谢！！！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc30">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 13 01:14:17 2015">
+ Apr 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c30" href="/p/goagent/issues/detail?id=20131#c30">#30</a>
+ 
+
+ <a class="userlink"
+ href="/u/105228503200223488049/">fuchang...@gmail.com</a
+></span>
+ 
+<pre>
+这个太吊了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc31">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 13 03:49:41 2015">
+ Apr 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c31" href="/p/goagent/issues/detail?id=20131#c31">#31</a>
+ 
+
+ <a class="userlink"
+ href="/u/102983285939913321940/">leopardr...@gmail.com</a
+></span>
+ 
+<pre>
+#29 是的可以不用重新部署了，我的就是直接改PROXY.INI里面的APPID（自己的ID），就能用了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc32">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 13 06:37:05 2015">
+ Apr 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c32" href="/p/goagent/issues/detail?id=20131#c32">#32</a>
+ 
+
+ <a class="userlink"
+ href="/u/114453504252278396211/">guojianz...@gmail.com</a
+></span>
+ 
+<pre>
+感谢分享！！！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc33">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 13 06:55:48 2015">
+ Apr 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c33" href="/p/goagent/issues/detail?id=20131#c33">#33</a>
+ 
+
+ <a class="userlink"
+ href="/u/103541853309433914092/">aigo...@gmail.com</a
+></span>
+ 
+<pre>
+有兩個 Not Exist appids，什麼意思？怎麼就沒了？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc34">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 13 19:42:29 2015">
+ Apr 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c34" href="/p/goagent/issues/detail?id=20131#c34">#34</a>
+ 
+
+ <a class="userlink"
+ href="/u/114772024266319800688/">man...@gmail.com</a
+></span>
+ 
+<pre>
+太棒了，谢谢！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc35">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 13 21:03:48 2015">
+ Apr 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c35" href="/p/goagent/issues/detail?id=20131#c35">#35</a>
+ 
+
+ <a class="userlink"
+ href="/u/110125173459528724029/">claw...@gmail.com</a
+></span>
+ 
+<pre>
+屌爆了~ 呵呵
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc36">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 13 21:42:15 2015">
+ Apr 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c36" href="/p/goagent/issues/detail?id=20131#c36">#36</a>
+ 
+
+ <a class="userlink"
+ href="/u/105715608688980173430/">minguo...@gmail.com</a
+></span>
+ 
+<pre>
+请问这个的步骤是不是：
+1.先运行原有的goagent（它不需要做任何手动修改？）；（发现先启动xxnet就会出现各种问题？）
+2.再运行已经部署好的xxnet；
+3.之后，这两个软件一直开着就行了。
+
+是这样吗？谢谢！
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc37">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 13 23:06:05 2015">
+ Apr 13, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c37" href="/p/goagent/issues/detail?id=20131#c37">#37</a>
+ 
+
+ <a class="userlink"
+ href="/u/109081586639246678877/">wzyg...@gmail.com</a
+></span>
+ 
+<pre>
+这几天goagent罢工的我都快崩溃了，不过这个项目其实不错，网页打开速度很快。两个问题想问下：
+1. gmail附件确实不能发送，这个还是挺要命的，目前正和外国导师联系呢，这个问题解决了吗？
+2. 版本可否升级到3.2.3，强迫症患者表示有点受不了？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc38">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 14 00:43:42 2015">
+ Apr 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c38" href="/p/goagent/issues/detail?id=20131#c38">#38</a>
+ 
+
+ <a class="userlink"
+ href="/u/106402196990015907522/">liwei2...@gmail.com</a
+></span>
+ 
+<pre>
+好用，多谢！！！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc39">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 14 02:20:34 2015">
+ Apr 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c39" href="/p/goagent/issues/detail?id=20131#c39">#39</a>
+ 
+
+ <a class="userlink"
+ href="/u/110870187471965512698/">xxnet....@gmail.com</a
+></span>
+ 
+<pre>
+#37
+ Gmail 附件问题已经修复，请测试最新版
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc40">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 14 02:39:03 2015">
+ Apr 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c40" href="/p/goagent/issues/detail?id=20131#c40">#40</a>
+ 
+
+ <a class="userlink"
+ href="/u/111489475185947239458/">gzk...@163.com</a
+></span>
+ 
+<pre>
+呵呵，好东西就是39#的作者开发的，有问题的可以直接问他。他说gmail.附件问题已经修复，大家可以点进项目地下下载最新版测试下。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc41">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 14 02:55:06 2015">
+ Apr 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c41" href="/p/goagent/issues/detail?id=20131#c41">#41</a>
+ 
+
+ <a class="userlink"
+ href="/u/113537992178463794193/">l.huiwu0...@gmail.com</a
+></span>
+ 
+<pre>
+这是个利国利民的好项目啊。顶
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc42">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 14 05:47:59 2015">
+ Apr 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c42" href="/p/goagent/issues/detail?id=20131#c42">#42</a>
+ 
+
+ <a class="userlink"
+ href="/u/100584712946783834332/">landrove...@gmail.com</a
+></span>
+ 
+<pre>
+已经开始使用，速度可以
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc43">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 14 09:05:39 2015">
+ Apr 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c43" href="/p/goagent/issues/detail?id=20131#c43">#43</a>
+ 
+
+ <a class="userlink"
+ href="/u/109177790888815356451/">garan1...@gmail.com</a
+></span>
+ 
+<pre>
+终于又找到组织啦 哈哈哈哈哈哈
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc44">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 14 09:11:26 2015">
+ Apr 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c44" href="/p/goagent/issues/detail?id=20131#c44">#44</a>
+ 
+
+ <a class="userlink"
+ href="/u/109177790888815356451/">garan1...@gmail.com</a
+></span>
+ 
+<pre>
+@ #39  能否提供通过邮件订阅的渠道，我怕明天睡醒又没法用了。
+真心感谢开发者！
+我的email:garan1980@hotmail.com
+谢谢！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc45">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 14 12:02:01 2015">
+ Apr 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c45" href="/p/goagent/issues/detail?id=20131#c45">#45</a>
+ 
+
+ <a class="userlink"
+ href="/u/110571275720332897952/">lxok1...@gmail.com</a
+></span>
+ 
+<pre>
+goodip使用时间频率最好调低，否则长时间流量过大，极易被封，昨天才扫出的大于1·4M/S的IP今天就失效了。妈的，操GFW。换成以前失效的高速IP，又尼玛活了。真是尼玛无聊，如此正腐，无耻、无聊、无德透顶。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc46">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 14 18:25:34 2015">
+ Apr 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c46" href="/p/goagent/issues/detail?id=20131#c46">#46</a>
+ 
+
+ <a class="userlink"
+ href="/u/109081586639246678877/">wzyg...@gmail.com</a
+></span>
+ 
+<pre>
+#39 已经下载1.8.7版本，测试仍然有问题，上传10K以下的可以，10K以上的总是卡在一个大概90%左右的进度条上停滞不前。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc47">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 14 18:33:07 2015">
+ Apr 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c47" href="/p/goagent/issues/detail?id=20131#c47">#47</a>
+ 
+
+ <a class="userlink"
+ href="/u/113724557543781461431/">shawnc...@gmail.com</a
+></span>
+ 
+<pre>
+超好用！
+感谢XXNET！！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc48">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 14 19:04:19 2015">
+ Apr 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c48" href="/p/goagent/issues/detail?id=20131#c48">#48</a>
+ 
+
+ <a class="userlink"
+ href="/u/111489475185947239458/">gzk...@163.com</a
+></span>
+ 
+<pre>
+#39 已经测试了1.8.7版本，gmail附件确实还存在问题，麻烦作者再调试下。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc49">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 14 19:49:09 2015">
+ Apr 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c49" href="/p/goagent/issues/detail?id=20131#c49">#49</a>
+ 
+
+ <a class="userlink"
+ href="/u/101894220290121883973/">forever9...@gmail.com</a
+></span>
+ 
+<pre>
+太nb太好用了，谢谢项目开发者
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc50">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 14 21:11:37 2015">
+ Apr 14, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c50" href="/p/goagent/issues/detail?id=20131#c50">#50</a>
+ 
+
+ <a class="userlink"
+ href="/u/106438135916095801031/">japanoo...@gmail.com</a
+></span>
+ 
+<pre>
+请问自己的好ip加在什么地方？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc51">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr 15 01:48:34 2015">
+ Apr 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c51" href="/p/goagent/issues/detail?id=20131#c51">#51</a>
+ 
+
+ <a class="userlink"
+ href="/u/102041401212429244892/">KartRide...@gmail.com</a
+></span>
+ 
+<pre>
+留名赞一个
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc52">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr 15 07:51:04 2015">
+ Apr 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c52" href="/p/goagent/issues/detail?id=20131#c52">#52</a>
+ 
+
+ <a class="userlink"
+ href="/u/106679372203524012445/">zhang.b...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢啊！成功复活，明天给朋友拷一个，谢谢！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc53">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr 15 22:16:01 2015">
+ Apr 15, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c53" href="/p/goagent/issues/detail?id=20131#c53">#53</a>
+ 
+
+ <a class="userlink"
+ href="/u/111489475185947239458/">gzk...@163.com</a
+></span>
+ 
+<pre>
+更新到最新的1.8.10 版，经过测试，上传了两个7.6M和3.2M的附件，成功。gmail附件有问题的朋友请更新到1.8.10版。基本可以满足日常需求了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc54">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 16 18:47:49 2015">
+ Apr 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c54" href="/p/goagent/issues/detail?id=20131#c54">#54</a>
+ 
+
+ <a class="userlink"
+ href="/u/105715608688980173430/">minguo...@gmail.com</a
+></span>
+ 
+<pre>
+请问:
+&quot;Local URLFetch '<a href="https://www.google.com/settings/security/lesssecureapps'" rel="nofollow">https://www.google.com/settings/security/lesssecureapps'</a> failed
+GAE_Exception()
+GAE_Exception()
+GAE_Exception() &quot;
+
+这个是怎么回事？
+
+我发现一开始用的时候，很多网站都会这样，但搜索还是飞速稳定的。不过如果把原生的goagent也同时打开的话，就没有这种问题了，但是速度又会降下来。
+谢谢！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc55">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 16 19:08:58 2015">
+ Apr 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c55" href="/p/goagent/issues/detail?id=20131#c55">#55</a>
+ 
+
+ <a class="userlink"
+ href="/u/110870187471965512698/">xxnet....@gmail.com</a
+></span>
+ 
+<pre>
+#54
+  请用最新版本测试
+  新版google.com域名采用FWD模式
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc56">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 16 19:47:47 2015">
+ Apr 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c56" href="/p/goagent/issues/detail?id=20131#c56">#56</a>
+ 
+
+ <a class="userlink"
+ href="/u/102257244895975197465/">jsbyfu...@gmail.com</a
+></span>
+ 
+<pre>
+终于正常了。谢谢。附件未试。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc57">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 16 19:55:02 2015">
+ Apr 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c57" href="/p/goagent/issues/detail?id=20131#c57">#57</a>
+ 
+
+ <a class="userlink"
+ href="/u/102257244895975197465/">jsbyfu...@gmail.com</a
+></span>
+ 
+<pre>
+似乎小型附件可以发送，至少试了4M以下的没问题。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc58">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 16 20:25:25 2015">
+ Apr 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c58" href="/p/goagent/issues/detail?id=20131#c58">#58</a>
+ 
+
+ <a class="userlink"
+ href="/u/105715608688980173430/">minguo...@gmail.com</a
+></span>
+ 
+<pre>
+#55
+好了，太感谢了！
+感觉那个“GAE_Exception()”就是因为自己的appids没有布置好引起的。最后问题是这样解决的：
+
+1.下了最新版，最后直接在proxy.ini里把appid替换为自己的；（在ie里重新部署，发现总是中途停下来，然后“状态”页里边自己的appid一直在“NOT EXIST appids”那里）
+2.重启浏览器，才会生效。（改过之后直接在已开的浏览器里尝试，就不行，重启一下就正常了~）
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc59">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 16 22:35:36 2015">
+ Apr 16, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c59" href="/p/goagent/issues/detail?id=20131#c59">#59</a>
+ 
+
+ <a class="userlink"
+ href="/u/107338711029923439212/">sguards....@gmail.com</a
+></span>
+ 
+<pre>
+有病毒。间谍软件
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc60">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 17 02:40:50 2015">
+ Apr 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c60" href="/p/goagent/issues/detail?id=20131#c60">#60</a>
+ 
+
+ <a class="userlink"
+ href="/u/110870187471965512698/">xxnet....@gmail.com</a
+></span>
+ 
+<pre>
+#59
+  请问是什么杀毒软件报的？
+  报的详细提示是什么
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc61">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 17 05:03:45 2015">
+ Apr 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c61" href="/p/goagent/issues/detail?id=20131#c61">#61</a>
+ 
+
+ <a class="userlink"
+ href="/u/106668721686956174869/">kakiyuh...@gmail.com</a
+></span>
+ 
+<pre>
+求教为什么我启动了一次xx-net后，把xx-net关了后就ie，115浏览器这些都上不去网了？chrome还能真常上网
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc62">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 17 05:12:07 2015">
+ Apr 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c62" href="/p/goagent/issues/detail?id=20131#c62">#62</a>
+ 
+
+ <a class="userlink"
+ href="/u/111489475185947239458/">gzk...@163.com</a
+></span>
+ 
+<pre>
+#61 估计你是开启了 set Goble goagent proxy,你可以选择goble Pac proxy
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc63">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 17 05:15:58 2015">
+ Apr 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c63" href="/p/goagent/issues/detail?id=20131#c63">#63</a>
+ 
+
+ <a class="userlink"
+ href="/u/111489475185947239458/">gzk...@163.com</a
+></span>
+ 
+<pre>
+#59 很明显是个黑，想阻止大家用xx-net,如果没猜错应该是筑墙宣传队的人。全部开源的代码，有没有毒，还看不出来。已经发现他在本issues的很多个有关xxnet的是件跟贴里，都是这么一句一模一样的话，所以xxnet没必要在意这种别有用心的人。 
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc64">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 17 06:53:23 2015">
+ Apr 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c64" href="/p/goagent/issues/detail?id=20131#c64">#64</a>
+ 
+
+ <a class="userlink"
+ href="/u/105715608688980173430/">minguo...@gmail.com</a
+></span>
+ 
+<pre>
+连接youtube的时候提示&quot;此连接不受信任&quot;，然后添加“安全例外”后，播放视频的时候又会有错误黑屏。
+在网上查说这是典型的证书没有安装好。但是xx-net的证书不是在local里的那个cacert.pem么？不知道怎么回事，不知道大家有没有遇到这种情况？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc65">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 17 06:54:36 2015">
+ Apr 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c65" href="/p/goagent/issues/detail?id=20131#c65">#65</a>
+ 
+
+ <a class="userlink"
+ href="/u/108130236633155538673/">d1540076...@gmail.com</a
+></span>
+ 
+<pre>
+#59 你不是五毛，而是一块！这里方滨兴的人还真不少！别瞎扯蛋了。XXNET很好用，感谢作者！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc66">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 17 06:57:58 2015">
+ Apr 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c66" href="/p/goagent/issues/detail?id=20131#c66">#66</a>
+ 
+
+ <a class="userlink"
+ href="/u/101844246839111579817/">wg778...@gmail.com</a
+></span>
+ 
+<pre>
+也不能说59是五毛，如果你的电脑安装了360卫士，肯定要报警的。不过没有没关系，只要允许所有操作即可，对电脑系统没有任何损伤
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc67">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 17 07:01:34 2015">
+ Apr 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c67" href="/p/goagent/issues/detail?id=20131#c67">#67</a>
+ 
+
+ <a class="userlink"
+ href="/u/105715608688980173430/">minguo...@gmail.com</a
+></span>
+ 
+<pre>
+同#64
+贴一下日志：
+
+
+Apr 17 21:56:55 - [DEBUG] GAE CONNECT CONNECT s.youtube.com:443
+Apr 17 21:56:55 - [WARNING] Method CONNECT not support in GoAgent for s.youtube.com:443
+Apr 17 21:56:55 - [DEBUG] tcp conn 210.158.146.208 time:52
+Apr 17 21:56:55 - [DEBUG] GAE CONNECT GET <a href="https://www.youtube.com/ptracking?plid=AAUT6_N4VJRXKJva&amp;video_id=Pf89RU15-7o&amp;cpn=TokG60XF-qfdbYbq&amp;oid=-EIybvXbhAUKe6QCQDJ80A&amp;pltype=contentugc&amp;ei=HhExVZj2Fs6JqAPrtoDADA&amp;ptk=ITTF" rel="nofollow">https://www.youtube.com/ptracking?plid=AAUT6_N4VJRXKJva&amp;video_id=Pf89RU15-7o&amp;cpn=TokG60XF-qfdbYbq&amp;oid=-EIybvXbhAUKe6QCQDJ80A&amp;pltype=contentugc&amp;ei=HhExVZj2Fs6JqAPrtoDADA&amp;ptk=ITTF</a>
+Apr 17 21:56:55 - [DEBUG] ssl_pool.get:210.158.146.208 handshake:125
+Apr 17 21:56:55 - [DEBUG] ssl conn_num:20
+Apr 17 21:56:55 - [DEBUG] GAE CONNECT GET <a href="https://www.youtube.com/user_watch?plid=AAUT6_N4VJRXKJva&amp;el=detailpage&amp;cpn=TokG60XF-qfdbYbq&amp;t=1&amp;ptk=ITTF&amp;ei=HhExVZj2Fs6JqAPrtoDADA&amp;asv=3&amp;ucid=UCr2FcZ-C3s77sbF5dSZpRiw&amp;video_id=Pf89RU15-7o&amp;fmt=135" rel="nofollow">https://www.youtube.com/user_watch?plid=AAUT6_N4VJRXKJva&amp;el=detailpage&amp;cpn=TokG60XF-qfdbYbq&amp;t=1&amp;ptk=ITTF&amp;ei=HhExVZj2Fs6JqAPrtoDADA&amp;asv=3&amp;ucid=UCr2FcZ-C3s77sbF5dSZpRiw&amp;video_id=Pf89RU15-7o&amp;fmt=135</a>
+Apr 17 21:56:55 - [DEBUG] ssl_pool.get:210.158.146.208 handshake:271
+Apr 17 21:56:55 - [DEBUG] ssl conn_num:19
+Apr 17 21:56:55 - [DEBUG] get ip:203.66.124.227 t:551
+Apr 17 21:56:55 - [INFO] GAE CONNECT s.youtube.com:443 
+Apr 17 21:56:55 - [DEBUG] GAE CONNECT GET <a href="https://www.youtube.com/annotations_invideo?video_id=Pf89RU15-7o" rel="nofollow">https://www.youtube.com/annotations_invideo?video_id=Pf89RU15-7o</a>
+Apr 17 21:56:55 - [DEBUG] ssl_pool.get:210.158.146.208 handshake:288
+Apr 17 21:56:55 - [DEBUG] ssl conn_num:18
+Apr 17 21:56:55 - [INFO] GAE CONNECT s.youtube.com:443 
+Apr 17 21:56:55 - [DEBUG] get ip:203.116.165.158 t:577
+Apr 17 21:56:55 - [INFO] GAE CONNECT www.youtube.com:443 
+Apr 17 21:56:55 - [DEBUG] GAE CONNECT CONNECT s.youtube.com:443
+Apr 17 21:56:55 - [WARNING] Method CONNECT not support in GoAgent for s.youtube.com:443
+Apr 17 21:56:55 - [DEBUG] GAE CONNECT CONNECT s.youtube.com:443
+Apr 17 21:56:55 - [WARNING] Method CONNECT not support in GoAgent for s.youtube.com:443
+Apr 17 21:56:55 - [DEBUG] GAE CONNECT GET <a href="https://www.youtube.com/gen_204?adstat=l" rel="nofollow">https://www.youtube.com/gen_204?adstat=l</a>
+Apr 17 21:56:55 - [DEBUG] ssl_pool.get:61.19.1.152 handshake:309
+Apr 17 21:56:55 - [DEBUG] ssl conn_num:17
+Apr 17 21:56:55 - [DEBUG] get ip:218.189.25.180 t:668
+Apr 17 21:56:55 - [INFO] GAE t:214 s:0 204 <a href="https://www.youtube.com/ptracking?plid=AAUT6_N4VJRXKJva&amp;video_id=Pf89RU15-7o&amp;cpn=TokG60XF-qfdbYbq&amp;oid=-EIybvXbhAUKe6QCQDJ80A&amp;pltype=contentugc&amp;ei=HhExVZj2Fs6JqAPrtoDADA&amp;ptk=ITTF" rel="nofollow">https://www.youtube.com/ptracking?plid=AAUT6_N4VJRXKJva&amp;video_id=Pf89RU15-7o&amp;cpn=TokG60XF-qfdbYbq&amp;oid=-EIybvXbhAUKe6QCQDJ80A&amp;pltype=contentugc&amp;ei=HhExVZj2Fs6JqAPrtoDADA&amp;ptk=ITTF</a>
+Apr 17 21:56:55 - [INFO] GAE t:565 s:469 200 <a href="https://www.youtube.com/annotations_invideo?video_id=Pf89RU15-7o" rel="nofollow">https://www.youtube.com/annotations_invideo?video_id=Pf89RU15-7o</a>
+Apr 17 21:56:55 - [INFO] GAE t:584 s:0 204 <a href="https://www.youtube.com/user_watch?plid=AAUT6_N4VJRXKJva&amp;el=detailpage&amp;cpn=TokG60XF-qfdbYbq&amp;t=1&amp;ptk=ITTF&amp;ei=HhExVZj2Fs6JqAPrtoDADA&amp;asv=3&amp;ucid=UCr2FcZ-C3s77sbF5dSZpRiw&amp;video_id=Pf89RU15-7o&amp;fmt=135" rel="nofollow">https://www.youtube.com/user_watch?plid=AAUT6_N4VJRXKJva&amp;el=detailpage&amp;cpn=TokG60XF-qfdbYbq&amp;t=1&amp;ptk=ITTF&amp;ei=HhExVZj2Fs6JqAPrtoDADA&amp;asv=3&amp;ucid=UCr2FcZ-C3s77sbF5dSZpRiw&amp;video_id=Pf89RU15-7o&amp;fmt=135</a>
+Apr 17 21:56:56 - [INFO] GAE t:685 s:0 204 <a href="https://www.youtube.com/gen_204?adstat=l" rel="nofollow">https://www.youtube.com/gen_204?adstat=l</a>
+Apr 17 21:56:56 - [INFO] FWD CONNECT clients1.google.com:443 
+Apr 17 21:56:56 - [DEBUG] get ip:194.78.99.82 t:699
+Apr 17 21:56:56 - [DEBUG] tcp conn 194.78.99.82 time:231
+Apr 17 21:56:56 - [DEBUG] create_ssl 203.66.124.227 fail:timed out c:0 h:0
+Apr 17 21:56:56 - [DEBUG] create_ssl 203.116.165.158 fail:timed out c:0 h:0
+Apr 17 21:56:56 - [DEBUG] network is fail
+Apr 17 21:56:56 - [DEBUG] report_connect_fail network fail
+Apr 17 21:56:56 - [DEBUG] forward local disconnected.
+Apr 17 21:56:56 - [DEBUG] FWD CONNECT clients1.google.com:443 with closed
+Apr 17 21:56:56 - [DEBUG] create_ssl 218.189.25.180 fail:timed out c:0 h:0
+Apr 17 21:56:56 - [DEBUG] report_connect_fail network fail recently
+Apr 17 21:56:56 - [DEBUG] network is ok
+Apr 17 21:56:56 - [INFO] remove ip:203.66.124.227 left amount:2949 gws_num:2949
+Apr 17 21:56:59 - [WARNING] network is unreachable. check your network connection.
+Apr 17 21:57:00 - [INFO] GAE CONNECT s.youtube.com:443 
+Apr 17 21:57:00 - [DEBUG] GAE CONNECT CONNECT s.youtube.com:443
+Apr 17 21:57:00 - [WARNING] Method CONNECT not support in GoAgent for s.youtube.com:443
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc68">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 17 07:03:53 2015">
+ Apr 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c68" href="/p/goagent/issues/detail?id=20131#c68">#68</a>
+ 
+
+ <a class="userlink"
+ href="/u/105715608688980173430/">minguo...@gmail.com</a
+></span>
+ 
+<pre>
+状态页
+
+Property
+
+Value
+
+
+Sys Platform win32 
+OS System Windows 
+OS version 6.1.7601 
+OS release 7 
+OS detail Version:6-1; Build:7601; Platform:2; CSD:Service Pack 1; ServicePack:1-0; Suite:256; ProductType:0 
+architecture 32bitWindowsPE 
+Browser Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko 
+XX-Net Version 1.8.11 
+Launcher Version 1.3.0 
+GoAgent Version 3.1.48 
+Python Version 2.7.9 
+Proxy Listen 127.0.0.1:8087 
+  
+working appids xxxxxxxxxxxxx 
+Out of Quota appids  
+Not Exist appids  
+PAC URL http://127.0.0.1:8086/proxy.pac  
+Google IP 2958 
+connected link 23 
+ip_connect_interval  
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc69">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 17 07:14:07 2015">
+ Apr 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c69" href="/p/goagent/issues/detail?id=20131#c69">#69</a>
+ 
+
+ <a class="userlink"
+ href="/u/108130236633155538673/">d1540076...@gmail.com</a
+></span>
+ 
+<pre>
+#66 我之前用小飞鸽，360也没报毒呀！360全盘扫面了N回，也没报毒，包括XXNET
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc70">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 17 08:35:50 2015">
+ Apr 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c70" href="/p/goagent/issues/detail?id=20131#c70">#70</a>
+ 
+
+ <a class="userlink"
+ href="/u/105236824030165905601/">137...@gmail.com</a
+></span>
+ 
+<pre>
+请教xx-net要怎么更新呢？我开启了“检查版本更新”，但发现官方已经有新版本了也没什么反应，要自己下载新的包解压覆盖原来的吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc71">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 17 09:15:37 2015">
+ Apr 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c71" href="/p/goagent/issues/detail?id=20131#c71">#71</a>
+ 
+
+ <a class="userlink"
+ href="/u/102241643163848839443/">coun...@gmail.com</a
+></span>
+ 
+<pre>
+果真是牛的一逼
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc72">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 17 12:21:10 2015">
+ Apr 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c72" href="/p/goagent/issues/detail?id=20131#c72">#72</a>
+ 
+
+ <a class="userlink"
+ href="/u/115873735076323347581/">zif...@gmail.com</a
+></span>
+ 
+<pre>
+现在这个新版本用谷歌浏览器的最新版本会有红叉叉出现吗？
+在下载源文件的第二个文件是什么？怎么用？？？Source code (tar.gz)？？？
+怎么打开？？？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc74">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 17 19:27:10 2015">
+ Apr 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c74" href="/p/goagent/issues/detail?id=20131#c74">#74</a>
+ 
+
+ <a class="userlink"
+ href="/u/110870187471965512698/">xxnet....@gmail.com</a
+></span>
+ 
+<pre>
+#68
+  怀疑你的浏览器配合问题。
+  建议Chrome+SwitchySharp吧。
+
+  
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc75">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 17 19:28:26 2015">
+ Apr 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c75" href="/p/goagent/issues/detail?id=20131#c75">#75</a>
+ 
+
+ <a class="userlink"
+ href="/u/110870187471965512698/">xxnet....@gmail.com</a
+></span>
+ 
+<pre>
+#73
+  提示不安全的链接，问题已经解决，请下载新版。
+  原因似乎老版本的证书是sha1签名，换成sha256就好了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc76">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 17 19:35:30 2015">
+ Apr 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c76" href="/p/goagent/issues/detail?id=20131#c76">#76</a>
+ 
+
+ <a class="userlink"
+ href="/u/103464554510395516649/">2418nj...@gmail.com</a
+></span>
+ 
+<pre>
+我已经到firefox里导入了certificate
+还是出现这个
+This Connection is Untrusted
+
+You have asked Firefox to connect securely to www.youtube.com, but we can't confirm that your connection is secure.
+请教
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc78">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 17 19:44:21 2015">
+ Apr 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c78" href="/p/goagent/issues/detail?id=20131#c78">#78</a>
+ 
+
+ <a class="userlink"
+ href="/u/110166017452921944032/">link.lij...@gmail.com</a
+></span>
+ 
+<pre>
+虽然看视频不卡，但是还有一个问题没有解决，就是上传视频的问题！还是无法上传啊。请各位大神指教！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc79">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Apr 17 20:07:20 2015">
+ Apr 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c79" href="/p/goagent/issues/detail?id=20131#c79">#79</a>
+ 
+
+ <a class="userlink"
+ href="/u/111684575603812707439/">2737...@qq.com</a
+></span>
+ 
+<pre>
+这个软件整合的其他的配套更新太慢了，Goagent已经更新到3.2.3版本，软件里还是3.1版本；SwitchySharp已经退出chrome舞台了，都淘汰了，现在已经是SwitchyOmega2.3.10。。。。。
+
+强烈建议同步更新配套软件，否则XX-NET。。。感觉有点不合拍
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc80">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr 18 15:52:39 2015">
+ Apr 18, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c80" href="/p/goagent/issues/detail?id=20131#c80">#80</a>
+ 
+
+ <a class="userlink"
+ href="/u/110870187471965512698/">xxnet....@gmail.com</a
+></span>
+ 
+<pre>
+#79
+  SwitchyOmega2.3.10 可以换掉，跟潮流。
+ 
+  至于GoAgent，也许应该把版本改为4.x.x，因为它是在GoAgent基础上改了很多的版本了，而GoAgent已经好久没有更新，而且怀疑以后都不会再更新了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc81">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Apr 18 23:55:51 2015">
+ Apr 18, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c81" href="/p/goagent/issues/detail?id=20131#c81">#81</a>
+ 
+
+ <a class="userlink"
+ href="/u/111489475185947239458/">gzk...@163.com</a
+></span>
+ 
+<pre>
+其实大家纠结于goagent的版本已经没什么必要，XX-net应该可以认为是基于goagent停更后继续开发更新的版本，各项性能及指标都是在原有基础上做了比较大的改变，所以就算把xx-net看作是goagent4.0版本也不为过。
+
+PS:最近看youtube真的没以前流畅了，以前760P完全没压力，现在480P都感觉卡，好在看网页还是秒开，似乎没受多少影响。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc82">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 19 01:46:04 2015">
+ Apr 19, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c82" href="/p/goagent/issues/detail?id=20131#c82">#82</a>
+ 
+
+ <a class="userlink"
+ href="/u/104687417373117042963/">wuduanya...@gmail.com</a
+></span>
+ 
+<pre>
+为什么我的xx-net只能用google相关的网站，不能登录facebook youtube等网站，而且再部署appid时候一直不成功 
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc83">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 19 03:10:53 2015">
+ Apr 19, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c83" href="/p/goagent/issues/detail?id=20131#c83">#83</a>
+ 
+
+ <a class="userlink"
+ href="/u/113841532684646442893/">wowcarl...@gmail.com</a
+></span>
+ 
+<pre>
+用户多了以后 会不会造成长期大量用户请求IP   导致这个软件被 服务器商封呢？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc84">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 19 06:50:08 2015">
+ Apr 19, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c84" href="/p/goagent/issues/detail?id=20131#c84">#84</a>
+ 
+
+ <a class="userlink"
+ href="/u/110870187471965512698/">xxnet....@gmail.com</a
+></span>
+ 
+<pre>
+#83
+  这点用户对Google完全没有感觉
+  而且这些用户都会去用Google搜索引擎，本来就是Google的用户
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc85">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 19 07:04:05 2015">
+ Apr 19, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c85" href="/p/goagent/issues/detail?id=20131#c85">#85</a>
+ 
+
+ <a class="userlink"
+ href="/u/113889638309125735492/">xiemingq...@gmail.com</a
+></span>
+ 
+<pre>
+支持下~~~好用，顶起！！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc86">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 19 08:44:32 2015">
+ Apr 19, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c86" href="/p/goagent/issues/detail?id=20131#c86">#86</a>
+ 
+
+ <a class="userlink"
+ href="/u/114547659712516218447/">dmigawa...@gmail.com</a
+></span>
+ 
+<pre>
+话说我使用了一直不成功啊，appid部署不成功，不知道怎么回事？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc87">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 19 21:32:38 2015">
+ Apr 19, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c87" href="/p/goagent/issues/detail?id=20131#c87">#87</a>
+ 
+
+ <a class="userlink"
+ href="/u/111489475185947239458/">gzk...@163.com</a
+></span>
+ 
+<pre>
+#86 <a href="http://i966.photobucket.com/albums/ae149/qinef/11.png" rel="nofollow">http://i966.photobucket.com/albums/ae149/qinef/11.png</a>
+见图中的红框，跳转后启用后上传就可以了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc88">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 19 21:35:07 2015">
+ Apr 19, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c88" href="/p/goagent/issues/detail?id=20131#c88">#88</a>
+ 
+
+ <a class="userlink"
+ href="/u/116865907885434278903/">li227878...@gmail.com</a
+></span>
+ 
+<pre>
+1.8.12最新版用起来不错
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc89">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 20 14:17:07 2015">
+ Apr 20, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c89" href="/p/goagent/issues/detail?id=20131#c89">#89</a>
+ 
+
+ <a class="userlink"
+ href="/u/115873735076323347581/">zif...@gmail.com</a
+></span>
+ 
+<pre>
+楼主你辛苦了，版本更新好快呀！！！
+呵呵 好事！
+在此再次表示感谢！
+还有 那第二个文件是什么呀？？？怎么样打开，就是这个。。 Source code (tar.gz) 文件。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc90">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 20 18:33:09 2015">
+ Apr 20, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c90" href="/p/goagent/issues/detail?id=20131#c90">#90</a>
+ 
+
+ <a class="userlink"
+ href="/u/107338711029923439212/">sguards....@gmail.com</a
+></span>
+ 
+<pre>
+360安全卫士木马查杀，电脑确实存在危险插件，本人说的属实，而且淘宝账号在短短一小时之内连续两次被盗。确实黑客高手弄得，把我的淘宝账号邮箱都改了，速度之快。goagent好像比这个安全些。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc91">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 20 18:57:50 2015">
+ Apr 20, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c91" href="/p/goagent/issues/detail?id=20131#c91">#91</a>
+ 
+
+ <a class="userlink"
+ href="/u/110870187471965512698/">xxnet....@gmail.com</a
+></span>
+ 
+<pre>
+#90
+  360报危险插件，具体是哪个文件？提示什么内容。
+  你可以把插件文件打包，发到github bug区，那里可以上传附件。
+  大家一起分析是什么插件。
+  你先把插件删除了，再启动XX-Net，再用360查有没有。
+
+
+  XX-Net有没有安全问题，所有源码都公开的，有问题我们就把它找出来，哪个文件，存在什么问题。
+  
+
+  淘宝帐号被盗2次，能否详细描述过程？大家来帮你分析
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc92">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr 20 21:46:57 2015">
+ Apr 20, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c92" href="/p/goagent/issues/detail?id=20131#c92">#92</a>
+ 
+
+ <a class="userlink"
+ href="/u/onemake0/">onemake0</a
+></span>
+ 
+<pre>
+打开xxnet后，怎么能够使用IE浏览网页呢 系统windows8.1
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc93">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 21 00:28:59 2015">
+ Apr 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c93" href="/p/goagent/issues/detail?id=20131#c93">#93</a>
+ 
+
+ <a class="userlink"
+ href="/u/111489475185947239458/">gzk...@163.com</a
+></span>
+ 
+<pre>
+#90楼的这个五毛黑早就在#59楼就出现过，看他发的贴子，只要是有关XX-NET的话题，都是说xx-net带毒，目的就是让大家不要使用xx-net，永远封闭在墙内，作者不用过多关注它的话。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc94">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 21 02:24:48 2015">
+ Apr 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c94" href="/p/goagent/issues/detail?id=20131#c94">#94</a>
+ 
+
+ <a class="userlink"
+ href="/u/111489475185947239458/">gzk...@163.com</a
+></span>
+ 
+<pre>
+xx-net自带的3000个IP缓冲池里IP速度不是很快，所以用论坛里提供的工具重新跑了下，得了108个IP加到good_ip.txt里，目录 XX-Net-1.8.12\data\goagent\good_ip.txt ,覆盖后重新启动下xx-net就可以极速浏览网页跟youtube了，附件下址地址如下：
+<a href="http://pan.baidu.com/s/1o6j1Ca2" rel="nofollow">http://pan.baidu.com/s/1o6j1Ca2</a>
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20131&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D20131"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="20131">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A20131',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 20131,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

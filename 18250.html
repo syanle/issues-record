@@ -1,0 +1,1528 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"profileUrl": null, "domainName": null, "loggedInUserEmail": null, "token": null, "projectHomeUrl": "/p/goagent", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "relativeBaseUrl": "", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "projectName": "goagent"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 18250 - 
+ goagent -
+ 
+ Goagent在Mac和Windows上运行时，iplist的状态不同？ - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18250&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18250" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=18250">18250</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >Goagent在Mac和Windows上运行时，iplist的状态不同？</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 5 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A18250">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18250&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18250">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/109187213000209224529/">darkred...@gmail.com</a
+>,
+ <span class="date" title="Sat Oct 25 22:26:25 2014">Oct 25, 2014</span>
+ 
+ </div>
+<pre>
+RT，我两个本子都在家里，连的同样的无线路由，goagent版本都是3.2.1b3aba0e，iplist也都是只在google_hk自定义了8个。但是在win7的本子上这8个ip都是good_ipaddress，在mac上经常8个全是bad_ipaddress，导致翻不出去。按理说都是用的相同的无线网络，应该不会有截然相反的ip状态，是因为windows和mac上运行有什么不同？
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 26 04:45:20 2014">
+ Oct 26, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=18250#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/116847175621860423818/">shen...@gmail.com</a
+></span>
+ 
+<pre>
+是有这个问题 windows下比较好 linux下也不如windows下。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 26 05:10:36 2014">
+ Oct 26, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=18250#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/115446203943576578109/">zhajj...@gmail.com</a
+></span>
+ 
+<pre>
+windows下放在mac下用能用，但效果确实差很多！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 26 18:17:23 2014">
+ Oct 26, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=18250#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/117798099638315960951/">xuzefeng...@gmail.com</a
+></span>
+ 
+<pre>
+也是相同的情况啊，同样的版本，同样的自定义ip，在win下好用，在mac下就翻不了，愁啊
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct 27 06:39:23 2014">
+ Oct 27, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=18250#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/113701785237663380569/">dongzhao...@gmail.com</a
+></span>
+ 
+<pre>
+用Bootcamp装的Windows 7。同样的配置文件，而且找了一大堆ip，结果Windows下特别的快，看视频完全没问题。等到OS X上，没有几分钟就全都是Bad iplist，并且打不开网页了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct 27 07:03:38 2014">
+ Oct 27, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=18250#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/115502118351992042622/">foxzsn...@gmail.com</a
+></span>
+ 
+<pre>
+我这里遇到同样的问题，中国电信的线路，同一个网络环境下，windows 8下使用同样的配置没有任何问题，mac Yosemite却全部都是badip，iplist一共400个。两台机器都是使用pac代理连接。
+
+另，mac下的tcp连接ip没有问题，一般情况下都有100多个goodip，但是ssl连接却goodip＝0。
+
+
+运行环境：
+GoAgent Starting...------------------------------------------------------
+GoAgent Version    : 3.2.0 (python/2.7.8 gevent/1.0.1 pyopenssl/0.14)
+Listen Address     : 0.0.0.0:8087
+GAE Mode           : https
+GAE Obfuscate      : 1
+DNS Listen         : 127.0.0.1:53
+DNS Servers        : 192.168.1.1|8.8.8.8|8.8.4.4|208.67.222.222|208.67.220.220|168.95.1.1|168.95.192.1|223.5.5.5|223.6.6.6|114.114.114.114|114.114.115.115
+
+
+配置文件：
+[listen]
+ip = 0.0.0.0
+port = 8087
+username =
+password =
+visible = 0
+debuginfo = 0
+
+[gae]
+enable = 1
+appid = 
+password = 
+path = /_gh/
+mode = https
+ipv6 = 0
+sslversion = TLSv1
+window = 2
+cachesock = 1
+headfirst = 1
+keepalive = 1
+obfuscate = 1
+pagespeed = 0
+validate = 0
+transport = 0
+options =
+regions = cn
+maxsize = 2097152
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct 27 18:01:51 2014">
+ Oct 27, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=18250#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/109187213000209224529/">darkred...@gmail.com</a
+></span>
+ 
+<pre>
+求作者现身，求修复。还有一个情况，在mac上貌似每次更新完goagent后都可以正常使用，但是一旦关机重启后就各种问题各种不能用了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct 27 23:14:33 2014">
+ Oct 27, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=18250#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/115001297445573747653/">douban...@gmail.com</a
+></span>
+ 
+<pre>
+新版好像确实有这个问题
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct 28 18:40:28 2014">
+ Oct 28, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=18250#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/109187213000209224529/">darkred...@gmail.com</a
+></span>
+ 
+<pre>
+结合这两天在公司和家里的本子试验的情况，似乎不用goagent作全局代理的时候，iplist的状态会好很多。但是safari上好像又没有切换自动切换代理的插件，纠结
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct 28 22:04:45 2014">
+ Oct 28, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=18250#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/103896125024090773262/">ljhedi...@gmail.com</a
+></span>
+ 
+<pre>
+我也是这个问题，求修复
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct 28 22:27:35 2014">
+ Oct 28, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=18250#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/108191903700833097708/">hrd007...@gmail.com</a
+></span>
+ 
+<pre>
+发现还是不能用，看youtube 还是会经常卡一下，等一段就是就Error
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct 28 22:29:46 2014">
+ Oct 28, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=18250#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/108191903700833097708/">hrd007...@gmail.com</a
+></span>
+ 
+<pre>
+INFO - [Oct 29 13:28:32] ssl good_ipaddrs=26, bad_ipaddrs=276, unknown_ipaddrs=0
+WARNING - [Oct 29 13:28:32] RangeFetch &quot;GET <a href="https://r4---sn-q4f7sn7e.googlevideo.com/videoplayback?c=web&amp;clen=767295&amp;cpn=hAWJlj_MH9y_oHpl&amp;cver=as3&amp;dur=47.739&amp;expire=1414581949&amp;fexp=3300116%2C3300116%2C3300132%2C3300132%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%2C3310366%2C3310700%2C3310700%2C3312210%2C3312210%2C905639%2C908594%2C909708%2C915519%2C917000%2C922929%2C927622%2C930666%2C930672%2C932404%2C947209%2C947601%2C952302%2C952901%2C957103&amp;gir=yes&amp;id=o-AAyJfKVKym6S5otgbvtJJCMBcb2JLzw6MPSpCZ9Wl1V9&amp;ip=107.178.200.197&amp;ipbits=0&amp;itag=140&amp;keepalive=yes&amp;key=yt5&amp;lmt=1413654967698468&amp;mime=audio%2Fmp4&amp;mm=31&amp;ms=au&amp;mt=1414560314&amp;mv=u&amp;range=241664-483327&amp;ratebypass=yes&amp;requiressl=yes&amp;signature=BBBDD98122D29033EABC392ECBA0EA637604CB7D.04913B081A69FFF125A83011D8239956193F5C4B&amp;source=youtube&amp;sparams=clen%2Cdur%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%2Cmv%2Crequiressl%2Csource%2Cupn%2Cexpire&amp;sver=3&amp;upn=VRiILNYKM2w" rel="nofollow">https://r4---sn-q4f7sn7e.googlevideo.com/videoplayback?c=web&amp;clen=767295&amp;cpn=hAWJlj_MH9y_oHpl&amp;cver=as3&amp;dur=47.739&amp;expire=1414581949&amp;fexp=3300116%2C3300116%2C3300132%2C3300132%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%2C3310366%2C3310700%2C3310700%2C3312210%2C3312210%2C905639%2C908594%2C909708%2C915519%2C917000%2C922929%2C927622%2C930666%2C930672%2C932404%2C947209%2C947601%2C952302%2C952901%2C957103&amp;gir=yes&amp;id=o-AAyJfKVKym6S5otgbvtJJCMBcb2JLzw6MPSpCZ9Wl1V9&amp;ip=107.178.200.197&amp;ipbits=0&amp;itag=140&amp;keepalive=yes&amp;key=yt5&amp;lmt=1413654967698468&amp;mime=audio%2Fmp4&amp;mm=31&amp;ms=au&amp;mt=1414560314&amp;mv=u&amp;range=241664-483327&amp;ratebypass=yes&amp;requiressl=yes&amp;signature=BBBDD98122D29033EABC392ECBA0EA637604CB7D.04913B081A69FFF125A83011D8239956193F5C4B&amp;source=youtube&amp;sparams=clen%2Cdur%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%2Cmv%2Crequiressl%2Csource%2Cupn%2Cexpire&amp;sver=3&amp;upn=VRiILNYKM2w</a>&quot; retry 131072-241663
+INFO - [Oct 29 13:28:32] ssl good_ipaddrs=26, bad_ipaddrs=276, unknown_ipaddrs=0
+INFO - [Oct 29 13:28:32] ssl good_ipaddrs=26, bad_ipaddrs=276, unknown_ipaddrs=0
+WARNING - [Oct 29 13:28:33] RangeFetch &quot;GET <a href="https://r4---sn-q4f7sn7e.googlevideo.com/videoplayback?c=web&amp;clen=11643328&amp;cpn=hAWJlj_MH9y_oHpl&amp;cver=as3&amp;dur=47.680&amp;expire=1414581949&amp;fexp=3300116%2C3300116%2C3300132%2C3300132%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%2C3310366%2C3310700%2C3310700%2C3312210%2C3312210%2C905639%2C908594%2C909708%2C915519%2C917000%2C922929%2C927622%2C930666%2C930672%2C932404%2C947209%2C947601%2C952302%2C952901%2C957103&amp;gir=yes&amp;id=o-AAyJfKVKym6S5otgbvtJJCMBcb2JLzw6MPSpCZ9Wl1V9&amp;ip=107.178.200.197&amp;ipbits=0&amp;itag=136&amp;keepalive=yes&amp;key=yt5&amp;lmt=1413654983054650&amp;mime=video%2Fmp4&amp;mm=31&amp;ms=au&amp;mt=1414560314&amp;mv=u&amp;range=1608819-4141055&amp;ratebypass=yes&amp;requiressl=yes&amp;signature=B8CB9E832AE4EB4F1C35B8B5ECCA0848F5BC248B.D4F2773D76664CC8E16E16803ABD187C04A68C7D&amp;source=youtube&amp;sparams=clen%2Cdur%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%2Cmv%2Crequiressl%2Csource%2Cupn%2Cexpire&amp;sver=3&amp;upn=VRiILNYKM2w" rel="nofollow">https://r4---sn-q4f7sn7e.googlevideo.com/videoplayback?c=web&amp;clen=11643328&amp;cpn=hAWJlj_MH9y_oHpl&amp;cver=as3&amp;dur=47.680&amp;expire=1414581949&amp;fexp=3300116%2C3300116%2C3300132%2C3300132%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%2C3310366%2C3310700%2C3310700%2C3312210%2C3312210%2C905639%2C908594%2C909708%2C915519%2C917000%2C922929%2C927622%2C930666%2C930672%2C932404%2C947209%2C947601%2C952302%2C952901%2C957103&amp;gir=yes&amp;id=o-AAyJfKVKym6S5otgbvtJJCMBcb2JLzw6MPSpCZ9Wl1V9&amp;ip=107.178.200.197&amp;ipbits=0&amp;itag=136&amp;keepalive=yes&amp;key=yt5&amp;lmt=1413654983054650&amp;mime=video%2Fmp4&amp;mm=31&amp;ms=au&amp;mt=1414560314&amp;mv=u&amp;range=1608819-4141055&amp;ratebypass=yes&amp;requiressl=yes&amp;signature=B8CB9E832AE4EB4F1C35B8B5ECCA0848F5BC248B.D4F2773D76664CC8E16E16803ABD187C04A68C7D&amp;source=youtube&amp;sparams=clen%2Cdur%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%2Cmv%2Crequiressl%2Csource%2Cupn%2Cexpire&amp;sver=3&amp;upn=VRiILNYKM2w</a>&quot; retry 139264-1572863
+INFO - [Oct 29 13:28:33] ssl good_ipaddrs=26, bad_ipaddrs=276, unknown_ipaddrs=0
+INFO - [Oct 29 13:28:34] ssl good_ipaddrs=26, bad_ipaddrs=276, unknown_ipaddrs=0
+INFO - [Oct 29 13:28:34] 127.0.0.1:58020 &quot;STRIP CONNECT clients4.google.com:443 HTTP/1.1&quot; - -
+INFO - [Oct 29 13:28:34] ssl good_ipaddrs=26, bad_ipaddrs=276, unknown_ipaddrs=0
+INFO - [Oct 29 13:28:35] ssl good_ipaddrs=26, bad_ipaddrs=276, unknown_ipaddrs=0
+WARNING - [Oct 29 13:28:35] create_ssl_connection to 'hrdissuperman.appspot.com' with [('74.125.24.90', 443), ('173.194.65.90', 443), ('173.194.127.135', 443), ('74.125.31.104', 443), ('74.125.69.90', 443), ('74.125.203.105', 443), ('173.194.127.196', 443), ('74.125.235.226', 443), ('74.125.235.224', 443), ('173.194.127.197', 443), ('173.194.127.82', 443), ('74.125.235.229', 443), ('74.125.23.95', 443), ('74.125.235.228', 443), ('58.145.238.53', 443), ('74.125.204.138', 443), ('74.125.204.104', 443), ('173.194.127.184', 443)] return ['4 seconds', 'timed out'], try again.
+INFO - [Oct 29 13:28:35] ssl good_ipaddrs=21, bad_ipaddrs=281, unknown_ipaddrs=0
+INFO - [Oct 29 13:28:36] ssl good_ipaddrs=22, bad_ipaddrs=280, unknown_ipaddrs=0
+INFO - [Oct 29 13:28:36] 127.0.0.1:57929 &quot;GAE GET <a href="https://r11---sn-q4f7dnes.googlevideo.com/videoplayback?mime=audio%2Fmp4&amp;ip=107.178.200.202&amp;requiressl=yes&amp;clen=5582031&amp;mm=31&amp;key=yt5&amp;ipbits=0&amp;mv=u&amp;gcr=us&amp;ms=au&amp;id=o-AO3QYJah7c4CEVzP8_tCQ-U6-g0YDd1CK702TmDlXM7H&amp;lmt=1413386992088903&amp;source=youtube&amp;sver=3&amp;expire=1414582080&amp;dur=347.648&amp;keepalive=yes&amp;gir=yes&amp;fexp=3300116%2C3300116%2C3300132%2C3300132%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%2C3310366%2C3310700%2C3310700%2C3312210%2C3312210%2C905639%2C908594%2C909708%2C915519%2C917000%2C922929%2C927622%2C930666%2C930672%2C932404%2C947209%2C947601%2C952302%2C952901%2C957103&amp;itag=140&amp;mt=1414560314&amp;upn=b5Tjv5nsGIo&amp;sparams=clen%2Cdur%2Cgcr%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%2Cmv%2Crequiressl%2Csource%2Cupn%2Cexpire&amp;cpn=v--gkf7Xw1cIlTPa&amp;alr=yes&amp;ratebypass=yes&amp;signature=F955E2DDF90988DECD41B1D7C058C4A18B3586F5.4B51B12ECC7819B59CFD18EF31CC0E93B3E79169&amp;c=WEB&amp;cver=html5&amp;range=65536-131071&amp;playerretry=2" rel="nofollow">https://r11---sn-q4f7dnes.googlevideo.com/videoplayback?mime=audio%2Fmp4&amp;ip=107.178.200.202&amp;requiressl=yes&amp;clen=5582031&amp;mm=31&amp;key=yt5&amp;ipbits=0&amp;mv=u&amp;gcr=us&amp;ms=au&amp;id=o-AO3QYJah7c4CEVzP8_tCQ-U6-g0YDd1CK702TmDlXM7H&amp;lmt=1413386992088903&amp;source=youtube&amp;sver=3&amp;expire=1414582080&amp;dur=347.648&amp;keepalive=yes&amp;gir=yes&amp;fexp=3300116%2C3300116%2C3300132%2C3300132%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%2C3310366%2C3310700%2C3310700%2C3312210%2C3312210%2C905639%2C908594%2C909708%2C915519%2C917000%2C922929%2C927622%2C930666%2C930672%2C932404%2C947209%2C947601%2C952302%2C952901%2C957103&amp;itag=140&amp;mt=1414560314&amp;upn=b5Tjv5nsGIo&amp;sparams=clen%2Cdur%2Cgcr%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%2Cmv%2Crequiressl%2Csource%2Cupn%2Cexpire&amp;cpn=v--gkf7Xw1cIlTPa&amp;alr=yes&amp;ratebypass=yes&amp;signature=F955E2DDF90988DECD41B1D7C058C4A18B3586F5.4B51B12ECC7819B59CFD18EF31CC0E93B3E79169&amp;c=WEB&amp;cver=html5&amp;range=65536-131071&amp;playerretry=2</a> HTTP/1.1&quot; 404 281
+INFO - [Oct 29 13:28:37] Found [autorange]endswith match url='redirector.googlevideo.com:443'
+INFO - [Oct 29 13:28:37] 127.0.0.1:58096 &quot;STRIP CONNECT redirector.googlevideo.com:443 HTTP/1.1&quot; - -
+INFO - [Oct 29 13:28:37] Found [autorange]endswith match url='<a href="https://redirector.googlevideo.com/videoplayback?mime=audio%2Fmp4&amp;ip=107.178.200.202&amp;requiressl=yes&amp;clen=5582031&amp;mm=31&amp;key=yt5&amp;ipbits=0&amp;mv=u&amp;gcr=us&amp;ms=au&amp;id=o-AO3QYJah7c4CEVzP8_tCQ-U6-g0YDd1CK702TmDlXM7H&amp;lmt=1413386992088903&amp;source=youtube&amp;sver=3&amp;expire=1414582080&amp;dur=347.648&amp;keepalive=yes&amp;gir=yes&amp;fexp=3300116%2C3300116%2C3300132%2C3300132%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%2C3310366%2C3310700%2C3310700%2C3312210%2C3312210%2C905639%2C908594%2C909708%2C915519%2C917000%2C922929%2C927622%2C930666%2C930672%2C932404%2C947209%2C947601%2C952302%2C952901%2C957103&amp;itag=140&amp;mt=1414560314&amp;upn=b5Tjv5nsGIo&amp;sparams=clen%2Cdur%2Cgcr%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%2Cmv%2Crequiressl%2Csource%2Cupn%2Cexpire&amp;cpn=v--gkf7Xw1cIlTPa&amp;alr=yes&amp;ratebypass=yes&amp;signature=F955E2DDF90988DECD41B1D7C058C4A18B3586F5.4B51B12ECC7819B59CFD18EF31CC0E93B3E79169&amp;c=WEB&amp;cver=html5&amp;cmo=pf%3D1&amp;range=65536-131071'" rel="nofollow">https://redirector.googlevideo.com/videoplayback?mime=audio%2Fmp4&amp;ip=107.178.200.202&amp;requiressl=yes&amp;clen=5582031&amp;mm=31&amp;key=yt5&amp;ipbits=0&amp;mv=u&amp;gcr=us&amp;ms=au&amp;id=o-AO3QYJah7c4CEVzP8_tCQ-U6-g0YDd1CK702TmDlXM7H&amp;lmt=1413386992088903&amp;source=youtube&amp;sver=3&amp;expire=1414582080&amp;dur=347.648&amp;keepalive=yes&amp;gir=yes&amp;fexp=3300116%2C3300116%2C3300132%2C3300132%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%2C3310366%2C3310700%2C3310700%2C3312210%2C3312210%2C905639%2C908594%2C909708%2C915519%2C917000%2C922929%2C927622%2C930666%2C930672%2C932404%2C947209%2C947601%2C952302%2C952901%2C957103&amp;itag=140&amp;mt=1414560314&amp;upn=b5Tjv5nsGIo&amp;sparams=clen%2Cdur%2Cgcr%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%2Cmv%2Crequiressl%2Csource%2Cupn%2Cexpire&amp;cpn=v--gkf7Xw1cIlTPa&amp;alr=yes&amp;ratebypass=yes&amp;signature=F955E2DDF90988DECD41B1D7C058C4A18B3586F5.4B51B12ECC7819B59CFD18EF31CC0E93B3E79169&amp;c=WEB&amp;cver=html5&amp;cmo=pf%3D1&amp;range=65536-131071'</a>
+INFO - [Oct 29 13:28:37] ssl good_ipaddrs=19, bad_ipaddrs=283, unknown_ipaddrs=0
+INFO - [Oct 29 13:28:37] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 76178016] 959373 bytes 1572864-2532236/2532237
+INFO - [Oct 29 13:28:37] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 76179936] 1433600 bytes 139264-1572863/2532237
+INFO - [Oct 29 13:28:37] ssl good_ipaddrs=19, bad_ipaddrs=283, unknown_ipaddrs=0
+INFO - [Oct 29 13:28:37] 127.0.0.1:58118 &quot;STRIP CONNECT s.youtube.com:443 HTTP/1.1&quot; - -
+INFO - [Oct 29 13:28:37] ssl good_ipaddrs=20, bad_ipaddrs=282, unknown_ipaddrs=0
+INFO - [Oct 29 13:28:37] 127.0.0.1:53930 &quot;GAE POST <a href="https://www.facebook.com/ajax/chat/buddy_list.php" rel="nofollow">https://www.facebook.com/ajax/chat/buddy_list.php</a> HTTP/1.1&quot; 404 281
+WARNING - [Oct 29 13:28:38] RangeFetch &quot;GET <a href="https://r4---sn-q4f7sn7e.googlevideo.com/videoplayback?c=web&amp;clen=11643328&amp;cpn=hAWJlj_MH9y_oHpl&amp;cver=as3&amp;dur=47.680&amp;expire=1414581949&amp;fexp=3300116%2C3300116%2C3300132%2C3300132%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%2C3310366%2C3310700%2C3310700%2C3312210%2C3312210%2C905639%2C908594%2C909708%2C915519%2C917000%2C922929%2C927622%2C930666%2C930672%2C932404%2C947209%2C947601%2C952302%2C952901%2C957103&amp;gir=yes&amp;id=o-AAyJfKVKym6S5otgbvtJJCMBcb2JLzw6MPSpCZ9Wl1V9&amp;ip=107.178.200.197&amp;ipbits=0&amp;itag=136&amp;keepalive=yes&amp;key=yt5&amp;lmt=1413654983054650&amp;mime=video%2Fmp4&amp;mm=31&amp;ms=au&amp;mt=1414560314&amp;mv=u&amp;range=1608819-4141055&amp;ratebypass=yes&amp;requiressl=yes&amp;signature=B8CB9E832AE4EB4F1C35B8B5ECCA0848F5BC248B.D4F2773D76664CC8E16E16803ABD187C04A68C7D&amp;source=youtube&amp;sparams=clen%2Cdur%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%2Cmv%2Crequiressl%2Csource%2Cupn%2Cexpire&amp;sver=3&amp;upn=VRiILNYKM2w" rel="nofollow">https://r4---sn-q4f7sn7e.googlevideo.com/videoplayback?c=web&amp;clen=11643328&amp;cpn=hAWJlj_MH9y_oHpl&amp;cver=as3&amp;dur=47.680&amp;expire=1414581949&amp;fexp=3300116%2C3300116%2C3300132%2C3300132%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%2C3310366%2C3310700%2C3310700%2C3312210%2C3312210%2C905639%2C908594%2C909708%2C915519%2C917000%2C922929%2C927622%2C930666%2C930672%2C932404%2C947209%2C947601%2C952302%2C952901%2C957103&amp;gir=yes&amp;id=o-AAyJfKVKym6S5otgbvtJJCMBcb2JLzw6MPSpCZ9Wl1V9&amp;ip=107.178.200.197&amp;ipbits=0&amp;itag=136&amp;keepalive=yes&amp;key=yt5&amp;lmt=1413654983054650&amp;mime=video%2Fmp4&amp;mm=31&amp;ms=au&amp;mt=1414560314&amp;mv=u&amp;range=1608819-4141055&amp;ratebypass=yes&amp;requiressl=yes&amp;signature=B8CB9E832AE4EB4F1C35B8B5ECCA0848F5BC248B.D4F2773D76664CC8E16E16803ABD187C04A68C7D&amp;source=youtube&amp;sparams=clen%2Cdur%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%2Cmv%2Crequiressl%2Csource%2Cupn%2Cexpire&amp;sver=3&amp;upn=VRiILNYKM2w</a>&quot; retry 1572864-2532236
+INFO - [Oct 29 13:28:38] ssl good_ipaddrs=19, bad_ipaddrs=283, unknown_ipaddrs=0
+INFO - [Oct 29 13:28:38] 127.0.0.1:58020 &quot;DIRECT POST <a href="https://clients4.google.com/chrome-sync/command/?client=Google+Chrome&amp;client_id=2tCZC/Ea%2B//B0wkYkhTrlA%3D%3D" rel="nofollow">https://clients4.google.com/chrome-sync/command/?client=Google+Chrome&amp;client_id=2tCZC/Ea%2B//B0wkYkhTrlA%3D%3D</a> HTTP/1.1&quot; 200 13757
+WARNING - [Oct 29 13:28:38] Range Fetch &quot;GET <a href="https://r4---sn-q4f7sn7e.googlevideo.com/videoplayback?c=web&amp;clen=767295&amp;cpn=hAWJlj_MH9y_oHpl&amp;cver=as3&amp;dur=47.739&amp;expire=1414581949&amp;fexp=3300116%2C3300116%2C3300132%2C3300132%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%2C3310366%2C3310700%2C3310700%2C3312210%2C3312210%2C905639%2C908594%2C909708%2C915519%2C917000%2C922929%2C927622%2C930666%2C930672%2C932404%2C947209%2C947601%2C952302%2C952901%2C957103&amp;gir=yes&amp;id=o-AAyJfKVKym6S5otgbvtJJCMBcb2JLzw6MPSpCZ9Wl1V9&amp;ip=107.178.200.197&amp;ipbits=0&amp;itag=140&amp;keepalive=yes&amp;key=yt5&amp;lmt=1413654967698468&amp;mime=audio%2Fmp4&amp;mm=31&amp;ms=au&amp;mt=1414560314&amp;mv=u&amp;range=241664-483327&amp;ratebypass=yes&amp;requiressl=yes&amp;signature=BBBDD98122D29033EABC392ECBA0EA637604CB7D.04913B081A69FFF125A83011D8239956193F5C4B&amp;source=youtube&amp;sparams=clen%2Cdur%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%2Cmv%2Crequiressl%2Csource%2Cupn%2Cexpire&amp;sver=3&amp;upn=VRiILNYKM2w" rel="nofollow">https://r4---sn-q4f7sn7e.googlevideo.com/videoplayback?c=web&amp;clen=767295&amp;cpn=hAWJlj_MH9y_oHpl&amp;cver=as3&amp;dur=47.739&amp;expire=1414581949&amp;fexp=3300116%2C3300116%2C3300132%2C3300132%2C3300137%2C3300137%2C3300161%2C3300161%2C3310366%2C3310366%2C3310700%2C3310700%2C3312210%2C3312210%2C905639%2C908594%2C909708%2C915519%2C917000%2C922929%2C927622%2C930666%2C930672%2C932404%2C947209%2C947601%2C952302%2C952901%2C957103&amp;gir=yes&amp;id=o-AAyJfKVKym6S5otgbvtJJCMBcb2JLzw6MPSpCZ9Wl1V9&amp;ip=107.178.200.197&amp;ipbits=0&amp;itag=140&amp;keepalive=yes&amp;key=yt5&amp;lmt=1413654967698468&amp;mime=audio%2Fmp4&amp;mm=31&amp;ms=au&amp;mt=1414560314&amp;mv=u&amp;range=241664-483327&amp;ratebypass=yes&amp;requiressl=yes&amp;signature=BBBDD98122D29033EABC392ECBA0EA637604CB7D.04913B081A69FFF125A83011D8239956193F5C4B&amp;source=youtube&amp;sparams=clen%2Cdur%2Cgir%2Cid%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cms%2Cmv%2Crequiressl%2Csource%2Cupn%2Cexpire&amp;sver=3&amp;upn=VRiILNYKM2w</a>&quot; bytes=131072-241663 return 404
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct 28 22:37:34 2014">
+ Oct 28, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=18250#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/108191903700833097708/">hrd007...@gmail.com</a
+></span>
+ 
+<pre>
+再刷新就出现
+Error: Not Found
+
+The requested URL /_gh/ was not found on this server.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct 28 22:38:09 2014">
+ Oct 28, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=18250#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/108191903700833097708/">hrd007...@gmail.com</a
+></span>
+ 
+<pre>
+发现播放视频时经常出现 有中断问题，等会 视频画面就会出现“出现错误，请稍后重试”的字样
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct 30 18:02:31 2014">
+ Oct 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=18250#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/109187213000209224529/">darkred...@gmail.com</a
+></span>
+ 
+<pre>
+默默顶一下，目前暂时放弃了全局代理，感觉情况有所好转
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Dec 28 18:40:28 2014">
+ Dec 28, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=18250#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/113118315864249007282/">aetherus...@gmail.com</a
+></span>
+ 
+<pre>
+回14楼的问题
+Error: Not Found
+The requested URL /_gh/ was not found on this server.
+
+你需要重新上传一下server端。由于3.2使用的URL从/2改为了/_gh/，只更新客户端会产生无法和server端对接的情况。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Dec 28 19:24:43 2014">
+ Dec 28, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=18250#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/110995043661915326343/">hfxia...@gmail.com</a
+></span>
+ 
+<pre>
+#17 
+感谢，解决了我的问题！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Dec 28 22:15:17 2014">
+ Dec 28, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=18250#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/111436539008431228967/">chen1258...@gmail.com</a
+></span>
+ 
+<pre>
+我现在Mac下完全不能用了  手头也没有win的本子   具体见我的<a title="救命阿 期末考前夕! 27号开始goagent不能用了 很卡 gogotest新搜的IP ping 90ms的加上去都没用"  href="/p/goagent/issues/detail?id=19219">issue19219</a>   求帮助阿
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Dec 29 06:17:40 2014">
+ Dec 29, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=18250#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/111436539008431228967/">chen1258...@gmail.com</a
+></span>
+ 
+<pre>
+具体见我的<a title="救命阿 期末考前夕! 27号开始goagent不能用了 很卡 gogotest新搜的IP ping 90ms的加上去都没用"  href="/p/goagent/issues/detail?id=19219">issue19219</a>   求帮助阿
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Dec 29 15:46:13 2014">
+ Dec 29, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=18250#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/111436539008431228967/">chen1258...@gmail.com</a
+></span>
+ 
+<pre>
+phus.lu麻烦来看看
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Dec 30 05:17:49 2014">
+ Dec 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=18250#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/111436539008431228967/">chen1258...@gmail.com</a
+></span>
+ 
+<pre>
+哪个朋友写一份 Mac的dnsforwarder的详细教程阿
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jan  1 09:17:19 2015">
+ Jan 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=18250#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/108149545414327228582/">hkbrya...@gmail.com</a
+></span>
+ 
+<pre>
+我的MAC也是27号之后就崩了, 试了所有方法(包括DNSFORWARDER)都不行. 
+然后今天重新下载了最新的3.2.3,发现GOODIP找到了.但是问题变成了The requested URL /_gh/ 
+was not found on this server.
+
+原来3.2版本要重新上传,再用UPLOADER成功上传之后就可以用了. 大家可以试一下.
+The requested URL /_gh/ was not found on this server.问题解决方案可以查看 <a title="大家的Goagent3.2.3能用吗"  href="/p/goagent/issues/detail?id=19247">Issue 19247</a>的17号回复.
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jan  1 09:29:28 2015">
+ Jan 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=18250#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/108149545414327228582/">hkbrya...@gmail.com</a
+></span>
+ 
+<pre>
+另外再说一下, 一定要今天去下最新的goagent-goagent-338ca80. 我前两天下的另外一个3.2.3版本还是不行. 
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18250&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D18250"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="18250">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A18250',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 18250,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

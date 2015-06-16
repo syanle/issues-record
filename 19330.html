@@ -1,0 +1,1431 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"loggedInUserEmail": null, "profileUrl": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "token": null, "projectHomeUrl": "/p/goagent", "projectName": "goagent", "relativeBaseUrl": "", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "domainName": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 19330 - 
+ goagent -
+ 
+ 我去，GFW对DNS进行污染至随机IP地址，这下事情大了 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19330&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19330" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=19330">19330</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >我去，GFW对DNS进行污染至随机IP地址，这下事情大了</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 12 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A19330">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19330&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19330">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/115354468257486784132/">zzq1...@gmail.com</a
+>,
+ <span class="date" title="Sun Jan  4 15:09:32 2015">Jan 4, 2015</span>
+ 
+ </div>
+<pre>
+感谢<a title="2015年dns black发生变化"  href="/p/goagent/issues/detail?id=19323">Issue 19323</a> 提出，本人另开一贴阐述细节
+
+首先，所有维护DNS IP黑名单的项目可以停了，因为是随机IP（或有一个巨大的IP列表），黑名单列举不了，老老实实用TCP 53或UDP非53端口查询吧，看看GFW敢不敢把非53端口的DNS请求也污染了
+
+其次，这回GFW污染的IP里，许多是可以访问的，不同于之前只污染至无响应地址（一些IP比如59.24.3.173和37.61.54.158在墙外无响应，在墙内可连接但不返回任何内容，用tcptrace可看出GFW在伪造建立TCP连接时使用的SYN-ACK包，Twitter上有人提出这些IP是蜜罐，本人无证据证明）。可以访问的IP中不少返回HTTP 404和403的，还有200的，这样理论上就可以劫持Facebook等到其他网站。可由于GFW的污染域名通常也被关键字阻断（比如Facebook是&quot;.facebook.com&quot;），所以HTTP的Facebook会被连接重置，HTTPS才会被重定向至其他网站（如果此IP支持HTTPS）
+
+第三，墙外网站对GFW的DNS污染有感知了，原来不太可能有，是因为GFW在DNS污染的同时封锁了污染用的IP地址，这就是为什么墙只使用几个静态的IP，目的大概是不影响国际网络（比如去年有段时间78.16.49.15在墙外可Ping通，墙内不行）
+
+“感谢”GFW，把本人逼得这么无聊。
+
+祝GFW早日倒塌，否则浪费知识分子用在翻墙上的时间。把YouTube和Facebook墙了就够变态了，连Google和Gmail都封了，这个正腐有多么心虚，也就不言而喻了
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jan  4 19:04:54 2015">
+ Jan 4, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=19330#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/108626285604157968026/">anesli...@gmail.com</a
+></span>
+ 
+<pre>
+这个问题似乎是最近才出现的吧，貌似有的运营商把tcp查询也干掉了，不知道是对公开的大家常用的dns封锁tcp连接，还是采用特征识别进行普遍劫持，我对技术所知有限，等待高手解开谜底。
+DNSCrypt采用证书加密连接，目前还没有受到影响。DNSCrypt的部分服务器不可用，不知道是被墙还是服务器原因。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jan  4 19:30:23 2015">
+ Jan 4, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=19330#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/106902348969730381532/">mr.yang...@gmail.com</a
+></span>
+ 
+<pre>
+疯狂了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  6 04:21:11 2015">
+ Jan 6, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=19330#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/116184181683081547891/">malplimu...@gmail.com</a
+></span>
+ 
+<pre>
+第二點不太明白，能解釋得簡單些嗎？
+
+而且最近發現一些ip總是時good時bad，貌似是用了升級技術動態封鎖了。
+
+另外，cannot watch more than 2560 sockets是什麼意思？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  6 14:13:39 2015">
+ Jan 6, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=19330#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/115354468257486784132/">zzq1...@gmail.com</a
+></span>
+ 
+<pre>
+回#4
+1. 第二点就是说，由于GFW的污染，被墙网站有时会被真正的404，即大名鼎鼎的“找不到网页”，但由于HTTP连接同时会被敏感字过滤（连接被重置），用HTTPS才会看到这些提示
+2. 一些IP时好时坏，是因为GFW不能判定此IP可以用来翻墙（或者GFW故意的），于是定期干扰与这些IP的连接，到时候真出问题了，可以责怪对方的网络不稳定。本人几个月前就发现这种情况，可以确定，GFW的工作人员也在使用GoGoTester，因为凡是GoGoTester扫出来的有效IP都被干扰
+3. 运行正常的goagent.exe会有2560个连接的限制，请更新至最新版本，并运行local文件夹里的goagent-uv.exe
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  6 14:37:30 2015">
+ Jan 6, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=19330#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/115354468257486784132/">zzq1...@gmail.com</a
+></span>
+ 
+<pre>
+GoGoTester的内置IP是公开可查的，所以很多网友以为GoGoTester有后门，其实没有。
+但人人都可以使用此软件，包括GFW工作人员，软件内置的IP早被扫烂了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  6 14:50:36 2015">
+ Jan 6, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=19330#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/116184181683081547891/">malplimu...@gmail.com</a
+></span>
+ 
+<pre>
+&quot;被真正的404&quot;意思是GFW除了偽造dns接收文件以外，還把網站的ip墻掉麼？
+
+另外想請教下，
+一、鑒於現在情況，用了dnscrypt和在goagent設置dns enable=1以後，出現了以下錯誤，請問是什麼問題？要改53端口嗎？
+WARNING - [Jan 07 06:42:18] install root certificate failed, Please run as admin
+istrator/root/sudo
+Traceback (most recent call last):
+  File &quot;F:\翻墙工具\goagent-goagent-bf12fe0\local\packages.egg\win32\gevent\gree
+nlet.py&quot;, line 327, in run
+  File &quot;F:\翻墙工具\goagent-goagent-bf12fe0\local\packages.egg\win32\gevent\base
+server.py&quot;, line 282, in serve_forever
+  File &quot;F:\翻墙工具\goagent-goagent-bf12fe0\local\packages.egg\win32\gevent\base
+server.py&quot;, line 234, in start
+  File &quot;F:\翻墙工具\goagent-goagent-bf12fe0\local\packages.egg\win32\gevent\serv
+er.py&quot;, line 118, in init_socket
+  File &quot;F:\翻墙工具\goagent-goagent-bf12fe0\local\packages.egg\win32\gevent\serv
+er.py&quot;, line 128, in get_listener
+  File &quot;F:\翻墙工具\goagent-goagent-bf12fe0\local\packages.egg\win32\gevent\serv
+er.py&quot;, line 171, in _udp_socket
+  File &quot;&lt;string&gt;&quot;, line 1, in bind
+error: [Errno 10048] 通常每个套接字地址(协议/网络地址/端口): ('127.0.0.1', 53)
+&lt;Greenlet at 0x2440b70: &lt;bound method DNSServer.serve_forever of &lt;DNSServer at 0
+x1b90c10 address=127.0.0.1:53&gt;&gt;&gt; failed with error
+
+二、請問用其他軟件，例如lantern，shadowsocks等能改善現在GFW針對Goagent的情況嗎？有什麼推薦？
+
+三、你的意思是不是用其他找IP軟件比gogotest會更好？是的話，其他很多，請具體推薦。另外，是否可能公開一個極大範圍的good_ip目錄給大家，讓各自找該範圍的good_ip，用人海戰術戰勝受成本限制的GWF？因為隨機找幾乎找不到的。
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  6 15:13:06 2015">
+ Jan 6, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=19330#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/115354468257486784132/">zzq1...@gmail.com</a
+></span>
+ 
+<pre>
+回复楼上：
+1. 被真正404指的是你真正看到404页面了，但你完全不知道是哪个网站的404页面（需要HTTPS加运气）
+2. DNSCrypt和Goagent的DNS转发不能同时用（而且没必要同时用）！只能用其中一个，否则会出Socket Error 10048（意思就是你的53端口被DNSCrypt占了），如果你英语好，可以看看所有的Socket Error（<a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms740668(v=vs.85).aspx" rel="nofollow">http://msdn.microsoft.com/en-us/library/windows/desktop/ms740668(v=vs.85).aspx</a> ）
+3. 关于翻Q软件的推荐，编程随想的博客（需翻墙）：<a href="http://program-think.blogspot.com/2015/01/gfw-news.html" rel="nofollow">http://program-think.blogspot.com/2015/01/gfw-news.html</a>
+4. GoGoTester可以继续用，自己找IP然后放进去扫。或者你不喜欢GoGoTester，可以用<a href="https://github.com/moonshawdo/checkgoogleip" rel="nofollow">https://github.com/moonshawdo/checkgoogleip</a> 扫ip
+公开一个极大范围的IP库？不可能，因为一公开出来GFW工作人员笑死了，正好全封，GFW封掉的可不是单个IP，而是整个IP段，而且，封掉这些IP段一般不会出事
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  6 15:25:23 2015">
+ Jan 6, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=19330#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/115354468257486784132/">zzq1...@gmail.com</a
+></span>
+ 
+<pre>
+续#10：
+开头的WARNING - [Jan 07 06:42:18] install root certificate failed, Please run as administrator/root/sudo 代表你要以管理员权限运行goagent，来导入证书，从而正常访问HTTPS网站
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jan 10 08:27:43 2015">
+ Jan 10, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=19330#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/115354468257486784132/">zzq1...@gmail.com</a
+></span>
+ 
+<pre>
+中国网民基数实在大啊，近3000个IP都不够负载平衡
+<a href="https://gist.github.com/felixonmars/7ce1dcd193c65937e670" rel="nofollow">https://gist.github.com/felixonmars/7ce1dcd193c65937e670</a>
+<a href="https://twitter.com/felixonmars/status/553207645838925824" rel="nofollow">https://twitter.com/felixonmars/status/553207645838925824</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jan 17 00:45:03 2015">
+ Jan 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=19330#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/111521512001232802693/">zlh63780...@gmail.com</a
+></span>
+ 
+<pre>
+随机ip了怎么破？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jan 17 01:05:05 2015">
+ Jan 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=19330#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/104390334475886160790/">hubenb...@gmail.com</a
+></span>
+ 
+<pre>
+这个长长的防火墙其实是中国动物庄园的篱笆墙，只要多数国民处于牛羊状态，那么这个篱笆墙就永远有必要，一两个不幸生于羊群里的狼就很悲剧了，得一辈子跟羊一起生活在牛棚羊圈里。……555555555555555
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr 22 00:37:05 2015">
+ Apr 22, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=19330#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/117922005993909500805/">gxs...@gmail.com</a
+></span>
+ 
+<pre>
+我还以为是我仅有，
+
+2015.4.20
+goagent 彻底失效，换IP没用，没黄字红字，
+只有google及相关网站(比如快照g+)能打开。
+所有需要翻墙的网站都打不开。
+所有无须翻墙的不用goagent都能正常访问，用了就不能访问，
+不过好像没人反映，难道只是我遇到的个别特殊情况？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr 22 01:45:32 2015">
+ Apr 22, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=19330#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/105178572927272849397/">Helloxi...@gmail.com</a
+></span>
+ 
+<pre>
+遇到16楼同样的问题
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr 22 02:45:28 2015">
+ Apr 22, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=19330#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/104348811309616071069/">shaopeng...@gmail.com</a
+></span>
+ 
+<pre>
+16-17,换3.23GoAgent
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr 22 02:51:07 2015">
+ Apr 22, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=19330#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/117922005993909500805/">gxs...@gmail.com</a
+></span>
+ 
+<pre>
+感谢楼上回复，
+试过3.23，无用，
+且无法上传。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr 22 12:30:02 2015">
+ Apr 22, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=19330#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/107696288815104262854/">jyuan...@gmail.com</a
+></span>
+ 
+<pre>
+16、17楼太耸人听闻了吧，goaent一切正常啊，哪里不能用了？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 23 02:39:26 2015">
+ Apr 23, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=19330#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/104083490813173328541/">a405709...@gmail.com</a
+></span>
+ 
+<pre>
+
+昨天是先自己的appid 用xx-net 发现提速不大  后用去搜索好IP  改IP 速度飞起  
+今天却发现appid流量用完 我就用了一会儿而已 
+现在也是 goagent 彻底失效，换IP没用，没黄字红字，
+只有google及相关网站(比如快照g+)能打开。
+所有需要翻墙的网站都打不开。
+所有无须翻墙的不用goagent都能正常访问，用了就不能访问，
+不过好像没人反映，难道只是我遇到的个别特殊情况？
+16 17 楼可以去查下是不是appid 流量也没了<a href="https://appengine.google.com/" rel="nofollow">https://appengine.google.com/</a>
+
+不知道什么原因 是appid 被xx-net盗用了?  还是GFW的事情
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 23 02:43:23 2015">
+ Apr 23, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=19330#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/114255133369633707531/">fh0205z...@gmail.com</a
+></span>
+ 
+<pre>
+用xxnet的和用360的應該是同一幫懶人。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 23 03:08:21 2015">
+ Apr 23, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=19330#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/104083490813173328541/">a405709...@gmail.com</a
+></span>
+ 
+<pre>
+昨天是速度觉得慢  搜索到推荐xxnet 第一次用xxnet   ...现在觉得是 GFW的原因  唉 
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 23 03:31:10 2015">
+ Apr 23, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=19330#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/113384776842209274765/">jsnjyc...@gmail.com</a
+></span>
+ 
+<pre>
+顶
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19330&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19330"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="19330">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A19330',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 19330,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

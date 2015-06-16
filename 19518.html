@@ -1,0 +1,1111 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"relativeBaseUrl": "", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "projectName": "goagent", "loggedInUserEmail": null, "token": null, "projectHomeUrl": "/p/goagent", "profileUrl": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 19518 - 
+ goagent -
+ 
+ 將IP段分類配置proxy.user.ini提速youtube - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19518&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19518" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=19518">19518</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >將IP段分類配置proxy.user.ini提速youtube</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 18 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A19518">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19518&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19518">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/114369775350778087263/">ultrajoe...@gmail.com</a
+>,
+ <span class="date" title="Fri Jan 16 06:43:52 2015">Jan 16, 2015</span>
+ 
+ </div>
+<pre>
+操作系统版本：win7
+浏览器版本：chrome39
+GoAgent 版本：3.2.3
+
+本人寬帶是艾普10M，tp-link普通路由，平時也就上上facebook和youtube。掃到好的ip看720流暢，1080還是經常卡頓。本人有點網絡基礎，也就屬於能看會教程自己摸索的段位。前不久看到一網友發的巧用proxy.user.ini帖子後，自己摸索修改1080播放已無壓力，現在分享出來大家交流交流。
+
+[gae]
+keepalive = 1
+##我這裡不開啟混淆的話，頁面打不開##
+obfuscate = 1
+validate = 1
+
+[iplist]
+google_cn = www.google.cn|www.g.cn
+google_hk = X.X.X.X|................(用gscan到香港、台灣、新加坡、日本、韓國的IP)
+google_talk = talk.google.com|talk.l.google.com|talkx.l.google.com
+google_com = X.X.X.X|...............(用gscan到Google Inc的IP基本上是64和173開頭的)
+google_usa = X.X.X.X|...............(用gscan到美國的IP)
+google_gae = X.X.X.X|...............(測試出來優質的IP)
+
+[profile]
+play.google.com = withgae
+wenda.google.com.hk = withgae
+clients.google.com = withgae,noforcehttps
+.clients.google.com = withgae,noforcehttps
+scholar.google.com = google_com,nocrlf,noforcehttps,nofakehttps
+scholar.google.com.hk = google_hk,nocrlf,noforcehttps,nofakehttps
+scholar.google.com.cn = google_com,nocrlf,noforcehttps,nofakehttps
+books.google.com.hk = google_hk,nocrlf,noforcehttps,nofakehttps
+webcache.googleusercontent.com = crlf,noforcehttps,nofakehttps
+####################################
+#之前那位網友讓下邊的強制google_com，不證書驗證，確實開google秒開，但是有的地方會出錯，本人就以IP區域分類的思路從新設置了如下：
+####################################
+mtalk.google.com = google_com                             
+talk.google.com = google_talk
+talk.l.google.com = google_talk
+talkx.l.google.com = google_talk
+.google.cn = google_gae,crlf
+.appspot.com = google_gae,crlf
+.google.com = google_com,crlf
+.google.com.hk = google_hk,crlf
+.commondatastorage.googleapis.com = withgae
+.googleapis.com = google_com,forcehttps,fakehttps
+.googleusercontent.com = google_com,forcehttps,fakehttps
+.googletagservices.com = google_com,forcehttps,fakehttps
+.googletagmanager.com = google_com,forcehttps,fakehttps
+.google-analytics.com = google_com,forcehttps,fakehttps
+.gstatic.com = google_com,forcehttps,fakehttps
+.ggpht.com = google_com,forcehttps,fakehttps
+.googlegroups.com = google_com,forcehttps,fakehttps
+.googlecode.com = google_com,forcehttps,fakehttps
+.youtube.com = google_usa,forcehttps,fakehttps
+##增加youtube視頻播放時會讀取的地址##
+.ytimg.com = google_usa,forcehttp,fakehttps
+.android.com = google_gae
+www.dropbox.com = withgae
+.dropbox.com:443 = direct
+.box.com:443 = direct
+.copy.com:443 = direct
+https?://www\.google\.com/(?:imgres|url)\?.*url=([^&amp;]+) = $1
+https?://www\.google\.com\.hk/(?:imgres|url)\?.*url=([^&amp;]+) = $1
+ https?://www\.example\.com/.+\.html = file:///C:/README.txt
+ https?://www\.google\.com(\.[a-z]{2})?/($|(search|url|gen_204)\?|(complete|images)/) = google_gae
+#這個地方我本來設置的google_usa但是頁面刷新出來後，flash player會報錯，修改成hk就正常了
+ https?://www\.youtube\.com/watch = google_hk
+ .c.youtube.com = google_usa,forcehttps,fakehttps
+ s.youtube.com = google_usa,forcehttps,fakehttps
+; .youtube.com = google_hk
+ .googlevideo.com = google_usa,forcehttps,fakehttps
+
+[autorange]
+threads = 6
+maxsize = 3145728
+waitsize = 1048576
+bufsize = 16384
+
+配合Magic Actions for YouTube插件，用flash格式播放1080流暢了！
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jan 18 01:23:52 2015">
+ Jan 18, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=19518#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/110524627465638337154/">qq61338...@gmail.com</a
+></span>
+ 
+<pre>
+本人小白，请问下这些用怎么测试出来google_hk = X.X.X.X|................(用gscan到香港、台灣、新加坡、日本、韓國的IP)
+google_talk = talk.google.com|talk.l.google.com|talkx.l.google.com
+google_com = X.X.X.X|...............(用gscan到Google Inc的IP基本上是64和173開頭的)
+google_usa = X.X.X.X|...............(用gscan到美國的IP)
+google_gae = X.X.X.X|...............(測試出來優質的IP)
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jan 18 01:29:08 2015">
+ Jan 18, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=19518#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/110524627465638337154/">qq61338...@gmail.com</a
+></span>
+ 
+<pre>
+大神能不能把你的配置好的发一份给呀，我不太懂得怎么搞，或者那个会搞的也可以发来谢谢，61328870@qq.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jan 18 03:15:22 2015">
+ Jan 18, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=19518#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/107334217310782916870/">freetuch...@gmail.com</a
+></span>
+ 
+<pre>
+配置什么的都是扯蛋! 主要是优质IP,不过你说的chrome插件确实可以加速youtube播放,主要就是强制FLASH播放,并禁止DASH缓冲
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jan 18 05:17:45 2015">
+ Jan 18, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=19518#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/115446203943576578109/">zhajj...@gmail.com</a
+></span>
+ 
+<pre>
+同意楼上的看法，折腾了一通，发现就是打开youtube首页快点，播放视频慢了一半速度，有时间找点优质的ip,千万别在配置上下浪费时间！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jan 18 06:18:03 2015">
+ Jan 18, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=19518#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/112314821949140664509/">mooner.n...@gmail.com</a
+></span>
+ 
+<pre>
+#5 GoAgent从我的使用体验来说，是非常值得投资时间精力的，没有哪家的SS或者VPN能赶上Google的服务器，无论是速度还是稳定性。找到好的GCC，非常非常爽的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jan 18 06:20:19 2015">
+ Jan 18, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=19518#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/110158684434685666353/">cym.zh...@gmail.com</a
+></span>
+ 
+<pre>
+不完全是钱
+
+李纳斯说的好，做爱还是不花钱的感觉好一点
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jan 18 09:51:08 2015">
+ Jan 18, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=19518#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/117323840712700880211/">robot...@gmail.com</a
+></span>
+ 
+<pre>
+gscan ：<a href="https://github.com/yinqiwen/gscan" rel="nofollow">https://github.com/yinqiwen/gscan</a>
+这里下载 ！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jan 18 23:38:07 2015">
+ Jan 18, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=19518#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/117158790449271841902/">5linh...@gmail.com</a
+></span>
+ 
+<pre>
+建议低延迟的ip用于打开网页，而对于youtube的视频播放（和图片）等流量大的可使用稍高延迟的ip
+因为延迟只影响网页的打开速度，并不能决定缓冲速度。
+这样应该不会影响看视频体验。欢迎有心人测试！！！！
+如果人人都用低延迟的ip来播放视频，会加速ip的封锁，再者高峰时，依然会造成视频播放不流畅（因为ip的带宽被挤满了）。
+而那些少人用的高延迟ip则非常适合播放视频。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jan 19 01:55:59 2015">
+ Jan 19, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=19518#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/117158790449271841902/">5linh...@gmail.com</a
+></span>
+ 
+<pre>
+{{{{{
+8：youtube.com使用美国的Google服务器地址。【只是修改了youtube.com的ip，并非通过这个ip来看youtube视频】(虽然youtube的视频存储在googlevideo.com上，实际上，我们无法事先无法确定哪个视频存放于哪个ip上，自定义googlevideo.com的ip地址也没多大用处。因此，这里youtube的视频服务不做任何设置，让googlevideo.com的视频自动走gae)
+}}}}}   引自 <a title="十条Goagent使用技巧"  href="/p/goagent/issues/detail?id=19311">Issue 19311</a>   <a href="https://code.google.com/p/goagent/issues/detail?id=19311" rel="nofollow">https://code.google.com/p/goagent/issues/detail?id=19311</a>
+
+ .googlevideo.com = google_usa,forcehttps,fakehttps
+你改了 .googlevideo.com ，确认能够播放吗？
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jan 19 04:43:33 2015">
+ Jan 19, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=19518#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/100200068994005036643/">pengda...@gmail.com</a
+></span>
+ 
+<pre>
+感谢楼主分享！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jan 23 17:03:17 2015">
+ Jan 23, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=19518#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/114369775350778087263/">ultrajoe...@gmail.com</a
+></span>
+ 
+<pre>
+#10 .googlevideo.com = withgae,forcehttps,fakhttps,crlf这样弄可以放了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jan 26 00:38:17 2015">
+ Jan 26, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=19518#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/101202377725859252938/">jc20031...@gmail.com</a
+></span>
+ 
+<pre>
+得到以下问题：
+
+connection aborted. too short headers data=Agent Python Server 3.2.0 works, deployed at 2015-01-25 14:18:36
+
+求解答！
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19518&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19518"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="19518">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A19518',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 19518,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

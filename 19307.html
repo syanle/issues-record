@@ -1,0 +1,632 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"loggedInUserEmail": null, "profileUrl": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "token": null, "projectHomeUrl": "/p/goagent", "projectName": "goagent", "relativeBaseUrl": "", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "domainName": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 19307 - 
+ goagent -
+ 
+ [bug]Firefox使用pac文件时，打开某些网站弹出“保存”提示对话框 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19307&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19307" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=19307">19307</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >[bug]Firefox使用pac文件时，打开某些网站弹出“保存”提示对话框</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 2 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A19307">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19307&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19307">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/111305249927850353259/">byhon...@gmail.com</a
+>,
+ <span class="date" title="Fri Jan  2 17:40:58 2015">Jan 2, 2015</span>
+ 
+ </div>
+<pre>
+Linux上将Firefox设置代理为pac文件时，登陆www.android.com网站，弹出如下一长串文件名的文件保存对话框：
+activityi;src=2542116;type=andro238;cat=andro970;ord=1;num=6002960777600;~oref=http___www.android.com_
+
+但如果是用127.0.0.1：8087的方式设置代理，则不会弹出保存文件对话框。
+
+
+具体环境如下
+==========
+操作系统版本：Linux Mint
+浏览器版本：Firefox 34.0.5
+代理插件：Foxyproxy 4.5
+GoAgent 版本：3.2.3 (python/2.7.4 gevent/1.0.1 pyopenssl/0.13)
+<b>GoAgent 日志：</b>
+
+INFO - [Jan  3 09:29:53] ssl good_ipaddrs=14, bad_ipaddrs=31, unknown_ipaddrs=0
+INFO - [Jan  3 09:29:55] 127.0.0.1:52808 &quot;GAE GET <a href="http://www.android.com/" rel="nofollow">http://www.android.com/</a> HTTP/1.1&quot; 304 0
+INFO - [Jan  3 09:29:55] ssl good_ipaddrs=16, bad_ipaddrs=31, unknown_ipaddrs=0
+INFO - [Jan  3 09:29:55] 127.0.0.1:53105 &quot;MOCK GET <a href="http://fonts.googleapis.com/css?family=Roboto:700,500,400,300,100&amp;subset=latin,latin-ext,cyrillic,cyrillic-ext" rel="nofollow">http://fonts.googleapis.com/css?family=Roboto:700,500,400,300,100&amp;subset=latin,latin-ext,cyrillic,cyrillic-ext</a> HTTP/1.1&quot; 301 0
+INFO - [Jan  3 09:29:55] 127.0.0.1:53106 &quot;MOCK GET <a href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,200,100&amp;subset=latin,latin-ext,cyrillic,cyrillic-ext" rel="nofollow">http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,200,100&amp;subset=latin,latin-ext,cyrillic,cyrillic-ext</a> HTTP/1.1&quot; 301 0
+INFO - [Jan  3 09:29:55] 127.0.0.1:52808 &quot;GAE GET <a href="http://www.android.com/new/stylesheets/site.min.css" rel="nofollow">http://www.android.com/new/stylesheets/site.min.css</a> HTTP/1.1&quot; 304 0
+INFO - [Jan  3 09:29:56] 127.0.0.1:52823 &quot;DIRECT GET <a href="https://www.google.com/js/gweb/analytics/autotrack.js" rel="nofollow">https://www.google.com/js/gweb/analytics/autotrack.js</a> HTTP/1.1&quot; 304 -
+INFO - [Jan  3 09:29:56] extend_iplist finished, added 15
+INFO - [Jan  3 09:29:56] 127.0.0.1:53090 &quot;GAE GET <a href="http://www.android.com/new/javascripts/site.min.js" rel="nofollow">http://www.android.com/new/javascripts/site.min.js</a> HTTP/1.1&quot; 304 0
+INFO - [Jan  3 09:29:56] 127.0.0.1:52829 &quot;DIRECT GET <a href="https://www.gstatic.com/external_hosted/hammerjs/v2_0_2/hammer.min.js" rel="nofollow">https://www.gstatic.com/external_hosted/hammerjs/v2_0_2/hammer.min.js</a> HTTP/1.1&quot; 304 -
+INFO - [Jan  3 09:29:56] 127.0.0.1:52828 &quot;DIRECT GET <a href="https://www.gstatic.com/external_hosted/gsap/TweenMax.min.js" rel="nofollow">https://www.gstatic.com/external_hosted/gsap/TweenMax.min.js</a> HTTP/1.1&quot; 304 -
+INFO - [Jan  3 09:29:56] 127.0.0.1:52826 &quot;DIRECT GET <a href="https://www.gstatic.com/external_hosted/modernizr/modernizr.js" rel="nofollow">https://www.gstatic.com/external_hosted/modernizr/modernizr.js</a> HTTP/1.1&quot; 304 -
+INFO - [Jan  3 09:29:57] 127.0.0.1:52808 &quot;MOCK GET <a href="http://www.googletagmanager.com/gtm.js?id=GTM-NBTRZZ" rel="nofollow">http://www.googletagmanager.com/gtm.js?id=GTM-NBTRZZ</a> HTTP/1.1&quot; 301 0
+INFO - [Jan  3 09:29:57] 127.0.0.1:46007 &quot;MOCK GET <a href="http://2542116.fls.doubleclick.net/activityi;src=2542116;type=andro238;cat=andro970;ord=1;num=2340618197375;~oref=http%3A%2F%2Fwww.android.com%2F?" rel="nofollow">http://2542116.fls.doubleclick.net/activityi;src=2542116;type=andro238;cat=andro970;ord=1;num=2340618197375;~oref=http%3A%2F%2Fwww.android.com%2F?</a> HTTP/1.1&quot; 200 0
+INFO - [Jan  3 09:29:57] 127.0.0.1:52873 &quot;GAE GET <a href="https://www.youtube.com/iframe_api" rel="nofollow">https://www.youtube.com/iframe_api</a> HTTP/1.1&quot; 200 428
+INFO - [Jan  3 09:29:57] ssl good_ipaddrs=22, bad_ipaddrs=31, unknown_ipaddrs=0
+INFO - [Jan  3 09:29:58] 127.0.0.1:52873 &quot;GAE GET <a href="https://www.youtube.com/embed/TRmgMe2STL0?controls=2&amp;showinfo=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.android.com" rel="nofollow">https://www.youtube.com/embed/TRmgMe2STL0?controls=2&amp;showinfo=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.android.com</a> HTTP/1.1&quot; 200 9497
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jan  2 17:42:26 2015">
+ Jan 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=19307#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/111305249927850353259/">byhon...@gmail.com</a
+></span>
+ 
+<pre>
+日志记录中重点是这一行：
+INFO - [Jan  3 09:29:57] 127.0.0.1:46007 &quot;MOCK GET <a href="http://2542116.fls.doubleclick.net/activityi;src=2542116;type=andro238;cat=andro970;ord=1;num=2340618197375;~oref=http%3A%2F%2Fwww.android.com%2F?" rel="nofollow">http://2542116.fls.doubleclick.net/activityi;src=2542116;type=andro238;cat=andro970;ord=1;num=2340618197375;~oref=http%3A%2F%2Fwww.android.com%2F?</a> HTTP/1.1&quot; 200 0
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jan  2 17:49:24 2015">
+ Jan 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=19307#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/111305249927850353259/">byhon...@gmail.com</a
+></span>
+ 
+<pre>
+如果是以127.0.0.1代理方式，则不会弹出保存对话框，日志如下：
+
+INFO - [Jan  3 09:46:04] 127.0.0.1:54922 &quot;GAE GET <a href="http://www.android.com/new/javascripts/site.min.js" rel="nofollow">http://www.android.com/new/javascripts/site.min.js</a> HTTP/1.1&quot; 304 0
+INFO - [Jan  3 09:46:04] 127.0.0.1:54942 &quot;DIRECT GET <a href="https://www.gstatic.com/external_hosted/modernizr/modernizr.js" rel="nofollow">https://www.gstatic.com/external_hosted/modernizr/modernizr.js</a> HTTP/1.1&quot; 304 -
+INFO - [Jan  3 09:46:04] 127.0.0.1:54944 &quot;DIRECT GET <a href="https://www.gstatic.com/external_hosted/hammerjs/v2_0_2/hammer.min.js" rel="nofollow">https://www.gstatic.com/external_hosted/hammerjs/v2_0_2/hammer.min.js</a> HTTP/1.1&quot; 304 -
+INFO - [Jan  3 09:46:04] 127.0.0.1:54943 &quot;DIRECT GET <a href="https://www.gstatic.com/external_hosted/gsap/TweenMax.min.js" rel="nofollow">https://www.gstatic.com/external_hosted/gsap/TweenMax.min.js</a> HTTP/1.1&quot; 304 -
+INFO - [Jan  3 09:46:04] 127.0.0.1:54939 &quot;DIRECT GET <a href="https://www.google.com/js/gweb/analytics/autotrack.js" rel="nofollow">https://www.google.com/js/gweb/analytics/autotrack.js</a> HTTP/1.1&quot; 304 -
+INFO - [Jan  3 09:46:04] 127.0.0.1:54907 &quot;MOCK GET <a href="http://www.googletagmanager.com/gtm.js?id=GTM-NBTRZZ" rel="nofollow">http://www.googletagmanager.com/gtm.js?id=GTM-NBTRZZ</a> HTTP/1.1&quot; 301 0
+INFO - [Jan  3 09:46:04] 127.0.0.1:55002 &quot;STRIP CONNECT www.youtube.com:443 HTTP/1.1&quot; - -
+INFO - [Jan  3 09:46:04] 127.0.0.1:55003 &quot;STRIP CONNECT www.googletagmanager.com:443 HTTP/1.1&quot; - -
+INFO - [Jan  3 09:46:04] ssl good_ipaddrs=29, bad_ipaddrs=90, unknown_ipaddrs=72
+INFO - [Jan  3 09:46:05] 127.0.0.1:55002 &quot;GAE GET <a href="https://www.youtube.com/iframe_api" rel="nofollow">https://www.youtube.com/iframe_api</a> HTTP/1.1&quot; 200 428
+INFO - [Jan  3 09:46:05] 127.0.0.1:55003 &quot;DIRECT GET <a href="https://www.googletagmanager.com/gtm.js?id=GTM-NBTRZZ" rel="nofollow">https://www.googletagmanager.com/gtm.js?id=GTM-NBTRZZ</a> HTTP/1.1&quot; 200 -
+INFO - [Jan  3 09:46:06] 127.0.0.1:55002 &quot;GAE GET <a href="https://www.youtube.com/embed/TRmgMe2STL0?controls=2&amp;showinfo=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.android.com" rel="nofollow">https://www.youtube.com/embed/TRmgMe2STL0?controls=2&amp;showinfo=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.android.com</a> HTTP/1.1&quot; 200 9411
+INFO - [Jan  3 09:46:06] 127.0.0.1:54922 &quot;GAE GET <a href="http://2542116.fls.doubleclick.net/activityi;src=2542116;type=andro238;cat=andro970;ord=1;num=2354764984114;~oref=http%3A%2F%2Fwww.android.com%2F?" rel="nofollow">http://2542116.fls.doubleclick.net/activityi;src=2542116;type=andro238;cat=andro970;ord=1;num=2354764984114;~oref=http%3A%2F%2Fwww.android.com%2F?</a> HTTP/1.1&quot; 200 177
+
+
+看来是这个MOK .net 出的问题，不知道Bug提到这儿，Phus Lu能看到么，这儿是提技术类bug的地方吧，还是要单发邮件？
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19307&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19307"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="19307">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A19307',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 19307,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

@@ -1,0 +1,1436 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"assetHostPath": "https://ssl.gstatic.com/codesite/ph", "domainName": null, "profileUrl": null, "token": null, "relativeBaseUrl": "", "loggedInUserEmail": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "projectHomeUrl": "/p/goagent", "projectName": "goagent"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 15411 - 
+ goagent -
+ 
+ 讲述一个自动获得安全google ip的思路 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D15411&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D15411" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=15411">15411</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >讲述一个自动获得安全google ip的思路</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 14 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A15411">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D15411&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D15411">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/111561751587929198110/">majun8...@gmail.com</a
+>,
+ <span class="date" title="Thu Jul 24 22:15:40 2014">Jul 24, 2014</span>
+ 
+ </div>
+<pre>
+经过多次升级迭代，从1.0到3.X，作者对goagent心血和对各种机制的完善，使得goagent广泛普及，感谢作者的无私精神。现在翻越GFW的主要困难不在goagent上，而是goagent在和服务器解析过程中被劫持到一些特定的ip，造成各种报错
+
+原因在于goagent在和DNS服务器交互过程中，windows默认采用UDP连接，经过测试TCP模式可以安全获得google servers的ip地址
+
+思路就是让goagent通过本地的DNS TCP服务进行地址解析
+
+goagent做如下修改
+[dns]
+enable = 0
+listen = 127.0.0.1:53
+servers = 127.0.0.1
+
+下载opendns DNSCrypt并安装
+<a href="https://github.com/opendns/dnscrypt-win-client/blob/master/DNSCrypt/dnscrypt-proxy.exe" rel="nofollow">https://github.com/opendns/dnscrypt-win-client/blob/master/DNSCrypt/dnscrypt-proxy.exe</a>
+
+启动DNSCrypt客户端，DNSCrypt客户端会和opendns服务器建立TCP查询连接，然后goagent会通过127.0.0.1进行DNS查询
+
+实际上此时是goagent透过DNSCrypt客户端TCP连接进行DNS解析，解决了DNS被污染的问题
+
+PS:
+如果可以找到其它的本地DNS TCP服务，也可以替换掉DNSCrypt
+比如dns-tcp-query
+<a href="https://code.google.com/p/dns-tcp-query/" rel="nofollow">https://code.google.com/p/dns-tcp-query/</a>
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jul 24 23:42:49 2014">
+ Jul 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=15411#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+昨天升级的0.9.3版本，已经这么做了，
+开启dnscryp-proxy后，会自动下载官方dnscrypt-proxy 1.4.0版本，开启服务后，会在配置文件中自动修改servers = 127.0.0.1
+
+详见下面地址：
+<a href="https://code.google.com/p/goagent/issues/detail?id=13165" rel="nofollow">https://code.google.com/p/goagent/issues/detail?id=13165</a>
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=154110001000&amp;name=0.9.3.jpg&amp;token=ABZ6GAdgtA2a_h0NBLm0opOCP0N3eqRtVg%3A1434455819124&amp;id=15411&amp;mod_ts_token=ABZ6GAdooOPm9UZu1x96MKokbObSWHX4mw%3A1434455819124">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >0.9.3.jpg</b>
+ <br>
+ 68.4 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=154110001000&amp;name=0.9.3.jpg&amp;token=ABZ6GAdgtA2a_h0NBLm0opOCP0N3eqRtVg%3A1434455819124&amp;id=15411&amp;mod_ts_token=ABZ6GAdooOPm9UZu1x96MKokbObSWHX4mw%3A1434455819124&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=154110001000&amp;name=0.9.3.jpg&amp;token=ABZ6GAdgtA2a_h0NBLm0opOCP0N3eqRtVg%3A1434455819124&amp;id=15411&amp;mod_ts_token=ABZ6GAdooOPm9UZu1x96MKokbObSWHX4mw%3A1434455819124">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=154110001000&amp;name=0.9.3.jpg&amp;token=ABZ6GAdgtA2a_h0NBLm0opOCP0N3eqRtVg%3A1434455819124&amp;id=15411&amp;mod_ts_token=ABZ6GAdooOPm9UZu1x96MKokbObSWHX4mw%3A1434455819124&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=154110001000&amp;name=0.9.3.jpg&amp;token=ABZ6GAdgtA2a_h0NBLm0opOCP0N3eqRtVg%3A1434455819124&amp;id=15411&amp;mod_ts_token=ABZ6GAdooOPm9UZu1x96MKokbObSWHX4mw%3A1434455819124&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jul 24 23:50:10 2014">
+ Jul 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=15411#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/111561751587929198110/">majun8...@gmail.com</a
+></span>
+ 
+<pre>
+可以考虑用dns-tcp-query，因为可以改DNS服务器地址，以免后期opendns彻底被墙
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jul 25 00:35:22 2014">
+ Jul 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=15411#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/106124523560669168370/">sunha...@gmail.com</a
+></span>
+ 
+<pre>
+goagent中[dns]enable=0 的话，不是说这个功能就没开么？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jul 25 00:39:17 2014">
+ Jul 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=15411#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+#3楼，你下载的地址是哪个？？？
+
+还有，你的操作系统是什么，是否覆盖了之前的？？
+
+你右键解压看看里面goagent.bat版本~
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jul 25 00:43:23 2014">
+ Jul 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=15411#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+#4楼， 
+
+[dns]
+enable = 0
+
+这个参数只是是否开启本地DNS转发的开关，与goagent去通过哪些DNS来获取IP无关
+
+开启这个后，goagent会在本地开启一个DNS服务，也就是127.0.0.1来给本机使用，
+
+如果开启会和dnscrypt-proxy冲突的！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jul 25 00:52:32 2014">
+ Jul 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=15411#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/111561751587929198110/">majun8...@gmail.com</a
+></span>
+ 
+<pre>
+#4楼 goagent中[dns]enable=0 的意义是开启/关闭DNS代理服务
+
+例如
+[dns]
+enable = 1
+listen = 127.0.0.1:53
+servers = 8.8.4.4|8.8.8.8
+开启后，listen的意思就是侦听127.0.0.1:53，此时把windows系统的DNS设置为127.0.0.1，系统的全部DNS请求指向servers = 8.8.4.4|8.8.8.8
+
+实质上是由goagent发起DNS UDP请求，并无开启tcp，只是本机做了个goagent DNS代理服务
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jul 25 00:57:17 2014">
+ Jul 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=15411#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/111561751587929198110/">majun8...@gmail.com</a
+></span>
+ 
+<pre>
+#1楼  
+
+我觉得你可以开个Project Home以便大家查询和完善
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jul 25 01:19:32 2014">
+ Jul 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=15411#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/102184351539911457668/">Zane...@gmail.com</a
+></span>
+ 
+<pre>
+#8楼，我看了一下，的确上传错了，不好意思，已经更新！！！
+
+
+#9楼，可以考虑一下， 回头试试~
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jul 25 01:41:39 2014">
+ Jul 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=15411#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+你用Dnsforwarder不是更靈活，可以自行決定用哪個查詢，用哪些好用的dns server，配合gfwlist可以像autoproxy一樣的內網走udp，外網走Tcp。不過這個配置更簡單更易用些，自己斟酌取捨吧。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jul 25 02:06:31 2014">
+ Jul 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=15411#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/111561751587929198110/">majun8...@gmail.com</a
+></span>
+ 
+<pre>
+#12
+国内服务商的DNS无论是TCP还是UDP都不会询问到正确的IP，只能向国外的DNS建立TCP才会询问到正确的结果。如果国内的网站也采用国外DNS的结果，则有可能电信用户被解析到联通服务器，这个和UDP和TCP没有关系，所以内网用UDP，外网用TCP，没有任何意义。结合autoproxy的规则墙内走本地DNS，墙外用goagent内置DNS更高效
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jul 25 10:58:16 2014">
+ Jul 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=15411#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/zhfreal/">zhfreal</a
+></span>
+ 
+<pre>
+LZ给你泼盆冷水，解决DNS污染并不能保证你得到可用可靠的google ip。现在GFW已经包括了特定IP和端口封锁，tcp连接重置，流量检测，特定协议检测和阻断，加密连接干扰等等一系列技术。goagent实际上就是依靠庞大数量的google 服务器群作为跳板代理，依靠本地与Google服务器的加密通信，使gfw难检测到你访问了敏感信息，保证你正常访问。如果通过dns解析的google ip，因为其更集中，更方便gfw封锁。本轮封锁，goagent配置域名的方式翻墙机会很小也相当不稳定。dnscrypt之类的加密DNS查询服务对找Google ip方面作用不大。比较好的方法是goagent 配置自己通过tcp ping 和证书校验等找到一些可用稳定的ip。而且尽量找些冷门的ip，减小被GFW发现的概率。解决DNS污染的问题，tcp查询加黑名单过滤也就行了，goagent默认设置也可以。当然dnscrypt也可以，只不过更慢些而已。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jul 25 14:35:11 2014">
+ Jul 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=15411#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/111561751587929198110/">majun8...@gmail.com</a
+></span>
+ 
+<pre>
+#15
+冷水谈不上，只是有几点需要指出
+TCP DNS每次查询结果都有不同，用户随机获取的google ip也不一样，除了位置区域，再就是应对的服务器集群有负载均衡机制，纵使被侦测到一部分，也是GFW直接进行国外DNS询问的结果。作者内置的域名问询结果对应的是google ip庞大数量，GFW的方式杯水车薪
+
+如果按照你的思路，作者内置冷门IP，这就是主动去更新迭代google ip，goagent谁都可以下载，恐怕一天一次更新都不能保证正常访问。如果你的内置IP方法有效，作者不会在goagent更新过程中取消了IP内置。
+以不确定的问询结果，应对固定套路的GFW，是上策
+
+GFW目前对TCP和IPv6毫无办法，这才是未来的思路
+
+希望15楼弄清楚DNS TCP的本质意义是什么，这是和服务器建立有效连接的第一步
+再次强调一下任何国内的DNS服务商无论是TCP还是UDP都是错误的解析结果
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jul 26 08:03:20 2014">
+ Jul 26, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=15411#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/zhfreal/">zhfreal</a
+></span>
+ 
+<pre>
+LS，你没有明白我的关键点：DNS返回的google ip不代表这个ip就能正常使用，没有被gfw干扰。不管你是通过UDP查询还是TCP查询，甚至加上dnssec验证签名，甚至dnscrypt加密查询。你只能保证你得到查询结果未被污染，是该dns配置的查询结果，而不是污染后的虚假的IP。而这些返回的google IP是否能用，需要检验。实际上，使用量大常用的DNS返回的google ip都已经被干扰的很厉害。比如google自己的公众DNS8.8.8.8，opendns。你能从这些dns获取未被污染的结果，但是返回的google IP被gfw干扰，无法使用。 
+TCP DNS每次返回的结果不同？这个是dns自己的策略，和你的查询方式（tcp，udp？）无关。对于一个区域网络来说，这个结果是在一定范围的。GFW当然不能全部都封锁。那样，负荷太大。只能是针对流量高的，使用量大ip作干扰。
+
+goagent发布时当然不能用固定ip。因为很多人都是依靠默认设置使用。如果固定ip，这些ip必然会被gfw封锁。GFW只要封住这些ip，也就能使很大一部分人无法翻墙，GFW乐于此。DNS查询更具灵活性，被墙几率比goagent默认固定ip小些。goagent发布默认配置域名而不是固定ip，这个是不错的选择。但是，dns查询得到的ip能不能用来翻墙， 你就要凭运气或者说看gfw了。而对个人而已，dns查询结果是否可用具有不确定性.所以如果要更稳定翻墙，你还是要学会自己找google ip，检验google ip。
+
+IPv6地址更广，封锁起来更难，不是不能封锁。目前已有常用的地址被干扰。道高一尺，魔高一丈。随着技术的发展，以后的事情谁知道呢？
+
+国内DNS都是错误的解析结果？不知你所谓的错误结果是指什么。国内的DNS通过TCP查询可以得到未被污染的结果，但是这些ip绝大部分已经被gfw干扰了。对于DNS查询而且，也就是这样。只能保证查询结果未被污染，不能保证查询结果中的google ip没有被干扰。当然，最近冒出来个阿里的dns，自称解析出来的ip可以直接用。他们的google域名查询结果应该是发布前经过检验的。而且从网上反馈来看，这些ip有些人可用，有些人不能用。
+
+写了这么多，希望你明白我在说什么。如果你不明白，建议你看下维基百科上关于gfw的介绍。
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jul 26 08:33:07 2014">
+ Jul 26, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=15411#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/103473276612546405783/">shuangzh...@gmail.com</a
+></span>
+ 
+<pre>
+再说楼上的,现在无论用哪个大名鼎鼎的公共DNS查询google.com类似的地址获取到的IP基本都是一样的,GFW的封锁现在是针对地址段的封锁,基本上涵盖了173.194.0.0/16以及74.125.0.0/16,基于证书的检测,整个地址段基本上只有*.c.docs.google.com的证书IP没有被封锁,谷歌公共DNS/OpenDNS解析返回的IP是基于用户IP的地理位置的.在正常的情况下无论你用哪一家的DNS获取到的IP我可以说基本都是这几个地址段里面的IP:173.194.127.0/24;74.125.31.0/24;173.194.72.0/24;74.125.203.0/24;74.125.204.0/24
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jul 26 08:50:03 2014">
+ Jul 26, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=15411#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/103473276612546405783/">shuangzh...@gmail.com</a
+></span>
+ 
+<pre>
+继续补充我楼上说的,我广西电信的,写了个程序扫描整个74.125.0.0/16和173.194.0.0/16证书为*.google.com和google.com的,整个扫描下来可用IP不超过300个.一个地址段的总数为65535个,可用仅为300,可用率只有0.5%,姑且说换了DNS能够解析到可用的IP上,但是你要怎么保证解析的一定是可用的呢?也许在移动网络通用,但是在联通电信呢?
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jul 26 23:16:00 2014">
+ Jul 26, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=15411#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/114902295707394912258/">gyk66...@gmail.com</a
+></span>
+ 
+<pre>
+DNSCrypt只有win32吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jul 26 23:32:21 2014">
+ Jul 26, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=15411#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/114902295707394912258/">gyk66...@gmail.com</a
+></span>
+ 
+<pre>
+已找出错误的地方了。想请问下楼主，你的工具如何进行自动更新。我看bat里dnscrypt-proxy版本是写死的。后期dnscrypt-proxy有更新的话，不是也不方便自动更新么。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Aug 12 23:10:44 2014">
+ Aug 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=15411#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/111561751587929198110/">majun8...@gmail.com</a
+></span>
+ 
+<pre>
+#21
+只是个TCP DNS的工具而已，没频繁更新的必要，除非被封
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Nov 26 07:07:04 2014">
+ Nov 26, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=15411#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/116403131830663013319/">haike28...@gmail.com</a
+></span>
+ 
+<pre>
+受教了 看了这贴讨论才真正明白一些。。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D15411&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D15411"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="15411">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A15411',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 15411,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

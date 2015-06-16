@@ -1,0 +1,1061 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"loggedInUserEmail": null, "projectHomeUrl": "/p/goagent", "relativeBaseUrl": "", "profileUrl": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "token": null, "projectName": "goagent", "domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 12558 - 
+ goagent -
+ 
+ youtube一个视频只加载一小段 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12558&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12558" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=12558">12558</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >youtube一个视频只加载一小段</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 2 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A12558">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12558&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12558">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/101875310685064417457/">fafa...@gmail.com</a
+>,
+ <span class="date" title="Thu Feb  6 19:23:36 2014">Feb 6, 2014</span>
+ 
+ </div>
+<pre>
+一月底开始就这样，其他地方使用都正常，就是youtube视频只能载一段，然后就没速度了。有人有一样的问题吗。。刚开始以为是3.1.5的问题，现在3.0.5也不行了。。
+
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Feb  6 20:59:35 2014">
+ Feb 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=12558#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/118064236487088911298/">mourneli...@gmail.com</a
+></span>
+ 
+<pre>
+延迟高很正常，中国这么多人，台服魔兽都2000延迟你敢信！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Feb  6 23:52:07 2014">
+ Feb 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=12558#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/101875310685064417457/">fafa...@gmail.com</a
+></span>
+ 
+<pre>
+不是延迟吧。。。根本看不了视频啊
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Feb  6 23:53:53 2014">
+ Feb 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=12558#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/113124231603289201734/">anonymou...@gmail.com</a
+></span>
+ 
+<pre>
+3.1.5是有问题，不过不知道是啥问题，看视频的时候黄字一堆 越来越多。还有红色的字
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Feb 11 05:42:47 2014">
+ Feb 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=12558#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/113210290461562300204/">jeffso...@gmail.com</a
+></span>
+ 
+<pre>
+我这里直接卡在开始5秒钟的广告上，刷新无效
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Feb 11 09:33:00 2014">
+ Feb 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=12558#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/gusign@gmail.com/">gusign@gmail.com</a
+></span>
+ 
+<pre>
+我也是,这不是延迟,视频载入后速度还是很快,但就是播放一小段就卡死了,需要跳一节才能接着播放,就是从3.1.4开始的,我以为3.1.5修复了,哪知道还是一样.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Feb 11 09:35:39 2014">
+ Feb 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=12558#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/gusign@gmail.com/">gusign@gmail.com</a
+></span>
+ 
+<pre>
+INFO - [Feb 12 01:31:07] GAEProxyHandler.do_METHOD_AGENT url='https://<a href="/p/goagent/source/detail?r=4">r4</a>---sn-i3
+b7sn7k.googlevideo.com/videoplayback?gcr=cn&amp;mv=u&amp;source=youtube&amp;factor=1.25&amp;ms=a
+u&amp;dur=3800.797&amp;mt=1392139417&amp;upn=NHK8_pFMkBA&amp;algorithm=throttle-factor&amp;gir=yes&amp;s
+ignature=<a href="/p/goagent/source/detail?r=38CBCBD91B5FEF48015334691DCD293DFE20B509">38CBCBD91B5FEF48015334691DCD293DFE20B509</a>.3854E73A099D73D29B0499CADF93D2
+45699ED475&amp;ip=117.174.60.19&amp;expire=1392162978&amp;key=yt5&amp;clen=57826781&amp;id=474d58304
+69a4846&amp;fexp=934704%2C930004%2C932242%2C916807%2C916623%2C943812%2C937417%2C9134
+34%2C936910%2C936913&amp;sparams=algorithm%2Cburst%2Cclen%2Cdur%2Cfactor%2Cgcr%2Cgir
+%2Cid%2Cip%2Cipbits%2Citag%2Clmt%2Csource%2Cupn%2Cexpire&amp;burst=40&amp;itag=160&amp;ipbit
+s=0&amp;sver=3&amp;lmt=1387059017543412&amp;cpn=rYoCrTv_IJwg6OBn&amp;alr=yes&amp;mime=video%2Fmp4&amp;ra
+tebypass=yes&amp;cwndbw=1073&amp;range=2447945-2825601&amp;keepalive=yes' return SSLError(1,
+ '_ssl.c:1309: error:1409F07F:SSL routines:SSL3_WRITE_PENDING:bad write retry'),
+ abort.
+INFO - [Feb 12 01:31:13] 127.0.0.1:49570 &quot;AGENT CONNECT <a href="/p/goagent/source/detail?r=4">r4</a>---sn-i3b7sn7k.googlev
+ideo.com:443 HTTP/1.1&quot; - -
+INFO - [Feb 12 01:31:25] 127.0.0.1:49575 &quot;AGENT CONNECT <a href="/p/goagent/source/detail?r=4">r4</a>---sn-i3b7sn7k.googlev
+ideo.com:443 HTTP/1.1&quot; - -
+INFO - [Feb 12 01:31:37] 127.0.0.1:49581 &quot;AGENT CONNECT <a href="/p/goagent/source/detail?r=4">r4</a>---sn-i3b7sn7k.googlev
+ideo.com:443 HTTP/1.1&quot; - -
+INFO - [Feb 12 01:31:49] 127.0.0.1:49594 &quot;AGENT CONNECT <a href="/p/goagent/source/detail?r=4">r4</a>---sn-i3b7sn7k.googlev
+ideo.com:443 HTTP/1.1&quot; - -
+INFO - [Feb 12 01:32:01] 127.0.0.1:49603 &quot;AGENT CONNECT <a href="/p/goagent/source/detail?r=4">r4</a>---sn-i3b7sn7k.googlev
+ideo.com:443 HTTP/1.1&quot; - -
+INFO - [Feb 12 01:32:13] 127.0.0.1:49616 &quot;AGENT CONNECT <a href="/p/goagent/source/detail?r=4">r4</a>---sn-i3b7sn7k.googlev
+ideo.com:443 HTTP/1.1&quot; - -
+INFO - [Feb 12 01:32:25] 127.0.0.1:49625 &quot;AGENT CONNECT <a href="/p/goagent/source/detail?r=4">r4</a>---sn-i3b7sn7k.googlev
+ideo.com:443 HTTP/1.1&quot; - -
+INFO - [Feb 12 01:32:43] 127.0.0.1:49654 &quot;AGENT CONNECT <a href="/p/goagent/source/detail?r=4">r4</a>---sn-i3b7sn7k.googlev
+ideo.com:443 HTTP/1.1&quot; - -
+INFO - [Feb 12 01:32:58] 127.0.0.1:49664 &quot;FWD CONNECT code.google.com:443 HTTP/1
+.1&quot; - -
+INFO - [Feb 12 01:33:00] 127.0.0.1:49673 &quot;FWD CONNECT www.google.com:443 HTTP/1.
+1&quot; - -
+INFO - [Feb 12 01:33:01] 127.0.0.1:49678 &quot;AGENT CONNECT <a href="/p/goagent/source/detail?r=4">r4</a>---sn-i3b7sn7k.googlev
+ideo.com:443 HTTP/1.1&quot; - -
+INFO - [Feb 12 01:33:10] 127.0.0.1:49691 &quot;FWD CONNECT clients4.google.com:443 HT
+TP/1.1&quot; - -
+INFO - [Feb 12 01:33:13] 127.0.0.1:49696 &quot;FWD CONNECT goagent.googlecode.com:443
+ HTTP/1.1&quot; - -
+INFO - [Feb 12 01:33:19] 127.0.0.1:49709 &quot;AGENT CONNECT <a href="/p/goagent/source/detail?r=4">r4</a>---sn-i3b7sn7k.googlev
+ideo.com:443 HTTP/1.1&quot; - -
+INFO - [Feb 12 01:33:37] 127.0.0.1:49727 &quot;AGENT CONNECT <a href="/p/goagent/source/detail?r=4">r4</a>---sn-i3b7sn7k.googlev
+ideo.com:443 HTTP/1.1&quot; - -
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Feb 11 09:52:45 2014">
+ Feb 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=12558#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/gusign@gmail.com/">gusign@gmail.com</a
+></span>
+ 
+<pre>
+但是把SwitchySharp情景模式选择为 GoAgent,不用自动切换模式,Youtube视频又能如早些版本一样,我觉得是SwitchySharp里面的切换规则和更新版本有不兼容的缘故,希望能改进..
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Feb 11 21:47:21 2014">
+ Feb 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=12558#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/104522651825521409933/">zou88866...@gmail.com</a
+></span>
+ 
+<pre>
+这样的情况我也经常遇到，譬如www.wallpaperhere.com/Hot_Girls　　这个网址，用自动切换进不去或显示不正常，直接用ＧＯＡＧＥＮＴ模式，十分正常／
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Feb 11 23:33:40 2014">
+ Feb 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=12558#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/105196846096651868901/">felixlu0...@gmail.com</a
+></span>
+ 
+<pre>
+如果用全局代理没有问题，那在代理规则里加一条||googlevideo.com。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Feb 12 02:15:03 2014">
+ Feb 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=12558#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/102547967668796508107/">yupeng1...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢9L，问题解决。
+单独再添加一条新规则即可： *://*.googlevideo.com/*
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Feb 12 05:07:11 2014">
+ Feb 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=12558#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/104651317305939684141/">yintam...@gmail.com</a
+></span>
+ 
+<pre>
+*://*.googlevideo.com/*
+添加在哪里呢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Feb 12 17:13:42 2014">
+ Feb 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=12558#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/101269831274610557823/">LuFH2...@gmail.com</a
+></span>
+ 
+<pre>
+添加在SwitchySharp Options-切换规则-新建规则
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12558&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12558"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="12558">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A12558',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 12558,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

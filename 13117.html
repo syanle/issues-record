@@ -1,0 +1,1933 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"token": null, "profileUrl": null, "projectName": "goagent", "projectHomeUrl": "/p/goagent", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "loggedInUserEmail": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "domainName": null, "relativeBaseUrl": ""};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 13117 - 
+ goagent -
+ 
+ 升级后慢的进来看：是否北京ip无关，事实证明3.16升级失败 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13117&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13117" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=13117">13117</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >升级后慢的进来看：是否北京ip无关，事实证明3.16升级失败</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 5 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A13117">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13117&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13117">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/117891610373109240350/">ianlee...@gmail.com</a
+>,
+ <span class="date" title="Mon Apr  7 00:30:11 2014">Apr 7, 2014</span>
+ 
+ </div>
+<pre>
+这两天升级后快被3.16逼疯了，各种慢，各种找原因
+最后用排除法，在自己电脑上只找到3.08版，结果发现除了G+别的谷歌网页打开都飞快。故排除了‘政府加强北京ip防火墙的’谬论。
+又看见有G友说3.14版用起来没问题。
+最后网上找到3.14版，重新安装后终于回到了升级316以前的顺畅，不敢私藏，下载地址如下：
+<a href="http://pan.baidu.com/s/1o6yj6hO" rel="nofollow">http://pan.baidu.com/s/1o6yj6hO</a>
+
+希望作者快修改下316吧
+估计只是改ini文件就可以，只是我不会改，BTW：316后加那么多google_hk不知道为啥，害的我每次<a href="https://www.google.com/ncr后还是回那个该死的谷歌hk！我们用goagent就是不要用谷歌hk啊，麻烦改回来吧，thx" rel="nofollow">https://www.google.com/ncr后还是回那个该死的谷歌hk！我们用goagent就是不要用谷歌hk啊，麻烦改回来吧，thx</a>
+
+</pre>
+
+ <div class="attachments">
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=131170000000&amp;name=%E7%A9%BF%E5%A2%99%E7%A5%9E%E5%99%A8++3.1.4.7z&amp;token=ABZ6GAcLq0ZpL4WclS7e31FNbA7uArIVug%3A1434455145570&amp;id=13117&amp;mod_ts_token=ABZ6GAcPtV972IKpm0NqIky82osJLv2Mmw%3A1434455145570">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >穿墙神器  3.1.4.7z</b>
+ <br>
+ 4.0 MB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=131170000000&amp;name=%E7%A9%BF%E5%A2%99%E7%A5%9E%E5%99%A8++3.1.4.7z&amp;token=ABZ6GAcLq0ZpL4WclS7e31FNbA7uArIVug%3A1434455145570&amp;id=13117&amp;mod_ts_token=ABZ6GAcPtV972IKpm0NqIky82osJLv2Mmw%3A1434455145570">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ </table>
+
+
+ 
+ </div>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 01:07:08 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=13117#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+试下最新版，首页发布了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 01:25:03 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=13117#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/103774258810649699204/">xiang.yu...@gmail.com</a
+></span>
+ 
+<pre>
+没用，别说youtube了连一般网页里的图都显示不了，显示一半就不动了，然后报错
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 01:26:52 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=13117#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+to ls: 你用 3.1.4 的速度反而可以吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 01:36:07 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=13117#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/103059880463778631403/">lancenf...@gmail.com</a
+></span>
+ 
+<pre>
+依旧很慢 上youtube直接报错
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 01:39:47 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=13117#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/103774258810649699204/">xiang.yu...@gmail.com</a
+></span>
+ 
+<pre>
+to #3: 所有能试版本都试过了，完全翻不出去，普通网页和图片都无能，北京联通
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 01:41:59 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=13117#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+OK, 现在问题大概清楚：
+
+I) 3.1.6 对大部分人还是很快。
+II) 某些地区（北方？）用 3.1.4 比 3.1.6 要快，调查下来可能是 proxy.ini 的问题，这个问题 3.1.7 尝试修了。
+III) 北京联通不管用什么版本的 goagent 都很慢。
+
+目前我汇总的情况是这样，还有补充的吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 01:47:07 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=13117#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+对于第三点， 我个人建议用 relay.php 跳到南方的出口，这样就能避开北京联通的出口问题了。
+
+不过这个方法有些门槛。。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 01:49:22 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=13117#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/118225774688694413911/">lilan...@gmail.com</a
+></span>
+ 
+<pre>
+可否解释一下replay.php
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 01:50:50 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=13117#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/117891610373109240350/">ianlee...@gmail.com</a
+></span>
+ 
+<pre>
+<a href="http://pan.baidu.com/s/1jGyrDEA" rel="nofollow">http://pan.baidu.com/s/1jGyrDEA</a>
+
+317我上传这里了，原来那个下载链接真慢啊
+
+经过测试317还是有问题，G+完全打不开
+
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=131170009000&amp;name=QQ%E5%9B%BE%E7%89%8720140407164920.jpg&amp;token=ABZ6GAeYUtitcH7TmKqRcQ96SkkSHnRWEA%3A1434455145571&amp;id=13117&amp;mod_ts_token=ABZ6GAccPEwCobxVyca7SMaVPpqW5OI3BA%3A1434455145571">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >QQ图片20140407164920.jpg</b>
+ <br>
+ 90.7 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=131170009000&amp;name=QQ%E5%9B%BE%E7%89%8720140407164920.jpg&amp;token=ABZ6GAeYUtitcH7TmKqRcQ96SkkSHnRWEA%3A1434455145571&amp;id=13117&amp;mod_ts_token=ABZ6GAccPEwCobxVyca7SMaVPpqW5OI3BA%3A1434455145571&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=131170009000&amp;name=QQ%E5%9B%BE%E7%89%8720140407164920.jpg&amp;token=ABZ6GAeYUtitcH7TmKqRcQ96SkkSHnRWEA%3A1434455145571&amp;id=13117&amp;mod_ts_token=ABZ6GAccPEwCobxVyca7SMaVPpqW5OI3BA%3A1434455145571">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=131170009000&amp;name=QQ%E5%9B%BE%E7%89%8720140407164920.jpg&amp;token=ABZ6GAeYUtitcH7TmKqRcQ96SkkSHnRWEA%3A1434455145571&amp;id=13117&amp;mod_ts_token=ABZ6GAccPEwCobxVyca7SMaVPpqW5OI3BA%3A1434455145571&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=131170009000&amp;name=QQ%E5%9B%BE%E7%89%8720140407164920.jpg&amp;token=ABZ6GAeYUtitcH7TmKqRcQ96SkkSHnRWEA%3A1434455145571&amp;id=13117&amp;mod_ts_token=ABZ6GAccPEwCobxVyca7SMaVPpqW5OI3BA%3A1434455145571&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 01:51:21 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=13117#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/107248791342526111076/">ronelv...@gmail.com</a
+></span>
+ 
+<pre>
+在家用的是安徽移动4M光纤，3.16看youtube有时冲到500kb，在学校用联通基本是100kb以下，还有刚才换了3.17，连fb都打不开，根本用不了
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 01:57:48 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=13117#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/106781204990925295112/">yubinlov...@gmail.com</a
+></span>
+ 
+<pre>
+关于replay.php看这里<a href="https://code.google.com/p/goagent/wiki/SetPassword" rel="nofollow">https://code.google.com/p/goagent/wiki/SetPassword</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 02:28:41 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=13117#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/106823207892926786026/">YNyou...@gmail.com</a
+></span>
+ 
+<pre>
+同北京联通  
+3.1.7 和 3.1.6 的弊端是起始加载网页要慢的多，但是访问youtube速度还是很可观
+（如图3.1.7 youtube 720p flash mode，10多分钟一小时的片子就已经加载完了）
+3.1.7 http + rc4 出现 crlf 错误（逐个id 出现 ****.appspot.com crlf read如何如何）
+3.1.5 http + rc4 访问 youtube 良好，访问goagent 主页会出现 crlf 错误
+
+希望改进起始的加载速度，并且跳出来讲一下不是所有的北京联通都不能用了。
+
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=131170013000&amp;name=QQ%E5%9B%BE%E7%89%8720140407172340.jpg&amp;token=ABZ6GAedLCSkYmGCurNoLH5d3yHim0dGqA%3A1434455145572&amp;id=13117&amp;mod_ts_token=ABZ6GAc4iN6MbJiaSTb0yu_gBzdMjz3mpg%3A1434455145572">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >QQ图片20140407172340.jpg</b>
+ <br>
+ 205 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=131170013000&amp;name=QQ%E5%9B%BE%E7%89%8720140407172340.jpg&amp;token=ABZ6GAedLCSkYmGCurNoLH5d3yHim0dGqA%3A1434455145572&amp;id=13117&amp;mod_ts_token=ABZ6GAc4iN6MbJiaSTb0yu_gBzdMjz3mpg%3A1434455145572&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=131170013000&amp;name=QQ%E5%9B%BE%E7%89%8720140407172340.jpg&amp;token=ABZ6GAedLCSkYmGCurNoLH5d3yHim0dGqA%3A1434455145572&amp;id=13117&amp;mod_ts_token=ABZ6GAc4iN6MbJiaSTb0yu_gBzdMjz3mpg%3A1434455145572">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=131170013000&amp;name=QQ%E5%9B%BE%E7%89%8720140407172340.jpg&amp;token=ABZ6GAedLCSkYmGCurNoLH5d3yHim0dGqA%3A1434455145572&amp;id=13117&amp;mod_ts_token=ABZ6GAc4iN6MbJiaSTb0yu_gBzdMjz3mpg%3A1434455145572&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=131170013000&amp;name=QQ%E5%9B%BE%E7%89%8720140407172340.jpg&amp;token=ABZ6GAedLCSkYmGCurNoLH5d3yHim0dGqA%3A1434455145572&amp;id=13117&amp;mod_ts_token=ABZ6GAc4iN6MbJiaSTb0yu_gBzdMjz3mpg%3A1434455145572&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 02:33:01 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=13117#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/116093445484035824299/">lil...@gmail.com</a
+></span>
+ 
+<pre>
+北京联通，3.16不行，升到3.17依然不行，油管完全打不开。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 03:19:37 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=13117#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/106369425669498402409/">angeli...@126.com</a
+></span>
+ 
+<pre>
+别瞎想了，和版本没关系的，
+北京联通应该是加强了封锁；
+有一个时钟循环随机drop掉google IP段服务器发回的包
+注意看timeout的请求，至少是十几KB以上的数据传输
+这个是没办法解决的。
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 03:21:16 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=13117#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/117891610373109240350/">ianlee...@gmail.com</a
+></span>
+ 
+<pre>
+又实验了半小时316，314，317
+最后结果是316和317完全无法打开facebook，twitter，以及G+
+而314虽然慢，但是能打开这几个网页
+
+
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=131170016000&amp;name=QQ%E5%9B%BE%E7%89%8720140407181829.jpg&amp;token=ABZ6GAdjL99hatLfvDDw67rou4Zc8EpXXg%3A1434455145572&amp;id=13117&amp;mod_ts_token=ABZ6GAeMMetvIrdgEfv5wnjwerBuIW-FFQ%3A1434455145572">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >QQ图片20140407181829.jpg</b>
+ <br>
+ 183 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=131170016000&amp;name=QQ%E5%9B%BE%E7%89%8720140407181829.jpg&amp;token=ABZ6GAdjL99hatLfvDDw67rou4Zc8EpXXg%3A1434455145572&amp;id=13117&amp;mod_ts_token=ABZ6GAeMMetvIrdgEfv5wnjwerBuIW-FFQ%3A1434455145572&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=131170016000&amp;name=QQ%E5%9B%BE%E7%89%8720140407181829.jpg&amp;token=ABZ6GAdjL99hatLfvDDw67rou4Zc8EpXXg%3A1434455145572&amp;id=13117&amp;mod_ts_token=ABZ6GAeMMetvIrdgEfv5wnjwerBuIW-FFQ%3A1434455145572">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=131170016000&amp;name=QQ%E5%9B%BE%E7%89%8720140407181829.jpg&amp;token=ABZ6GAdjL99hatLfvDDw67rou4Zc8EpXXg%3A1434455145572&amp;id=13117&amp;mod_ts_token=ABZ6GAeMMetvIrdgEfv5wnjwerBuIW-FFQ%3A1434455145572&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=131170016000&amp;name=QQ%E5%9B%BE%E7%89%8720140407181829.jpg&amp;token=ABZ6GAdjL99hatLfvDDw67rou4Zc8EpXXg%3A1434455145572&amp;id=13117&amp;mod_ts_token=ABZ6GAeMMetvIrdgEfv5wnjwerBuIW-FFQ%3A1434455145572&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 03:24:44 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=13117#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/113123026280071253212/">70088...@qq.com</a
+></span>
+ 
+<pre>
+我是湖南联通的，慢了半个月了。3月23号之前飞快。哪个版本都一样。
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 03:43:39 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=13117#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/114709006132582951675/">knightka...@gmail.com</a
+></span>
+ 
+<pre>
+表示北京联通不仅是goagent慢，啥啥门也一样慢，而且症状差不多
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 04:03:11 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=13117#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/103774258810649699204/">xiang.yu...@gmail.com</a
+></span>
+ 
+<pre>
+现在对youtube已经不敢奢望了，现在头疼是网页开的非常慢，更头疼的是网页里的图片大多数打不开，假设一张图size是300x300，最多也就显示300x100，图里剩下部分全灰，然后goagent里满篇黄字，任何版本都一样，这等于是武功全废了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 04:05:08 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=13117#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/111393853460661269070/">yangb...@gmail.com</a
+></span>
+ 
+<pre>
+补充北京联通的测试结果：
+1. 初步显示google_hk丢包率超高，google_tw、jp还可以，表现就是换成tw的twitter等基本在3秒钟内打开。
+2. 对于搜索等服务，设置成google_cn是秒开的，建议可以挖掘现在cn服务还有哪些能用。
+3. 配置文件中的默认IP需要根据自身网络情况更换，建议可以使用excel googlehost等批量测试工具选择一组能用的IP，我现在选取了一组jp的IP，效果挺不错。
+4. 对于https模式，建议不要使用默认的CA证书，建议删掉后让它自己生成一个，这样效果也会好很多。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 04:06:53 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=13117#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/118238229084038731617/">zyhz...@gmail.com</a
+></span>
+ 
+<pre>
+北京联通已经废了！别指望了！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 04:10:04 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=13117#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/114709006132582951675/">knightka...@gmail.com</a
+></span>
+ 
+<pre>
+教育网的测试结果：
+只要是IPV4模式，从314到317一律极慢，网页无法完整显示
+而IPV6模式都可以正常使用
+所以我想应该不只是北京联通的问题
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 04:22:41 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=13117#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/111393853460661269070/">yangb...@gmail.com</a
+></span>
+ 
+<pre>
+北京联通测试补充一点：感觉并不是针对goagent，就是直接打开诸如eclipse.org的网站都打不开，所以估计是对出国流量做了限制。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 04:29:45 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=13117#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+北京联通的问题，暂时可以试下 paas + relay 的模式。
+
+3.1.6 以后， 首次打开网页变慢的问题，是由于引入了远程 dns 解析的特性，所以会造成首次打开网页变慢。这个问题暂时不打算修正，因为远程 dns 解析是防止干扰的一个手段，先保留这个特性。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 04:35:04 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=13117#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/109188358222969368376/">younge...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢phus.lu的及时回答。请不吝赐教如何配置PAAS+RELAY的链接，我自己去详细看。现在搜这方面的资料，好像不太多。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc26">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 17:47:43 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c26" href="/p/goagent/issues/detail?id=13117#c26">#26</a>
+ 
+
+ <a class="userlink"
+ href="/u/106823207892926786026/">YNyou...@gmail.com</a
+></span>
+ 
+<pre>
+Re：#24
+远程dns可否做成可选的呢？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 19:03:54 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=13117#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+to  YNyounuo: 暂时不太愿意，因为首次启动远程解析 dns 的话，虽然会导致第一次打开网页变慢，但是却能解析到更多的 google ip, 这个在某些奇葩地区非常必要的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 22:19:34 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=13117#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/112725525955099629120/">mack...@gmail.com</a
+></span>
+ 
+<pre>
+清华附近，打开G+测试，
+3.16、3.17宣告完全无法打开。
+3.14能打开，文字不全，部分图片完全不能打开。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc29">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May 18 20:43:05 2014">
+ May 18, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c29" href="/p/goagent/issues/detail?id=13117#c29">#29</a>
+ 
+
+ <a class="userlink"
+ href="/u/112526940029318228950/">xin.cr...@gmail.com</a
+></span>
+ 
+<pre>
+@YNyou...@gmail.com， 谢谢提供思路
+亲测可行，我用的是3.1.2-12，速度得到很大提升。我直接在proxy.ini的google_hk,hosts=字段加入了www.google.com.tw，速度马上改善。
+
+
+[google_hk]
+mode = https
+window = 4
+hosts = www.google.com|mail.google.com|www.l.google.com|mail.l.google.com|www.google.com.hk|www.google.com.tw
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13117&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13117"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="13117">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A13117',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 13117,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

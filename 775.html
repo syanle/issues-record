@@ -1,0 +1,1531 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"token": null, "projectHomeUrl": "/p/goagent", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "projectName": "goagent", "profileUrl": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "domainName": null, "loggedInUserEmail": null, "relativeBaseUrl": ""};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 775 - 
+ goagent -
+ 
+ 提示twitter证书问题, 忽略后能打开twitter, 但是无法自动刷新. - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D775&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D775" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="closed_colors">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=775">775</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >提示twitter证书问题, 忽略后能打开twitter, 但是无法自动刷新.</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 2 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A775">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Developer made source code changes, QA should verify">Fixed</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ <tr><th align="left" valign="top">Closed:&nbsp;</th>
+ <td align="left" valign="top" width="100%">
+ Sep 2011
+ </td>
+ </tr>
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D775&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D775">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/116579469156242717036/">shao...@gmail.com</a
+>,
+ <span class="date" title="Sun Sep  4 04:43:46 2011">Sep 4, 2011</span>
+ 
+ </div>
+<pre>
+以前几个版本没遇到过这个问题. cert目录下证书删除, 重新获取也是如此. 
+我是MAC OS X LION. chrome dev 浏览器.
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Sep  4 05:58:56 2011">
+ Sep 4, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=775#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+奇怪，我这边没法重新啊，跟踪一下。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Sep  4 06:32:45 2011">
+ Sep 4, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=775#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/116579469156242717036/">shao...@gmail.com</a
+></span>
+ 
+<pre>
+ 补图.
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=7750002000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2011-09-04+%E4%B8%8B%E5%8D%889.31.36.png&amp;token=ABZ6GAcVFJF7Pdrv3THaHfqXFhW3Kqytmg%3A1434452608173&amp;id=775&amp;mod_ts_token=ABZ6GAcdbDhykZ_RZ0AN_Pd44OH4xhWFQw%3A1434452608173">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >屏幕快照 2011-09-04 下午9.31.36.png</b>
+ <br>
+ 79.4 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=7750002000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2011-09-04+%E4%B8%8B%E5%8D%889.31.36.png&amp;token=ABZ6GAcVFJF7Pdrv3THaHfqXFhW3Kqytmg%3A1434452608173&amp;id=775&amp;mod_ts_token=ABZ6GAcdbDhykZ_RZ0AN_Pd44OH4xhWFQw%3A1434452608173&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=7750002000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2011-09-04+%E4%B8%8B%E5%8D%889.31.36.png&amp;token=ABZ6GAcVFJF7Pdrv3THaHfqXFhW3Kqytmg%3A1434452608173&amp;id=775&amp;mod_ts_token=ABZ6GAcdbDhykZ_RZ0AN_Pd44OH4xhWFQw%3A1434452608173">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=7750002000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2011-09-04+%E4%B8%8B%E5%8D%889.31.36.png&amp;token=ABZ6GAcVFJF7Pdrv3THaHfqXFhW3Kqytmg%3A1434452608173&amp;id=775&amp;mod_ts_token=ABZ6GAcdbDhykZ_RZ0AN_Pd44OH4xhWFQw%3A1434452608173&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=7750002000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2011-09-04+%E4%B8%8B%E5%8D%889.31.36.png&amp;token=ABZ6GAcVFJF7Pdrv3THaHfqXFhW3Kqytmg%3A1434452608173&amp;id=775&amp;mod_ts_token=ABZ6GAcdbDhykZ_RZ0AN_Pd44OH4xhWFQw%3A1434452608173&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Sep  4 06:41:08 2011">
+ Sep 4, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=775#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/116579469156242717036/">shao...@gmail.com</a
+></span>
+ 
+<pre>
+不知道和这条信息有关否?
+启动proxy.py是 如果不是sudo的话就会提示如下:
+cp: /Users/username/Library/Keychains/X509Anchors: Permission denied
+***Error adding certificate to keychain
+WARNING - - [04/Sep/2011 21:39:21] GoAgent install trusted root CA certificate failed, Please run goagent by administrator/root.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Sep  4 07:08:54 2011">
+ Sep 4, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=775#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+你尝试用
+sudo python proxy.py运行一次。然后看下。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Sep  4 07:38:58 2011">
+ Sep 4, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=775#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/116579469156242717036/">shao...@gmail.com</a
+></span>
+ 
+<pre>
+sudo 是不会出现 certificate failed的信息, 但是访问twitter的问题如上图依旧. :((
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Sep  4 07:47:12 2011">
+ Sep 4, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=775#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+看来是个bug,下一个版本修掉 ～～
+谢谢
+</pre>
+ 
+ 
+ <div class="updates">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ 
+ <b>Status:</b>
+ Accepted
+ 
+ <br>
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Sep  4 18:23:12 2011">
+ Sep 4, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=775#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/116579469156242717036/">shao...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢phus :) , 再提供一个线索, win7 chrome dev 下完全正常. 
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Sep  5 20:51:49 2011">
+ Sep 5, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=775#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/110716764677129764030/">vt.zh...@gmail.com</a
+></span>
+ 
+<pre>
+我也遇到跟楼主完全一样的问题，用 Mac 上 twitter 不大正常，总是遇到证书不信任并且刷新不能，但是在 windows 一切正常。期待解决啊～
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Sep  6 04:04:19 2011">
+ Sep 6, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=775#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/HewigOvens/">HewigOvens</a
+></span>
+ 
+<pre>
+lz的机器应该是mac吧，有没有试过将goagent的证书导入到mac os里？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Sep  6 06:48:34 2011">
+ Sep 6, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=775#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/116579469156242717036/">shao...@gmail.com</a
+></span>
+ 
+<pre>
+ca证书一直导入mac os的... 
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=7750010000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2011-09-06+%E4%B8%8B%E5%8D%889.48.10.png&amp;token=ABZ6GAftogAZefe5d5lVAI5LiLtDwbD76w%3A1434452608174&amp;id=775&amp;mod_ts_token=ABZ6GAdQ3vBF30oIbXF9ET0glROtRIbfDg%3A1434452608174">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >屏幕快照 2011-09-06 下午9.48.10.png</b>
+ <br>
+ 14.8 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=7750010000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2011-09-06+%E4%B8%8B%E5%8D%889.48.10.png&amp;token=ABZ6GAftogAZefe5d5lVAI5LiLtDwbD76w%3A1434452608174&amp;id=775&amp;mod_ts_token=ABZ6GAdQ3vBF30oIbXF9ET0glROtRIbfDg%3A1434452608174&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=7750010000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2011-09-06+%E4%B8%8B%E5%8D%889.48.10.png&amp;token=ABZ6GAftogAZefe5d5lVAI5LiLtDwbD76w%3A1434452608174&amp;id=775&amp;mod_ts_token=ABZ6GAdQ3vBF30oIbXF9ET0glROtRIbfDg%3A1434452608174">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=7750010000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2011-09-06+%E4%B8%8B%E5%8D%889.48.10.png&amp;token=ABZ6GAftogAZefe5d5lVAI5LiLtDwbD76w%3A1434452608174&amp;id=775&amp;mod_ts_token=ABZ6GAdQ3vBF30oIbXF9ET0glROtRIbfDg%3A1434452608174&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=7750010000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2011-09-06+%E4%B8%8B%E5%8D%889.48.10.png&amp;token=ABZ6GAftogAZefe5d5lVAI5LiLtDwbD76w%3A1434452608174&amp;id=775&amp;mod_ts_token=ABZ6GAdQ3vBF30oIbXF9ET0glROtRIbfDg%3A1434452608174&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Sep  6 06:49:24 2011">
+ Sep 6, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=775#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/116579469156242717036/">shao...@gmail.com</a
+></span>
+ 
+<pre>
+不光是twitter, youtube也是访问不正常. 可能是 mac os特例吧. win7 下都正常.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Sep 11 01:38:47 2011">
+ Sep 11, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=775#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/113970762072277837590/">rank...@gmail.com</a
+></span>
+ 
+<pre>
+我是這麽解决的:
+
+用Safari打開https://twitter.com,應該會提示證書出錯什麽的,選擇總是信任,然後應該會跳到api.twitter.com，同樣選擇總是信任，然後就一切正常了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Sep 15 01:00:23 2011">
+ Sep 15, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=775#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/phus.lu/">phus.lu</a
+></span>
+ 
+<pre>
+<i>(No comment was entered for this change.)</i>
+</pre>
+ 
+ 
+ <div class="updates">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ 
+ <b>Status:</b>
+ Fixed
+ 
+ <br>
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Sep 22 19:11:07 2011">
+ Sep 22, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=775#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/104321642669180718547/">ryancheu...@gmail.com</a
+></span>
+ 
+<pre>
+我的开始也是这个证书问题，后面在网上找到了解决方案：
+
+使用中发现很多https网站弹出证书警示，需要将local/ca.crt证书导入，下面简单介绍ubuntu下chrome证书的导入方法。
+
+安装libnss3-tools:sudo apt-get install libnss3-tools
+
+然后导入证书(这里假定证书ca.crt位于&quot;/goagent/local/ca.crt&quot;):certutil -d sql:$HOME/.pki/nssdb -A -t &quot;C,,&quot; -n GoAgent -i '/goagent/local/ca.crt'
+
+操作完就OK了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Nov  6 09:39:44 2011">
+ Nov 6, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=775#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/108239262032612907093/">wbzgat...@gmail.com</a
+></span>
+ 
+<pre>
+一样的问题，mac os lion + chrome，已经更新到最新版的goagent，twitter还是无法自动更新timeline，别的网站也经常显示证书问题。
+而且客户端经常收到这个错误：ERROR - - [07/Nov/2011 01:34:57] do_CONNECT_Thunnel socket.error: [Errno 8] _ssl.c:503: EOF occurred in violation of protocol
+Traceback (most recent call last):
+  File &quot;/Users/Admin/Documents/goagent/local/proxy.py&quot;, line 685, in do_CONNECT_Thunnel
+    self.connection = ssl.wrap_socket(self.connection, keyFile, crtFile, True)
+  File &quot;/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/ssl.py&quot;, line 372, in wrap_socket
+    ciphers=ciphers)
+  File &quot;/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/ssl.py&quot;, line 134, in __init__
+    self.do_handshake()
+  File &quot;/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/ssl.py&quot;, line 296, in do_handshake
+    self._sslobj.do_handshake()
+SSLError: [Errno 8] _ssl.c:503: EOF occurred in violation of protocol
+
+但是同样的server端，用pc上的客户端＋firefox就完全没有问题。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr  1 08:34:21 2012">
+ Apr 1, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=775#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/112599895105846410992/">andy.xia...@gmail.com</a
+></span>
+ 
+<pre>
+同样的goagent 版本， win7下面没有问题， OS X 10.7 下面， twitter 和facebook 都提示证书错误。
+之前都已经按照教程导入过证书，其他网站没有问题
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr  8 07:38:22 2012">
+ Apr 8, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=775#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/104875883297339437731/">ice.d...@gmail.com</a
+></span>
+ 
+<pre>
+MAC 系统：
+
+双击 GoAgent/local 目录下的 CA.crt 证书导入到系统
+在 Launchpad &gt; 实用工具 &gt; 钥匙串访问 &gt; 系统 中找到 GoAgent CA 并双击
+选择 信任 &gt; 使用此证书时 &gt; 总是信任
+重启浏览器
+<a href="http://blog.mutoo.im/2011/10/goagent-ssl-failed/" rel="nofollow">http://blog.mutoo.im/2011/10/goagent-ssl-failed/</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr 11 09:20:41 2012">
+ Apr 11, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=775#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/105054811334221664340/">huo.yumi...@gmail.com</a
+></span>
+ 
+<pre>
+我win7也是这个问题  怎么解决啊
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Feb 23 06:02:19 2013">
+ Feb 23, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=775#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/107198652262289671379/">tiny...@gmail.com</a
+></span>
+ 
+<pre>
+新发布的v2.1.12也有就这个问题，Chrome + Switchy Sharp，证书不受信任无法访问twitter，查看证书的设置，Go Agent证书是存在的，但属于“中级机构颁发的证书”，不属于“受信任的根证书颁发机构”，手动的把CA.cer导入到“受信任的根证书颁发机构”里，能正常访问。
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=7750019000&amp;name=goagent_cer.png&amp;token=ABZ6GAc5WBU8jRossyPQocl5zrQCxfevLw%3A1434452608176&amp;id=775&amp;mod_ts_token=ABZ6GAcDKWT884Oj2g615nkFX0uqBhZOug%3A1434452608176">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >goagent_cer.png</b>
+ <br>
+ 21.6 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=7750019000&amp;name=goagent_cer.png&amp;token=ABZ6GAc5WBU8jRossyPQocl5zrQCxfevLw%3A1434452608176&amp;id=775&amp;mod_ts_token=ABZ6GAcDKWT884Oj2g615nkFX0uqBhZOug%3A1434452608176&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=7750019000&amp;name=goagent_cer.png&amp;token=ABZ6GAc5WBU8jRossyPQocl5zrQCxfevLw%3A1434452608176&amp;id=775&amp;mod_ts_token=ABZ6GAcDKWT884Oj2g615nkFX0uqBhZOug%3A1434452608176">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=7750019000&amp;name=goagent_cer.png&amp;token=ABZ6GAc5WBU8jRossyPQocl5zrQCxfevLw%3A1434452608176&amp;id=775&amp;mod_ts_token=ABZ6GAcDKWT884Oj2g615nkFX0uqBhZOug%3A1434452608176&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=7750019000&amp;name=goagent_cer.png&amp;token=ABZ6GAc5WBU8jRossyPQocl5zrQCxfevLw%3A1434452608176&amp;id=775&amp;mod_ts_token=ABZ6GAcDKWT884Oj2g615nkFX0uqBhZOug%3A1434452608176&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D775&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D775"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="775">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A775',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 775,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

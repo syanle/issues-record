@@ -1,0 +1,1746 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"token": null, "profileUrl": null, "domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "projectHomeUrl": "/p/goagent", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "loggedInUserEmail": null, "projectName": "goagent", "relativeBaseUrl": ""};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 14012 - 
+ goagent -
+ 
+ 寻找、检验可用ip的方法和经验 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14012&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14012" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=14012">14012</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >寻找、检验可用ip的方法和经验</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 34 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A14012">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14012&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14012">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/zhfreal/">zhfreal</a
+>,
+ <span class="date" title="Tue Jun  3 06:13:26 2014">Jun 3, 2014</span>
+ 
+ </div>
+<pre>
+最近GFW封锁得很厉害，有些同志速度很慢或者根本用不了。不少同志在分享配置文件或者IP段。为大家突破封锁添砖加瓦。本人用goagent时间不短，受益颇多。想想还是该做点什么。 授之以鱼，不如授之以渔。分享一下使用经验，仅供参考：
+1. 版本问题，新版本可能有DNS解析问题，目前用3.1.12，dns解析问题较少。goagent用的是TCP方式查询，再用黑名单对结果过滤，所以速度和结果都有保障。
+2. ip问题，不能翻大部分还是ip的问题。貌似GFW是根据特定的IP地址或IP地址段进行SSL间歇性干扰。之前能用的，现在不一定能用。比如之前我一直使用的是 港74.125.128.x中唯一的两个SSL很稳定的地址102和114，而且时延只有几十ms，可这次这两个IP的HTTPS完全被干扰了，无法使用。每个人的网络情况不一样，还是要自己寻找、校验IP。
+
+寻找、校验IP：
+1. 需要找到google服务器或者CDN加速的IP地址段。可以通过nslookup查询出google使用的所有ip地址段信息。另外，根据网友贡献<a href="http://bgp.he.net/search?search%5Bsearch%5D=google&amp;commit=Search直接搜索查看（无须翻墙）。" rel="nofollow">http://bgp.he.net/search?search%5Bsearch%5D=google&amp;commit=Search直接搜索查看（无须翻墙）。</a>
+2. 对443端口进行TCP ping，确定联通性和延时。推荐：windows下，nmap + psping。（<a href="http://nmap.org/dist/nmap-6.46-setup.exe）（http://download.sysinternals.com/files/PSTools.zip）。linux下工具就更多了，这里就不介绍了。" rel="nofollow">http://nmap.org/dist/nmap-6.46-setup.exe）（http://download.sysinternals.com/files/PSTools.zip）。linux下工具就更多了，这里就不介绍了。</a>
+3. 粗略确定HTTPS是否可用。
+4. 填入配置文件中使用，进一步确定是否可用。
+
+端口扫描、TCP ping：
+1 、nmap可以快速扫描IP地址段，确定443端口可用的ip，以及延时。Windows下还有UI工具zenmap集成在官方的安装包中。使用方法很简单。命令行下: nmap -sS -p 443 [ip段] 就行了。ip段就是从上面那个地址中得到的。比如74.125.128.0/24。命令就是： nmap -sS -p 443 74.125.128.0/24，等待一段时间后就可以看到扫描结果。
+结果分ip显示，如果有“443/tcp open https”字样，说明这个ip可用。延时是(0.11s latency)，表示0.11秒延时，即110ms延时。尽量找open而且延时低的ip。
+2 、 psping可以tcp方式持续ping一个ip的指定端口，测试nmap得到的可用IP是否具有持续可用性。用法很简单，跟ping命令差不多：命令行下 psping -w &lt;次数&gt; &lt;ip地址&gt;:443。比如: psping  -w 50 74.125.128.100:443。即ping 74.125.128.100的443端口50次。得到的结果和ping也类似。 psping非必须。
+个人经验，台、日、韩的地址，延时较低。
+
+分析HTTPS是否可用：
+在浏览器地址栏中通过输入  https://ip地址 ，查看显示结果中对证书的域名有效性，就可以大致知道HTTPS是否可用于goagent使用。比如显示：此证书仅对*.google.com有效。或者对其他本地化地址有效如 ： *.google.ar，*.google.pk，*.google.uk或者cache之类的。当然证书可能会对一大堆网址进行SSL认证，只要里面包含可用的就行了。
+如果会编写脚本，python就可以批量检测，或者openssl工具也可以用脚本批量检测。
+此为个人经验，仅供参考。还有其它的google相关认证可能也能用于goagent。也有非google的认证，比如CDN加速，可能证书是其他非google的，但仍可以用于goagent。是否可用，以填入ini实际测试为准。
+
+敏感时期，封得太快，尽量多找些IP填入ini。
+
+个人经验，仅供参考，有不足和错误的地方，请多包涵。
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 06:14:50 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=14012#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/112116642933345899595/">vvq...@gmail.com</a
+></span>
+ 
+<pre>
+楼主谢谢你 我爱你！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 07:13:54 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=14012#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/113701785237663380569/">dongzhao...@gmail.com</a
+></span>
+ 
+<pre>
+mac环境怎么扫描啊
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 07:51:27 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=14012#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/100742011763408359045/">tomb...@gmail.com</a
+></span>
+ 
+<pre>
+74.125都是美国IP不是香港IP，而且是google默认返回的IP，肯定是被封的。
+测试ping值可以用PingInfoView这个软件，可以批量测试，可以设置ping间隔，可以自动反查域名，可以自动记录ping的各种信息，可以自动计算平均ping值，可以批量复制结果。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 08:06:42 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=14012#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/zhfreal/">zhfreal</a
+></span>
+ 
+<pre>
+回复#3：74.125网上检测都是美国IP，但是google给各个ip段注册的1e100域名又不同，比如这个74.125.128.*, 注册的是hg-in-f[xxx].1e100.net， 根据之前网友的推断这个可能是在HK(1e100,hg开头和hkg开头)。ping值时延很低，感觉是在香港。不明真相。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 08:12:35 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=14012#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/zhfreal/">zhfreal</a
+></span>
+ 
+<pre>
+回复#2，nmap也有mac的版本，是否有一直ping的工具就不知了。其实nmap多用几次也差不多。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  3 08:19:37 2014">
+ Jun 3, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=14012#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/zhfreal/">zhfreal</a
+></span>
+ 
+<pre>
+nslookup以txt方式查询，可得一大堆google地址段，只是地址段太大。有效性和效率不是很好：
+
+nslookup -q=TXT _netblocks.google.com 8.8.8.8
+
+Server:		8.8.8.8
+Address:	8.8.8.8#53
+
+Non-authoritative answer:
+_netblocks.google.com	text = &quot;v=spf1 ip4:216.239.32.0/19 ip4:64.233.160.0/19 ip4:66.249.80.0/20 ip4:72.14.192.0/18 ip4:209.85.128.0/17 ip4:66.102.0.0/20 ip4:74.125.0.0/16 ip4:64.18.0.0/20 ip4:207.126.144.0/20 ip4:173.194.0.0/16 ~all&quot;
+
+linux下查询结果，windows版的nslookup不是是否可查。有兴趣的可以尝试去检测。目前我这里台，日，韩都有不少可用的ip。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun  5 21:02:42 2014">
+ Jun 5, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=14012#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/115086558931826318316/">hwe...@gmail.com</a
+></span>
+ 
+<pre>
+为什么我的nmap扫描时不显示延时时间呢? 如果要能看到延迟多少秒的选项该怎么修改命令?
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun  6 02:45:34 2014">
+ Jun 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=14012#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/zhfreal/">zhfreal</a
+></span>
+ 
+<pre>
+#9 刚才试了下，nmap在windows8.1中扫不出结果，linux下没问题。windows下用其他的软件吧，psping没问题，或者#3 建议的PingInfoView
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun 13 00:48:28 2014">
+ Jun 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=14012#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/111323823023093635021/">radlyhar...@gmail.com</a
+></span>
+ 
+<pre>
+我想请问一下，“<a href="http://bgp.he.net/search?search%5Bsearch%5D=google&amp;commit=Search直接搜索查看（无须翻墙）”中显示的IP地址，如：74.125.180.0/24。“0/24”是指0到24这些数字吗？" rel="nofollow">http://bgp.he.net/search?search%5Bsearch%5D=google&amp;commit=Search直接搜索查看（无须翻墙）”中显示的IP地址，如：74.125.180.0/24。“0/24”是指0到24这些数字吗？</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun 13 02:32:58 2014">
+ Jun 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=14012#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/zhfreal/">zhfreal</a
+></span>
+ 
+<pre>
+#11 74.125.180.0/24是IP地址段表示法，指一段IP地址：74.125.180.1~74.125.128.254。“/24”表示子网掩码是24,即255.255.255.0。74.125.180.0/24相当于74.125.180.0/255.255.255.0。扣除0和255,有效地址74.125.180.1-255。
+如果还不明白，可去看下ipv4地址划分相关知识。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun 13 05:52:43 2014">
+ Jun 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=14012#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/108615753449387481231/">XRacZ...@gmail.com</a
+></span>
+ 
+<pre>
+感谢楼主，方法有效，不用再打捞IPlist了，目前用zenmap + PingInfoView查找ip，填入goagent，再配合DNSForwarder，稳定运行！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun 13 06:10:05 2014">
+ Jun 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=14012#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+顶楼主，我们就这么干，分散iplist，各自找各自的，免得发出来让五毛狗给报上去封了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun 13 06:28:10 2014">
+ Jun 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=14012#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/113292563919005293118/">xvyongp...@gmail.com</a
+></span>
+ 
+<pre>
+撸主你让我们非程序员的墙友们怎么办？ 工具会下载 手会打字 但是有点听不懂你在讲什么 能详细点吗？谢谢了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun 13 07:14:31 2014">
+ Jun 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=14012#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/113292563919005293118/">xvyongp...@gmail.com</a
+></span>
+ 
+<pre>
+而且我想说 我之所以能上到code这个网页 也是看了什么什么度的chrome吧 改了hosts才上的来 
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun 13 07:30:07 2014">
+ Jun 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=14012#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/zhfreal/">zhfreal</a
+></span>
+ 
+<pre>
+#15, 这个不是什么所谓程序员才能明白的。真是会写代码或者脚本的，直接写一个就OK了，哪用这样一步二步三步麻烦的。我也不是高人，这里讲的都是一些基础的，对网络稍微了解或者感兴趣的同志应该都可以看懂。如果不知道一些名词或者概念，建议google、bing或者baidu一下吧。如果是嫌麻烦，或者实在搞不定，找找其他帖子里的现成的检验工具。
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun 13 07:41:27 2014">
+ Jun 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=14012#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/113292563919005293118/">xvyongp...@gmail.com</a
+></span>
+ 
+<pre>
+#17 说实话还是听不太懂 求详细步骤 谢谢了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun 13 07:51:38 2014">
+ Jun 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=14012#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/109680885935223716084/">david.da...@gmail.com</a
+></span>
+ 
+<pre>
+建议彻底不懂的先Wikipedia一番再来看实战应用
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun 13 07:56:13 2014">
+ Jun 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=14012#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/113292563919005293118/">xvyongp...@gmail.com</a
+></span>
+ 
+<pre>
+#19 该从哪部分看起？我只想看看外网呀······
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun 13 11:23:36 2014">
+ Jun 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=14012#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/111273475140706044385/">japhlet...@gmail.com</a
+></span>
+ 
+<pre>
+nmap在win7系统是不是不能运行啊？楼主可否再推荐个软件啊？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun 13 18:16:49 2014">
+ Jun 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=14012#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/zhfreal/">zhfreal</a
+></span>
+ 
+<pre>
+#21 上面写得有 PingInfoView , psping, 或者tcping。只要支持tcp协议的ping软件即可。
+关键点就是以tcp协议方式ping 443端口，加上ssl证书验证，加上带入goagent验证。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun 17 08:57:24 2014">
+ Jun 17, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=14012#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/107541931561066884313/">pinocchi...@gmail.com</a
+></span>
+ 
+<pre>
+刚才找了一些速度不错韩国IP，443端口是开放的，填到goagent里却不能用
+在ISSUE里看了你的贴子，才知道还要检查证书对域名的有效性
+手工检查几个，果然可以用了
+不过手工检查太麻烦了，楼主能不能分享一下你的python脚本，谢谢！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun 18 03:51:46 2014">
+ Jun 18, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=14012#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/zhfreal/">zhfreal</a
+></span>
+ 
+<pre>
+#23 python的话据我所知，用pyOpenSSL库或者httplib2都可以。抛砖引玉吧。
+需要批量检测，套个多线程或者多进程就行了。
+
+
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=140120024000&amp;name=test.py&amp;token=ABZ6GAfJKX2_4P4z_lSWLC7L14xN2ZoOlQ%3A1434455369318&amp;id=14012&amp;mod_ts_token=ABZ6GAfgZ6chMmggJAHTldWaftfIyJp5aA%3A1434455369318">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >test.py</b>
+ <br>
+ 713 bytes
+ 
+ 
+ &nbsp; <a href="../../goagent/issues/attachmentText?id=14012&amp;aid=140120024000&amp;name=test.py&amp;token=ABZ6GAfJKX2_4P4z_lSWLC7L14xN2ZoOlQ%3A1434455369318" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=140120024000&amp;name=test.py&amp;token=ABZ6GAfJKX2_4P4z_lSWLC7L14xN2ZoOlQ%3A1434455369318&amp;id=14012&amp;mod_ts_token=ABZ6GAfgZ6chMmggJAHTldWaftfIyJp5aA%3A1434455369318">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun 18 05:47:05 2014">
+ Jun 18, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=14012#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/107541931561066884313/">pinocchi...@gmail.com</a
+></span>
+ 
+<pre>
+#24 谢谢分享，不过你这个脚本好像有错，用不了
+  File &quot;test.py&quot;, line 18
+    except Exception,e:
+                    ^
+SyntaxError: invalid syntax
+
+而且我很菜，不会套多线程，我以为是那种傻瓜型的脚本
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc26">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 28 08:49:03 2014">
+ Jun 28, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c26" href="/p/goagent/issues/detail?id=14012#c26">#26</a>
+ 
+
+ <a class="userlink"
+ href="/u/107288752867457054010/">jinkang6...@gmail.com</a
+></span>
+ 
+<pre>
+我想问下，我用中国的ip和美国的ip  ping同一个google服务器地址 得到的延时不同，我应该怎么选择最小延时的google服务器地址呢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 29 02:16:33 2014">
+ Jun 29, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=14012#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/zhfreal/">zhfreal</a
+></span>
+ 
+<pre>
+#26，你是说你的设备上有两个IP，一个是中国的，一个是国外的？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 29 20:20:53 2014">
+ Jun 29, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=14012#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/107288752867457054010/">jinkang6...@gmail.com</a
+></span>
+ 
+<pre>
+我的意思是翻墙ping，还是不翻墙ping
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc29">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 29 20:35:22 2014">
+ Jun 29, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c29" href="/p/goagent/issues/detail?id=14012#c29">#29</a>
+ 
+
+ <a class="userlink"
+ href="/u/zhfreal/">zhfreal</a
+></span>
+ 
+<pre>
+#28,当然是不翻墙ping
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14012&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14012"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="14012">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A14012',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 14012,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

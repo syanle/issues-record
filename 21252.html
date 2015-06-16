@@ -1,0 +1,2180 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "relativeBaseUrl": "", "loggedInUserEmail": null, "projectName": "goagent", "projectHomeUrl": "/p/goagent", "token": null, "profileUrl": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 21252 - 
+ goagent -
+ 
+ 利用cow访问未屏蔽的youtube视频 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21252&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21252" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=21252">21252</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >利用cow访问未屏蔽的youtube视频</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 12 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A21252">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21252&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21252">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/116326853761552387466/">scattere...@gmail.com</a
+>,
+ <span class="date" title="Mon Jun  1 08:35:14 2015">Jun 1, 2015</span>
+ 
+ </div>
+<pre>
+大家都知道有很多谷歌视频服务器(gvs)是没有屏蔽的，大概占多少呢
+在goagent的proxy.ini中profile这段, 添加如下一项
+.googlevideo.com = direct
+再打开youtube网站，可以发现大部分视频可以直接播放
+
+cow + goagent 就可以达到未屏蔽的视频直接播放，屏蔽的再走goagent访问
+配置方法请参考cow的主页上说明, 很详细，不赘述了
+
+
+<a href="https://github.com/cyfdecyf/cow" rel="nofollow">https://github.com/cyfdecyf/cow</a>
+COW 是一个简化穿墙的 HTTP 代理服务器。它能自动检测被墙网站，仅对这些网站使用二级代理
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  1 08:59:44 2015">
+ Jun 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=21252#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/114255133369633707531/">fh0205z...@gmail.com</a
+></span>
+ 
+<pre>
+这东西能独立使用吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  1 09:03:59 2015">
+ Jun 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=21252#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/117158790449271841902/">5linh...@gmail.com</a
+></span>
+ 
+<pre>
+你试验成功过了吗？
+严重怀疑，你在goagent中都设置成直连了，怎么可能再走GAE呢？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  1 09:10:40 2015">
+ Jun 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=21252#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/116326853761552387466/">scattere...@gmail.com</a
+></span>
+ 
+<pre>
+#2
+
+独立使用是指什么
+cow本身不含翻墙功能，需要和其它代理结合使用
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  1 09:16:48 2015">
+ Jun 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=21252#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/116326853761552387466/">scattere...@gmail.com</a
+></span>
+ 
+<pre>
+#3
+
+抱歉，也许我的表述带来了误解
+之所以让试试 .googlevideo.com = direct , 是让大家看看直连有多大的成功率， 有个感性认识
+真做代理这行当然不能加
+
+设置真的很简单，又不费啥事，试试不就知道了么
+
+rc文件中如下设置
+listen = http://localhost:7777
+proxy = http://localhost:8087
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  1 09:37:34 2015">
+ Jun 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=21252#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/114255133369633707531/">fh0205z...@gmail.com</a
+></span>
+ 
+<pre>
+本身不含翻墙功能那基本对我来说没用，可能是我逼格太低用不上。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  1 09:54:15 2015">
+ Jun 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=21252#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/114033169287966003070/">redfrog...@gmail.com</a
+></span>
+ 
+<pre>
+测试了下没用，还不如直接用cow+ss翻呢。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  1 10:17:12 2015">
+ Jun 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=21252#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/117158790449271841902/">5linh...@gmail.com</a
+></span>
+ 
+<pre>
+#5
+direct直连用的是你DNS解析得到的ip地址进行直连，
+按你说的，你应该使用gvs的ip地址进行直连，应该是
+[iplist]
+......
+gvs_ip = xxx.xxx.xxx.xxx
+
+[profile]
+......
+.googlevideo.com = gvs_ip
+
+可参考
+<a href="https://github.com/goagent/goagent/blob/wiki/ConfigIntroduce.md.ini" rel="nofollow">https://github.com/goagent/goagent/blob/wiki/ConfigIntroduce.md.ini</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  1 10:32:47 2015">
+ Jun 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=21252#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/117855495887411412744/">nirvana...@gmail.com</a
+></span>
+ 
+<pre>
+想直连的话, 还需要反dns污染吧.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  1 18:58:16 2015">
+ Jun 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=21252#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/116326853761552387466/">scattere...@gmail.com</a
+></span>
+ 
+<pre>
+#10
+
+以为dns反污染这种基本要求不用提
+好吧，强调一下，dns反污染是必须的
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  1 19:04:52 2015">
+ Jun 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=21252#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/116326853761552387466/">scattere...@gmail.com</a
+></span>
+ 
+<pre>
+#9
+
+直连就是要用dns来解析
+
+并不是任意没封的gvs ip,都可以用于不同googlevideo.com域名的解析，比如
+<a href="/p/goagent/source/detail?r=9">r9</a>---sn-vgqs7nee.googlevideo.com   173.194.134.78
+<a href="/p/goagent/source/detail?r=13">r13</a>---sn-i3b7sn7z.googlevideo.com   173.194.51.242
+如果用<a href="/p/goagent/source/detail?r=9">r9</a>的ip解析到<a href="/p/goagent/source/detail?r=13">r13</a>
+<a href="/p/goagent/source/detail?r=9">r9</a>---sn-vgqs7nee.googlevideo.com   173.194.134.78
+<a href="/p/goagent/source/detail?r=13">r13</a>---sn-i3b7sn7z.googlevideo.com   173.194.134.78
+<a href="/p/goagent/source/detail?r=13">r13</a>则不可访问
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  1 19:07:26 2015">
+ Jun 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=21252#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/116326853761552387466/">scattere...@gmail.com</a
+></span>
+ 
+<pre>
+#7
+
+cow+ss同cow+goagent并没有什么不同
+如果你觉得cow+goagent没用，那么cow+ss同样也没发挥作用
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  1 19:15:29 2015">
+ Jun 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=21252#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/116326853761552387466/">scattere...@gmail.com</a
+></span>
+ 
+<pre>
+#6
+
+有用没用，我说下场景，再判断下
+
+如果你是youtube党，使用的是收费的翻墙服务，采用这种方式，可以节省一大半的流量
+如果你使用的连接速度比较慢，采用这种方式，大部分的视频因为直连，速度不受代理的限制
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun  1 23:37:00 2015">
+ Jun 1, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=21252#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/117855495887411412744/">nirvana...@gmail.com</a
+></span>
+ 
+<pre>
+尝试直连我也试过, 不过没用cow(用的是自己修改的goagent). 第一次成功的几率可能有1/5, 如果失败再redirector.googlevideo.com后, 成功几率可能有4/5(不过要等10秒左右), 因为要等10秒所以还不如直接走gae方便.
+
+相关链接:
+<a href="https://code.google.com/p/goagent/issues/detail?id=20757" rel="nofollow">https://code.google.com/p/goagent/issues/detail?id=20757</a>
+<a href="http://v2ex.com/t/173383" rel="nofollow">http://v2ex.com/t/173383</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  2 00:26:57 2015">
+ Jun 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=21252#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/109688994450758344173/">LIUS...@gmail.com</a
+></span>
+ 
+<pre>
+#15
+youtube HOSTS+防污染DNS直连，确实有一部分视频可以直接播放，不过绝大部分GVS IP都被墙了，成功的机率不高。成功的当中，有些GVS IP没有被墙，那么点击就可播放，有些虽然被墙了，但是跳转到其它GVS IP（应该是其它分辨率视频所在的GVS IP）没有被墙，这时等一段时间就可以播放。但是依然有很多视频的所有GVS IP全部被墙，这时是无法直接播放的。
+
+总的来说，确实是不如直接走代理方便。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  2 02:15:27 2015">
+ Jun 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=21252#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/106088583427384130526/">jasonli...@gmail.com</a
+></span>
+ 
+<pre>
+#15  scattere大大的主意是不错的, 自己搜过ip的人,通常会有很多gvs ip, gws反倒少得多,这些都被无端浪费.
+
+现在强搜ip显然不明智. 
+而且如果不玩u2b,什么ip都差不多,质量好坏也无所谓.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  2 03:32:43 2015">
+ Jun 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=21252#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/117855495887411412744/">nirvana...@gmail.com</a
+></span>
+ 
+<pre>
+#17
+
+强搜IP(用蛤蛤方法先ping后tcp), 瓶颈主要在路由器上, 如果不用路由器拨号(主机拨号), 在不影响上网的情况下(保持延迟100ms以下,cpu20%以下), 电信6m网络可以可以到扫描200IP/S, 广电网络可以500IP/S(广电的网络很神奇, 再高并发延迟都不会高, 瓶颈在自己的cpu)
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  2 03:49:00 2015">
+ Jun 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=21252#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/117158790449271841902/">5linh...@gmail.com</a
+></span>
+ 
+<pre>
+#18
+可以试试这种方法，看看有没效果
+<a href="https://github.com/XX-net/XX-Net/issues/454" rel="nofollow">https://github.com/XX-net/XX-Net/issues/454</a>
+
+ivanla...@gmail.com
+nmap 有 Windows 版本的 <a href="https://nmap.org/dist/nmap-6.47-win32.zip" rel="nofollow">https://nmap.org/dist/nmap-6.47-win32.zip</a> 可以下载到。14楼的命令行可以使用。另外需要 WanPacket.dll 文件 这个文件可以自己搜
+
+摘自
+<a href="https://code.google.com/p/goagent/issues/detail?id=21192&amp;colspec=ID%20Opened%20Reporter%20Modified%20Summary%20Stars" rel="nofollow">https://code.google.com/p/goagent/issues/detail?id=21192&amp;colspec=ID%20Opened%20Reporter%20Modified%20Summary%20Stars</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  2 04:19:47 2015">
+ Jun 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=21252#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/117855495887411412744/">nirvana...@gmail.com</a
+></span>
+ 
+<pre>
+#20
+
+谢谢. 不过nmap原来试过, 但是还是用自己写的程序测试快得多而且准确得多.
+
+这是前两天扫的(带#的是暂时失效的ip段), 象这样的ip列表(10w+)我用广电的网络3分钟(800IP/S+)就测完了, 而且很保证100%的能用GAE.
+
+61.75.7.0-61.75.7.255
+61.91.18.0-61.91.18.255
+64.15.114.0-64.15.114.255
+64.233.162.0-64.233.162.255
+64.233.188.0-64.233.188.255
+66.34.113.0-66.34.113.255
+66.34.117.0-66.34.118.255
+66.34.120.0-66.34.123.255
+66.221.64.0-66.221.64.255
+66.221.69.0-66.221.69.255
+66.221.75.0-66.221.75.255
+66.221.79.0-66.221.79.255
+66.221.229.0-66.221.229.255
+66.221.231.0-66.221.231.255
+66.221.233.0-66.221.234.255
+66.221.236.0-66.221.236.255
+69.13.115.0-69.13.116.255
+69.13.199.0-69.13.199.255
+69.13.201.0-69.13.201.255
+69.13.203.0-69.13.203.255
+89.47.210.0-89.47.210.255
+89.127.198.0-89.127.198.255
+95.158.47.0-95.158.47.255
+98.126.98.0-98.126.98.255
+103.7.200.0-103.7.200.255
+103.16.207.0-103.16.207.255
+110.164.4.0-110.164.4.255
+115.167.74.0-115.167.74.255
+128.0.86.0-128.0.86.255
+128.0.169.0-128.0.169.255
+137.88.140.0-137.88.143.255
+139.175.107.0-139.175.107.255
+146.166.75.0-146.166.78.255
+150.199.206.0-150.199.206.255
+173.194.218.0-173.194.218.255
+173.214.182.0-173.214.182.255
+177.100.48.0-177.100.48.255
+182.228.125.0-182.228.125.255
+184.150.152.0-184.150.152.255
+185.6.8.0-185.6.8.255
+185.6.11.0-185.6.11.255
+186.251.10.0-186.251.10.255
+189.89.161.0-189.89.161.255
+190.211.175.0-190.211.175.255
+194.107.93.0-194.107.93.255
+196.27.66.0-196.27.66.255
+202.51.67.0-202.51.67.255
+203.133.8.0-203.133.8.255
+216.97.17.0-216.97.17.255
+216.97.21.0-216.97.21.255
+216.97.27.0-216.97.28.255
+216.97.30.0-216.97.31.255
+222.114.182.0-222.114.182.255
+# 1.9.24.0-1.9.24.255
+# 1.179.250.0-1.179.250.255
+# 1.255.33.0-1.255.33.255
+# 2.78.44.0-2.78.44.255
+# 4.35.108.0-4.35.108.255
+# 5.22.190.0-5.22.190.255
+# 5.102.252.0-5.102.252.255
+# 24.155.92.0-24.155.92.255
+# 24.156.131.0-24.156.131.255
+# 27.90.140.0-27.90.140.255
+# 31.7.160.0-31.7.160.255
+# 31.31.48.0-31.31.48.255
+# 31.46.5.0-31.46.5.255
+# 36.85.194.0-36.85.194.255
+# 37.58.167.0-37.58.167.255
+# 37.139.254.0-37.139.254.255
+# 37.228.69.0-37.228.69.255
+# 38.68.16.0-38.68.16.255
+# 43.255.113.0-43.255.113.255
+# 45.64.20.0-45.64.20.255
+# 46.19.98.0-46.19.98.255
+# 46.28.246.0-46.28.247.255
+# 46.39.3.0-46.39.3.255
+# 49.231.56.0-49.231.56.255
+# 49.231.60.0-49.231.60.255
+# 54.204.35.0-54.204.35.255
+# 54.204.39.0-54.204.39.255
+# 58.121.16.0-58.121.16.255
+# 58.121.18.0-58.121.18.255
+# 58.121.20.0-58.121.20.255
+# 58.121.26.0-58.121.26.255
+# 58.121.28.0-58.121.28.255
+# 58.121.30.0-58.121.31.255
+# 58.121.144.0-58.121.144.255
+# 58.121.148.0-58.121.150.255
+# 58.121.152.0-58.121.153.255
+# 58.121.159.0-58.121.159.255
+# 58.145.238.0-58.145.238.255
+# 58.176.217.0-58.176.217.255
+# 58.226.16.0-58.226.20.255
+# 58.226.22.0-58.226.23.255
+# 58.226.27.0-58.226.27.255
+# 58.226.29.0-58.226.29.255
+# 59.18.44.0-59.18.44.255
+# 59.26.208.0-59.26.209.255
+# 59.26.211.0-59.26.212.255
+# 59.26.214.0-59.26.215.255
+# 59.26.217.0-59.26.220.255
+# 59.190.145.0-59.190.145.255
+# 60.199.175.0-60.199.175.255
+# 61.19.1.0-61.19.2.255
+# 61.84.176.0-61.84.179.255
+# 61.84.181.0-61.84.181.255
+# 61.84.184.0-61.84.187.255
+# 61.84.190.0-61.84.190.255
+# 61.86.202.0-61.86.202.255
+# 61.223.33.0-61.223.33.255
+# 62.1.38.0-62.1.38.255
+# 62.75.10.0-62.75.10.255
+# 62.149.105.0-62.149.105.255
+# 62.149.110.0-62.149.110.255
+# 62.168.125.0-62.168.125.255
+# 62.212.252.0-62.212.252.255
+# 62.243.26.0-62.243.26.255
+# 63.88.73.0-63.88.73.255
+# 63.211.200.0-63.211.200.255
+# 64.15.124.0-64.15.124.255
+# 64.41.221.0-64.41.221.255
+# 64.68.64.0-64.68.64.255
+# 64.68.80.0-64.68.95.255
+# 64.154.178.0-64.154.178.255
+# 65.183.12.0-65.183.12.255
+# 66.34.114.0-66.34.114.255
+# 66.34.125.0-66.34.125.255
+# 66.58.255.0-66.58.255.255
+# 66.97.30.0-66.97.30.255
+# 66.185.84.0-66.185.84.255
+# 69.13.117.0-69.13.117.255
+# 69.13.126.0-69.13.126.255
+# 69.79.200.0-69.79.200.255
+# 70.90.219.0-70.90.219.255
+# 74.51.119.0-74.51.119.255
+# 74.125.237.0-74.125.237.255
+# 76.75.38.0-76.75.38.255
+# 77.68.251.0-77.68.251.255
+# 77.111.2.0-77.111.2.255
+# 77.120.15.0-77.120.15.255
+# 77.153.129.0-77.153.129.255
+# 77.239.64.0-77.239.64.255
+# 78.37.100.0-78.37.100.255
+# 80.64.175.0-80.64.175.255
+# 80.89.192.0-80.89.192.255
+# 80.93.31.0-80.93.31.255
+# 80.228.65.0-80.228.65.255
+# 81.167.38.0-81.167.38.255
+# 82.94.234.0-82.94.234.255
+# 82.114.163.0-82.114.163.255
+# 82.147.54.0-82.147.54.255
+# 82.178.33.0-82.178.33.255
+# 82.206.179.0-82.206.179.255
+# 83.100.221.0-83.100.221.255
+# 84.54.161.0-84.54.161.255
+# 85.112.121.0-85.112.121.255
+# 85.113.32.0-85.113.32.255
+# 85.182.250.0-85.182.250.255
+# 86.127.118.0-86.127.118.255
+# 87.72.143.0-87.72.143.255
+# 88.204.142.0-88.204.142.255
+# 89.25.120.0-89.25.120.255
+# 90.150.80.0-90.150.80.255
+# 90.150.83.0-90.150.83.255
+# 91.144.157.0-91.144.157.255
+# 91.204.176.0-91.204.176.255
+# 91.245.214.0-91.245.214.255
+# 93.88.162.0-93.88.163.255
+# 94.25.137.0-94.25.137.255
+# 94.40.70.0-94.40.70.255
+# 94.77.249.0-94.77.249.255
+# 95.30.216.0-95.30.217.255
+# 95.54.196.0-95.54.196.255
+# 101.100.190.0-101.100.190.255
+# 103.1.139.0-103.1.139.255
+# 103.3.32.0-103.3.32.255
+# 103.16.204.0-103.16.204.255
+# 103.25.178.0-103.25.178.255
+# 103.241.59.0-103.241.59.255
+# 103.244.186.0-103.244.186.255
+# 104.237.188.0-104.237.188.255
+# 106.103.2.0-106.103.2.255
+# 106.162.198.0-106.162.198.255
+# 106.186.20.0-106.186.20.255
+# 109.193.192.0-109.193.193.255
+# 109.194.169.0-109.194.169.255
+# 109.195.89.0-109.195.89.255
+# 109.195.121.0-109.195.121.255
+# 109.195.169.0-109.195.169.255
+# 110.164.5.0-110.164.5.255
+# 110.164.10.0-110.164.10.255
+# 110.164.13.0-110.164.13.255
+# 111.107.254.0-111.107.254.255
+# 112.156.70.0-112.156.70.255
+# 112.156.75.0-112.156.76.255
+# 112.196.151.0-112.196.151.255
+# 113.171.243.0-113.171.243.255
+# 113.171.246.0-113.171.246.255
+# 113.171.252.0-113.171.252.255
+# 114.4.41.0-114.4.41.255
+# 114.29.66.0-114.29.67.255
+# 114.29.69.0-114.29.73.255
+# 114.29.75.0-114.29.78.255
+# 114.30.26.0-114.30.27.255
+# 114.30.29.0-114.30.29.255
+# 114.206.208.0-114.206.211.255
+# 114.206.213.0-114.206.214.255
+# 114.206.216.0-114.206.216.255
+# 114.206.220.0-114.206.223.255
+# 115.178.27.0-115.178.27.255
+# 116.202.225.0-116.202.225.255
+# 116.202.231.0-116.202.231.255
+# 117.219.228.0-117.219.228.255
+# 118.32.224.0-118.32.226.255
+# 118.32.228.0-118.32.229.255
+# 118.32.233.0-118.32.237.255
+# 118.32.239.0-118.32.239.255
+# 118.98.110.0-118.98.110.255
+# 118.143.88.0-118.143.88.255
+# 119.64.137.0-119.64.137.255
+# 119.203.65.0-119.203.67.255
+# 119.203.76.0-119.203.76.255
+# 119.203.78.0-119.203.79.255
+# 119.235.103.0-119.235.103.255
+# 120.89.96.0-120.89.96.255
+# 121.78.206.0-121.78.206.255
+# 124.153.209.0-124.153.211.255
+# 124.153.213.0-124.153.213.255
+# 124.153.217.0-124.153.217.255
+# 124.153.219.0-124.153.220.255
+# 124.153.222.0-124.153.223.255
+# 128.74.250.0-128.74.250.255
+# 128.210.224.0-128.210.224.255
+# 130.111.19.0-130.111.19.255
+# 134.19.215.0-134.19.215.255
+# 139.218.20.0-139.218.20.255
+# 163.28.18.0-163.28.18.255
+# 164.113.94.0-164.113.94.255
+# 165.165.38.0-165.165.38.255
+# 166.90.148.0-166.90.148.255
+# 167.206.252.0-167.206.252.255
+# 173.194.64.0-173.194.64.255
+# 173.194.73.0-173.194.74.255
+# 173.194.76.0-173.194.77.255
+# 173.194.194.0-173.194.194.255
+# 173.218.248.0-173.218.248.255
+# 177.21.244.0-177.21.244.255
+# 177.35.32.0-177.35.32.255
+# 177.71.7.0-177.71.7.255
+# 178.60.128.0-178.60.128.255
+# 178.168.3.0-178.168.3.255
+# 178.236.130.0-178.236.130.255
+# 178.250.208.0-178.250.208.255
+# 180.149.5.0-180.149.5.255
+# 180.180.250.0-180.180.250.255
+# 181.30.240.0-181.30.240.255
+# 181.40.65.0-181.40.65.255
+# 181.48.255.0-181.48.255.255
+# 181.64.132.0-181.64.132.255
+# 181.176.244.0-181.176.244.255
+# 181.188.0.0-181.188.0.255
+# 182.50.94.0-182.50.94.255
+# 182.79.254.0-182.79.254.255
+# 182.221.49.0-182.221.49.255
+# 182.221.53.0-182.221.53.255
+# 182.248.204.0-182.248.204.255
+# 182.255.114.0-182.255.114.255
+# 185.6.9.0-185.6.9.255
+# 186.232.197.0-186.232.197.255
+# 187.58.66.0-187.58.66.255
+# 187.160.243.0-187.160.243.255
+# 188.21.9.0-188.21.9.255
+# 188.29.166.0-188.29.166.255
+# 188.43.66.0-188.43.66.255
+# 189.26.123.0-189.26.123.255
+# 189.59.93.0-189.59.93.255
+# 189.86.41.0-189.86.41.255
+# 189.115.42.0-189.115.42.255
+# 189.194.54.0-189.194.54.255
+# 189.195.96.0-189.195.96.255
+# 189.197.77.0-189.197.77.255
+# 189.199.103.0-189.199.103.255
+# 190.55.60.0-190.55.60.255
+# 190.90.15.0-190.90.15.255
+# 190.98.163.0-190.98.163.255
+# 190.98.170.0-190.98.171.255
+# 190.143.134.0-190.143.134.255
+# 190.240.1.0-190.240.1.255
+# 190.248.1.0-190.248.1.255
+# 192.248.3.0-192.248.3.255
+# 193.33.5.0-193.33.5.255
+# 193.90.147.0-193.90.147.255
+# 193.120.166.0-193.120.166.255
+# 193.134.255.0-193.134.255.255
+# 193.192.250.0-193.192.250.255
+# 194.78.99.0-194.78.99.255
+# 194.122.82.0-194.122.82.255
+# 194.199.78.0-194.199.78.255
+# 194.221.68.0-194.221.68.255
+# 195.8.12.0-195.8.12.255
+# 195.218.169.0-195.218.169.255
+# 196.200.129.0-196.200.129.255
+# 197.84.128.0-197.84.128.255
+# 198.108.100.0-198.108.100.255
+# 198.142.187.0-198.142.187.255
+# 199.87.241.0-199.87.241.255
+# 200.28.12.0-200.28.12.255
+# 200.53.245.0-200.53.245.255
+# 200.94.238.0-200.94.238.255
+# 200.115.194.0-200.115.194.255
+# 200.216.90.0-200.216.90.255
+# 201.23.161.0-201.23.161.255
+# 201.130.49.0-201.130.49.255
+# 201.248.76.0-201.248.76.255
+# 201.248.78.0-201.248.78.255
+# 202.4.173.0-202.4.173.255
+# 202.74.205.0-202.74.205.255
+# 202.133.51.0-202.133.51.255
+# 202.134.182.0-202.134.182.255
+# 202.152.192.0-202.152.192.255
+# 202.169.193.0-202.169.193.255
+# 202.208.170.0-202.208.170.255
+# 203.5.76.0-203.5.76.255
+# 203.42.38.0-203.42.38.255
+# 203.66.124.0-203.66.124.255
+# 203.66.155.0-203.66.155.255
+# 203.82.75.0-203.82.75.255
+# 203.114.135.0-203.114.135.255
+# 203.133.5.0-203.133.5.255
+# 203.146.98.0-203.146.98.255
+# 203.162.235.0-203.162.236.255
+# 203.176.177.0-203.176.177.255
+# 203.210.2.0-203.210.2.255
+# 203.211.0.0-203.211.0.255
+# 203.233.126.0-203.233.126.255
+# 204.17.140.0-204.17.140.255
+# 204.85.30.0-204.85.30.255
+# 204.186.48.0-204.186.48.255
+# 205.237.38.0-205.237.38.255
+# 206.111.13.0-206.111.13.255
+# 207.204.159.0-207.204.159.255
+# 207.237.69.0-207.237.69.255
+# 208.21.209.0-208.21.209.255
+# 208.117.224.0-208.117.224.255
+# 209.52.144.0-209.52.144.255
+# 209.118.99.0-209.118.99.255
+# 209.185.108.0-209.185.108.255
+# 209.245.184.0-209.245.184.255
+# 209.247.159.0-209.247.159.255
+# 210.139.253.0-210.139.253.255
+# 210.158.146.0-210.158.146.255
+# 210.187.25.0-210.187.25.255
+# 210.210.2.0-210.210.2.255
+# 210.210.4.0-210.210.4.255
+# 210.242.125.0-210.242.125.255
+# 210.242.128.0-210.242.128.255
+# 210.245.14.0-210.245.14.255
+# 211.245.48.0-211.245.49.255
+# 211.245.51.0-211.245.52.255
+# 211.245.55.0-211.245.55.255
+# 211.245.60.0-211.245.63.255
+# 212.2.108.0-212.2.108.255
+# 212.106.207.0-212.106.207.255
+# 212.106.221.0-212.106.221.255
+# 212.113.185.0-212.113.185.255
+# 212.188.7.0-212.188.7.255
+# 212.188.10.0-212.188.10.255
+# 213.24.121.0-213.24.121.255
+# 213.87.125.0-213.87.125.255
+# 213.158.11.0-213.158.11.255
+# 213.241.88.0-213.241.89.255
+# 216.33.229.0-216.33.229.255
+# 216.58.192.0-216.58.192.255
+# 216.58.196.0-216.58.196.255
+# 216.97.20.0-216.97.20.255
+# 216.109.75.0-216.109.75.255
+# 216.155.64.0-216.155.64.255
+# 218.237.68.0-218.237.71.255
+# 218.237.73.0-218.237.73.255
+# 218.237.75.0-218.237.75.255
+# 218.237.77.0-218.237.79.255
+# 218.253.0.0-218.253.0.255
+# 219.85.119.0-219.85.119.255
+# 220.244.223.0-220.244.223.255
+# 221.160.176.0-221.160.177.255
+# 221.160.180.0-221.160.180.255
+# 221.160.184.0-221.160.184.255
+# 221.160.186.0-221.160.186.255
+# 221.160.188.0-221.160.188.255
+# 221.160.190.0-221.160.191.255
+# 222.117.80.0-222.117.80.255
+# 222.117.83.0-222.117.85.255
+# 222.117.87.0-222.117.87.255
+# 222.117.90.0-222.117.90.255
+# 222.117.95.0-222.117.95.255
+# 222.255.120.0-222.255.120.255
+# 223.27.237.0-223.27.237.255
+# 223.62.226.0-223.62.226.255
+# 223.196.44.0-223.196.44.255
+
+119.81.229.0/24
+119.81.232.0/24
+
+193.181.179.0/24
+193.181.178.0/24
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  2 08:16:39 2015">
+ Jun 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=21252#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/117640287201028282637/">ldtx2...@gmail.com</a
+></span>
+ 
+<pre>
+#15 看来Google给你分配的服务器只有官方cache
+访问 <a href="https://redirector.googlevideo.com/report_mapping" rel="nofollow">https://redirector.googlevideo.com/report_mapping</a> 刷新几次如果返回的都是“iata  code”+“服务器组号”形式的就是官方cache，如果是“isp name”+“-”+“iata  code”+“服务器编号”形式的就是ggc
+减少等待时间可以试试把被屏蔽ip对应的域名指向0.0.0.0；或者直接刷新（分配的服务器可能会变化）
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun  2 08:21:20 2015">
+ Jun 2, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=21252#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/106088583427384130526/">jasonli...@gmail.com</a
+></span>
+ 
+<pre>
+#22 阁下也是大白鲨, 高明.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun  3 04:27:55 2015">
+ Jun 3, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=21252#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/116326853761552387466/">scattere...@gmail.com</a
+></span>
+ 
+<pre>
+#15 #16
+
+我这儿第一次直连的成功率大约为3/4，所以我觉得采用这种方式还是值得的
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun  3 04:32:41 2015">
+ Jun 3, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=21252#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/106088583427384130526/">jasonli...@gmail.com</a
+></span>
+ 
+<pre>
+#24 自己搜ip的时候, 有大把gvs, 你这个馊主意没想出来, 
+该打pat.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc26">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun  3 04:38:37 2015">
+ Jun 3, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c26" href="/p/goagent/issues/detail?id=21252#c26">#26</a>
+ 
+
+ <a class="userlink"
+ href="/u/116326853761552387466/">scattere...@gmail.com</a
+></span>
+ 
+<pre>
+#25
+
+这真的要感谢 fh0205z...@gmail.com 的坚持
+
+不然不会朝这个方向想，思维定式蛮害人的
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun  3 04:39:08 2015">
+ Jun 3, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=21252#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/rcyggdra/">rcyggdra</a
+></span>
+ 
+<pre>
+我用cow只为了
+loadBalance = backup
+这个功能,
+用cow看国内视频网站居然会走ss,我不明白他是怎么判定的..
+这种情况是因为DNS用了国外的,响应过慢然后在选择响应快的SS吗?
+谁有COW的相关配置..
+我想在只能用
+alwaysProxy = true
+当ss客户端用...
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun  3 04:47:13 2015">
+ Jun 3, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=21252#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/116326853761552387466/">scattere...@gmail.com</a
+></span>
+ 
+<pre>
+#27
+
+应该是dns的问题，国内的网站还是需要转给国内的dns服务器
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc29">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun  3 04:53:05 2015">
+ Jun 3, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c29" href="/p/goagent/issues/detail?id=21252#c29">#29</a>
+ 
+
+ <a class="userlink"
+ href="/u/106088583427384130526/">jasonli...@gmail.com</a
+></span>
+ 
+<pre>
+#26 讲笑而已.
+有时候这种简单直接的方案, 反倒最难想到.总会不自觉越搞越复杂.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc30">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun  3 04:57:41 2015">
+ Jun 3, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c30" href="/p/goagent/issues/detail?id=21252#c30">#30</a>
+ 
+
+ <a class="userlink"
+ href="/u/rcyggdra/">rcyggdra</a
+></span>
+ 
+<pre>
+#28
+试着把dnsforwarder的UDP的第一个DNS用国内的,还不知道效果.
+dnsforwarder这东西开UDP伪造好呢还是用TCP直接查询好?
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21252&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21252"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="21252">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A21252',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 21252,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

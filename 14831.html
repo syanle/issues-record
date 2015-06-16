@@ -1,0 +1,1524 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "relativeBaseUrl": "", "loggedInUserEmail": null, "projectName": "goagent", "projectHomeUrl": "/p/goagent", "token": null, "profileUrl": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 14831 - 
+ goagent -
+ 
+ dropbox挂了 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14831&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14831" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=14831">14831</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >dropbox挂了</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 1 person starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A14831">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14831&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14831">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/100621576149662526335/">a564605...@gmail.com</a
+>,
+ <span class="date" title="Wed Jun 18 22:33:50 2014">Jun 18, 2014</span>
+ 
+ </div>
+<pre>
+dropbox挂了 怎么用goagent代理？
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun 18 23:43:48 2014">
+ Jun 18, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=14831#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/103286004694374594464/">kingway2...@gmail.com</a
+></span>
+ 
+<pre>
+我的也挂了，按照月光博客改host也无效！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun 18 23:58:52 2014">
+ Jun 18, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=14831#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/110411062881516663952/">yanyingj...@gmail.com</a
+></span>
+ 
+<pre>
+在天朝用过互联网真是杯具，感觉是灭亡前的疯狂
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 00:02:00 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=14831#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/114858491409111830929/">putin...@gmail.com</a
+></span>
+ 
+<pre>
+我的也是，妈的，太无耻了，一个网盘都屏蔽
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 00:52:00 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=14831#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/102303482437966968690/">herohes...@gmail.com</a
+></span>
+ 
+<pre>
+艹他娘的GFW~~~~~~~~~
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 01:23:08 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=14831#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/104616298669688806261/">9oogle.f...@gmail.com</a
+></span>
+ 
+<pre>
+我以为就我的挂了
+哎，想买个VPN算了，在x宝输入，直接不给搜索
+GFW天天搞些有意思么，闭关锁国好了，搞这么复杂
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 01:48:50 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=14831#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/114858491409111830929/">putin...@gmail.com</a
+></span>
+ 
+<pre>
+貌似以前的HOSTS也没用
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 01:50:21 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=14831#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/103085117154873091324/">cocacola...@gmail.com</a
+></span>
+ 
+<pre>
+确实是的,这段时间Dropbox也封了.可以用hosts配合着用,不过不保险,因为ip随时可能变,谁知道什么时候就不行了.
+
+真不行,就只能改为自由门了,我是真心不喜欢自由门的.没别的法呀~
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 01:51:09 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=14831#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/116545898434558734194/">mails...@gmail.com</a
+></span>
+ 
+<pre>
+我的没问题，正常访问
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 01:55:04 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=14831#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/106457268381098693496/">cheming6...@gmail.com</a
+></span>
+ 
+<pre>
+我这也挂了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 01:57:44 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=14831#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/100676270863984503656/">nybux.t...@gmail.com</a
+></span>
+ 
+<pre>
+108.160.167.203 www.dropbox.com
+108.160.167.203 dropbox.com
+108.160.165.211 dl-client677.dropbox.com
+108.160.165.211 dl-client960.dropbox.com
+108.160.165.211 dl-client686.dropbox.com
+108.160.165.253 d.dropbox.com
+108.160.165.211 notify7.dropbox.com
+108.160.165.211 client-lb.dropbox.com
+108.160.165.211 client.dropbox.com
+108.160.165.211 client1.dropbox.com
+108.160.165.211 client2.dropbox.com
+108.160.165.211 client3.dropbox.com
+108.160.165.211 client4.dropbox.com
+108.160.165.211 client5.dropbox.com
+108.160.165.211 client6.dropbox.com
+108.160.165.211 client7.dropbox.com
+108.160.165.211 client8.dropbox.com
+108.160.165.211 client9.dropbox.com
+108.160.165.211 client10.dropbox.com
+108.160.165.211 client11.dropbox.com
+108.160.165.211 client12.dropbox.com
+108.160.165.211 client13.dropbox.com
+108.160.165.211 client14.dropbox.com
+108.160.165.211 client15.dropbox.com
+108.160.165.211 client16.dropbox.com
+108.160.165.211 client17.dropbox.com
+108.160.165.211 client18.dropbox.com
+108.160.165.211 client19.dropbox.com
+108.160.165.211 client20.dropbox.com
+108.160.165.211 client21.dropbox.com
+108.160.165.211 client22.dropbox.com
+108.160.165.211 client23.dropbox.com
+108.160.165.211 client24.dropbox.com
+108.160.165.211 client25.dropbox.com
+108.160.165.211 client26.dropbox.com
+108.160.165.211 client27.dropbox.com
+108.160.165.211 client28.dropbox.com
+108.160.165.211 client29.dropbox.com
+108.160.165.211 client30.dropbox.com
+108.160.165.211 client31.dropbox.com
+108.160.165.211 client32.dropbox.com
+108.160.165.211 client33.dropbox.com
+108.160.165.211 client34.dropbox.com
+108.160.165.211 client35.dropbox.com
+108.160.165.211 client36.dropbox.com
+108.160.165.211 client37.dropbox.com
+108.160.165.211 client38.dropbox.com
+108.160.165.211 client39.dropbox.com
+108.160.165.211 client40.dropbox.com
+108.160.165.211 client41.dropbox.com
+108.160.165.211 client42.dropbox.com
+108.160.165.211 client43.dropbox.com
+108.160.165.211 client44.dropbox.com
+108.160.165.211 client45.dropbox.com
+108.160.165.211 client46.dropbox.com
+108.160.165.211 client47.dropbox.com
+108.160.165.211 client48.dropbox.com
+108.160.165.211 client49.dropbox.com
+108.160.165.211 client50.dropbox.com
+108.160.165.211 client51.dropbox.com
+108.160.165.211 client52.dropbox.com
+108.160.165.211 client53.dropbox.com
+108.160.165.211 client54.dropbox.com
+108.160.165.211 client55.dropbox.com
+108.160.165.211 client56.dropbox.com
+108.160.165.211 client57.dropbox.com
+108.160.165.211 client58.dropbox.com
+108.160.165.211 client59.dropbox.com
+108.160.165.211 client60.dropbox.com
+108.160.165.211 client61.dropbox.com
+108.160.165.211 client62.dropbox.com
+108.160.165.211 client63.dropbox.com
+108.160.165.211 client64.dropbox.com
+108.160.165.211 client65.dropbox.com
+108.160.165.211 client66.dropbox.com
+108.160.165.211 client67.dropbox.com
+108.160.165.211 client68.dropbox.com
+108.160.165.211 client69.dropbox.com
+108.160.165.211 client70.dropbox.com
+108.160.165.211 client71.dropbox.com
+108.160.165.211 client72.dropbox.com
+108.160.165.211 client73.dropbox.com
+108.160.165.211 client74.dropbox.com
+108.160.165.211 client75.dropbox.com
+108.160.165.211 client76.dropbox.com
+108.160.165.211 client77.dropbox.com
+108.160.165.211 client78.dropbox.com
+108.160.165.211 client79.dropbox.com
+108.160.165.211 client80.dropbox.com
+108.160.165.211 client81.dropbox.com
+108.160.165.211 client82.dropbox.com
+108.160.165.211 client83.dropbox.com
+108.160.165.211 client84.dropbox.com
+108.160.165.211 client85.dropbox.com
+108.160.165.211 client86.dropbox.com
+108.160.165.211 client87.dropbox.com
+108.160.165.211 client88.dropbox.com
+108.160.165.211 client89.dropbox.com
+108.160.165.211 client90.dropbox.com
+108.160.165.211 client91.dropbox.com
+108.160.165.211 client92.dropbox.com
+108.160.165.211 client93.dropbox.com
+108.160.165.211 client94.dropbox.com
+108.160.165.211 client95.dropbox.com
+108.160.165.211 client96.dropbox.com
+108.160.165.211 client97.dropbox.com
+108.160.165.211 client98.dropbox.com
+108.160.165.211 client99.dropbox.com
+
+108.160.165.211 notify1.dropbox.com
+108.160.165.211 notify2.dropbox.com
+108.160.165.211 notify3.dropbox.com
+108.160.165.211 notify4.dropbox.com
+108.160.165.211 notify5.dropbox.com
+108.160.165.211 notify6.dropbox.com
+108.160.165.211 notify7.dropbox.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 03:59:55 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=14831#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/100616665740769522847/">mind...@gmail.com</a
+></span>
+ 
+<pre>
+昨天半夜封锁的，大概11点左右。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 04:45:43 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=14831#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/107334217310782916870/">freetuch...@gmail.com</a
+></span>
+ 
+<pre>
+只是DNS污染,你可以用nslookup命令找到IP并改到host里
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 04:56:47 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=14831#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/100616665740769522847/">mind...@gmail.com</a
+></span>
+ 
+<pre>
+请使用这个方法避免DNS污染
+<a href="http://xxxiixxx.blogspot.com/2013/03/gfw1.html" rel="nofollow">http://xxxiixxx.blogspot.com/2013/03/gfw1.html</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 07:13:48 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=14831#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/100531954406173583582/">lxj...@gmail.com</a
+></span>
+ 
+<pre>
+用GAE设置IE代理，再在DROPBOX设置代理服务器为自动检测，搞定
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 07:26:31 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=14831#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/100621576149662526335/">a564605...@gmail.com</a
+></span>
+ 
+<pre>
+#14 好方法
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 08:11:47 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=14831#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/112983042847560253980/">calf.z...@gmail.com</a
+></span>
+ 
+<pre>
+让dropbox走goagent的代理，能更新文件列表信息，但是本地的更改无法上传到服务器上
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 08:23:09 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=14831#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/102303482437966968690/">herohes...@gmail.com</a
+></span>
+ 
+<pre>
+#16 calf.z...@gmail.com 让dropbox走goagent的代理，能更新文件列表信息，但是本地的更改无法上传到服务器上
+————————————————————————————————————————————————————————————————————————————————————
+用这种方法我勉强使用正常，但终究是权宜之计啊……
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 11:30:54 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=14831#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/110571275720332897952/">lxok1...@gmail.com</a
+></span>
+ 
+<pre>
+的确挂了，天朝准备与世界为敌。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jun 19 18:59:42 2014">
+ Jun 19, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=14831#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/114063671051699112470/">zju...@gmail.com</a
+></span>
+ 
+<pre>
+改hosts，dnscrypt, 和goagent代理全用上了。反正现在可以同步上传了。
+fuck gfw，创建gfw的组织和技术人员都将被钉在历史的耻辱柱上，被世代人民唾弃。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 21 09:16:45 2014">
+ Jun 21, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=14831#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/117448550790880115577/">threeyea...@gmail.com</a
+></span>
+ 
+<pre>
+让中国互联网倒退多少年
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 22 01:49:27 2014">
+ Jun 22, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=14831#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/105622658352596759443/">enpha...@gmail.com</a
+></span>
+ 
+<pre>
+土共傻逼
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14831&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14831"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="14831">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A14831',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 14831,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

@@ -1,0 +1,2816 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"relativeBaseUrl": "", "projectName": "goagent", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "domainName": null, "profileUrl": null, "projectHomeUrl": "/p/goagent", "loggedInUserEmail": null, "token": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 7823 - 
+ goagent -
+ 
+ tomato 使用curl -k -L http://git.io/I9B7RQ|sh 安装 gevent 失败，请作者帮助，感谢。 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D7823&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D7823" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="closed_colors">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=7823">7823</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >tomato 使用curl -k -L http://git.io/I9B7RQ|sh 安装 gevent 失败，请作者帮助，感谢。</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 2 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A7823">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="The requested non-coding task was completed">Done</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ <tr><th align="left" valign="top">Closed:&nbsp;</th>
+ <td align="left" valign="top" width="100%">
+ Dec 2012
+ </td>
+ </tr>
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D7823&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D7823">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/116048493686770224485/">jelly0...@gmail.com</a
+>,
+ <span class="date" title="Wed Dec 12 23:25:24 2012">Dec 12, 2012</span>
+ 
+ </div>
+<pre>
+安装到最后时出现如下错误：
+libev/ev.c:4563:27: warning: &quot;/*&quot; within comment
+libev/ev.c:4564:27: warning: &quot;/*&quot; within comment
+/tmp/ccCRK0eb.s: Assembler messages:
+/tmp/ccCRK0eb.s:8024: Error: opcode not supported on this processor: mips1 (mips1) `sync'
+/tmp/ccCRK0eb.s:8415: Error: opcode not supported on this processor: mips1 (mips1) `sync'
+/tmp/ccCRK0eb.s:8451: Error: opcode not supported on this processor: mips1 (mips1) `sync'
+/tmp/ccCRK0eb.s:8457: Error: opcode not supported on this processor: mips1 (mips1) `sync'
+/tmp/ccCRK0eb.s:8469: Error: opcode not supported on this processor: mips1 (mips1) `sync'
+/tmp/ccCRK0eb.s:9180: Error: opcode not supported on this processor: mips1 (mips1) `sync'
+/tmp/ccCRK0eb.s:9190: Error: opcode not supported on this processor: mips1 (mips1) `sync'
+/tmp/ccCRK0eb.s:9230: Error: opcode not supported on this processor: mips1 (mips1) `sync'
+/tmp/ccCRK0eb.s:9286: Error: opcode not supported on this processor: mips1 (mips1) `sync'
+/tmp/ccCRK0eb.s:34672: Error: opcode not supported on this processor: mips1 (mips1) `sync'
+/tmp/ccCRK0eb.s:34716: Error: opcode not supported on this processor: mips1 (mips1) `sync'
+error: command '/opt/bin/gcc' failed with exit status 1
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 00:13:08 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=7823#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/109915319819232866192/">qgt...@gmail.com</a
+></span>
+ 
+<pre>
+lib/ev.c使用了sync指令，这个指令是mips2中的，但是程序并没有指出。所以会出现错误，具体怎么改，我也正在试验。暂时来看gevent 0.13.8是可以编译成功的，gevent 1.0的几个版本都会出现这个错误。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 00:23:47 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=7823#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/116048493686770224485/">jelly0...@gmail.com</a
+></span>
+ 
+<pre>
+我的0.13.8也没能编译，错误是一样的，能出个教程吗？谢谢。能不能列下你那边的list_installed 谢谢。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 00:25:11 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=7823#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/109915319819232866192/">qgt...@gmail.com</a
+></span>
+ 
+<pre>
+试试这样修改libev/ev.c再进行编译：
+    #elif defined __mips__
+      #define ECB_MEMORY_FENCE         __asm__ __volatile__ (&quot;.set mips2; sync; .set mips0&quot;: : :&quot;memory&quot;)
+如图，注释里面是原来的。
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 00:34:03 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=7823#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/109915319819232866192/">qgt...@gmail.com</a
+></span>
+ 
+<pre>
+<a href="https://maskv.com/technology/192.html" rel="nofollow">https://maskv.com/technology/192.html</a>
+我的0.13.8严格按照这个里面来的，1.0rc2刚才修改以后编译成功了。现在在tomato上已经完全可以正常使用了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 00:35:58 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=7823#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/116048493686770224485/">jelly0...@gmail.com</a
+></span>
+ 
+<pre>
+问题依旧
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=78230005000&amp;name=error.jpg&amp;token=ABZ6GAd7i5AIclCIlBc7ZExYWqySw3x_kQ%3A1434453958702&amp;id=7823&amp;mod_ts_token=ABZ6GAcn-R1vjkbaE0924r3nPKD-yiBdrQ%3A1434453958702">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >error.jpg</b>
+ <br>
+ 181 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=78230005000&amp;name=error.jpg&amp;token=ABZ6GAd7i5AIclCIlBc7ZExYWqySw3x_kQ%3A1434453958702&amp;id=7823&amp;mod_ts_token=ABZ6GAcn-R1vjkbaE0924r3nPKD-yiBdrQ%3A1434453958702&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=78230005000&amp;name=error.jpg&amp;token=ABZ6GAd7i5AIclCIlBc7ZExYWqySw3x_kQ%3A1434453958702&amp;id=7823&amp;mod_ts_token=ABZ6GAcn-R1vjkbaE0924r3nPKD-yiBdrQ%3A1434453958702">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=78230005000&amp;name=error.jpg&amp;token=ABZ6GAd7i5AIclCIlBc7ZExYWqySw3x_kQ%3A1434453958702&amp;id=7823&amp;mod_ts_token=ABZ6GAcn-R1vjkbaE0924r3nPKD-yiBdrQ%3A1434453958702&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=78230005000&amp;name=error.jpg&amp;token=ABZ6GAd7i5AIclCIlBc7ZExYWqySw3x_kQ%3A1434453958702&amp;id=7823&amp;mod_ts_token=ABZ6GAcn-R1vjkbaE0924r3nPKD-yiBdrQ%3A1434453958702&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 00:39:13 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=7823#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/109915319819232866192/">qgt...@gmail.com</a
+></span>
+ 
+<pre>
+我是用的python2.6编译的。你再参考一下我发的那个教程吧。你的tomato版本是什么呢？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 00:40:49 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=7823#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/109915319819232866192/">qgt...@gmail.com</a
+></span>
+ 
+<pre>
+供参考
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=78230007000&amp;name=%E5%82%B2%E6%B8%B8%E6%88%AA%E5%9B%BE20121213164016.png&amp;token=ABZ6GAeDgNqlQ1GLWHisYggFqqUwzxlFBA%3A1434453958703&amp;id=7823&amp;mod_ts_token=ABZ6GAcxk-VyCRvMKx2Tl2i9fNNljoqw0Q%3A1434453958703">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >傲游截图20121213164016.png</b>
+ <br>
+ 160 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=78230007000&amp;name=%E5%82%B2%E6%B8%B8%E6%88%AA%E5%9B%BE20121213164016.png&amp;token=ABZ6GAeDgNqlQ1GLWHisYggFqqUwzxlFBA%3A1434453958703&amp;id=7823&amp;mod_ts_token=ABZ6GAcxk-VyCRvMKx2Tl2i9fNNljoqw0Q%3A1434453958703&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=78230007000&amp;name=%E5%82%B2%E6%B8%B8%E6%88%AA%E5%9B%BE20121213164016.png&amp;token=ABZ6GAeDgNqlQ1GLWHisYggFqqUwzxlFBA%3A1434453958703&amp;id=7823&amp;mod_ts_token=ABZ6GAcxk-VyCRvMKx2Tl2i9fNNljoqw0Q%3A1434453958703">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=78230007000&amp;name=%E5%82%B2%E6%B8%B8%E6%88%AA%E5%9B%BE20121213164016.png&amp;token=ABZ6GAeDgNqlQ1GLWHisYggFqqUwzxlFBA%3A1434453958703&amp;id=7823&amp;mod_ts_token=ABZ6GAcxk-VyCRvMKx2Tl2i9fNNljoqw0Q%3A1434453958703&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=78230007000&amp;name=%E5%82%B2%E6%B8%B8%E6%88%AA%E5%9B%BE20121213164016.png&amp;token=ABZ6GAeDgNqlQ1GLWHisYggFqqUwzxlFBA%3A1434453958703&amp;id=7823&amp;mod_ts_token=ABZ6GAcxk-VyCRvMKx2Tl2i9fNNljoqw0Q%3A1434453958703&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 00:44:11 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=7823#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/116048493686770224485/">jelly0...@gmail.com</a
+></span>
+ 
+<pre>
+我的版本是
+Tomato DualWAN  版本 12.10.0037 MIPSR2 K26 USB WR-520W专用版    swap 也加了，能装的软件包都装了就是出错。要怎样把编译失败的文件删除呀。在原文件中没看到 uninstall。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 00:44:40 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=7823#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/109915319819232866192/">qgt...@gmail.com</a
+></span>
+ 
+<pre>
+对了。你改ev.c那句话的时候不要加后面的注释，那个图片只是用来给你对比的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 00:45:31 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=7823#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/109915319819232866192/">qgt...@gmail.com</a
+></span>
+ 
+<pre>
+编译失败不用删除，重新build就行了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 00:47:00 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=7823#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/116048493686770224485/">jelly0...@gmail.com</a
+></span>
+ 
+<pre>
+ev.c 那句我是加了/*    */的。这样不对吗？那你发一个正确的过来我试试。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 00:50:37 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=7823#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/109915319819232866192/">qgt...@gmail.com</a
+></span>
+ 
+<pre>
+应该是这个样子的，不要后面的注释/* */
+
+    #elif defined __mips__
+      #define ECB_MEMORY_FENCE         __asm__ __volatile__ (&quot;.set mips2; sync; .set mips0&quot;: : :&quot;memory&quot;)
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 00:52:59 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=7823#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/116048493686770224485/">jelly0...@gmail.com</a
+></span>
+ 
+<pre>
+哦，你现在编译成功的是那个版本，我正在编译。一会就会有结果。你试用过2.7.3 编译试一下能不能成功。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 00:55:28 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=7823#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/109915319819232866192/">qgt...@gmail.com</a
+></span>
+ 
+<pre>
+我没用python 2.7.3，只用了2.6.8。我编译的是1.0rc2， 从这儿下载的[<a href="https://github.com/downloads/SiteSupport/gevent/gevent-1.0rc2.tar.gz" rel="nofollow">https://github.com/downloads/SiteSupport/gevent/gevent-1.0rc2.tar.gz</a>]
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 00:55:54 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=7823#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/106781204990925295112/">yubinlov...@gmail.com</a
+></span>
+ 
+<pre>
+<a title="求在tomato 上面安装gevent" class=closed_ref href="/p/goagent/issues/detail?id=7817"> Issue 7817 </a> has been merged into this issue.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 01:05:12 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=7823#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/109915319819232866192/">qgt...@gmail.com</a
+></span>
+ 
+<pre>
+贴个图。
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=78230017000&amp;name=%E5%82%B2%E6%B8%B8%E6%88%AA%E5%9B%BE20121213170415.png&amp;token=ABZ6GAdVHyYvagb6gIxMCvL6M8KpA3YGug%3A1434453958703&amp;id=7823&amp;mod_ts_token=ABZ6GAdRV1_Pw87wrDw_BcDQ78krWoJKgg%3A1434453958703">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >傲游截图20121213170415.png</b>
+ <br>
+ 20.6 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=78230017000&amp;name=%E5%82%B2%E6%B8%B8%E6%88%AA%E5%9B%BE20121213170415.png&amp;token=ABZ6GAdVHyYvagb6gIxMCvL6M8KpA3YGug%3A1434453958703&amp;id=7823&amp;mod_ts_token=ABZ6GAdRV1_Pw87wrDw_BcDQ78krWoJKgg%3A1434453958703&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=78230017000&amp;name=%E5%82%B2%E6%B8%B8%E6%88%AA%E5%9B%BE20121213170415.png&amp;token=ABZ6GAdVHyYvagb6gIxMCvL6M8KpA3YGug%3A1434453958703&amp;id=7823&amp;mod_ts_token=ABZ6GAdRV1_Pw87wrDw_BcDQ78krWoJKgg%3A1434453958703">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=78230017000&amp;name=%E5%82%B2%E6%B8%B8%E6%88%AA%E5%9B%BE20121213170415.png&amp;token=ABZ6GAdVHyYvagb6gIxMCvL6M8KpA3YGug%3A1434453958703&amp;id=7823&amp;mod_ts_token=ABZ6GAdRV1_Pw87wrDw_BcDQ78krWoJKgg%3A1434453958703&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=78230017000&amp;name=%E5%82%B2%E6%B8%B8%E6%88%AA%E5%9B%BE20121213170415.png&amp;token=ABZ6GAdVHyYvagb6gIxMCvL6M8KpA3YGug%3A1434453958703&amp;id=7823&amp;mod_ts_token=ABZ6GAdRV1_Pw87wrDw_BcDQ78krWoJKgg%3A1434453958703&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 01:19:00 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=7823#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/116048493686770224485/">jelly0...@gmail.com</a
+></span>
+ 
+<pre>
+修改刚刚编译成功。就是什么原因造成的呀。那有办法让openssl也启用吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 01:21:00 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=7823#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/109915319819232866192/">qgt...@gmail.com</a
+></span>
+ 
+<pre>
+openssl我是直接在optware下面安装的，我没用goagent，所以不知道问题在啥地方。python 2.6是可以的
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 01:23:39 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=7823#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/116048493686770224485/">jelly0...@gmail.com</a
+></span>
+ 
+<pre>
+哦，不过python 现在到了3.3.0了，goagent是不是也应该对python 2.7.3有更好的支持了呢？新版本增加了好多新特性。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 01:28:23 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=7823#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/116048493686770224485/">jelly0...@gmail.com</a
+></span>
+ 
+<pre>
+现在gevent编译安装成功了，要怎样反编译或者删除呢？setup.py没有删除参数。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 03:31:35 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=7823#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/109915319819232866192/">qgt...@gmail.com</a
+></span>
+ 
+<pre>
+你可以试着交叉编译一下openssl。<a href="http://pypi.python.org/pypi/pyOpenSSL#downloads" rel="nofollow">http://pypi.python.org/pypi/pyOpenSSL#downloads</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 03:48:59 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=7823#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/116048493686770224485/">jelly0...@gmail.com</a
+></span>
+ 
+<pre>
+刚刚用2.7.3编译 gevent 1.0rc2 没能成功，没有py27-setuptools 这个包。你在那边试试可以不。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 03:54:43 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=7823#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/109915319819232866192/">qgt...@gmail.com</a
+></span>
+ 
+<pre>
+<a href="http://pypi.python.org/pypi/setuptools" rel="nofollow">http://pypi.python.org/pypi/setuptools</a> 自己交叉编译，呵呵。
+我没用python2.7，就是因为需要自己编译的东西太多，比较懒。
+我的路由是办公室的，现在也没有办法折腾了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 04:04:49 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=7823#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/116048493686770224485/">jelly0...@gmail.com</a
+></span>
+ 
+<pre>
+哦，自己动手可以学到很多东西呀。方便的话你发一封邮件给我，想和你交流学习一下，谢谢。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 04:47:09 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=7823#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/109915319819232866192/">qgt...@gmail.com</a
+></span>
+ 
+<pre>
+好啊，看你在2.7.3下面折腾的怎么样吧，有消息告诉我一声，qgtxqj#gmail.com
+PS: 推荐折腾一下wallproxy呗，我写的wiki[<a href="https://code.google.com/p/wallproxy/wiki/Tomato" rel="nofollow">https://code.google.com/p/wallproxy/wiki/Tomato</a>]
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 04:51:41 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=7823#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/116048493686770224485/">jelly0...@gmail.com</a
+></span>
+ 
+<pre>
+嗯，正在弄openssl 总出这个错误，
+OpenSSL/crypto/crypto.c:839: error: 'crypto_NetscapeSPKI_New' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:859: error: 'X509_FILETYPE_PEM' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:860: error: 'X509_FILETYPE_ASN1' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:863: error: 'EVP_PKEY_RSA' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:864: error: 'EVP_PKEY_DSA' undeclared (first use in this function)
+error: command '/opt/bin/gcc' failed with exit status 1。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc30">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 05:10:34 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c30" href="/p/goagent/issues/detail?id=7823#c30">#30</a>
+ 
+
+ <a class="userlink"
+ href="/u/116048493686770224485/">jelly0...@gmail.com</a
+></span>
+ 
+<pre>
+是有些复杂，这个方法是在PC机上安装，在tomato上面不行
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc31">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 21:35:45 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c31" href="/p/goagent/issues/detail?id=7823#c31">#31</a>
+ 
+
+ <a class="userlink"
+ href="/u/105290478760910890703/">happy...@gmail.com</a
+></span>
+ 
+<pre>
+终于在rt-n66u+tomato shibby上搞定了gevent。另外python2.7要用pyOpenSSL 0.12。pyOpenSSL0.13需要打补丁
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=78230031000&amp;name=12-14-2012+13-35-17.png&amp;token=ABZ6GAeQup6gbsAHv4TpuqWMRDmbknfkgw%3A1434453958705&amp;id=7823&amp;mod_ts_token=ABZ6GAcIxbzCoOchWrz_9ToZJbADE-ztCQ%3A1434453958705">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >12-14-2012 13-35-17.png</b>
+ <br>
+ 6.2 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=78230031000&amp;name=12-14-2012+13-35-17.png&amp;token=ABZ6GAeQup6gbsAHv4TpuqWMRDmbknfkgw%3A1434453958705&amp;id=7823&amp;mod_ts_token=ABZ6GAcIxbzCoOchWrz_9ToZJbADE-ztCQ%3A1434453958705&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=78230031000&amp;name=12-14-2012+13-35-17.png&amp;token=ABZ6GAeQup6gbsAHv4TpuqWMRDmbknfkgw%3A1434453958705&amp;id=7823&amp;mod_ts_token=ABZ6GAcIxbzCoOchWrz_9ToZJbADE-ztCQ%3A1434453958705">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=78230031000&amp;name=12-14-2012+13-35-17.png&amp;token=ABZ6GAeQup6gbsAHv4TpuqWMRDmbknfkgw%3A1434453958705&amp;id=7823&amp;mod_ts_token=ABZ6GAcIxbzCoOchWrz_9ToZJbADE-ztCQ%3A1434453958705&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=78230031000&amp;name=12-14-2012+13-35-17.png&amp;token=ABZ6GAeQup6gbsAHv4TpuqWMRDmbknfkgw%3A1434453958705&amp;id=7823&amp;mod_ts_token=ABZ6GAcIxbzCoOchWrz_9ToZJbADE-ztCQ%3A1434453958705&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc32">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 21:56:25 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c32" href="/p/goagent/issues/detail?id=7823#c32">#32</a>
+ 
+
+ <a class="userlink"
+ href="/u/116048493686770224485/">jelly0...@gmail.com</a
+></span>
+ 
+<pre>
+楼上的，能不能提供安装python2.7.3 pyopenssl0.12的步骤，谢谢。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc33">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 22:05:22 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c33" href="/p/goagent/issues/detail?id=7823#c33">#33</a>
+ 
+
+ <a class="userlink"
+ href="/u/106781204990925295112/">yubinlov...@gmail.com</a
+></span>
+ 
+<pre>
+<a title="python2.7: '/opt/lib/python2.7/site-packages/OpenSSL/crypto.so' is not an ELF executable for MIPS" class=closed_ref href="/p/goagent/issues/detail?id=7791"> Issue 7791 </a> has been merged into this issue.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc34">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 22:09:06 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c34" href="/p/goagent/issues/detail?id=7823#c34">#34</a>
+ 
+
+ <a class="userlink"
+ href="/u/116048493686770224485/">jelly0...@gmail.com</a
+></span>
+ 
+<pre>
+作者，目前我已经在tomato平台上用python2.7.3编译gevent成功了。日前就差openssl没能成功。需要大家帮助，谢谢。
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=78230034000&amp;name=111.jpg&amp;token=ABZ6GAeaz9Hzc7iW4crczh855Cq9Q6SoJQ%3A1434453958705&amp;id=7823&amp;mod_ts_token=ABZ6GAcT496iSRyZ0Dtd0aFR90pVcjgXSg%3A1434453958705">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >111.jpg</b>
+ <br>
+ 36.9 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=78230034000&amp;name=111.jpg&amp;token=ABZ6GAeaz9Hzc7iW4crczh855Cq9Q6SoJQ%3A1434453958705&amp;id=7823&amp;mod_ts_token=ABZ6GAcT496iSRyZ0Dtd0aFR90pVcjgXSg%3A1434453958705&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=78230034000&amp;name=111.jpg&amp;token=ABZ6GAeaz9Hzc7iW4crczh855Cq9Q6SoJQ%3A1434453958705&amp;id=7823&amp;mod_ts_token=ABZ6GAcT496iSRyZ0Dtd0aFR90pVcjgXSg%3A1434453958705">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=78230034000&amp;name=111.jpg&amp;token=ABZ6GAeaz9Hzc7iW4crczh855Cq9Q6SoJQ%3A1434453958705&amp;id=7823&amp;mod_ts_token=ABZ6GAcT496iSRyZ0Dtd0aFR90pVcjgXSg%3A1434453958705&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=78230034000&amp;name=111.jpg&amp;token=ABZ6GAeaz9Hzc7iW4crczh855Cq9Q6SoJQ%3A1434453958705&amp;id=7823&amp;mod_ts_token=ABZ6GAcT496iSRyZ0Dtd0aFR90pVcjgXSg%3A1434453958705&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc35">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 22:40:09 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c35" href="/p/goagent/issues/detail?id=7823#c35">#35</a>
+ 
+
+ <a class="userlink"
+ href="/u/116048493686770224485/">jelly0...@gmail.com</a
+></span>
+ 
+<pre>
+rt-n66u+tomato shibby上搞定了gevent openssl 的朋友在吗？为什么我下载的openssl 0.12源码，在tomato平台上编译安装出错呢？你是怎样操作的，能说明一下吗？谢谢。
+OpenSSL/crypto/pkey.h:27: error: expected specifier-qualifier-list before 'EVP_PKEY'
+In file included from OpenSSL/crypto/crypto.h:23,
+                 from OpenSSL/crypto/crypto.c:16:
+OpenSSL/crypto/x509ext.h:16:28: error: openssl/x509v3.h: No such file or directory
+In file included from OpenSSL/crypto/crypto.h:23,
+                 from OpenSSL/crypto/crypto.c:16:
+OpenSSL/crypto/x509ext.h:28: error: expected specifier-qualifier-list before 'X509_EXTENSION'
+In file included from OpenSSL/crypto/crypto.h:24,
+                 from OpenSSL/crypto/crypto.c:16:
+OpenSSL/crypto/pkcs7.h:15:27: error: openssl/pkcs7.h: No such file or directory
+In file included from OpenSSL/crypto/crypto.h:24,
+                 from OpenSSL/crypto/crypto.c:16:
+OpenSSL/crypto/pkcs7.h:25: error: expected specifier-qualifier-list before 'PKCS7'
+In file included from OpenSSL/crypto/crypto.h:25,
+                 from OpenSSL/crypto/crypto.c:16:
+OpenSSL/crypto/pkcs12.h:14:28: error: openssl/pkcs12.h: No such file or directory
+OpenSSL/crypto/pkcs12.h:15:26: error: openssl/asn1.h: No such file or directory
+In file included from OpenSSL/crypto/crypto.h:25,
+                 from OpenSSL/crypto/crypto.c:16:
+OpenSSL/crypto/pkcs12.h:37: error: expected ')' before '*' token
+In file included from OpenSSL/crypto/crypto.h:26,
+                 from OpenSSL/crypto/crypto.c:16:
+OpenSSL/crypto/crl.h:14: error: expected specifier-qualifier-list before 'X509_CRL'
+OpenSSL/crypto/crl.h:17: error: expected ')' before '*' token
+In file included from OpenSSL/crypto/crypto.h:27,
+                 from OpenSSL/crypto/crypto.c:16:
+OpenSSL/crypto/revoked.h:12: error: expected specifier-qualifier-list before 'X509_REVOKED'
+OpenSSL/crypto/revoked.h:16: error: expected ')' before '*' token
+In file included from OpenSSL/crypto/crypto.h:28,
+                 from OpenSSL/crypto/crypto.c:16:
+OpenSSL/crypto/../util.h:17:25: error: openssl/err.h: No such file or directory
+In file included from OpenSSL/crypto/crypto.c:16:
+OpenSSL/crypto/crypto.h:74: error: expected ')' before '*' token
+OpenSSL/crypto/crypto.h:75: error: expected ')' before '*' token
+OpenSSL/crypto/crypto.h:76: error: expected ')' before '*' token
+OpenSSL/crypto/crypto.h:77: error: expected ')' before '*' token
+OpenSSL/crypto/crypto.h:78: error: expected ')' before '*' token
+OpenSSL/crypto/crypto.h:80: error: expected ')' before '*' token
+OpenSSL/crypto/crypto.h:81: error: expected ')' before '*' token
+OpenSSL/crypto/crypto.c: In function 'crypto_load_privatekey':
+OpenSSL/crypto/crypto.c:79: error: expected ')' before '*' token
+OpenSSL/crypto/crypto.c:83: error: 'pem_password_cb' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:83: error: (Each undeclared identifier is reported only once
+OpenSSL/crypto/crypto.c:83: error: for each function it appears in.)
+OpenSSL/crypto/crypto.c:83: error: 'cb' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:85: error: 'BIO' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:85: error: 'bio' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:86: error: 'EVP_PKEY' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:86: error: 'pkey' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:110: warning: implicit declaration of function 'BIO_new_mem_buf'
+OpenSSL/crypto/crypto.c:113: error: 'X509_FILETYPE_PEM' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:114: warning: implicit declaration of function 'PEM_read_bio_PrivateKey'
+OpenSSL/crypto/crypto.c:117: error: 'X509_FILETYPE_ASN1' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:118: warning: implicit declaration of function 'd2i_PrivateKey_bio'
+OpenSSL/crypto/crypto.c:123: warning: implicit declaration of function 'BIO_free'
+OpenSSL/crypto/crypto.c:134: warning: implicit declaration of function 'crypto_PKey_New'
+OpenSSL/crypto/crypto.c: In function 'crypto_dump_privatekey':
+OpenSSL/crypto/crypto.c:158: error: expected '=', ',', ';', 'asm' or '__attribute__' before '*' token
+OpenSSL/crypto/crypto.c:158: error: 'cipher' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:160: error: 'pem_password_cb' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:160: error: 'cb' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:162: error: 'BIO' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:162: error: 'bio' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:163: error: 'RSA' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:163: error: 'rsa' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:167: error: 'pw' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:177: warning: implicit declaration of function 'EVP_get_cipherbyname'
+OpenSSL/crypto/crypto.c:200: warning: implicit declaration of function 'BIO_new'
+OpenSSL/crypto/crypto.c:200: warning: implicit declaration of function 'BIO_s_mem'
+OpenSSL/crypto/crypto.c:203: error: 'X509_FILETYPE_PEM' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:204: warning: implicit declaration of function 'PEM_write_bio_PrivateKey'
+OpenSSL/crypto/crypto.c:204: error: 'crypto_PKeyObj' has no member named 'pkey'
+OpenSSL/crypto/crypto.c:212: error: 'X509_FILETYPE_ASN1' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:213: warning: implicit declaration of function 'i2d_PrivateKey_bio'
+OpenSSL/crypto/crypto.c:213: error: 'crypto_PKeyObj' has no member named 'pkey'
+OpenSSL/crypto/crypto.c:217: warning: implicit declaration of function 'EVP_PKEY_get1_RSA'
+OpenSSL/crypto/crypto.c:217: error: 'crypto_PKeyObj' has no member named 'pkey'
+OpenSSL/crypto/crypto.c:218: warning: implicit declaration of function 'RSA_print'
+OpenSSL/crypto/crypto.c:219: warning: implicit declaration of function 'RSA_free'
+OpenSSL/crypto/crypto.c:235: warning: implicit declaration of function 'BIO_get_mem_data'
+OpenSSL/crypto/crypto.c: In function 'crypto_load_certificate':
+OpenSSL/crypto/crypto.c:253: error: expected ')' before '*' token
+OpenSSL/crypto/crypto.c:256: error: 'BIO' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:256: error: 'bio' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:257: error: 'X509' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:257: error: 'cert' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:265: error: 'X509_FILETYPE_PEM' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:266: warning: implicit declaration of function 'PEM_read_bio_X509'
+OpenSSL/crypto/crypto.c:269: error: 'X509_FILETYPE_ASN1' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:270: warning: implicit declaration of function 'd2i_X509_bio'
+OpenSSL/crypto/crypto.c:286: warning: implicit declaration of function 'crypto_X509_New'
+OpenSSL/crypto/crypto.c: In function 'crypto_dump_certificate':
+OpenSSL/crypto/crypto.c:303: error: 'BIO' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:303: error: 'bio' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:313: error: 'X509_FILETYPE_PEM' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:314: warning: implicit declaration of function 'PEM_write_bio_X509'
+OpenSSL/crypto/crypto.c:314: error: 'crypto_X509Obj' has no member named 'x509'
+OpenSSL/crypto/crypto.c:317: error: 'X509_FILETYPE_ASN1' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:318: warning: implicit declaration of function 'i2d_X509_bio'
+OpenSSL/crypto/crypto.c:318: error: 'crypto_X509Obj' has no member named 'x509'
+OpenSSL/crypto/crypto.c:322: warning: implicit declaration of function 'X509_print_ex'
+OpenSSL/crypto/crypto.c:322: error: 'crypto_X509Obj' has no member named 'x509'
+OpenSSL/crypto/crypto.c: In function 'crypto_load_certificate_request':
+OpenSSL/crypto/crypto.c:356: error: expected ')' before '*' token
+OpenSSL/crypto/crypto.c:359: error: 'BIO' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:359: error: 'bio' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:360: error: 'X509_REQ' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:360: error: 'req' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:368: error: 'X509_FILETYPE_PEM' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:369: warning: implicit declaration of function 'PEM_read_bio_X509_REQ'
+OpenSSL/crypto/crypto.c:372: error: 'X509_FILETYPE_ASN1' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:373: warning: implicit declaration of function 'd2i_X509_REQ_bio'
+OpenSSL/crypto/crypto.c:389: warning: implicit declaration of function 'crypto_X509Req_New'
+OpenSSL/crypto/crypto.c: In function 'crypto_dump_certificate_request':
+OpenSSL/crypto/crypto.c:406: error: 'BIO' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:406: error: 'bio' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:416: error: 'X509_FILETYPE_PEM' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:417: warning: implicit declaration of function 'PEM_write_bio_X509_REQ'
+OpenSSL/crypto/crypto.c:417: error: 'crypto_X509ReqObj' has no member named 'x509_req'
+OpenSSL/crypto/crypto.c:420: error: 'X509_FILETYPE_ASN1' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:421: warning: implicit declaration of function 'i2d_X509_REQ_bio'
+OpenSSL/crypto/crypto.c:421: error: 'crypto_X509ReqObj' has no member named 'x509_req'
+OpenSSL/crypto/crypto.c:425: warning: implicit declaration of function 'X509_REQ_print_ex'
+OpenSSL/crypto/crypto.c:425: error: 'crypto_X509ReqObj' has no member named 'x509_req'
+OpenSSL/crypto/crypto.c: In function 'crypto_load_crl':
+OpenSSL/crypto/crypto.c:461: error: 'BIO' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:461: error: 'bio' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:462: error: 'X509_CRL' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:462: error: 'crl' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:470: error: 'X509_FILETYPE_PEM' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:471: warning: implicit declaration of function 'PEM_read_bio_X509_CRL'
+OpenSSL/crypto/crypto.c:474: error: 'X509_FILETYPE_ASN1' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:475: warning: implicit declaration of function 'd2i_X509_CRL_bio'
+OpenSSL/crypto/crypto.c:490: warning: implicit declaration of function 'crypto_CRL_New'
+OpenSSL/crypto/crypto.c: In function 'crypto_load_pkcs7_data':
+OpenSSL/crypto/crypto.c:506: error: 'BIO' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:506: error: 'bio' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:507: error: 'PKCS7' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:507: error: 'pkcs7' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:518: error: 'X509_FILETYPE_PEM' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:519: warning: implicit declaration of function 'PEM_read_bio_PKCS7'
+OpenSSL/crypto/crypto.c:522: error: 'X509_FILETYPE_ASN1' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:523: warning: implicit declaration of function 'd2i_PKCS7_bio'
+OpenSSL/crypto/crypto.c:542: warning: implicit declaration of function 'crypto_PKCS7_New'
+OpenSSL/crypto/crypto.c: In function 'crypto_load_pkcs12':
+OpenSSL/crypto/crypto.c:558: error: 'BIO' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:558: error: 'bio' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:559: error: 'PKCS12' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:559: error: 'p12' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:565: warning: implicit declaration of function 'd2i_PKCS12_bio'
+OpenSSL/crypto/crypto.c:573: warning: implicit declaration of function 'crypto_PKCS12_New'
+OpenSSL/crypto/crypto.c: In function 'crypto_X509_verify_cert_error_string':
+OpenSSL/crypto/crypto.c:593: warning: implicit declaration of function 'X509_verify_cert_error_string'
+OpenSSL/crypto/crypto.c:593: warning: assignment makes pointer from integer without a cast
+OpenSSL/crypto/crypto.c: In function 'crypto_sign':
+OpenSSL/crypto/crypto.c:624: error: expected '=', ',', ';', 'asm' or '__attribute__' before '*' token
+OpenSSL/crypto/crypto.c:624: error: 'digest' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:625: error: 'EVP_MD_CTX' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:634: warning: implicit declaration of function 'EVP_get_digestbyname'
+OpenSSL/crypto/crypto.c:639: warning: implicit declaration of function 'EVP_SignInit'
+OpenSSL/crypto/crypto.c:639: error: 'md_ctx' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:640: warning: implicit declaration of function 'EVP_SignUpdate'
+OpenSSL/crypto/crypto.c:642: warning: implicit declaration of function 'EVP_SignFinal'
+OpenSSL/crypto/crypto.c:642: error: 'crypto_PKeyObj' has no member named 'pkey'
+OpenSSL/crypto/crypto.c: In function 'crypto_verify':
+OpenSSL/crypto/crypto.c:670: error: expected '=', ',', ';', 'asm' or '__attribute__' before '*' token
+OpenSSL/crypto/crypto.c:670: error: 'digest' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:671: error: 'EVP_MD_CTX' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:672: error: 'EVP_PKEY' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:672: error: 'pkey' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:687: warning: implicit declaration of function 'X509_get_pubkey'
+OpenSSL/crypto/crypto.c:687: error: 'crypto_X509Obj' has no member named 'x509'
+OpenSSL/crypto/crypto.c:693: warning: implicit declaration of function 'EVP_VerifyInit'
+OpenSSL/crypto/crypto.c:693: error: 'md_ctx' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:694: warning: implicit declaration of function 'EVP_VerifyUpdate'
+OpenSSL/crypto/crypto.c:695: warning: implicit declaration of function 'EVP_VerifyFinal'
+OpenSSL/crypto/crypto.c:696: warning: implicit declaration of function 'EVP_PKEY_free'
+OpenSSL/crypto/crypto.c: In function 'locking_function':
+OpenSSL/crypto/crypto.c:742: error: 'CRYPTO_LOCK' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c: In function 'init_openssl_threads':
+OpenSSL/crypto/crypto.c:759: warning: implicit declaration of function 'CRYPTO_num_locks'
+OpenSSL/crypto/crypto.c:766: warning: implicit declaration of function 'CRYPTO_set_id_callback'
+OpenSSL/crypto/crypto.c:767: warning: implicit declaration of function 'CRYPTO_set_locking_callback'
+OpenSSL/crypto/crypto.c: In function 'initcrypto':
+OpenSSL/crypto/crypto.c:815: warning: implicit declaration of function 'ERR_load_crypto_strings'
+OpenSSL/crypto/crypto.c:816: warning: implicit declaration of function 'OpenSSL_add_all_algorithms'
+OpenSSL/crypto/crypto.c:830: error: 'crypto_X509_New' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:831: error: 'crypto_X509Name_New' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:832: error: 'crypto_X509Req_New' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:833: error: 'crypto_X509Store_New' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:834: error: 'crypto_PKey_New' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:836: error: 'crypto_PKCS7_New' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:837: error: 'crypto_NetscapeSPKI_New' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:849: error: 'X509_FILETYPE_PEM' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:850: error: 'X509_FILETYPE_ASN1' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:853: error: 'EVP_PKEY_RSA' undeclared (first use in this function)
+OpenSSL/crypto/crypto.c:854: error: 'EVP_PKEY_DSA' undeclared (first use in this function)
+error: command '/opt/bin/gcc' failed with exit status 1
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc36">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 22:41:12 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c36" href="/p/goagent/issues/detail?id=7823#c36">#36</a>
+ 
+
+ <a class="userlink"
+ href="/u/109915319819232866192/">qgt...@gmail.com</a
+></span>
+ 
+<pre>
+我在python 2.6.8上也编译成功pyopenssl 0.12了。同样0.13编译通不过，也懒得再去弄了。需要openssl和openssl-dev包。这个在2.6上都有现成的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc37">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 22:48:49 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c37" href="/p/goagent/issues/detail?id=7823#c37">#37</a>
+ 
+
+ <a class="userlink"
+ href="/u/116048493686770224485/">jelly0...@gmail.com</a
+></span>
+ 
+<pre>
+哈，happy...这个朋友用python2.7.3 在tomato下编译openssl 0.12 成功了，不知道他能否提供方法我在等他的回复。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc38">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 22:55:05 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c38" href="/p/goagent/issues/detail?id=7823#c38">#38</a>
+ 
+
+ <a class="userlink"
+ href="/u/106781204990925295112/">yubinlov...@gmail.com</a
+></span>
+ 
+<pre>
+你直接发邮件给他吧，Comment 31那位朋友不一定知道你在问他方法
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc39">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 23:16:43 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c39" href="/p/goagent/issues/detail?id=7823#c39">#39</a>
+ 
+
+ <a class="userlink"
+ href="/u/105290478760910890703/">happy...@gmail.com</a
+></span>
+ 
+<pre>
+的确是需要openssl和openssl-dev包。下图供参考
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=78230039000&amp;name=12-14-2012+15-14-46.png&amp;token=ABZ6GAfqFHktUulbynQnAgHJlPq13mILbA%3A1434453958709&amp;id=7823&amp;mod_ts_token=ABZ6GAejDcwUz6Bl69Z7iXdBHsASdBWAbA%3A1434453958709">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >12-14-2012 15-14-46.png</b>
+ <br>
+ 34.9 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=78230039000&amp;name=12-14-2012+15-14-46.png&amp;token=ABZ6GAfqFHktUulbynQnAgHJlPq13mILbA%3A1434453958709&amp;id=7823&amp;mod_ts_token=ABZ6GAejDcwUz6Bl69Z7iXdBHsASdBWAbA%3A1434453958709&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=78230039000&amp;name=12-14-2012+15-14-46.png&amp;token=ABZ6GAfqFHktUulbynQnAgHJlPq13mILbA%3A1434453958709&amp;id=7823&amp;mod_ts_token=ABZ6GAejDcwUz6Bl69Z7iXdBHsASdBWAbA%3A1434453958709">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=78230039000&amp;name=12-14-2012+15-14-46.png&amp;token=ABZ6GAfqFHktUulbynQnAgHJlPq13mILbA%3A1434453958709&amp;id=7823&amp;mod_ts_token=ABZ6GAejDcwUz6Bl69Z7iXdBHsASdBWAbA%3A1434453958709&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=78230039000&amp;name=12-14-2012+15-14-46.png&amp;token=ABZ6GAfqFHktUulbynQnAgHJlPq13mILbA%3A1434453958709&amp;id=7823&amp;mod_ts_token=ABZ6GAejDcwUz6Bl69Z7iXdBHsASdBWAbA%3A1434453958709&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc40">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Dec 14 00:05:43 2012">
+ Dec 14, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c40" href="/p/goagent/issues/detail?id=7823#c40">#40</a>
+ 
+
+ <a class="userlink"
+ href="/u/116048493686770224485/">jelly0...@gmail.com</a
+></span>
+ 
+<pre>
+happy 能不能把你的邮箱给我，需要你的帮助。我和你的平台一样，下载的软件包都一样就是不成功。想和你交流学习一下，谢谢。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc41">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Dec 14 00:08:49 2012">
+ Dec 14, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c41" href="/p/goagent/issues/detail?id=7823#c41">#41</a>
+ 
+
+ <a class="userlink"
+ href="/u/116048493686770224485/">jelly0...@gmail.com</a
+></span>
+ 
+<pre>
+我的安装的这一步就出错，不知道问题出在那
+jelly@jelly:/opt/make/pyOpenSSL-0.12# python2.7 setup.py install
+/opt/lib/python2.7/distutils/dist.py:267: UserWarning: Unknown distribution option: 'zip_safe'
+  warnings.warn(msg)
+running install
+running build
+running build_py
+running build_ext
+running install_lib
+running install_egg_info
+Removing /opt/local/lib/python2.7/site-packages/pyOpenSSL-0.12-py2.7.egg-info
+Writing /opt/local/lib/python2.7/site-packages/pyOpenSSL-0.12-py2.7.egg-info
+jelly@jelly:/opt/make/pyOpenSSL-0.12# 
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc42">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Dec 14 00:29:29 2012">
+ Dec 14, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c42" href="/p/goagent/issues/detail?id=7823#c42">#42</a>
+ 
+
+ <a class="userlink"
+ href="/u/109915319819232866192/">qgt...@gmail.com</a
+></span>
+ 
+<pre>
+@jelly 你安装py27-setuptools[<a href="http://ipkg.nslu2-linux.org/feeds/optware/ddwrt/cross/stable/py27-setuptools_0.6c11-2_mipsel.ipk]了吗？" rel="nofollow">http://ipkg.nslu2-linux.org/feeds/optware/ddwrt/cross/stable/py27-setuptools_0.6c11-2_mipsel.ipk]了吗？</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc43">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Dec 14 00:46:15 2012">
+ Dec 14, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c43" href="/p/goagent/issues/detail?id=7823#c43">#43</a>
+ 
+
+ <a class="userlink"
+ href="/u/116048493686770224485/">jelly0...@gmail.com</a
+></span>
+ 
+<pre>
+安装了，就是不成功，能不能给你邮箱我，我发邮件到你邮箱你帮我看下，谢谢。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc44">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 20 05:35:49 2012">
+ Dec 20, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c44" href="/p/goagent/issues/detail?id=7823#c44">#44</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+<i>(No comment was entered for this change.)</i>
+</pre>
+ 
+ 
+ <div class="updates">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ 
+ <b>Status:</b>
+ Done
+ 
+ <br>
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D7823&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D7823"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="7823">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A7823',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 7823,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

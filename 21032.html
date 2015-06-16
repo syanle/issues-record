@@ -1,0 +1,1830 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"assetHostPath": "https://ssl.gstatic.com/codesite/ph", "domainName": null, "token": null, "profileUrl": null, "loggedInUserEmail": null, "relativeBaseUrl": "", "projectHomeUrl": "/p/goagent", "projectName": "goagent", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 21032 - 
+ goagent -
+ 
+ 自由是自己付出努力争取来的,而不是施舍来的！——论公布ip的利与弊及措施。 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21032&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21032" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=21032">21032</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >自由是自己付出努力争取来的,而不是施舍来的！——论公布ip的利与弊及措施。</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 2 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A21032">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21032&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21032">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/101137768118462728182/">free20us...@gmail.com</a
+>,
+ <span class="date" title="Thu May 21 03:50:56 2015">May 21, 2015</span>
+ 
+ </div>
+<pre>
+  张贴公布ip的事情在这里吵得的一塌糊涂，离google code关闭已经没多少时间了，但是我觉得有必要将这个问题拿出说说：
+
+ 第一 goagent是共享的，是不是ip就应该是共享的？
+
+   1、用这个软件都知道GoAgent这个软件的核心是可用的ip，如果ip全部被墙，软件也就失去了生命力
+
+   2、共享的软件是封不住的，无限复制分享，就算彻底断网，国内局域网内也能分享
+
+   3、但是google的可在大陆访问的ip是有限的，能被goagent使用的更是有限的，这几年，ip越来越难找，存活时间越来越短是大家有目共睹的
+
+   所以软件共享和ip共享是完全不同的事情
+
+ 第二 张贴式ip共享（这里指公开张贴在这里或是BBS上的共享方式）会不会导致被墙？
+
+   1、我们都不知道共产党是如何运作这个墙的，鉴于记者高瑜因为“泄露”一个被下发到各个基层的“七不讲”，就把一个七十多岁的老太太的判刑了。以国内现在的环境，我们恐怕要等到共产党彻底倒台，才会知道这个墙是如何运作的。所以，我们不会有直接证据证明，公开贴出ip地址是不是直接导致ip失效。
+
+   2、如果不存在直接证据，那么我们如何判断这种方式是否合适哪？这个时候，我们需要常识的力量
+      （1）、公开张贴的ip，会让非常多的人使用，而gfw的作用，就是为了阻止多数人访问国外的网站、获取国外的信息，所以从基本动机上分析，gfw绝对有理由快速封掉这些ip，不论是这个组织的需要，还是操作这个事情的个人“业绩”需要
+
+      （2）、公开张贴的ip，会让每个人都轻而易举的获得，所以，操作封堵ip这个事情的个人，都不要花费什么代价，就可以完成个人的指标，甚至可以去邀功，写入自己的报告当中。
+
+     综上所述，公开张贴的ip不论内因还是外因，都更容易更快速被封堵。
+
+ 第三 已经有IP在上网的人，是不是有责任和义务公布自己的ip，来“共享”哪？
+
+    1、共享是一种自愿、自由的行为，当你翻越这堵墙的时候，你终于实现了“共享”的自由，别笑，你在国内，能“共享”的是必须要先自我审查、之后网站审查、最后警察审查的。
+
+    2、你没有权利要求别人共享ip，因为这不是他的义务和责任，事实上，理直气壮要求这一点的，你们应该去要求政府关掉这堵墙，你们有这个权利，但是你们没有这个胆量去对抗强权，所以凡是以此来说事儿的，都是被共产党洗脑洗残了的，他们只敢向好人、弱者主张他们的权利，而且还是主张那些不属于他们的权利。
+
+ 第四 凡是能到这里的，其实已经是翻墙出来的，用goagent的不过两个原因，一个是免费，一个速度够快（再次感谢google！）。所以这些人都不会是互联网的小白，不论是代理出来的，还是VPN ，或是放出来的五毛狗、自干五，都是有基本的互联网技术的。
+
+    1、这些人里面做狗的就不谈了，基本上出来完任务搅混水的
+
+    2、这个里面那些有知识水平的翻墙者，你们等着别人放出的ip，这是我无法认同的，我上面已经讲过了原因
+
+    3、这里面很多人讲，他们不知道如何去获取ip。哥就呵呵了，你们翻墙出来，也不是学校教你的吧？你能自学到这一点，去google搜搜各种教程很难吗？
+
+    你们想得到自由，却不愿意为之付出任何努力，你们真的觉得自由是那么廉价的东西吗？你们以为你们现在在国内能享受到的有限自由是“免费”得来的？！这一百多年来，没有孙中山、蒋介石这些一代代的伟人，付出一生去努力，你们不是做着奴才活在满清，就是活在日本人的统治之下。
+
+第五 有共享精神放ip的兄弟，兄弟从心里是支持你们的！
+
+   1、因为有你们的这种无私的共享精神，中国才有重新自由的希望。
+
+   2、你们人品，是高尚的，这点在当今中国是非常非常稀缺的。
+
+我个人不建议公布ip，如果你们非常想公布，我建议你们可以把方法的教程写的更详细，直到任何小白都能一步步的完成。如果你们还是想公布，兄弟给你们一个建议，你们可以考虑一下：
+
+    你们不要在论坛上公布ip，而是建个网站来公布，这里提一下“honglingjin”同学，他搞了个网站来公布ip，网站上第一页不是ip，而是访问者必须选择确认以下选项：
+
+   1、如果我是共产党的支持者，我全家不得好死，子孙世代为奴为婢
+
+   2、我反对共产党、我之所以还在共产党内，为共产党和其政府服务就是为了推翻它
+
+   3、我以党旗和我的家人性命发誓，我向佛祖、观音、上帝、耶稣、马克思、毛泽东、习近平发誓：我所说的是真的，如果谎言欺骗，共产党的所有党员就是狗娘养的，最悲惨厄运将降临在我和我父母家人、党总书记习近平及其家人不得好死，子子孙孙受此诅咒不得超生。
+   
+   确认过，跳转到IP页面，每天只公布或者的1-3个ip足够用了，只要ip不死，就不要公布新的ip。
+
+   寄语：“支持共产党的，就不要翻墙了，你们一方面吃着共产党的狗粮、享受着共产党独裁带来的特权，一反面翻墙出来砸自由人民的锅，想封ip，你们就要确认这些誓言，中国共产党人不信神不信鬼，但是你们确认了这些，说不定就实现了哪？呵呵。你们敢不敢赌哪？即使你们愿意赌，你们这样诅咒你们的主子，做奴才的你们真有这个胆量？”
+   
+    权利的斗争从来都是残酷的，共产党享受的一切，就是从每个人身上剥夺的，如果大家连语言的力量都不敢用，斗争起来一点技巧都不讲，大家只好一辈子待在墙里，然后等着google的ip全死完，VPN全被污染为止，子子孙孙被洗脑了。
+
+   共产党为了政权坏事儿做绝，所以现在其历史遍布禁区，一寸鲜血一寸权利，权利从来都不是别人送给你的，与大家共勉!
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 04:04:38 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=21032#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/115722741935006065081/">peekale...@gmail.com</a
+></span>
+ 
+<pre>
+支！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 04:07:07 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=21032#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/114033169287966003070/">redfrog...@gmail.com</a
+></span>
+ 
+<pre>
+有理有据，有逻辑力量，趁issue没关，大伙儿多讨论讨论以后怎么互相联络，抱团取暖，对抗共匪至关重要，出墙嘛，肯动脑子绝对不是问题。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 04:09:40 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=21032#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/114858491409111830929/">putin...@gmail.com</a
+></span>
+ 
+<pre>
+翻墙为看黄网而已！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 04:16:16 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=21032#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/107696288815104262854/">jyuan...@gmail.com</a
+></span>
+ 
+<pre>
+楼主此言差也～
+
+没有中共就不会有GFW，没有GFW就不会有翻墙，没有翻墙，楼主也就没机会没必要在这里发表大义凛然的演讲了。
+
+所以说楼主应该首先感谢中共给你创造了这个机会才对
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 04:16:34 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=21032#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/115722741935006065081/">peekale...@gmail.com</a
+></span>
+ 
+<pre>
+权力是有权者的语言
+语言是无权者的权力
+
+互联网已经使得它们胆战，丧心病狂
+多嘴多舌地谈论和传播即是最基本的作为
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 04:19:33 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=21032#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/114033169287966003070/">redfrog...@gmail.com</a
+></span>
+ 
+<pre>
+#3看成人网站难道不是一种自由?为何其他人类都能享有的权利，你要小心翼翼，费尽心思才能取得，还会随时失去?
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 04:26:38 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=21032#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/101003603716105211870/">kingtope...@gmail.com</a
+></span>
+ 
+<pre>
+顶你！要是连话都不敢说，自由思考的能力和勇气都没有，那还叫个男人吗！那这样活着还有什么意义？
+
+GFW这些走狗和共匪想恐吓我们失去说话的勇气，失去言论自由，想禁锢我们的思想，让我们失去自由思考的能力，失去明辨是非的能力，以达到维持他们丑恶统治的目的。
+
+ 但是我们要能说话，说真话，我们有权知道真相，要言论自由，思想自由，信息透明，维护公平和正义，这种趋势是决不可阻挡的！我们这一代如果说过这种生活是无奈，难道我们的子孙也要继续过这种扭曲被奴役的生活吗？！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 04:29:18 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=21032#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/114033169287966003070/">redfrog...@gmail.com</a
+></span>
+ 
+<pre>
+#6 你说得对极了，如果你有女性亲属被强奸了，你首先应该感谢强奸犯，如果不是他，你怎么机会到法庭大声控诉他的罪行，表演你的泪涕齐下，博取舆论同情呢。当然你沉默以对，信奉家丑不可外扬，那当我放屁。所以，常怀感恩之心，尤其对共匪这样的犯罪分子。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 04:31:06 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=21032#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/106088583427384130526/">jasonli...@gmail.com</a
+></span>
+ 
+<pre>
+我主耶稣教导世人:
+你当纯良如鸽, 机警如蛇.
+
+对付一切反人民的屁玩意, 愚勇是无谓虚荣的, 得讲究方式效率.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 04:41:02 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=21032#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/115722741935006065081/">peekale...@gmail.com</a
+></span>
+ 
+<pre>
+互联网这个利器也正是双刃剑
+没有被充分有效利用，却被钝化没收并用作监视控制奴隶的链条
+到那时悔之晚矣
+
+BTW：
+扩张是癌瘤的本能
+传教是神棍的生命
+神棍总是不失时机啊
+
+在传播思想方面，必须向神棍取经学习和富有心机。
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 04:49:40 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=21032#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/104390334475886160790/">hubenb...@gmail.com</a
+></span>
+ 
+<pre>
+威武强大，膜拜ing。哈哈哈……
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 04:50:57 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=21032#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/114255133369633707531/">fh0205z...@gmail.com</a
+></span>
+ 
+<pre>
+思想传播方面，谁也比不过马列，通过几个妓女就在上海的码头工人之间传播开了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 04:57:39 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=21032#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/115722741935006065081/">peekale...@gmail.com</a
+></span>
+ 
+<pre>
+马列基督半斤八两一脉相承
+马教的创立者是基督教世界的犹太人，传承乌托邦理想，都自称宇宙真理唯一真神。。。
+只不过在中国，马列当朝，基督在野
+
+不过它们的传播技术传教经验确实强大令人叹服值得学习
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 04:58:51 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=21032#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/106088583427384130526/">jasonli...@gmail.com</a
+></span>
+ 
+<pre>
+#14 噗哈哈,共产共妻嘛.
+
+本来恩格斯赞助落魄书生马克思, 做点学术, 但老马却拿着这些嫖巴黎交际花, 顺便还搞了个老婆.应付差事写的&lt;资本论&gt;屁话多, 内容少.
+
+恩格斯验收很不满意, 加了一条共妻, 红共领导不能成家认亲, 群众才会拥护. 没家没小没私心.
+结果老马的徒子徒孙都剪掉了&quot;共妻&quot;, 把群众的一切权益, 都共到了自己的腰包.
+
+恩格斯算资本家, 果然还是有远见.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 05:03:21 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=21032#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/116306592812276909383/">jgs...@gmail.com</a
+></span>
+ 
+<pre>
+   会是以下状况嘛？
+
+1、能被goagent使用的IP是有限的；
+
+2、墙国技术人员，好像并不知道“能被goagent使用的IP是有限的”；
+
+3、被动状态下，墙国技术人员专在issues上“守株待兔”，谁分享IP这IP就会死；
+
+4、主动状态下，墙国扫封IP成效，正快乐的与翻墙网友们比拼——谁更懒、谁更慢！：）
+
+----------------------------
+
+ps:从3楼开始跑题啦！：）
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 05:05:27 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=21032#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/115722741935006065081/">peekale...@gmail.com</a
+></span>
+ 
+<pre>
+#14 了解得不多。。。不过那时候很多甚至大部分知识分子也都难免冲动幼稚。
+就像西方就有不少思想大鳄特别是文科大拿都有过投奔苏俄的光彩历史，不过很快就不了了之灰溜溜逃回去了
+
+不过毕竟也有爱因斯坦、胡适之之流代表那时清醒的头脑和判断力。
+所以后来说中国知识分子在红朝自杀成风跟幻灭有一定关系。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 05:06:11 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=21032#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/108063289147214719846/">zhangj...@gmail.com</a
+></span>
+ 
+<pre>
+#14 的确是这样，梅毒在妓女和色情业者圈子里传播也没有马列教传播得成功，这一点的确很值得研究。
+
+马烈性病毒怎么就在中国迅速传播并且活力经久不衰？当然它跟中国传统的改朝换代的周期性重叠这给它带来了最好的扩散机会。至于它为什么到今天死而不僵，它又是寄生于中国人内心深处的什么习性的根部获得生存空间，这个问题就更深了。
+
+这一帖真的很强大。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 05:10:41 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=21032#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/114033169287966003070/">redfrog...@gmail.com</a
+></span>
+ 
+<pre>
+#19胡适之当时也是猛烈鼓吹共产主义的，只是到了后期，至少10年后，他才开始反思共产主义表面平等民主，背后隐藏的绝对全面控制理论的危害。共产主义能搞成的，都是穷国，点解？自己想想。美帝为啥强调中产阶级的重要性，李家坡的头子也不断宣讲：有了20万存款的，绝不会造反了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 05:23:58 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=21032#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/111445401667509811800/">wsq.wea...@gmail.com</a
+></span>
+ 
+<pre>
+支持
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 05:26:17 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=21032#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/102129027825179272284/">arima...@gmail.com</a
+></span>
+ 
+<pre>
+honglingjin第3条明显逻辑上有问题
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 05:43:17 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=21032#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/115722741935006065081/">peekale...@gmail.com</a
+></span>
+ 
+<pre>
+#21 是那样的。
+
+人不怕幼稚，就怕不肯成长。胡适之的转变就代表了判断力。
+另外，他们也有较少的私心。而把革命当作生意来做的头人，就不是判断力问题那样单纯了。
+
+另外美帝、李头子，都有或多或少但至少最起码的理性，即或皇权也要考虑万年家业不敢恣意妄为。兲朝完全就是不按常理出牌得过且过末日疯狂了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc26">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 17:05:55 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c26" href="/p/goagent/issues/detail?id=21032#c26">#26</a>
+ 
+
+ <a class="userlink"
+ href="/u/116642018264006539699/">agrochem...@gmail.com</a
+></span>
+ 
+<pre>
+说得太好了，强烈支持楼主！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 17:52:59 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=21032#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/102899713177083894783/">chinliu...@gmail.com</a
+></span>
+ 
+<pre>
+身為中華民國國民，對共匪祗有：殺！殺！殺！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 20:47:32 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=21032#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/102036774538481625145/">kshiena...@gmail.com</a
+></span>
+ 
+<pre>
+说得好！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc29">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 20:54:45 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c29" href="/p/goagent/issues/detail?id=21032#c29">#29</a>
+ 
+
+ <a class="userlink"
+ href="/u/114391797494657993131/">jhuzb...@gmail.com</a
+></span>
+ 
+<pre>
+honglingjin同学说的太过了吧 最讨厌谁强迫我干什么，不管墙内的还是墙外的
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc30">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 21 21:26:14 2015">
+ May 21, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c30" href="/p/goagent/issues/detail?id=21032#c30">#30</a>
+ 
+
+ <a class="userlink"
+ href="/u/115937729830853230352/">chunbl...@gmail.com</a
+></span>
+ 
+<pre>
+人家也没强迫你用人家辛苦提供的IP。
+中国没救就是这种装清高的蠢逼乌泱乌泱太jb多。共匪强迫你和你先人吃大便那么久，还装什么有气质。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc31">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 22 05:41:36 2015">
+ May 22, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c31" href="/p/goagent/issues/detail?id=21032#c31">#31</a>
+ 
+
+ <a class="userlink"
+ href="/u/114858491409111830929/">putin...@gmail.com</a
+></span>
+ 
+<pre>
+同意#30！
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc32">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri May 22 09:54:15 2015">
+ May 22, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c32" href="/p/goagent/issues/detail?id=21032#c32">#32</a>
+ 
+
+ <a class="userlink"
+ href="/u/106088583427384130526/">jasonli...@gmail.com</a
+></span>
+ 
+<pre>
+#30 乌泱乌泱
+赞一个!
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21032&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D21032"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="21032">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A21032',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 21032,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

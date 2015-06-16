@@ -1,0 +1,946 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"token": null, "projectHomeUrl": "/p/goagent", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "projectName": "goagent", "profileUrl": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "domainName": null, "loggedInUserEmail": null, "relativeBaseUrl": ""};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 9939 - 
+ goagent -
+ 
+ 高清YOUTUBE性能问题 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D9939&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D9939" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=9939">9939</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >高清YOUTUBE性能问题</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 4 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A9939">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D9939&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D9939">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/104722765866104841830/">cl456...@gmail.com</a
+>,
+ <span class="date" title="Wed Jul  3 00:56:38 2013">Jul 3, 2013</span>
+ 
+ </div>
+<pre>
+播放高清YOUTUBE（1080P）时性能不如2.x了，总是播放的时候卡住。2.x的时候缓冲非常快，不是带宽的问题，环境是100Mb/s带宽 PING GAE服务器4ms
+出现这个日志的时候就会很卡：
+WARNING - [Jul  3 15:48:26] 500 with range in query, trying another APPID
+WARNING - [Jul  3 15:48:27] 500 with range in query, trying another APPID
+
+WIN7 64  chrome 27 GOAGENT 3.0.2
+我配置了6个APPID
+
+缓冲参数：
+[autorange]
+threads = 10
+maxsize = 1048576
+waitsize = 524288
+bufsize = 15000
+
+PS：现在2.x上YOUTUBE不能用了，发一会就卡住，不知道是youtube更新，还是Chrome更新的原因，如果能用的话还是想用2.X
+
+
+INFO - [Jul  3 15:48:18] 127.0.0.1:50426 &quot;GAE GET <a href="http://s.youtube.com/api/stats" rel="nofollow">http://s.youtube.com/api/stats</a>
+/watchtime?nsidf=1&amp;cbr=Chrome&amp;fs=0&amp;pd=0&amp;et=3.354&amp;fmt=137&amp;st=0&amp;cr=US&amp;docid=ZtSJu6
+OHe_U&amp;cosver=6.2&amp;lact=2512&amp;bc=525795&amp;idpj=-4&amp;c=WEB&amp;el=detailpage&amp;fexp=900361,914
+004,906397,928201,929117,929123,929121,929915,929906,929907,929125,929127,925714
+,929917,929919,931202,912512,912515,912521,906838,904485,906840,931913,904830,91
+9373,933701,904122,908534,909549,900816,909421,912711,907228&amp;ldpj=-32&amp;subscribed
+=1&amp;len=249&amp;cpn=eRvr9P0G_iurlrW-&amp;ns=yt&amp;q=young%20and%20beautiful&amp;plid=AATglq-PqfR
+Lax4Z&amp;ver=2&amp;cmt=0.000&amp;cbrver=27.0.1453.116&amp;rtn=16&amp;hl=en_US&amp;rti=6&amp;cver=as3&amp;rt=8.9
+79&amp;state=paused&amp;cos=Windows HTTP/1.1&quot; 500 -
+INFO - [Jul  3 15:48:19] 127.0.0.1:50433 &quot;GAE GET <a href="http://s.youtube.com/stream_20" rel="nofollow">http://s.youtube.com/stream_20</a>
+4?el=detailpage&amp;fexp=900361,914004,906397,928201,929117,929123,929121,929915,929
+906,929907,929125,929127,925714,929917,929919,931202,912512,912515,912521,906838
+,904485,906840,931913,904830,919373,933701,904122,908534,909549,900816,909421,91
+2711,907228&amp;event=streamingstats&amp;scoville=1&amp;fmt=137&amp;cpn=eRvr9P0G_iurlrW-&amp;ns=yt&amp;p
+lid=AATglq-PqfRLax4Z&amp;docid=ZtSJu6OHe_U&amp;vps=5.961:PA,6.094:S,9.487:PL&amp;fv=WIN%2011
+,7,700,225&amp;subscribed=1 HTTP/1.1&quot; 500 -
+WARNING - [Jul  3 15:48:26] 500 with range in query, trying another APPID
+WARNING - [Jul  3 15:48:27] 500 with range in query, trying another APPID
+INFO - [Jul  3 15:48:27] 127.0.0.1:50437 &quot;GAE GET <a href="http://r1---sn-a5m7znes.c.yout" rel="nofollow">http://r1---sn-a5m7znes.c.yout</a>
+ube.com/videoplayback?algorithm=throttle-factor&amp;burst=40&amp;clen=7937377&amp;cp=U0hWR1h
+RTl9ITkNONl9QS1JEOk9oZGNDSGI1ZDdJ&amp;cpn=eRvr9P0G_iurlrW-&amp;expire=1372860334&amp;factor=
+1.25&amp;fexp=900361%2C914004%2C906397%2C928201%2C929117%2C929123%2C929121%2C929915%
+2C929906%2C929907%2C929125%2C929127%2C925714%2C929917%2C929919%2C931202%2C912512
+%2C912515%2C912521%2C906838%2C904485%2C906840%2C931913%2C904830%2C919373%2C93370
+1%2C904122%2C908534%2C909549%2C900816%2C909421%2C912711%2C907228&amp;gir=yes&amp;id=66d4
+89bba3877bf5&amp;ip=121.79.144.99&amp;ipbits=8&amp;itag=141&amp;keepalive=yes&amp;key=yt1&amp;lmt=137274
+7458549238&amp;ms=au&amp;mt=1372837588&amp;mv=u&amp;newshard=yes&amp;range=479232-958463&amp;ratebypass=
+yes&amp;signature=<a href="/p/goagent/source/detail?r=8CE601258AECB133E3602FCA90C632AB2FBC5D5D">8CE601258AECB133E3602FCA90C632AB2FBC5D5D</a>.7D9A08B70AC871BE7E6EE4647
+ECA6E69B9D0ED67&amp;source=youtube&amp;sparams=algorithm%2Cburst%2Cclen%2Ccp%2Cfactor%2C
+gir%2Cid%2Cip%2Cipbits%2Citag%2Clmt%2Csource%2Cupn%2Cexpire&amp;sver=3&amp;upn=vITpe_dSI
+zM HTTP/1.1&quot; 200 464456
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul  3 01:00:27 2013">
+ Jul 3, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=9939#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/112405280388369516078/">allensha...@gmail.com</a
+></span>
+ 
+<pre>
+把threads改成6或小于6试试
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul  3 01:22:40 2013">
+ Jul 3, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=9939#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/104722765866104841830/">cl456...@gmail.com</a
+></span>
+ 
+<pre>
+改了 无效
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul  3 01:50:41 2013">
+ Jul 3, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=9939#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/112405280388369516078/">allensha...@gmail.com</a
+></span>
+ 
+<pre>
+那把bufsize也改成默认的8192试试....如果还不行我也就不知道了   我这里是出现“INFO - [Jun 29 14:03:49] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 56507488] 1048576 bytes 5242880-6291455/32048990“”这种日志会卡住
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul  3 01:55:57 2013">
+ Jul 3, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=9939#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/104722765866104841830/">cl456...@gmail.com</a
+></span>
+ 
+<pre>
+有个发现，新安装了一个OPERA 15 浏览器，由于新的浏览器没有安装FLASH,上YouTube是用HTML5 模式播放的，这时候GOAGENT 缓冲的日志变成2.X的时候的样式了，如下，而且“好像”也
+不卡了，为什么呢？
+
+INFO - [Jul  3 16:52:24] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 55711024] 1048576 bytes 1029210
+19-103969594/112458219
+INFO - [Jul  3 16:52:24] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 55840000] 1048576 bytes 1050181
+71-106066746/112458219
+INFO - [Jul  3 16:52:25] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 55838080] 1048576 bytes 1060667
+47-107115322/112458219
+INFO - [Jul  3 16:52:25] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 55838000] 1048576 bytes 1071153
+23-108163898/112458219
+INFO - [Jul  3 16:52:28] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 55840640] 1048576 bytes 1081638
+99-109212474/112458219
+INFO - [Jul  3 16:52:29] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 55840080] 1048576 bytes 1092124
+75-110261050/112458219
+INFO - [Jul  3 16:52:30] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 55838080] 1048576 bytes 1102610
+51-111309626/112458219
+INFO - [Jul  3 16:52:31] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 45767616] 100016 bytes 11235820
+3-112458218/112458219
+INFO - [Jul  3 16:52:31] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 55840000] 1048576 bytes 1113096
+27-112358202/112458219
+INFO - [Jul  3 16:52:32] 127.0.0.1:54692 &quot;GAE GET <a href="http://s.youtube.com/stream_20" rel="nofollow">http://s.youtube.com/stream_20</a>
+4?event=streamingstats&amp;fmt=46&amp;cpn=eiSPBvSUhzzN10xm&amp;docid=ZtSJu6OHe_U&amp;ns=yt&amp;html5
+=1&amp;df=244.062:1&amp;vps=223.210:S,227.207:PL,227.249:B,227.294:PL&amp;view=244.062:640:3
+60 HTTP/1.1&quot; 204 2
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul  3 02:00:59 2013">
+ Jul 3, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=9939#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/104722765866104841830/">cl456...@gmail.com</a
+></span>
+ 
+<pre>
+正好和#3 allensha...@gmail.com 说的相反呀 呵呵 不过以HTML5 播放 在GOAGENT下 确实不卡了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul  3 02:16:40 2013">
+ Jul 3, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=9939#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/104722765866104841830/">cl456...@gmail.com</a
+></span>
+ 
+<pre>
+在没有安装FLASH的 opera 下日志才是2.x那个样式的，安装了FLASH的chrome即使切换为HTML5 模式，goagent的日志还是新的。
+但是在Opera的HTML5 有些视频不能调成1080P的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul  3 02:49:35 2013">
+ Jul 3, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=9939#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/106781204990925295112/">yubinlov...@gmail.com</a
+></span>
+ 
+<pre>
+Tag Stream Player
+日志时
+INFO - [Jul  3 15:48:27] 127.0.0.1:50437 &quot;GAE GET <a href="http://r1---sn-a5m7znes.c.yout" rel="nofollow">http://r1---sn-a5m7znes.c.yout</a>
+ube.com/videoplayback?algorithm=throttle-factor&amp;burst=40&amp;clen=7937377&amp;cp=U0hWR1h
+RTl9ITkNONl9QS1JEOk9oZGNDSGI1ZDdJ&amp;cpn=eRvr9P0G_iurlrW-&amp;expire=1372860334&amp;factor=
+1.25&amp;fexp=900361%2C914004%2C906397%2C928201%2C929117%2C929123%2C929121%2C929915%
+2C929906%2C929907%2C929125%2C929127%2C925714%2C929917%2C929919%2C931202%2C912512
+%2C912515%2C912521%2C906838%2C904485%2C906840%2C931913%2C904830%2C919373%2C93370
+1%2C904122%2C908534%2C909549%2C900816%2C909421%2C912711%2C907228&amp;gir=yes&amp;id=66d4
+89bba3877bf5&amp;ip=121.79.144.99&amp;ipbits=8&amp;itag=141&amp;keepalive=yes&amp;key=yt1&amp;lmt=137274
+7458549238&amp;ms=au&amp;mt=1372837588&amp;mv=u&amp;newshard=yes&amp;range=479232-958463&amp;ratebypass=
+yes&amp;signature=<a href="/p/goagent/source/detail?r=8CE601258AECB133E3602FCA90C632AB2FBC5D5D">8CE601258AECB133E3602FCA90C632AB2FBC5D5D</a>.7D9A08B70AC871BE7E6EE4647
+ECA6E69B9D0ED67&amp;source=youtube&amp;sparams=algorithm%2Cburst%2Cclen%2Ccp%2Cfactor%2C
+gir%2Cid%2Cip%2Cipbits%2Citag%2Clmt%2Csource%2Cupn%2Cexpire&amp;sver=3&amp;upn=vITpe_dSI
+zM HTTP/1.1&quot; 200 464456
+这种类型
+
+
+HTTPVideoPlayer
+是
+INFO - [Jul  3 16:52:24] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 55711024] 1048576 bytes 1029210
+19-103969594/112458219
+INFO - [Jul  3 16:52:24] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 55840000] 1048576 bytes 1050181
+71-106066746/112458219
+INFO - [Jul  3 16:52:25] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; [thread 55838080] 1048576 bytes 1060667
+这种，不过这种在python3下的速度似乎要慢些
+
+HTML5的跟Tag Stream Player一样
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jul  3 03:00:39 2013">
+ Jul 3, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=9939#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/104722765866104841830/">cl456...@gmail.com</a
+></span>
+ 
+<pre>
+把FLASH 升级到了最新版 应该了解决了问题，缓冲快了，而且解决了切换高清有时候切换不过来的问题
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D9939&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D9939"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="9939">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A9939',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 9939,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

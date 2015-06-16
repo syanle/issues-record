@@ -1,0 +1,979 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"token": null, "profileUrl": null, "projectName": "goagent", "projectHomeUrl": "/p/goagent", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "loggedInUserEmail": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "domainName": null, "relativeBaseUrl": ""};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 8699 - 
+ goagent -
+ 
+ chrome不停刷新，不停自动开首页 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D8699&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D8699" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=8699">8699</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >chrome不停刷新，不停自动开首页</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 3 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A8699">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D8699&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D8699">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/107387616695449924298/">katin...@gmail.com</a
+>,
+ <span class="date" title="Tue Feb 26 02:59:43 2013">Feb 26, 2013</span>
+ 
+ </div>
+<pre>
+无论是否开了goagent，chrome都是不停地在刷新，我设置google.com为首页，只要打开新标签页，我还没输入网址打开网页，就自动在新标签也帮我刷新打开Google首页。我用的是最新的goagent，用DNSCrypt，所以不用goagent也可以打开Google首页，但是也是同样的不停在刷新
+
+
+但是我开了vpn，一切都正常打开，YouTube的那些要刷新两次才可以打开的。
+
+请问这是什么原因？
+
+我在firefox下用goagent一切正常
+
+
+INFO - - [Feb 26 18:57:10] resolve common.GOOGLE_HOSTS domain=['203.208.46.131',
+ '203.208.46.132', '203.208.46.133', '203.208.46.134', '203.208.46.135', '203.20
+8.46.136', '203.208.46.137', '203.208.46.138'] to iplist
+INFO - - [Feb 26 18:57:10] resolve common.GOOGLE_HOSTS domain to iplist=['203.20
+8.36.16', '203.208.36.17', '203.208.36.18', '203.208.36.19', '203.208.46.212', '
+203.208.46.210', '203.208.46.211', '203.208.46.209', '203.208.46.208', '203.208.
+36.20']
+INFO - - [Feb 26 18:57:10] 127.0.0.1:4684 &quot;CONNECT www.google.com:443 HTTP/1.1&quot;
+- -
+INFO - - [Feb 26 18:57:15] 127.0.0.1:4700 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/&amp;ust=1361876267583" rel="nofollow">http://www.google.com.hk/&amp;ust=1361876267583</a>
+745&amp;usg=AFQjCNHS8H5YQGSzwdZX6071488mLUwhZQ HTTP/1.1&quot; 302 177
+INFO - - [Feb 26 18:57:15] 127.0.0.1:4719 &quot;CONNECT ssl.gstatic.com:443 HTTP/1.1&quot;
+ - -
+INFO - - [Feb 26 18:57:15] 127.0.0.1:4720 &quot;CONNECT www.google.com.hk:443 HTTP/1.
+1&quot; - -
+INFO - - [Feb 26 18:57:15] 127.0.0.1:4699 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/searchdomaincheck%" rel="nofollow">http://www.google.com.hk/searchdomaincheck%</a>
+3Fformat%3Durl%26type%3Dchrome&amp;ust=1361876269998093&amp;usg=AFQjCNGnr3MBw2IrgaZ3j-Iy
+X6iSE0L8RQ HTTP/1.1&quot; 302 211
+INFO - - [Feb 26 18:57:15] 127.0.0.1:4724 &quot;CONNECT www.google.com.hk:443 HTTP/1.
+1&quot; - -
+INFO - - [Feb 26 18:57:17] 127.0.0.1:4736 &quot;CONNECT plus.google.com:443 HTTP/1.1&quot;
+ - -
+INFO - - [Feb 26 18:57:19] 127.0.0.1:4740 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/webhp%3Fsourceid%3" rel="nofollow">http://www.google.com.hk/webhp%3Fsourceid%3</a>
+Dchrome-instant%26ion%3D1%26ie%3DUTF-8&amp;ust=1361876272673156&amp;usg=AFQjCNFfQFhes190
+WCEPbzXYFKbwGry9EA HTTP/1.1&quot; 302 216
+INFO - - [Feb 26 18:57:22] 127.0.0.1:4747 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/webhp%3Fsourceid%3" rel="nofollow">http://www.google.com.hk/webhp%3Fsourceid%3</a>
+Dchrome-instant%26ion%3D1%26ie%3DUTF-8&amp;ust=1361876275794463&amp;usg=AFQjCNGeiTBE5c4a
+nNb44ytZIPf46cWo_A HTTP/1.1&quot; 302 216
+INFO - - [Feb 26 18:57:25] 127.0.0.1:4763 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/webhp%3Fsourceid%3" rel="nofollow">http://www.google.com.hk/webhp%3Fsourceid%3</a>
+Dchrome-instant%26ion%3D1%26ie%3DUTF-8&amp;ust=1361876279039942&amp;usg=AFQjCNGwGEgAdWAx
+1gtxxODoyb3acp5wqQ HTTP/1.1&quot; 302 216
+INFO - - [Feb 26 18:57:26] 127.0.0.1:4784 &quot;CONNECT clients4.google.com:443 HTTP/
+1.1&quot; - -
+INFO - - [Feb 26 18:57:28] 127.0.0.1:4779 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/webhp%3Fsourceid%3" rel="nofollow">http://www.google.com.hk/webhp%3Fsourceid%3</a>
+Dchrome-instant%26ion%3D1%26ie%3DUTF-8&amp;ust=1361876281416415&amp;usg=AFQjCNFKwDhuABv4
+1UQn0R6ZNNDtt8btgw HTTP/1.1&quot; 302 216
+INFO - - [Feb 26 18:57:31] 127.0.0.1:4797 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/webhp%3Fsourceid%3" rel="nofollow">http://www.google.com.hk/webhp%3Fsourceid%3</a>
+Dchrome-instant%26ion%3D1%26ie%3DUTF-8&amp;ust=1361876285103104&amp;usg=AFQjCNGZreJs7BJy
+AT5vnVwBqS7sg649dQ HTTP/1.1&quot; 302 216
+INFO - - [Feb 26 18:57:33] 127.0.0.1:4820 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/webhp%3Fsourceid%3" rel="nofollow">http://www.google.com.hk/webhp%3Fsourceid%3</a>
+Dchrome-instant%26ion%3D1%26ie%3DUTF-8&amp;ust=1361876286984114&amp;usg=AFQjCNHwRySdIqSR
+kldTHyJ_1l21FJkyGA HTTP/1.1&quot; 302 216
+INFO - - [Feb 26 18:57:35] 127.0.0.1:4831 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/webhp%3Fsourceid%3" rel="nofollow">http://www.google.com.hk/webhp%3Fsourceid%3</a>
+Dchrome-instant%26ion%3D1%26ie%3DUTF-8&amp;ust=1361876289181512&amp;usg=AFQjCNG8fpcIBax3
+k0LMCAo9mILDooy_iQ HTTP/1.1&quot; 302 216
+INFO - - [Feb 26 18:57:39] 127.0.0.1:4842 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/webhp%3Fsourceid%3" rel="nofollow">http://www.google.com.hk/webhp%3Fsourceid%3</a>
+Dchrome-instant%26ion%3D1%26ie%3DUTF-8&amp;ust=1361876292551389&amp;usg=AFQjCNG8dap4_HXv
+9Kr68FYmQqjntRZCYQ HTTP/1.1&quot; 302 216
+INFO - - [Feb 26 18:57:42] 127.0.0.1:4858 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/webhp%3Fsourceid%3" rel="nofollow">http://www.google.com.hk/webhp%3Fsourceid%3</a>
+Dchrome-instant%26ion%3D1%26ie%3DUTF-8&amp;ust=1361876295994401&amp;usg=AFQjCNHsVHeeI68P
+I2ZwIjmhrQJZSKGi8A HTTP/1.1&quot; 302 216
+INFO - - [Feb 26 18:57:44] 127.0.0.1:4874 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/webhp%3Fsourceid%3" rel="nofollow">http://www.google.com.hk/webhp%3Fsourceid%3</a>
+Dchrome-instant%26ion%3D1%26ie%3DUTF-8&amp;ust=1361876298046633&amp;usg=AFQjCNHBMPOGBUQn
+JOzM9ry_2IvnW0PS1Q HTTP/1.1&quot; 302 216
+INFO - - [Feb 26 18:57:47] 127.0.0.1:4889 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/webhp%3Fsourceid%3" rel="nofollow">http://www.google.com.hk/webhp%3Fsourceid%3</a>
+Dchrome-instant%26ion%3D1%26ie%3DUTF-8&amp;ust=1361876301462517&amp;usg=AFQjCNFr5y85_zBq
+NjycaBdT4KWg8ByoKA HTTP/1.1&quot; 302 216
+INFO - - [Feb 26 18:57:50] 127.0.0.1:4904 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/webhp%3Fsourceid%3" rel="nofollow">http://www.google.com.hk/webhp%3Fsourceid%3</a>
+Dchrome-instant%26ion%3D1%26ie%3DUTF-8&amp;ust=1361876304197033&amp;usg=AFQjCNEzZL-9SOPC
+6UpaOgmK2SFrzER3uw HTTP/1.1&quot; 302 216
+INFO - - [Feb 26 18:57:52] 127.0.0.1:4919 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/webhp%3Fsourceid%3" rel="nofollow">http://www.google.com.hk/webhp%3Fsourceid%3</a>
+Dchrome-instant%26ion%3D1%26ie%3DUTF-8&amp;ust=1361876305944243&amp;usg=AFQjCNHtw6r1qIs8
+5NU-spDJkU-vwwi8Rg HTTP/1.1&quot; 302 216
+INFO - - [Feb 26 18:57:55] 127.0.0.1:4926 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/webhp%3Fsourceid%3" rel="nofollow">http://www.google.com.hk/webhp%3Fsourceid%3</a>
+Dchrome-instant%26ion%3D1%26ie%3DUTF-8&amp;ust=1361876308585186&amp;usg=AFQjCNHtx8n4MRTB
+Um8h-dBccDZH20SxoQ HTTP/1.1&quot; 302 216
+INFO - - [Feb 26 18:57:56] 127.0.0.1:4942 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/webhp%3Fsourceid%3" rel="nofollow">http://www.google.com.hk/webhp%3Fsourceid%3</a>
+Dchrome-instant%26ion%3D1%26ie%3DUTF-8&amp;ust=1361876310236190&amp;usg=AFQjCNH_qSAShciY
+dOSOCIYXzEwry_bHiw HTTP/1.1&quot; 302 216
+INFO - - [Feb 26 18:58:00] 127.0.0.1:4953 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/webhp%3Fsourceid%3" rel="nofollow">http://www.google.com.hk/webhp%3Fsourceid%3</a>
+Dchrome-instant%26ion%3D1%26ie%3DUTF-8&amp;ust=1361876313542129&amp;usg=AFQjCNEiUda2Ilmd
+mfz1bmh4rcG3p9cXuQ HTTP/1.1&quot; 302 216
+INFO - - [Feb 26 18:58:03] 127.0.0.1:4974 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/webhp%3Fsourceid%3" rel="nofollow">http://www.google.com.hk/webhp%3Fsourceid%3</a>
+Dchrome-instant%26ion%3D1%26ie%3DUTF-8&amp;ust=1361876316873450&amp;usg=AFQjCNHfUiIEFlah
+8tloW9LpeofwI8gJ7w HTTP/1.1&quot; 302 216
+INFO - - [Feb 26 18:58:07] 127.0.0.1:4990 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/webhp%3Fsourceid%3" rel="nofollow">http://www.google.com.hk/webhp%3Fsourceid%3</a>
+Dchrome-instant%26ion%3D1%26ie%3DUTF-8&amp;ust=1361876319881924&amp;usg=AFQjCNFpCQ-fT2q6
+S5xjFPfrjHx08piv-Q HTTP/1.1&quot; 302 216
+INFO - - [Feb 26 18:58:09] 127.0.0.1:5006 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/webhp%3Fsourceid%3" rel="nofollow">http://www.google.com.hk/webhp%3Fsourceid%3</a>
+Dchrome-instant%26ion%3D1%26ie%3DUTF-8&amp;ust=1361876322777251&amp;usg=AFQjCNHFBrgIsWgc
+K76bMWE_CPWOstDi1A HTTP/1.1&quot; 302 216
+INFO - - [Feb 26 18:58:11] 127.0.0.1:5018 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/webhp%3Fsourceid%3" rel="nofollow">http://www.google.com.hk/webhp%3Fsourceid%3</a>
+Dchrome-instant%26ion%3D1%26ie%3DUTF-8&amp;ust=1361876324989905&amp;usg=AFQjCNFzwPPSs0o4
+T8zrTP3sfQ4eyfpP_Q HTTP/1.1&quot; 302 216
+INFO - - [Feb 26 18:58:13] 127.0.0.1:5035 &quot;GET <a href="http://www.google.com.hk/url?sa=p" rel="nofollow">http://www.google.com.hk/url?sa=p</a>
+&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/webhp%3Fsourceid%3" rel="nofollow">http://www.google.com.hk/webhp%3Fsourceid%3</a>
+Dchrome-instant%26ion%3D1%26ie%3DUTF-8&amp;ust=1361876327407974&amp;usg=AFQjCNEzDz2DnvyV
+x9KIEC348pehWcbUxg HTTP/1.1&quot; 302 216
+INFO - - [Feb 26 18:58:15] 127.0.0.1:4719 &quot;CONNECT ssl.gstatic.com:443 HTTP/1.1&quot;
+ 501 -
+
+</pre>
+
+ <div class="attachments">
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=86990000000&amp;name=%E6%8D%95%E8%8E%B7.JPG&amp;token=ABZ6GAfKwuPq74piJGFdrujZmhcq8AdRVw%3A1434454137576&amp;id=8699&amp;mod_ts_token=ABZ6GAfcPJvHZ3zi89KNgAb1V_uCELr4aA%3A1434454137576">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >捕获.JPG</b>
+ <br>
+ 63.7 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=86990000000&amp;name=%E6%8D%95%E8%8E%B7.JPG&amp;token=ABZ6GAfKwuPq74piJGFdrujZmhcq8AdRVw%3A1434454137576&amp;id=8699&amp;mod_ts_token=ABZ6GAfcPJvHZ3zi89KNgAb1V_uCELr4aA%3A1434454137576&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=86990000000&amp;name=%E6%8D%95%E8%8E%B7.JPG&amp;token=ABZ6GAfKwuPq74piJGFdrujZmhcq8AdRVw%3A1434454137576&amp;id=8699&amp;mod_ts_token=ABZ6GAfcPJvHZ3zi89KNgAb1V_uCELr4aA%3A1434454137576">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=86990000000&amp;name=%E6%8D%95%E8%8E%B7.JPG&amp;token=ABZ6GAfKwuPq74piJGFdrujZmhcq8AdRVw%3A1434454137576&amp;id=8699&amp;mod_ts_token=ABZ6GAfcPJvHZ3zi89KNgAb1V_uCELr4aA%3A1434454137576&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=86990000000&amp;name=%E6%8D%95%E8%8E%B7.JPG&amp;token=ABZ6GAfKwuPq74piJGFdrujZmhcq8AdRVw%3A1434454137576&amp;id=8699&amp;mod_ts_token=ABZ6GAfcPJvHZ3zi89KNgAb1V_uCELr4aA%3A1434454137576&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Feb 26 14:20:42 2013">
+ Feb 26, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=8699#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+需要火速访问几次<a href="http://www.google.com/ncr" rel="nofollow">http://www.google.com/ncr</a>
+即可
+
+
+试试公共服务端吧！
+项目地址
+<a href="https://code.google.com/p/wwqgtxx-goagent" rel="nofollow">https://code.google.com/p/wwqgtxx-goagent</a>
+免配置，免上传，内置290个公共服务端，提供配置好的firefox便携版，欢迎大家使用，请觉得好用的多多宣传
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Feb 26 15:43:41 2013">
+ Feb 26, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=8699#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/114839866780430922806/">michaelc...@gmail.com</a
+></span>
+ 
+<pre>
+我用google chrome for os x ，由于chrome 自动更新功能不好，直接吧chrome app拖进trash，然后安装最新版的google chrome，结果也出现和你一样的情况，后来用cleanmymac删除我的chrome，然后安装新版，这种情况就不出现了，不知老弟是不是用的chrome for os x 
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Feb 26 16:14:51 2013">
+ Feb 26, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=8699#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/117670419473098769796/">wxuj...@gmail.com</a
+></span>
+ 
+<pre>
+先断开网络，然后去设置里换一个用户。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Feb 28 07:36:14 2013">
+ Feb 28, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=8699#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/107387616695449924298/">katin...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢楼上的各位，我访问了ncr那个网址，把goagent换回2.1.11
+
+我已经放弃在mac下用goagent了，太麻烦了，直接双系统在win下使用，mac下使用vpn了
+
+3楼的没有试过
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Feb 28 19:27:18 2013">
+ Feb 28, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=8699#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/110066744514346176913/">lichangl...@gmail.com</a
+></span>
+ 
+<pre>
+我也是换回2.1.11就好了。不知道2.1.12是啥问题造成的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Mar  1 05:09:58 2013">
+ Mar 1, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=8699#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/104437144856167418447/">guochenc...@gmail.com</a
+></span>
+ 
+<pre>
+我能和你说- -我用的1,8,3的AGE也是不停的刷新= =|||
+其实切换到隐私模式也可以正常使用- -
+不过真的好麻烦啊= =
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Mar 10 07:27:26 2013">
+ Mar 10, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=8699#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/106453218348947734647/">wangtian...@gmail.com</a
+></span>
+ 
+<pre>
+关闭设置里搜索栏里的启用既搜既得 就OK了
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D8699&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D8699"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="8699">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A8699',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 8699,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

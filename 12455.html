@@ -1,0 +1,1381 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"token": null, "profileUrl": null, "domainName": null, "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "projectHomeUrl": "/p/goagent", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "loggedInUserEmail": null, "projectName": "goagent", "relativeBaseUrl": ""};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 12455 - 
+ goagent -
+ 
+ goagent 3.1.5 host return empty - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12455&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12455" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=12455">12455</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >goagent 3.1.5 host return empty</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 4 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A12455">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12455&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12455">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/117018702219644028221/">zhangw...@gmail.com</a
+>,
+ <span class="date" title="Fri Jan 24 06:29:46 2014">Jan 24, 2014</span>
+ 
+ </div>
+<pre>
+The issue is &quot;resolve google_hk host return empty! please retry!&quot;. Everything is configured correctly. I found &quot;profile=ipv4&quot;, instead of originally &quot;profile=google_cn&quot;
+
+Traceback (most recent call last):
+  File &quot;proxy.py&quot;, line 1420, in do_remote_resolve
+    queue.put((host, dnsservers, dns_remote_resolve(host, dnsservers, self.DNS_BLACKLIST, timeout=2)))
+  File &quot;proxy.py&quot;, line 781, in dns_remote_resolve
+    except gevent.timeout.Timeout as e:
+AttributeError: 'NoneType' object has no attribute 'timeout'    queue.put((host, dnsservers, dns_remote_resolve(host, dnsservers, self.DNS_BLACKLIST, timeout=2)))
+    self.finish_request(request, client_address)
+  File &quot;proxy.py&quot;, line 1828, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File &quot;/usr/lib/python2.7/SocketServer.py&quot;, line 647, in __init__
+    self.setup()
+  File &quot;proxy.py&quot;, line 1916, in setup
+
+  File &quot;proxy.py&quot;, line 781, in dns_remote_resolve
+AttributeError: 'NoneType' object has no attribute 'timeout'
+    except gevent.timeout.Timeout as e:
+    queue.put((host, dnsservers, dns_remote_resolve(host, dnsservers, self.DNS_BLACKLIST, timeout=2)))
+  File &quot;proxy.py&quot;, line 781, in dns_remote_resolve
+    except gevent.timeout.Timeout as e:
+AttributeError: 'NoneType' object has no attribute 'timeout'AttributeError: 'NoneType' object has no attribute 'timeout'
+AttributeError: 'NoneType' object has no attribute 'timeout'Unhandled exception in thread started by &lt;function do_remote_resolve at 0x9846e0&gt;
+Traceback (most recent call last):
+  File &quot;proxy.py&quot;, line 1420, in do_remote_resolve
+
+Traceback (most recent call last):
+  File &quot;proxy.py&quot;, line 1420, in do_remote_resolve
+    queue.put((host, dnsservers, dns_remote_resolve(host, dnsservers, self.DNS_BLACKLIST, timeout=2)))
+
+  File &quot;proxy.py&quot;, line 781, in dns_remote_resolve
+    except gevent.timeout.Timeout as e:
+AttributeError: except gevent.timeout.Timeout as e:
+  File &quot;proxy.py&quot;, line 781, in dns_remote_resolve
+    except gevent.timeout.Timeout as e:
+AttributeError: 'NoneType' object has no attribute 'timeout'    queue.put((host, dnsservers, dns_remote_resolve(host, dnsservers, self.DNS_BLACKLIST, timeout=2)))
+AttributeError: 'NoneType' object has no attribute 'timeout'
+
+  File &quot;proxy.py&quot;, line 781, in dns_remote_resolve
+
+    self.first_run()
+    except gevent.timeout.Timeout as e:
+'NoneType' object has no attribute 'timeout'
+AttributeError: 'NoneType' object has no attribute 'timeout'
+Unhandled exception in thread started by &lt;function do_remote_resolve at 0x9846e0&gt;  File &quot;proxy.py&quot;, line 1901, in first_run
+    common.resolve_iplist()
+
+Traceback (most recent call last):
+Unhandled exception in thread started by &lt;function do_remote_resolve at 0x9846e0&gt;  File &quot;proxy.py&quot;, line 1452, in resolve_iplist
+    sys.exit(-1)
+  File &quot;proxy.py&quot;, line 1420, in do_remote_resolve
+    SystemExit: -1
+----------------------------------------
+queue.put((host, dnsservers, dns_remote_resolve(host, dnsservers, self.DNS_BLACKLIST, timeout=2)))
+  File &quot;proxy.py&quot;, line 781, in dns_remote_resolve
+    except gevent.timeout.Timeout as e:
+AttributeError: 'NoneType' object has no attribute 'timeout'
+Unhandled exception in thread started by &lt;function do_remote_resolve at 0x9846e0&gt;
+Traceback (most recent call last):
+
+Traceback (most recent call last):
+  File &quot;proxy.py&quot;, line 1420, in do_remote_resolve
+  File &quot;proxy.py&quot;, line 1420, in do_remote_resolve
+    queue.put((host, dnsservers, dns_remote_resolve(host, dnsservers, self.DNS_BLACKLIST, timeout=2)))
+  File &quot;proxy.py&quot;, line 781, in dns_remote_resolve
+    except gevent.timeout.Timeout as e:
+AttributeError:     'NoneType' object has no attribute 'timeout'queue.put((host, dnsservers, dns_remote_resolve(host, dnsservers, self.DNS_BLACKLIST, timeout=2)))
+
+  File &quot;proxy.py&quot;, line 781, in dns_remote_resolve
+    except gevent.timeout.Timeout as e:
+AttributeError: 'NoneType' object has no attribute 'timeout'
+WARNING - [Jan 24 22:23:58] resolve remote timeout, continue
+ERROR - [Jan 24 22:23:58] resolve google_hk host return empty! please retry!
+----------------------------------------
+Exception happened during processing of request from ('127.0.0.1', 52366)
+Traceback (most recent call last):
+  File &quot;/usr/lib/python2.7/SocketServer.py&quot;, line 593, in process_request_thread
+    self.finish_request(request, client_address)
+  File &quot;proxy.py&quot;, line 1828, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File &quot;/usr/lib/python2.7/SocketServer.py&quot;, line 647, in __init__
+    self.setup()
+  File &quot;proxy.py&quot;, line 1916, in setup
+    self.first_run()
+  File &quot;proxy.py&quot;, line 1901, in first_run
+    common.resolve_iplist()
+  File &quot;proxy.py&quot;, line 1452, in resolve_iplist
+    sys.exit(-1)
+SystemExit: -1
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jan 24 22:39:18 2014">
+ Jan 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=12455#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/113568728061094562556/">LHAO....@gmail.com</a
+></span>
+ 
+<pre>
+I had the same issue. Anyone knows how to fix it? Appreciate!
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jan 24 23:26:01 2014">
+ Jan 24, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=12455#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/115007126538998679092/">Rfwu1...@gmail.com</a
+></span>
+ 
+<pre>
+同样的问题，为什么没人回答以下的
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jan 25 07:03:20 2014">
+ Jan 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=12455#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/103762796783887299522/">linxing...@gmail.com</a
+></span>
+ 
+<pre>
+我也是这样。。无奈啊...
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jan 25 09:41:24 2014">
+ Jan 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=12455#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/103026120095439959482/">panwei...@gmail.com</a
+></span>
+ 
+<pre>
+同上：
+
+ERROR - [Jan 26 01:37:00] GoAgent DNSServer requires dnslib and gevent 1.0
+Traceback (most recent call last):
+  File &quot;goagent/3.1.5-00/proxy.py&quot;, line 2686, in main
+  File &quot;/home/kkk/goagent/3.1.5-00/dnsproxy.py&quot;, line 14, in &lt;module&gt;
+    import gevent
+ImportError: No module named gevent
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jan 25 09:52:55 2014">
+ Jan 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=12455#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/103026120095439959482/">panwei...@gmail.com</a
+></span>
+ 
+<pre>
+本机版使用似乎正常，linux下的有楼上问题、不工作。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jan 25 10:45:19 2014">
+ Jan 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=12455#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/107418258651648155182/">langhua9...@gmail.com</a
+></span>
+ 
+<pre>
+看来，不是我一个人有这样的问题，我的系统是MAC OS X 10.9.1的，我装的是goagent-goagent-v3.1.5-0-gb767d1f
+
+AttributeError: 'NoneType' object has no attribute 'timeout'
+WARNING - [Jan 26 02:31:43] resolve remote timeout, continue
+ERROR - [Jan 26 02:31:43] resolve google_hk host return empty! please retry!
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jan 25 10:53:14 2014">
+ Jan 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=12455#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/107418258651648155182/">langhua9...@gmail.com</a
+></span>
+ 
+<pre>
+希望能解决一下。。。过年的时候能用上
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jan 25 10:54:37 2014">
+ Jan 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=12455#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/103009830731879313511/">guoqiyi...@gmail.com</a
+></span>
+ 
+<pre>
+楼上的各位，我是用的是archlinux，同样也出现了这个提示，貌似是缺少了gevent组件，arch下安装了python2-gevent以后就正常了，你们各自的版本搜一下gevent包安装应该就没问题了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jan 25 20:52:25 2014">
+ Jan 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=12455#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/107418258651648155182/">langhua9...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢楼上，我解决了，我没有安gevent，我去安了一个python2就解决了，然后我用的是<a href="https://github.com/ohdarling/GoAgentX这个客户端就可以了。。浏览器用的是FIREFOX" rel="nofollow">https://github.com/ohdarling/GoAgentX这个客户端就可以了。。浏览器用的是FIREFOX</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jan 25 20:54:32 2014">
+ Jan 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=12455#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/107418258651648155182/">langhua9...@gmail.com</a
+></span>
+ 
+<pre>
+<a href="http://www.python.org/download/" rel="nofollow">http://www.python.org/download/</a> 我安的是2.7，现在最新版是3.3
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jan 25 22:39:39 2014">
+ Jan 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=12455#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/106781204990925295112/">yubinlov...@gmail.com</a
+></span>
+ 
+<pre>
+python2与python3是不兼容的，
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jan 26 00:06:08 2014">
+ Jan 26, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=12455#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/107418258651648155182/">langhua9...@gmail.com</a
+></span>
+ 
+<pre>
+那应该怎么处理好啊，用python2.7的+GoAgentX 就能上，但是看YOUTUBE视屏，CHROME和FIREFOX就看不了，苹果的Safari就可以看。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jan 26 01:26:08 2014">
+ Jan 26, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=12455#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/105002639162055054572/">chenlian...@gmail.com</a
+></span>
+ 
+<pre>
+希望解决一下 这新版本有没有经过测试就放出来了啊
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jan 26 20:14:40 2014">
+ Jan 26, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=12455#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/101160808152890453873/">yuguoru...@gmail.com</a
+></span>
+ 
+<pre>
+我用的是mint解决方法是用的8楼的方法，另外注python的版本为python2.7.5
+具体方法是：
+sudo apt-get install python-gevent
+安装后就恢复了正常，ubuntu的朋友若有相同问题应该也是一样
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Feb  9 02:02:13 2014">
+ Feb 9, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=12455#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/103803546952386933105/">poke5...@gmail.com</a
+></span>
+ 
+<pre>
+mint 16遇到同样问题,装了gevent解决.
+不过#14的方法安装的gevent可能是旧版本(goagent警告说要1.0).
+我用pip install gevent
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Feb 16 18:08:47 2014">
+ Feb 16, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=12455#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/113808349600011630167/">zhaohao...@gmail.com</a
+></span>
+ 
+<pre>
+I'm using archlinux and have the same problem. I've alse installed python2-gevent. I found that, when I ping 8.8.8.8|8.8.4.4|114.114.114.114|114.114.115.115, there's no response. However, I have anothor DNS server 192.168.x.x in my LAN. So I added 192.168.x.x into the list of servers in [dns], and set enable=1. And the problen is solved.
+
+I found my DNS server by executing &quot;nslookup google.com&quot;. So if you can reach google.com but have the same problem, you can try this solution. &quot;nslookup&quot; is in extra/dnsutils.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Mar 11 22:05:31 2014">
+ Mar 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=12455#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/109624166609553267233/">lovely...@gmail.com</a
+></span>
+ 
+<pre>
+[dns]enable=1 打开 dns 代理功能。
+不要改成1,默认0的时候就不会报错
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jul 18 22:30:14 2014">
+ Jul 18, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=12455#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/111827786642167779747/">gallex2...@gmail.com</a
+></span>
+ 
+<pre>
+很奇怪，我删除了debian7缺省的pyhon-gevent就正确了。 
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12455&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12455"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="12455">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A12455',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 12455,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

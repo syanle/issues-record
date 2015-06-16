@@ -1,0 +1,2926 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"token": null, "profileUrl": null, "projectName": "goagent", "projectHomeUrl": "/p/goagent", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "loggedInUserEmail": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "domainName": null, "relativeBaseUrl": ""};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 873 - 
+ goagent -
+ 
+ iOS下本地PAC文件无效 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D873&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D873" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="closed_colors">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=873">873</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >iOS下本地PAC文件无效</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 6 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A873">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="The requested non-coding task was completed">Done</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ <tr><th align="left" valign="top">Closed:&nbsp;</th>
+ <td align="left" valign="top" width="100%">
+ Dec 2012
+ </td>
+ </tr>
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D873&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D873">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/110854543431416985235/">ccsasuk...@gmail.com</a
+>,
+ <span class="date" title="Sun Sep 18 23:46:45 2011">Sep 18, 2011</span>
+ 
+ </div>
+<pre>
+如题，GoAgent本身配置没有问题，使用手动代理可以上。
+
+使用 file://localhost/User/goagent-local/autoproxy.pac 这种形式的本地PAC无效。
+
+而使用之前在Wiki里面有人提出的方法
+“ios下，我的方案是：pac + goagent; 先把pac 放在任意目录下，用ifile的webdav（打开wifi图标那个）功能，然后设定代理 http://localhost:端口/指定目录/file.pac即可”
+就可以用。
+这样还需要一直把iFile开在后台，有点麻烦。
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Sep 19 00:17:46 2011">
+ Sep 19, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=873#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/HewigOvens/">HewigOvens</a
+></span>
+ 
+<pre>
+嗯，之前借的一台iphone4 4.2就不行，但是我的ipod 4.3.3就可以，你是iphone4吗？iOS版本是多少？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Sep 19 00:19:40 2011">
+ Sep 19, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=873#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/110854543431416985235/">ccsasuk...@gmail.com</a
+></span>
+ 
+<pre>
+是iphone4，4.3.2
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Sep 19 00:30:37 2011">
+ Sep 19, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=873#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/HewigOvens/">HewigOvens</a
+></span>
+ 
+<pre>
+能不能帮忙测试一下？试试这样填file:///private/var/mobile/goagent-local/autoproxy.pac
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Sep 19 01:40:57 2011">
+ Sep 19, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=873#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/HewigOvens/">HewigOvens</a
+></span>
+ 
+<pre>
+似乎iPhone4不再支持file://了，下一个版本中自建一个http server好了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Sep 19 02:17:46 2011">
+ Sep 19, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=873#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/HewigOvens/">HewigOvens</a
+></span>
+ 
+<pre>
+<i>(No comment was entered for this change.)</i>
+</pre>
+ 
+ 
+ <div class="updates">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ 
+ <b>Status:</b>
+ Accepted
+ 
+ <br>
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Sep 20 02:37:05 2011">
+ Sep 20, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=873#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/117612829248099351158/">joeyyang...@gmail.com</a
+></span>
+ 
+<pre>
+换1.5.5后，iPad2 4.3.3 手工设置代理可以，用自动设置下列两种方式都不行
+file://localhost/User/goagent-local/autoproxy.pac
+file:///private/var/mobile/goagent-local/autoproxy.pac
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Sep 20 07:28:22 2011">
+ Sep 20, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=873#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/109761228622631247191/">mchob...@gmail.com</a
+></span>
+ 
+<pre>
+4.3.3直接用file：很正常
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Sep 22 11:04:05 2011">
+ Sep 22, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=873#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/114522404704177173209/">davidlin...@gmail.com</a
+></span>
+ 
+<pre>
+换个浏览器再试看看吧。我的ipt 4里面刚开始也是这样，后来下载了dolphin，一切ok，同时再试自带的safari，依旧不行，总提示已经丢失网络连接，由此看来问题其实是出在浏览器上。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Sep 22 18:39:39 2011">
+ Sep 22, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=873#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/117612829248099351158/">joeyyang...@gmail.com</a
+></span>
+ 
+<pre>
+测试了下，确实是浏览器问题，我用iCabMobile配合file方法可以用，而safari不行
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Sep 29 17:51:39 2011">
+ Sep 29, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=873#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/113614965717431351124/">sron...@gmail.com</a
+></span>
+ 
+<pre>
+为什么safari 就用不了 file的方法 QQ浏览器用行了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Sep 29 18:27:48 2011">
+ Sep 29, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=873#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/HewigOvens/">HewigOvens</a
+></span>
+ 
+<pre>
+safari有些版本是可用的，可能是safari本身的一些问题，具体原因还不清楚
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Sep 30 01:43:35 2011">
+ Sep 30, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=873#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/113614965717431351124/">sron...@gmail.com</a
+></span>
+ 
+<pre>
+我接得应该是safari 本身的 file 的不稳定问题。。。但是还想用safari来浏览
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct  1 08:39:01 2011">
+ Oct 1, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=873#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/xixinxing/">xixinxing</a
+></span>
+ 
+<pre>
+我的可以
+ipad 4.3.3
+file://localhost/Applications/MobileSafari.app/7.pac
+任何程序都完美代理，无论是http代理，还是socks代理。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct  1 08:48:41 2011">
+ Oct 1, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=873#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/110854543431416985235/">ccsasuk...@gmail.com</a
+></span>
+ 
+<pre>
+13楼正解，亲测确实可以。难道safari只能调用自己目录的文件？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct  2 08:33:23 2011">
+ Oct 2, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=873#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/102831686380247111184/">sprin...@gmail.com</a
+></span>
+ 
+<pre>
+13楼怎么操作的?麻烦具体说一下。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct  2 21:57:40 2011">
+ Oct 2, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=873#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/102831686380247111184/">sprin...@gmail.com</a
+></span>
+ 
+<pre>
+我的手动设置代理正常，自动试了半天都不行。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct  3 04:04:16 2011">
+ Oct 3, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=873#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/110854543431416985235/">ccsasuk...@gmail.com</a
+></span>
+ 
+<pre>
+我之前用PAC也不行。
+把pac文件放在file://localhost/Applications/MobileSafari.app/
+这个目录里面，我就可以了。16楼可以参考一下。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct  3 09:24:27 2011">
+ Oct 3, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=873#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/102831686380247111184/">sprin...@gmail.com</a
+></span>
+ 
+<pre>
+晕了，我的还是不行。楼上。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct  3 09:41:32 2011">
+ Oct 3, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=873#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/102831686380247111184/">sprin...@gmail.com</a
+></span>
+ 
+<pre>
+我开始怀疑我的PAC文件是不是有错，哪位提供一个正确的下载？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct  3 17:32:30 2011">
+ Oct 3, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=873#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/102831686380247111184/">sprin...@gmail.com</a
+></span>
+ 
+<pre>
+应该不是pac文件问题，不过还是不行。pac文件打开也看不懂，完全像乱码。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Oct  7 00:19:36 2011">
+ Oct 7, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=873#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/xixinxing/">xixinxing</a
+></span>
+ 
+<pre>
+分享我自用的pac文件。
+放到file://localhost/Applications/MobileSafari.app/11.pac下。
+ipad2 4.3.3完美代理，任何程序都正常。
+需要代理的网址在pac文件中添加一行代理即可。
+软件自带的autoproxy.pac因为如果放到外网服务器上的话需要躲开GFW的敏感词过滤，所以进行base64编码了，如果放在本地完全没有必要进行编码。
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=8730021000&amp;name=11.pac&amp;token=ABZ6GAfh5FASSusSf1Uh9a9O6JWFU6mOZQ%3A1434452626771&amp;id=873&amp;mod_ts_token=ABZ6GAcvqC-clelQ18_1uUPUM0vsrinbVQ%3A1434452626772">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >11.pac</b>
+ <br>
+ 104 KB
+ 
+ 
+ &nbsp; <a href="../../goagent/issues/attachmentText?id=873&amp;aid=8730021000&amp;name=11.pac&amp;token=ABZ6GAfh5FASSusSf1Uh9a9O6JWFU6mOZQ%3A1434452626771" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=8730021000&amp;name=11.pac&amp;token=ABZ6GAfh5FASSusSf1Uh9a9O6JWFU6mOZQ%3A1434452626771&amp;id=873&amp;mod_ts_token=ABZ6GAcvqC-clelQ18_1uUPUM0vsrinbVQ%3A1434452626772">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Oct  7 00:56:36 2011">
+ Oct 7, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=873#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/102831686380247111184/">sprin...@gmail.com</a
+></span>
+ 
+<pre>
+彻底正常了，非常感谢。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct  8 04:52:23 2011">
+ Oct 8, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=873#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/105180854512235493447/">bang.wei...@gmail.com</a
+></span>
+ 
+<pre>
+我采用file://localhost/User/goagent-local/autoproxy.pac，在iPad可以看youtube，阳光卫视，但用不了VOA，明报新闻（都是指iPad和iPhone的应用软件）。按照xixinxing的介绍，改用了file://localhost/Applications/MobileSafari.app/11.pac，可以用VOA了，但明报新闻还是用不了，Safari可以上明报网的，有没有什么解决办法？“需要代理的网址在pac文件中添加一行代理即可”，怎样加？请赐教。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct  8 07:16:35 2011">
+ Oct 8, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=873#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/105180854512235493447/">bang.wei...@gmail.com</a
+></span>
+ 
+<pre>
+我试了仿照加上url,*mingpao.com,或mingpaonews.com都无用
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct  9 04:56:35 2011">
+ Oct 9, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=873#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/116686132415481268098/">chat.s...@gmail.com</a
+></span>
+ 
+<pre>
+仿照增加，网址前后都要有星号(*),*www.mingpao.com*
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc26">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct  9 05:52:58 2011">
+ Oct 9, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c26" href="/p/goagent/issues/detail?id=873#c26">#26</a>
+ 
+
+ <a class="userlink"
+ href="/u/HewigOvens/">HewigOvens</a
+></span>
+ 
+<pre>
+明报新闻，全局代理时可以访问，应该是gfwlist还没有收入。另外明报新闻App的域名是pixel-hk.pixelinteractivemedia.com，不是mingpao.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct  9 05:58:35 2011">
+ Oct 9, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=873#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/HewigOvens/">HewigOvens</a
+></span>
+ 
+<pre>
+建议去<a href="https://gfwlist.autoproxy.org/report/?url=https://autoproxy.org/Bookmarklet" rel="nofollow">https://gfwlist.autoproxy.org/report/?url=https://autoproxy.org/Bookmarklet</a> 添加一下pixel-hk.pixelinteractivemedia.com
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct  9 06:45:51 2011">
+ Oct 9, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=873#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/105180854512235493447/">bang.wei...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢各位。
+1.我查了一下，11.pac中已有与mingpao关联的7个网址，包括mingpao.com，mingpaonews.com等
+2.我在11.pac中把pixel-hk.pixelinteractivemedia.com加了进去，还是不能访问明报新闻。Hevig所说得全局代理时在PC还是在iPad上操作？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc29">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct  9 08:15:39 2011">
+ Oct 9, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c29" href="/p/goagent/issues/detail?id=873#c29">#29</a>
+ 
+
+ <a class="userlink"
+ href="/u/105180854512235493447/">bang.wei...@gmail.com</a
+></span>
+ 
+<pre>
+pixel-hk.pixelinteractivemedia.com是明报新闻App的域名？似不是明报新闻的网址。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc30">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct  9 17:12:47 2011">
+ Oct 9, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c30" href="/p/goagent/issues/detail?id=873#c30">#30</a>
+ 
+
+ <a class="userlink"
+ href="/u/HewigOvens/">HewigOvens</a
+></span>
+ 
+<pre>
+全局是指在iOS上，没仔细看log，应该是如下两个ip或域名，请再添加试一下
+creative.mingpao.com
+203.85.62.137
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc31">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct  9 18:21:11 2011">
+ Oct 9, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c31" href="/p/goagent/issues/detail?id=873#c31">#31</a>
+ 
+
+ <a class="userlink"
+ href="/u/105180854512235493447/">bang.wei...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢Hewig,我今晚再试一下。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc32">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct 10 03:55:00 2011">
+ Oct 10, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c32" href="/p/goagent/issues/detail?id=873#c32">#32</a>
+ 
+
+ <a class="userlink"
+ href="/u/105180854512235493447/">bang.wei...@gmail.com</a
+></span>
+ 
+<pre>
+我把creative.mingpao.com
+203.85.62.137加入11.pac后，可以访问明报新闻了，谢谢！
+能否告知我怎样去查找app的ip或域名？有一些app无法访问，如WorldTube,我估计都是给GFW了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc33">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Oct 14 19:07:54 2011">
+ Oct 14, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c33" href="/p/goagent/issues/detail?id=873#c33">#33</a>
+ 
+
+ <a class="userlink"
+ href="/u/103202311888456538586/">songtao....@gmail.com</a
+></span>
+ 
+<pre>
+因为是校园网，我直接全部使用代理，设置manual -&gt; 127.0.0.1:8087 IOS版本 4.2.1
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc34">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Oct 14 22:39:37 2011">
+ Oct 14, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c34" href="/p/goagent/issues/detail?id=873#c34">#34</a>
+ 
+
+ <a class="userlink"
+ href="/u/104485579232889576623/">2005re...@gmail.com</a
+></span>
+ 
+<pre>
+这个问题肯定是safari自己的问题，无论是file://还是file:///在icab等其它浏览器都没问题。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc35">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Oct 21 20:30:55 2011">
+ Oct 21, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c35" href="/p/goagent/issues/detail?id=873#c35">#35</a>
+ 
+
+ <a class="userlink"
+ href="/u/111558513801734599527/">ggbond.m...@gmail.com</a
+></span>
+ 
+<pre>
+只要把pac文件放到file://localhost/Applications/MobileSafari.app/就正常了
+safari不认这个文件夹以外的pac
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc36">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Oct 28 08:00:21 2011">
+ Oct 28, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c36" href="/p/goagent/issues/detail?id=873#c36">#36</a>
+ 
+
+ <a class="userlink"
+ href="/u/114897539578452579069/">MySweetC...@gmail.com</a
+></span>
+ 
+<pre>
+楼上说得对，apple为了保证安全对safari做了很多限制，譬如只能访问自身目录下的pac文件……
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc37">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Nov  6 06:42:18 2011">
+ Nov 6, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c37" href="/p/goagent/issues/detail?id=873#c37">#37</a>
+ 
+
+ <a class="userlink"
+ href="/u/102831686380247111184/">sprin...@gmail.com</a
+></span>
+ 
+<pre>
+为什么软件自带的pac文件一直都有问题，xixinxing的正常。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc38">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov 14 04:12:00 2011">
+ Nov 14, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c38" href="/p/goagent/issues/detail?id=873#c38">#38</a>
+ 
+
+ <a class="userlink"
+ href="/u/107455052607177861937/">huguohua...@gmail.com</a
+></span>
+ 
+<pre>
+请问，file://localhost/Applications/MobileSafari.app/是哪一个文件目录？为什么我只能找到 file://localhost/var/stash/applications/MobileSafari.app/这个目录，他们是同一个路径吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc39">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov 14 04:20:59 2011">
+ Nov 14, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c39" href="/p/goagent/issues/detail?id=873#c39">#39</a>
+ 
+
+ <a class="userlink"
+ href="/u/107455052607177861937/">huguohua...@gmail.com</a
+></span>
+ 
+<pre>
+刚刚测试了，PAC文件放在file://localhost/var/stash/applications/MobileSafari.app/这个目录下，然后将代理指向file://localhost/Applications/MobileSafari.app/11.pac可行！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc40">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Nov 14 17:38:52 2011">
+ Nov 14, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c40" href="/p/goagent/issues/detail?id=873#c40">#40</a>
+ 
+
+ <a class="userlink"
+ href="/u/HewigOvens/">HewigOvens</a
+></span>
+ 
+<pre>
+越狱后，系统的Application目录被移到了/var/stash底下，所以是效果是一样的。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc41">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Dec  3 20:24:30 2011">
+ Dec 3, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c41" href="/p/goagent/issues/detail?id=873#c41">#41</a>
+ 
+
+ <a class="userlink"
+ href="/u/105858970259655030749/">flatlan...@gmail.com</a
+></span>
+ 
+<pre>
+iOS 5.0 越狱 file://localhost/var/mobile/goagent-local/8087.pac 正常的不得了！
+Safari Tweetbot path facebook 都很正常！就是速度有点慢！目前 主力就是这个~
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc42">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 29 23:50:08 2011">
+ Dec 29, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c42" href="/p/goagent/issues/detail?id=873#c42">#42</a>
+ 
+
+ <a class="userlink"
+ href="/u/103209895155969204555/">chk970...@gmail.com</a
+></span>
+ 
+<pre>
+4.3.3下。替换11.pac。youtube无论网页还是客户端，还是无法播放此视频。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc43">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar 19 07:06:15 2012">
+ Mar 19, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c43" href="/p/goagent/issues/detail?id=873#c43">#43</a>
+ 
+
+ <a class="userlink"
+ href="/u/114562291568483471283/">chia...@gmail.com</a
+></span>
+ 
+<pre>
+下了一个新的pac文件并发到safari目录就好了，各种奇怪啊。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc44">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar 19 08:11:44 2012">
+ Mar 19, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c44" href="/p/goagent/issues/detail?id=873#c44">#44</a>
+ 
+
+ <a class="userlink"
+ href="/u/HewigOvens/">HewigOvens</a
+></span>
+ 
+<pre>
+新的版本（1.8）将会自带pac server，这个issue终于可以关掉了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc45">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 26 23:00:31 2012">
+ May 26, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c45" href="/p/goagent/issues/detail?id=873#c45">#45</a>
+ 
+
+ <a class="userlink"
+ href="/u/115105635035676053595/">xiangzl7...@gmail.com</a
+></span>
+ 
+<pre>
+PAC文件放在file://localhost/var/stash/applications/MobileSafari.app/这个目录下，代理地址要指向file://localhost/var/stash/Applications/MobileSafari.app/11.pac才可行，不写var/stash这段无效，我的new ipad 4G版本是这样子的，供大家参考。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc46">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May 27 06:30:18 2012">
+ May 27, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c46" href="/p/goagent/issues/detail?id=873#c46">#46</a>
+ 
+
+ <a class="userlink"
+ href="/u/109881049369612602550/">felixha...@gmail.com</a
+></span>
+ 
+<pre>
+不知道为什么，直接将<a href="https://code.google.com/p/goagent/wiki/GoAgent_IOS中的地址粘贴过去会导致file://变成file:///，希望大家留意一下。" rel="nofollow">https://code.google.com/p/goagent/wiki/GoAgent_IOS中的地址粘贴过去会导致file://变成file:///，希望大家留意一下。</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc47">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 28 10:34:24 2012">
+ May 28, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c47" href="/p/goagent/issues/detail?id=873#c47">#47</a>
+ 
+
+ <a class="userlink"
+ href="/u/116962514907895417999/">Hopeless...@gmail.com</a
+></span>
+ 
+<pre>
+试了各种方法，最后用file://localhost/var/stash/applications/MobileSafari.app/这个目录，把11.pac放到这个目录下，代理地址指向这里，手机自带Youtube的App可以正常看视频，但是Safari不能生效，比如打不开www.youtube.com，实在不知道怎么回事了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc48">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jun  1 20:33:58 2012">
+ Jun 1, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c48" href="/p/goagent/issues/detail?id=873#c48">#48</a>
+ 
+
+ <a class="userlink"
+ href="/u/110351525835982416799/">maxiongb...@gmail.com</a
+></span>
+ 
+<pre>
+除了ifile设置http方式以外，其他任何方式都无效，ipad2 5.0.1
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc49">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun  9 10:07:10 2012">
+ Jun 9, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c49" href="/p/goagent/issues/detail?id=873#c49">#49</a>
+ 
+
+ <a class="userlink"
+ href="/u/110351525835982416799/">maxiongb...@gmail.com</a
+></span>
+ 
+<pre>
+难道一直没解决方案吗。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc50">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun 25 19:36:38 2012">
+ Jun 25, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c50" href="/p/goagent/issues/detail?id=873#c50">#50</a>
+ 
+
+ <a class="userlink"
+ href="/u/101191403308508214490/">mrgel...@gmail.com</a
+></span>
+ 
+<pre>
+ipad2 ios5.1.1
+只要是在safari后台打开的时候设置pac文件goagent就没有反应。
+把safari kill掉之后再设置pac文件就没有问题~~~~~
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc51">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Jul 27 14:08:44 2012">
+ Jul 27, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c51" href="/p/goagent/issues/detail?id=873#c51">#51</a>
+ 
+
+ <a class="userlink"
+ href="/u/101787100213526332790/">bigerb...@gmail.com</a
+></span>
+ 
+<pre>
+safari忽略了file://这类东西。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc52">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 14:01:57 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c52" href="/p/goagent/issues/detail?id=873#c52">#52</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+<i>(No comment was entered for this change.)</i>
+</pre>
+ 
+ 
+ <div class="updates">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ 
+ <b>Status:</b>
+ Done
+ 
+ <br>
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc53">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jan 12 09:17:39 2013">
+ Jan 12, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c53" href="/p/goagent/issues/detail?id=873#c53">#53</a>
+ 
+
+ <a class="userlink"
+ href="/u/105283108565431274803/">y....@nbsystems.tv</a
+></span>
+ 
+<pre>
+请问最终的解决方案是什么么？手动代理是指什么？可以举例一下吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc54">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Mar  5 07:53:14 2013">
+ Mar 5, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c54" href="/p/goagent/issues/detail?id=873#c54">#54</a>
+ 
+
+ <a class="userlink"
+ href="/u/110763841175841089688/">Adinos.L...@gmail.com</a
+></span>
+ 
+<pre>
+顶13楼
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D873&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D873"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="873">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A873',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 873,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

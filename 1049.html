@@ -1,0 +1,3500 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"loggedInUserEmail": null, "profileUrl": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "token": null, "projectHomeUrl": "/p/goagent", "projectName": "goagent", "relativeBaseUrl": "", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "domainName": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 1049 - 
+ goagent -
+ 
+ goagent在ios上的全局代理和PAC（PROXY AUTO CONFIG)的详细说明 ios4.3.3tested - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D1049&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D1049" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="closed_colors">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=1049">1049</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >goagent在ios上的全局代理和PAC（PROXY AUTO CONFIG)的详细说明 ios4.3.3tested</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 23 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A1049">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="The requested non-coding task was completed">Done</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ <tr><th align="left" valign="top">Closed:&nbsp;</th>
+ <td align="left" valign="top" width="100%">
+ Dec 2012
+ </td>
+ </tr>
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D1049&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D1049">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/111429364937018957389/">ljq8...@gmail.com</a
+>,
+ <span class="date" title="Sat Oct  8 07:49:18 2011">Oct 8, 2011</span>
+ 
+ </div>
+<pre>
+安装在WIFI上的方式请参照：<a href="https://code.google.com/p/goagent/wiki/GoAgent_IOS" rel="nofollow">https://code.google.com/p/goagent/wiki/GoAgent_IOS</a>
+以下说明由<a href="http://todaym.com/2010/05/iphone-over-the-wall-via-ssh-pac.html#comment-791提供思路。" rel="nofollow">http://todaym.com/2010/05/iphone-over-the-wall-via-ssh-pac.html#comment-791提供思路。</a>
+对于安装在3g/EDGE网络下的全局代理方法，移动运营商可前往：<a href="http://www.uc.cn/a/support/iphone_install6.html" rel="nofollow">http://www.uc.cn/a/support/iphone_install6.html</a>
+参考，接入点必须选择cmnet 如果使用goagent默认设置，代理服务器：127.0.0.1:8087 。联通运营商的方法同上，接入点为3gnet/uninet
+其中uninet为2g专用 经测试 3gnet可通用与2G/3G网络。
+iPhone/ipad 配置实用工具 3.3（Windows 版）可在APPLE网站下载：<a href="http://support.apple.com/zh_CN/downloads/" rel="nofollow">http://support.apple.com/zh_CN/downloads/</a>
+---以上方法是由于联通隐藏了APN设置，移动用户如果在设置-&gt;通用-&gt;网络-&gt;蜂窝数据中可以直接配置APN和代理服务器，则无需使用上述方法----
+另外，以上方法有明显的缺点，取消配置可在手机完成，但配置必须由电脑发起，很不方便。经测试，使用全局代理时ex.qq.com腾讯Exchange服务器连接失效，或有其他可能。
+如有方法可以打开APN配置而无需通过电脑，请回复我，感谢。
+
+-------以下是好方法，上面的可以不看------
+对于安装在3g/EDGE网络下的PAC代理方法，IPHONE/IPAD配置实用工具无效，是由于plist配置文件中ProxyAutoConfigEnable默认值是0（禁用）造成的，采用自动配置代理（PAC）有很多好处 非墙网站直连 反应速度更快 且一般无异常现象 不用手动开关。
+
+SFTP进iPhone，或用ifun-box等程序
+ 在private/var/preferences/systemconfiguration 里找到preferences.plist，备份之后进行修改，可用文本编辑。
+------请注意备份----请覆盖文件----或设置权限0644-----
+找到如下行进行比对添加，移动用户可能略有不同，但有效配置的关键词是
+				&lt;key&gt;AllowNetworkAccess&lt;/key&gt;
+				&lt;integer&gt;1&lt;/integer&gt;
+找到上面的词的位置 然后编写如下：
+                ................................
+			&lt;key&gt;Interface&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;DeviceName&lt;/key&gt;
+				&lt;string&gt;ip1&lt;/string&gt;
+				&lt;key&gt;Hardware&lt;/key&gt;
+				&lt;string&gt;com.apple.CommCenter&lt;/string&gt;
+				&lt;key&gt;Type&lt;/key&gt;
+				&lt;string&gt;com.apple.CommCenter&lt;/string&gt;
+				&lt;key&gt;UserDefinedName&lt;/key&gt;
+				&lt;string&gt;com.apple.CommCenter (ip1)&lt;/string&gt;
+			&lt;/dict&gt;
+			&lt;key&gt;Proxies&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;ProxyAutoConfigEnable&lt;/key&gt;
+				&lt;integer&gt;1&lt;/integer&gt;
+				&lt;key&gt;ProxyAutoConfigURLString&lt;/key&gt;
+				&lt;string&gt;file:///Applications/MobileSafari.app/autoproxy.pac&lt;/string&gt;
+			&lt;/dict&gt;
+			&lt;key&gt;UserDefinedName&lt;/key&gt;
+			&lt;string&gt;com.apple.CommCenter (ip1)&lt;/string&gt;
+			&lt;key&gt;com.apple.CommCenter&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;AllowNetworkAccess&lt;/key&gt;
+				&lt;integer&gt;1&lt;/integer&gt;
+                      ................................
+
+要添加的内容是：
+&lt;key&gt;Proxies&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;ProxyAutoConfigEnable&lt;/key&gt;
+				&lt;integer&gt;1&lt;/integer&gt;
+				&lt;key&gt;ProxyAutoConfigURLString&lt;/key&gt;
+				&lt;string&gt;file:///Applications/MobileSafari.app/autoproxy.pac&lt;/string&gt;
+			&lt;/dict&gt;
+其中file:///Applications/MobileSafari.app/autoproxy.pac是pac得路径 据说放置在safari目录下safari才能识别，对其他程序无影响。
+另外 别忘了修改proxy.ini中APPID，否则会返回error 502
+对plist文件的修改须重启生效，pac则不用。
+如有疑问 请留言 写的很罗嗦 请见谅
+
+
+
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Oct  8 08:40:07 2011">
+ Oct 8, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=1049#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/HewigOvens/">HewigOvens</a
+></span>
+ 
+<pre>
+赞。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Oct 12 16:34:04 2011">
+ Oct 12, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=1049#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/118336163811062579030/">ct59187...@hotmail.com</a
+></span>
+ 
+<pre>
+请问怎样更改应用程序的代理服务器地址，现在uc8.0有个默认代理，但是基本没用。不知道怎么把他改成GOAGENT得代理地址
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Oct 12 17:38:34 2011">
+ Oct 12, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=1049#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/HewigOvens/">HewigOvens</a
+></span>
+ 
+<pre>
+UC和opera mini都是自己的协议，不会支持GoAgent的server端程序的，改了也没用
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 16 10:01:48 2011">
+ Oct 16, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=1049#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/113034345201464990009/">bino...@gmail.com</a
+></span>
+ 
+<pre>
+请问找你的修改以后，移动GPRS下似乎并没有默认成为全局代理，仍然必须要在sbsettings里面打开开关，才能正常上fb，u2b等。一旦把toggle关掉，马上又变成与没有代理一样了。这样正常吗？谢谢。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 16 17:44:39 2011">
+ Oct 16, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=1049#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/HewigOvens/">HewigOvens</a
+></span>
+ 
+<pre>
+正常的行为，不开toggle，GoAgent就没有运行
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 16 18:37:16 2011">
+ Oct 16, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=1049#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/113034345201464990009/">bino...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢。还有一个问题是，如果肉身翻墙了，比如我现在在香港出差，那么理论上，gprs/3g是可以上任何网站的。所以我其实不需要在gprs/3g下再启动goagent了。可是即使我关闭了toggle，仍然无法上fb或者youtube，删掉新增加的一段以后也没有变化，请问如何解决呢？感觉似乎装了goagent以后，gprs/3g的上网就被强制劫持使用goagnet了……
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 16 20:56:50 2011">
+ Oct 16, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=1049#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/111429364937018957389/">ljq8...@gmail.com</a
+></span>
+ 
+<pre>
+如果删除了pac设置 也就是删除那一段 访问就不走goagent了 请检查你是否使用了配置文件代理 另preferences在重启后会还原 方法是在carrier.plist中加入allowedgeediting 切设置为1 以上是联通卡设置 移动无必要 如果还是无法访问可尝试注销 与goagent开关无关 pac不指定走代理 就是直连
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 16 21:00:13 2011">
+ Oct 16, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=1049#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/111429364937018957389/">ljq8...@gmail.com</a
+></span>
+ 
+<pre>
+补充  修改运营商文件请网上搜索教程 安装最新commcenter破解 易导致无法开机 还是注意备份 不成还原
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct 17 01:02:03 2011">
+ Oct 17, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=1049#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/113034345201464990009/">bino...@gmail.com</a
+></span>
+ 
+<pre>
+多谢你的回复，那么如果在那一段中第二行，就是把ProxyAutoConfig开关设为0，是否起到相同的效果呢？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Oct 17 01:46:58 2011">
+ Oct 17, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=1049#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/111429364937018957389/">ljq8...@gmail.com</a
+></span>
+ 
+<pre>
+正解
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Nov 12 00:39:06 2011">
+ Nov 12, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=1049#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/114719219805079388041/">cybersa...@gmail.com</a
+></span>
+ 
+<pre>
+成功过，某天突然不行了，查看plist发现被系统自动改回原始的，再修改后一直无果。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Nov 12 04:18:26 2011">
+ Nov 12, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=1049#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/111429364937018957389/">ljq8...@gmail.com</a
+></span>
+ 
+<pre>
+我是原作者 经研究发现重启后聪明帽commcenter会调用carrier.plist文件配置preferences.plist
+可用以下方法解决
+移动用户请跳跃之STEP3
+1.下载适用于你IOS版本的COMMCENTER文件覆盖至//System/Library/Frameworks/CoreTelephony.framework/Support
+或使用cydia安装（但请注意不要安装weiphone的那个，那个是落后版本需要修改签名信息而不是屏蔽签名）
+2.修改//System/Library/Carrier Bundles/iPhone 下的对应运营商文件 若移动则无需修改 若联通则许添加键值  &lt;key&gt;AllowEDGEEditing&lt;/key&gt;
+  并设置为实数 &lt;interger&gt;1&lt;/interger&gt;
+此时 你可以在设置中修改APN数据  如果觉得麻烦 省略第一步 直接第二步 但重启后会无法通过签名验证 应恢复到未修改前状态
+3.编辑你的APN数据 随意修改 比如3gnet改为3gnet1,修改后返回上层目录 在回到编辑改回3gnet
+这一步是为了让系统在preferences.plist中写入				&lt;key&gt;SettingsHaveBeenAlteredByPreferences&lt;/key&gt;
+				&lt;true/&gt;
+此键值可直接写入，表明APN已由设置修改 不会有commcenter调用覆盖
+位置是&lt;string&gt;com.apple.CommCenter (ip1)&lt;/string&gt;
+			&lt;key&gt;com.apple.CommCenter&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;AllowNetworkAccess&lt;/key&gt;
+				&lt;integer&gt;1&lt;/integer&gt;
+				&lt;key&gt;Available&lt;/key&gt;
+				&lt;integer&gt;1&lt;/integer&gt;
+				&lt;key&gt;SettingsHaveBeenAlteredByPreferences&lt;/key&gt;
+				&lt;true/&gt;
+				&lt;key&gt;Setup&lt;/key&gt;
+				&lt;dict&gt;
+					&lt;key&gt;apn&lt;/key&gt;
+					&lt;string&gt;3gnet&lt;/string&gt;
+键值位于commcenter字典下即可
+由此 此perferences将不会随系统重启而改变  请注意 最简单的办法是手动输入第三布键值 前面的过程是我发现此方法的步骤
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Nov 12 05:28:05 2011">
+ Nov 12, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=1049#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/114719219805079388041/">cybersa...@gmail.com</a
+></span>
+ 
+<pre>
+看不太明白，好像非常的复杂...
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Nov 24 22:27:07 2011">
+ Nov 24, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=1049#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/117241757454702404698/">xyb...@gmail.com</a
+></span>
+ 
+<pre>
+有点复杂了，再等等看
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Dec  9 03:30:36 2011">
+ Dec 9, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=1049#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/114719219805079388041/">cybersa...@gmail.com</a
+></span>
+ 
+<pre>
+问题自己已经解决。
+原因是“中行手机银行”这个app安装的描述性文件会安装一个签名证书，然后将APN修改为3gwap，默认所有的访问都通过联通的内网代理地址10.0.0.172:80进行访问。
+经过各种测试发现，用3gwap的ANP可以访问中行手机银行，但用不了3g的gae，改为3gnet的APN后可以用3g的gae，但无法用手机号码登录（用其他方式登录时用不了中行手机银行的全部功能）。
+经过搜索中国联通的3gnet和3gwap的区别发现跟中国移动的cmnet和cmwap区别一样，net是直接接入互联网，wap是先通过ISP的内部代理再接入互联网。联通的3gnet获取的ip地址是B类地址（172.16.0.0--172.31.255.255），3gwap获取的ip地址是A类地址（10.0.0.0--10.255.255.255）。
+对于中行来说，为了加强自身客户的财产安全，要求高风险操作必须通过他们的签名证书和联通的代理进行连接（这中间应该也是为了让app识别出用户的手机号码吧）。
+所以要使用中行手机银行app全部功能的话，就必须要使用中行的签名的描述性文件和3gwap的APN（将默认代理修改为.pac自动代理也可以访问中行手机银行，但是3g的gae代理却无法使用），而要使用3G网络下的gae代理就必须使用3gnet的APN。
+由于本人技术有限，后来试过修改preferences.plist几个位置的内容，都无法实现中行手机银行app和3G的gae共存。希望有高人能帮忙解决他们两个共存的问题。
+附上自己修改后的preferences.plist的（ip1）主要内容，其中Proxies和SettingsHaveBeenAlteredByPreferences的内容是根据<a title="goagent在ios上的全局代理和PAC（PROXY AUTO CONFIG)的详细说明 ios4.3.3tested" class=closed_ref href="/p/goagent/issues/detail?id=1049"> issue1049 </a>作者ljq8...@gmail.com的方法写的，AllowNoDNS是中行描述性文件里原有的，为了方便随时切换而给予保留，而apn的则是根据需要编辑成3gnet或者3gwap。
+
+&lt;key&gt;Interface&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;DeviceName&lt;/key&gt;
+				&lt;string&gt;ip1&lt;/string&gt;
+				&lt;key&gt;Hardware&lt;/key&gt;
+				&lt;string&gt;com.apple.CommCenter&lt;/string&gt;
+				&lt;key&gt;Type&lt;/key&gt;
+				&lt;string&gt;com.apple.CommCenter&lt;/string&gt;
+				&lt;key&gt;UserDefinedName&lt;/key&gt;
+				&lt;string&gt;com.apple.CommCenter(ip1)&lt;/string&gt;
+			&lt;/dict&gt;
+			&lt;key&gt;Proxies&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;ProxyAutoConfigEnable&lt;/key&gt;
+				&lt;integer&gt;1&lt;/integer&gt;
+				&lt;key&gt;ProxyAutoConfigURLString&lt;/key&gt;
+			&lt;string&gt;file://localhost/var/mobile/goagent-local/8087.pac&lt;/string&gt;
+			&lt;/dict&gt;
+			&lt;string&gt;com.apple.CommCenter (ip1)&lt;/string&gt;
+			&lt;key&gt;com.apple.CommCenter&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;AllowNetworkAccess&lt;/key&gt;
+				&lt;integer&gt;1&lt;/integer&gt;
+				&lt;key&gt;Available&lt;/key&gt;
+				&lt;integer&gt;1&lt;/integer&gt;
+				&lt;key&gt;SettingsHaveBeenAlteredByPreferences&lt;/key&gt;
+				&lt;true/&gt;
+				&lt;key&gt;Setup&lt;/key&gt;
+				&lt;dict&gt;
+					&lt;key&gt;AllowNoDNS&lt;/key&gt;
+					&lt;integer&gt;1&lt;/integer&gt;
+
+					&lt;key&gt;apn&lt;/key&gt;
+					&lt;string&gt;3gnet&lt;/string&gt;
+				&lt;/dict&gt;
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Dec 12 20:53:10 2011">
+ Dec 12, 2011
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=1049#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/115403791186620011542/">yuanpei...@gmail.com</a
+></span>
+ 
+<pre>
+为什么app都无法走代理连接呢？可以用safari，但安装的app连不上
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Feb  9 21:05:40 2012">
+ Feb 9, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=1049#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/118011203614502373770/">ssnob...@gmail.com</a
+></span>
+ 
+<pre>
+之前自己的评论把自己都搞错了……
+装了一个onavo，发现就是onavo所在的位置替换添加即可，当然onavo是明文代理，只能舍弃了呵呵。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Feb 14 08:46:07 2012">
+ Feb 14, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=1049#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/108860507390783222471/">myhenryx...@gmail.com</a
+></span>
+ 
+<pre>
+请教一下，为什么plist重启后会自动恢复？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Feb 14 08:51:21 2012">
+ Feb 14, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=1049#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/111429364937018957389/">ljq8...@gmail.com</a
+></span>
+ 
+<pre>
+please read my comment #13.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Mar  1 01:58:37 2012">
+ Mar 1, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=1049#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/111095500009393212081/">toker.ji...@gmail.com</a
+></span>
+ 
+<pre>
+移动的蜂窝数据设置中本身没有 APN代理的设置，如果用LZ的方法，使用3G/EDGE的时候就只能通过goagent，怎样才能做到可以切换，即不想翻墙的时候用正常的EDGE,需要的时候通过Goagent
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Mar 11 21:32:30 2012">
+ Mar 11, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=1049#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/104378946586133433621/">inter...@gmail.com</a
+></span>
+ 
+<pre>
+请问电信CDMA应该如何修改？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Mar 11 21:41:18 2012">
+ Mar 11, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=1049#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/114719219805079388041/">cybersa...@gmail.com</a
+></span>
+ 
+<pre>
+to Comment 22 :
+手头没有CDMA版本的机子，你可以把private/var/preferences/systemconfiguration 的preferences.plist文件分享出来供大家研究下。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar 19 21:42:50 2012">
+ Mar 19, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=1049#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/105561116458890873103/">z.xia1...@gmail.com</a
+></span>
+ 
+<pre>
+ios5.0.1，联通3G，可以使用twitbot，心满意足。脸书和youtube app也可用。
+路径用的是file://localhost/var/mobile/goagent-local/8087.pac。
+
+不过貌似operamini和safari无法。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc26">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Mar 19 22:03:33 2012">
+ Mar 19, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c26" href="/p/goagent/issues/detail?id=1049#c26">#26</a>
+ 
+
+ <a class="userlink"
+ href="/u/118011203614502373770/">ssnob...@gmail.com</a
+></span>
+ 
+<pre>
+opera用的自己的apn代理
+safari需要把pac放到safari目录下
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Mar 30 23:52:44 2012">
+ Mar 30, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=1049#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/113104205667763585387/">Frank...@gmail.com</a
+></span>
+ 
+<pre>
+我是联通如意通预付费卡的，只能用GPRS上网，在试验安装goagent后，在wifi上成功FQ，但是如果修改preferences.plist文件就会遇到问题，照这里的例子修改后，GPRS上网可以FQ了，但是此时Wifi下FQ就不行了，查一下发现此时Wifi网络&gt;路由器名称下HTTP代理下原来的“自动”变为关闭了，URL后面是空白的，重设后也没用，系统马上又“关闭”URL了，两种FQ的途径不兼容？于是只能恢复preferences.plist放弃GPRS上网FQ了，楼主有没有办法实现Wifi和GPRS的兼容FQ呢。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Mar 31 20:46:45 2012">
+ Mar 31, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=1049#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/106710920277142495678/">Wangxiao...@gmail.com</a
+></span>
+ 
+<pre>
+我CDMA iphone4 机子修改preferences.plist文件后  还是无法3G上啊  
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc29">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Apr  4 09:29:53 2012">
+ Apr 4, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c29" href="/p/goagent/issues/detail?id=1049#c29">#29</a>
+ 
+
+ <a class="userlink"
+ href="/u/100871963548263625374/">blove...@gmail.com</a
+></span>
+ 
+<pre>
+有点儿乱，楼主能否整理一下，可以看得更清楚。
+
+另外还有那些问题没有解决，也盼能集中说明一下。
+
+辛苦了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc30">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 10 23:26:04 2012">
+ Apr 10, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c30" href="/p/goagent/issues/detail?id=1049#c30">#30</a>
+ 
+
+ <a class="userlink"
+ href="/u/110270884397198534287/">wyb3...@gmail.com</a
+></span>
+ 
+<pre>
+&lt;key&gt;Proxies&lt;/key&gt;
+&lt;dict&gt;
+  &lt;key&gt;HTTPEnable&lt;/key&gt;
+  &lt;integer&gt;0&lt;/integer&gt;
+  &lt;key&gt;HTTPProxyType&lt;/key&gt;
+  &lt;integer&gt;2&lt;/integer&gt;
+  &lt;key&gt;HTTPSEnable&lt;/key&gt;
+  &lt;integer&gt;0&lt;/integer&gt;
+  &lt;key&gt;ProxyAutoConfigEnable&lt;/key&gt;
+  &lt;integer&gt;1&lt;/integer&gt;
+  &lt;key&gt;ProxyAutoConfigURLString&lt;/key&gt;
+  &lt;string&gt;file://localhost/var/stash/Applications/MobileSafari.app/8087.pac&lt;/string&gt;
+&lt;/dict&gt;
+直接从WIFI那里复制这段代码添加也可以，pac地址用这个比较好
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc31">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Apr 10 23:26:58 2012">
+ Apr 10, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c31" href="/p/goagent/issues/detail?id=1049#c31">#31</a>
+ 
+
+ <a class="userlink"
+ href="/u/110270884397198534287/">wyb3...@gmail.com</a
+></span>
+ 
+<pre>
+我电信的CDMA改法和联通是一样的
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc32">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 12 00:09:03 2012">
+ Apr 12, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c32" href="/p/goagent/issues/detail?id=1049#c32">#32</a>
+ 
+
+ <a class="userlink"
+ href="/u/103831684775616881640/">3081...@gmail.com</a
+></span>
+ 
+<pre>
+其中file:///Applications/MobileSafari.app/autoproxy.pac是pac得路径 据说放置在safari目录下safari才能识别，对其他程序无影响。
+
+这句不大明白，求详解步骤
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc34">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 19 08:01:22 2012">
+ Apr 19, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c34" href="/p/goagent/issues/detail?id=1049#c34">#34</a>
+ 
+
+ <a class="userlink"
+ href="/u/116347913562559074748/">sjz...@gmail.com</a
+></span>
+ 
+<pre>
+移动的，已经测试成功了，edge网络可行，与 wifi 相同都需要先打开sbs的 goagent的开关~~不懂的童鞋，可以参照 威锋论坛的 大神的 教程 貌似跟这里说的一样，只是 步骤更清晰一些~~
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc35">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 29 21:21:12 2012">
+ Apr 29, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c35" href="/p/goagent/issues/detail?id=1049#c35">#35</a>
+ 
+
+ <a class="userlink"
+ href="/u/100489589259953962582/">yaoyongp...@gmail.com</a
+></span>
+ 
+<pre>
+电信CDMA也搞定了，用的下面修改plist的方法，其中在PAC的地方还是应该用：
+file:///Applications/MobileSafari.app/autoproxy.pac
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc36">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Apr 29 21:28:41 2012">
+ Apr 29, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c36" href="/p/goagent/issues/detail?id=1049#c36">#36</a>
+ 
+
+ <a class="userlink"
+ href="/u/100489589259953962582/">yaoyongp...@gmail.com</a
+></span>
+ 
+<pre>
+顺便说一句，用的是iOS 5.0.1越狱，CDMA iPhone 4
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc37">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May 27 01:11:13 2012">
+ May 27, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c37" href="/p/goagent/issues/detail?id=1049#c37">#37</a>
+ 
+
+ <a class="userlink"
+ href="/u/115892940201634465488/">alsot...@gmail.com</a
+></span>
+ 
+<pre>
+file:///Applications/MobileSafari.app/autoproxy.pac  这个文件已经不存在了，应该改为
+file://localhost/var/stash/Applications/MobileSafari.app/8087.pac
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc38">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 28 18:47:04 2012">
+ May 28, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c38" href="/p/goagent/issues/detail?id=1049#c38">#38</a>
+ 
+
+ <a class="userlink"
+ href="/u/102223814402064879744/">yupan0...@gmail.com</a
+></span>
+ 
+<pre>
+完全看不懂。谁能告诉我移动Edge应该用那一段代码呢。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc39">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 28 19:19:15 2012">
+ May 28, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c39" href="/p/goagent/issues/detail?id=1049#c39">#39</a>
+ 
+
+ <a class="userlink"
+ href="/u/115799879770214155350/">qianxian...@gmail.com</a
+></span>
+ 
+<pre>
+按照前面大家的经验，也搞定了移动edge及wifi下的配置，目前edge和wifi下调用goagent都没有问题，谢谢大家。我分享一下我的preferences.plist的相关信息：
+		&lt;dict&gt;
+			&lt;key&gt;Interface&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;DeviceName&lt;/key&gt;
+				&lt;string&gt;ip1&lt;/string&gt;
+				&lt;key&gt;Hardware&lt;/key&gt;
+				&lt;string&gt;com.apple.CommCenter&lt;/string&gt;
+				&lt;key&gt;Type&lt;/key&gt;
+				&lt;string&gt;com.apple.CommCenter&lt;/string&gt;
+				&lt;key&gt;UserDefinedName&lt;/key&gt;
+				&lt;string&gt;com.apple.CommCenter (ip1)&lt;/string&gt;
+			&lt;/dict&gt;
+			&lt;key&gt;Proxies&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;ProxyAutoConfigEnable&lt;/key&gt;
+				&lt;integer&gt;1&lt;/integer&gt;
+				&lt;key&gt;ProxyAutoConfigURLString&lt;/key&gt;
+				&lt;string&gt;file://localhost/Applications/MobileSafari.app/8087.pac&lt;/string&gt;
+			&lt;/dict&gt;
+			&lt;key&gt;UserDefinedName&lt;/key&gt;
+			&lt;string&gt;com.apple.CommCenter (ip1)&lt;/string&gt;
+			&lt;key&gt;com.apple.CommCenter&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;AllowNetworkAccess&lt;/key&gt;
+				&lt;integer&gt;1&lt;/integer&gt;
+				&lt;key&gt;Available&lt;/key&gt;
+				&lt;integer&gt;1&lt;/integer&gt;
+				&lt;key&gt;SettingsHaveBeenAlteredByPreferences&lt;/key&gt;
+				&lt;true/&gt;
+				&lt;key&gt;Setup&lt;/key&gt;
+				&lt;dict&gt;
+					&lt;key&gt;apn&lt;/key&gt;
+					&lt;string&gt;cmnet&lt;/string&gt;
+					&lt;key&gt;password&lt;/key&gt;
+					&lt;string&gt;&lt;/string&gt;
+					&lt;key&gt;signature&lt;/key&gt;
+					&lt;data&gt;
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc40">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 28 19:19:51 2012">
+ May 28, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c40" href="/p/goagent/issues/detail?id=1049#c40">#40</a>
+ 
+
+ <a class="userlink"
+ href="/u/115799879770214155350/">qianxian...@gmail.com</a
+></span>
+ 
+<pre>
+补充一下，港版iphone4s，5.1.1
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc41">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 28 19:21:36 2012">
+ May 28, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c41" href="/p/goagent/issues/detail?id=1049#c41">#41</a>
+ 
+
+ <a class="userlink"
+ href="/u/107155775189343573448/">zxq3...@gmail.com</a
+></span>
+ 
+<pre>
+小白 求指导在文件里哪个位置添加
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc42">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 28 19:24:55 2012">
+ May 28, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c42" href="/p/goagent/issues/detail?id=1049#c42">#42</a>
+ 
+
+ <a class="userlink"
+ href="/u/115799879770214155350/">qianxian...@gmail.com</a
+></span>
+ 
+<pre>
+我的8087.pac文件是放在了：/Applications/MobileSafari.app/   目录下，供参考。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc43">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jun 12 23:38:58 2012">
+ Jun 12, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c43" href="/p/goagent/issues/detail?id=1049#c43">#43</a>
+ 
+
+ <a class="userlink"
+ href="/u/100985395235813947926/">ostarav...@gmail.com</a
+></span>
+ 
+<pre>
+
+引用39楼 qianxian...的preferences.plist的相关信息进行配置后，现在的情况是这样：
+1.wifi无法配置静态ip
+2.wifi的代理设置完，退出后再进入wifi设置，设置好的自动代理变为关闭状态。
+3.e网可用。
+
+请教，该如何解决，谢谢。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc44">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jun 13 18:21:52 2012">
+ Jun 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c44" href="/p/goagent/issues/detail?id=1049#c44">#44</a>
+ 
+
+ <a class="userlink"
+ href="/u/115799879770214155350/">qianxian...@gmail.com</a
+></span>
+ 
+<pre>
+我把plist中涉及wifi和edge的部分贴出来，请特别注意一下有三个涉及8087.pac的部分，按照这个设置，wifi和edge都是可以的。在iphone的设置部分，不需要另外设置wifi的代理，因为在plist中已经定义好了。
+================================
+
+&lt;dict&gt;
+	&lt;key&gt;CurrentSet&lt;/key&gt;
+	&lt;string&gt;/Sets/E2FAF4EB-DB2C-492F-A1A8-DA2DD82E7110&lt;/string&gt;
+	&lt;key&gt;NetworkServices&lt;/key&gt;
+	&lt;dict&gt;
+		&lt;key&gt;13DB59F5-FF61-439D-AE79-62EB5836575E&lt;/key&gt;
+		&lt;dict&gt;
+			&lt;key&gt;DNS&lt;/key&gt;
+			&lt;dict/&gt;
+			&lt;key&gt;IPv4&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;ConfigMethod&lt;/key&gt;
+				&lt;string&gt;DHCP&lt;/string&gt;
+			&lt;/dict&gt;
+			&lt;key&gt;IPv6&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;ConfigMethod&lt;/key&gt;
+				&lt;string&gt;Automatic&lt;/string&gt;
+			&lt;/dict&gt;
+			&lt;key&gt;Interface&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;DeviceName&lt;/key&gt;
+				&lt;string&gt;en0&lt;/string&gt;
+				&lt;key&gt;Hardware&lt;/key&gt;
+				&lt;string&gt;AirPort&lt;/string&gt;
+				&lt;key&gt;Type&lt;/key&gt;
+				&lt;string&gt;Ethernet&lt;/string&gt;
+				&lt;key&gt;UserDefinedName&lt;/key&gt;
+				&lt;string&gt;Wi-Fi&lt;/string&gt;
+			&lt;/dict&gt;
+			&lt;key&gt;Proxies&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;HTTPEnable&lt;/key&gt;
+				&lt;integer&gt;0&lt;/integer&gt;
+				&lt;key&gt;HTTPPort&lt;/key&gt;
+				&lt;integer&gt;0&lt;/integer&gt;
+				&lt;key&gt;HTTPProxy&lt;/key&gt;
+				&lt;string&gt;&lt;/string&gt;
+				&lt;key&gt;HTTPProxyType&lt;/key&gt;
+				&lt;integer&gt;2&lt;/integer&gt;
+				&lt;key&gt;HTTPSEnable&lt;/key&gt;
+				&lt;integer&gt;0&lt;/integer&gt;
+				&lt;key&gt;HTTPSPort&lt;/key&gt;
+				&lt;integer&gt;0&lt;/integer&gt;
+				&lt;key&gt;HTTPSProxy&lt;/key&gt;
+				&lt;string&gt;&lt;/string&gt;
+				&lt;key&gt;ProxyAutoConfigEnable&lt;/key&gt;
+				&lt;integer&gt;1&lt;/integer&gt;
+				&lt;key&gt;ProxyAutoConfigURLString&lt;/key&gt;
+				&lt;string&gt;file://localhost/Applications/MobileSafari.app/8087.pac&lt;/string&gt;
+			&lt;/dict&gt;
+			&lt;key&gt;UserDefinedName&lt;/key&gt;
+			&lt;string&gt;Wi-Fi&lt;/string&gt;
+		&lt;/dict&gt;
+		&lt;key&gt;294881CC-7F3E-48BA-8940-626D5117292A&lt;/key&gt;
+		&lt;dict&gt;
+			&lt;key&gt;Interface&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;DeviceName&lt;/key&gt;
+				&lt;string&gt;ip2&lt;/string&gt;
+				&lt;key&gt;Hardware&lt;/key&gt;
+				&lt;string&gt;com.apple.CommCenter&lt;/string&gt;
+				&lt;key&gt;Type&lt;/key&gt;
+				&lt;string&gt;com.apple.CommCenter&lt;/string&gt;
+				&lt;key&gt;UserDefinedName&lt;/key&gt;
+				&lt;string&gt;com.apple.CommCenter (ip2)&lt;/string&gt;
+			&lt;/dict&gt;
+			&lt;key&gt;PrimaryRank&lt;/key&gt;
+			&lt;string&gt;Never&lt;/string&gt;
+			&lt;key&gt;UserDefinedName&lt;/key&gt;
+			&lt;string&gt;com.apple.CommCenter (ip2)&lt;/string&gt;
+			&lt;key&gt;com.apple.CommCenter&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;AllowNetworkAccess&lt;/key&gt;
+				&lt;integer&gt;0&lt;/integer&gt;
+				&lt;key&gt;Available&lt;/key&gt;
+				&lt;integer&gt;1&lt;/integer&gt;
+				&lt;key&gt;SettingsHaveBeenAlteredByPreferences&lt;/key&gt;
+				&lt;true/&gt;
+				&lt;key&gt;Setup&lt;/key&gt;
+				&lt;dict&gt;
+					&lt;key&gt;apn&lt;/key&gt;
+					&lt;string&gt;&lt;/string&gt;
+					&lt;key&gt;password&lt;/key&gt;
+					&lt;string&gt;&lt;/string&gt;
+					&lt;key&gt;type-mask&lt;/key&gt;
+					&lt;integer&gt;0&lt;/integer&gt;
+					&lt;key&gt;username&lt;/key&gt;
+					&lt;string&gt;&lt;/string&gt;
+				&lt;/dict&gt;
+				&lt;key&gt;Version&lt;/key&gt;
+				&lt;integer&gt;11&lt;/integer&gt;
+			&lt;/dict&gt;
+		&lt;/dict&gt;
+		&lt;key&gt;3AF1E97B-B102-4A60-A3AD-8E5552C1689D&lt;/key&gt;
+		&lt;dict&gt;
+			&lt;key&gt;Interface&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;DeviceName&lt;/key&gt;
+				&lt;string&gt;ip1&lt;/string&gt;
+				&lt;key&gt;Hardware&lt;/key&gt;
+				&lt;string&gt;com.apple.CommCenter&lt;/string&gt;
+				&lt;key&gt;Type&lt;/key&gt;
+				&lt;string&gt;com.apple.CommCenter&lt;/string&gt;
+				&lt;key&gt;UserDefinedName&lt;/key&gt;
+				&lt;string&gt;com.apple.CommCenter (ip1)&lt;/string&gt;
+			&lt;/dict&gt;
+			&lt;key&gt;Proxies&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;ProxyAutoConfigEnable&lt;/key&gt;
+				&lt;integer&gt;1&lt;/integer&gt;
+				&lt;key&gt;ProxyAutoConfigURLString&lt;/key&gt;
+				&lt;string&gt;file://localhost/Applications/MobileSafari.app/8087.pac&lt;/string&gt;
+			&lt;/dict&gt;
+			&lt;key&gt;UserDefinedName&lt;/key&gt;
+			&lt;string&gt;com.apple.CommCenter (ip1)&lt;/string&gt;
+			&lt;key&gt;com.apple.CommCenter&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;AllowNetworkAccess&lt;/key&gt;
+				&lt;integer&gt;1&lt;/integer&gt;
+				&lt;key&gt;Available&lt;/key&gt;
+				&lt;integer&gt;1&lt;/integer&gt;
+				&lt;key&gt;SettingsHaveBeenAlteredByPreferences&lt;/key&gt;
+				&lt;true/&gt;
+				&lt;key&gt;Setup&lt;/key&gt;
+				&lt;dict&gt;
+					&lt;key&gt;apn&lt;/key&gt;
+					&lt;string&gt;cmnet&lt;/string&gt;
+					&lt;key&gt;password&lt;/key&gt;
+					&lt;string&gt;&lt;/string&gt;
+					&lt;key&gt;signature&lt;/key&gt;
+					&lt;data&gt;
+					UPjwiZr7gVDTYaHl62x1+C3r7ws3F01lFGOV
+					CEiPGNZHCQ4nbLfteTj/HIc3sONpSDvjqIHP
+					96GkgS1GzAvb2yeK8QjQu8Qe3Gxg9H38wSe/
+					PIPJlkooHbufLcMhXfN5cBupzchOvxpWR2tr
+					o1NsYHkUI7kcCbBx5iZZPRGiP/o=
+					&lt;/data&gt;
+					&lt;key&gt;type-mask&lt;/key&gt;
+					&lt;integer&gt;1&lt;/integer&gt;
+					&lt;key&gt;username&lt;/key&gt;
+					&lt;string&gt;&lt;/string&gt;
+				&lt;/dict&gt;
+				&lt;key&gt;Version&lt;/key&gt;
+				&lt;integer&gt;11&lt;/integer&gt;
+			&lt;/dict&gt;
+		&lt;/dict&gt;
+		&lt;key&gt;42AF8EA5-A825-40AC-AD74-225518CFCEE5&lt;/key&gt;
+		&lt;dict&gt;
+			&lt;key&gt;DNS&lt;/key&gt;
+			&lt;dict/&gt;
+			&lt;key&gt;IPv4&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;ConfigMethod&lt;/key&gt;
+				&lt;string&gt;DHCP&lt;/string&gt;
+			&lt;/dict&gt;
+			&lt;key&gt;IPv6&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;ConfigMethod&lt;/key&gt;
+				&lt;string&gt;Automatic&lt;/string&gt;
+			&lt;/dict&gt;
+			&lt;key&gt;Interface&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;DeviceName&lt;/key&gt;
+				&lt;string&gt;en0&lt;/string&gt;
+				&lt;key&gt;Hardware&lt;/key&gt;
+				&lt;string&gt;AirPort&lt;/string&gt;
+				&lt;key&gt;Type&lt;/key&gt;
+				&lt;string&gt;Ethernet&lt;/string&gt;
+				&lt;key&gt;UserDefinedName&lt;/key&gt;
+				&lt;string&gt;Wi-Fi&lt;/string&gt;
+			&lt;/dict&gt;
+			&lt;key&gt;Proxies&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;ExceptionsList&lt;/key&gt;
+				&lt;array&gt;
+					&lt;string&gt;*.local&lt;/string&gt;
+					&lt;string&gt;169.254/16&lt;/string&gt;
+				&lt;/array&gt;
+				&lt;key&gt;FTPPassive&lt;/key&gt;
+				&lt;integer&gt;1&lt;/integer&gt;
+			&lt;/dict&gt;
+			&lt;key&gt;UserDefinedName&lt;/key&gt;
+			&lt;string&gt;Wi-Fi&lt;/string&gt;
+		&lt;/dict&gt;
+		&lt;key&gt;446D26B5-11CF-4E4B-97FA-C1D8E533C751&lt;/key&gt;
+		&lt;dict&gt;
+			&lt;key&gt;Interface&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;DeviceName&lt;/key&gt;
+				&lt;string&gt;ip3&lt;/string&gt;
+				&lt;key&gt;Hardware&lt;/key&gt;
+				&lt;string&gt;com.apple.CommCenter&lt;/string&gt;
+				&lt;key&gt;Type&lt;/key&gt;
+				&lt;string&gt;com.apple.CommCenter&lt;/string&gt;
+				&lt;key&gt;UserDefinedName&lt;/key&gt;
+				&lt;string&gt;com.apple.CommCenter (ip3)&lt;/string&gt;
+			&lt;/dict&gt;
+			&lt;key&gt;PrimaryRank&lt;/key&gt;
+			&lt;string&gt;Never&lt;/string&gt;
+			&lt;key&gt;UserDefinedName&lt;/key&gt;
+			&lt;string&gt;com.apple.CommCenter (ip3)&lt;/string&gt;
+			&lt;key&gt;com.apple.CommCenter&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;AllowNetworkAccess&lt;/key&gt;
+				&lt;integer&gt;0&lt;/integer&gt;
+				&lt;key&gt;Available&lt;/key&gt;
+				&lt;integer&gt;1&lt;/integer&gt;
+				&lt;key&gt;SettingsHaveBeenAlteredByPreferences&lt;/key&gt;
+				&lt;true/&gt;
+				&lt;key&gt;Setup&lt;/key&gt;
+				&lt;dict&gt;
+					&lt;key&gt;apn&lt;/key&gt;
+					&lt;string&gt;cmwap&lt;/string&gt;
+					&lt;key&gt;password&lt;/key&gt;
+					&lt;string&gt;&lt;/string&gt;
+					&lt;key&gt;type-mask&lt;/key&gt;
+					&lt;integer&gt;4&lt;/integer&gt;
+					&lt;key&gt;username&lt;/key&gt;
+					&lt;string&gt;&lt;/string&gt;
+				&lt;/dict&gt;
+				&lt;key&gt;Version&lt;/key&gt;
+				&lt;integer&gt;11&lt;/integer&gt;
+			&lt;/dict&gt;
+		&lt;/dict&gt;
+		&lt;key&gt;4B8DB7EF-852B-46CA-B254-28A0C73D04AD&lt;/key&gt;
+		&lt;dict&gt;
+			&lt;key&gt;Interface&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;DeviceName&lt;/key&gt;
+				&lt;string&gt;ip4&lt;/string&gt;
+				&lt;key&gt;Hardware&lt;/key&gt;
+				&lt;string&gt;com.apple.CommCenter&lt;/string&gt;
+				&lt;key&gt;Type&lt;/key&gt;
+				&lt;string&gt;com.apple.CommCenter&lt;/string&gt;
+				&lt;key&gt;UserDefinedName&lt;/key&gt;
+				&lt;string&gt;com.apple.CommCenter (ip4)&lt;/string&gt;
+			&lt;/dict&gt;
+			&lt;key&gt;PrimaryRank&lt;/key&gt;
+			&lt;string&gt;Never&lt;/string&gt;
+			&lt;key&gt;UserDefinedName&lt;/key&gt;
+			&lt;string&gt;com.apple.CommCenter (ip4)&lt;/string&gt;
+			&lt;key&gt;com.apple.CommCenter&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;AllowNetworkAccess&lt;/key&gt;
+				&lt;integer&gt;0&lt;/integer&gt;
+				&lt;key&gt;Available&lt;/key&gt;
+				&lt;integer&gt;1&lt;/integer&gt;
+				&lt;key&gt;Version&lt;/key&gt;
+				&lt;integer&gt;11&lt;/integer&gt;
+			&lt;/dict&gt;
+		&lt;/dict&gt;
+		&lt;key&gt;5521DEDB-E7B1-41E9-991E-80C287D80042&lt;/key&gt;
+		&lt;dict&gt;
+			&lt;key&gt;DNS&lt;/key&gt;
+			&lt;dict/&gt;
+			&lt;key&gt;IPv4&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;ConfigMethod&lt;/key&gt;
+				&lt;string&gt;DHCP&lt;/string&gt;
+			&lt;/dict&gt;
+			&lt;key&gt;IPv6&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;ConfigMethod&lt;/key&gt;
+				&lt;string&gt;Automatic&lt;/string&gt;
+			&lt;/dict&gt;
+			&lt;key&gt;Interface&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;DeviceName&lt;/key&gt;
+				&lt;string&gt;en0&lt;/string&gt;
+				&lt;key&gt;Hardware&lt;/key&gt;
+				&lt;string&gt;AirPort&lt;/string&gt;
+				&lt;key&gt;Type&lt;/key&gt;
+				&lt;string&gt;Ethernet&lt;/string&gt;
+				&lt;key&gt;UserDefinedName&lt;/key&gt;
+				&lt;string&gt;Wi-Fi&lt;/string&gt;
+			&lt;/dict&gt;
+			&lt;key&gt;Proxies&lt;/key&gt;
+			&lt;dict&gt;
+				&lt;key&gt;HTTPEnable&lt;/key&gt;
+				&lt;integer&gt;0&lt;/integer&gt;
+				&lt;key&gt;HTTPProxyType&lt;/key&gt;
+				&lt;integer&gt;2&lt;/integer&gt;
+				&lt;key&gt;HTTPSEnable&lt;/key&gt;
+				&lt;integer&gt;0&lt;/integer&gt;
+				&lt;key&gt;ProxyAutoConfigEnable&lt;/key&gt;
+				&lt;integer&gt;1&lt;/integer&gt;
+				&lt;key&gt;ProxyAutoConfigURLString&lt;/key&gt;
+				&lt;string&gt;file://localhost/Applications/MobileSafari.app/8087.pac&lt;/string&gt;
+			&lt;/dict&gt;
+			&lt;key&gt;UserDefinedName&lt;/key&gt;
+			&lt;string&gt;Wi-Fi&lt;/string&gt;
+		&lt;/dict&gt;
+	&lt;/dict&gt;
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc45">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jul  7 11:29:44 2012">
+ Jul 7, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c45" href="/p/goagent/issues/detail?id=1049#c45">#45</a>
+ 
+
+ <a class="userlink"
+ href="/u/rabbitzhang52/">rabbitzhang52</a
+></span>
+ 
+<pre>
+我的3G模式下代理成功了，但是现在修改wifi的代理设置无法保存呀，返回再进去代理就为空了~怎么办呀？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc46">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jul 12 00:04:04 2012">
+ Jul 12, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c46" href="/p/goagent/issues/detail?id=1049#c46">#46</a>
+ 
+
+ <a class="userlink"
+ href="/u/110714950401386396200/">jiangsha...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢，回头仔细研究。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc47">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jul 31 01:32:54 2012">
+ Jul 31, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c47" href="/p/goagent/issues/detail?id=1049#c47">#47</a>
+ 
+
+ <a class="userlink"
+ href="/u/110064075654989837534/">dong...@gmail.com</a
+></span>
+ 
+<pre>
+13楼的多虑了。其实没必要在APN设置来设置去的。直接按照lz的方法操作就行了。没有任何问题。我的系统是5.1.1.不知道你的是哪个版本的系统会重置commcenter
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc48">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Aug 14 01:47:58 2012">
+ Aug 14, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c48" href="/p/goagent/issues/detail?id=1049#c48">#48</a>
+ 
+
+ <a class="userlink"
+ href="/u/118074205821312314131/">wesley.c...@gmail.com</a
+></span>
+ 
+<pre>
+我用BBedit改之后保存不了,然后google一下,说itools打开不会乱码,又用itools来改,结果保存时候说格式不对...
+到底应该怎么改呀...求高手指点...QQ:233851520
+我的是mac文本编辑打开,说是文件损坏,根本不能打开...另外我的手机系统是5.1.1
+谢谢,好心人.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc49">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Aug 24 08:15:37 2012">
+ Aug 24, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c49" href="/p/goagent/issues/detail?id=1049#c49">#49</a>
+ 
+
+ <a class="userlink"
+ href="/u/117933214888284311905/">fmm15218...@gmail.com</a
+></span>
+ 
+<pre>
+commcenter重启被重置的一般都是修改后格式不对，注意对齐
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc50">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Sep 12 00:08:19 2012">
+ Sep 12, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c50" href="/p/goagent/issues/detail?id=1049#c50">#50</a>
+ 
+
+ <a class="userlink"
+ href="/u/110714950401386396200/">jiangsha...@gmail.com</a
+></span>
+ 
+<pre>
+thankyou!!!!!
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc51">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Sep 24 09:11:06 2012">
+ Sep 24, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c51" href="/p/goagent/issues/detail?id=1049#c51">#51</a>
+ 
+
+ <a class="userlink"
+ href="/u/113963789210553625847/">jasonwan...@gmail.com</a
+></span>
+ 
+<pre>
+大家有没有发现一个问题，按照这个帖子正确设置了3G的GAE后，个人热点(hotspot)却无法使用了？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc52">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Oct  9 08:24:20 2012">
+ Oct 9, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c52" href="/p/goagent/issues/detail?id=1049#c52">#52</a>
+ 
+
+ <a class="userlink"
+ href="/u/110340967775844228005/">cdli...@gmail.com</a
+></span>
+ 
+<pre>
+3G配置代理成功，效果与WIFI一样。
+谢谢作者及各位！
+我的理解，简单地说，所有的修改都在preferences.plist文件中进行。按照作者文章修改，以及作者在13楼说明中加入的下面语句添加：
+                         &lt;key&gt;SettingsHaveBeenAlteredByPreferences&lt;/key&gt;
+                     &lt;true/&gt;
+即可。千万不要改carrier.plist文件。当然楼主是为了我们更好理解，说了许多，佩服楼主的奉献精神！
+说下我安装的东东：org.goagent.local.ios_0.0.3-1_iphoneos-arm.deb 新版以及python_2.7.3-3（python这个版本的不同未发现有什么区别），未安装goagent-local_1.7。这样只能使用代理
+              file:///Applications/goagent-ios.app/goagent-local/goagent.pac
+   就不能使用
+              http://127.0.0.1:8089/goagent.pac
+少安装一个东西，不错。
+效果：youtube可以看见列表，不能播放。还有mg之音中文网打不开，英文网可以，不知何故。期待软件升级。
+再次感谢楼主
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc53">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Oct 28 11:23:03 2012">
+ Oct 28, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c53" href="/p/goagent/issues/detail?id=1049#c53">#53</a>
+ 
+
+ <a class="userlink"
+ href="/u/101910383008241927280/">asukamu...@gmail.com</a
+></span>
+ 
+<pre>
+求25的兄弟把配置文件发给我啊 我怎么动都不行也 谢谢了饿
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc55">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec  6 21:03:46 2012">
+ Dec 6, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c55" href="/p/goagent/issues/detail?id=1049#c55">#55</a>
+ 
+
+ <a class="userlink"
+ href="/u/101035747379555051789/">rogerql...@gmail.com</a
+></span>
+ 
+<pre>
+iphone4s在3G下用safari配置代理:跟Comment52安装的工具一样，org.goagent.local.ios_0.0.3-1_iphoneos-arm.deb和python_2.7.3-3, 用opendoor上网速度快且稳定,但3G下safari不能上被墙了网。按照网上的教程，分别在两个位置加了下面两段，但仍然不行，后受Comment52启发，将&lt;string&gt;file://localhost/Applications/MobileSafari.app/8087.pac&lt;/string&gt;改为file:///Applications/goagent-ios.app/goagent-local/goagent.pac，3G下safari能上youtube等了，但safari速度没opendoor快。不解此两种代理有何不同，请了解的大侠赐教。
+
+   &lt;key&gt;Proxies&lt;/key&gt;
+   &lt;dict&gt;
+       &lt;key&gt;ProxyAutoConfigEnable&lt;/key&gt;
+       &lt;integer&gt;1&lt;/integer&gt;
+       &lt;key&gt;ProxyAutoConfigURLString&lt;/key&gt;
+       &lt;string&gt;file://localhost/Applications/MobileSafari.app/8087.pac&lt;/string&gt;
+   &lt;/dict&gt;
+
+        &lt;key&gt;SettingsHaveBeenAlteredByPreferences&lt;/key&gt;
+	&lt;true/&gt;
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc56">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Dec 13 14:01:57 2012">
+ Dec 13, 2012
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c56" href="/p/goagent/issues/detail?id=1049#c56">#56</a>
+ 
+
+ <a class="userlink"
+ href="/u/wwqgtxx/">wwqgtxx</a
+></span>
+ 
+<pre>
+<i>(No comment was entered for this change.)</i>
+</pre>
+ 
+ 
+ <div class="updates">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ 
+ <b>Status:</b>
+ Done
+ 
+ <br>
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc57">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jan 23 21:39:16 2013">
+ Jan 23, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c57" href="/p/goagent/issues/detail?id=1049#c57">#57</a>
+ 
+
+ <a class="userlink"
+ href="/u/100120228529466181314/">myc93266...@gmail.com</a
+></span>
+ 
+<pre>
+你好，我想问一下，干嘛我之前一直用翻墙，但是我一个月没用之后现在不行了，从新试过很多次都不可以了。。现在就是现实那个Error response
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc58">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jan 23 21:39:45 2013">
+ Jan 23, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c58" href="/p/goagent/issues/detail?id=1049#c58">#58</a>
+ 
+
+ <a class="userlink"
+ href="/u/100120228529466181314/">myc93266...@gmail.com</a
+></span>
+ 
+<pre>
+你好，我想问一下，干嘛我之前一直用翻墙，但是我一个月没用之后现在不行了，从新试过很多次都不可以了。。现在就是现实那个Error response
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc60">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Feb 14 01:37:15 2013">
+ Feb 14, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c60" href="/p/goagent/issues/detail?id=1049#c60">#60</a>
+ 
+
+ <a class="userlink"
+ href="/u/113886074548307835672/">pqhcxh...@gmail.com</a
+></span>
+ 
+<pre>
+求助下，iso 
+在youtube上视频无法播放
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc61">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Fri Feb 22 06:44:44 2013">
+ Feb 22, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c61" href="/p/goagent/issues/detail?id=1049#c61">#61</a>
+ 
+
+ <a class="userlink"
+ href="/u/118011203614502373770/">ssnob...@gmail.com</a
+></span>
+ 
+<pre>
+preferences.plist 文件是自动备份的，以前修改成功过的可以在preferences.plist里面查找“pac”关键字，修改pac路径为file:///Applications/goagent-ios.app/goagent-local/xxxx.pac即可。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc62">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  8 21:00:05 2013">
+ Apr 8, 2013
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c62" href="/p/goagent/issues/detail?id=1049#c62">#62</a>
+ 
+
+ <a class="userlink"
+ href="/u/hopedu86/">hopedu86</a
+></span>
+ 
+<pre>
+太複雜了，最好能開發一個deb插件，安裝後直接修改，謝謝各位大師！
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D1049&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D1049"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="1049">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A1049',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 1049,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

@@ -1,0 +1,2155 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ (function(){(function(){function c(a){this.t={};this.tick=function(a,b,c){b=void 0!=c?c:(new Date).getTime();this.t[a]=b;if(void 0==c)try{window.console.timeStamp("CSI/"+a)}catch(d){}};this.tick("start",null,a)}var a;window.performance&&(a=window.performance.timing);var b=a?new c(a.responseStart):new c;window.jstiming={Timer:c,load:b};a&&(b=a.navigationStart,a=a.responseStart,0<b&&a>=b&&(window.jstiming.srt=a-b));try{a=null,window.chrome&&window.chrome.csi&&(a=Math.floor(window.chrome.csi().pageT)),null==a&&
+window.gtbExternal&&(a=window.gtbExternal.pageT()),null==a&&window.external&&(a=window.external.pageT),a&&(window.jstiming.pt=a)}catch(d){}})();})();
+
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"profileUrl": null, "domainName": null, "loggedInUserEmail": null, "token": null, "projectHomeUrl": "/p/goagent", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "relativeBaseUrl": "", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "projectName": "goagent"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 13606 - 
+ goagent -
+ 
+ 北京联通，从今晚（5月11日）9点之后goagent速度缓慢并且丢包严重 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13606&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13606" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=13606">13606</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >北京联通，从今晚（5月11日）9点之后goagent速度缓慢并且丢包严重</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 7 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A13606">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13606&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13606">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/115001297445573747653/">douban...@gmail.com</a
+>,
+ <span class="date" title="Sun May 11 08:56:02 2014">May 11, 2014</span>
+ 
+ </div>
+<pre>
+北京联通光纤，昨天在用还没什么问题，从今天晚上大概9点之后出现使用goagent访问所有网站异常缓慢丢数据包严重
+
+大家可以试试看PING这个IP地址74.125.128.94
+
+Ping 已启动…
+
+PING 74.125.128.94 (74.125.128.94): 56 data bytes
+Request timeout for icmp_seq 0
+64 bytes from 74.125.128.94: icmp_seq=1 ttl=36 time=325.029 ms
+64 bytes from 74.125.128.94: icmp_seq=2 ttl=36 time=244.961 ms
+Request timeout for icmp_seq 3
+Request timeout for icmp_seq 4
+64 bytes from 74.125.128.94: icmp_seq=5 ttl=36 time=314.317 ms
+Request timeout for icmp_seq 6
+Request timeout for icmp_seq 7
+Request timeout for icmp_seq 8
+64 bytes from 74.125.128.94: icmp_seq=9 ttl=36 time=304.766 ms
+
+--- 74.125.128.94 ping statistics ---
+10 packets transmitted, 4 packets received, 60.0% packet loss
+round-trip min/avg/max/stddev = 244.961/297.268/325.029/31.039 ms
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May 11 09:07:00 2014">
+ May 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=13606#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/114450596637896535771/">CASTLEKA...@gmail.com</a
+></span>
+ 
+<pre>
+我这儿也是这个情况，各个网站无差别地慢。北京联通。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May 11 17:48:19 2014">
+ May 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=13606#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/106788781027194576591/">yangli...@gmail.com</a
+></span>
+ 
+<pre>
+我这也是
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May 11 17:54:59 2014">
+ May 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=13606#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/118336640638613078747/">Kay...@gmail.com</a
+></span>
+ 
+<pre>
+北京联通有同样问题。且gfwlist.txt 无法打开，无法更新。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May 11 19:56:11 2014">
+ May 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=13606#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/105622658352596759443/">enpha...@gmail.com</a
+></span>
+ 
+<pre>
+没错，联通的光纤，昨晚（5.11）9点后开始不正常，无法打开gmail，和上次出现的情况一样，当时正好在工作，需要用gmail，特别耽误事，这是google的问题？还是goagent程序的问题？还是联通的问题？技术大拿们
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May 11 20:19:07 2014">
+ May 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=13606#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/100831409086162912130/">hongyan3...@gmail.com</a
+></span>
+ 
+<pre>
+我的刚才也是。后来我换到V3.1.7的版本后。速度又恢复了。gmail也可以登上
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May 11 20:31:25 2014">
+ May 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=13606#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/112450704677072772331/">jasonche...@gmail.com</a
+></span>
+ 
+<pre>
+北京联通 ＋＋＋＋1
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May 11 20:50:52 2014">
+ May 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=13606#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/105622658352596759443/">enpha...@gmail.com</a
+></span>
+ 
+<pre>
+ 奇怪的是我办公室也是联通的网，是不是光纤不确定，但貌似没问题，gmail什么都很快，然后版本是3.1.5
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May 11 23:36:36 2014">
+ May 11, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=13606#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/105460655368159614332/">yunchen...@gmail.com</a
+></span>
+ 
+<pre>
+北京联通确实是这样  而且连flyssh的所有服务器也全部都ping不通
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 12 01:29:21 2014">
+ May 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=13606#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/112405280388369516078/">allensha...@gmail.com</a
+></span>
+ 
+<pre>
+西安电信已经这样快半年了。。。。5月2日恢复了一天。。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 12 01:36:53 2014">
+ May 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=13606#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/105395142165891921025/">liuxiaol...@gmail.com</a
+></span>
+ 
+<pre>
+北京，公司的网，不太确定是联通还是哪个，也是缓慢且丢包
+尤其是Google旗下的网站，包括Gmail、G+等，均需要很长时间的缓冲
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 12 01:40:47 2014">
+ May 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=13606#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/102624716023112633027/">jrivers9...@gmail.com</a
+></span>
+ 
+<pre>
+联通光纤 昨天开始干扰严重 
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 12 05:44:36 2014">
+ May 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=13606#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/114144755003246406358/">Zac.Zh...@gmail.com</a
+></span>
+ 
+<pre>
+这两天就在等大家上来确认不是我一个人的问题。春天走了，丢包的季节又来到了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 12 06:00:42 2014">
+ May 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=13606#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/116558657184426134523/">wy315...@gmail.com</a
+></span>
+ 
+<pre>
+都一样啦
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 12 06:13:02 2014">
+ May 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=13606#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/116449103942799408305/">ChunleD...@gmail.com</a
+></span>
+ 
+<pre>
+哎， 昨天发现gmail 上不去了， g+上 扯了扯，没人鸟，今天在这里终于发现不是我自己出问题了~
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 12 07:59:52 2014">
+ May 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=13606#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/104092534583979527078/">ryun...@gmail.com</a
+></span>
+ 
+<pre>
+同上啊同上，一直在用手机客户端来收发邮件，麻烦死了……万恶的GFW
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 12 09:41:20 2014">
+ May 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=13606#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/116442071527206154736/">blu...@gmail.com</a
+></span>
+ 
+<pre>
+同联通，gmail彻底木法用了，恨！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon May 12 10:25:12 2014">
+ May 12, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=13606#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/115489195014150358281/">lsb1...@gmail.com</a
+></span>
+ 
+<pre>
+我也是联通
+
+INFO - [May 13 01:15:39] resolve common.IPLIST_MAP names=['googl
+k', 'google_talk', 'google_ipv6', 'mtalk.google.com'] to iplist
+WARNING - [May 13 01:15:41] resolve remote host='www.google.com'
+11004] getaddrinfo 'www.google.com' from ['8.8.4.4'] failed
+WARNING - [May 13 01:15:41] resolve remote host='mail.google.com
+ 11004] getaddrinfo 'mail.google.com' from ['8.8.4.4'] failed
+WARNING - [May 13 01:15:41] resolve remote host='www.l.google.co
+o 11004] getaddrinfo 'www.l.google.com' from ['8.8.8.8'] failed
+
+一直这样，Gmail无法打开，Google反应特别慢，挂VPN马上正常。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 13 00:43:26 2014">
+ May 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=13606#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/105622658352596759443/">enpha...@gmail.com</a
+></span>
+ 
+<pre>
+是，没错，gmail还是不行，但还能翻墙，就是慢，gmail现在只能在客户端上回复邮件了，到底什么问题啊？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 13 01:11:31 2014">
+ May 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=13606#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/113596202638535426157/">panning...@gmail.com</a
+></span>
+ 
+<pre>
+上twitter很慢
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 13 04:37:34 2014">
+ May 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=13606#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/115001297445573747653/">douban...@gmail.com</a
+></span>
+ 
+<pre>
+北京联通，今日还是很慢。
+
+另，建议速度慢或者速度不慢的用户都报一下所在地和使用的网络服务商（联通电信移动还是其他的什么），以便于软件开发者进行分析
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc26">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 13 06:55:30 2014">
+ May 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c26" href="/p/goagent/issues/detail?id=13606#c26">#26</a>
+ 
+
+ <a class="userlink"
+ href="/u/112914467481427772345/">ldp...@gmail.com</a
+></span>
+ 
+<pre>
+一阵一阵的，烦死了快
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 13 19:05:05 2014">
+ May 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=13606#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/116760793808209076661/">zhuziyi1...@gmail.com</a
+></span>
+ 
+<pre>
+能开谷歌，巨慢！其他的站如youtube、FB都打不开~~
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 13 19:06:10 2014">
+ May 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=13606#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/116760793808209076661/">zhuziyi1...@gmail.com</a
+></span>
+ 
+<pre>
+背景联通
+
+正在 Ping 74.125.128.94 具有 32 字节的数据:
+来自 74.125.128.94 的回复: 字节=32 时间=218ms TTL=32
+来自 74.125.128.94 的回复: 字节=32 时间=219ms TTL=32
+请求超时。
+请求超时。
+
+74.125.128.94 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 2，丢失 = 2 (50% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 218ms，最长 = 219ms，平均 = 218ms
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc29">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 13 19:12:09 2014">
+ May 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c29" href="/p/goagent/issues/detail?id=13606#c29">#29</a>
+ 
+
+ <a class="userlink"
+ href="/u/109365279814420428649/">Advanc...@gmail.com</a
+></span>
+ 
+<pre>
+我也是同样情况。求助！！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc30">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue May 13 19:21:20 2014">
+ May 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c30" href="/p/goagent/issues/detail?id=13606#c30">#30</a>
+ 
+
+ <a class="userlink"
+ href="/u/103887503345730827402/">godtr...@gmail.com</a
+></span>
+ 
+<pre>
+Unicom China Ping 74.125.128.94. result: very smooth. 
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc34">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 15 08:02:06 2014">
+ May 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c34" href="/p/goagent/issues/detail?id=13606#c34">#34</a>
+ 
+
+ <a class="userlink"
+ href="/u/109004435412777234837/">jd04063...@gmail.com</a
+></span>
+ 
+<pre>
+正在 Ping 74.125.128.94 具有 32 字节的数据:
+来自 74.125.128.94 的回复: 字节=32 时间=213ms TTL=36
+来自 74.125.128.94 的回复: 字节=32 时间=213ms TTL=36
+来自 74.125.128.94 的回复: 字节=32 时间=214ms TTL=36
+请求超时。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc35">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 15 08:34:26 2014">
+ May 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c35" href="/p/goagent/issues/detail?id=13606#c35">#35</a>
+ 
+
+ <a class="userlink"
+ href="/u/116433698188458856966/">mask...@gmail.com</a
+></span>
+ 
+<pre>
+昨晚速度还不错的，今晚速度掉下来看youtube 720p都卡
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc36">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 15 08:41:33 2014">
+ May 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c36" href="/p/goagent/issues/detail?id=13606#c36">#36</a>
+ 
+
+ <a class="userlink"
+ href="/u/104502772223713371233/">raremonk...@gmail.com</a
+></span>
+ 
+<pre>
+一样,平时720很顺畅,今天放只能放360
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc37">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 15 10:15:16 2014">
+ May 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c37" href="/p/goagent/issues/detail?id=13606#c37">#37</a>
+ 
+
+ <a class="userlink"
+ href="/u/116433698188458856966/">mask...@gmail.com</a
+></span>
+ 
+<pre>
+现在快1点钟，youtube视频下载速度明显提升
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc38">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 15 10:34:15 2014">
+ May 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c38" href="/p/goagent/issues/detail?id=13606#c38">#38</a>
+ 
+
+ <a class="userlink"
+ href="/u/104241038538448797448/">samt...@gmail.com</a
+></span>
+ 
+<pre>
+南宁联通 就刚刚也是碰到了这个问题基本上缓冲不了 time out
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=136060038000&amp;name=20140516013324.jpg&amp;token=ABZ6GAcI_Di4RfgeLEZ_Tfo95p9XqZfAgA%3A1434455269118&amp;id=13606&amp;mod_ts_token=ABZ6GAf4V7w7PFI4t5r_o3m2C8fsP0r-bg%3A1434455269118">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >20140516013324.jpg</b>
+ <br>
+ 189 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=136060038000&amp;name=20140516013324.jpg&amp;token=ABZ6GAcI_Di4RfgeLEZ_Tfo95p9XqZfAgA%3A1434455269118&amp;id=13606&amp;mod_ts_token=ABZ6GAf4V7w7PFI4t5r_o3m2C8fsP0r-bg%3A1434455269118&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=136060038000&amp;name=20140516013324.jpg&amp;token=ABZ6GAcI_Di4RfgeLEZ_Tfo95p9XqZfAgA%3A1434455269118&amp;id=13606&amp;mod_ts_token=ABZ6GAf4V7w7PFI4t5r_o3m2C8fsP0r-bg%3A1434455269118">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=136060038000&amp;name=20140516013324.jpg&amp;token=ABZ6GAcI_Di4RfgeLEZ_Tfo95p9XqZfAgA%3A1434455269118&amp;id=13606&amp;mod_ts_token=ABZ6GAf4V7w7PFI4t5r_o3m2C8fsP0r-bg%3A1434455269118&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=136060038000&amp;name=20140516013324.jpg&amp;token=ABZ6GAcI_Di4RfgeLEZ_Tfo95p9XqZfAgA%3A1434455269118&amp;id=13606&amp;mod_ts_token=ABZ6GAf4V7w7PFI4t5r_o3m2C8fsP0r-bg%3A1434455269118&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc39">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 15 10:43:24 2014">
+ May 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c39" href="/p/goagent/issues/detail?id=13606#c39">#39</a>
+ 
+
+ <a class="userlink"
+ href="/u/112048608653567153497/">cantones...@gmail.com</a
+></span>
+ 
+<pre>
+现在600KB/S电信带宽下，720P速度还算不错
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=136060039000&amp;name=%E5%9B%BE%E5%83%8F+4.jpg&amp;token=ABZ6GAfxdtCrBT2C8XXbTQ_tDBSNNHgm3w%3A1434455269118&amp;id=13606&amp;mod_ts_token=ABZ6GAdZcTfZY8H6n7rsRMDvZCgyFqYLTQ%3A1434455269118">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >图像 4.jpg</b>
+ <br>
+ 35.1 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=136060039000&amp;name=%E5%9B%BE%E5%83%8F+4.jpg&amp;token=ABZ6GAfxdtCrBT2C8XXbTQ_tDBSNNHgm3w%3A1434455269118&amp;id=13606&amp;mod_ts_token=ABZ6GAdZcTfZY8H6n7rsRMDvZCgyFqYLTQ%3A1434455269118&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=136060039000&amp;name=%E5%9B%BE%E5%83%8F+4.jpg&amp;token=ABZ6GAfxdtCrBT2C8XXbTQ_tDBSNNHgm3w%3A1434455269118&amp;id=13606&amp;mod_ts_token=ABZ6GAdZcTfZY8H6n7rsRMDvZCgyFqYLTQ%3A1434455269118">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=136060039000&amp;name=%E5%9B%BE%E5%83%8F+4.jpg&amp;token=ABZ6GAfxdtCrBT2C8XXbTQ_tDBSNNHgm3w%3A1434455269118&amp;id=13606&amp;mod_ts_token=ABZ6GAdZcTfZY8H6n7rsRMDvZCgyFqYLTQ%3A1434455269118&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=136060039000&amp;name=%E5%9B%BE%E5%83%8F+4.jpg&amp;token=ABZ6GAfxdtCrBT2C8XXbTQ_tDBSNNHgm3w%3A1434455269118&amp;id=13606&amp;mod_ts_token=ABZ6GAdZcTfZY8H6n7rsRMDvZCgyFqYLTQ%3A1434455269118&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc40">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu May 15 20:36:13 2014">
+ May 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c40" href="/p/goagent/issues/detail?id=13606#c40">#40</a>
+ 
+
+ <a class="userlink"
+ href="/u/116433698188458856966/">mask...@gmail.com</a
+></span>
+ 
+<pre>
+现在白天电信10M光纤看youtube又变慢了，看来是网络问题，出口光缆又断了？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc41">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat May 17 03:04:03 2014">
+ May 17, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c41" href="/p/goagent/issues/detail?id=13606#c41">#41</a>
+ 
+
+ <a class="userlink"
+ href="/u/114000712448152771703/">smalldan...@gmail.com</a
+></span>
+ 
+<pre>
+38楼的，跟你在同一个地方，我也是从前两天开始慢的，网页可以打开，视频看不了，好在还有vpn。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc42">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May 18 14:06:50 2014">
+ May 18, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c42" href="/p/goagent/issues/detail?id=13606#c42">#42</a>
+ 
+
+ <a class="userlink"
+ href="/u/114609419022738165283/">causla...@gmail.com</a
+></span>
+ 
+<pre>
+重装了还是一样慢，浏览网站还可以，看视频不行
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc43">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun May 25 05:35:57 2014">
+ May 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c43" href="/p/goagent/issues/detail?id=13606#c43">#43</a>
+ 
+
+ <a class="userlink"
+ href="/u/106414978953220468441/">ThixoW...@gmail.com</a
+></span>
+ 
+<pre>
+北京联通10M光纤，能上youtube不能加载视频，能上facebook但是首页动态一直在加载，刷不出。公司是长宽光纤，一切正常
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13606&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D13606"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="13606">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A13606',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 13606,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ 
+ <script type="text/javascript">_CS_reportToCsi();</script>
+ 
+ </body>
+</html>
+

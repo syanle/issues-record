@@ -1,0 +1,4094 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "relativeBaseUrl": "", "loggedInUserEmail": null, "token": null, "projectHomeUrl": "/p/goagent", "projectName": "goagent", "profileUrl": null, "domainName": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 14644 - 
+ goagent -
+ 
+ GFW封杀Goagent的原理分析并提供解决程序（仅测试出来的，不完全对） - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14644&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14644" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=14644">14644</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >GFW封杀Goagent的原理分析并提供解决程序（仅测试出来的，不完全对）</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 45 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A14644">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14644&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14644">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/104375815226861239051/">Monistra...@gmail.com</a
+>,
+ <span class="date" title="Sat Jun 14 04:03:21 2014">Jun 14, 2014</span>
+ 
+ </div>
+<pre>
+         GFW封杀Goagent的原理分析并提供解决程序（仅测试出来的，不完全对）
+
+GFW不能全封了Google，因为Google很重要，所以或是根据流量来封杀Google的443号端口，但只要流量降下去，便出解封，这就是为什么有人提供了IP，大家都去用，流量一高，就封了。根据国人习惯，很少有人会保留“这个看起来被封的IP”，所以，在大家不用此IP，流量一降，此IP就会被解封。
+
+要对付GFW，办法很简单，就是大家要分散流量。
+
+如何做？
+
+用我的程序（不需要GCC IP），直接会在20多万个Google IP池里找，一般情况下，可会找到300个以上，全加入proxy.ini，IP越多，流量越分散，由于每个人找的时间不一样，GFW已经封杀的，和没有封杀的数据库，就不一样，所以大家找到的IP不可能完全一样。这样，分散后或许会好些。
+
+由于我写的这个程序是并行的，20多万个IP几乎会同时加入内存中，CPU也会有点高，运行此程序，最好查看电脑是否还有2G以上的空闲内存。
+
+找到IP后，会自动调用ping测试，也是并行的，我不想一个一个去ping，那样对于300个以后的ip，会要很长时间，ping完之后，会自动把延时短的放前面。
+
+加入proxy.ini后，并重启Goagent，请等五分钟后再用Goagent，我不知道为什么，这个“找IP”的动作会响你加入IP致proxy.ini后，5分钟（估计的数）内，不能用，当然，5分钟之后，没什么影响，以后也没影响了，运行有黄色的，红色的，也不用管，因为IP多，不影响打开网页的，只要能用就行，一般情况下会有一百多个good_ip，看我的测试结果。
+
+本程序开源协议是GPL2.0及以上，程序本身就是代码。只支持Linux。Windows下请先搞虚拟机，内存开大点，看能不能搞（没测试过）。
+
+如何搞？  下载附件 ---&gt;   解压 ---&gt; 进入解压目录
+
+运行:  
+
+./find_ip.sh
+
+若提示安装python-netaddr python-numpy，请输入密码安装，然后，去喝杯咖啡，八分钟左右来收网即可（时间与你电脑体质有关）。
+
+注：本程序支持加速，只不过，要耜掉3G左右的内存，并且CPU直接爆満
+并行请运行：
+
+./find_ip.sh parallel
+
+我自己电脑上运行上面那一条，3分钟即可结束。
+
+请原谅我的语文水平，小学体育老师教的，被洗脑了这么多年，也只有这个水平了，都末世了，大家就开开心心好好玩一把吧。
+
+
+
+
+
+</pre>
+
+ <div class="attachments">
+ 
+ 
+ 
+
+
+
+
+
+ 
+ 
+ 
+
+
+
+
+
+ 
+ </div>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 04:05:45 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=14644#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/117158532779626932966/">WisdomB...@gmail.com</a
+></span>
+ 
+<pre>
+干的漂亮！ 好酷
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 04:18:43 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=14644#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/hc5023295/">hc5023295</a
+></span>
+ 
+<pre>
+文件没放上来。。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 04:21:44 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=14644#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/105819848623895230376/">tq08...@gmail.com</a
+></span>
+ 
+<pre>
+这要很强的电脑阿。。还是立尼克斯。。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 04:22:08 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=14644#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/117286367193785189133/">ruizhipe...@gmail.com</a
+></span>
+ 
+<pre>
+文件在哪？楼主，你体育老师是谁，我要砍了他
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 04:28:00 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=14644#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/104375815226861239051/">Monistra...@gmail.com</a
+></span>
+ 
+<pre>
+<i>(No comment was entered for this change.)</i>
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=146440005001&amp;name=test.png&amp;token=ABZ6GAc3o-4Kknonf0KJH_BVuVnIKHb-eQ%3A1434455571698&amp;id=14644&amp;mod_ts_token=ABZ6GAde6oNz7tr0-iKTNid5qHaUiyJpEQ%3A1434455571698">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >test.png</b>
+ <br>
+ 170 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=146440005001&amp;name=test.png&amp;token=ABZ6GAc3o-4Kknonf0KJH_BVuVnIKHb-eQ%3A1434455571698&amp;id=14644&amp;mod_ts_token=ABZ6GAde6oNz7tr0-iKTNid5qHaUiyJpEQ%3A1434455571698&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=146440005001&amp;name=test.png&amp;token=ABZ6GAc3o-4Kknonf0KJH_BVuVnIKHb-eQ%3A1434455571698&amp;id=14644&amp;mod_ts_token=ABZ6GAde6oNz7tr0-iKTNid5qHaUiyJpEQ%3A1434455571698">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=146440005001&amp;name=test.png&amp;token=ABZ6GAc3o-4Kknonf0KJH_BVuVnIKHb-eQ%3A1434455571698&amp;id=14644&amp;mod_ts_token=ABZ6GAde6oNz7tr0-iKTNid5qHaUiyJpEQ%3A1434455571698&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=146440005001&amp;name=test.png&amp;token=ABZ6GAc3o-4Kknonf0KJH_BVuVnIKHb-eQ%3A1434455571698&amp;id=14644&amp;mod_ts_token=ABZ6GAde6oNz7tr0-iKTNid5qHaUiyJpEQ%3A1434455571698&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 04:31:15 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=14644#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/110571275720332897952/">lxok1...@gmail.com</a
+></span>
+ 
+<pre>
+老机子，跑不起啊。操你妈的gfw，搞的麻烦死，套用台湾网友的一句话“不就是上个网吗？”
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 04:37:21 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=14644#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/117286367193785189133/">ruizhipe...@gmail.com</a
+></span>
+ 
+<pre>
+话说。。。卡掉了怎么破。。。刚刚换回的笔记本。。。果然台式机太老跑不动么，怎么办，楼主把你跑出来的ip邮件吧，跪谢gmail：ruizhipeng001@gmail.com手上就剩下2个活着的了。。。真心害怕明早起床之后上不来了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 04:42:42 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=14644#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/114104789131828703413/">zhoulong...@gmail.com</a
+></span>
+ 
+<pre>
+楼主用python写个win32的应用吧
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 04:42:42 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=14644#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/114104789131828703413/">zhoulong...@gmail.com</a
+></span>
+ 
+<pre>
+楼主用python写个win32的应用吧
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 04:43:47 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=14644#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/105065507298687797928/">tomly...@gmail.com</a
+></span>
+ 
+<pre>
+怎么都是python开发，
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 06:33:49 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=14644#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/104375815226861239051/">Monistra...@gmail.com</a
+></span>
+ 
+<pre>
+串行版本，估计没多大的实用之处，20多万个IP，每个IP花3S中去测试，需要7天左右，已经没有意义了。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 06:40:30 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=14644#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/104375815226861239051/">Monistra...@gmail.com</a
+></span>
+ 
+<pre>
+若是老机器，请尝试这个
+
+<a href="https://code.google.com/p/goagent/issues/detail?id=14607" rel="nofollow">https://code.google.com/p/goagent/issues/detail?id=14607</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 06:40:58 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=14644#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/106951911208304773317/">suxianli...@gmail.com</a
+></span>
+ 
+<pre>
+楼主牛叉，本人仅从图片中的选了几个测试了一下，效果立显，搜索软件已下载，感谢楼主的分享，新时代的自由主义战士
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 07:17:03 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=14644#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/114493946111490265661/">wang.wha...@gmail.com</a
+></span>
+ 
+<pre>
+我十分想知道，假如用图片的方式公布ip，效果是怎样的
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 08:46:27 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=14644#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/105819848623895230376/">tq08...@gmail.com</a
+></span>
+ 
+<pre>
+要是可以随机加密那就好啦。。全部都机密随机性的
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 08:47:32 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=14644#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/105819848623895230376/">tq08...@gmail.com</a
+></span>
+ 
+<pre>
+#14 我们应该多公布一些非google服务器地址。真假让他们自己麻烦去吧
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 09:03:37 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=14644#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/106122205097559929803/">WongZeon...@gmail.com</a
+></span>
+ 
+<pre>
+樓主你好，我在mac中運行，出現以下情況,求助
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=146440017000&amp;name=Screen+Shot+2014-06-15+at+0.02.58.png&amp;token=ABZ6GAdZhf7XvO6Kfq0wLkRs-5UJWKvWVw%3A1434455571700&amp;id=14644&amp;mod_ts_token=ABZ6GAceoyGgOSp-FN27WHTdiW94wQOoyQ%3A1434455571700">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >Screen Shot 2014-06-15 at 0.02.58.png</b>
+ <br>
+ 14.0 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=146440017000&amp;name=Screen+Shot+2014-06-15+at+0.02.58.png&amp;token=ABZ6GAdZhf7XvO6Kfq0wLkRs-5UJWKvWVw%3A1434455571700&amp;id=14644&amp;mod_ts_token=ABZ6GAceoyGgOSp-FN27WHTdiW94wQOoyQ%3A1434455571700&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=146440017000&amp;name=Screen+Shot+2014-06-15+at+0.02.58.png&amp;token=ABZ6GAdZhf7XvO6Kfq0wLkRs-5UJWKvWVw%3A1434455571700&amp;id=14644&amp;mod_ts_token=ABZ6GAceoyGgOSp-FN27WHTdiW94wQOoyQ%3A1434455571700">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=146440017000&amp;name=Screen+Shot+2014-06-15+at+0.02.58.png&amp;token=ABZ6GAdZhf7XvO6Kfq0wLkRs-5UJWKvWVw%3A1434455571700&amp;id=14644&amp;mod_ts_token=ABZ6GAceoyGgOSp-FN27WHTdiW94wQOoyQ%3A1434455571700&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=146440017000&amp;name=Screen+Shot+2014-06-15+at+0.02.58.png&amp;token=ABZ6GAdZhf7XvO6Kfq0wLkRs-5UJWKvWVw%3A1434455571700&amp;id=14644&amp;mod_ts_token=ABZ6GAceoyGgOSp-FN27WHTdiW94wQOoyQ%3A1434455571700&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 09:58:18 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=14644#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/104375815226861239051/">Monistra...@gmail.com</a
+></span>
+ 
+<pre>
+回复#17： 请将find_ip.sh中的
+
+echo &quot;Install python-netaddr, python-numpy package...&quot;
+sudo apt-get install python-netaddr python-numpy || \
+    sudo yum install python-netaddr python-numpy
+
+删除，并自行安装python-netaddr python-numpy，再试，
+
+版本更新：
+历史：版本 1.0
+现行版本： 1.1
+
+更新：
+CPU占有率更低
+内存减少700MB左右
+找到的IP更多，运行一次，找五六百个，应该没问题。
+
+建议在proxy.ini里贴上最快的300百个即可，程序自带ping检测。
+
+Bug： 若发现某段的IP，比如62开头的不能用，只要在gooole_ip_pool文件夹中删除62开头的文件,重新扫描一次即可。
+
+建议扫描时间间隔大于10分钟，否则扫到的IP会大大减少。
+
+
+用法： 请看README
+
+为自由而战！
+
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 10:14:02 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=14644#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/104375815226861239051/">Monistra...@gmail.com</a
+></span>
+ 
+<pre>
+若发现使用ip过程中，经常发现打不开，请手动筛选扫出来的ip，有些ip不管你有没有用，都会封得很快，GFW是靠流量检测的。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 10:14:46 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=14644#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/104631906630763578329/">muzhiwan...@gmail.com</a
+></span>
+ 
+<pre>
+楼主整个WIN的吧
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 11:30:21 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=14644#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/104375815226861239051/">Monistra...@gmail.com</a
+></span>
+ 
+<pre>
+回复 20楼：对于Windows的版本，我不知道如何写
+
+版本更新：1.2
+历史版本：1.1
+
+更新要点： 更新算法，验证SSL，提高准确率。请不要再使用历史版本。谢谢！
+Bug： 暂未发现。
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 11:37:03 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=14644#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/104375815226861239051/">Monistra...@gmail.com</a
+></span>
+ 
+<pre>
+对于老机器，请自行修改find_host_port.py中的
+
+thread_num=100
+
+建议修改成10, 可以参考：thread_num=10时，在P4，256MB内存的机器上调试可行（内核占用92MB）。
+
+修改后，再根据README运行，谢谢。
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc23">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 11:56:00 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c23" href="/p/goagent/issues/detail?id=14644#c23">#23</a>
+ 
+
+ <a class="userlink"
+ href="/u/100044227874525458753/">dajian...@gmail.com</a
+></span>
+ 
+<pre>
+伸手党求一个找好ip的proxy.ini呀。 昨天我win7用的GAE旧的proxy.ini里的ip已经全部沦陷 任何网站都打不开了。我虚拟机里有个cdlinux，试着装过驱动和软件，基本很头大。他还一重启就还原成初始状态....  同时也希望楼主推荐一个版本的Linux我去慢慢折腾，学会装各种驱动，软件，GAE等等。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc24">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 13:26:51 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c24" href="/p/goagent/issues/detail?id=14644#c24">#24</a>
+ 
+
+ <a class="userlink"
+ href="/u/110707634282664252794/">leopan...@gmail.com</a
+></span>
+ 
+<pre>
+楼主，我相信你的想法是正确的，从另一方面可以认证，刚才我用家里的PC机用旧版本的goagent可以翻出去，但是我的Macbook pro用3.1.18的就不行了，就算可以也很卡很慢，反而旧版本的就速度很好～！两个版本的Goagent都没有修改过iplist
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc25">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 13:56:22 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c25" href="/p/goagent/issues/detail?id=14644#c25">#25</a>
+ 
+
+ <a class="userlink"
+ href="/u/110549452242122498111/">AJieJiDa...@gmail.com</a
+></span>
+ 
+<pre>
+多谢楼主。不过我遇到了问题，Mac OS 10.9，自己安装的netaddr和numpy，并按#18楼提示删了三行。但运行find_ip.py出现错误SyntaxError: invalid syntax.
+我不懂python，请楼主指教
+
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=146440025000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2014-06-15+%E4%B8%8A%E5%8D%884.45.40.png&amp;token=ABZ6GAcwAcGNchamlDai5NRGZHjHQkiOsA%3A1434455571701&amp;id=14644&amp;mod_ts_token=ABZ6GAfvryGviq5gBbvijCTMl5MAkWY6xw%3A1434455571701">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >屏幕快照 2014-06-15 上午4.45.40.png</b>
+ <br>
+ 19.3 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=146440025000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2014-06-15+%E4%B8%8A%E5%8D%884.45.40.png&amp;token=ABZ6GAcwAcGNchamlDai5NRGZHjHQkiOsA%3A1434455571701&amp;id=14644&amp;mod_ts_token=ABZ6GAfvryGviq5gBbvijCTMl5MAkWY6xw%3A1434455571701&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=146440025000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2014-06-15+%E4%B8%8A%E5%8D%884.45.40.png&amp;token=ABZ6GAcwAcGNchamlDai5NRGZHjHQkiOsA%3A1434455571701&amp;id=14644&amp;mod_ts_token=ABZ6GAfvryGviq5gBbvijCTMl5MAkWY6xw%3A1434455571701">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=146440025000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2014-06-15+%E4%B8%8A%E5%8D%884.45.40.png&amp;token=ABZ6GAcwAcGNchamlDai5NRGZHjHQkiOsA%3A1434455571701&amp;id=14644&amp;mod_ts_token=ABZ6GAfvryGviq5gBbvijCTMl5MAkWY6xw%3A1434455571701&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=146440025000&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2014-06-15+%E4%B8%8A%E5%8D%884.45.40.png&amp;token=ABZ6GAcwAcGNchamlDai5NRGZHjHQkiOsA%3A1434455571701&amp;id=14644&amp;mod_ts_token=ABZ6GAfvryGviq5gBbvijCTMl5MAkWY6xw%3A1434455571701&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=146440025001&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2014-06-15+%E4%B8%8A%E5%8D%884.52.18.png&amp;token=ABZ6GAd9jtpCC3E_BOklwGAC6ANXkjZ1Ew%3A1434455571701&amp;id=14644&amp;mod_ts_token=ABZ6GAfsGJdnQxDC6BcXN_rSXhmL5DFo3Q%3A1434455571701">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >屏幕快照 2014-06-15 上午4.52.18.png</b>
+ <br>
+ 36.1 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=146440025001&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2014-06-15+%E4%B8%8A%E5%8D%884.52.18.png&amp;token=ABZ6GAd9jtpCC3E_BOklwGAC6ANXkjZ1Ew%3A1434455571701&amp;id=14644&amp;mod_ts_token=ABZ6GAfsGJdnQxDC6BcXN_rSXhmL5DFo3Q%3A1434455571701&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=146440025001&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2014-06-15+%E4%B8%8A%E5%8D%884.52.18.png&amp;token=ABZ6GAd9jtpCC3E_BOklwGAC6ANXkjZ1Ew%3A1434455571701&amp;id=14644&amp;mod_ts_token=ABZ6GAfsGJdnQxDC6BcXN_rSXhmL5DFo3Q%3A1434455571701">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=146440025001&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2014-06-15+%E4%B8%8A%E5%8D%884.52.18.png&amp;token=ABZ6GAd9jtpCC3E_BOklwGAC6ANXkjZ1Ew%3A1434455571701&amp;id=14644&amp;mod_ts_token=ABZ6GAfsGJdnQxDC6BcXN_rSXhmL5DFo3Q%3A1434455571701&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=146440025001&amp;name=%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7+2014-06-15+%E4%B8%8A%E5%8D%884.52.18.png&amp;token=ABZ6GAd9jtpCC3E_BOklwGAC6ANXkjZ1Ew%3A1434455571701&amp;id=14644&amp;mod_ts_token=ABZ6GAfsGJdnQxDC6BcXN_rSXhmL5DFo3Q%3A1434455571701&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc26">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 16:18:25 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c26" href="/p/goagent/issues/detail?id=14644#c26">#26</a>
+ 
+
+ <a class="userlink"
+ href="/u/101186574022949474479/">OliverSc...@gmail.com</a
+></span>
+ 
+<pre>
+楼主，我用你的工具找出很多ip。但是效果不好。在mac 下会报错。看下看看什么问题。Exception happened during processing of request from ('127.0.0.1', 63217)
+Traceback (most recent call last):
+  File &quot;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/SocketServer.py&quot;, line 593, in process_request_thread
+    self.finish_request(request, client_address)
+  File &quot;goagent-goagent-a5b0812/local/proxy.py&quot;, line 2252, in finish_request
+  File &quot;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/SocketServer.py&quot;, line 649, in __init__
+    self.handle()
+  File &quot;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/BaseHTTPServer.py&quot;, line 340, in handle
+    self.handle_one_request()
+  File &quot;goagent-goagent-a5b0812/local/proxy.py&quot;, line 994, in handle_one_request
+  File &quot;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/BaseHTTPServer.py&quot;, line 328, in handle_one_request
+    method()
+  File &quot;goagent-goagent-a5b0812/local/proxy.py&quot;, line 1312, in do_METHOD
+  File &quot;goagent-goagent-a5b0812/local/proxy.py&quot;, line 1145, in STRIP
+  File &quot;goagent-goagent-a5b0812/local/proxy.py&quot;, line 1312, in do_METHOD
+  File &quot;goagent-goagent-a5b0812/local/proxy.py&quot;, line 1204, in DIRECT
+  File &quot;goagent-goagent-a5b0812/local/proxy.py&quot;, line 1900, in create_http_request
+  File &quot;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/httplib.py&quot;, line 409, in begin
+    version, status, reason = self._read_status()
+  File &quot;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/httplib.py&quot;, line 365, in _read_status
+    line = self.fp.readline(_MAXLINE + 1)
+  File &quot;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/socket.py&quot;, line 476, in readline
+    data = self._sock.recv(self._rbufsize)
+  File &quot;goagent-goagent-a5b0812/local/proxy.py&quot;, line 486, in recv
+  File &quot;goagent-goagent-a5b0812/local/proxy.py&quot;, line 449, in __wait_sock_io
+  File &quot;build/bdist.macosx-10.9-intel/egg/OpenSSL/SSL.py&quot;, line 995, in recv
+    self._raise_ssl_error(self._ssl, result)
+  File &quot;build/bdist.macosx-10.9-intel/egg/OpenSSL/SSL.py&quot;, line 864, in _raise_ssl_error
+    raise SysCallError(-1, &quot;Unexpected EOF&quot;)
+SysCallError: (-1, 'Unexpected EOF')
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc27">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 17:45:17 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c27" href="/p/goagent/issues/detail?id=14644#c27">#27</a>
+ 
+
+ <a class="userlink"
+ href="/u/103844667444764108823/">lb5285...@gmail.com</a
+></span>
+ 
+<pre>
+./find_ip.sh: line 37: ./speed_test.py: 参数列表过长
+Oops, can NOT ping any ip in ip.find.out, please check your network
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc28">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 18:12:22 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c28" href="/p/goagent/issues/detail?id=14644#c28">#28</a>
+ 
+
+ <a class="userlink"
+ href="/u/113128405368309721102/">lel...@gmail.com</a
+></span>
+ 
+<pre>
+可怜我OSX搞了半天没搞定，或者你的脚本本来就有问题，我自己把依赖都装好了还是不能运行提示缺少依赖包。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc29">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 18:13:53 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c29" href="/p/goagent/issues/detail?id=14644#c29">#29</a>
+ 
+
+ <a class="userlink"
+ href="/u/100616665740769522847/">mind...@gmail.com</a
+></span>
+ 
+<pre>
+楼主好样的，这样的程序才值得信赖。问下，16G内存的机器运行这个猛物应该没有问题吧？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc30">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 18:52:12 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c30" href="/p/goagent/issues/detail?id=14644#c30">#30</a>
+ 
+
+ <a class="userlink"
+ href="/u/108045202181175569809/">tianguor...@gmail.com</a
+></span>
+ 
+<pre>
+这个要2g剩余内存？那不是玩单机游戏一边开着没法用？我只有8g内存，额
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc31">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 19:52:27 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c31" href="/p/goagent/issues/detail?id=14644#c31">#31</a>
+ 
+
+ <a class="userlink"
+ href="/u/104375815226861239051/">Monistra...@gmail.com</a
+></span>
+ 
+<pre>
+回复 #25, 对于MAC用户，我没有机器能测试，抱歉。
+回复 #27, 参数列表过长，已经在V1.3版本中修复，其实你已经找到约2000千个IP了。请下载新版本再试。
+
+版本更新：V1.3，修复若干Bug。优化内存占用和降低CPU使用率。没V1.0版本那么恐怖了，请用新版本。
+
+对于老机器，请自行修改find_host_port.py中的
+
+thread_num=100
+
+建议修改成10, 可以参考：thread_num=10时，在P4，256MB内存的机器上调试可行（内核占用92MB）。
+
+修改后，再根据README运行，谢谢。
+
+建议大家运行find_ip.sh时，找到了几百个IP后，就Ctrl+C。再运行./deal_ip.sh，若等find_ip.sh自行完毕，我这边测试显示，时间很长，当然也能找到2000个左右的IP。而./deal_ip.sh的原理是，每5秒测试10个IP的ping时间，再把延时短的放前面。时间会比较长。
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=146440031000&amp;name=google_find_ip_ver1.3.tar.gz&amp;token=ABZ6GAeAAuT2XbPFk4nooNrzjCoVHIXOpw%3A1434455571702&amp;id=14644&amp;mod_ts_token=ABZ6GAd1XZEESG2B3BKMiC0vl_1FoDdc2g%3A1434455571702">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >google_find_ip_ver1.3.tar.gz</b>
+ <br>
+ 594 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=146440031000&amp;name=google_find_ip_ver1.3.tar.gz&amp;token=ABZ6GAeAAuT2XbPFk4nooNrzjCoVHIXOpw%3A1434455571702&amp;id=14644&amp;mod_ts_token=ABZ6GAd1XZEESG2B3BKMiC0vl_1FoDdc2g%3A1434455571702">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc32">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 19:59:29 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c32" href="/p/goagent/issues/detail?id=14644#c32">#32</a>
+ 
+
+ <a class="userlink"
+ href="/u/104375815226861239051/">Monistra...@gmail.com</a
+></span>
+ 
+<pre>
+回复 26#： 请用最新版本试试。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc33">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 20:22:10 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c33" href="/p/goagent/issues/detail?id=14644#c33">#33</a>
+ 
+
+ <a class="userlink"
+ href="/u/117729528691194374573/">wang0xin...@gmail.com</a
+></span>
+ 
+<pre>
+To #24 floor,thanks for your idea , it really works.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc34">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 20:35:28 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c34" href="/p/goagent/issues/detail?id=14644#c34">#34</a>
+ 
+
+ <a class="userlink"
+ href="/u/117729528691194374573/">wang0xin...@gmail.com</a
+></span>
+ 
+<pre>
+e...I think I need to take back my comment ,my goagent work just because of IPV6 tunnel.....
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc35">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 21:11:53 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c35" href="/p/goagent/issues/detail?id=14644#c35">#35</a>
+ 
+
+ <a class="userlink"
+ href="/u/104349845162897066584/">MrYn...@gmail.com</a
+></span>
+ 
+<pre>
+之前完全没有接触过Linux,昨天看到楼主的帖子我用虚拟机装Ubuntu弄了整整一个通宵.实在是没辙了,楼主可否发一些ip到我的邮箱呢,十分感谢. mrynot0@gmail.com 到现在翻不了墙时才发现自己原来对电脑知识懂的是那么少...唉...上youtube看点视频至于那么困难么..
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc36">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 21:58:34 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c36" href="/p/goagent/issues/detail?id=14644#c36">#36</a>
+ 
+
+ <a class="userlink"
+ href="/u/113637371139294256586/">doraemon...@gmail.com</a
+></span>
+ 
+<pre>
+为什么这种测IP的程序会很耗磁盘呢?
+我的CPU和内存都还好, 就是硬盘读写都满了.
+作者能不能改进一下读到内存里面等测完一次性写进磁盘呢.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc38">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 22:08:26 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c38" href="/p/goagent/issues/detail?id=14644#c38">#38</a>
+ 
+
+ <a class="userlink"
+ href="/u/104375815226861239051/">Monistra...@gmail.com</a
+></span>
+ 
+<pre>
+回复#36： 请使用最新版本，程序本身不会耗硬盘的，几乎不会写硬盘。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc39">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 22:11:07 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c39" href="/p/goagent/issues/detail?id=14644#c39">#39</a>
+ 
+
+ <a class="userlink"
+ href="/u/106951911208304773317/">suxianli...@gmail.com</a
+></span>
+ 
+<pre>
+Linux技术要求有点高啊。能否给个图片教程看看操作，弄了一天实在是不会，谢谢啊
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc40">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 22:47:49 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c40" href="/p/goagent/issues/detail?id=14644#c40">#40</a>
+ 
+
+ <a class="userlink"
+ href="/u/113637371139294256586/">doraemon...@gmail.com</a
+></span>
+ 
+<pre>
+嗯, 是我的问题. 我猜是我的虚拟机上内存开小了, 导致虚拟机磁盘做虚拟内存.
+开到4G后问题解决了.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc41">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 22:54:34 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c41" href="/p/goagent/issues/detail?id=14644#c41">#41</a>
+ 
+
+ <a class="userlink"
+ href="/u/104375815226861239051/">Monistra...@gmail.com</a
+></span>
+ 
+<pre>
+请用最新版本，V1.3，小内存，低CPU，高准确度。
+
+详情：
+
+<a href="https://code.google.com/p/goagent/issues/detail?id=14674" rel="nofollow">https://code.google.com/p/goagent/issues/detail?id=14674</a>
+
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc42">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 23:00:30 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c42" href="/p/goagent/issues/detail?id=14644#c42">#42</a>
+ 
+
+ <a class="userlink"
+ href="/u/104375815226861239051/">Monistra...@gmail.com</a
+></span>
+ 
+<pre>
+历史版本已经不再提供下载，请使用最新版本V1.3
+
+详情：
+
+<a href="https://code.google.com/p/goagent/issues/detail?id=14674" rel="nofollow">https://code.google.com/p/goagent/issues/detail?id=14674</a>
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc43">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 23:07:57 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c43" href="/p/goagent/issues/detail?id=14644#c43">#43</a>
+ 
+
+ <a class="userlink"
+ href="/u/104664142262288777119/">nucle...@gmail.com</a
+></span>
+ 
+<pre>
+这次封禁应该是有针对性的，专门针对goagent来的，还不是封IP这么简单。因为很多IP能短时间用一下，很快就不行了，但隔一段时间又可以了。也不仅仅是流量控制，估计是通过请求次数来控制的，如果是这样，那就不是短期的了。但不知这样是否会导致商业受损？如果对商业影响太大的话，程序员们会投诉的吧？高手们解惑一下。。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc44">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 23:10:59 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c44" href="/p/goagent/issues/detail?id=14644#c44">#44</a>
+ 
+
+ <a class="userlink"
+ href="/u/107432431625224837396/">Ding1987...@gmail.com</a
+></span>
+ 
+<pre>
+楼主 如何把搜出来的ip地址批量的添加到 proxy.ini文件当中 。几百个ip地址， 一个一个手动添加有一点点麻烦啊
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc45">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 23:33:37 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c45" href="/p/goagent/issues/detail?id=14644#c45">#45</a>
+ 
+
+ <a class="userlink"
+ href="/u/104362894763258652622/">zhaozh...@gmail.com</a
+></span>
+ 
+<pre>
+多谢楼主，效果还是不错的。看了一下代码，绝对安全，大家放心用
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc46">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 23:45:18 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c46" href="/p/goagent/issues/detail?id=14644#c46">#46</a>
+ 
+
+ <a class="userlink"
+ href="/u/104375815226861239051/">Monistra...@gmail.com</a
+></span>
+ 
+<pre>
+回复 #44 看最新本版V1.3中的README，运行完那两条后，屏幕会有输出，同时也有个文件叫ip.final，已经格式化为proxy.ini格式的了，即 
+
+xxx.xxx.xxx.xxx|xxx.xxx.xxx.xxx|xxx.xxx.xxx.xxx|xxx.xxx.xxx.xxx|xxx.xxx.xxx.xxx
+
+直接复制即可。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc47">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jun 14 23:54:21 2014">
+ Jun 14, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c47" href="/p/goagent/issues/detail?id=14644#c47">#47</a>
+ 
+
+ <a class="userlink"
+ href="/u/104375815226861239051/">Monistra...@gmail.com</a
+></span>
+ 
+<pre>
+回复 #43： 一次性加两三百个ip进去，均衡一下，效果会好很多，几个ip的话，估计一下子就没有了。
+
+请用最新版本，V1.3，小内存，低CPU，高准确度。
+
+详情：
+
+<a href="https://code.google.com/p/goagent/issues/detail?id=14674" rel="nofollow">https://code.google.com/p/goagent/issues/detail?id=14674</a>
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc48">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 00:01:17 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c48" href="/p/goagent/issues/detail?id=14644#c48">#48</a>
+ 
+
+ <a class="userlink"
+ href="/u/113637371139294256586/">doraemon...@gmail.com</a
+></span>
+ 
+<pre>
+楼主, 请问一下:
+我看到你在第一个版本里面是通过查询 netblock.google.com来获得IP pool的, 为什么在第三个版本换成了固定IP pool呢? 通过查询来获得应该更稳定, 也不怕谷歌以后改IP呀.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc49">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 00:22:04 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c49" href="/p/goagent/issues/detail?id=14644#c49">#49</a>
+ 
+
+ <a class="userlink"
+ href="/u/104375815226861239051/">Monistra...@gmail.com</a
+></span>
+ 
+<pre>
+回复 #48， 版本V1.0：
+1. 把所有产生的google ip 全放内存里，占内存太大，几个G吧，而且并发线程太多，CPU占有率及点，旧（老）机器吃不消。
+2. 一般用户dns可能被截获或被丢弃或被污染，可能得不到正确的ip段。
+
+故直接把固定IP pool在文件里了。
+
+这里提供如何更新ip池的方法，根据自己机器的配置去试：下载解压后，进入解压目录，再进入gooole_ip_pool
+运行：
+
+ip_range=$(dig TXT +short _netblocks{,2,3}.google.com \
+    | tr ' ' '\n' | grep '^ip4:' | sed 's/ip4://g' | xargs)
+echo $ip_range
+
+若有ip段出来之后，再把gooole_ip_pool里的所有东西删除（不写出rm语句是因为有用户会不少心在其它目录执行这个rm，后果很严重），再运行：
+
+
+for i in $ip_range ;do ../ip_pool.py $i &gt; $(echo $i | sed 's/\//_/g');done
+
+即会更新所有ip
+
+请用最新版本，V1.3，小内存，低CPU，高准确度。
+
+详情：
+
+<a href="https://code.google.com/p/goagent/issues/detail?id=14674" rel="nofollow">https://code.google.com/p/goagent/issues/detail?id=14674</a>
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc50">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 00:34:38 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c50" href="/p/goagent/issues/detail?id=14644#c50">#50</a>
+ 
+
+ <a class="userlink"
+ href="/u/107432431625224837396/">Ding1987...@gmail.com</a
+></span>
+ 
+<pre>
+我去实验一下，感谢楼主
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc51">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 01:30:36 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c51" href="/p/goagent/issues/detail?id=14644#c51">#51</a>
+ 
+
+ <a class="userlink"
+ href="/u/101909722338644274191/">pcyc...@gmail.com</a
+></span>
+ 
+<pre>
+非常好，感謝樓主！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc52">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 05:31:50 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c52" href="/p/goagent/issues/detail?id=14644#c52">#52</a>
+ 
+
+ <a class="userlink"
+ href="/u/114676100531514623361/">luweih...@gmail.com</a
+></span>
+ 
+<pre>
+请问扫出IP以后，怎么加入到proxy.ini当中去？IP地址复制到proxy.ini当中的哪个位置？谢谢。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc53">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 05:45:22 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c53" href="/p/goagent/issues/detail?id=14644#c53">#53</a>
+ 
+
+ <a class="userlink"
+ href="/u/114676100531514623361/">luweih...@gmail.com</a
+></span>
+ 
+<pre>
+好吧，Proxy.ini当中有个[iplist]，然后复制到各个“=”后面去。是这样的吗楼主？不过发现运行以后，还是很多黄。。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc54">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 06:22:27 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c54" href="/p/goagent/issues/detail?id=14644#c54">#54</a>
+ 
+
+ <a class="userlink"
+ href="/u/100616665740769522847/">mind...@gmail.com</a
+></span>
+ 
+<pre>
+楼主，我用这个程序，发觉一个问题。就是测试成功的ip（一部分）。在goagent里是黄字。
+由于我不懂python.为什么通过ssl验证的，却是错的？
+
+如果用c写的话，我想大概是这样的
+半开多线程扫描433端口（速度超快），然后用openssl函数里的函数去验证。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc55">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 07:36:29 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c55" href="/p/goagent/issues/detail?id=14644#c55">#55</a>
+ 
+
+ <a class="userlink"
+ href="/u/changejava/">changejava</a
+></span>
+ 
+<pre>
+为什么能找到第一步能找到IP，然后再IP.format，执行speed test 的时候却没有一个IP可以通的， 有遇到和我一样的情况吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc56">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 15 08:34:55 2014">
+ Jun 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c56" href="/p/goagent/issues/detail?id=14644#c56">#56</a>
+ 
+
+ <a class="userlink"
+ href="/u/114902295707394912258/">gyk66...@gmail.com</a
+></span>
+ 
+<pre>
+确实不错啊。楼主干得漂亮。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc57">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jun 16 00:34:15 2014">
+ Jun 16, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c57" href="/p/goagent/issues/detail?id=14644#c57">#57</a>
+ 
+
+ <a class="userlink"
+ href="/u/104919817723753466825/">song...@gmail.com</a
+></span>
+ 
+<pre>
+mac上运行 提示：
+sort: invalid option -- R
+Try 'sort --help' for more information.
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc58">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jun 29 22:17:24 2014">
+ Jun 29, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c58" href="/p/goagent/issues/detail?id=14644#c58">#58</a>
+ 
+
+ <a class="userlink"
+ href="/u/109613756866888744154/">songyi8...@gmail.com</a
+></span>
+ 
+<pre>
+不错不错，ubuntu下再也没抽风了
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc59">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jul 10 07:00:18 2014">
+ Jul 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c59" href="/p/goagent/issues/detail?id=14644#c59">#59</a>
+ 
+
+ <a class="userlink"
+ href="/u/101924606026354844931/">TroyZX1...@gmail.com</a
+></span>
+ 
+<pre>
+楼主，我在mac下运行程序，虽然ip会出来，中间会经常报这样的错误：
+Traceback (most recent call last):
+  File &quot;./find_host_port.py&quot;, line 46, in &lt;module&gt;
+    dmn_dtct.start()
+  File &quot;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/multiprocessing/process.py&quot;, line 130, in start
+    self._popen = Popen(self)
+  File &quot;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/multiprocessing/forking.py&quot;, line 121, in __init__
+    self.pid = os.fork()
+OSError: [Errno 35] Resource temporarily unavailable
+
+貌似是线程太多了啊？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc60">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Jul 10 07:00:52 2014">
+ Jul 10, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c60" href="/p/goagent/issues/detail?id=14644#c60">#60</a>
+ 
+
+ <a class="userlink"
+ href="/u/101924606026354844931/">TroyZX1...@gmail.com</a
+></span>
+ 
+<pre>
+而且搜索到一半会卡住，之后就再也不动了，机器也会跟着一起卡。。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc61">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jul 13 22:27:34 2014">
+ Jul 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c61" href="/p/goagent/issues/detail?id=14644#c61">#61</a>
+ 
+
+ <a class="userlink"
+ href="/u/105058509392953962476/">ahillg...@gmail.com</a
+></span>
+ 
+<pre>
+不明觉厉
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc62">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Jul 13 23:44:36 2014">
+ Jul 13, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c62" href="/p/goagent/issues/detail?id=14644#c62">#62</a>
+ 
+
+ <a class="userlink"
+ href="/u/105310035520377444398/">fiberdra...@gmail.com</a
+></span>
+ 
+<pre>
+在 windoes下用 cygwin 虚拟机  ，按照 18楼，楼主的说明，删除了 sudo命令，自行安装了netaddr和另一个插件，还是报错啊，求助！ 
+
+报如下错误，
+
+
+$ ./find_ip.sh
+      1 [main] python2.7 1776 child_info_fork::abort: unable to remap fcntl.dll
+to same address as parent (0x890000) - try running rebaseall
+Traceback (most recent call last):
+  File &quot;./find_host_port.py&quot;, line 46, in &lt;module&gt;
+    dmn_dtct.start()
+  File &quot;/usr/lib/python2.7/multiprocessing/process.py&quot;, line 130, in start
+    self._popen = Popen(self)
+  File &quot;/usr/lib/python2.7/multiprocessing/forking.py&quot;, line 120, in __init__
+    self.pid = os.fork()
+OSError: [Errno 11] Resource temporarily unavailable
+      1 [main] python2.7 4236 child_info_fork::abort: unable to remap fcntl.dll
+to same address as parent (0x890000) - try running rebaseall
+Traceback (most recent call last):
+  File &quot;./find_host_port.py&quot;, line 46, in &lt;module&gt;
+    dmn_dtct.start()
+  File &quot;/usr/lib/python2.7/multiprocessing/process.py&quot;, line 130, in start
+    self._popen = Popen(self)
+  File &quot;/usr/lib/python2.7/multiprocessing/forking.py&quot;, line 120, in __init__
+    self.pid = os.fork()
+OSError: [Errno 11] Resource temporarily unavailable
+      1 [main] python2.7 4668 child_info_fork::abort: unable to remap fcntl.dll
+to same address as parent (0x890000) - try running rebaseall
+Traceback (most recent call last):
+  File &quot;./find_host_port.py&quot;, line 46, in &lt;module&gt;
+    dmn_dtct.start()
+  File &quot;/usr/lib/python2.7/multiprocessing/process.py&quot;, line 130, in start
+    self._popen = Popen(self)
+  File &quot;/usr/lib/python2.7/multiprocessing/forking.py&quot;, line 120, in __init__
+    self.pid = os.fork()
+OSError: [Errno 11] Resource temporarily unavailable
+      1 [main] python2.7 5128 child_info_fork::abort: unable to remap fcntl.dll
+to same address as parent (0x890000) - try running rebaseall
+Traceback (most recent call last):
+  File &quot;./find_host_port.py&quot;, line 46, in &lt;module&gt;
+    dmn_dtct.start()
+  File &quot;/usr/lib/python2.7/multiprocessing/process.py&quot;, line 130, in start
+    self._popen = Popen(self)
+  File &quot;/usr/lib/python2.7/multiprocessing/forking.py&quot;, line 120, in __init__
+    self.pid = os.fork()
+OSError: [Errno 11] Resource temporarily unavailable
+      1 [main] python2.7 2008 child_info_fork::abort: unable to remap fcntl.dll
+to same address as parent (0x890000) - try running rebaseall
+Traceback (most recent call last):
+  File &quot;./find_host_port.py&quot;, line 46, in &lt;module&gt;
+    dmn_dtct.start()
+  File &quot;/usr/lib/python2.7/multiprocessing/process.py&quot;, line 130, in start
+    self._popen = Popen(self)
+  File &quot;/usr/lib/python2.7/multiprocessing/forking.py&quot;, line 120, in __init__
+    self.pid = os.fork()
+OSError: [Errno 11] Resource temporarily unavailable
+      1 [main] python2.7 4504 child_info_fork::abort: unable to remap fcntl.dll
+to same address as parent (0x890000) - try running rebaseall
+Traceback (most recent call last):
+  File &quot;./find_host_port.py&quot;, line 46, in &lt;module&gt;
+    dmn_dtct.start()
+  File &quot;/usr/lib/python2.7/multiprocessing/process.py&quot;, line 130, in start
+    self._popen = Popen(self)
+  File &quot;/usr/lib/python2.7/multiprocessing/forking.py&quot;, line 120, in __init__
+    self.pid = os.fork()
+OSError: [Errno 11] Resource temporarily unavailable
+      1 [main] python2.7 5680 child_info_fork::abort: unable to remap fcntl.dll
+to same address as parent (0x890000) - try running rebaseall
+Traceback (most recent call last):
+  File &quot;./find_host_port.py&quot;, line 46, in &lt;module&gt;
+    dmn_dtct.start()
+  File &quot;/usr/lib/python2.7/multiprocessing/process.py&quot;, line 130, in start
+    self._popen = Popen(self)
+  File &quot;/usr/lib/python2.7/multiprocessing/forking.py&quot;, line 120, in __init__
+    self.pid = os.fork()
+OSError: [Errno 11] Resource temporarily unavailable
+      1 [main] python2.7 6100 child_info_fork::abort: unable to remap fcntl.dll
+to same address as parent (0x890000) - try running rebaseall
+Traceback (most recent call last):
+  File &quot;./find_host_port.py&quot;, line 46, in &lt;module&gt;
+    dmn_dtct.start()
+  File &quot;/usr/lib/python2.7/multiprocessing/process.py&quot;, line 130, in start
+    self._popen = Popen(self)
+  File &quot;/usr/lib/python2.7/multiprocessing/forking.py&quot;, line 120, in __init__
+    self.pid = os.fork()
+OSError: [Errno 11] Resource temporarily unavailable
+      1 [main] python2.7 3320 child_info_fork::abort: unable to remap fcntl.dll
+to same address as parent (0x890000) - try running rebaseall
+Traceback (most recent call last):
+  File &quot;./find_host_port.py&quot;, line 46, in &lt;module&gt;
+    dmn_dtct.start()
+  File &quot;/usr/lib/python2.7/multiprocessing/process.py&quot;, line 130, in start
+    self._popen = Popen(self)
+  File &quot;/usr/lib/python2.7/multiprocessing/forking.py&quot;, line 120, in __init__
+    self.pid = os.fork()
+OSError: [Errno 11] Resource temporarily unavailable
+      1 [main] python2.7 4468 child_info_fork::abort: unable to remap fcntl.dll
+to same address as parent (0x890000) - try running rebaseall
+Traceback (most recent call last):
+  File &quot;./find_host_port.py&quot;, line 46, in &lt;module&gt;
+    dmn_dtct.start()
+  File &quot;/usr/lib/python2.7/multiprocessing/process.py&quot;, line 130, in start
+    self._popen = Popen(self)
+  File &quot;/usr/lib/python2.7/multiprocessing/forking.py&quot;, line 120, in __init__
+    self.pid = os.fork()
+OSError: [Errno 11] Resource temporarily unavailable
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc63">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jul 15 19:18:14 2014">
+ Jul 15, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c63" href="/p/goagent/issues/detail?id=14644#c63">#63</a>
+ 
+
+ <a class="userlink"
+ href="/u/105310035520377444398/">fiberdra...@gmail.com</a
+></span>
+ 
+<pre>
+仍然提示 如下错误，请楼主帮忙啊啊，谢谢谢谢！！
+$ ./find_ip.sh
+      1 [main] python2.7 4532 child_info_fork::abort: unable to remap fcntl.dll
+to same address as parent (0x890000) - try running rebaseall
+Traceback (most recent call last):
+  File &quot;./find_host_port.py&quot;, line 46, in &lt;module&gt;
+    dmn_dtct.start()
+  File &quot;/usr/lib/python2.7/multiprocessing/process.py&quot;, line 130, in start
+    self._popen = Popen(self)
+  File &quot;/usr/lib/python2.7/multiprocessing/forking.py&quot;, line 120, in __init__
+    self.pid = os.fork()
+OSError: [Errno 11] Resource temporarily unavailable
+      2 [main] python2.7 5492 child_info_fork::abort: unable to remap fcntl.dll
+to same address as parent (0x890000) - try running rebaseall
+Traceback (most recent call last):
+  File &quot;./find_host_port.py&quot;, line 46, in &lt;module&gt;
+    dmn_dtct.start()
+  File &quot;/usr/lib/python2.7/multiprocessing/process.py&quot;, line 130, in start
+    self._popen = Popen(self)
+  File &quot;/usr/lib/python2.7/multiprocessing/forking.py&quot;, line 120, in __init__
+    self.pid = os.fork()
+OSError: [Errno 11] Resource temporarily unavailable
+      1 [main] python2.7 2652 child_info_fork::abort: unable to remap fcntl.dll
+to same address as parent (0x890000) - try running rebaseall
+Traceback (most recent call last):
+  File &quot;./find_host_port.py&quot;, line 46, in &lt;module&gt;
+    dmn_dtct.start()
+  File &quot;/usr/lib/python2.7/multiprocessing/process.py&quot;, line 130, in start
+    self._popen = Popen(self)
+  File &quot;/usr/lib/python2.7/multiprocessing/forking.py&quot;, line 120, in __init__
+    self.pid = os.fork()
+OSError: [Errno 11] Resource temporarily unavailable
+      2 [main] python2.7 4432 child_info_fork::abort: unable to remap fcntl.dll
+to same address as parent (0x890000) - try running rebaseall
+Traceback (most recent call last):
+  File &quot;./find_host_port.py&quot;, line 46, in &lt;module&gt;
+    dmn_dtct.start()
+  File &quot;/usr/lib/python2.7/multiprocessing/process.py&quot;, line 130, in start
+    self._popen = Popen(self)
+  File &quot;/usr/lib/python2.7/multiprocessing/forking.py&quot;, line 120, in __init__
+    self.pid = os.fork()
+OSError: [Errno 11] Resource temporarily unavailable
+      2 [main] python2.7 1720 child_info_fork::abort: unable to remap fcntl.dll
+to same address as parent (0x890000) - try running rebaseall
+Traceback (most recent call last):
+  File &quot;./find_host_port.py&quot;, line 46, in &lt;module&gt;
+    dmn_dtct.start()
+  File &quot;/usr/lib/python2.7/multiprocessing/process.py&quot;, line 130, in start
+    self._popen = Popen(self)
+  File &quot;/usr/lib/python2.7/multiprocessing/forking.py&quot;, line 120, in __init__
+    self.pid = os.fork()
+OSError: [Errno 11] Resource temporarily unavailable
+      1 [main] python2.7 2992 child_info_fork::abort: unable to remap fcntl.dll
+to same address as parent (0x890000) - try running rebaseall
+Traceback (most recent call last):
+  File &quot;./find_host_port.py&quot;, line 46, in &lt;module&gt;
+    dmn_dtct.start()
+  File &quot;/usr/lib/python2.7/multiprocessing/process.py&quot;, line 130, in start
+    self._popen = Popen(self)
+  File &quot;/usr/lib/python2.7/multiprocessing/forking.py&quot;, line 120, in __init__
+    self.pid = os.fork()
+OSError: [Errno 11] Resource temporarily unavailable
+      1 [main] python2.7 5616 child_info_fork::abort: unable to remap fcntl.dll
+to same address as parent (0x890000) - try running rebaseall
+Traceback (most recent call last):
+  File &quot;./find_host_port.py&quot;, line 46, in &lt;module&gt;
+    dmn_dtct.start()
+  File &quot;/usr/lib/python2.7/multiprocessing/process.py&quot;, line 130, in start
+    self._popen = Popen(self)
+  File &quot;/usr/lib/python2.7/multiprocessing/forking.py&quot;, line 120, in __init__
+    self.pid = os.fork()
+OSError: [Errno 11] Resource temporarily unavailable
+      1 [main] python2.7 4840 child_info_fork::abort: unable to remap fcntl.dll
+to same address as parent (0x890000) - try running rebaseall
+Traceback (most recent call last):
+  File &quot;./find_host_port.py&quot;, line 46, in &lt;module&gt;
+    dmn_dtct.start()
+  File &quot;/usr/lib/python2.7/multiprocessing/process.py&quot;, line 130, in start
+    self._popen = Popen(self)
+  File &quot;/usr/lib/python2.7/multiprocessing/forking.py&quot;, line 120, in __init__
+    self.pid = os.fork()
+OSError: [Errno 11] Resource temporarily unavailable
+      1 [main] python2.7 716 child_info_fork::abort: unable to remap fcntl.dll t
+o same address as parent (0x890000) - try running rebaseall
+Traceback (most recent call last):
+  File &quot;./find_host_port.py&quot;, line 46, in &lt;module&gt;
+    dmn_dtct.start()
+  File &quot;/usr/lib/python2.7/multiprocessing/process.py&quot;, line 130, in start
+    self._popen = Popen(self)
+  File &quot;/usr/lib/python2.7/multiprocessing/forking.py&quot;, line 120, in __init__
+    self.pid = os.fork()
+OSError: [Errno 11] Resource temporarily unavailable
+      2 [main] python2.7 5216 child_info_fork::abort: unable to remap fcntl.dll
+to same address as parent (0x890000) - try running rebaseall
+Traceback (most recent call last):
+  File &quot;./find_host_port.py&quot;, line 46, in &lt;module&gt;
+    dmn_dtct.start()
+  File &quot;/usr/lib/python2.7/multiprocessing/process.py&quot;, line 130, in start
+    self._popen = Popen(self)
+  File &quot;/usr/lib/python2.7/multiprocessing/forking.py&quot;, line 120, in __init__
+    self.pid = os.fork()
+OSError: [Errno 11] Resource temporarily unavailable
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc65">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Aug  6 00:12:18 2014">
+ Aug 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c65" href="/p/goagent/issues/detail?id=14644#c65">#65</a>
+ 
+
+ <a class="userlink"
+ href="/u/118153030539307220185/">wua...@gmail.com</a
+></span>
+ 
+<pre>
+感谢作者分享
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc66">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct 30 20:47:21 2014">
+ Oct 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c66" href="/p/goagent/issues/detail?id=14644#c66">#66</a>
+ 
+
+ <a class="userlink"
+ href="/u/107442462881548616077/">wwf...@gmail.com</a
+></span>
+ 
+<pre>
+有沒有人可以提供資金提供技術。提供可以炸掉GFW的方案？我願意去執行！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc67">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct 30 21:16:09 2014">
+ Oct 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c67" href="/p/goagent/issues/detail?id=14644#c67">#67</a>
+ 
+
+ <a class="userlink"
+ href="/u/108624022798487360207/">hongwang...@gmail.com</a
+></span>
+ 
+<pre>
+谢谢楼主！
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc68">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Oct 30 21:43:26 2014">
+ Oct 30, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c68" href="/p/goagent/issues/detail?id=14644#c68">#68</a>
+ 
+
+ <a class="userlink"
+ href="/u/sovieting/">sovieting</a
+></span>
+ 
+<pre>
+要从物理上消灭GFW设备及工作人员，主要方法有：暗杀、灭门、人肉炸弹，成功案例参考穆斯林系列
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc69">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sun Nov  2 00:11:10 2014">
+ Nov 2, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c69" href="/p/goagent/issues/detail?id=14644#c69">#69</a>
+ 
+
+ <a class="userlink"
+ href="/u/100623003003084836330/">kiratec...@gmail.com</a
+></span>
+ 
+<pre>
+先杀贪官 然后联系ISIS拿weapons 主要是中国人不团结干不成大事
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc70">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Nov 25 19:14:49 2014">
+ Nov 25, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c70" href="/p/goagent/issues/detail?id=14644#c70">#70</a>
+ 
+
+ <a class="userlink"
+ href="/u/116403131830663013319/">haike28...@gmail.com</a
+></span>
+ 
+<pre>
+我折腾了一下 可以出结果 有效果。 
+只是说到底主动权恐怕还是在gfw那里
+比如同样是这些ip有时候也很卡
+但是这样的方法肯定是有改善的
+向各位大侠致敬
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14644&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D14644"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="14644">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A14644',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 14644,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

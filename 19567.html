@@ -1,0 +1,854 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"token": null, "profileUrl": null, "projectName": "goagent", "projectHomeUrl": "/p/goagent", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "loggedInUserEmail": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "domainName": null, "relativeBaseUrl": ""};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 19567 - 
+ goagent -
+ 
+ 自定义IP使用报错 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19567&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19567" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=19567">19567</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >自定义IP使用报错</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 2 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A19567">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19567&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19567">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/112092709729092459328/">skye...@gmail.com</a
+>,
+ <span class="date" title="Tue Jan 20 04:04:48 2015">Jan 20, 2015</span>
+ 
+ </div>
+<pre>
+一使用自定义IP就出错，默认就OK
+
+操作系统版本：win7 sp1 64bit
+浏览器版本：FF35.0
+GoAgent 版本：3.2.3
+<b>GoAgent 日志：</b>
+INFO - [Jan 20 19:52:45] 127.0.0.1:61086 &quot;STRIP CONNECT code.google.com:443 HTTP
+/1.1&quot; - -
+INFO - [Jan 20 19:52:45] ssl good_ipaddrs=2, bad_ipaddrs=0, unknown_ipaddrs=0
+----------------------------------------
+Exception happened during processing of request from ('127.0.0.1', 61086)
+Traceback (most recent call last):
+  File &quot;F:\goagent-goagent-6360876\local\python27.zip\SocketServer.py&quot;, line 595
+, in process_request_thread
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 934, in finish_reque
+st
+  File &quot;proxy.py&quot;, line 760, in __init__
+  File &quot;F:\goagent-goagent-6360876\local\python27.zip\SocketServer.py&quot;, line 651
+, in __init__
+  File &quot;F:\goagent-goagent-6360876\local\python27.zip\BaseHTTPServer.py&quot;, line 3
+40, in handle
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 2279, in handle_one_
+request
+  File &quot;F:\goagent-goagent-6360876\local\python27.zip\BaseHTTPServer.py&quot;, line 3
+28, in handle_one_request
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 2310, in do_METHOD
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1029, in handle
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 2310, in do_METHOD
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1082, in handle
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1099, in handle_meth
+od
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 2140, in create_http
+_request
+  File &quot;F:\goagent-goagent-6360876\local\python27.zip\httplib.py&quot;, line 409, in
+begin
+  File &quot;F:\goagent-goagent-6360876\local\python27.zip\httplib.py&quot;, line 373, in
+_read_status
+BadStatusLine: ''
+----------------------------------------
+INFO - [Jan 20 19:53:27] 127.0.0.1:61124 &quot;STRIP CONNECT code.google.com:443 HTTP
+/1.1&quot; - -
+INFO - [Jan 20 19:53:27] ssl good_ipaddrs=2, bad_ipaddrs=0, unknown_ipaddrs=0
+----------------------------------------
+Exception happened during processing of request from ('127.0.0.1', 61124)
+Traceback (most recent call last):
+  File &quot;F:\goagent-goagent-6360876\local\python27.zip\SocketServer.py&quot;, line 595
+, in process_request_thread
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 934, in finish_reque
+st
+  File &quot;proxy.py&quot;, line 760, in __init__
+  File &quot;F:\goagent-goagent-6360876\local\python27.zip\SocketServer.py&quot;, line 651
+, in __init__
+  File &quot;F:\goagent-goagent-6360876\local\python27.zip\BaseHTTPServer.py&quot;, line 3
+40, in handle
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 2279, in handle_one_
+request
+  File &quot;F:\goagent-goagent-6360876\local\python27.zip\BaseHTTPServer.py&quot;, line 3
+28, in handle_one_request
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 2310, in do_METHOD
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1029, in handle
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 2310, in do_METHOD
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1082, in handle
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1099, in handle_meth
+od
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 2140, in create_http
+_request
+  File &quot;F:\goagent-goagent-6360876\local\python27.zip\httplib.py&quot;, line 409, in
+begin
+  File &quot;F:\goagent-goagent-6360876\local\python27.zip\httplib.py&quot;, line 373, in
+_read_status
+BadStatusLine: ''
+----------------------------------------
+INFO - [Jan 20 19:53:54] 127.0.0.1:61160 &quot;STRIP CONNECT 119.255.133.36:443 HTTP/
+1.1&quot; - -
+ERROR - [Jan 20 19:53:54] ssl.wrap_socket(connection=&lt;socket at 0x2a58cd0 fileno
+=732 sock=127.0.0.1:8087 peer=127.0.0.1:61160&gt;) failed: [('SSL routines', 'SSL23
+_GET_CLIENT_HELLO', 'unknown protocol')]
+Traceback (most recent call last):
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1001, in handle
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1067, in do_ssl_hand
+shake
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 438, in do_handshake
+
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 420, in __iowait
+Error: [('SSL routines', 'SSL23_GET_CLIENT_HELLO', 'unknown protocol')]
+
+127.0.0.1 - - [20/Jan/2015 19:53:54] code 400, message Bad request version ('\x0
+1')
+INFO - [Jan 20 19:53:56] 127.0.0.1:61171 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:53:56] 127.0.0.1:61170 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:53:56] 127.0.0.1:61169 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:53:56] 127.0.0.1:61172 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:53:56] 127.0.0.1:61173 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:53:56] 127.0.0.1:61174 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:53:56] 127.0.0.1:61175 &quot;STRIP CONNECT 202.177.216.227:443 HTTP
+/1.1&quot; - -
+ERROR - [Jan 20 19:53:56] ssl.wrap_socket(connection=&lt;socket at 0x2a58fd0 fileno
+=872 sock=127.0.0.1:8087 peer=127.0.0.1:61175&gt;) failed: [('SSL routines', 'SSL23
+_GET_CLIENT_HELLO', 'unknown protocol')]
+Traceback (most recent call last):
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1001, in handle
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1067, in do_ssl_hand
+shake
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 438, in do_handshake
+
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 420, in __iowait
+Error: [('SSL routines', 'SSL23_GET_CLIENT_HELLO', 'unknown protocol')]
+
+127.0.0.1 - - [20/Jan/2015 19:53:56] code 400, message Bad request version ('\x0
+1')
+INFO - [Jan 20 19:53:57] 127.0.0.1:61204 &quot;STRIP CONNECT 202.177.216.236:443 HTTP
+/1.1&quot; - -
+ERROR - [Jan 20 19:53:57] ssl.wrap_socket(connection=&lt;socket at 0x2a58cf0 fileno
+=812 sock=127.0.0.1:8087 peer=127.0.0.1:61204&gt;) failed: [('SSL routines', 'SSL23
+_GET_CLIENT_HELLO', 'unknown protocol')]
+Traceback (most recent call last):
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1001, in handle
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1067, in do_ssl_hand
+shake
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 438, in do_handshake
+
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 420, in __iowait
+Error: [('SSL routines', 'SSL23_GET_CLIENT_HELLO', 'unknown protocol')]
+
+127.0.0.1 - - [20/Jan/2015 19:53:57] code 400, message Bad request version ('\x0
+1')
+INFO - [Jan 20 19:53:57] 127.0.0.1:61233 &quot;STRIP CONNECT 62.128.100.109:443 HTTP/
+1.1&quot; - -
+ERROR - [Jan 20 19:53:57] ssl.wrap_socket(connection=&lt;socket at 0x2a58f30 fileno
+=872 sock=127.0.0.1:8087 peer=127.0.0.1:61233&gt;) failed: [('SSL routines', 'SSL23
+_GET_CLIENT_HELLO', 'unknown protocol')]
+Traceback (most recent call last):
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1001, in handle
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1067, in do_ssl_hand
+shake
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 438, in do_handshake
+
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 420, in __iowait
+Error: [('SSL routines', 'SSL23_GET_CLIENT_HELLO', 'unknown protocol')]
+
+127.0.0.1 - - [20/Jan/2015 19:53:57] code 400, message Bad request version ('\x0
+1')
+INFO - [Jan 20 19:53:57] 127.0.0.1:61255 &quot;STRIP CONNECT 62.128.100.132:443 HTTP/
+1.1&quot; - -
+ERROR - [Jan 20 19:53:57] ssl.wrap_socket(connection=&lt;socket at 0x2a58cd0 fileno
+=812 sock=127.0.0.1:8087 peer=127.0.0.1:61255&gt;) failed: [('SSL routines', 'SSL23
+_GET_CLIENT_HELLO', 'unknown protocol')]
+Traceback (most recent call last):
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1001, in handle
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1067, in do_ssl_hand
+shake
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 438, in do_handshake
+
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 420, in __iowait
+Error: [('SSL routines', 'SSL23_GET_CLIENT_HELLO', 'unknown protocol')]
+
+127.0.0.1 - - [20/Jan/2015 19:53:57] code 400, message Bad request version ('\x0
+1')
+INFO - [Jan 20 19:53:57] 127.0.0.1:61263 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:53:57] 127.0.0.1:61264 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:53:57] 127.0.0.1:61266 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:53:57] 127.0.0.1:61265 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:53:57] 127.0.0.1:61267 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:53:57] 127.0.0.1:61268 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:54:00] 127.0.0.1:61355 &quot;STRIP CONNECT 119.255.133.27:443 HTTP/
+1.1&quot; - -
+ERROR - [Jan 20 19:54:00] ssl.wrap_socket(connection=&lt;socket at 0x2a58fd0 fileno
+=732 sock=127.0.0.1:8087 peer=127.0.0.1:61355&gt;) failed: [('SSL routines', 'SSL23
+_GET_CLIENT_HELLO', 'unknown protocol')]
+Traceback (most recent call last):
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1001, in handle
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1067, in do_ssl_hand
+shake
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 438, in do_handshake
+
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 420, in __iowait
+Error: [('SSL routines', 'SSL23_GET_CLIENT_HELLO', 'unknown protocol')]
+
+127.0.0.1 - - [20/Jan/2015 19:54:00] code 400, message Bad request version ('\x0
+1')
+INFO - [Jan 20 19:54:03] 127.0.0.1:61456 &quot;STRIP CONNECT 119.255.133.30:443 HTTP/
+1.1&quot; - -
+ERROR - [Jan 20 19:54:03] ssl.wrap_socket(connection=&lt;socket at 0x2a58cf0 fileno
+=876 sock=127.0.0.1:8087 peer=127.0.0.1:61456&gt;) failed: [('SSL routines', 'SSL23
+_GET_CLIENT_HELLO', 'unknown protocol')]
+Traceback (most recent call last):
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1001, in handle
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1067, in do_ssl_hand
+shake
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 438, in do_handshake
+
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 420, in __iowait
+Error: [('SSL routines', 'SSL23_GET_CLIENT_HELLO', 'unknown protocol')]
+
+127.0.0.1 - - [20/Jan/2015 19:54:03] code 400, message Bad request version ('\x0
+1')
+INFO - [Jan 20 19:54:06] 127.0.0.1:61466 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:54:07] 127.0.0.1:61480 &quot;STRIP CONNECT 119.255.133.33:443 HTTP/
+1.1&quot; - -
+ERROR - [Jan 20 19:54:07] ssl.wrap_socket(connection=&lt;socket at 0x2a58fd0 fileno
+=876 sock=127.0.0.1:8087 peer=127.0.0.1:61480&gt;) failed: [('SSL routines', 'SSL23
+_GET_CLIENT_HELLO', 'unknown protocol')]
+Traceback (most recent call last):
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1001, in handle
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1067, in do_ssl_hand
+shake
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 438, in do_handshake
+
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 420, in __iowait
+Error: [('SSL routines', 'SSL23_GET_CLIENT_HELLO', 'unknown protocol')]
+
+127.0.0.1 - - [20/Jan/2015 19:54:07] code 400, message Bad request version ('\x0
+1')
+INFO - [Jan 20 19:54:08] extend_iplist start for hosts=[]
+INFO - [Jan 20 19:54:08] extend_iplist finished, added 2
+INFO - [Jan 20 19:54:56] 127.0.0.1:61542 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:54:56] 127.0.0.1:61543 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:54:56] 127.0.0.1:61544 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:54:56] 127.0.0.1:61545 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:54:56] 127.0.0.1:61546 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:54:56] 127.0.0.1:61547 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:54:58] 127.0.0.1:61606 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:54:58] 127.0.0.1:61607 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:54:58] 127.0.0.1:61608 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:54:58] 127.0.0.1:61609 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:54:58] 127.0.0.1:61610 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:54:58] 127.0.0.1:61611 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:54:58] 127.0.0.1:61612 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:54:58] 127.0.0.1:61613 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:54:58] 127.0.0.1:61614 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:54:58] 127.0.0.1:61615 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:54:58] 127.0.0.1:61616 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:55:08] extend_iplist start for hosts=[]
+INFO - [Jan 20 19:55:08] extend_iplist finished, added 2
+INFO - [Jan 20 19:57:38] extend_iplist start for hosts=[]
+INFO - [Jan 20 19:57:38] extend_iplist finished, added 2
+INFO - [Jan 20 19:59:06] 127.0.0.1:61943 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:59:07] 127.0.0.1:61948 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 19:59:41] 127.0.0.1:61987 &quot;STRIP CONNECT 119.255.133.57:443 HTTP/
+1.1&quot; - -
+ERROR - [Jan 20 19:59:41] ssl.wrap_socket(connection=&lt;socket at 0x2a58e30 fileno
+=876 sock=127.0.0.1:8087 peer=127.0.0.1:61987&gt;) failed: [('SSL routines', 'SSL23
+_GET_CLIENT_HELLO', 'unknown protocol')]
+Traceback (most recent call last):
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1001, in handle
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1067, in do_ssl_hand
+shake
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 438, in do_handshake
+
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 420, in __iowait
+Error: [('SSL routines', 'SSL23_GET_CLIENT_HELLO', 'unknown protocol')]
+
+127.0.0.1 - - [20/Jan/2015 19:59:41] code 400, message Bad HTTP/0.9 request type
+ ('\x10KL20')
+INFO - [Jan 20 20:00:00] 127.0.0.1:62012 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 80878
+INFO - [Jan 20 20:00:08] extend_iplist start for hosts=[]
+INFO - [Jan 20 20:00:08] extend_iplist finished, added 2
+INFO - [Jan 20 20:00:52] 127.0.0.1:62086 &quot;MOCK GET http://127.0.0.1:8086/proxy.p
+ac HTTP/1.1&quot; 200 20704
+INFO - [Jan 20 20:03:11] 127.0.0.1:62225 &quot;STRIP CONNECT 119.255.133.60:443 HTTP/
+1.1&quot; - -
+ERROR - [Jan 20 20:03:15] ssl.wrap_socket(connection=&lt;socket at 0x29c0550 fileno
+=952 sock=127.0.0.1:8087 peer=127.0.0.1:62225&gt;) failed: (-1, 'Unexpected EOF')
+Traceback (most recent call last):
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1001, in handle
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 1067, in do_ssl_hand
+shake
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 438, in do_handshake
+
+  File &quot;F:\goagent-goagent-6360876\local\proxylib.py&quot;, line 420, in __iowait
+SysCallError: (-1, 'Unexpected EOF')
+
+页面提示错误如下
+Message From LocalProxy
+Local URLFetch '<a href="http://www.facebook.com/'" rel="nofollow">http://www.facebook.com/'</a> failed
+
+BadStatusLine(&quot;''&quot;,)
+BadStatusLine(&quot;''&quot;,)
+
+
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Thu Apr 23 22:39:00 2015">
+ Apr 23, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=19567#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/114754753743107960544/">lh784319...@gmail.com</a
+></span>
+ 
+<pre>
+我也是这个问题 ，没人解决
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19567&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19567"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="19567">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A19567',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 19567,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

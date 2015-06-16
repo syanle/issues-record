@@ -1,0 +1,894 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "relativeBaseUrl": "", "loggedInUserEmail": null, "token": null, "projectHomeUrl": "/p/goagent", "projectName": "goagent", "profileUrl": null, "domainName": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 19308 - 
+ goagent -
+ 
+ goagent往谷歌硬盘等上载文件时卡死 - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19308&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19308" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=19308">19308</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >goagent往谷歌硬盘等上载文件时卡死</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 1 person starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A19308">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19308&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19308">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/113192075155508240615/">yangis...@gmail.com</a
+>,
+ <span class="date" title="Fri Jan  2 18:59:33 2015">Jan 2, 2015</span>
+ 
+ </div>
+<pre>
+<b>发issue前先在All issues中搜索是否已经有你要提交的问题。</b>
+
+操作系统版本：windows 8.1 32bit
+浏览器版本：ie 11 firefox最新版
+GoAgent 版本：3.2.3
+<b>GoAgent 日志：</b>
+INFO - [Jan 03 10:36:51] 127.0.0.1:50890 &quot;DIRECT POST <a href="https://code.google.com/ap" rel="nofollow">https://code.google.com/ap</a>
+is/ajax/playground/get_projects HTTP/1.1&quot; 301 247
+INFO - [Jan 03 10:36:51] 127.0.0.1:50916 &quot;STRIP CONNECT developers.google.com:44
+3 HTTP/1.1&quot; - -
+INFO - [Jan 03 10:36:51] ssl good_ipaddrs=12, bad_ipaddrs=4, unknown_ipaddrs=308
+
+INFO - [Jan 03 10:36:53] 127.0.0.1:50916 &quot;DIRECT GET https://developers.google.c
+om/apis-explorer/?csw=1 HTTP/1.1&quot; 200 609
+INFO - [Jan 03 10:38:49] 127.0.0.1:50942 &quot;STRIP CONNECT www.google.de:443 HTTP/1
+.1&quot; - -
+INFO - [Jan 03 10:38:49] ssl good_ipaddrs=12, bad_ipaddrs=21, unknown_ipaddrs=29
+3
+INFO - [Jan 03 10:38:49] 127.0.0.1:50961 &quot;STRIP CONNECT www.google.de:443 HTTP/1
+.1&quot; - -
+INFO - [Jan 03 10:38:49] ssl good_ipaddrs=12, bad_ipaddrs=21, unknown_ipaddrs=29
+3
+INFO - [Jan 03 10:38:49] 127.0.0.1:50980 &quot;STRIP CONNECT www.google.de:443 HTTP/1
+.1&quot; - -
+INFO - [Jan 03 10:38:49] ssl good_ipaddrs=12, bad_ipaddrs=21, unknown_ipaddrs=29
+3
+INFO - [Jan 03 10:38:49] 127.0.0.1:50999 &quot;STRIP CONNECT www.google.de:443 HTTP/1
+.1&quot; - -
+INFO - [Jan 03 10:38:49] ssl good_ipaddrs=12, bad_ipaddrs=21, unknown_ipaddrs=29
+3
+INFO - [Jan 03 10:38:50] 127.0.0.1:51018 &quot;STRIP CONNECT www.google.de:443 HTTP/1
+.1&quot; - -
+INFO - [Jan 03 10:38:50] ssl good_ipaddrs=12, bad_ipaddrs=21, unknown_ipaddrs=29
+3
+INFO - [Jan 03 10:38:50] 127.0.0.1:51037 &quot;STRIP CONNECT www.google.de:443 HTTP/1
+.1&quot; - -
+INFO - [Jan 03 10:38:50] ssl good_ipaddrs=12, bad_ipaddrs=21, unknown_ipaddrs=29
+3
+INFO - [Jan 03 10:38:51] 127.0.0.1:51056 &quot;STRIP CONNECT www.google.de:443 HTTP/1
+.1&quot; - -
+INFO - [Jan 03 10:38:51] 127.0.0.1:50942 &quot;GAE GET <a href="https://www.google.de/complete" rel="nofollow">https://www.google.de/complete</a>
+/search?client=serp&amp;hl=zh-CN&amp;sugexp=msedr&amp;gs_rn=60&amp;gs_ri=serp&amp;tok=HxZgFGJtt-JBz8
+P59jRyLw&amp;pq=goagent%E4%B8%8B%E8%BD%BD&amp;cp=8&amp;gs_id=1gkf&amp;q=goagent%E4%B8%8B&amp;xhr=t H
+TTP/1.1&quot; 200 102
+INFO - [Jan 03 10:38:51] 127.0.0.1:50961 &quot;GAE GET <a href="https://www.google.de/complete" rel="nofollow">https://www.google.de/complete</a>
+/search?client=serp&amp;hl=zh-CN&amp;sugexp=msedr&amp;gs_rn=60&amp;gs_ri=serp&amp;tok=HxZgFGJtt-JBz8
+P59jRyLw&amp;pq=goagent%E4%B8%8B%E8%BD%BD&amp;cp=7&amp;gs_id=1gkt&amp;q=goagent&amp;xhr=t HTTP/1.1&quot;
+200 197
+INFO - [Jan 03 10:38:51] 127.0.0.1:51057 &quot;STRIP CONNECT www.google.de:443 HTTP/1
+.1&quot; - -
+INFO - [Jan 03 10:38:51] 127.0.0.1:50980 &quot;GAE GET <a href="https://www.google.de/complete" rel="nofollow">https://www.google.de/complete</a>
+/search?client=serp&amp;hl=zh-CN&amp;sugexp=msedr&amp;gs_rn=60&amp;gs_ri=serp&amp;tok=HxZgFGJtt-JBz8
+P59jRyLw&amp;pq=goagent%E4%B8%8B%E8%BD%BD&amp;cp=6&amp;gs_id=1glc&amp;q=goagen&amp;xhr=t HTTP/1.1&quot; 2
+00 205
+INFO - [Jan 03 10:38:51] 127.0.0.1:51056 &quot;GAE GET <a href="https://www.google.de/complete" rel="nofollow">https://www.google.de/complete</a>
+/search?client=serp&amp;hl=zh-CN&amp;sugexp=msedr&amp;gs_rn=60&amp;gs_ri=serp&amp;tok=HxZgFGJtt-JBz8
+P59jRyLw&amp;pq=goagent%E4%B8%8B%E8%BD%BD&amp;cp=11&amp;gs_id=1gpp&amp;q=GoAgent%20%E6%97%A5%E5%
+BF%97%EF%BC%9A&amp;xhr=t HTTP/1.1&quot; 200 112
+INFO - [Jan 03 10:38:51] 127.0.0.1:50999 &quot;GAE GET <a href="https://www.google.de/complete" rel="nofollow">https://www.google.de/complete</a>
+/search?client=serp&amp;hl=zh-CN&amp;sugexp=msedr&amp;gs_rn=60&amp;gs_ri=serp&amp;tok=HxZgFGJtt-JBz8
+P59jRyLw&amp;pq=goagent%E4%B8%8B%E8%BD%BD&amp;cp=5&amp;gs_id=1glx&amp;q=goage&amp;xhr=t HTTP/1.1&quot; 20
+0 205
+INFO - [Jan 03 10:38:52] 127.0.0.1:51018 &quot;GAE GET <a href="https://www.google.de/complete" rel="nofollow">https://www.google.de/complete</a>
+/search?client=serp&amp;hl=zh-CN&amp;sugexp=msedr&amp;gs_rn=60&amp;gs_ri=serp&amp;tok=HxZgFGJtt-JBz8
+P59jRyLw&amp;pq=goagent%E4%B8%8B%E8%BD%BD&amp;cp=4&amp;gs_id=1gn9&amp;q=goag&amp;xhr=t HTTP/1.1&quot; 200
+ 197
+INFO - [Jan 03 10:38:52] 127.0.0.1:51037 &quot;GAE GET <a href="https://www.google.de/complete" rel="nofollow">https://www.google.de/complete</a>
+/search?client=serp&amp;hl=zh-CN&amp;sugexp=msedr&amp;gs_rn=60&amp;gs_ri=serp&amp;tok=HxZgFGJtt-JBz8
+P59jRyLw&amp;pq=goagent%E4%B8%8B%E8%BD%BD&amp;cp=0&amp;gs_id=1gnu&amp;q=&amp;xhr=t HTTP/1.1&quot; 200 77
+INFO - [Jan 03 10:38:52] 127.0.0.1:51057 &quot;GAE GET <a href="https://www.google.de/search?n" rel="nofollow">https://www.google.de/search?n</a>
+ewwindow=1&amp;biw=1280&amp;bih=682&amp;site=imghp&amp;q=GoAgent+%E6%97%A5%E5%BF%97%EF%BC%9A&amp;oq=
+GoAgent+%E6%97%A5%E5%BF%97%EF%BC%9A&amp;gs_l=serp.3...1038638.1040270.0.1040557.10.7
+.0.0.0.0.0.0..0.0.msedr...0...1c.1.60.serp..10.0.0.0.S0yMVU5fQu4 HTTP/1.1&quot; 200 4
+2458
+INFO - [Jan 03 10:38:52] 127.0.0.1:51058 &quot;STRIP CONNECT lh3.googleusercontent.co
+m:443 HTTP/1.1&quot; - -
+INFO - [Jan 03 10:38:55] 127.0.0.1:51058 &quot;DIRECT GET https://lh3.googleuserconte
+nt.com/-k6Z56D3a7Co/AAAAAAAAAAI/AAAAAAAAAAA/V60QeA7wwhQ/s24-c/photo.jpg HTTP/1.1
+&quot; 304 -
+INFO - [Jan 03 10:38:55] ssl good_ipaddrs=12, bad_ipaddrs=21, unknown_ipaddrs=29
+4
+INFO - [Jan 03 10:38:55] 127.0.0.1:51077 &quot;STRIP CONNECT plus.google.com:443 HTTP
+/1.1&quot; - -
+INFO - [Jan 03 10:38:55] ssl good_ipaddrs=12, bad_ipaddrs=21, unknown_ipaddrs=29
+4
+INFO - [Jan 03 10:38:55] 127.0.0.1:51096 &quot;STRIP CONNECT www.google.com:443 HTTP/
+1.1&quot; - -
+INFO - [Jan 03 10:38:55] ssl good_ipaddrs=12, bad_ipaddrs=27, unknown_ipaddrs=28
+8
+INFO - [Jan 03 10:38:56] 127.0.0.1:51057 &quot;GAE GET <a href="https://www.google.de/gen_204?" rel="nofollow">https://www.google.de/gen_204?</a>
+v=3&amp;s=web&amp;imc=5&amp;imn=5&amp;imp=2&amp;ei=OlanVPDRBoeVyQT894CgAw&amp;e=18167,20782,3700290,4003
+510,4005878,4011559,4016824,4017578,4020347,4020562,4021073,4021529,4021586,4021
+598,4023709,4025171,4025747,4025837,4026005,4026124,4026397,4027552,4027578,8300
+096,8300111,8500393,8500923,10200084,10200716,10200819,10200828,10200835,1020085
+8&amp;dM=11&amp;atyp=csi&amp;adh=&amp;xjs=init.59.26.sb.35.dvl.9.m.5.cdos.4.foot.2&amp;action=&amp;rt=xj
+sls.534,prt.535,xjses.642,xjs2ls.658,xjsee.700,xjs2es.775,xjs.803,ol.2795,iml.27
+93,wsrt.938,cst.0,dnst.0,rqst.610,rspt.595,rqstt.859,unt.1,cstt.1,dit.1475 HTTP/
+1.1&quot; 204 0
+INFO - [Jan 03 10:38:57] 127.0.0.1:51077 &quot;DIRECT POST <a href="https://plus.google.com/u/" rel="nofollow">https://plus.google.com/u/</a>
+0/_/n/gcosuc?origin=https%3A%2F%2Fwww.google.de HTTP/1.1&quot; 200 -
+INFO - [Jan 03 10:38:57] 127.0.0.1:51096 &quot;DIRECT GET <a href="https://www.google.com/ads/" rel="nofollow">https://www.google.com/ads/</a>
+measurement/t HTTP/1.1&quot; 302 307
+INFO - [Jan 03 10:38:57] 127.0.0.1:51115 &quot;STRIP CONNECT www.googleadservices.com
+:443 HTTP/1.1&quot; - -
+INFO - [Jan 03 10:38:57] 127.0.0.1:51115 &quot;GAE GET https://www.googleadservices.c
+om/measurement?jaid=AJHaeXIoD3oEzniQHSM3m-ZAVbDP9wu6F82Gl5w3_ys&amp;jaidet=16977 HTT
+P/1.1&quot; 200 42
+INFO - [Jan 03 10:39:05] ssl good_ipaddrs=12, bad_ipaddrs=70, unknown_ipaddrs=25
+7
+INFO - [Jan 03 10:39:07] 127.0.0.1:51116 &quot;GAE GET <a href="http://www.google.de/url?sa=t&amp;" rel="nofollow">http://www.google.de/url?sa=t&amp;</a>
+rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=2&amp;ved=0CCkQFjAB&amp;url=http%3A%2F%2Fcode.google.com%2
+Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D9106&amp;ei=OlanVPDRBoeVyQT894CgAw&amp;usg=AFQjCNE
+Si38VELAHNtuxlAaGU8MbWjhWVg&amp;sig2=5d6XY0q68Wnt05ZvztHUZg HTTP/1.1&quot; 200 539
+INFO - [Jan 03 10:39:07] 127.0.0.1:51116 &quot;MOCK GET <a href="https://code.google.com/p/goag" rel="nofollow">https://code.google.com/p/goag</a>
+ent/issues/detail?id=9106 HTTP/1.1&quot; 301 0
+INFO - [Jan 03 10:39:07] 127.0.0.1:51135 &quot;STRIP CONNECT code.google.com:443 HTTP
+/1.1&quot; - -
+INFO - [Jan 03 10:39:08] 127.0.0.1:51135 &quot;DIRECT GET <a href="https://code.google.com/p/g" rel="nofollow">https://code.google.com/p/g</a>
+oagent/issues/detail?id=9106 HTTP/1.1&quot; 200 -
+INFO - [Jan 03 10:39:08] 127.0.0.1:51136 &quot;STRIP CONNECT ssl.google-analytics.com
+:443 HTTP/1.1&quot; - -
+INFO - [Jan 03 10:39:08] 127.0.0.1:51136 &quot;MOCK GET https://ssl.google-analytics
+com/ga.js HTTP/1.1&quot; 200 0
+INFO - [Jan 03 10:39:08] ssl good_ipaddrs=12, bad_ipaddrs=70, unknown_ipaddrs=25
+7
+INFO - [Jan 03 10:39:10] 127.0.0.1:51135 &quot;DIRECT POST <a href="https://code.google.com/ho" rel="nofollow">https://code.google.com/ho</a>
+sting/projects HTTP/1.1&quot; 200 -
+INFO - [Jan 03 10:39:10] 127.0.0.1:51135 &quot;DIRECT POST <a href="https://code.google.com/ap" rel="nofollow">https://code.google.com/ap</a>
+is/ajax/playground/get_projects HTTP/1.1&quot; 301 247
+INFO - [Jan 03 10:39:10] 127.0.0.1:51155 &quot;STRIP CONNECT developers.google.com:44
+3 HTTP/1.1&quot; - -
+INFO - [Jan 03 10:39:10] ssl good_ipaddrs=12, bad_ipaddrs=70, unknown_ipaddrs=25
+7
+INFO - [Jan 03 10:39:12] 127.0.0.1:51155 &quot;DIRECT GET https://developers.google.c
+om/apis-explorer/?csw=1 HTTP/1.1&quot; 200 -
+INFO - [Jan 03 10:39:42] ssl good_ipaddrs=12, bad_ipaddrs=85, unknown_ipaddrs=24
+3
+INFO - [Jan 03 10:39:43] 127.0.0.1:51057 &quot;GAE GET <a href="https://www.google.de/?gws_rd=" rel="nofollow">https://www.google.de/?gws_rd=</a>
+ssl HTTP/1.1&quot; 200 25294
+INFO - [Jan 03 10:39:44] ssl good_ipaddrs=12, bad_ipaddrs=85, unknown_ipaddrs=24
+3
+INFO - [Jan 03 10:39:44] 127.0.0.1:51058 &quot;DIRECT GET https://lh3.googleuserconte
+nt.com/-k6Z56D3a7Co/AAAAAAAAAAI/AAAAAAAAAAA/V60QeA7wwhQ/s24-c/photo.jpg HTTP/1.1
+&quot; 304 -
+INFO - [Jan 03 10:39:44] 127.0.0.1:51057 &quot;GAE GET <a href="https://www.google.de/extern_c" rel="nofollow">https://www.google.de/extern_c</a>
+hrome/766cf75cd5124518.js?bav=on.2,or.r_cp. HTTP/1.1&quot; 200 10433
+INFO - [Jan 03 10:39:45] ssl good_ipaddrs=12, bad_ipaddrs=85, unknown_ipaddrs=24
+3
+INFO - [Jan 03 10:39:45] ssl good_ipaddrs=12, bad_ipaddrs=85, unknown_ipaddrs=24
+3
+INFO - [Jan 03 10:39:46] 127.0.0.1:51056 &quot;GAE GET <a href="https://www.google.de/complete" rel="nofollow">https://www.google.de/complete</a>
+/search?client=hp&amp;hl=zh-CN&amp;sugexp=msedr&amp;gs_rn=60&amp;gs_ri=hp&amp;tok=0nhnVwo6MIAS7r_ZsO
+UogA&amp;cp=0&amp;gs_id=1&amp;q=&amp;xhr=t HTTP/1.1&quot; 200 74
+INFO - [Jan 03 10:39:46] 127.0.0.1:51057 &quot;GAE GET <a href="https://www.google.de/gen_204?" rel="nofollow">https://www.google.de/gen_204?</a>
+v=3&amp;s=webhp&amp;imc=4&amp;imn=4&amp;imp=2&amp;ei=blanVJu2CYGYyATZ-YGgAw&amp;e=18167,3700290,4003510,
+4011559,4016824,4017578,4020347,4020562,4021073,4021529,4021586,4021598,4023709,
+4025171,4025747,4025837,4026005,4026124,4026397,4027552,4027578,8300096,8300111,
+8500393,8500923,10200084,10200716,10200819,10200828,10200835,10200858&amp;dM=11&amp;atyp
+=csi&amp;adh=&amp;xjs=init.39.24.sb.32.m.5.async.1.fpe.1.bbd.0&amp;action=&amp;rt=xjsls.333,prt.
+334,xjses.460,xjs2ls.490,xjsee.524,xjs2es.562,xjs.571,ol.1214,iml.672,wsrt.1608,
+cst.0,dnst.0,rqst.335,rspt.321,rqstt.1575,unt.0,cstt.0,dit.1944 HTTP/1.1&quot; 204 0
+INFO - [Jan 03 10:39:46] 127.0.0.1:51077 &quot;DIRECT POST <a href="https://plus.google.com/u/" rel="nofollow">https://plus.google.com/u/</a>
+0/_/n/gcosuc?origin=https%3A%2F%2Fwww.google.de HTTP/1.1&quot; 200 -
+INFO - [Jan 03 10:39:47] 127.0.0.1:51251 &quot;STRIP CONNECT mail.google.com:443 HTTP
+/1.1&quot; - -
+INFO - [Jan 03 10:39:47] ssl good_ipaddrs=12, bad_ipaddrs=85, unknown_ipaddrs=24
+3
+INFO - [Jan 03 10:39:48] 127.0.0.1:51096 &quot;DIRECT GET <a href="https://www.google.com/gen_" rel="nofollow">https://www.google.com/gen_</a>
+204?atyp=i&amp;zx=1420252787843&amp;oge=1&amp;ogex=28834&amp;ogev=blanVNupCoeiyQTf-4Aw&amp;ogf=.55.6
+6.46.51.49.41.&amp;ogp=1&amp;ogrp=&amp;ogsr=1&amp;ogv=1418781672.0&amp;oggv=es_plusone_gc_20141211.0
+_p0&amp;ogd=de&amp;ogl=zh-CN&amp;ogc=DEU&amp;ogus=3&amp;ogad=t.23 HTTP/1.1&quot; 302 663
+INFO - [Jan 03 10:39:48] 127.0.0.1:51270 &quot;MOCK GET <a href="http://www.google.com.hk/url?" rel="nofollow">http://www.google.com.hk/url?</a>
+sa=p&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/gen_204%3Fatyp" rel="nofollow">http://www.google.com.hk/gen_204%3Fatyp</a>
+%3Di%26zx%3D1420252787843%26oge%3D1%26ogex%3D28834%26ogev%3DblanVNupCoeiyQTf-4Aw
+%26ogf%3D.55.66.46.51.49.41.%26ogp%3D1%26ogrp%3D%26ogsr%3D1%26ogv%3D1418781672.0
+%26oggv%3Des_plusone_gc_20141211.0_p0%26ogd%3Dde%26ogl%3Dzh-CN%26ogc%3DDEU%26ogu
+s%3D3%26ogad%3Dt.23%26gws_rd%3Dcr&amp;ust=1420252816549537&amp;usg=AFQjCNFgG3XEiJxCN66ql
+2RgyTjj7NDDpA HTTP/1.1&quot; 301 0
+INFO - [Jan 03 10:39:48] 127.0.0.1:51271 &quot;STRIP CONNECT www.google.com.hk:443 HT
+TP/1.1&quot; - -
+INFO - [Jan 03 10:39:48] ssl good_ipaddrs=12, bad_ipaddrs=85, unknown_ipaddrs=24
+3
+INFO - [Jan 03 10:39:49] 127.0.0.1:51271 &quot;DIRECT GET <a href="https://www.google.com.hk/u" rel="nofollow">https://www.google.com.hk/u</a>
+rl?sa=p&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/gen_204%3Fa" rel="nofollow">http://www.google.com.hk/gen_204%3Fa</a>
+typ%3Di%26zx%3D1420252787843%26oge%3D1%26ogex%3D28834%26ogev%3DblanVNupCoeiyQTf-
+4Aw%26ogf%3D.55.66.46.51.49.41.%26ogp%3D1%26ogrp%3D%26ogsr%3D1%26ogv%3D141878167
+2.0%26oggv%3Des_plusone_gc_20141211.0_p0%26ogd%3Dde%26ogl%3Dzh-CN%26ogc%3DDEU%26
+ogus%3D3%26ogad%3Dt.23%26gws_rd%3Dcr&amp;ust=1420252816549537&amp;usg=AFQjCNFgG3XEiJxCN6
+6ql2RgyTjj7NDDpA HTTP/1.1&quot; 302 505
+INFO - [Jan 03 10:39:49] 127.0.0.1:51290 &quot;MOCK GET <a href="http://www.google.com.hk/gen_" rel="nofollow">http://www.google.com.hk/gen_</a>
+204?atyp=i&amp;zx=1420252787843&amp;oge=1&amp;ogex=28834&amp;ogev=blanVNupCoeiyQTf-4Aw&amp;ogf=.55.6
+6.46.51.49.41.&amp;ogp=1&amp;ogrp=&amp;ogsr=1&amp;ogv=1418781672.0&amp;oggv=es_plusone_gc_20141211.0
+_p0&amp;ogd=de&amp;ogl=zh-CN&amp;ogc=DEU&amp;ogus=3&amp;ogad=t.23&amp;gws_rd=cr HTTP/1.1&quot; 301 0
+INFO - [Jan 03 10:39:50] 127.0.0.1:51271 &quot;DIRECT GET <a href="https://www.google.com.hk/g" rel="nofollow">https://www.google.com.hk/g</a>
+en_204?atyp=i&amp;zx=1420252787843&amp;oge=1&amp;ogex=28834&amp;ogev=blanVNupCoeiyQTf-4Aw&amp;ogf=.5
+5.66.46.51.49.41.&amp;ogp=1&amp;ogrp=&amp;ogsr=1&amp;ogv=1418781672.0&amp;oggv=es_plusone_gc_2014121
+1.0_p0&amp;ogd=de&amp;ogl=zh-CN&amp;ogc=DEU&amp;ogus=3&amp;ogad=t.23&amp;gws_rd=cr HTTP/1.1&quot; 204 0
+INFO - [Jan 03 10:39:50] 127.0.0.1:51251 &quot;DIRECT GET <a href="https://mail.google.com/mai" rel="nofollow">https://mail.google.com/mai</a>
+l/?tab=wm HTTP/1.1&quot; 200 -
+INFO - [Jan 03 10:39:51] ssl good_ipaddrs=12, bad_ipaddrs=97, unknown_ipaddrs=23
+2
+INFO - [Jan 03 10:39:51] 127.0.0.1:51309 &quot;STRIP CONNECT mail.google.com:443 HTTP
+/1.1&quot; - -
+INFO - [Jan 03 10:39:51] ssl good_ipaddrs=12, bad_ipaddrs=97, unknown_ipaddrs=23
+2
+INFO - [Jan 03 10:39:51] 127.0.0.1:51310 &quot;STRIP CONNECT mail.google.com:443 HTTP
+/1.1&quot; - -
+INFO - [Jan 03 10:39:51] ssl good_ipaddrs=12, bad_ipaddrs=97, unknown_ipaddrs=23
+2
+INFO - [Jan 03 10:39:51] 127.0.0.1:51329 &quot;STRIP CONNECT mail.google.com:443 HTTP
+/1.1&quot; - -
+INFO - [Jan 03 10:39:51] ssl good_ipaddrs=12, bad_ipaddrs=100, unknown_ipaddrs=2
+32
+INFO - [Jan 03 10:39:52] 127.0.0.1:51309 &quot;DIRECT GET <a href="https://mail.google.com/mai" rel="nofollow">https://mail.google.com/mai</a>
+l/?ui=2&amp;view=bsp&amp;ver=ohhl4rw8mbn4 HTTP/1.1&quot; 200 62
+INFO - [Jan 03 10:39:52] 127.0.0.1:51310 &quot;DIRECT GET <a href="https://mail.google.com/mai" rel="nofollow">https://mail.google.com/mai</a>
+l/?ui=2&amp;view=bsp&amp;ver=ohhl4rw8mbn4 HTTP/1.1&quot; 200 62
+INFO - [Jan 03 10:39:52] 127.0.0.1:51329 &quot;DIRECT GET <a href="https://mail.google.com/mai" rel="nofollow">https://mail.google.com/mai</a>
+l/?ui=2&amp;view=bsp&amp;ver=ohhl4rw8mbn4 HTTP/1.1&quot; 200 62
+INFO - [Jan 03 10:39:52] 127.0.0.1:51251 &quot;DIRECT GET <a href="https://mail.google.com/_/s" rel="nofollow">https://mail.google.com/_/s</a>
+cs/mail-static/_/js/k=gmail.main.zh_CN.BC2Jfti0vqE.O/m=m_i,t,it/am=PSMO7v_uD2Kc4
+S59Uu3ff5_7pPiZ5-FevAkg2QmA_5v9P4C_B_bRDxk/rt=h/d=1/t=zcms/rs=AItRSTNShHlUWY-Qvz
+2PWoIfz_fJL_62cQ HTTP/1.1&quot; 200 583674
+INFO - [Jan 03 10:39:53] ssl good_ipaddrs=12, bad_ipaddrs=107, unknown_ipaddrs=2
+30
+INFO - [Jan 03 10:39:53] 127.0.0.1:51057 &quot;GAE GET <a href="https://www.google.de/gen_204?" rel="nofollow">https://www.google.de/gen_204?</a>
+atyp=i&amp;ct=backbutton&amp;cad=&amp;ei=blanVJu2CYGYyATZ-YGgAw&amp;zx=1420252792936 HTTP/1.1&quot; 2
+04 0
+INFO - [Jan 03 10:39:54] 127.0.0.1:51077 &quot;DIRECT POST <a href="https://plus.google.com/u/" rel="nofollow">https://plus.google.com/u/</a>
+0/_/n/gcosuc?origin=https%3A%2F%2Fwww.google.de HTTP/1.1&quot; 200 -
+INFO - [Jan 03 10:39:55] ssl good_ipaddrs=12, bad_ipaddrs=119, unknown_ipaddrs=2
+19
+INFO - [Jan 03 10:39:56] 127.0.0.1:51096 &quot;DIRECT GET <a href="https://www.google.com/gen_" rel="nofollow">https://www.google.com/gen_</a>
+204?atyp=i&amp;zx=1420252795549&amp;oge=1&amp;ogex=28834&amp;ogev=blanVNupCoeiyQTf-4Aw&amp;ogf=.55.6
+6.46.51.49.41.&amp;ogp=1&amp;ogrp=&amp;ogsr=1&amp;ogv=1418781672.0&amp;oggv=es_plusone_gc_20141211.0
+_p0&amp;ogd=de&amp;ogl=zh-CN&amp;ogc=DEU&amp;ogus=3&amp;ogad=t.2 HTTP/1.1&quot; 302 662
+INFO - [Jan 03 10:39:56] 127.0.0.1:51402 &quot;MOCK GET <a href="http://www.google.com.hk/url?" rel="nofollow">http://www.google.com.hk/url?</a>
+sa=p&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/gen_204%3Fatyp" rel="nofollow">http://www.google.com.hk/gen_204%3Fatyp</a>
+%3Di%26zx%3D1420252795549%26oge%3D1%26ogex%3D28834%26ogev%3DblanVNupCoeiyQTf-4Aw
+%26ogf%3D.55.66.46.51.49.41.%26ogp%3D1%26ogrp%3D%26ogsr%3D1%26ogv%3D1418781672.0
+%26oggv%3Des_plusone_gc_20141211.0_p0%26ogd%3Dde%26ogl%3Dzh-CN%26ogc%3DDEU%26ogu
+s%3D3%26ogad%3Dt.2%26gws_rd%3Dcr&amp;ust=1420252824250380&amp;usg=AFQjCNF54wh1gW54zlBraq
+1Lehi8ChBbzg HTTP/1.1&quot; 301 0
+INFO - [Jan 03 10:39:56] ssl good_ipaddrs=12, bad_ipaddrs=119, unknown_ipaddrs=2
+19
+INFO - [Jan 03 10:39:57] 127.0.0.1:51057 &quot;GAE GET <a href="https://www.google.de/imghp?hl" rel="nofollow">https://www.google.de/imghp?hl</a>
+=zh-CN&amp;tab=wi HTTP/1.1&quot; 200 45389
+INFO - [Jan 03 10:39:58] 127.0.0.1:51271 &quot;DIRECT GET <a href="https://www.google.com.hk/u" rel="nofollow">https://www.google.com.hk/u</a>
+rl?sa=p&amp;hl=zh-CN&amp;pref=hkredirect&amp;pval=yes&amp;q=<a href="http://www.google.com.hk/gen_204%3Fa" rel="nofollow">http://www.google.com.hk/gen_204%3Fa</a>
+typ%3Di%26zx%3D1420252795549%26oge%3D1%26ogex%3D28834%26ogev%3DblanVNupCoeiyQTf-
+4Aw%26ogf%3D.55.66.46.51.49.41.%26ogp%3D1%26ogrp%3D%26ogsr%3D1%26ogv%3D141878167
+2.0%26oggv%3Des_plusone_gc_20141211.0_p0%26ogd%3Dde%26ogl%3Dzh-CN%26ogc%3DDEU%26
+ogus%3D3%26ogad%3Dt.2%26gws_rd%3Dcr&amp;ust=1420252824250380&amp;usg=AFQjCNF54wh1gW54zlB
+raq1Lehi8ChBbzg HTTP/1.1&quot; 302 504
+INFO - [Jan 03 10:39:58] 127.0.0.1:51421 &quot;MOCK GET <a href="http://www.google.com.hk/gen_" rel="nofollow">http://www.google.com.hk/gen_</a>
+204?atyp=i&amp;zx=1420252795549&amp;oge=1&amp;ogex=28834&amp;ogev=blanVNupCoeiyQTf-4Aw&amp;ogf=.55.6
+6.46.51.49.41.&amp;ogp=1&amp;ogrp=&amp;ogsr=1&amp;ogv=1418781672.0&amp;oggv=es_plusone_gc_20141211.0
+_p0&amp;ogd=de&amp;ogl=zh-CN&amp;ogc=DEU&amp;ogus=3&amp;ogad=t.2&amp;gws_rd=cr HTTP/1.1&quot; 301 0
+INFO - [Jan 03 10:39:58] ssl good_ipaddrs=13, bad_ipaddrs=136, unknown_ipaddrs=2
+03
+INFO - [Jan 03 10:39:58] ssl good_ipaddrs=13, bad_ipaddrs=136, unknown_ipaddrs=2
+03
+INFO - [Jan 03 10:39:58] ssl good_ipaddrs=13, bad_ipaddrs=136, unknown_ipaddrs=2
+03
+INFO - [Jan 03 10:39:58] 127.0.0.1:51446 &quot;STRIP CONNECT www.gstatic.com:443 HTTP
+/1.1&quot; - -
+INFO - [Jan 03 10:39:58] ssl good_ipaddrs=13, bad_ipaddrs=136, unknown_ipaddrs=2
+03
+INFO - [Jan 03 10:40:00] 127.0.0.1:51271 &quot;DIRECT GET <a href="https://www.google.com.hk/g" rel="nofollow">https://www.google.com.hk/g</a>
+en_204?atyp=i&amp;zx=1420252795549&amp;oge=1&amp;ogex=28834&amp;ogev=blanVNupCoeiyQTf-4Aw&amp;ogf=.5
+5.66.46.51.49.41.&amp;ogp=1&amp;ogrp=&amp;ogsr=1&amp;ogv=1418781672.0&amp;oggv=es_plusone_gc_2014121
+1.0_p0&amp;ogd=de&amp;ogl=zh-CN&amp;ogc=DEU&amp;ogus=3&amp;ogad=t.2&amp;gws_rd=cr HTTP/1.1&quot; 204 0
+INFO - [Jan 03 10:40:00] 127.0.0.1:51446 &quot;DIRECT GET <a href="https://www.gstatic.com/og/" rel="nofollow">https://www.gstatic.com/og/</a>
+_/js/k=og.og.en_US.T7r5zq88RPI.O/rt=j/m=ld,sy32,sy33,sy35,sy36,sy37,sy38,sy39,sy
+40,sy45,sy41,sy42,sy43,sy44,d,sy56,gl,is,sy49,sy47,sy50,sy51,id,nb,nw,sb,sd,st,s
+y48,awd,sy53,p,vd,lod,eld,ip,dp,cpd,sy54,drt/rs=AItRSTOUQcQhSoidcfU63fVWS5RrFlnW
+cw HTTP/1.1&quot; 304 -
+INFO - [Jan 03 10:40:00] 127.0.0.1:51471 &quot;STRIP CONNECT clients5.google.com:443
+HTTP/1.1&quot; - -
+INFO - [Jan 03 10:40:00] ssl good_ipaddrs=15, bad_ipaddrs=141, unknown_ipaddrs=1
+97
+INFO - [Jan 03 10:40:00] ssl good_ipaddrs=15, bad_ipaddrs=141, unknown_ipaddrs=1
+97
+INFO - [Jan 03 10:40:01] 127.0.0.1:51056 &quot;GAE GET <a href="https://www.google.de/gen_204?" rel="nofollow">https://www.google.de/gen_204?</a>
+v=3&amp;s=imghp&amp;ei=fFanVP7bCo6dyAShkoCYAw&amp;e=3700290,4003510,4011559,4016824,4017578,
+4020347,4020562,4021073,4021529,4021586,4021598,4023709,4025171,4025747,4025837,
+4026005,4026124,4026397,4027552,4027578,8300096,8300111,8500393,8500923,10200084
+,10200716,10200819,10200828,10200835,10200858&amp;dM=11&amp;atyp=csi&amp;adh=&amp;xjs=&amp;action=&amp;r
+t=wsrt.2438,cst.0,dnst.0,rqst.732,rspt.718,rqstt.2354,unt.1,cstt.1,dit.3100 HTTP
+/1.1&quot; 204 0
+INFO - [Jan 03 10:40:01] 127.0.0.1:51057 &quot;GAE GET <a href="https://www.google.de/gen_204?" rel="nofollow">https://www.google.de/gen_204?</a>
+v=3&amp;s=imghp&amp;ei=fFanVP7bCo6dyAShkoCYAw&amp;e=3700290,4003510,4011559,4016824,4017578,
+4020347,4020562,4021073,4021529,4021586,4021598,4023709,4025171,4025747,4025837,
+4026005,4026124,4026397,4027552,4027578,8300096,8300111,8500393,8500923,10200084
+,10200716,10200819,10200828,10200835,10200858&amp;dM=11&amp;atyp=csi&amp;adh=&amp;xjs=init.37.9.
+sb.33.foot.2.jsa.1.qi.1.bbd.0&amp;action=&amp;rt=xjsls.658,prt.658,xjses.772,xjs2ls.789,
+xjsee.823,xjs2es.852,xjs.858,ol.861,wsrt.2438,cst.0,dnst.0,rqst.732,rspt.718,rqs
+tt.2354,unt.1,cstt.1,dit.3100 HTTP/1.1&quot; 204 0
+INFO - [Jan 03 10:40:03] 127.0.0.1:51471 &quot;DIRECT GET <a href="https://clients5.google.com" rel="nofollow">https://clients5.google.com</a>
+/pagead/drt/dn/ HTTP/1.1&quot; 304 -
+INFO - [Jan 03 10:40:03] 127.0.0.1:51077 &quot;DIRECT POST <a href="https://plus.google.com/u/" rel="nofollow">https://plus.google.com/u/</a>
+0/_/n/gcosuc HTTP/1.1&quot; 200 -
+INFO - [Jan 03 10:40:07] ssl good_ipaddrs=16, bad_ipaddrs=181, unknown_ipaddrs=1
+65
+
+
+<b>注意:请尽量填写以上信息，否则可能难以得到帮助</b>
+---------------------------------------------------
+
+打开goagent后不能在谷歌云端硬盘或谷歌图片搜索里上传文件，一上传文件python27(goagent)进程的cpu占用就会持续在50%左右，上传文件的进度会直接卡住，即使将上传文件的页面关掉python27进程的cpu使用率也一直在50%，之后goagent就没反应了，打不开任何被墙的网页，只能关掉goagent重新启动，目前测试下载文件没有此问题。
+
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jan 17 19:07:36 2015">
+ Jan 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=19308#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/111419049095522242482/">changshu...@gmail.com</a
+></span>
+ 
+<pre>
+同样问题，我的是Chrome，上传100k以下的附件一般没问题，超过100k的附件就会出现以上问题。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Sat Jan 17 23:29:29 2015">
+ Jan 17, 2015
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=19308#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/105175104656449517940/">zkx...@gmail.com</a
+></span>
+ 
+<pre>
+问题一样。google不能以图搜图了
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19308&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D19308"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="19308">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A19308',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 19308,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

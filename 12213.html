@@ -1,0 +1,1809 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ (function(){(function(){function c(a){this.t={};this.tick=function(a,b,c){b=void 0!=c?c:(new Date).getTime();this.t[a]=b;if(void 0==c)try{window.console.timeStamp("CSI/"+a)}catch(d){}};this.tick("start",null,a)}var a;window.performance&&(a=window.performance.timing);var b=a?new c(a.responseStart):new c;window.jstiming={Timer:c,load:b};a&&(b=a.navigationStart,a=a.responseStart,0<b&&a>=b&&(window.jstiming.srt=a-b));try{a=null,window.chrome&&window.chrome.csi&&(a=Math.floor(window.chrome.csi().pageT)),null==a&&
+window.gtbExternal&&(a=window.gtbExternal.pageT()),null==a&&window.external&&(a=window.external.pageT),a&&(window.jstiming.pt=a)}catch(d){}})();})();
+
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"loggedInUserEmail": null, "relativeBaseUrl": "", "assetHostPath": "https://ssl.gstatic.com/codesite/ph", "projectName": "goagent", "domainName": null, "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/8599073060794244502", "projectHomeUrl": "/p/goagent", "token": null, "profileUrl": null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>Issue 12213 - 
+ goagent -
+ 
+ 3.1.2 youtube视频每10s~30s就发生一次warning: timed out - 
+ https://github.com/goagent/goagent - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/ph_detail.css" >
+ 
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/8599073060794244502/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ .attachments { width:33%; border-top:2px solid #999; padding-top: 3px; margin-left: .7em;}
+ .attachments table { margin-bottom: 0.75em; }
+ .attachments table tr td { padding: 0; margin: 0; font-size: 95%; }
+ .preview { border: 2px solid #c3d9ff; padding: 1px; }
+ .preview:hover { border: 2px solid blue; }
+ .label { white-space: nowrap; }
+ .derived { font-style:italic }
+ .cursor_on .author {
+ background: url(https://ssl.gstatic.com/codesite/ph/images/show-arrow.gif) no-repeat 2px;
+ }
+ .hiddenform {
+ display: none;
+ }
+
+ 
+ </style>
+</head>
+<body class="t3">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12213&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12213" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/goagent">
+ <a href="/p/goagent/">
+ 
+ <img src="https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/goagent/"><span itemprop="name">goagent</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/goagent/"><span itemprop="description">https://github.com/goagent/goagent</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/goagent/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/goagent/issues/list"
+ class="tab active">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="https://code.google.com/export-to-github/export?project=goagent">
+ <button>Export to GitHub</button>
+ 
+ </a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ 
+ <span class="inIssueEntry">
+ <a class="buttonify" href="entry" onclick="return _newIssuePrompt();">New issue</a>
+ </span> &nbsp;
+ 
+ <span class="inIssueList">
+ <span>Search</span>
+ <form action="list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ 
+<option disabled="disabled">Search within:</option>
+<option value="1" >&nbsp;All issues</option>
+<option value="2" selected=selected>&nbsp;Open issues</option>
+
+<option value="6" >&nbsp;New issues</option>
+<option value="7" >&nbsp;Issues to verify</option>
+
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q"
+ value="" autocomplete="off"
+ 
+ onkeydown="_blurOnEsc(event)"></span>
+ 
+ 
+ <span id="search_colspec"><input type="hidden" name="colspec" value="ID Opened Reporter Modified Summary Stars" ></span>
+ 
+ 
+ 
+ <input type="hidden" name="cells" value="tiles" >
+ <input type="submit" value="Search">
+ </form>
+ </span> &nbsp;
+ <span class="inIssueAdvSearch">
+ <a href="advsearch">Advanced search</a>
+ </span> &nbsp;
+ <span class="inIssueSearchTips">
+ <a href="searchtips">Search tips</a>
+ </span> &nbsp;
+ <span class="inIssueSubscriptions">
+ <a href="/p/goagent/issues/subscriptions">Subscriptions</a>
+ </span>
+</div>
+</div>
+ </td>
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+<div id="color_control" class="">
+<div id="issueheader">
+<table cellpadding="0" cellspacing="0" width="100%"><tbody>
+ <tr>
+ <td class="vt h3" nowrap="nowrap" style="padding:0 5px">
+ 
+ 
+ Issue <a href="detail?id=12213">12213</a>:
+ </td>
+ <td width="90%" class="vt">
+ <span class="h3" >3.1.2 youtube视频每10s~30s就发生一次warning: timed out</span>
+ </td>
+ <td>
+ 
+ </td>
+ </tr>
+ <tr>
+ <td></td>
+ <td nowrap="nowrap">
+ 
+ 
+ 4 people starred this issue and may be notified of changes.
+ 
+ 
+ 
+ </td>
+ <td align="center" nowrap="nowrap">
+ 
+ <a href="https://code.google.com/p/goagent/issues/list?cursor=goagent%3A12213">Back to list</a>
+ 
+ </td>
+ </tr>
+ 
+</tbody></table>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="issuepage" id="meta-container">
+<tbody class="collapse"> 
+ <tr>
+ <td id="issuemeta">
+ <div id="meta-float">
+ 
+<table cellspacing="0" cellpadding="0">
+ <tr><th align="left">Status:&nbsp;</th>
+ <td width="100%">
+ 
+ <span title="Issue has not had initial review yet">New</span>
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ 
+ <tr><th align="left">Owner:&nbsp;</th><td>
+ 
+ 
+ ----
+ 
+ 
+ </td>
+ </tr>
+ 
+ 
+ 
+ <tr><td colspan="2">
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Type-Defect"
+ title="Report of a software defect"
+ class="label"><b>Type-</b>Defect</a>
+ 
+ </div>
+ 
+ 
+ 
+ 
+ <div style="padding-top:2px">
+ 
+ <a href="list?q=label:Priority-Medium"
+ title="Normal priority"
+ class="label"><b>Priority-</b>Medium</a>
+ 
+ </div>
+ 
+ 
+ </td></tr>
+ 
+</table>
+<div class="rel_issues">
+ 
+ 
+ 
+</div>
+
+
+ <br><br>
+ 
+ 
+ <div style="white-space:nowrap"><a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12213&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12213">Sign in</a> to add a comment</div>
+ 
+ 
+
+
+ 
+ </div>&nbsp;
+ </td>
+ <td class="vt issuedescription" width="100%" id="cursorarea" >
+ 
+<div class="cursor_off vt issuedescription" id="hc0">
+ 
+ 
+ <div class="author">
+ 
+ Reported by
+ 
+
+ <a class="userlink"
+ href="/u/107886291041459614327/">zoujt...@gmail.com</a
+>,
+ <span class="date" title="Sun Jan  5 23:10:58 2014">Jan 5, 2014</span>
+ 
+ </div>
+<pre>
+<b>发issue前先在All issues中搜索是否已经有你要提交的问题。</b>
+
+<b>1.问题描述</b>
+youtube视频播放非常不流畅，每10~30秒发生一次断流，goagent出现黄色warning字样，且视频就此中断只能通过刷新来继续看。
+
+<b>2.系统信息及依赖情况</b>
+win7
+谷歌浏览器28.0.1500.95 m
+Proxy SwitchySharp 1.10.2
+
+<b>3.goagent日志</b>
+每次断流共有特征：
+WARNING - [……] GAEProxyHandler.do_METHOD_AGENT timed out, url='………………', content_length=……, try again
+
+这里虽然写着try again却完全没有体现出效果，视频会完全断掉（此后可能只有声音或者只有图像，或者完全没有）
+有没有办法解决高频率的timed out问题以及超时后自动尝试的问题？不要让视频出现永久性的中断。每10s~30s刷新一次真的很烦人。
+</pre>
+
+</div>
+
+ 
+
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc1">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jan  6 02:18:12 2014">
+ Jan 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c1" href="/p/goagent/issues/detail?id=12213#c1">#1</a>
+ 
+
+ <a class="userlink"
+ href="/u/112405280388369516078/">allensha...@gmail.com</a
+></span>
+ 
+<pre>
+同样会断流，不过我这里是goagent里面一点儿反应都没有，等一小会儿就又好了，然后再过几十秒就又断一次。。感觉是goagent的缓存机制貌似有点儿问题......
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc2">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jan  6 02:40:21 2014">
+ Jan 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c2" href="/p/goagent/issues/detail?id=12213#c2">#2</a>
+ 
+
+ <a class="userlink"
+ href="/u/113124231603289201734/">anonymou...@gmail.com</a
+></span>
+ 
+<pre>
+退回版本，新的版本应该是提高性能了，提高过头了，过早的清理了，造成的断流现象吧
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc3">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jan  6 04:40:46 2014">
+ Jan 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c3" href="/p/goagent/issues/detail?id=12213#c3">#3</a>
+ 
+
+ <a class="userlink"
+ href="/u/112405280388369516078/">allensha...@gmail.com</a
+></span>
+ 
+<pre>
+现在也有一样的问题了，不过没这么频繁。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc4">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jan  6 06:10:10 2014">
+ Jan 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c4" href="/p/goagent/issues/detail?id=12213#c4">#4</a>
+ 
+
+ <a class="userlink"
+ href="/u/111089010859055861035/">ericcl...@gmail.com</a
+></span>
+ 
+<pre>
+能不能帮我看一下，你们的youtube是不是dash版本的播放器。
+在视频点右键，选stats for nerds，看DASH这一行是yes还是no
+我观察到的是：如果dash是yes就有这种情况，no就没有
+还有楼主如果你不刷新等着，时间长一点，比如半分钟甚至一分钟它还能接下去播放吗？
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=122130004000&amp;name=Clipboard01.png&amp;token=ABZ6GAdNjW7GPDe24hrZ1zsSqeFETiiS0A%3A1434454857722&amp;id=12213&amp;mod_ts_token=ABZ6GAd8Oaev3qHWFb8J8U5p59k9eKkg-Q%3A1434454857722">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >Clipboard01.png</b>
+ <br>
+ 37.9 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=122130004000&amp;name=Clipboard01.png&amp;token=ABZ6GAdNjW7GPDe24hrZ1zsSqeFETiiS0A%3A1434454857722&amp;id=12213&amp;mod_ts_token=ABZ6GAd8Oaev3qHWFb8J8U5p59k9eKkg-Q%3A1434454857722&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=122130004000&amp;name=Clipboard01.png&amp;token=ABZ6GAdNjW7GPDe24hrZ1zsSqeFETiiS0A%3A1434454857722&amp;id=12213&amp;mod_ts_token=ABZ6GAd8Oaev3qHWFb8J8U5p59k9eKkg-Q%3A1434454857722">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=122130004000&amp;name=Clipboard01.png&amp;token=ABZ6GAdNjW7GPDe24hrZ1zsSqeFETiiS0A%3A1434454857722&amp;id=12213&amp;mod_ts_token=ABZ6GAd8Oaev3qHWFb8J8U5p59k9eKkg-Q%3A1434454857722&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=122130004000&amp;name=Clipboard01.png&amp;token=ABZ6GAdNjW7GPDe24hrZ1zsSqeFETiiS0A%3A1434454857722&amp;id=12213&amp;mod_ts_token=ABZ6GAd8Oaev3qHWFb8J8U5p59k9eKkg-Q%3A1434454857722&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc5">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jan  6 07:05:01 2014">
+ Jan 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c5" href="/p/goagent/issues/detail?id=12213#c5">#5</a>
+ 
+
+ <a class="userlink"
+ href="/u/107886291041459614327/">zoujt...@gmail.com</a
+></span>
+ 
+<pre>
+回复4楼
+我用的是Adobe Flash Player 11,9,900,170
+如果不刷新等待的话会发生三种情况：
+1、没有声音，视频继续，过一会儿彻底断掉。
+2、没有视频，声音继续，过一会儿同样彻底断掉。
+3、直接断掉。
+注：断掉指变花屏报错界面。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc6">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jan  6 07:08:13 2014">
+ Jan 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c6" href="/p/goagent/issues/detail?id=12213#c6">#6</a>
+ 
+
+ <a class="userlink"
+ href="/u/107886291041459614327/">zoujt...@gmail.com</a
+></span>
+ 
+<pre>
+回复2楼
+可能是吧，好像从3.0.4~3.0.7之间某个版本就开始有了，挺头疼的。而且那个时候因为有一个版本从某一天开始完全上不了youtube，看到主页上说要更新到新版本于是就更新了，现在弄回去的话还能够正常使用吗？
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc7">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jan  6 08:55:21 2014">
+ Jan 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c7" href="/p/goagent/issues/detail?id=12213#c7">#7</a>
+ 
+
+ <a class="userlink"
+ href="/u/111089010859055861035/">ericcl...@gmail.com</a
+></span>
+ 
+<pre>
+你妹啊，我才不关心你是flash还是html5呢，这个完全不重要的。
+我明明问的是DASH啊。。。还截图画圈圈了，flash播放器也有stats for nerds的
+不过你描述的现象倒是跟我的挺像的。。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc8">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jan  6 10:26:42 2014">
+ Jan 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c8" href="/p/goagent/issues/detail?id=12213#c8">#8</a>
+ 
+
+ <a class="userlink"
+ href="/u/107886291041459614327/">zoujt...@gmail.com</a
+></span>
+ 
+<pre>
+回复7楼
+我按方式去找了，stats for nerds（详细统计信息）显示的是如下内容……
+timestamp seconds 340.400
+640x360, 0 average kbps, 4% volume
+TagStreamPlayer, HTTP, 108 kbps
+10 stage fps, 0 video fps, 69 dropped, 0 kbps
+accelerated video rendering, software video decoding
+NaN db, 1 audio factor
+不要问候我妹妹0.0
+你说的确实挺详细的，谢谢啊，可惜我还是没找到你所说的dash，菜鸟一个，求解答= =
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc9">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jan  6 10:34:17 2014">
+ Jan 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c9" href="/p/goagent/issues/detail?id=12213#c9">#9</a>
+ 
+
+ <a class="userlink"
+ href="/u/111089010859055861035/">ericcl...@gmail.com</a
+></span>
+ 
+<pre>
+我刚看了，的确flash播放器里没有DASH指示，可能是它改了，可能是我记错了，我记错了的可能性比较大。非常抱歉。
+这个比较麻烦。你确定每次断流都100%出现这句话么？
+WARNING - [……] GAEProxyHandler.do_METHOD_AGENT timed out, url='………………', content_length=……, try again
+如果确实100%是&quot;...try again&quot;,你能不能把之前之后的几行也一并贴出来？还有你现在用的proxy.py
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc10">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jan  6 10:41:11 2014">
+ Jan 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c10" href="/p/goagent/issues/detail?id=12213#c10">#10</a>
+ 
+
+ <a class="userlink"
+ href="/u/107886291041459614327/">zoujt...@gmail.com</a
+></span>
+ 
+<pre>
+对了，出现视频卡顿，timed out warning后还有一种情况是视频卡在那里，一会儿就直接判定为视频结束……
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc11">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jan  6 11:24:57 2014">
+ Jan 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c11" href="/p/goagent/issues/detail?id=12213#c11">#11</a>
+ 
+
+ <a class="userlink"
+ href="/u/111089010859055861035/">ericcl...@gmail.com</a
+></span>
+ 
+<pre>
+你说的这是表象，我知道了。我或许能找到原因，不过还需要再确定一下。
+重复一下，我的问题是：
+1.不管什么情况，如果视频出现异常，100%是这个time out warning吗？
+2.如果是100%或者至少95%以上，出现这句warning前后的log是什么？
+3.你现在的proxy.py贴上来（最近更新频繁，直接看文件比较容易确定具体是哪个版本），不要proxy.ini，我对你的appid没有兴趣
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc12">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jan  6 11:37:33 2014">
+ Jan 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c12" href="/p/goagent/issues/detail?id=12213#c12">#12</a>
+ 
+
+ <a class="userlink"
+ href="/u/107886291041459614327/">zoujt...@gmail.com</a
+></span>
+ 
+<pre>
+回复11楼
+这个可能要明天下午回复你了。sorry
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc13">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Jan  6 11:39:54 2014">
+ Jan 6, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c13" href="/p/goagent/issues/detail?id=12213#c13">#13</a>
+ 
+
+ <a class="userlink"
+ href="/u/111089010859055861035/">ericcl...@gmail.com</a
+></span>
+ 
+<pre>
+ok的，只要不是现在就好，睡觉还是要的。。。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc14">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  7 05:39:44 2014">
+ Jan 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c14" href="/p/goagent/issues/detail?id=12213#c14">#14</a>
+ 
+
+ <a class="userlink"
+ href="/u/107886291041459614327/">zoujt...@gmail.com</a
+></span>
+ 
+<pre>
+回复11楼
+这么晚了才来回答你，不好意思呀。那么我一一回答一下：
+1. 是的，如果视频出现异常，100%是那个time out warning
+2. 这个我就放截图吧，不过因为都是长句，一张截图里能展示的数据太少，我不知道我这样子放截图有没有帮助。请问有没有其他办法展示log？
+3. 也在附件里啦~
+
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=122130014000&amp;name=QQ%E6%88%AA%E5%9B%BE20140107213243.png&amp;token=ABZ6GAe2g3RfeM-TUJmxbXyAf8DhENg7cQ%3A1434454857723&amp;id=12213&amp;mod_ts_token=ABZ6GAcDAw1ybJrQOhE3gxbTlflgmyU4Rg%3A1434454857723">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >QQ截图20140107213243.png</b>
+ <br>
+ 55.2 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=122130014000&amp;name=QQ%E6%88%AA%E5%9B%BE20140107213243.png&amp;token=ABZ6GAe2g3RfeM-TUJmxbXyAf8DhENg7cQ%3A1434454857723&amp;id=12213&amp;mod_ts_token=ABZ6GAcDAw1ybJrQOhE3gxbTlflgmyU4Rg%3A1434454857723&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=122130014000&amp;name=QQ%E6%88%AA%E5%9B%BE20140107213243.png&amp;token=ABZ6GAe2g3RfeM-TUJmxbXyAf8DhENg7cQ%3A1434454857723&amp;id=12213&amp;mod_ts_token=ABZ6GAcDAw1ybJrQOhE3gxbTlflgmyU4Rg%3A1434454857723">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=122130014000&amp;name=QQ%E6%88%AA%E5%9B%BE20140107213243.png&amp;token=ABZ6GAe2g3RfeM-TUJmxbXyAf8DhENg7cQ%3A1434454857723&amp;id=12213&amp;mod_ts_token=ABZ6GAcDAw1ybJrQOhE3gxbTlflgmyU4Rg%3A1434454857723&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=122130014000&amp;name=QQ%E6%88%AA%E5%9B%BE20140107213243.png&amp;token=ABZ6GAe2g3RfeM-TUJmxbXyAf8DhENg7cQ%3A1434454857723&amp;id=12213&amp;mod_ts_token=ABZ6GAcDAw1ybJrQOhE3gxbTlflgmyU4Rg%3A1434454857723&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=122130014001&amp;name=QQ%E6%88%AA%E5%9B%BE20140107213429.png&amp;token=ABZ6GAefQhgGQr9BOZdaTX9QTD0IXJH3nw%3A1434454857723&amp;id=12213&amp;mod_ts_token=ABZ6GAfPgvqg3XxKOU-xZqIyYeG_Bsjrsw%3A1434454857723">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >QQ截图20140107213429.png</b>
+ <br>
+ 57.6 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=122130014001&amp;name=QQ%E6%88%AA%E5%9B%BE20140107213429.png&amp;token=ABZ6GAefQhgGQr9BOZdaTX9QTD0IXJH3nw%3A1434454857723&amp;id=12213&amp;mod_ts_token=ABZ6GAfPgvqg3XxKOU-xZqIyYeG_Bsjrsw%3A1434454857723&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=122130014001&amp;name=QQ%E6%88%AA%E5%9B%BE20140107213429.png&amp;token=ABZ6GAefQhgGQr9BOZdaTX9QTD0IXJH3nw%3A1434454857723&amp;id=12213&amp;mod_ts_token=ABZ6GAfPgvqg3XxKOU-xZqIyYeG_Bsjrsw%3A1434454857723">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=122130014001&amp;name=QQ%E6%88%AA%E5%9B%BE20140107213429.png&amp;token=ABZ6GAefQhgGQr9BOZdaTX9QTD0IXJH3nw%3A1434454857723&amp;id=12213&amp;mod_ts_token=ABZ6GAfPgvqg3XxKOU-xZqIyYeG_Bsjrsw%3A1434454857723&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=122130014001&amp;name=QQ%E6%88%AA%E5%9B%BE20140107213429.png&amp;token=ABZ6GAefQhgGQr9BOZdaTX9QTD0IXJH3nw%3A1434454857723&amp;id=12213&amp;mod_ts_token=ABZ6GAfPgvqg3XxKOU-xZqIyYeG_Bsjrsw%3A1434454857723&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=122130014002&amp;name=proxy.py&amp;token=ABZ6GAcRViNfHzsngxVfpB69WsaigsCBRA%3A1434454857723&amp;id=12213&amp;mod_ts_token=ABZ6GAdgAQTF_mNc5DFJDc3yu8r1GKvrIA%3A1434454857723">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >proxy.py</b>
+ <br>
+ 129 KB
+ 
+ 
+ &nbsp; <a href="../../goagent/issues/attachmentText?id=12213&amp;aid=122130014002&amp;name=proxy.py&amp;token=ABZ6GAcRViNfHzsngxVfpB69WsaigsCBRA%3A1434454857723" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=122130014002&amp;name=proxy.py&amp;token=ABZ6GAcRViNfHzsngxVfpB69WsaigsCBRA%3A1434454857723&amp;id=12213&amp;mod_ts_token=ABZ6GAdgAQTF_mNc5DFJDc3yu8r1GKvrIA%3A1434454857723">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc15">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  7 05:42:43 2014">
+ Jan 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c15" href="/p/goagent/issues/detail?id=12213#c15">#15</a>
+ 
+
+ <a class="userlink"
+ href="/u/107886291041459614327/">zoujt...@gmail.com</a
+></span>
+ 
+<pre>
+再放一张= =可能毫无帮助。
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=122130015000&amp;name=QQ%E6%88%AA%E5%9B%BE20140107214150.png&amp;token=ABZ6GAe2jSIoDpXQ336hrNsJqsK64T8tew%3A1434454857723&amp;id=12213&amp;mod_ts_token=ABZ6GAfaYJUBHuMoCw3YZWc3ka4MqeGigQ%3A1434454857723">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >QQ截图20140107214150.png</b>
+ <br>
+ 56.0 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=122130015000&amp;name=QQ%E6%88%AA%E5%9B%BE20140107214150.png&amp;token=ABZ6GAe2jSIoDpXQ336hrNsJqsK64T8tew%3A1434454857723&amp;id=12213&amp;mod_ts_token=ABZ6GAfaYJUBHuMoCw3YZWc3ka4MqeGigQ%3A1434454857723&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=122130015000&amp;name=QQ%E6%88%AA%E5%9B%BE20140107214150.png&amp;token=ABZ6GAe2jSIoDpXQ336hrNsJqsK64T8tew%3A1434454857723&amp;id=12213&amp;mod_ts_token=ABZ6GAfaYJUBHuMoCw3YZWc3ka4MqeGigQ%3A1434454857723">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=122130015000&amp;name=QQ%E6%88%AA%E5%9B%BE20140107214150.png&amp;token=ABZ6GAe2jSIoDpXQ336hrNsJqsK64T8tew%3A1434454857723&amp;id=12213&amp;mod_ts_token=ABZ6GAfaYJUBHuMoCw3YZWc3ka4MqeGigQ%3A1434454857723&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=122130015000&amp;name=QQ%E6%88%AA%E5%9B%BE20140107214150.png&amp;token=ABZ6GAe2jSIoDpXQ336hrNsJqsK64T8tew%3A1434454857723&amp;id=12213&amp;mod_ts_token=ABZ6GAfaYJUBHuMoCw3YZWc3ka4MqeGigQ%3A1434454857723&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc16">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  7 20:16:06 2014">
+ Jan 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c16" href="/p/goagent/issues/detail?id=12213#c16">#16</a>
+ 
+
+ <a class="userlink"
+ href="/u/109011162860837940022/">jianghai...@gmail.com</a
+></span>
+ 
+<pre>
+我的goagent也出现了类似的情况，求帮忙。
+
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc17">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  7 21:16:57 2014">
+ Jan 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c17" href="/p/goagent/issues/detail?id=12213#c17">#17</a>
+ 
+
+ <a class="userlink"
+ href="/u/110695497033162673037/">yiran000...@gmail.com</a
+></span>
+ 
+<pre>
+*://*.googlevideo.com/* 情景模式GoAgent
+加一条规则看看。
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc18">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Tue Jan  7 21:29:54 2014">
+ Jan 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c18" href="/p/goagent/issues/detail?id=12213#c18">#18</a>
+ 
+
+ <a class="userlink"
+ href="/u/111089010859055861035/">ericcl...@gmail.com</a
+></span>
+ 
+<pre>
+楼主:
+这第三张图都有用啊，第三张图最上面几行和它前面的那一段其实也挺重要的，刚好被你截了。。。我按我猜测的试试吧。
+改了一下你的proxy.py。你备份一下原来的文件，替换掉试试看。从我这里来看，虽然还是timeout，但是一般等10秒左右它能自己接上。time out肯定消除不了，除非gfw不存在了，卡肯定还会卡，只是省了你人肉刷新而已。你要是担心我给你的proxy.py动了手脚，你可以参照下面的自己改。改之前别忘了备份，不然挂了别找我-_-
+
+#16:
+你打开你的proxy.py，找到这行：
+if content_length and accept_ranges == 'bytes':
+在这前面加上这三行：
+                    if 'range=' in self.url_parts.query and any(x(host) for x in common.AUTORANGE_HOSTS_MATCH) or path.endswith(common.AUTORANGE_ENDSWITH):
+                        logging.warn('GAEProxyHandler.do_METHOD_AGENT timed out, url=%r, content_length=%r, video: do not retry', self.path, content_length)
+                        return
+罗嗦一句，每行开头的空格一定要严格对齐，就像图片里这样，不然会出错（改之前别忘了备份）
+啊，对了，我并不确定这样改就一定有效，如果还不行我也没办法了
+
+</pre>
+ 
+ <div class="attachments">
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=122130018000&amp;name=proxy.py&amp;token=ABZ6GAd5Mcch4RHnTWRQizPTRJEocMaNHg%3A1434454857724&amp;id=12213&amp;mod_ts_token=ABZ6GAeeb0TqCCJwXy4Qw3agOTo9IvlT-A%3A1434454857724">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >proxy.py</b>
+ <br>
+ 129 KB
+ 
+ 
+ &nbsp; <a href="../../goagent/issues/attachmentText?id=12213&amp;aid=122130018000&amp;name=proxy.py&amp;token=ABZ6GAd5Mcch4RHnTWRQizPTRJEocMaNHg%3A1434454857724" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=122130018000&amp;name=proxy.py&amp;token=ABZ6GAd5Mcch4RHnTWRQizPTRJEocMaNHg%3A1434454857724&amp;id=12213&amp;mod_ts_token=ABZ6GAeeb0TqCCJwXy4Qw3agOTo9IvlT-A%3A1434454857724">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ </table>
+
+
+ 
+ 
+ 
+ 
+
+
+
+
+ <table cellspacing="3" cellpadding="2" border="0">
+ <tr><td width="20">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=122130018001&amp;name=Clipboard01.png&amp;token=ABZ6GAfFpHVpXY7UYoFG-CFJ60rer-aJgg%3A1434454857724&amp;id=12213&amp;mod_ts_token=ABZ6GAfoG7kzF8grTmA6r_V8GLo8TDKx2g%3A1434454857724">
+ <img width="15" height="15" src="https://ssl.gstatic.com/codesite/ph/images/paperclip.gif" border="0" >
+ </a>
+ </td>
+ <td style="min-width:16em" valign="top">
+ 
+ <b >Clipboard01.png</b>
+ <br>
+ 159 KB
+ 
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=122130018001&amp;name=Clipboard01.png&amp;token=ABZ6GAfFpHVpXY7UYoFG-CFJ60rer-aJgg%3A1434454857724&amp;id=12213&amp;mod_ts_token=ABZ6GAfoG7kzF8grTmA6r_V8GLo8TDKx2g%3A1434454857724&amp;inline=1" target="_blank">View</a>
+ 
+ &nbsp; <a href="//goagent.googlecode.com/issues/attachment?aid=122130018001&amp;name=Clipboard01.png&amp;token=ABZ6GAfFpHVpXY7UYoFG-CFJ60rer-aJgg%3A1434454857724&amp;id=12213&amp;mod_ts_token=ABZ6GAfoG7kzF8grTmA6r_V8GLo8TDKx2g%3A1434454857724">Download</a>
+ 
+ </td>
+ 
+ </tr>
+ 
+ 
+ <tr>
+ <td colspan="3">
+ <a href="//goagent.googlecode.com/issues/attachment?aid=122130018001&amp;name=Clipboard01.png&amp;token=ABZ6GAfFpHVpXY7UYoFG-CFJ60rer-aJgg%3A1434454857724&amp;id=12213&amp;mod_ts_token=ABZ6GAfoG7kzF8grTmA6r_V8GLo8TDKx2g%3A1434454857724&amp;inline=1" target="_blank">
+ <img src="//goagent.googlecode.com/issues/attachment?aid=122130018001&amp;name=Clipboard01.png&amp;token=ABZ6GAfFpHVpXY7UYoFG-CFJ60rer-aJgg%3A1434454857724&amp;id=12213&amp;mod_ts_token=ABZ6GAfoG7kzF8grTmA6r_V8GLo8TDKx2g%3A1434454857724&amp;inline=1&amp;thumb=1" class="preview">
+ </a>
+ </td>
+ </tr>
+ 
+ 
+ </table>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc19">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jan  8 05:22:48 2014">
+ Jan 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c19" href="/p/goagent/issues/detail?id=12213#c19">#19</a>
+ 
+
+ <a class="userlink"
+ href="/u/107886291041459614327/">zoujt...@gmail.com</a
+></span>
+ 
+<pre>
+回复#18楼
+太谢谢您啦，我这就测试去~
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc20">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jan  8 05:36:46 2014">
+ Jan 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c20" href="/p/goagent/issues/detail?id=12213#c20">#20</a>
+ 
+
+ <a class="userlink"
+ href="/u/107886291041459614327/">zoujt...@gmail.com</a
+></span>
+ 
+<pre>
+回复#18楼
+已经去测试过了，果然如你所愿，time out之后依然能够重新连接上，视频能够正常继续下去了，太感谢你了~谢谢。
+不过说到这个timeout，其实在去年6~10月份的时候视频播放一直非常流畅并没有遇到这样的类似问题，但具体的时间节点和版本节点我已经没法提供出来了，咳，可惜了。。。祝好人一生平安~（唉，赶脚哪里不太对）
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc21">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Wed Jan  8 05:37:48 2014">
+ Jan 8, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c21" href="/p/goagent/issues/detail?id=12213#c21">#21</a>
+ 
+
+ <a class="userlink"
+ href="/u/107886291041459614327/">zoujt...@gmail.com</a
+></span>
+ 
+<pre>
+这个issue算是完结了，管理员处理掉吧~thx
+</pre>
+ 
+ 
+ </div>
+ 
+
+ 
+ 
+ 
+ 
+ <div class="cursor_off vt issuecomment"
+ id="hc22">
+ <div style="float:right; margin-right:.3em; text-align:right">
+ <span class="date" title="Mon Apr  7 07:06:19 2014">
+ Apr 7, 2014
+ </span>
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">
+ 
+ <a name="c22" href="/p/goagent/issues/detail?id=12213#c22">#22</a>
+ 
+
+ <a class="userlink"
+ href="/u/109039502955070301402/">zhengk9...@gmail.com</a
+></span>
+ 
+<pre>
+看来大家都会啊 真是头痛
+</pre>
+ 
+ 
+ </div>
+ 
+
+
+ 
+
+
+ </td>
+ </tr>
+
+ 
+ <tr>
+ <td></td>
+ <td class="vt issuecomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12213&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fgoagent%2Fissues%2Fdetail%3Fid%3D12213"
+ >Sign in</a> to add a comment
+ </td>
+ </tr>
+ 
+
+</tbody>
+</table>
+<br>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/dit_scripts.js"></script>
+
+
+
+ 
+
+</div> 
+<form name="delcom" action="delComment.do?q=&amp;can=2&amp;groupby=&amp;sort=&amp;colspec=ID+Opened+Reporter+Modified+Summary+Stars" method="POST">
+ <input type="hidden" name="sequence_num" value="">
+ <input type="hidden" name="mode" value="">
+ <input type="hidden" name="id" value="12213">
+ <input type="hidden" name="token" value="">
+</form>
+
+<div id="helparea"></div>
+<script type="text/javascript">
+ _onload();
+ function delComment(sequence_num, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.mode.value = delete_mode;
+ 
+ f.submit();
+ return false;
+ }
+ 
+ _floatMetadata();
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/kibbles.js"></script>
+<script type="text/javascript">
+ _setupKibblesOnDetailPage(
+ 'https://code.google.com/p/goagent/issues/list?cursor\x3dgoagent%3A12213',
+ '/p/goagent/issues/entry',
+ '',
+ '',
+ '', 'goagent', 12213,
+ false, false, codesite_token);
+</script>
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/8599073060794244502/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ 
+ <script type="text/javascript">_CS_reportToCsi();</script>
+ 
+ </body>
+</html>
+
