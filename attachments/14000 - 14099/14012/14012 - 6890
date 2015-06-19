@@ -1,0 +1,22 @@
+from socket import socket   
+from OpenSSL.SSL import Connection, Context, SSLv3_METHOD
+def _get_ssl_cn(server):
+	try:
+		s_socket = socket() 
+		s_socket.settimeout(5)
+		ssl_context = Context(SSLv3_METHOD)  
+		ssl_context.set_timeout(5)
+		s_socket.connect((server,443))
+		s_socket.settimeout(None) 
+		ssl_connection = Connection(ssl_context, s_socket)  
+		ssl_connection.set_connect_state()  
+		ssl_connection.do_handshake()
+		ssl_cer = ssl_connection.get_peer_certificate()  
+		return tuple([ server , ssl_cer.get_subject().get_components()[-1][1] ])
+		ssl_connection.shutdown()  
+		s_socket.close()
+	except Exception,e:
+		return None
+if __name__ == '__main__':
+	server = '74.125.31.54'
+	print _get_ssl_cn(server)

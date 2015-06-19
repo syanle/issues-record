@@ -1,0 +1,33 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main()
+{
+	string search, replace;
+	cout << "Please enter your current ID: ";
+	cin >> search;
+	cout << "Please enter your new ID: ";
+	cin >> replace;
+	int offset;
+	string word;
+	ifstream fin;
+	ofstream fout;
+	fin.open("proxy.ini");
+	fout.open("proxy2.ini");
+	if (!fin)
+	{
+		cout << "Proxy.ini was not found." << endl;
+		return 1;
+	}
+	while (!fin.eof() && getline(fin, word))
+	{
+		if ((offset = word.find(search, 0)) != string::npos)
+		{
+			word.replace(offset, search.size(), replace);
+			
+		}
+		fout << word << endl;
+	}
+}

@@ -1,0 +1,31 @@
+--- proxy.py.bak	2011-09-24 00:20:16.332695275 +0800
++++ proxy.py	2011-09-24 00:21:12.515784798 +0800
+@@ -342,14 +342,16 @@
+     @staticmethod
+     def checkCA():
+         #Check CA exists
+-        #if not os.path.exists('CA.crt'):
++        basedir = os.path.dirname(__file__)
++        keyFile = os.path.join(basedir, 'CA.key')
++        crtFile = os.path.join(basedir, 'CA.crt')
+         if not os.path.exists(crtFile):
+             if not OpenSSL:
+                 logging.critical('CA.crt is not exist and OpenSSL is disabled, ABORT!')
+                 sys.exit(-1)
+             key, crt = CertUtil.makeCA()
+-            CertUtil.writeFile('CA.key', key)
+-            CertUtil.writeFile('CA.crt', crt)
++            CertUtil.writeFile(keyFile, key)
++            CertUtil.writeFile(crtFile, crt)
+             [os.remove(os.path.join('certs', x)) for x in os.listdir('certs')]
+         #Check CA imported
+         cmd = {
+@@ -359,8 +361,6 @@
+         if cmd and os.system(cmd) != 0:
+             logging.warn('GoAgent install trusted root CA certificate failed, Please run goagent by administrator/root.')
+         if OpenSSL:
+-            keyFile = os.path.join(os.path.dirname(__file__), 'CA.key')
+-            crtFile = os.path.join(os.path.dirname(__file__), 'CA.crt')
+             cakey = CertUtil.readFile(keyFile)
+             cacrt = CertUtil.readFile(crtFile)
+             CertUtil.CA = (CertUtil.loadPEM(cakey, 0), CertUtil.loadPEM(cacrt, 2))

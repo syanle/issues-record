@@ -1,0 +1,91 @@
+
+
+goagent 3.1.17 正式版，Win 8.1 下载可用！
+
+如果不显示上传成功，删除.appcfg_cookies，管理员权限打开goagent-win8.exe，再一个一个上传。现在的上传方式是，每上传一组10个appid，就需要删除一次生成的cookies文件。
+
+上传完后，想要无红的话，可用修改一下proxy.ini文件，[iplist]里面的内容。复制、粘贴即可。
+
+[iplist]
+google_cn = 60.199.175.82|60.199.175.83|60.199.175.84|121.78.74.99|60.199.175.123
+google_hk = 210.61.221.187|121.78.74.99
+google_ipv6 = 2404:6800:4005:c00::64|2404:6800:4005:c00::65|2404:6800:4005:c00::5e|2404:6800:4005:c00::67|2404:6800:4005:c00::2f
+
+
+goagent也有dnsproxy，其实可以不用dnscrypt这个软件。在goagent的设置启动dns [dns]
+enable = 1，然后启动goagent，把本机的dns设置为127.0.0.1，步骤如下：
+
+点击左下角的 开始，打开 控制面板，查看方式为 类别，进入 网络和Internet——网络和共享中心,点击 更改适配器设置：当前活动的网络是 无线网络连接（网络名称涂掉了）。右键点击当前活动的 无线网络连接，点弹出菜单中的 属性。选中 Internet 协议版本 4（TCP/IPv4），再点 属性。选中 使用下面的DNS服务器地址，填写首选DNS服务器设置为127.0.0.1（根据你的网络服务提供商以及所在的城市百度搜索）和备用DNS服务器（推荐114.114.114.114或者8.8.8.8），然后点击 确定。至此DNS修改完毕。
+
+【goagent搭配dnsforwarder使用，U2B 国内外秒速、全开】
+
+使用dnsforwarder，将系统DNS设置成127.0.0.1，使用tcping防止DNS污染，没有被墙的ip则用UDP。
+
+dnsforwarder.config里面有全部的配置选项说明。
+
+还有建议把proxy.ini里的dns开启，更换成opendns 208.67.222.222 208.67.220.220，如下：
+
+[dns]
+enable = 0【改为1】
+listen = 127.0.0.1:53
+servers = 42.120.21.30|208.67.222.222|208.67.220.220|114.114.114.114|114.114.115.115【增加后面这两个】|208.67.222.222|208.67.220.220
+
+
+【dnsforwarder设置】搜索文件：秒速、全开 国内外电脑翻墙  DNSForwarder 杜绝DNS污染 直连高速穿墙.docx
+
+把你当前活动连接的DNS设置为127.0.0.1
+
+就在“配置文件实例”里面的“防止污染方式二”，把这个txt复制到上层文件夹然后更名为“dnsforwarder.config”覆盖掉原来的即可。
+
+我的建议是TCP部分使用8.8.8.8,8.8.4.4，作者把4.4的放前面了，我不知是何意义，我个人颠倒过来了。
+保存好了配置文件，执行相应的exe执行文件即可使用了，同上面一样，记得设置当前连接的DNS！
+同时开goagent 和dnsforwarder，国内外翻墙，秒速、全开。
+
+
+最好用chrome，以https模式访问，https://www.youtube.com，看1080p720p没有压力。
+
+
+因为使用了新的连接方式，win8.1 用户请更新到最新版，并且使用管理员权限启动 快捷键文件：goagent-win8.exe(并且适当降低gaewindow值）
+
+
+然后goagent-win8.exe翻墙，设置下这个：http://www.v5fm.com/google-quic.html
+
+Chrome浏览器在地址栏打开：chrome://flags/
+然后Ctrl+F 输入quic
+启用“试验性QUIC协议”、经由实验性QUIC协议。。“
+
+
+【教程】看YouTube慢的注意了【文件夹里面有】
+
+Reported by zzq1...@gmail.com, May 10, 2014
+下载一个名叫Youtube center的软件（附件里有，只能用于Chrome）下载（Firefox，Chrome，opera，ie 都有），然后（chrome）进入“扩展”，拖入YouTubeCenter.crx到这个窗口，确认添加
+
+然后，开youtube.com，单击右上角齿轮（未登录youtube时）或单击齿轮，选youtube center设置，导入附件中的ytcs文件（可以不导入，但扩展默认设置和youtube默认设置不一样，可能不习惯），再关闭设置，随便开个youtube视频，还卡不？？
+
+还卡的话，再按刚才方法进入设置，选左边的Player（播放器设置），更改Default Player（默认播放器）为“Flash”，退出，再看看卡不卡。（顺便注意一下那个DASH，应该没有勾）
+
+原理：youtube视频是这么缓冲的：当你暂停时，youtube加载后面若干秒便停止加载，这是dash的作用，为了省流量（国外网速快，但是有的ISP限流量）。但中国大多都是不限流量的，网速由于墙的干扰很慢，所以要禁止dash。但是光禁用dash可能不行，html5播放器禁了dash后，暂停后可能会直接停止加载，所以还要强制使用Flash，一开视频就从头加载到尾，加载完后可以直接拖进度条无卡顿。
+
+顺便推荐一下Youtube Center，它的功能很多，比如微调播放器设置，下载youtube视频等，更多的请自己进设置探索。
+
+【修改hosts从而登录FB TT G+ Google等】【以下的文件，在文件夹里面有】
+http://www.v5fm.com/hosts-2014.html
+
+进入 Windows\System32\Drivers\etc
+下载 www.v5fm.com/hosts 或者 http://v5fm.com/imoutohosts
+覆盖原来的hosts或者复制进你原先的hosts
+大功告成~
+
+
+【策略】
+
+Google浏览器—————翻墙、搜索、国外网页
+Firefox浏览器————国内网页
+
+
+用Google浏览器的效果最好，比火狐好的多，火狐打开Youtobe无法看视频，Google浏览器稍等一会儿可流畅看的。
+
+
+【Goagent 翻墙官方教程】
+
+https://code.google.com/p/goagent/

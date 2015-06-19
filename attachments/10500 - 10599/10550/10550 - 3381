@@ -1,0 +1,42 @@
+commit e8649226b0cccd8d39280b4c00ad02b3634521ae
+Author: Hrimfaxi <outmatch@gmail.com>
+Date:   Sat Oct 12 00:00:21 2013 +0800
+
+    提供关闭导入证书的选项
+
+diff --git a/local/proxy.ini b/local/proxy.ini
+index f3a4733..8170821 100644
+--- a/local/proxy.ini
++++ b/local/proxy.ini
+@@ -103,3 +103,6 @@ tip = \u8bf7\u5173\u6ce8\u5317\u4eac\u5931\u5b66\u513f\u7ae5~~
+ .+\.copy\.com\:443 = 
+ talkx?\.(l\.)?google\.com\:5222 = 
+ ^https?\://.+\.c\.youtube\.com/liveplay = www.google.cn
++
++[ca]
++enable=1
+diff --git a/local/proxy.py b/local/proxy.py
+index e3e0ac5..308fb74 100644
+--- a/local/proxy.py
++++ b/local/proxy.py
+@@ -1398,6 +1398,10 @@ class Common(object):
+ 
+         random.shuffle(self.GAE_APPIDS)
+         self.GAE_FETCHSERVER = '%s://%s.appspot.com%s?' % (self.GOOGLE_MODE, self.GAE_APPIDS[0], self.GAE_PATH)
++        if self.CONFIG.has_option('ca', 'enable'):
++                self.IMPORT_CA = self.CONFIG.getint('ca', 'enable')
++        else:
++                self.IMPORT_CA = 1
+ 
+     def info(self):
+         info = ''
+@@ -2492,7 +2496,8 @@ def main():
+     os.chdir(os.path.dirname(os.path.abspath(__file__)))
+     logging.basicConfig(level=logging.DEBUG if common.LISTEN_DEBUGINFO else logging.INFO, format='%(levelname)s - %(asctime)s %(message)s', datefmt='[%b %d %H:%M:%S]')
+     pre_start()
+-    CertUtil.check_ca()
++    if common.IMPORT_CA:
++        CertUtil.check_ca()
+     sys.stdout.write(common.info())
+ 
+     if common.PAAS_ENABLE:

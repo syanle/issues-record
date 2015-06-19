@@ -1,0 +1,77 @@
+#本程序是为了goagent的使用，找出最佳google的ip地址
+#依次ping相关ip并找出最低延迟
+
+#https://code.google.com/p/goagent/issues/detail?id=13764&colspec=ID%20Opened%20Reporter%20Modified%20Summary%20Stars
+#测试了部分美国、韩国、新加坡的IP，发现此规律全球通用（未全部测试验证）
+#大规律：每个IP段都有固定尾数的IP是可以用来做代理的，且部分末尾数固定，每个IP段都有12或16个可用。
+#IP段：18 - 59 (小规律，末位是 4,5,9,0 第一个18为特殊)
+#尾数：18,24,25,29,30,34,35,39,40,44,45,49,50,54,55,59
+#IP段：20 - 59 (小规律，末位是 0,4,5,9)
+#尾数：20,24,25,29,30,34,35,39,40,44,45,49,50,54,55,59
+#IP段：80 - 91 (无小规律)
+#尾数：全部可用
+#IP段：80 - 123 (无小规律)
+#尾数：80,84,88,90,91,95,99,101,102,106,110,112,113,117,121,123
+#IP段：82 - 123 (无小规律)
+#尾数：82,88,89,95,96,102,103,109,110,116,117,123
+#IP段：84 - 123 (小规律，末位是 3,4,8,9)
+#尾数：84,88,89,93,94,98,99,103,104,108,109,113,114,118,119,123
+#IP段：112 - 123 (无小规律)
+#尾数：全部可用
+#IP段：132 - 187 (无小规律)
+#尾数：144,148,152,154,155,159,163,165,166,170,174,176,177,181,185,187
+#IP段：146 - 187 (无小规律)
+#尾数：146,152,153,159,160,166,167,173,174,180,181,187
+#IP段：148 - 187 (小规律，末位是 2,3,7,8)
+#尾数：148,152,153,157,158,162,163,167,168,172,173,177,178,182,183,187
+#IP段：212 - 251 (小规律，末尾是 1,2,6,7)
+#尾数：212,216,217,221,222,226,227,231,232,236,237,241,242,246,247,251
+
+ipEnd = [18,20,24,25,29,30,34,35,39,40,44,45,49,50,54,55,59,80,82,84,88,89,90,91,95,96,99,101,102,103,106,110,112,113,117,121,123,144,146,148,152,153,154,155,157,158,159,160,162,163,165,166,167,168,170,172,173,174,176,177,180,181,182,183,185,187,212,216,217,221,222,226,227,231,232,236,237,241,242,246,247,251]
+
+ipRigen = {"tw":"60.199.175.","ru":"178.45.251.","kr":"121.78.74."}  #必须以"."结尾
+
+import re,subprocess,os,sys
+
+ipDelay = {}  #统计延迟
+Result = []    #排序后的结果
+
+def view_bar(num=1, sum=100, bar_word=":"):  
+    rate = float(num) / float(sum)  
+    rate_num = int(rate * 100)  
+    print '\r%d%% :' %(rate_num),  
+    for i in range(0, num):  
+        os.write(1, bar_word)  
+    sys.stdout.flush()  
+    #网上搜的进度条程序，num超过74会换行
+
+def runCheck(country = "tw" , count = 1):  #默认搜索“tw”，1次ping
+    ipDone = 0 #统计进度的数
+    for i in ipEnd :
+        #执行ping命令
+        p = subprocess.Popen(["ping -n "+ str(count) +" " + ipRigen[country] + str(i)],
+                            stdin = subprocess.PIPE,
+                            stdout = subprocess.PIPE,
+                            stderr = subprocess.PIPE,
+                            shell = True)
+        out = p.stdout.read()
+        regex = re.compile("时间=\d*", re.IGNORECASE | re.MULTILINE)   #默认中文系统
+        #统计延迟, 有丢包的ip抛弃
+        if len(regex.findall(out)) == count :
+            sumTime = 0
+            for timeStr in regex.findall(out):
+                sumTime = sumTime + int(timeStr[5:])
+            ipDelay[ipRigen[country] + str(i)] = sumTime / count
+        view_bar(74*ipDone/len(ipEnd),74) # 显示进度,74是因为换行bug
+        ipDone = ipDone + 1
+        #单个ip处理结束
+    #排序并输出
+    Result = sorted(ipDelay.items(), key=lambda d:d[1])
+    print "Total Avail Number is :" , len(ipDelay) ,"," , len(ipDelay)/len(ipEnd)*100,"%"
+    print "Recommended IP Address is （Top3）:" 
+    print Result[0][0],"Delay=",Result[0][1]
+    print Result[1][0],"Delay=",Result[1][1]
+    print Result[2][0],"Delay=",Result[2][1]
+
+
+        

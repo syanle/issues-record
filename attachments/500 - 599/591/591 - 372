@@ -1,0 +1,92 @@
+%%% 将windows系统的hosts格式转换为goagent[hosts]字段的格式
+%%% windows：   IP site #comment
+%%% goagent:    site = IP ;comment
+%%% Dependency :  none
+%%% Author     :  David Leon ;
+%%% Created    :   7,27,2011 ;
+%%% Revised    :   7,27,2011 ;
+%%% All rights reserved %%%
+
+function hostconvert
+clear;  filename='C:\WINDOWS\system32\drivers\etc\hosts';
+fid = fopen(filename,'rt');
+fid2= fopen([filename,'_goagent.txt'], 'wt');
+str=' ';
+while 1
+    str=fgetl(fid);
+    if ~ischar(str) break; end
+    str=format(str);
+    [IP, site, comment]=split(str);
+    if isempty(IP)
+        if ~isempty(comment)
+            fprintf(fid2, '%s\n', [';',comment]);
+        else
+            fprintf(fid2, '\n');
+        end
+    else
+        if ~isempty(comment)
+            fprintf(fid2, '%s\n',[site,' = ',IP,' ;',comment]);
+        else
+            fprintf(fid2, '%s\n', [site,' = ',IP]);
+        end
+    end
+end
+fclose(fid);
+fclose(fid2);
+end
+
+%% Function for removing redundant white spaces  %% 
+function str = format(str)
+L=length(str);
+tmpstr=' ';
+k=1;
+for i=1:L
+    if str(i)=='#'                                %% 将#其后的字符直接复制
+        tmpstr=[tmpstr,str(i:end)];
+        str=tmpstr(2:end);
+        return;
+    else                                          %% 消除多余空格
+        if str(i)==' '
+            if tmpstr(k)~=' '
+                tmpstr=[tmpstr,str(i)];
+                k=k+1;
+            end
+        else
+            tmpstr=[tmpstr,str(i)];
+            k=k+1;
+        end
+    end
+end
+str=tmpstr(2:end);
+end
+
+%% Function for splitting a string line into triplet{IP, site, comment} %%
+function [IP site comment] = split(str)
+IP=''; site=''; comment='';
+L=length(str);
+str2=[str,' '];
+IPon=true; siteon=false;                          %% 当前字符组标志
+k=1;
+for i=1:L
+    if str2(i)=='#'
+        comment=str2(i+1:end-1);
+        return;
+    else
+        if str2(i)==' '
+            if IPon==1 IPon=0; end
+            siteon=~siteon;
+        else
+            if IPon==1
+                IP=[IP,str2(i)];
+            end
+            if siteon==1
+                site=[site,str2(i)];
+            end
+        end
+    end
+end
+end
+
+
+
+
